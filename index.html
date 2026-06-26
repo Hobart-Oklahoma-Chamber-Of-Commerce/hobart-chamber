@@ -1,0 +1,978 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Hobart Chamber of Commerce | Hobart, Oklahoma</title>
+<meta name="description" content="The Hobart Chamber of Commerce supports local business and strengthens community in Hobart and Kiowa County, Oklahoma." />
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;800;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
+<!-- Firebase (compat) — loads on the LIVE site. In this preview it won't load, so the calendar runs in demo mode. -->
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
+
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+
+  :root{
+    /* Bearcat royal blue + athletic gold */
+    --navy:#1a3ea8;
+    --navy-dark:#142f7e;
+    --navy-deep:#0e2056;
+    --navy-hover:#2247bd;
+    --gold:#c49a3e;
+    --gold-light:#dab65e;
+    --gold-pale:#f6edd6;
+    --white:#ffffff;
+    --slate:#f3f6fc;
+    --gray:#6f7d99;
+    --dark-gray:#2c3a58;
+    --border:#dbe3f4;
+
+    --t-bronze:#b08d57;
+    --t-silver:#9aa6b2;
+    --t-gold:#c49a3e;
+    --t-diamond:#56a8d4;
+    --t-platinum:#2f3b54;
+  }
+
+  html{scroll-behavior:smooth;}
+  body{font-family:'Inter',sans-serif;color:var(--navy-deep);background:var(--white);overflow-x:hidden;}
+
+  /* ---- announcement banner ---- */
+  #announceBar{display:none;background:var(--gold);color:var(--navy-deep);text-align:center;font-size:14px;font-weight:600;padding:9px 48px;position:relative;z-index:120;}
+  #announceBar.on{display:block;}
+
+  /* ---- NAV ---- */
+  nav{position:sticky;top:0;left:0;right:0;z-index:100;background:rgba(26,62,168,.97);backdrop-filter:blur(8px);display:flex;align-items:center;justify-content:space-between;padding:0 48px;height:74px;border-bottom:1px solid rgba(196,154,62,.4);}
+  .nav-logo{display:flex;align-items:center;gap:13px;text-decoration:none;}
+  .nav-logo-mark{width:46px;height:46px;border-radius:50%;background:var(--gold-pale);display:flex;align-items:center;justify-content:center;flex-shrink:0;overflow:hidden;}
+  .nav-logo-mark img{width:100%;height:100%;object-fit:contain;}
+  .nav-logo-text{display:flex;flex-direction:column;}
+  .nav-logo-text span:first-child{font-family:'Playfair Display',serif;font-weight:700;font-size:15px;color:var(--white);letter-spacing:.4px;line-height:1.15;}
+  .nav-logo-text span:last-child{font-size:9.5px;color:var(--gold-light);letter-spacing:2px;text-transform:uppercase;font-weight:500;}
+  .nav-links{display:flex;align-items:center;gap:28px;list-style:none;}
+  .nav-links a{color:rgba(255,255,255,.85);text-decoration:none;font-size:12.5px;font-weight:500;letter-spacing:.5px;text-transform:uppercase;transition:color .2s;cursor:pointer;}
+  .nav-links a:hover{color:var(--gold-light);}
+  .nav-cta{background:var(--gold)!important;color:var(--navy-deep)!important;padding:10px 22px;border-radius:4px;font-weight:700!important;transition:background .2s!important;}
+  .nav-cta:hover{background:var(--gold-light)!important;}
+  .nav-toggle{display:none;background:none;border:none;color:var(--white);font-size:24px;cursor:pointer;}
+
+  /* ---- HERO ---- */
+  .hero{position:relative;min-height:640px;height:92vh;display:flex;align-items:flex-end;padding-bottom:80px;overflow:hidden;}
+  .hero-bg{position:absolute;inset:0;background:linear-gradient(135deg,#16317f 0%,#1a3ea8 45%,#2247bd 100%);}
+  .hero-photo{position:absolute;inset:0;background-image:linear-gradient(to bottom,rgba(14,32,86,.45) 0%,rgba(14,32,86,.6) 45%,rgba(14,32,86,.92) 100%),url('hero.jpg');background-size:cover;background-position:center;}
+  .hero-photo.empty{display:none;}
+  .hero-lines{position:absolute;top:0;right:0;width:42%;height:100%;background:repeating-linear-gradient(90deg,transparent,transparent 58px,rgba(196,154,62,.06) 58px,rgba(196,154,62,.06) 59px);pointer-events:none;}
+  .hero-tower{position:absolute;right:6%;top:50%;transform:translateY(-50%);width:230px;opacity:.13;pointer-events:none;}
+  .hero-content{position:relative;z-index:2;padding:0 60px;max-width:920px;}
+  .hero-eyebrow{display:flex;align-items:center;gap:12px;margin-bottom:24px;}
+  .hero-eyebrow-line{width:48px;height:2px;background:var(--gold);}
+  .hero-eyebrow span{font-size:11px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:var(--gold-light);}
+  .hero-title{font-family:'Playfair Display',serif;font-size:clamp(48px,8vw,90px);font-weight:900;line-height:.96;color:var(--white);margin-bottom:26px;}
+  .hero-title .accent{color:var(--gold-light);display:block;}
+  .hero-sub{font-size:18px;font-weight:300;color:rgba(255,255,255,.85);line-height:1.6;max-width:500px;margin-bottom:38px;}
+  .hero-actions{display:flex;gap:16px;flex-wrap:wrap;}
+
+  .btn-primary{background:var(--gold);color:var(--navy-deep);padding:16px 34px;border:none;border-radius:4px;font-size:14px;font-weight:700;letter-spacing:.5px;cursor:pointer;text-decoration:none;display:inline-block;transition:background .2s,transform .15s;}
+  .btn-primary:hover{background:var(--gold-light);transform:translateY(-1px);}
+  .btn-ghost{background:transparent;color:var(--white);padding:15px 34px;border:1.5px solid rgba(255,255,255,.5);border-radius:4px;font-size:14px;font-weight:500;cursor:pointer;text-decoration:none;display:inline-block;transition:border-color .2s,background .2s;}
+  .btn-ghost:hover{border-color:var(--gold-light);background:rgba(196,154,62,.14);}
+
+  /* ---- STAT BAR ---- */
+  .stat-bar{background:var(--gold);padding:22px 60px;display:flex;align-items:center;justify-content:space-around;gap:20px;flex-wrap:wrap;}
+  .stat-item{display:flex;flex-direction:column;align-items:center;gap:3px;}
+  .stat-item .num{font-family:'Playfair Display',serif;font-size:30px;font-weight:800;color:var(--navy-deep);line-height:1;}
+  .stat-item .label{font-size:10.5px;font-weight:600;letter-spacing:1.4px;text-transform:uppercase;color:rgba(14,32,86,.72);text-align:center;}
+  .stat-divider{width:1px;height:42px;background:rgba(14,32,86,.2);}
+
+  .section-eyebrow{font-size:11px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:12px;display:block;}
+  .section-title{font-family:'Playfair Display',serif;font-size:clamp(30px,4vw,46px);font-weight:700;line-height:1.18;}
+
+  /* ---- PILLARS ---- */
+  .pillars{background:var(--navy);padding:84px 60px;}
+  .pillars-header{text-align:center;margin-bottom:58px;}
+  .pillars-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:rgba(255,255,255,.08);}
+  .pillar{background:var(--navy);padding:48px 40px;position:relative;overflow:hidden;transition:background .3s;}
+  .pillar::before{content:'';position:absolute;top:0;left:0;width:3px;height:0;background:var(--gold);transition:height .4s ease;}
+  .pillar:hover{background:var(--navy-hover);}
+  .pillar:hover::before{height:100%;}
+  .pillar-number{font-family:'Playfair Display',serif;font-size:62px;font-weight:900;color:rgba(196,154,62,.18);line-height:1;margin-bottom:14px;}
+  .pillar-label{font-size:11px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:var(--gold-light);margin-bottom:12px;}
+  .pillar h3{font-family:'Playfair Display',serif;font-size:25px;font-weight:700;color:var(--white);margin-bottom:14px;line-height:1.2;}
+  .pillar p{font-size:15px;color:rgba(255,255,255,.66);line-height:1.7;}
+
+  /* ---- EVENTS carousel ---- */
+  .events-section{padding:84px 0 84px 60px;background:var(--slate);overflow:hidden;}
+  .events-head{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:14px;padding-right:60px;}
+  .events-head .section-title{color:var(--navy);}
+  .events-sub{font-size:15px;color:var(--gray);margin-bottom:34px;max-width:560px;}
+  .events-controls{display:flex;gap:10px;}
+  .ev-arrow{width:46px;height:46px;border-radius:50%;border:1.5px solid var(--border);background:var(--white);color:var(--navy);font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s;flex-shrink:0;}
+  .ev-arrow:hover{background:var(--navy);color:var(--white);border-color:var(--navy);}
+  .events-track{display:flex;gap:24px;overflow-x:auto;scroll-snap-type:x mandatory;padding:6px 60px 24px 0;scroll-behavior:smooth;scrollbar-width:none;}
+  .events-track::-webkit-scrollbar{display:none;}
+  .event-card{flex:0 0 340px;scroll-snap-align:start;background:var(--white);border-radius:8px;overflow:hidden;box-shadow:0 4px 22px rgba(26,62,168,.08);display:flex;flex-direction:column;transition:transform .2s,box-shadow .2s;}
+  .event-card:hover{transform:translateY(-4px);box-shadow:0 14px 40px rgba(26,62,168,.18);}
+  .flyer-slot{position:relative;width:100%;aspect-ratio:4/3;background:linear-gradient(135deg,#eef2fb,#e2e9f8);display:flex;align-items:center;justify-content:center;overflow:hidden;border-bottom:3px solid var(--gold);}
+  .flyer-slot img{width:100%;height:100%;object-fit:cover;display:block;}
+  .flyer-empty{display:flex;flex-direction:column;align-items:center;gap:6px;color:#9fb0cc;}
+  .flyer-empty svg{width:34px;height:34px;}
+  .flyer-empty span{font-size:11px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;}
+  .event-top{padding:22px 24px 14px;display:flex;align-items:flex-start;gap:16px;}
+  .event-date{display:flex;flex-direction:column;align-items:center;background:var(--navy);padding:9px 13px;border-radius:5px;min-width:56px;flex-shrink:0;}
+  .event-date .m{font-size:10px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:var(--gold-light);}
+  .event-date .d{font-family:'Playfair Display',serif;font-size:26px;font-weight:900;color:var(--white);line-height:1;}
+  .event-meta h4{font-family:'Playfair Display',serif;font-size:18px;font-weight:700;color:var(--navy);line-height:1.25;margin-bottom:5px;}
+  .event-meta .loc{font-size:12px;color:var(--gray);line-height:1.4;}
+  .event-meta .loc a{color:var(--navy);text-decoration:none;border-bottom:1px dotted var(--gray);}
+  .event-meta .loc a:hover{color:var(--gold);}
+  .event-body{padding:0 24px 18px;}
+  .event-body p{font-size:13.5px;color:var(--dark-gray);line-height:1.6;}
+  .event-foot{margin-top:auto;padding:14px 24px;border-top:1px solid var(--border);}
+  .event-tag{font-size:10px;font-weight:600;letter-spacing:1.4px;text-transform:uppercase;color:var(--navy);background:rgba(26,62,168,.08);padding:4px 11px;border-radius:20px;}
+
+  /* ---- COMMUNITY CALENDAR ---- */
+  .cal-section{padding:84px 60px;background:var(--white);}
+  .cal-head{display:flex;align-items:flex-end;justify-content:space-between;gap:20px;flex-wrap:wrap;margin-bottom:10px;}
+  .cal-head .section-title{color:var(--navy);}
+  .cal-sub{font-size:15px;color:var(--gray);max-width:600px;margin-bottom:30px;}
+  .cal-toolbar{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;margin-bottom:18px;}
+  .cal-nav{display:flex;align-items:center;gap:14px;}
+  .cal-nav button{width:40px;height:40px;border-radius:8px;border:1.5px solid var(--border);background:var(--white);color:var(--navy);font-size:17px;cursor:pointer;transition:all .2s;}
+  .cal-nav button:hover{background:var(--navy);color:var(--white);border-color:var(--navy);}
+  .cal-month{font-family:'Playfair Display',serif;font-size:24px;font-weight:700;color:var(--navy);min-width:200px;text-align:center;}
+  .cal-grid{display:grid;grid-template-columns:repeat(7,1fr);border:1px solid var(--border);border-radius:10px;overflow:hidden;background:var(--border);gap:1px;}
+  .cal-dow{background:var(--navy);color:var(--gold-light);font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;text-align:center;padding:12px 4px;}
+  .cal-cell{background:var(--white);min-height:104px;padding:8px 9px;position:relative;display:flex;flex-direction:column;gap:4px;transition:background .15s;}
+  .cal-cell.dim{background:#fafbfe;}
+  .cal-cell.today{box-shadow:inset 0 0 0 2px var(--gold);}
+  .cal-cell .dnum{font-size:12px;font-weight:600;color:var(--dark-gray);}
+  .cal-cell.dim .dnum{color:#c2cbdd;}
+  .cal-chip{font-size:10.5px;font-weight:600;line-height:1.25;padding:3px 6px;border-radius:4px;background:rgba(26,62,168,.1);color:var(--navy);cursor:pointer;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;border-left:3px solid var(--gold);}
+  .cal-chip:hover{background:rgba(26,62,168,.2);}
+  .cal-more{font-size:10px;font-weight:600;color:var(--gold);cursor:pointer;}
+  .cal-legend{margin-top:16px;font-size:12.5px;color:var(--gray);display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
+  .cal-mode{font-size:11px;font-weight:600;color:#b08d57;background:#fdf6e9;border:1px solid #f0e0c0;padding:3px 9px;border-radius:20px;}
+
+  /* ---- MEMBERSHIP FORM ---- */
+  .membership{padding:84px 60px;background:var(--slate);}
+  .membership-head{text-align:center;max-width:680px;margin:0 auto 40px;}
+  .membership-head .section-title{color:var(--navy);margin-bottom:14px;}
+  .membership-head p{font-size:15.5px;color:var(--gray);line-height:1.7;}
+  .form-card{max-width:760px;margin:0 auto;background:var(--white);border:1px solid var(--border);border-radius:12px;padding:40px;box-shadow:0 8px 30px rgba(26,62,168,.07);}
+  .fg{margin-bottom:18px;}
+  .fg label{display:block;font-size:12.5px;font-weight:600;color:var(--navy);margin-bottom:6px;letter-spacing:.3px;}
+  .fg input,.fg select,.fg textarea{width:100%;padding:11px 13px;border:1px solid var(--border);border-radius:6px;font-family:inherit;font-size:14px;color:var(--dark-gray);background:var(--white);transition:border-color .2s,box-shadow .2s;}
+  .fg input:focus,.fg select:focus,.fg textarea:focus{outline:none;border-color:var(--navy);box-shadow:0 0 0 3px rgba(26,62,168,.12);}
+  .fg-row{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+  .check-row{display:flex;flex-wrap:wrap;gap:14px;margin-top:4px;}
+  .check-item{display:flex;align-items:center;gap:7px;font-size:13.5px;color:var(--dark-gray);}
+  .check-item input{width:auto;}
+  .form-note{font-size:12.5px;color:var(--gray);margin-top:6px;line-height:1.5;}
+  .form-msg{display:none;margin-top:14px;padding:12px 16px;border-radius:6px;font-size:13.5px;font-weight:500;}
+  .form-msg.ok{display:block;background:#e8f6ec;color:#1c7a3e;border:1px solid #bce3c8;}
+
+  /* ---- BOTW ---- */
+  .botw{padding:84px 60px;background:var(--white);display:grid;grid-template-columns:1fr 1fr;gap:70px;align-items:center;}
+  .botw-text .section-title{color:var(--navy);margin-bottom:18px;}
+  .botw-text p{font-size:16px;color:var(--gray);line-height:1.8;margin-bottom:30px;}
+  .botw-card{background:var(--navy);border-radius:10px;overflow:hidden;}
+  .botw-photo{width:100%;aspect-ratio:16/9;background:linear-gradient(135deg,#2247bd,#16317f);display:flex;align-items:center;justify-content:center;overflow:hidden;}
+  .botw-photo img{width:100%;height:100%;object-fit:cover;}
+  .botw-photo .flyer-empty{color:rgba(255,255,255,.4);}
+  .botw-inner{padding:34px 40px 40px;}
+  .botw-badge{display:inline-block;font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--gold-light);border:1px solid var(--gold);padding:5px 12px;border-radius:20px;margin-bottom:18px;}
+  .botw-card h3{font-family:'Playfair Display',serif;font-size:30px;font-weight:700;color:var(--white);margin-bottom:10px;line-height:1.2;}
+  .botw-card p{font-size:15px;color:rgba(255,255,255,.68);line-height:1.7;}
+
+  /* ---- DIRECTORY ---- */
+  .directory{background:var(--slate);padding:84px 60px;}
+  .directory-head{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:12px;}
+  .directory-head .section-title{color:var(--navy);}
+  .directory-sub{font-size:15px;color:var(--gray);margin-bottom:26px;max-width:620px;}
+  .dir-filter{display:flex;gap:10px;overflow-x:auto;padding-bottom:14px;margin-bottom:28px;scrollbar-width:none;}
+  .dir-filter::-webkit-scrollbar{display:none;}
+  .dir-chip{flex:0 0 auto;padding:9px 18px;border-radius:30px;border:1.5px solid var(--border);background:var(--white);color:var(--dark-gray);font-size:13px;font-weight:600;cursor:pointer;white-space:nowrap;transition:all .2s;}
+  .dir-chip:hover{border-color:var(--navy);color:var(--navy);}
+  .dir-chip.on{background:var(--navy);color:var(--white);border-color:var(--navy);}
+  .directory-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;}
+  .member{background:var(--white);border:1px solid var(--border);border-left:4px solid var(--t-silver);border-radius:6px;padding:18px 22px;transition:border-color .2s,box-shadow .2s,transform .2s;text-decoration:none;display:block;}
+  .member:hover{box-shadow:0 6px 22px rgba(26,62,168,.13);transform:translateY(-2px);}
+  .member h5{font-size:13.5px;font-weight:600;color:var(--navy);margin-bottom:4px;line-height:1.3;display:flex;align-items:center;gap:6px;}
+  .member span{font-size:11px;color:var(--gray);}
+  .member .ext{font-size:10px;color:var(--gold);opacity:0;transition:opacity .2s;}
+  .member[href]:hover .ext{opacity:1;}
+  .t-bronze{border-left-color:var(--t-bronze);}
+  .t-silver{border-left-color:var(--t-silver);}
+  .t-gold{border-left-color:var(--t-gold);}
+  .t-diamond{border-left-color:var(--t-diamond);}
+  .t-platinum{border-left-color:var(--t-platinum);}
+  .directory-note{margin-top:26px;font-size:12.5px;color:var(--gray);font-style:italic;}
+
+  /* ---- BOARD ---- */
+  .board{background:var(--navy);padding:84px 60px;}
+  .board-head{text-align:center;margin-bottom:54px;}
+  .board-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;max-width:1100px;margin:0 auto;}
+  .board-member{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:8px;padding:26px 20px;text-align:center;transition:background .25s,border-color .25s;}
+  .board-member:hover{background:rgba(196,154,62,.1);border-color:rgba(196,154,62,.4);}
+  .board-avatar{width:54px;height:54px;border-radius:50%;background:var(--gold-pale);color:var(--navy);font-family:'Playfair Display',serif;font-weight:700;font-size:20px;display:flex;align-items:center;justify-content:center;margin:0 auto 14px;}
+  .board-member h4{font-size:15px;font-weight:600;color:var(--white);line-height:1.3;}
+  .board-member span{font-size:11px;color:var(--gold-light);letter-spacing:.5px;}
+  .board-ed{text-align:center;margin-top:40px;}
+  .board-ed .board-avatar{width:64px;height:64px;font-size:24px;background:var(--gold);}
+
+  /* ---- ABOUT ---- */
+  .about{padding:90px 60px;background:var(--white);display:grid;grid-template-columns:1fr 1fr;gap:70px;align-items:start;}
+  .about-text .section-title{color:var(--navy);margin-bottom:22px;}
+  .about-text p{font-size:15.5px;color:var(--dark-gray);line-height:1.85;margin-bottom:18px;}
+  .about-mission{background:var(--slate);border-left:4px solid var(--gold);border-radius:6px;padding:28px 30px;}
+  .about-mission .ti{font-size:11px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:12px;}
+  .about-mission p{font-family:'Playfair Display',serif;font-size:21px;font-style:italic;color:var(--navy);line-height:1.5;margin:0;}
+  .involve{margin-top:30px;}
+  .involve h4{font-size:13px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:var(--navy);margin-bottom:16px;}
+  .involve-list{display:flex;flex-direction:column;gap:11px;}
+  .involve-item{display:flex;align-items:center;gap:12px;font-size:14.5px;color:var(--dark-gray);}
+  .involve-dot{width:8px;height:8px;border-radius:50%;background:var(--gold);flex-shrink:0;}
+
+  /* ---- JOIN ---- */
+  .join{background:var(--navy);padding:96px 60px;text-align:center;position:relative;overflow:hidden;}
+  .join::before{content:'HOBART';position:absolute;font-family:'Playfair Display',serif;font-size:200px;font-weight:900;color:rgba(255,255,255,.04);top:50%;left:50%;transform:translate(-50%,-50%);white-space:nowrap;pointer-events:none;letter-spacing:-4px;}
+  .join-inner{position:relative;z-index:2;}
+  .join-title{font-family:'Playfair Display',serif;font-size:clamp(34px,5vw,58px);font-weight:700;color:var(--white);line-height:1.15;margin:14px auto 20px;}
+  .join-title em{font-style:normal;color:var(--gold-light);}
+  .join-sub{font-size:17px;color:rgba(255,255,255,.68);max-width:580px;margin:0 auto 30px;line-height:1.7;}
+  .join-actions{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;}
+
+  /* ---- FOOTER ---- */
+  .footer{background:var(--navy-dark);padding:64px 60px;display:grid;grid-template-columns:2fr 1fr 1fr 1.3fr;gap:48px;}
+  .footer-brand .nav-logo{margin-bottom:16px;}
+  .footer-brand .nav-logo-text span:first-child{font-size:18px;}
+  .footer-brand p{font-size:14px;color:rgba(255,255,255,.45);line-height:1.7;margin-bottom:22px;}
+  .footer h6{font-size:11px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--gold-light);margin-bottom:18px;}
+  .footer ul{list-style:none;display:flex;flex-direction:column;gap:10px;}
+  .footer ul a{font-size:14px;color:rgba(255,255,255,.58);text-decoration:none;transition:color .2s;cursor:pointer;}
+  .footer ul a:hover{color:var(--white);}
+  .footer-contact p{font-size:14px;color:rgba(255,255,255,.58);line-height:1.85;}
+  .footer-contact a{color:var(--gold-light);text-decoration:none;}
+  .footer-contact a:hover{text-decoration:underline;}
+  .social-links{display:flex;gap:11px;}
+  .social-links a{width:38px;height:38px;border-radius:5px;background:rgba(255,255,255,.07);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.6);text-decoration:none;font-size:13px;font-weight:700;transition:all .2s;cursor:pointer;}
+  .social-links a:hover{background:var(--gold);color:var(--navy-deep);}
+  .footer-bottom{background:var(--navy-deep);padding:20px 60px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;}
+  .footer-bottom p{font-size:12px;color:rgba(255,255,255,.32);}
+  .gear{cursor:pointer;user-select:none;color:rgba(255,255,255,.32);}
+
+  /* ---- MODAL / OVERLAY ---- */
+  .overlay{display:none;position:fixed;inset:0;z-index:200;background:rgba(14,32,86,.55);backdrop-filter:blur(3px);align-items:flex-start;justify-content:center;padding:40px 16px;overflow-y:auto;}
+  .overlay.on{display:flex;}
+  .modal{background:var(--white);border-radius:12px;width:100%;max-width:540px;box-shadow:0 24px 70px rgba(0,0,0,.3);overflow:hidden;}
+  .modal.wide{max-width:760px;}
+  .modal-head{background:var(--navy);color:var(--white);padding:20px 26px;display:flex;align-items:center;justify-content:space-between;}
+  .modal-head h3{font-family:'Playfair Display',serif;font-size:20px;font-weight:700;}
+  .modal-x{background:none;border:none;color:rgba(255,255,255,.8);font-size:24px;cursor:pointer;line-height:1;}
+  .modal-body{padding:26px;}
+  .modal-foot{padding:0 26px 26px;display:flex;gap:12px;justify-content:flex-end;}
+  .btn-sm{padding:9px 18px;border-radius:5px;font-size:13px;font-weight:600;cursor:pointer;border:none;}
+  .btn-blue{background:var(--navy);color:var(--white);}
+  .btn-blue:hover{background:var(--navy-hover);}
+  .btn-gold{background:var(--gold);color:var(--navy-deep);}
+  .btn-gold:hover{background:var(--gold-light);}
+  .btn-line{background:var(--white);border:1px solid var(--border);color:var(--dark-gray);}
+  .btn-line:hover{background:var(--slate);}
+  .btn-red{background:#fbe9e9;color:#b3261e;}
+  .btn-red:hover{background:#f5d6d4;}
+  .btn-green{background:#e6f5ea;color:#1c7a3e;}
+  .btn-green:hover{background:#d2ecda;}
+
+  /* admin */
+  .admin-tabs{display:flex;gap:6px;border-bottom:1px solid var(--border);margin-bottom:20px;}
+  .admin-tab{padding:10px 16px;font-size:13px;font-weight:600;color:var(--gray);cursor:pointer;border-bottom:2px solid transparent;}
+  .admin-tab.on{color:var(--navy);border-bottom-color:var(--gold);}
+  .admin-list{display:flex;flex-direction:column;gap:10px;max-height:340px;overflow-y:auto;}
+  .admin-row{border:1px solid var(--border);border-radius:8px;padding:13px 15px;display:flex;align-items:center;justify-content:between;gap:12px;}
+  .admin-row .info{flex:1;}
+  .admin-row .info b{font-size:14px;color:var(--navy);display:block;}
+  .admin-row .info small{font-size:12px;color:var(--gray);}
+  .admin-row .acts{display:flex;gap:7px;flex-shrink:0;}
+  .admin-empty{font-size:13px;color:var(--gray);text-align:center;padding:24px;}
+  .badge-pending{font-size:10px;font-weight:700;color:#9a6a00;background:#fdf2db;padding:2px 7px;border-radius:10px;margin-left:6px;}
+
+  @media(max-width:980px){
+    .nav-links{display:none;position:absolute;top:74px;left:0;right:0;flex-direction:column;background:var(--navy);padding:20px 24px;gap:18px;border-bottom:2px solid var(--gold);}
+    .nav-toggle{display:block;}
+    .about,.botw{grid-template-columns:1fr;gap:44px;}
+    .directory-grid,.board-grid{grid-template-columns:repeat(2,1fr);}
+    .pillars-grid{grid-template-columns:1fr;}
+    .fg-row{grid-template-columns:1fr;}
+  }
+  @media(max-width:640px){
+    nav{padding:0 20px;}#announceBar{padding:9px 20px;}
+    .hero-content{padding:0 22px;}.hero-tower{display:none;}
+    .stat-bar,.pillars,.botw,.directory,.board,.about,.join,.footer,.cal-section,.membership{padding-left:22px;padding-right:22px;}
+    .events-section{padding-left:22px;}.events-head,.events-track{padding-right:22px;}
+    .footer{grid-template-columns:1fr;gap:34px;}.footer-bottom{padding:20px 22px;}
+    .directory-grid,.board-grid{grid-template-columns:1fr;}
+    .event-card{flex-basis:280px;}.stat-divider{display:none;}
+    .form-card{padding:26px;}
+    .cal-cell{min-height:78px;padding:5px;}
+    .cal-chip{font-size:9px;}
+  }
+</style>
+</head>
+<body>
+
+<div id="announceBar"></div>
+
+<!-- ===== NAV ===== -->
+<nav>
+  <a href="#top" class="nav-logo">
+    <span class="nav-logo-mark">
+      <img src="chamber-logo.png" alt="Hobart Chamber of Commerce"
+           onerror="this.onerror=null;this.outerHTML='&lt;svg viewBox=\'0 0 48 48\' xmlns=\'http://www.w3.org/2000/svg\'&gt;&lt;g fill=\'none\' stroke=\'#1a3ea8\' stroke-width=\'2\'&gt;&lt;path d=\'M16 18 h16 l-2 7 h-12 z\' fill=\'#1a3ea8\'/&gt;&lt;path d=\'M16 18 q8 -6 16 0\' fill=\'#1a3ea8\'/&gt;&lt;line x1=\'18\' y1=\'25\' x2=\'15\' y2=\'40\'/&gt;&lt;line x1=\'30\' y1=\'25\' x2=\'33\' y2=\'40\'/&gt;&lt;line x1=\'17\' y1=\'33\' x2=\'31\' y2=\'33\'/&gt;&lt;/g&gt;&lt;/svg&gt;';" />
+    </span>
+    <span class="nav-logo-text"><span>Hobart Chamber</span><span>of Commerce · Kiowa County</span></span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#calendar">Calendar</a></li>
+    <li><a href="#events">Events</a></li>
+    <li><a href="#directory">Members</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#membership" class="nav-cta">Join Today</a></li>
+  </ul>
+  <button class="nav-toggle" onclick="var n=document.querySelector('.nav-links');n.style.display=(this.dataset.o=='1'?'none':'flex');this.dataset.o=(this.dataset.o=='1'?'0':'1');">☰</button>
+</nav>
+
+<!-- ===== HERO ===== -->
+<section class="hero" id="top">
+  <div class="hero-bg"></div>
+  <div class="hero-photo" id="heroPhoto"></div>
+  <div class="hero-lines"></div>
+  <svg class="hero-tower" viewBox="0 0 100 120" xmlns="http://www.w3.org/2000/svg">
+    <g fill="none" stroke="#ffffff" stroke-width="2">
+      <path d="M30 40 h40 l-5 18 h-30 z" fill="#ffffff" fill-opacity=".5"/>
+      <path d="M30 40 q20 -16 40 0" fill="#ffffff" fill-opacity=".5"/>
+      <line x1="36" y1="58" x2="28" y2="108"/><line x1="64" y1="58" x2="72" y2="108"/>
+      <line x1="33" y1="82" x2="67" y2="82"/><line x1="30" y1="95" x2="70" y2="95"/>
+    </g>
+  </svg>
+  <div class="hero-content">
+    <div class="hero-eyebrow"><div class="hero-eyebrow-line"></div><span>Hobart, Oklahoma · Kiowa County</span></div>
+    <h1 class="hero-title">Supporting Business.<span class="accent">Strengthening Community.</span></h1>
+    <p class="hero-sub">Connecting local businesses, driving community events, and building a vibrant future for Hobart — one business, one family, and one event at a time.</p>
+    <div class="hero-actions">
+      <a href="#membership" class="btn-primary">Join the Chamber</a>
+      <a href="#calendar" class="btn-ghost">Community Calendar</a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== STAT BAR ===== -->
+<div class="stat-bar">
+  <div class="stat-item"><span class="num">17</span><span class="label">Current Members</span></div>
+  <div class="stat-divider"></div>
+  <div class="stat-item"><span class="num">8</span><span class="label">Summer Events</span></div>
+  <div class="stat-divider"></div>
+  <div class="stat-item"><span class="num">Kiowa</span><span class="label">County Served</span></div>
+  <div class="stat-divider"></div>
+  <div class="stat-item"><span class="num">2&nbsp;Days</span><span class="label">Open Weekly</span></div>
+</div>
+
+<!-- ===== PILLARS ===== -->
+<section class="pillars">
+  <div class="pillars-header">
+    <span class="section-eyebrow">What We Do</span>
+    <h2 class="section-title" style="color:var(--white)">The Chamber's Role<br>in Hobart's Future</h2>
+  </div>
+  <div class="pillars-grid">
+    <div class="pillar"><div class="pillar-number">01</div><div class="pillar-label">Advocate</div><h3>Voice for Local Business</h3><p>We represent Hobart's business community — making sure local interests are heard by leadership, partners, and the people who keep our town moving forward.</p></div>
+    <div class="pillar"><div class="pillar-number">02</div><div class="pillar-label">Connect</div><h3>Where Relationships Are Built</h3><p>From the Farmers Market to Relay for Life to Moonlight Madness, we create the moments where Hobart's community comes together, grows, and thrives.</p></div>
+    <div class="pillar"><div class="pillar-number">03</div><div class="pillar-label">Invest</div><h3>Growing Hobart's Economy</h3><p>We promote new businesses, support existing members, and actively work to attract opportunity and economic development to Kiowa County.</p></div>
+  </div>
+</section>
+
+<!-- ===== EVENTS CAROUSEL ===== -->
+<section class="events-section" id="events">
+  <div class="events-head">
+    <div><span class="section-eyebrow">What's Happening · Summer 2026</span><h2 class="section-title">Featured Events</h2></div>
+    <div class="events-controls">
+      <button class="ev-arrow" onclick="scrollEvents(-1)" aria-label="Previous">‹</button>
+      <button class="ev-arrow" onclick="scrollEvents(1)" aria-label="Next">›</button>
+    </div>
+  </div>
+  <p class="events-sub">Our marquee summer events. Each card has a space for its flyer as it's released — drop the image into the repo and it appears here.</p>
+  <div class="events-track" id="eventsTrack">
+    <div class="event-card"><div class="flyer-slot"><img src="flyer-supply-drive.jpg" alt="" onerror="this.parentElement.classList.add('empty');this.outerHTML=flyerPH;"></div><div class="event-top"><div class="event-date"><span class="m">Jul</span><span class="d">1</span></div><div class="event-meta"><h4>Back-to-School Supply Drive</h4><span class="loc">📍 Great Plains Youth &amp; Family Services</span></div></div><div class="event-body"><p>The supply donation campaign kicks off July 1. Help spread the word and donate so local students start the year prepared.</p></div><div class="event-foot"><span class="event-tag">Community Drive</span></div></div>
+    <div class="event-card"><div class="flyer-slot"><img src="flyer-relay.jpg" alt="" onerror="this.parentElement.classList.add('empty');this.outerHTML=flyerPH;"></div><div class="event-top"><div class="event-date"><span class="m">Jul</span><span class="d">10</span></div><div class="event-meta"><h4>Relay for Life</h4><span class="loc">📍 Hobart Events Center · 6 PM – Midnight</span></div></div><div class="event-body"><p>Our community celebrates survivors, remembers loved ones, and supports the fight against cancer. Everyone is encouraged to attend.</p></div><div class="event-foot"><span class="event-tag">Signature Event</span></div></div>
+    <div class="event-card"><div class="flyer-slot"><img src="flyer-golf-camp.jpg" alt="" onerror="this.parentElement.classList.add('empty');this.outerHTML=flyerPH;"></div><div class="event-top"><div class="event-date"><span class="m">Jul</span><span class="d">13</span></div><div class="event-meta"><h4>Hilltop National Junior Golf Camp</h4><span class="loc">📍 <a href="https://hobartok.gov/golf-course" target="_blank" rel="noopener">Hobart Municipal Golf Course</a> · Jul 13–15</span></div></div><div class="event-body"><p>Three-day junior golf camp coached by Bobby Taylor. A great introduction to the game for kids. Call the golf course for details.</p></div><div class="event-foot"><span class="event-tag">Youth · Golf</span></div></div>
+    <div class="event-card"><div class="flyer-slot"><img src="flyer-health-fitness.jpg" alt="" onerror="this.parentElement.classList.add('empty');this.outerHTML=flyerPH;"></div><div class="event-top"><div class="event-date"><span class="m">Jul</span><span class="d">17</span></div><div class="event-meta"><h4>Family Health &amp; Fitness Day</h4><span class="loc">📍 <a href="https://elkviewhospital.com/" target="_blank" rel="noopener">Elkview General Hospital</a> · 6–8:30 PM</span></div></div><div class="event-body"><p>An evening focused on health, wellness, and fun for the whole family. Proceeds benefit victims of child abuse throughout Southwest Oklahoma.</p></div><div class="event-foot"><span class="event-tag">Family · Wellness</span></div></div>
+    <div class="event-card"><div class="flyer-slot"><img src="flyer-farmers-market.jpg" alt="" onerror="this.parentElement.classList.add('empty');this.outerHTML=flyerPH;"></div><div class="event-top"><div class="event-date"><span class="m">Jul</span><span class="d">18</span></div><div class="event-meta"><h4>Farmers Market</h4><span class="loc">📍 Hunter Park · Morning</span></div></div><div class="event-body"><p>Support local growers, makers, and vendors. Fresh produce, baked goods, handmade items, plus kids' activities all morning.</p></div><div class="event-foot"><span class="event-tag">Shop Local</span></div></div>
+    <div class="event-card"><div class="flyer-slot"><img src="flyer-kickball.jpg" alt="" onerror="this.parentElement.classList.add('empty');this.outerHTML=flyerPH;"></div><div class="event-top"><div class="event-date"><span class="m">Jul</span><span class="d">18</span></div><div class="event-meta"><h4>Family Slip 'N Slide Kickball</h4><span class="loc">📍 Biggers Park · Evening</span></div></div><div class="event-body"><p>One of the most exciting family events of the summer. Gather your team for an evening of fun and friendly competition.</p></div><div class="event-foot"><span class="event-tag">Family · Sports</span></div></div>
+    <div class="event-card"><div class="flyer-slot"><img src="flyer-showdown.jpg" alt="" onerror="this.parentElement.classList.add('empty');this.outerHTML=flyerPH;"></div><div class="event-top"><div class="event-date"><span class="m">Jul</span><span class="d">18</span></div><div class="event-meta"><h4>Show Down on the Hill Scramble</h4><span class="loc">📍 <a href="https://hobartok.gov/golf-course" target="_blank" rel="noopener">Hobart Municipal Golf Course</a></span></div></div><div class="event-body"><p>Four-man scramble with a payout to the winner. Limited to 18 teams — get registered soon.</p></div><div class="event-foot"><span class="event-tag">Golf · Tournament</span></div></div>
+    <div class="event-card"><div class="flyer-slot"><img src="flyer-glow-golf.jpg" alt="" onerror="this.parentElement.classList.add('empty');this.outerHTML=flyerPH;"></div><div class="event-top"><div class="event-date"><span class="m">Aug</span><span class="d">1</span></div><div class="event-meta"><h4>Glow Golf Tournament Returns</h4><span class="loc">📍 <a href="https://hobartok.gov/golf-course" target="_blank" rel="noopener">Hobart Municipal Golf Course</a> · Night</span></div></div><div class="event-body"><p>The popular nighttime event is back — glowing golf balls, illuminated fairways, and a fun evening under the stars.</p></div><div class="event-foot"><span class="event-tag">Golf · Night Event</span></div></div>
+  </div>
+</section>
+
+<!-- ===== COMMUNITY CALENDAR ===== -->
+<section class="cal-section" id="calendar">
+  <div class="cal-head">
+    <div><span class="section-eyebrow">Hobart Happenings</span><h2 class="section-title">Community Calendar</h2></div>
+    <button class="btn-primary" onclick="openSubmit()">+ Submit an Event</button>
+  </div>
+  <p class="cal-sub">See what's happening across Hobart and Kiowa County. Anyone can submit a community event — submissions are reviewed by the Chamber before they appear on the calendar.</p>
+  <div class="cal-toolbar">
+    <div class="cal-nav">
+      <button onclick="calMove(-1)" aria-label="Previous month">‹</button>
+      <div class="cal-month" id="calMonth">—</div>
+      <button onclick="calMove(1)" aria-label="Next month">›</button>
+    </div>
+    <button class="btn-sm btn-line" onclick="calToday()">Today</button>
+  </div>
+  <div class="cal-grid" id="calGrid"></div>
+  <div class="cal-legend"><span id="calStatus"></span></div>
+</section>
+
+<!-- ===== MEMBERSHIP FORM ===== -->
+<section class="membership" id="membership">
+  <div class="membership-head">
+    <span class="section-eyebrow">Membership</span>
+    <h2 class="section-title">Join the Chamber</h2>
+    <p>Become part of a network of local businesses committed to the growth and success of our community. Complete the application below and the Chamber will follow up with the right membership options for your business — no paperwork to mail, no leaving the site.</p>
+  </div>
+  <div class="form-card">
+    <!-- Native on-site application. Submits to the Chamber email. See setup notes for the no-setup vs. silent-submit options. -->
+    <div class="fg"><label>Business / Organization Name *</label><input id="m_biz" type="text" placeholder="Your business name" /></div>
+    <div class="fg-row">
+      <div class="fg"><label>Primary Contact Name *</label><input id="m_name" type="text" placeholder="First and last name" /></div>
+      <div class="fg"><label>Phone *</label><input id="m_phone" type="tel" placeholder="(580) 000-0000" /></div>
+    </div>
+    <div class="fg-row">
+      <div class="fg"><label>Email *</label><input id="m_email" type="email" placeholder="you@business.com" /></div>
+      <div class="fg"><label>Website or Facebook</label><input id="m_web" type="text" placeholder="optional" /></div>
+    </div>
+    <div class="fg"><label>Mailing Address</label><input id="m_addr" type="text" placeholder="Street, City, State, ZIP" /></div>
+    <div class="fg"><label>I'm interested in being involved with:</label>
+      <div class="check-row">
+        <label class="check-item"><input type="checkbox" class="m_int" value="Community Events" />Community Events</label>
+        <label class="check-item"><input type="checkbox" class="m_int" value="Business Promotion" />Business Promotion</label>
+        <label class="check-item"><input type="checkbox" class="m_int" value="Family Activities" />Family Activities</label>
+        <label class="check-item"><input type="checkbox" class="m_int" value="Volunteer Opportunities" />Volunteer</label>
+        <label class="check-item"><input type="checkbox" class="m_int" value="Sponsorship Opportunities" />Sponsorship</label>
+      </div>
+    </div>
+    <div class="fg"><label>Anything else you'd like us to know?</label><textarea id="m_notes" rows="3" placeholder="Optional"></textarea></div>
+    <button class="btn-primary" style="width:100%;text-align:center;padding:14px;" onclick="submitMembership()">Submit Application</button>
+    <p class="form-note">By submitting, your application is sent to the Chamber at director@hobartokchamber.org. A team member will follow up with membership level options. We accept cash, card, or check.</p>
+    <div class="form-msg" id="m_msg"></div>
+  </div>
+</section>
+
+<!-- ===== BOTW ===== -->
+<section class="botw">
+  <div class="botw-text">
+    <span class="section-eyebrow">Member Spotlight</span>
+    <h2 class="section-title">Business of the Week</h2>
+    <p>Our popular Business of the Week spotlight is back. Each week we recognize a local business for its contributions to our community. Watch the local newspaper and our Facebook page to see who's featured.</p>
+    <a href="#membership" class="btn-primary">Become a Member</a>
+  </div>
+  <div class="botw-card">
+    <div class="botw-photo"><img src="botw.jpg" alt="" onerror="this.parentElement.classList.add('empty');this.outerHTML=flyerPHWhite;"></div>
+    <div class="botw-inner"><span class="botw-badge">This Week's Feature</span><h3>Featured Member Coming Soon</h3><p>This space spotlights a different Chamber member each week. Add the business name, a short description, and a photo above to feature them.</p></div>
+  </div>
+</section>
+
+<!-- ===== DIRECTORY ===== -->
+<section class="directory" id="directory">
+  <div class="directory-head"><div><span class="section-eyebrow">Our Members</span><h2 class="section-title">Member Directory</h2></div></div>
+  <p class="directory-sub">Current members since our December 2025 membership drive. These are the businesses and organizations investing in Hobart's future.</p>
+  <div class="dir-filter" id="dirFilter"></div>
+  <div class="directory-grid" id="directoryGrid">
+    <a class="member t-gold" data-cat="Civic &amp; Nonprofit" href="https://tommyfranksmuseum.org/" target="_blank" rel="noopener"><h5>General Tommy Franks Museum <span class="ext">↗</span></h5><span>Museum · Leadership Institute</span></a>
+    <div class="member t-diamond" data-cat="Retail &amp; Shopping"><h5>Walmart</h5><span>Retail</span></div>
+    <a class="member t-platinum" data-cat="Banking &amp; Finance" href="https://www.bancfirst.bank/" target="_blank" rel="noopener"><h5>BancFirst <span class="ext">↗</span></h5><span>Banking &amp; Finance</span></a>
+    <a class="member t-diamond" data-cat="Utilities" href="https://www.psoklahoma.com/" target="_blank" rel="noopener"><h5>PSO <span class="ext">↗</span></h5><span>Public Service Co. · Utilities</span></a>
+    <div class="member t-bronze" data-cat="Banking &amp; Finance"><h5>Scott Northrip CPA</h5><span>Accounting · CPA</span></div>
+    <div class="member t-silver" data-cat="Banking &amp; Finance"><h5>Edward Jones</h5><span>Financial Services</span></div>
+    <div class="member t-silver" data-cat="Banking &amp; Finance"><h5>Frazer Bank</h5><span>Banking &amp; Finance</span></div>
+    <div class="member t-silver" data-cat="Civic &amp; Nonprofit"><h5>Hobart Lions Club</h5><span>Civic Organization</span></div>
+    <div class="member t-silver" data-cat="Home &amp; Construction"><h5>McAbee Fox Roofing</h5><span>Roofing · Construction</span></div>
+    <div class="member t-silver" data-cat="Real Estate"><h5>Russ Real Estate</h5><span>Real Estate</span></div>
+    <div class="member t-bronze" data-cat="Home &amp; Construction"><h5>TH Rogers</h5><span>Lumber · Building Supply</span></div>
+    <div class="member t-silver" data-cat="Lodging &amp; Travel"><h5>Hiway Inn Motel</h5><span>Lodging</span></div>
+    <div class="member t-silver" data-cat="Insurance"><h5>Josh Wald Insurance</h5><span>Insurance</span></div>
+    <div class="member t-bronze" data-cat="Veterinary &amp; Pets"><h5>Ark Vet</h5><span>Veterinary</span></div>
+    <div class="member t-bronze" data-cat="Local Business"><h5>Clinks</h5><span>Local Business</span></div>
+    <div class="member t-silver" data-cat="Local Business"><h5>Searchlight</h5><span>Local Business</span></div>
+    <div class="member t-bronze" data-cat="Local Business"><h5>Wilmes</h5><span>Local Business</span></div>
+  </div>
+  <p class="directory-note">Interested in joining the directory? <a href="#membership" style="color:var(--gold)">Become a member →</a></p>
+</section>
+
+<!-- ===== BOARD ===== -->
+<section class="board" id="board">
+  <div class="board-head"><span class="section-eyebrow">Leadership</span><h2 class="section-title" style="color:var(--white)">Board of Directors</h2></div>
+  <div class="board-grid">
+    <div class="board-member"><div class="board-avatar">JS</div><h4>Jaci Sims</h4><span>Director</span></div>
+    <div class="board-member"><div class="board-avatar">JL</div><h4>Jessica Lankford</h4><span>Director</span></div>
+    <div class="board-member"><div class="board-avatar">HF</div><h4>Hannah Felder</h4><span>Director</span></div>
+    <div class="board-member"><div class="board-avatar">WP</div><h4>Whitney Perez</h4><span>Director</span></div>
+    <div class="board-member"><div class="board-avatar">CF</div><h4>Chris Fleming</h4><span>Director</span></div>
+    <div class="board-member"><div class="board-avatar">AC</div><h4>Annie Cruz</h4><span>Director</span></div>
+    <div class="board-member"><div class="board-avatar">PR</div><h4>Preston Reed</h4><span>Director</span></div>
+    <div class="board-member"><div class="board-avatar">TH</div><h4>Tanner Heath</h4><span>Director</span></div>
+  </div>
+  <div class="board-ed"><div class="board-avatar">JW</div><h4 style="color:var(--white);font-family:'Playfair Display',serif;">Jessica Williams</h4><span style="color:var(--gold-light);font-size:12px;letter-spacing:1px;text-transform:uppercase;">Executive Director</span></div>
+</section>
+
+<!-- ===== ABOUT ===== -->
+<section class="about" id="about">
+  <div class="about-text">
+    <span class="section-eyebrow">About the Chamber</span>
+    <h2 class="section-title">Building a Vibrant Future for Hobart</h2>
+    <p>The Hobart Chamber of Commerce is committed to supporting and promoting the businesses that make our community strong. Our mission is to encourage economic growth by connecting local businesses, attracting new opportunities, and creating a thriving environment for entrepreneurs and citizens alike.</p>
+    <p>We believe a strong business community leads to a strong Hobart. Through year-round events for adults, children, and families, we bring people together, drive traffic to local businesses, and showcase everything our town has to offer.</p>
+  </div>
+  <div>
+    <div class="about-mission"><div class="ti">Our Promise</div><p>"Supporting Business. Strengthening Community."</p></div>
+    <div class="involve"><h4>Ways to Get Involved</h4><div class="involve-list">
+      <div class="involve-item"><span class="involve-dot"></span>Community Events</div>
+      <div class="involve-item"><span class="involve-dot"></span>Business Promotion</div>
+      <div class="involve-item"><span class="involve-dot"></span>Family Activities</div>
+      <div class="involve-item"><span class="involve-dot"></span>Volunteer Opportunities</div>
+      <div class="involve-item"><span class="involve-dot"></span>Sponsorship Opportunities</div>
+    </div></div>
+  </div>
+</section>
+
+<!-- ===== JOIN ===== -->
+<section class="join">
+  <div class="join-inner">
+    <span class="section-eyebrow" style="display:block;margin-bottom:14px;">Get Started</span>
+    <h2 class="join-title">Invest in <em>Hobart.</em><br>Invest in Yourself.</h2>
+    <p class="join-sub">Join a network of local businesses committed to the growth and success of our community. Multiple membership levels are available to fit every business — reach out and we'll find the right fit.</p>
+    <div class="join-actions">
+      <a href="#membership" class="btn-primary">Apply Online</a>
+      <a href="tel:5806820887" class="btn-ghost">Call (580) 682-0887</a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer class="footer" id="contact">
+  <div class="footer-brand">
+    <a href="#top" class="nav-logo"><span class="nav-logo-mark"><img src="chamber-logo.png" alt="Hobart Chamber of Commerce" onerror="this.style.display='none'"></span><span class="nav-logo-text"><span>Hobart Chamber</span><span>of Commerce</span></span></a>
+    <p>Supporting and promoting the businesses that make our community strong. Join us as we build a vibrant future for Hobart, Oklahoma.</p>
+    <div class="social-links"><a href="https://www.facebook.com/profile.php?id=61579700143153" target="_blank" rel="noopener" title="Facebook">f</a><a href="mailto:director@hobartokchamber.org" title="Email">@</a></div>
+  </div>
+  <div><h6>Navigate</h6><ul>
+    <li><a href="#calendar">Community Calendar</a></li>
+    <li><a href="#events">Events</a></li>
+    <li><a href="#directory">Member Directory</a></li>
+    <li><a href="#board">Board of Directors</a></li>
+    <li><a href="#about">About</a></li>
+  </ul></div>
+  <div><h6>Get Involved</h6><ul>
+    <li><a href="#membership">Membership</a></li>
+    <li><a onclick="openSubmit()">Submit an Event</a></li>
+    <li><a href="#membership">Sponsorship</a></li>
+    <li><a href="#membership">Volunteer</a></li>
+    <li><a href="#directory">Business of the Week</a></li>
+  </ul></div>
+  <div class="footer-contact"><h6>Visit / Contact</h6><p>
+    106 W. 4th St.<br>Hobart, OK 73651<br><br>
+    <a href="tel:5806820887">(580) 682-0887</a><br>
+    <a href="mailto:director@hobartokchamber.org">director@hobartokchamber.org</a><br>
+    <a href="https://www.hobartokchamber.org" target="_blank" rel="noopener">www.hobartokchamber.org</a><br><br>
+    <strong style="color:rgba(255,255,255,.7)">Open Hours</strong><br>Mon &amp; Thu: 8:30–11:30 AM<br>Other times by appointment
+  </p></div>
+</footer>
+<div class="footer-bottom">
+  <p>© 2026 Hobart Chamber of Commerce · All Rights Reserved</p>
+  <p>Supporting Business. Strengthening Community. <span class="gear" id="gear" title="Chamber settings">·</span></p>
+</div>
+
+<!-- ===== SUBMIT EVENT MODAL ===== -->
+<div class="overlay" id="submitOverlay">
+  <div class="modal">
+    <div class="modal-head"><h3>Submit a Community Event</h3><button class="modal-x" onclick="closeOverlay('submitOverlay')">×</button></div>
+    <div class="modal-body">
+      <div class="fg"><label>Event Title *</label><input id="s_title" type="text" /></div>
+      <div class="fg-row"><div class="fg"><label>Date *</label><input id="s_date" type="date" /></div><div class="fg"><label>Time</label><input id="s_time" type="text" placeholder="e.g. 6:00 PM" /></div></div>
+      <div class="fg"><label>Location</label><input id="s_loc" type="text" placeholder="Where is it?" /></div>
+      <div class="fg"><label>Description</label><textarea id="s_desc" rows="3"></textarea></div>
+      <div class="fg-row"><div class="fg"><label>Your Name *</label><input id="s_by" type="text" /></div><div class="fg"><label>Your Email *</label><input id="s_byemail" type="email" /></div></div>
+      <div class="form-msg" id="s_msg"></div>
+    </div>
+    <div class="modal-foot"><button class="btn-sm btn-line" onclick="closeOverlay('submitOverlay')">Cancel</button><button class="btn-sm btn-gold" onclick="submitEvent()">Submit for Review</button></div>
+  </div>
+</div>
+
+<!-- ===== EVENT DETAIL MODAL ===== -->
+<div class="overlay" id="detailOverlay">
+  <div class="modal">
+    <div class="modal-head"><h3 id="d_title">Event</h3><button class="modal-x" onclick="closeOverlay('detailOverlay')">×</button></div>
+    <div class="modal-body" id="d_body"></div>
+  </div>
+</div>
+
+<!-- ===== ADMIN OVERLAY ===== -->
+<div class="overlay" id="adminOverlay">
+  <div class="modal wide">
+    <div class="modal-head"><h3 id="adminTitle">Chamber Settings</h3><button class="modal-x" onclick="closeOverlay('adminOverlay')">×</button></div>
+    <div class="modal-body" id="adminBody"></div>
+  </div>
+</div>
+
+<script>
+/* ============================================================
+   HOBART CHAMBER — calendar + admin
+   Built single-file, string-concatenation only (no template literals).
+   FIREBASE: paste your Chamber project's web config below.
+   On the LIVE site this connects to Firestore. In this preview it
+   falls back to DEMO mode so you can see the layout.
+   ============================================================ */
+
+var firebaseConfig = {
+  apiKey: "PASTE_API_KEY",
+  authDomain: "PASTE.firebaseapp.com",
+  projectId: "PASTE_PROJECT_ID",
+  storageBucket: "PASTE.appspot.com",
+  messagingSenderId: "PASTE_SENDER_ID",
+  appId: "PASTE_APP_ID"
+};
+
+var CHAMBER_EMAIL = "director@hobartokchamber.org";
+
+var db=null, auth=null, FB=false;
+try{
+  if(window.firebase && firebaseConfig.apiKey.indexOf("PASTE")===-1){
+    firebase.initializeApp(firebaseConfig);
+    db=firebase.firestore();
+    auth=firebase.auth();
+    FB=true;
+  }
+}catch(e){ console.warn("Firebase not initialized:", e); }
+
+/* placeholder markup for empty flyer slots */
+var flyerPH='<div class="flyer-empty"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg><span>Flyer / Photo</span></div>';
+var flyerPHWhite=flyerPH;
+
+/* hide hero photo layer if hero.jpg missing */
+(function(){var i=new Image();i.onerror=function(){var h=document.getElementById('heroPhoto');if(h)h.classList.add('empty');};i.src='hero.jpg';})();
+
+/* ---- DEMO data (preview only) ---- */
+var DEMO=[
+  {id:'d1',title:'Back-to-School Supply Drive',date:'2026-07-01',time:'All day',location:'Great Plains Youth & Family Services',description:'Supply donation campaign kicks off. Donate school supplies for local students.',status:'approved'},
+  {id:'d2',title:'Relay for Life',date:'2026-07-10',time:'6:00 PM – Midnight',location:'Hobart Events Center',description:'Celebrate survivors and support the fight against cancer.',status:'approved'},
+  {id:'d3',title:'Family Health & Fitness Day',date:'2026-07-17',time:'6:00–8:30 PM',location:'Elkview General Hospital',description:'An evening of health, wellness, and fun for the whole family.',status:'approved'},
+  {id:'d4',title:'Farmers Market',date:'2026-07-18',time:'Morning',location:'Hunter Park',description:'Support local growers, makers, and vendors.',status:'approved'},
+  {id:'d5',title:'Glow Golf Tournament',date:'2026-08-01',time:'Night',location:'Hobart Municipal Golf Course',description:'Glowing golf balls, illuminated fairways, fun under the stars.',status:'approved'}
+];
+
+var EVENTS=[];
+var view=new Date(2026,6,1); // default July 2026 so demo events show
+var MN=['January','February','March','April','May','June','July','August','September','October','November','December'];
+var DOW=['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+
+function pad(n){return (n<10?'0':'')+n;}
+function dstr(d){return d.getFullYear()+'-'+pad(d.getMonth()+1)+'-'+pad(d.getDate());}
+
+function loadEvents(){
+  if(FB){
+    db.collection('events').where('status','==','approved').get().then(function(snap){
+      EVENTS=[]; snap.forEach(function(doc){var x=doc.data();x.id=doc.id;EVENTS.push(x);});
+      renderCal(); setStatus('');
+    }).catch(function(e){ console.warn(e); EVENTS=[]; renderCal(); setStatus('Could not load events.'); });
+  }else{
+    EVENTS=DEMO.slice();
+    renderCal();
+    setStatus('PREVIEW MODE — sample events shown. On the live site this loads from Firebase.');
+  }
+}
+function setStatus(msg){
+  var s=document.getElementById('calStatus');
+  if(!msg){s.innerHTML='';return;}
+  s.innerHTML='<span class="cal-mode">'+msg+'</span>';
+}
+
+function renderCal(){
+  document.getElementById('calMonth').textContent=MN[view.getMonth()]+' '+view.getFullYear();
+  var grid=document.getElementById('calGrid'); grid.innerHTML='';
+  var i; for(i=0;i<7;i++){var h=document.createElement('div');h.className='cal-dow';h.textContent=DOW[i];grid.appendChild(h);}
+  var mo=view.getMonth(), yr=view.getFullYear();
+  var start=new Date(yr,mo,1).getDay();
+  var dim=new Date(yr,mo+1,0).getDate();
+  var prevDim=new Date(yr,mo,0).getDate();
+  var todayStr=dstr(new Date());
+  var c;
+  for(c=0;c<42;c++){
+    var cell=document.createElement('div'); cell.className='cal-cell';
+    var inMonth=(c>=start && c<start+dim);
+    var dayNum;
+    if(c<start){ dayNum=prevDim-start+1+c; cell.classList.add('dim'); }
+    else if(c>=start+dim){ dayNum=c-(start+dim)+1; cell.classList.add('dim'); }
+    else{ dayNum=c-start+1; }
+    var num=document.createElement('div'); num.className='dnum'; num.textContent=dayNum; cell.appendChild(num);
+    if(inMonth){
+      var ds=yr+'-'+pad(mo+1)+'-'+pad(dayNum);
+      if(ds===todayStr) cell.classList.add('today');
+      var dayEvents=EVENTS.filter(function(e){return e.date===ds;});
+      var shown=dayEvents.slice(0,2), k;
+      for(k=0;k<shown.length;k++){
+        (function(ev){var chip=document.createElement('div');chip.className='cal-chip';chip.textContent=ev.title;chip.onclick=function(){showDetail(ev);};cell.appendChild(chip);})(shown[k]);
+      }
+      if(dayEvents.length>2){
+        var more=document.createElement('div'); more.className='cal-more'; more.textContent='+'+(dayEvents.length-2)+' more';
+        (function(list){more.onclick=function(){showDay(list);};})(dayEvents);
+        cell.appendChild(more);
+      }
+    }
+    grid.appendChild(cell);
+  }
+}
+
+function calMove(d){ view=new Date(view.getFullYear(),view.getMonth()+d,1); renderCal(); }
+function calToday(){ view=new Date(); view.setDate(1); renderCal(); }
+
+function showDetail(ev){
+  document.getElementById('d_title').textContent=ev.title;
+  var b='<p style="font-size:13px;color:var(--gold);font-weight:600;letter-spacing:1px;text-transform:uppercase;margin-bottom:10px;">'+fmtNice(ev.date)+(ev.time?(' · '+esc(ev.time)):'')+'</p>';
+  if(ev.location) b+='<p style="font-size:14px;color:var(--dark-gray);margin-bottom:12px;"><strong>📍 </strong>'+esc(ev.location)+'</p>';
+  if(ev.description) b+='<p style="font-size:14.5px;color:var(--dark-gray);line-height:1.7;">'+esc(ev.description)+'</p>';
+  document.getElementById('d_body').innerHTML=b;
+  openOverlay('detailOverlay');
+}
+function showDay(list){
+  document.getElementById('d_title').textContent=fmtNice(list[0].date);
+  var b='', i;
+  for(i=0;i<list.length;i++){
+    var ev=list[i];
+    b+='<div style="border-left:3px solid var(--gold);padding:6px 0 6px 14px;margin-bottom:14px;cursor:pointer;" onclick="showDetailById(\''+ev.id+'\')">'
+      +'<strong style="color:var(--navy);font-size:15px;">'+esc(ev.title)+'</strong><br>'
+      +'<small style="color:var(--gray);">'+(ev.time?esc(ev.time)+' · ':'')+esc(ev.location||'')+'</small></div>';
+  }
+  document.getElementById('d_body').innerHTML=b;
+  openOverlay('detailOverlay');
+}
+function showDetailById(id){var e=EVENTS.filter(function(x){return x.id===id;})[0];if(e)showDetail(e);}
+
+function fmtNice(ds){ if(!ds)return''; var p=ds.split('-'); var d=new Date(p[0],p[1]-1,p[2]); return DOW[d.getDay()]+', '+MN[d.getMonth()]+' '+parseInt(p[2],10)+', '+p[0]; }
+function esc(s){ s=(s==null?'':''+s); return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+
+/* ---- submit event (public → pending) ---- */
+function openSubmit(){ openOverlay('submitOverlay'); }
+function submitEvent(){
+  var t=val('s_title'), d=val('s_date'), by=val('s_by'), em=val('s_byemail');
+  var msg=document.getElementById('s_msg');
+  if(!t||!d||!by||!em){ msg.className='form-msg'; msg.style.display='block'; msg.style.background='#fbe9e9'; msg.style.color='#b3261e'; msg.textContent='Please fill in title, date, your name, and email.'; return; }
+  var ev={title:t,date:d,time:val('s_time'),location:val('s_loc'),description:val('s_desc'),submittedBy:by,submitterEmail:em,status:'pending'};
+  if(FB){
+    ev.createdAt=firebase.firestore.FieldValue.serverTimestamp();
+    db.collection('events').add(ev).then(function(){ submitOK(msg); }).catch(function(e){ msg.style.display='block';msg.style.background='#fbe9e9';msg.style.color='#b3261e';msg.textContent='Something went wrong. Please try again.'; });
+  }else{
+    submitOK(msg);
+  }
+}
+function submitOK(msg){
+  msg.className='form-msg ok'; msg.style.display='block'; msg.style.background='#e8f6ec'; msg.style.color='#1c7a3e';
+  msg.textContent='Thank you! Your event was submitted and is pending Chamber review.';
+  ['s_title','s_date','s_time','s_loc','s_desc','s_by','s_byemail'].forEach(function(id){var el=document.getElementById(id);if(el)el.value='';});
+  setTimeout(function(){closeOverlay('submitOverlay');msg.style.display='none';},2200);
+}
+
+/* ---- membership form ---- */
+function submitMembership(){
+  var biz=val('m_biz'),name=val('m_name'),phone=val('m_phone'),email=val('m_email');
+  var msg=document.getElementById('m_msg');
+  if(!biz||!name||!phone||!email){ msg.className='form-msg'; msg.style.display='block'; msg.style.background='#fbe9e9'; msg.style.color='#b3261e'; msg.textContent='Please fill in business name, contact, phone, and email.'; return; }
+  var ints=[]; var boxes=document.querySelectorAll('.m_int'); var i;
+  for(i=0;i<boxes.length;i++){ if(boxes[i].checked) ints.push(boxes[i].value); }
+  var body='New Chamber Membership Application%0D%0A%0D%0A'
+    +'Business: '+enc(biz)+'%0D%0A'
+    +'Contact: '+enc(name)+'%0D%0A'
+    +'Phone: '+enc(phone)+'%0D%0A'
+    +'Email: '+enc(email)+'%0D%0A'
+    +'Website/FB: '+enc(val('m_web'))+'%0D%0A'
+    +'Address: '+enc(val('m_addr'))+'%0D%0A'
+    +'Interested in: '+enc(ints.join(', '))+'%0D%0A'
+    +'Notes: '+enc(val('m_notes'))+'%0D%0A';
+  /* Default: open email pre-filled to the Chamber (works with no setup).
+     To submit silently instead, swap this for a Web3Forms/Formspree fetch — see setup notes. */
+  window.location.href='mailto:'+CHAMBER_EMAIL+'?subject='+enc('Chamber Membership Application — '+biz)+'&body='+body;
+  msg.className='form-msg ok'; msg.style.display='block';
+  msg.textContent='Your email app should open with the application ready to send to the Chamber. Hit send and you are done.';
+}
+function enc(s){return encodeURIComponent(s==null?'':s);}
+function val(id){var el=document.getElementById(id);return el?el.value.trim():'';}
+
+/* ---- overlays ---- */
+function openOverlay(id){document.getElementById(id).classList.add('on');document.body.style.overflow='hidden';}
+function closeOverlay(id){document.getElementById(id).classList.remove('on');document.body.style.overflow='';}
+window.addEventListener('click',function(e){ if(e.target.classList&&e.target.classList.contains('overlay')) e.target.classList.remove('on'),document.body.style.overflow=''; });
+
+/* ---- featured events carousel ---- */
+function scrollEvents(dir){var t=document.getElementById('eventsTrack');var card=t.querySelector('.event-card');var step=card?card.offsetWidth+24:360;t.scrollBy({left:dir*step,behavior:'smooth'});}
+
+/* ============ SECRET ADMIN (Chamber settings) ============ */
+/* Open with the footer dot (tap 3x) OR visit  yoursite.com/#chamber-settings */
+var gearClicks=0,gearTimer=null;
+document.getElementById('gear').addEventListener('click',function(){
+  gearClicks++; clearTimeout(gearTimer); gearTimer=setTimeout(function(){gearClicks=0;},1200);
+  if(gearClicks>=3){gearClicks=0;openAdmin();}
+});
+if(location.hash==='#chamber-settings'){ setTimeout(openAdmin,300); }
+
+function openAdmin(){
+  openOverlay('adminOverlay');
+  if(!FB){
+    document.getElementById('adminTitle').textContent='Chamber Settings';
+    document.getElementById('adminBody').innerHTML='<div class="admin-empty">Admin tools run on the <strong>live site</strong> once Firebase is connected.<br><br>Paste your Chamber Firebase config at the top of the script, deploy, then the Executive Director can sign in here to approve, create, edit, and delete events.</div>';
+    return;
+  }
+  if(auth.currentUser){ renderAdmin(); }
+  else{ renderLogin(); }
+}
+function renderLogin(){
+  document.getElementById('adminTitle').textContent='Chamber Sign In';
+  document.getElementById('adminBody').innerHTML=
+    '<div class="fg"><label>Email</label><input id="a_email" type="email" placeholder="director@hobartokchamber.org"></div>'
+    +'<div class="fg"><label>Password</label><input id="a_pass" type="password"></div>'
+    +'<div class="form-msg" id="a_msg"></div>'
+    +'<button class="btn-primary" style="width:100%;text-align:center;padding:12px;margin-top:6px;" onclick="adminLogin()">Sign In</button>';
+}
+function adminLogin(){
+  var em=val('a_email'),pw=val('a_pass'),msg=document.getElementById('a_msg');
+  auth.signInWithEmailAndPassword(em,pw).then(function(){renderAdmin();}).catch(function(e){
+    msg.style.display='block';msg.style.background='#fbe9e9';msg.style.color='#b3261e';msg.textContent='Sign in failed. Check email and password.';
+  });
+}
+var adminTab='pending';
+function renderAdmin(){
+  document.getElementById('adminTitle').textContent='Chamber Settings';
+  var h=''
+    +'<div class="admin-tabs">'
+    +'<div class="admin-tab'+(adminTab==='pending'?' on':'')+'" onclick="switchTab(\'pending\')">Pending <span id="pendCount"></span></div>'
+    +'<div class="admin-tab'+(adminTab==='manage'?' on':'')+'" onclick="switchTab(\'manage\')">Manage Events</div>'
+    +'<div class="admin-tab'+(adminTab==='create'?' on':'')+'" onclick="switchTab(\'create\')">+ New Event</div>'
+    +'<div class="admin-tab'+(adminTab==='banner'?' on':'')+'" onclick="switchTab(\'banner\')">Banner</div>'
+    +'<div class="admin-tab" onclick="adminLogout()" style="margin-left:auto;color:#b3261e;">Sign Out</div>'
+    +'</div><div id="adminPane"></div>';
+  document.getElementById('adminBody').innerHTML=h;
+  if(adminTab==='pending') paneList('pending');
+  else if(adminTab==='manage') paneList('approved');
+  else if(adminTab==='create') paneCreate(null);
+  else if(adminTab==='banner') paneBanner();
+}
+function switchTab(t){adminTab=t;renderAdmin();}
+function adminLogout(){auth.signOut().then(function(){renderLogin();});}
+
+function paneList(status){
+  var pane=document.getElementById('adminPane');
+  pane.innerHTML='<div class="admin-empty">Loading…</div>';
+  db.collection('events').where('status','==',status).get().then(function(snap){
+    var rows=[]; snap.forEach(function(doc){var x=doc.data();x.id=doc.id;rows.push(x);});
+    rows.sort(function(a,b){return (a.date||'').localeCompare(b.date||'');});
+    if(status==='pending'){var pc=document.getElementById('pendCount'); if(pc) pc.innerHTML=rows.length?('<span class="badge-pending">'+rows.length+'</span>'):'';}
+    if(!rows.length){ pane.innerHTML='<div class="admin-empty">Nothing here right now.</div>'; return; }
+    var html='<div class="admin-list">', i;
+    for(i=0;i<rows.length;i++){
+      var e=rows[i];
+      html+='<div class="admin-row"><div class="info"><b>'+esc(e.title)+'</b><small>'+fmtNice(e.date)+(e.time?' · '+esc(e.time):'')+(e.location?' · '+esc(e.location):'')+(e.submittedBy?' · by '+esc(e.submittedBy):'')+'</small></div><div class="acts">';
+      if(status==='pending') html+='<button class="btn-sm btn-green" onclick="approve(\''+e.id+'\')">Approve</button>';
+      else html+='<button class="btn-sm btn-line" onclick="editEvent(\''+e.id+'\')">Edit</button>';
+      html+='<button class="btn-sm btn-red" onclick="delEvent(\''+e.id+'\')">Delete</button></div></div>';
+    }
+    html+='</div>';
+    pane.innerHTML=html;
+  }).catch(function(e){ pane.innerHTML='<div class="admin-empty">Error loading.</div>'; });
+}
+function approve(id){ db.collection('events').doc(id).update({status:'approved'}).then(function(){loadEvents();paneList('pending');}); }
+function delEvent(id){ if(!confirm('Delete this event?'))return; db.collection('events').doc(id).delete().then(function(){loadEvents();renderAdmin();}); }
+
+var editingId=null;
+function editEvent(id){ adminTab='create'; renderAdmin(); db.collection('events').doc(id).get().then(function(doc){var e=doc.data();e.id=id;paneCreate(e);}); }
+function paneCreate(e){
+  editingId=e?e.id:null;
+  var pane=document.getElementById('adminPane');
+  pane.innerHTML=''
+    +'<div class="fg"><label>Title *</label><input id="c_title" type="text" value="'+(e?esc(e.title):'')+'"></div>'
+    +'<div class="fg-row"><div class="fg"><label>Date *</label><input id="c_date" type="date" value="'+(e?esc(e.date):'')+'"></div><div class="fg"><label>Time</label><input id="c_time" type="text" value="'+(e?esc(e.time||''):'')+'"></div></div>'
+    +'<div class="fg"><label>Location</label><input id="c_loc" type="text" value="'+(e?esc(e.location||''):'')+'"></div>'
+    +'<div class="fg"><label>Description</label><textarea id="c_desc" rows="3">'+(e?esc(e.description||''):'')+'</textarea></div>'
+    +'<div class="form-msg" id="c_msg"></div>'
+    +'<button class="btn-primary" style="width:100%;text-align:center;padding:12px;" onclick="saveEvent()">'+(e?'Save Changes':'Publish Event')+'</button>';
+}
+function saveEvent(){
+  var t=val('c_title'),d=val('c_date'),msg=document.getElementById('c_msg');
+  if(!t||!d){ msg.style.display='block';msg.style.background='#fbe9e9';msg.style.color='#b3261e';msg.textContent='Title and date are required.'; return; }
+  var data={title:t,date:d,time:val('c_time'),location:val('c_loc'),description:val('c_desc'),status:'approved'};
+  var p;
+  if(editingId){ p=db.collection('events').doc(editingId).update(data); }
+  else{ data.createdAt=firebase.firestore.FieldValue.serverTimestamp(); p=db.collection('events').add(data); }
+  p.then(function(){ editingId=null; loadEvents(); adminTab='manage'; renderAdmin(); }).catch(function(e){ msg.style.display='block';msg.style.background='#fbe9e9';msg.style.color='#b3261e';msg.textContent='Could not save.'; });
+}
+
+/* announcement banner */
+function paneBanner(){
+  var pane=document.getElementById('adminPane');
+  db.collection('settings').doc('announcement').get().then(function(doc){
+    var d=doc.exists?doc.data():{text:'',active:false};
+    pane.innerHTML=''
+      +'<div class="fg"><label>Banner message</label><input id="b_text" type="text" value="'+esc(d.text||'')+'" placeholder="e.g. Office closed July 4 for the holiday"></div>'
+      +'<label class="check-item" style="margin-bottom:14px;"><input type="checkbox" id="b_active" '+(d.active?'checked':'')+'> Show banner at top of site</label>'
+      +'<div class="form-msg" id="b_msg"></div>'
+      +'<button class="btn-primary" style="width:100%;text-align:center;padding:12px;" onclick="saveBanner()">Save Banner</button>';
+  });
+}
+function saveBanner(){
+  var data={text:val('b_text'),active:document.getElementById('b_active').checked};
+  db.collection('settings').doc('announcement').set(data).then(function(){ applyBanner(data); var m=document.getElementById('b_msg'); m.className='form-msg ok'; m.style.display='block'; m.textContent='Banner saved.'; });
+}
+function applyBanner(d){
+  var bar=document.getElementById('announceBar');
+  if(d&&d.active&&d.text){ bar.textContent=d.text; bar.classList.add('on'); }
+  else{ bar.classList.remove('on'); }
+}
+function loadBanner(){
+  if(!FB)return;
+  db.collection('settings').doc('announcement').get().then(function(doc){ if(doc.exists) applyBanner(doc.data()); }).catch(function(){});
+}
+
+/* ---- member directory category filter (auto-builds from data-cat) ---- */
+function initDirFilter(){
+  var members=Array.prototype.slice.call(document.querySelectorAll('#directoryGrid .member'));
+  var cats={}; members.forEach(function(m){var c=m.getAttribute('data-cat');if(c)cats[c]=true;});
+  var list=Object.keys(cats).sort();
+  var bar=document.getElementById('dirFilter');
+  if(!bar)return;
+  bar.innerHTML='';
+  bar.appendChild(mkChip('All',true));
+  list.forEach(function(c){ bar.appendChild(mkChip(c,false)); });
+}
+function mkChip(label,on){
+  var b=document.createElement('button');
+  b.className='dir-chip'+(on?' on':'');
+  b.textContent=label;
+  b.addEventListener('click',function(){ filterDir(label,b); });
+  return b;
+}
+function filterDir(cat,btn){
+  var chips=document.querySelectorAll('#dirFilter .dir-chip'),i;
+  for(i=0;i<chips.length;i++) chips[i].classList.remove('on');
+  btn.classList.add('on');
+  var members=document.querySelectorAll('#directoryGrid .member');
+  for(i=0;i<members.length;i++){
+    var c=members[i].getAttribute('data-cat');
+    members[i].style.display=(cat==='All'||c===cat)?'':'none';
+  }
+}
+
+/* ---- boot ---- */
+if(FB){ auth.onAuthStateChanged(function(u){ if(document.getElementById('adminOverlay').classList.contains('on')){ u?renderAdmin():renderLogin(); } }); }
+loadEvents();
+loadBanner();
+initDirFilter();
+</script>
+</body>
+</html>
