@@ -62,7 +62,7 @@
   /* ---- HERO ---- */
   .hero{position:relative;min-height:640px;height:92vh;display:flex;align-items:flex-end;padding-bottom:80px;overflow:hidden;}
   .hero-bg{position:absolute;inset:0;background:linear-gradient(135deg,#16317f 0%,#1a3ea8 45%,#2247bd 100%);}
-  .hero-photo{position:absolute;inset:0;background-image:linear-gradient(to bottom,rgba(14,32,86,.45) 0%,rgba(14,32,86,.6) 45%,rgba(14,32,86,.92) 100%),url('hero.jpg');background-size:cover;background-position:center;}
+  .hero-photo{position:absolute;inset:0;background-image:linear-gradient(to bottom,rgba(14,32,86,.45) 0%,rgba(14,32,86,.6) 45%,rgba(14,32,86,.92) 100%),url('flyers/hero.jpg');background-size:cover;background-position:center;}
   .hero-photo.empty{display:none;}
   .hero-lines{position:absolute;top:0;right:0;width:42%;height:100%;background:repeating-linear-gradient(90deg,transparent,transparent 58px,rgba(196,154,62,.06) 58px,rgba(196,154,62,.06) 59px);pointer-events:none;}
   .hero-tower{position:absolute;right:6%;top:50%;transform:translateY(-50%);width:230px;opacity:.13;pointer-events:none;}
@@ -472,7 +472,7 @@
     <a href="#membership" class="btn-primary">Become a Member</a>
   </div>
   <div class="botw-card">
-    <div class="botw-photo"><img src="botw.jpg" alt="" onerror="this.parentElement.classList.add('empty');this.outerHTML=flyerPHWhite;"></div>
+    <div class="botw-photo"><img src="flyers/botw.png" alt="" onerror="this.parentElement.classList.add('empty');this.outerHTML=flyerPHWhite;"></div>
     <div class="botw-inner"><span class="botw-badge">This Week's Feature</span><h3>Featured Member Coming Soon</h3><p>This space spotlights a different Chamber member each week. Add the business name, a short description, and a photo above to feature them.</p></div>
   </div>
 </section>
@@ -654,7 +654,7 @@ var flyerPH='<div class="flyer-empty"><svg viewBox="0 0 24 24" fill="none" strok
 var flyerPHWhite=flyerPH;
 
 /* hide hero photo layer if hero.jpg missing */
-(function(){var i=new Image();i.onerror=function(){var h=document.getElementById('heroPhoto');if(h)h.classList.add('empty');};i.src='hero.jpg';})();
+(function(){    var i=new Image();i.onerror=function(){var h=document.getElementById('heroPhoto');if(h)h.classList.add('empty');};i.src='flyers/hero.jpg';})();
 
 /* ---- DEMO data (preview only) ---- */
 var DEMO=[
