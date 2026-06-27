@@ -777,26 +777,47 @@ function submitOK(msg){
 }
 
 /* ---- membership form ---- */
+var WEB3FORMS_KEY = "a35795f6-54b3-41a0-b5c8-043e93cb73a5";
+
 function submitMembership(){
   var biz=val('m_biz'),name=val('m_name'),phone=val('m_phone'),email=val('m_email');
   var msg=document.getElementById('m_msg');
   if(!biz||!name||!phone||!email){ msg.className='form-msg'; msg.style.display='block'; msg.style.background='#fbe9e9'; msg.style.color='#b3261e'; msg.textContent='Please fill in business name, contact, phone, and email.'; return; }
   var ints=[]; var boxes=document.querySelectorAll('.m_int'); var i;
   for(i=0;i<boxes.length;i++){ if(boxes[i].checked) ints.push(boxes[i].value); }
-  var body='New Chamber Membership Application%0D%0A%0D%0A'
-    +'Business: '+enc(biz)+'%0D%0A'
-    +'Contact: '+enc(name)+'%0D%0A'
-    +'Phone: '+enc(phone)+'%0D%0A'
-    +'Email: '+enc(email)+'%0D%0A'
-    +'Website/FB: '+enc(val('m_web'))+'%0D%0A'
-    +'Address: '+enc(val('m_addr'))+'%0D%0A'
-    +'Interested in: '+enc(ints.join(', '))+'%0D%0A'
-    +'Notes: '+enc(val('m_notes'))+'%0D%0A';
-  /* Default: open email pre-filled to the Chamber (works with no setup).
-     To submit silently instead, swap this for a Web3Forms/Formspree fetch — see setup notes. */
-  window.location.href='mailto:'+CHAMBER_EMAIL+'?subject='+enc('Chamber Membership Application — '+biz)+'&body='+body;
-  msg.className='form-msg ok'; msg.style.display='block';
-  msg.textContent='Your email app should open with the application ready to send to the Chamber. Hit send and you are done.';
+
+  var payload={
+    access_key: WEB3FORMS_KEY,
+    subject: "New Chamber Membership Application - "+biz,
+    from_name: "Hobart Chamber Website",
+    "Business / Organization": biz,
+    "Contact Name": name,
+    "Phone": phone,
+    "Email": email,
+    "Website / Facebook": val('m_web'),
+    "Mailing Address": val('m_addr'),
+    "Interested In": ints.join(', '),
+    "Notes": val('m_notes')
+  };
+
+  msg.className='form-msg'; msg.style.display='block'; msg.style.background='#eef2fb'; msg.style.color='#1a3ea8'; msg.textContent='Sending your application...';
+
+  fetch('https://api.web3forms.com/submit',{
+    method:'POST',
+    headers:{'Content-Type':'application/json','Accept':'application/json'},
+    body:JSON.stringify(payload)
+  }).then(function(r){return r.json();}).then(function(data){
+    if(data.success){
+      msg.className='form-msg ok'; msg.style.display='block'; msg.style.background='#e8f6ec'; msg.style.color='#1c7a3e';
+      msg.textContent='Thank you! Your application was sent to the Chamber. A team member will follow up with membership options.';
+      ['m_biz','m_name','m_phone','m_email','m_web','m_addr','m_notes'].forEach(function(id){var el=document.getElementById(id);if(el)el.value='';});
+      for(i=0;i<boxes.length;i++){ boxes[i].checked=false; }
+    }else{
+      msg.style.background='#fbe9e9'; msg.style.color='#b3261e'; msg.textContent='Something went wrong. Please call the Chamber at (580) 682-0887 or email director@hobartokchamber.org.';
+    }
+  }).catch(function(){
+    msg.style.background='#fbe9e9'; msg.style.color='#b3261e'; msg.textContent='Could not send right now. Please call (580) 682-0887 or email director@hobartokchamber.org.';
+  });
 }
 function enc(s){return encodeURIComponent(s==null?'':s);}
 function val(id){var el=document.getElementById(id);return el?el.value.trim():'';}
