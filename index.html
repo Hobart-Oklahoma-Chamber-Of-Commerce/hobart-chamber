@@ -47,7 +47,7 @@
   /* ---- NAV ---- */
   nav{position:sticky;top:0;left:0;right:0;z-index:100;background:rgba(26,62,168,.97);backdrop-filter:blur(8px);display:flex;align-items:center;justify-content:space-between;padding:0 48px;height:74px;border-bottom:1px solid rgba(196,154,62,.4);}
   .nav-logo{display:flex;align-items:center;gap:13px;text-decoration:none;}
-  .nav-logo-mark{width:46px;height:46px;border-radius:50%;background:var(--gold-pale);display:flex;align-items:center;justify-content:center;flex-shrink:0;overflow:hidden;}
+  .nav-logo-mark{width:52px;height:52px;border-radius:50%;background:#fff;display:flex;align-items:center;justify-content:center;flex-shrink:0;overflow:hidden;padding:5px;box-shadow:0 2px 8px rgba(0,0,0,.15);}
   .nav-logo-mark img{width:100%;height:100%;object-fit:contain;}
   .nav-logo-text{display:flex;flex-direction:column;}
   .nav-logo-text span:first-child{font-family:'Playfair Display',serif;font-weight:700;font-size:15px;color:var(--white);letter-spacing:.4px;line-height:1.15;}
@@ -67,6 +67,7 @@
   .hero-lines{position:absolute;top:0;right:0;width:42%;height:100%;background:repeating-linear-gradient(90deg,transparent,transparent 58px,rgba(196,154,62,.06) 58px,rgba(196,154,62,.06) 59px);pointer-events:none;}
   .hero-tower{position:absolute;right:6%;top:50%;transform:translateY(-50%);width:230px;opacity:.13;pointer-events:none;}
   .hero-content{position:relative;z-index:2;padding:0 60px;max-width:920px;}
+  .hero-logo{width:132px;height:132px;border-radius:50%;background:rgba(255,255,255,.96);padding:13px;object-fit:contain;margin-bottom:28px;box-shadow:0 10px 34px rgba(0,0,0,.28);}
   .hero-eyebrow{display:flex;align-items:center;gap:12px;margin-bottom:24px;}
   .hero-eyebrow-line{width:48px;height:2px;background:var(--gold);}
   .hero-eyebrow span{font-size:11px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:var(--gold-light);}
@@ -329,7 +330,7 @@
 <nav>
   <a href="#top" class="nav-logo">
     <span class="nav-logo-mark">
-      <img src="chamber-logo.png" alt="Hobart Chamber of Commerce"
+      <img src="chamber-logo.PNG" alt="Hobart Chamber of Commerce"
            onerror="this.onerror=null;this.outerHTML='&lt;svg viewBox=\'0 0 48 48\' xmlns=\'http://www.w3.org/2000/svg\'&gt;&lt;g fill=\'none\' stroke=\'#1a3ea8\' stroke-width=\'2\'&gt;&lt;path d=\'M16 18 h16 l-2 7 h-12 z\' fill=\'#1a3ea8\'/&gt;&lt;path d=\'M16 18 q8 -6 16 0\' fill=\'#1a3ea8\'/&gt;&lt;line x1=\'18\' y1=\'25\' x2=\'15\' y2=\'40\'/&gt;&lt;line x1=\'30\' y1=\'25\' x2=\'33\' y2=\'40\'/&gt;&lt;line x1=\'17\' y1=\'33\' x2=\'31\' y2=\'33\'/&gt;&lt;/g&gt;&lt;/svg&gt;';" />
     </span>
     <span class="nav-logo-text"><span>Hobart Chamber</span><span>of Commerce · Kiowa County</span></span>
@@ -358,6 +359,7 @@
     </g>
   </svg>
   <div class="hero-content">
+    <img class="hero-logo" src="chamber-logo.PNG" alt="Hobart Chamber of Commerce" onerror="this.style.display='none'" />
     <div class="hero-eyebrow"><div class="hero-eyebrow-line"></div><span>Hobart, Oklahoma · Kiowa County</span></div>
     <h1 class="hero-title">Supporting Business.<span class="accent">Strengthening Community.</span></h1>
     <p class="hero-sub">Connecting local businesses, driving community events, and building a vibrant future for Hobart — one business, one family, and one event at a time.</p>
@@ -561,7 +563,7 @@
 <!-- ===== FOOTER ===== -->
 <footer class="footer" id="contact">
   <div class="footer-brand">
-    <a href="#top" class="nav-logo"><span class="nav-logo-mark"><img src="chamber-logo.png" alt="Hobart Chamber of Commerce" onerror="this.style.display='none'"></span><span class="nav-logo-text"><span>Hobart Chamber</span><span>of Commerce</span></span></a>
+    <a href="#top" class="nav-logo"><span class="nav-logo-mark"><img src="chamber-logo.PNG" alt="Hobart Chamber of Commerce" onerror="this.style.display='none'"></span><span class="nav-logo-text"><span>Hobart Chamber</span><span>of Commerce</span></span></a>
     <p>Supporting and promoting the businesses that make our community strong. Join us as we build a vibrant future for Hobart, Oklahoma.</p>
     <div class="social-links"><a href="https://www.facebook.com/profile.php?id=61579700143153" target="_blank" rel="noopener" title="Facebook">f</a><a href="mailto:director@hobartokchamber.org" title="Email">@</a></div>
   </div>
