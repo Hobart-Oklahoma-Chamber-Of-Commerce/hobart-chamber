@@ -656,13 +656,16 @@ var flyerPHWhite=flyerPH;
 /* hide hero photo layer if hero.jpg missing */
 (function(){    var i=new Image();i.onerror=function(){var h=document.getElementById('heroPhoto');if(h)h.classList.add('empty');};i.src='flyers/hero.jpg';})();
 
-/* ---- DEMO data (preview only) ---- */
-var DEMO=[
-  {id:'d1',title:'Back-to-School Supply Drive',date:'2026-07-01',time:'All day',location:'Great Plains Youth & Family Services',description:'Supply donation campaign kicks off. Donate school supplies for local students.',status:'approved'},
-  {id:'d2',title:'Relay for Life',date:'2026-07-10',time:'6:00 PM – Midnight',location:'Hobart Events Center',description:'Celebrate survivors and support the fight against cancer.',status:'approved'},
-  {id:'d3',title:'Family Health & Fitness Day',date:'2026-07-17',time:'6:00–8:30 PM',location:'Elkview General Hospital',description:'An evening of health, wellness, and fun for the whole family.',status:'approved'},
-  {id:'d4',title:'Farmers Market',date:'2026-07-18',time:'Morning',location:'Hunter Park',description:'Support local growers, makers, and vendors.',status:'approved'},
-  {id:'d5',title:'Glow Golf Tournament',date:'2026-08-01',time:'Night',location:'Hobart Municipal Golf Course',description:'Glowing golf balls, illuminated fairways, fun under the stars.',status:'approved'}
+/* ---- Built-in chamber events (always shown on the calendar) ---- */
+var SEED=[
+  {id:'s1',title:'Back-to-School Supply Drive',date:'2026-07-01',time:'All day',location:'Great Plains Youth & Family Services',description:'The supply donation campaign kicks off. Donate school supplies so local students start the year prepared.',status:'approved'},
+  {id:'s2',title:'Relay for Life',date:'2026-07-10',time:'6:00 PM – Midnight',location:'Hobart Events Center',description:'Celebrate survivors, remember loved ones, and support the fight against cancer.',status:'approved'},
+  {id:'s3',title:'Hilltop National Junior Golf Camp',date:'2026-07-13',time:'July 13–15',location:'Hobart Municipal Golf Course',description:'Three-day junior golf camp coached by Bobby Taylor. Call the golf course for details and registration.',status:'approved'},
+  {id:'s4',title:'Family Health & Fitness Day',date:'2026-07-17',time:'6:00–8:30 PM',location:'Elkview General Hospital',description:'An evening of health, wellness, and fun for the whole family. Proceeds benefit victims of child abuse throughout Southwest Oklahoma.',status:'approved'},
+  {id:'s5',title:'Farmers Market',date:'2026-07-18',time:'Morning',location:'Hunter Park',description:'Support local growers, makers, and vendors, plus special kids activities all morning.',status:'approved'},
+  {id:'s6',title:"Family Slip 'N Slide Kickball",date:'2026-07-18',time:'Evening',location:'Biggers Park',description:'An evening of fun and friendly competition. Teams welcome from families, businesses, and groups of friends.',status:'approved'},
+  {id:'s7',title:'Show Down on the Hill Scramble',date:'2026-07-18',time:'Four-man scramble',location:'Hobart Municipal Golf Course',description:'Four-man scramble with a payout to the winner. Limited to 18 teams, so register soon.',status:'approved'},
+  {id:'s8',title:'Glow Golf Tournament',date:'2026-08-01',time:'Night',location:'Hobart Municipal Golf Course',description:'Glowing golf balls, illuminated fairways, and a fun evening under the stars.',status:'approved'}
 ];
 
 var EVENTS=[];
@@ -676,13 +679,13 @@ function dstr(d){return d.getFullYear()+'-'+pad(d.getMonth()+1)+'-'+pad(d.getDat
 function loadEvents(){
   if(FB){
     db.collection('events').where('status','==','approved').get().then(function(snap){
-      EVENTS=[]; snap.forEach(function(doc){var x=doc.data();x.id=doc.id;EVENTS.push(x);});
+      EVENTS=SEED.slice(); snap.forEach(function(doc){var x=doc.data();x.id=doc.id;EVENTS.push(x);});
       renderCal(); setStatus('');
-    }).catch(function(e){ console.warn(e); EVENTS=[]; renderCal(); setStatus('Could not load events.'); });
+    }).catch(function(e){ console.warn(e); EVENTS=SEED.slice(); renderCal(); setStatus(''); });
   }else{
-    EVENTS=DEMO.slice();
+    EVENTS=SEED.slice();
     renderCal();
-    setStatus('PREVIEW MODE — sample events shown. On the live site this loads from Firebase.');
+    setStatus('PREVIEW MODE — built-in events shown. On the live site this also loads approved community events from Firebase.');
   }
 }
 function setStatus(msg){
