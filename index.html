@@ -836,7 +836,7 @@ function openAdmin(){
 function renderLogin(){
   document.getElementById('adminTitle').textContent='Chamber Sign In';
   document.getElementById('adminBody').innerHTML=
-    '<div class="fg"><label>Email</label><input id="a_email" type="email" placeholder="director@hobartokchamber.org"></div>'
+    '<div class="fg"><label>Email</label><input id="a_email" type="email" autocomplete="off"></div>'
     +'<div class="fg"><label>Password</label><input id="a_pass" type="password"></div>'
     +'<div class="form-msg" id="a_msg"></div>'
     +'<button class="btn-primary" style="width:100%;text-align:center;padding:12px;margin-top:6px;" onclick="adminLogin()">Sign In</button>';
