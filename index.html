@@ -50,7 +50,7 @@
   .nav-logo-mark{width:52px;height:52px;border-radius:50%;background:#fff;display:flex;align-items:center;justify-content:center;flex-shrink:0;overflow:hidden;padding:5px;box-shadow:0 2px 8px rgba(0,0,0,.15);}
   .nav-logo-mark img{width:100%;height:100%;object-fit:contain;}
   .nav-logo-text{display:flex;flex-direction:column;}
-  .nav-logo-text span:first-child{font-family:'Playfair Display',serif;font-weight:700;font-size:15px;color:var(--white);letter-spacing:.4px;line-height:1.15;}
+  .nav-logo-text span:first-child{font-family:'Playfair Display',serif;font-weight:700;font-size:15px;color:var(--white);letter-spacing:.4px;line-height:1.15;white-space:nowrap;}
   .nav-logo-text span:last-child{font-size:9.5px;color:var(--gold-light);letter-spacing:2px;text-transform:uppercase;font-weight:500;}
   .nav-links{display:flex;align-items:center;gap:28px;list-style:none;}
   .nav-links a{color:rgba(255,255,255,.85);text-decoration:none;font-size:12.5px;font-weight:500;letter-spacing:.5px;text-transform:uppercase;transition:color .2s;cursor:pointer;}
@@ -67,7 +67,8 @@
   .hero-lines{position:absolute;top:0;right:0;width:42%;height:100%;background:repeating-linear-gradient(90deg,transparent,transparent 58px,rgba(196,154,62,.06) 58px,rgba(196,154,62,.06) 59px);pointer-events:none;}
   .hero-tower{position:absolute;right:6%;top:50%;transform:translateY(-50%);width:230px;opacity:.13;pointer-events:none;}
   .hero-content{position:relative;z-index:2;padding:0 60px;max-width:920px;}
-  .hero-logo{width:132px;height:132px;border-radius:50%;background:rgba(255,255,255,.96);padding:13px;object-fit:contain;margin-bottom:28px;box-shadow:0 10px 34px rgba(0,0,0,.28);}
+  .hero-emblem{position:absolute;right:6%;top:50%;transform:translateY(-50%);width:360px;height:360px;border-radius:50%;background:rgba(255,255,255,.96);padding:34px;object-fit:contain;box-shadow:0 16px 50px rgba(0,0,0,.3);z-index:1;}
+  @media(max-width:1080px){.hero-emblem{display:none;}}
   .hero-eyebrow{display:flex;align-items:center;gap:12px;margin-bottom:24px;}
   .hero-eyebrow-line{width:48px;height:2px;background:var(--gold);}
   .hero-eyebrow span{font-size:11px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:var(--gold-light);}
@@ -333,7 +334,7 @@
       <img src="chamber-logo.PNG" alt="Hobart Chamber of Commerce"
            onerror="this.onerror=null;this.outerHTML='&lt;svg viewBox=\'0 0 48 48\' xmlns=\'http://www.w3.org/2000/svg\'&gt;&lt;g fill=\'none\' stroke=\'#1a3ea8\' stroke-width=\'2\'&gt;&lt;path d=\'M16 18 h16 l-2 7 h-12 z\' fill=\'#1a3ea8\'/&gt;&lt;path d=\'M16 18 q8 -6 16 0\' fill=\'#1a3ea8\'/&gt;&lt;line x1=\'18\' y1=\'25\' x2=\'15\' y2=\'40\'/&gt;&lt;line x1=\'30\' y1=\'25\' x2=\'33\' y2=\'40\'/&gt;&lt;line x1=\'17\' y1=\'33\' x2=\'31\' y2=\'33\'/&gt;&lt;/g&gt;&lt;/svg&gt;';" />
     </span>
-    <span class="nav-logo-text"><span>Hobart Chamber</span><span>of Commerce · Kiowa County</span></span>
+    <span class="nav-logo-text"><span>Hobart Chamber of Commerce</span><span>Kiowa County · Oklahoma</span></span>
   </a>
   <ul class="nav-links">
     <li><a href="#calendar">Calendar</a></li>
@@ -350,16 +351,8 @@
   <div class="hero-bg"></div>
   <div class="hero-photo" id="heroPhoto"></div>
   <div class="hero-lines"></div>
-  <svg class="hero-tower" viewBox="0 0 100 120" xmlns="http://www.w3.org/2000/svg">
-    <g fill="none" stroke="#ffffff" stroke-width="2">
-      <path d="M30 40 h40 l-5 18 h-30 z" fill="#ffffff" fill-opacity=".5"/>
-      <path d="M30 40 q20 -16 40 0" fill="#ffffff" fill-opacity=".5"/>
-      <line x1="36" y1="58" x2="28" y2="108"/><line x1="64" y1="58" x2="72" y2="108"/>
-      <line x1="33" y1="82" x2="67" y2="82"/><line x1="30" y1="95" x2="70" y2="95"/>
-    </g>
-  </svg>
+  <img class="hero-emblem" src="chamber-logo.PNG" alt="Hobart Chamber of Commerce" onerror="this.style.display='none'" />
   <div class="hero-content">
-    <img class="hero-logo" src="chamber-logo.PNG" alt="Hobart Chamber of Commerce" onerror="this.style.display='none'" />
     <div class="hero-eyebrow"><div class="hero-eyebrow-line"></div><span>Hobart, Oklahoma · Kiowa County</span></div>
     <h1 class="hero-title">Supporting Business.<span class="accent">Strengthening Community.</span></h1>
     <p class="hero-sub">Connecting local businesses, driving community events, and building a vibrant future for Hobart — one business, one family, and one event at a time.</p>
