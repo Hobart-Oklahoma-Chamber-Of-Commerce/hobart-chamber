@@ -217,9 +217,17 @@
   .board{background:var(--navy);padding:84px 60px;}
   .board-head{text-align:center;margin-bottom:54px;}
   .board-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;max-width:1100px;margin:0 auto;}
-  .board-member{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:8px;padding:26px 20px;text-align:center;transition:background .25s,border-color .25s;}
-  .board-member:hover{background:rgba(196,154,62,.1);border-color:rgba(196,154,62,.4);}
-  .board-avatar{width:54px;height:54px;border-radius:50%;background:var(--gold-pale);color:var(--navy);font-family:'Playfair Display',serif;font-weight:700;font-size:20px;display:flex;align-items:center;justify-content:center;margin:0 auto 14px;}
+  .board-member{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:8px;padding:26px 20px;text-align:center;transition:background .25s,border-color .25s,transform .2s;cursor:pointer;}
+  .board-member:hover{background:rgba(196,154,62,.1);border-color:rgba(196,154,62,.4);transform:translateY(-3px);}
+  .board-avatar{width:64px;height:64px;border-radius:50%;background:var(--gold-pale);color:var(--navy);font-family:'Playfair Display',serif;font-weight:700;font-size:22px;display:flex;align-items:center;justify-content:center;margin:0 auto 14px;overflow:hidden;}
+  .board-avatar img{width:100%;height:100%;object-fit:cover;}
+  .bio-top{display:flex;flex-direction:column;align-items:center;text-align:center;margin-bottom:18px;}
+  .bio-avatar{width:120px;height:120px;border-radius:50%;background:var(--gold-pale);color:var(--navy);font-family:'Playfair Display',serif;font-weight:700;font-size:40px;display:flex;align-items:center;justify-content:center;overflow:hidden;margin-bottom:14px;}
+  .bio-avatar img{width:100%;height:100%;object-fit:cover;}
+  .bio-name{font-family:'Playfair Display',serif;font-size:24px;font-weight:700;color:var(--navy);}
+  .bio-title{font-size:12px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:var(--gold);margin-top:5px;}
+  .bio-text{font-size:14.5px;color:var(--dark-gray);line-height:1.75;}
+  .bio-text p{margin-bottom:12px;}
   .board-member h4{font-size:15px;font-weight:600;color:var(--white);line-height:1.3;}
   .board-member span{font-size:11px;color:var(--gold-light);letter-spacing:.5px;}
   .board-ed{text-align:center;margin-top:40px;}
@@ -507,17 +515,8 @@
 <!-- ===== BOARD ===== -->
 <section class="board" id="board">
   <div class="board-head"><span class="section-eyebrow">Leadership</span><h2 class="section-title" style="color:var(--white)">Board of Directors</h2></div>
-  <div class="board-grid">
-    <div class="board-member"><div class="board-avatar">JS</div><h4>Jaci Sims</h4><span>Director</span></div>
-    <div class="board-member"><div class="board-avatar">JL</div><h4>Jessica Lankford</h4><span>Director</span></div>
-    <div class="board-member"><div class="board-avatar">HF</div><h4>Hannah Felder</h4><span>Director</span></div>
-    <div class="board-member"><div class="board-avatar">WP</div><h4>Whitney Perez</h4><span>Director</span></div>
-    <div class="board-member"><div class="board-avatar">CF</div><h4>Chris Fleming</h4><span>Director</span></div>
-    <div class="board-member"><div class="board-avatar">AC</div><h4>Annie Cruz</h4><span>Director</span></div>
-    <div class="board-member"><div class="board-avatar">PR</div><h4>Preston Reed</h4><span>Director</span></div>
-    <div class="board-member"><div class="board-avatar">TH</div><h4>Tanner Heath</h4><span>Director</span></div>
-  </div>
-  <div class="board-ed"><div class="board-avatar">JW</div><h4 style="color:var(--white);font-family:'Playfair Display',serif;">Jessica Williams</h4><span style="color:var(--gold-light);font-size:12px;letter-spacing:1px;text-transform:uppercase;">Executive Director</span></div>
+  <div class="board-grid" id="boardGrid"></div>
+  <div class="board-ed" id="boardEd"></div>
 </section>
 
 <!-- ===== ABOUT ===== -->
@@ -608,6 +607,14 @@
   <div class="modal">
     <div class="modal-head"><h3 id="d_title">Event</h3><button class="modal-x" onclick="closeOverlay('detailOverlay')">×</button></div>
     <div class="modal-body" id="d_body"></div>
+  </div>
+</div>
+
+<!-- ===== BOARD BIO MODAL ===== -->
+<div class="overlay" id="bioOverlay">
+  <div class="modal">
+    <div class="modal-head"><h3>Leadership</h3><button class="modal-x" onclick="closeOverlay('bioOverlay')">×</button></div>
+    <div class="modal-body" id="bio_body"></div>
   </div>
 </div>
 
@@ -987,11 +994,52 @@ function filterDir(cat,btn){
   }
 }
 
+/* ---- Board of Directors (click a member for their bio) ---- */
+var BOARD=[
+  {name:'Jaci Sims', title:'Director', photo:'', bio:''},
+  {name:'Jessica Lankford', title:'Director', photo:'', bio:''},
+  {name:'Hannah Felder', title:'Director', photo:'', bio:''},
+  {name:'Whitney Perez', title:'Director', photo:'', bio:''},
+  {name:'Chris Fleming', title:'Director', photo:'flyers/board-fleming.PNG', bio:'Chris Fleming is the Founder and CEO of IronSilk Strategies, a consulting firm built to help small communities tell their stories, organize their people, and advocate for their future. Through IronSilk — including its hyperlocal publication, IronSilk Weekly — he works across civic strategy, local media, and community development in Hobart and Kiowa County.||Originally from Los Angeles, California, Chris studied business and music at Southwestern Oklahoma State University and earned an associate in music business from the College of the Desert. He channels that wide-ranging creative and technical background into everything he does — as a jingle writer, Web3 developer, event coordinator, and podcast host — and into his service on the Hobart Chamber Board, the Parks and Recreation Board, and as a volunteer running city hall audio and video.||A follower of Christ and a proud father, Chris has put down deep roots in Hobart, where his children and a close circle of college-friends-turned-family make the community home.'},
+  {name:'Annie Cruz', title:'Director', photo:'', bio:''},
+  {name:'Preston Reed', title:'Director', photo:'', bio:''},
+  {name:'Tanner Heath', title:'Director', photo:'', bio:''}
+];
+var BOARD_ED={name:'Jessica Williams', title:'Executive Director', photo:'', bio:''};
+
+function bInitials(n){ var p=n.trim().split(/\s+/); return ((p[0]?p[0][0]:'')+(p[1]?p[1][0]:'')).toUpperCase(); }
+function bAvatar(m,cls){ if(m.photo){ return '<div class="'+cls+'"><img src="'+m.photo+'" alt="'+esc(m.name)+'" onerror="this.parentElement.textContent=\''+bInitials(m.name)+'\'"></div>'; } return '<div class="'+cls+'">'+bInitials(m.name)+'</div>'; }
+function renderBoard(){
+  var grid=document.getElementById('boardGrid');
+  if(grid){ grid.innerHTML='';
+    BOARD.forEach(function(m){
+      var d=document.createElement('div'); d.className='board-member';
+      d.innerHTML=bAvatar(m,'board-avatar')+'<h4>'+esc(m.name)+'</h4><span>'+esc(m.title)+'</span>';
+      d.addEventListener('click',function(){ openBio(m); });
+      grid.appendChild(d);
+    });
+  }
+  var ed=document.getElementById('boardEd');
+  if(ed){
+    ed.innerHTML=bAvatar(BOARD_ED,'board-avatar')+'<h4 style="color:var(--white);font-family:\'Playfair Display\',serif;">'+esc(BOARD_ED.name)+'</h4><span style="color:var(--gold-light);font-size:12px;letter-spacing:1px;text-transform:uppercase;">'+esc(BOARD_ED.title)+'</span>';
+    ed.style.cursor='pointer';
+    ed.addEventListener('click',function(){ openBio(BOARD_ED); });
+  }
+}
+function openBio(m){
+  var b='<div class="bio-top">'+bAvatar(m,'bio-avatar')+'<div class="bio-name">'+esc(m.name)+'</div><div class="bio-title">'+esc(m.title)+'</div></div>';
+  if(m.bio){ b+='<div class="bio-text"><p>'+m.bio.split('||').map(function(x){return esc(x);}).join('</p><p>')+'</p></div>'; }
+  else{ b+='<div class="bio-text" style="text-align:center;color:var(--gray);">Bio coming soon.</div>'; }
+  document.getElementById('bio_body').innerHTML=b;
+  openOverlay('bioOverlay');
+}
+
 /* ---- boot ---- */
 if(FB){ auth.onAuthStateChanged(function(u){ if(document.getElementById('adminOverlay').classList.contains('on')){ u?renderAdmin():renderLogin(); } }); }
 loadEvents();
 loadBanner();
 initDirFilter();
+renderBoard();
 </script>
 </body>
 </html>
