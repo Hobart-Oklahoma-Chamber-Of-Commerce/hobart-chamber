@@ -145,7 +145,8 @@
   .cal-nav button{width:40px;height:40px;border-radius:8px;border:1.5px solid var(--border);background:var(--white);color:var(--navy);font-size:17px;cursor:pointer;transition:all .2s;}
   .cal-nav button:hover{background:var(--navy);color:var(--white);border-color:var(--navy);}
   .cal-month{font-family:'Playfair Display',serif;font-size:24px;font-weight:700;color:var(--navy);min-width:200px;text-align:center;}
-  .cal-grid{display:grid;grid-template-columns:repeat(7,1fr);border:1px solid var(--border);border-radius:10px;overflow:hidden;background:var(--border);gap:1px;}
+  .cal-grid{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));border:1px solid var(--border);border-radius:10px;overflow:hidden;background:var(--border);gap:1px;}
+  .cal-cell.has-ev{cursor:pointer;}
   .cal-dow{background:var(--navy);color:var(--gold-light);font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;text-align:center;padding:12px 4px;}
   .cal-cell{background:var(--white);min-height:104px;padding:8px 9px;position:relative;display:flex;flex-direction:column;gap:4px;transition:background .15s;}
   .cal-cell.dim{background:#fafbfe;}
@@ -326,8 +327,11 @@
     .directory-grid,.board-grid{grid-template-columns:1fr;}
     .event-card{flex-basis:280px;}.stat-divider{display:none;}
     .form-card{padding:26px;}
-    .cal-cell{min-height:78px;padding:5px;}
-    .cal-chip{font-size:9px;}
+    .cal-cell{min-height:60px;padding:6px 5px;gap:3px;}
+    .cal-cell .dnum{font-size:13px;}
+    .cal-dow{font-size:10px;padding:10px 2px;}
+    .cal-chip{font-size:0;height:5px;min-height:5px;padding:0;border:none;border-radius:3px;background:var(--navy);margin-top:1px;pointer-events:none;}
+    .cal-more{font-size:9px;}
   }
 </style>
 </head>
@@ -723,13 +727,17 @@ function renderCal(){
       var ds=yr+'-'+pad(mo+1)+'-'+pad(dayNum);
       if(ds===todayStr) cell.classList.add('today');
       var dayEvents=EVENTS.filter(function(e){return e.date===ds;});
+      if(dayEvents.length){
+        cell.classList.add('has-ev');
+        (function(list){ cell.addEventListener('click',function(){ showDay(list); }); })(dayEvents);
+      }
       var shown=dayEvents.slice(0,2), k;
       for(k=0;k<shown.length;k++){
-        (function(ev){var chip=document.createElement('div');chip.className='cal-chip';chip.textContent=ev.title;chip.onclick=function(){showDetail(ev);};cell.appendChild(chip);})(shown[k]);
+        (function(ev){var chip=document.createElement('div');chip.className='cal-chip';chip.textContent=ev.title;chip.onclick=function(e){e.stopPropagation();showDetail(ev);};cell.appendChild(chip);})(shown[k]);
       }
       if(dayEvents.length>2){
         var more=document.createElement('div'); more.className='cal-more'; more.textContent='+'+(dayEvents.length-2)+' more';
-        (function(list){more.onclick=function(){showDay(list);};})(dayEvents);
+        (function(list){more.onclick=function(e){e.stopPropagation();showDay(list);};})(dayEvents);
         cell.appendChild(more);
       }
     }
