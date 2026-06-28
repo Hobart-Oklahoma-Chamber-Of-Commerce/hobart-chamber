@@ -214,6 +214,15 @@
   .t-platinum{border-left-color:var(--t-platinum);}
   .directory-note{margin-top:26px;font-size:12.5px;color:var(--gray);font-style:italic;}
 
+  /* member contact (added) */
+  .member h5 a{color:var(--navy);text-decoration:none;display:inline-flex;align-items:center;gap:6px;}
+  .member h5 a:hover{color:var(--gold);}
+  .member:hover .ext{opacity:1;}
+  .member-contact{margin-top:10px;padding-top:9px;border-top:1px solid var(--border);display:flex;flex-direction:column;gap:3px;}
+  .member-contact .mc-line{font-size:11.5px;color:var(--gray);line-height:1.45;}
+  .member-contact .mc-phone{font-size:11.5px;font-weight:600;color:var(--navy);text-decoration:none;width:fit-content;}
+  .member-contact .mc-phone:hover{color:var(--gold);}
+
   /* ---- BOARD ---- */
   .board{background:var(--navy);padding:84px 60px;}
   .board-head{text-align:center;margin-bottom:54px;}
@@ -495,22 +504,73 @@
   <p class="directory-sub">Current members since our December 2025 membership drive. These are the businesses and organizations investing in Hobart's future.</p>
   <div class="dir-filter" id="dirFilter"></div>
   <div class="directory-grid" id="directoryGrid">
-    <a class="member t-gold" data-cat="Civic &amp; Nonprofit" href="https://tommyfranksmuseum.org/" target="_blank" rel="noopener"><h5>General Tommy Franks Museum <span class="ext">↗</span></h5><span>Museum · Leadership Institute</span></a>
-    <a class="member t-diamond" data-cat="Retail &amp; Shopping" href="https://www.walmart.com/store/607-hobart-ok" target="_blank" rel="noopener"><h5>Walmart <span class="ext">↗</span></h5><span>Retail</span></a>
-    <a class="member t-platinum" data-cat="Banking &amp; Finance" href="https://www.bancfirst.bank/" target="_blank" rel="noopener"><h5>BancFirst <span class="ext">↗</span></h5><span>Banking &amp; Finance</span></a>
-    <a class="member t-diamond" data-cat="Utilities" href="https://www.psoklahoma.com/" target="_blank" rel="noopener"><h5>PSO <span class="ext">↗</span></h5><span>Public Service Co. · Utilities</span></a>
+    <div class="member t-gold" data-cat="Civic &amp; Nonprofit">
+      <h5><a href="https://tommyfranksmuseum.org/" target="_blank" rel="noopener">General Tommy Franks Museum <span class="ext">↗</span></a></h5>
+      <span>Museum · Leadership Institute</span>
+      <div class="member-contact"><span class="mc-line">507 S. Main St</span><a class="mc-phone" href="tel:5807265900">(580) 726-5900</a></div>
+    </div>
+    <div class="member t-diamond" data-cat="Retail &amp; Shopping">
+      <h5><a href="https://www.walmart.com/store/607-hobart-ok" target="_blank" rel="noopener">Walmart <span class="ext">↗</span></a></h5>
+      <span>Retail</span>
+      <div class="member-contact"><span class="mc-line">923 W 11th St</span><a class="mc-phone" href="tel:5807265693">(580) 726-5693</a></div>
+    </div>
+    <div class="member t-platinum" data-cat="Banking &amp; Finance">
+      <h5><a href="https://www.bancfirst.bank/" target="_blank" rel="noopener">BancFirst <span class="ext">↗</span></a></h5>
+      <span>Banking &amp; Finance</span>
+      <div class="member-contact"><span class="mc-line">105 W. 4th St</span><a class="mc-phone" href="tel:5807265617">(580) 726-5617</a></div>
+    </div>
+    <div class="member t-diamond" data-cat="Utilities">
+      <h5><a href="https://www.psoklahoma.com/" target="_blank" rel="noopener">PSO <span class="ext">↗</span></a></h5>
+      <span>Public Service Co. · Utilities</span>
+    </div>
     <div class="member t-bronze" data-cat="Banking &amp; Finance"><h5>Scott Northrip CPA</h5><span>Accounting · CPA</span></div>
-    <a class="member t-silver" data-cat="Banking &amp; Finance" href="https://www.edwardjones.com/us-en/financial-advisor/lonnie-olson" target="_blank" rel="noopener"><h5>Edward Jones <span class="ext">↗</span></h5><span>Financial Services · Lonnie Olson</span></a>
-    <a class="member t-silver" data-cat="Banking &amp; Finance" href="https://www.frazerbank.com/" target="_blank" rel="noopener"><h5>Frazer Bank <span class="ext">↗</span></h5><span>Banking &amp; Finance</span></a>
+    <div class="member t-silver" data-cat="Banking &amp; Finance">
+      <h5><a href="https://www.edwardjones.com/us-en/financial-advisor/lonnie-olson" target="_blank" rel="noopener">Edward Jones <span class="ext">↗</span></a></h5>
+      <span>Financial Services · Lonnie Olson</span>
+      <div class="member-contact"><span class="mc-line">411 S Main St</span></div>
+    </div>
+    <div class="member t-silver" data-cat="Banking &amp; Finance">
+      <h5><a href="https://www.frazerbank.com/" target="_blank" rel="noopener">Frazer Bank <span class="ext">↗</span></a></h5>
+      <span>Banking &amp; Finance</span>
+      <div class="member-contact"><span class="mc-line">229 S Broadway</span><a class="mc-phone" href="tel:5807263389">(580) 726-3389</a></div>
+    </div>
     <div class="member t-silver" data-cat="Civic &amp; Nonprofit"><h5>Hobart Lions Club</h5><span>Civic Organization</span></div>
-    <a class="member t-silver" data-cat="Home &amp; Construction" href="https://mcabeefoxroofing.com/" target="_blank" rel="noopener"><h5>McAbee Fox Roofing <span class="ext">↗</span></h5><span>Roofing · Construction</span></a>
-    <a class="member t-silver" data-cat="Real Estate" href="https://www.russrealestate.net/" target="_blank" rel="noopener"><h5>Russ Real Estate <span class="ext">↗</span></h5><span>Real Estate</span></a>
-    <a class="member t-bronze" data-cat="Home &amp; Construction" href="https://www.throgers.com/hobart" target="_blank" rel="noopener"><h5>TH Rogers <span class="ext">↗</span></h5><span>Lumber · Building Supply</span></a>
-    <a class="member t-silver" data-cat="Lodging &amp; Travel" href="https://www.facebook.com/people/Hiway-Inn-Motel/100083684103309/" target="_blank" rel="noopener"><h5>Hiway Inn Motel <span class="ext">↗</span></h5><span>Lodging</span></a>
-    <a class="member t-silver" data-cat="Insurance" href="https://agents.farmers.com/ok/hobart/joshua-wald" target="_blank" rel="noopener"><h5>Josh Wald Insurance <span class="ext">↗</span></h5><span>Farmers Insurance</span></a>
+    <div class="member t-silver" data-cat="Home &amp; Construction">
+      <h5><a href="https://mcabeefoxroofing.com/" target="_blank" rel="noopener">McAbee Fox Roofing <span class="ext">↗</span></a></h5>
+      <span>Roofing · Construction</span>
+      <div class="member-contact"><span class="mc-line">510 S Broadway</span><a class="mc-phone" href="tel:5805300274">(580) 530-0274</a></div>
+    </div>
+    <div class="member t-silver" data-cat="Real Estate">
+      <h5><a href="https://www.russrealestate.net/" target="_blank" rel="noopener">Russ Real Estate <span class="ext">↗</span></a></h5>
+      <span>Real Estate</span>
+      <div class="member-contact"><span class="mc-line">1030 S Broadway</span><a class="mc-phone" href="tel:5805300023">(580) 530-0023</a></div>
+    </div>
+    <div class="member t-bronze" data-cat="Home &amp; Construction">
+      <h5><a href="https://www.throgers.com/hobart" target="_blank" rel="noopener">TH Rogers <span class="ext">↗</span></a></h5>
+      <span>Lumber · Building Supply</span>
+      <div class="member-contact"><span class="mc-line">431 S Washington St</span><a class="mc-phone" href="tel:5807262409">(580) 726-2409</a></div>
+    </div>
+    <div class="member t-silver" data-cat="Lodging &amp; Travel">
+      <h5><a href="https://www.facebook.com/people/Hiway-Inn-Motel/100083684103309/" target="_blank" rel="noopener">Hiway Inn Motel <span class="ext">↗</span></a></h5>
+      <span>Lodging</span>
+      <div class="member-contact"><span class="mc-line">1004 W 11th St</span><a class="mc-phone" href="tel:5807263373">(580) 726-3373</a></div>
+    </div>
+    <div class="member t-silver" data-cat="Insurance">
+      <h5><a href="https://agents.farmers.com/ok/hobart/joshua-wald" target="_blank" rel="noopener">Josh Wald Insurance <span class="ext">↗</span></a></h5>
+      <span>Farmers Insurance</span>
+      <div class="member-contact"><span class="mc-line">901 S Main St</span><a class="mc-phone" href="tel:5807263077">(580) 726-3077</a></div>
+    </div>
     <div class="member t-bronze" data-cat="Veterinary &amp; Pets"><h5>Ark Vet</h5><span>Veterinary</span></div>
-    <div class="member t-bronze" data-cat="Local Business"><h5>Clinks</h5><span>Local Business</span></div>
-    <div class="member t-silver" data-cat="Local Business"><h5>Searchlight</h5><span>Local Business</span></div>
+    <div class="member t-bronze" data-cat="Retail &amp; Shopping">
+      <h5><a href="https://www.clinksmarkets.com/" target="_blank" rel="noopener">Clink's Supermarket <span class="ext">↗</span></a></h5>
+      <span>Supermarket · Grocery</span>
+      <div class="member-contact"><span class="mc-line">410 S Broadway</span><a class="mc-phone" href="tel:5807262560">(580) 726-2560</a></div>
+    </div>
+    <div class="member t-silver" data-cat="Civic &amp; Nonprofit">
+      <h5><a href="https://www.searchlightcenter.org/" target="_blank" rel="noopener">Searchlight Center Inc. <span class="ext">↗</span></a></h5>
+      <span>Disability Services · Nonprofit</span>
+      <div class="member-contact"><span class="mc-line">902 S Park Rd</span><a class="mc-phone" href="tel:5807266635">(580) 726-6635</a></div>
+    </div>
     <div class="member t-bronze" data-cat="Local Business"><h5>Wilmes</h5><span>Local Business</span></div>
   </div>
   <p class="directory-note">Interested in joining the directory? <a href="#membership" style="color:var(--gold)">Become a member →</a></p>
