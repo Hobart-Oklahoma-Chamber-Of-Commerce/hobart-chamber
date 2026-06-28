@@ -104,6 +104,10 @@
   .pillar-label{font-size:11px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:var(--gold-light);margin-bottom:12px;}
   .pillar h3{font-family:'Playfair Display',serif;font-size:25px;font-weight:700;color:var(--white);margin-bottom:14px;line-height:1.2;}
   .pillar p{font-size:15px;color:rgba(255,255,255,.66);line-height:1.7;}
+  .pillar-photos{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;margin-bottom:2px;}
+  .pillar-photo{aspect-ratio:4/3;overflow:hidden;background:var(--navy-deep);border-bottom:3px solid var(--gold);}
+  .pillar-photo img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s ease;}
+  .pillar-photo:hover img{transform:scale(1.05);}
 
   /* ---- EVENTS carousel ---- */
   .events-section{padding:84px 0 84px 60px;background:var(--slate);overflow:hidden;}
@@ -325,6 +329,8 @@
     .about,.botw{grid-template-columns:1fr;gap:44px;}
     .directory-grid,.board-grid{grid-template-columns:repeat(2,1fr);}
     .pillars-grid{grid-template-columns:1fr;}
+    .pillar-photos{grid-template-columns:1fr;}
+    .pillar-photo:nth-child(n+2){display:none;}
     .fg-row{grid-template-columns:1fr;}
   }
   @media(max-width:640px){
@@ -400,6 +406,11 @@
   <div class="pillars-header">
     <span class="section-eyebrow">What We Do</span>
     <h2 class="section-title" style="color:var(--white)">The Chamber's Role<br>in Hobart's Future</h2>
+  </div>
+  <div class="pillar-photos" id="pillarPhotos">
+    <div class="pillar-photo"><img alt="Hobart community event"></div>
+    <div class="pillar-photo"><img alt="Hobart community event"></div>
+    <div class="pillar-photo"><img alt="Hobart community event"></div>
   </div>
   <div class="pillars-grid">
     <div class="pillar"><div class="pillar-number">01</div><div class="pillar-label">Advocate</div><h3>Voice for Local Business</h3><p>We represent Hobart's business community — making sure local interests are heard by leadership, partners, and the people who keep our town moving forward.</p></div>
@@ -1118,12 +1129,27 @@ function openBio(m){
   openOverlay('bioOverlay');
 }
 
+/* ---- What We Do rotating photos (random per visit) ---- */
+var PILLAR_PICS=['flyers/promo-shot-1.jpg','flyers/promo-shot-2.jpg','flyers/promo-shot-3.jpg','flyers/promo-shot-4.jpg','flyers/promo-shot-5.jpg','flyers/promo-shot-6.jpg','flyers/promo-shot-7.jpg','flyers/promo-shot-8.jpg'];
+function shufflePics(a){ var arr=a.slice(),i,j,t; for(i=arr.length-1;i>0;i--){ j=Math.floor(Math.random()*(i+1)); t=arr[i]; arr[i]=arr[j]; arr[j]=t; } return arr; }
+function renderPillarPhotos(){
+  var wrap=document.getElementById('pillarPhotos');
+  if(!wrap)return;
+  var imgs=wrap.querySelectorAll('img');
+  var pick=shufflePics(PILLAR_PICS);
+  var i;
+  for(i=0;i<imgs.length;i++){
+    (function(img,src){ img.onerror=function(){ img.parentElement.style.display='none'; }; img.src=src; })(imgs[i],pick[i]);
+  }
+}
+
 /* ---- boot ---- */
 if(FB){ auth.onAuthStateChanged(function(u){ if(document.getElementById('adminOverlay').classList.contains('on')){ u?renderAdmin():renderLogin(); } }); }
 loadEvents();
 loadBanner();
 initDirFilter();
 renderBoard();
+renderPillarPhotos();
 </script>
 </body>
 </html>
