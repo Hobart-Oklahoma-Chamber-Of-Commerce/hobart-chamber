@@ -428,7 +428,7 @@
       <button class="ev-arrow" onclick="scrollEvents(1)" aria-label="Next">›</button>
     </div>
   </div>
-  <p class="events-sub">Our marquee summer events. Each card has a space for its flyer as it's released — drop the image into the repo and it appears here.</p>
+  <p class="events-sub">Our marquee summer events. Mark your calendar and watch this space — event flyers and details are added as each one is announced.</p>
   <div class="events-track" id="eventsTrack">
     <div class="event-card"><div class="flyer-slot"><img src="flyer-supply-drive.jpg" alt="" onerror="this.parentElement.classList.add('empty');this.outerHTML=flyerPH;"></div><div class="event-top"><div class="event-date"><span class="m">Jul</span><span class="d">1</span></div><div class="event-meta"><h4>Back-to-School Supply Drive</h4><span class="loc">📍 Great Plains Youth &amp; Family Services</span></div></div><div class="event-body"><p>The supply donation campaign kicks off July 1. Help spread the word and donate so local students start the year prepared.</p></div><div class="event-foot"><span class="event-tag">Community Drive</span></div></div>
     <div class="event-card"><div class="flyer-slot"><img src="flyer-relay.jpg" alt="" onerror="this.parentElement.classList.add('empty');this.outerHTML=flyerPH;"></div><div class="event-top"><div class="event-date"><span class="m">Jul</span><span class="d">10</span></div><div class="event-meta"><h4>Relay for Life</h4><span class="loc">📍 Hobart Events Center · 6 PM – Midnight</span></div></div><div class="event-body"><p>Our community celebrates survivors, remembers loved ones, and supports the fight against cancer. Everyone is encouraged to attend.</p></div><div class="event-foot"><span class="event-tag">Signature Event</span></div></div>
@@ -505,7 +505,7 @@
   </div>
   <div class="botw-card">
     <div class="botw-photo"><img src="flyers/botw.png" alt="" onerror="this.parentElement.classList.add('empty');this.outerHTML=flyerPHWhite;"></div>
-    <div class="botw-inner"><span class="botw-badge">This Week's Feature</span><h3>Featured Member Coming Soon</h3><p>This space spotlights a different Chamber member each week. Add the business name, a short description, and a photo above to feature them.</p></div>
+    <div class="botw-inner"><span class="botw-badge">This Week's Feature</span><h3>Featured Member Coming Soon</h3><p>Each week we shine a light on a different Chamber member for the difference they make in our community. Check back soon to see who's featured.</p></div>
   </div>
 </section>
 
@@ -783,7 +783,7 @@ function loadEvents(){
   }else{
     EVENTS=SEED.slice();
     renderCal();
-    setStatus('PREVIEW MODE — built-in events shown. On the live site this also loads approved community events from Firebase.');
+    setStatus('Showing the Chamber\'s featured events. Community submissions appear here once approved.');
   }
 }
 function setStatus(msg){
@@ -948,7 +948,7 @@ function openAdmin(){
   openOverlay('adminOverlay');
   if(!FB){
     document.getElementById('adminTitle').textContent='Chamber Settings';
-    document.getElementById('adminBody').innerHTML='<div class="admin-empty">Admin tools run on the <strong>live site</strong> once Firebase is connected.<br><br>Paste your Chamber Firebase config at the top of the script, deploy, then the Executive Director can sign in here to approve, create, edit, and delete events.</div>';
+    document.getElementById('adminBody').innerHTML='<div class="admin-empty">Chamber tools are temporarily unavailable. Please try again in a few moments, or contact the Chamber office if this continues.</div>';
     return;
   }
   if(auth.currentUser){ renderAdmin(); }
