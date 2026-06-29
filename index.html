@@ -937,6 +937,29 @@ window.addEventListener('click',function(e){ if(e.target.classList&&e.target.cla
 /* ---- featured events carousel ---- */
 function scrollEvents(dir){var t=document.getElementById('eventsTrack');var card=t.querySelector('.event-card');var step=card?card.offsetWidth+24:360;t.scrollBy({left:dir*step,behavior:'smooth'});}
 
+/* auto-sort the carousel cards by date so they always run soonest-first.
+   Each card sorts by its date badge (month abbrev + day). For precise control
+   across year boundaries, you can optionally add data-date="YYYY-MM-DD" to a
+   .event-card and it will use that instead. */
+var MONTH_IDX={Jan:0,Feb:1,Mar:2,Apr:3,May:4,Jun:5,Jul:6,Aug:7,Sep:8,Oct:9,Nov:10,Dec:11};
+function cardSortKey(card){
+  var ds=card.getAttribute('data-date');
+  if(ds){ var p=ds.split('-'); return new Date(+p[0],(+p[1])-1,+p[2]).getTime(); }
+  var mEl=card.querySelector('.event-date .m'), dEl=card.querySelector('.event-date .d');
+  var mo=mEl?MONTH_IDX[(mEl.textContent||'').trim().slice(0,3)]:0;
+  if(mo==null||mo===undefined)mo=0;
+  var day=dEl?parseInt(dEl.textContent,10):1;
+  if(isNaN(day))day=1;
+  return new Date((new Date()).getFullYear(),mo,day).getTime();
+}
+function sortEventsCarousel(){
+  var track=document.getElementById('eventsTrack');
+  if(!track)return;
+  var cards=Array.prototype.slice.call(track.querySelectorAll('.event-card'));
+  cards.sort(function(a,b){return cardSortKey(a)-cardSortKey(b);});
+  cards.forEach(function(c){track.appendChild(c);});
+}
+
 /* ============ SECRET ADMIN (Chamber settings) ============ */
 /* Open with the footer dot (tap 3x) OR visit  yoursite.com/#chamber-settings */
 var gearClicks=0,gearTimer=null;
@@ -1152,6 +1175,7 @@ loadBanner();
 initDirFilter();
 renderBoard();
 renderPillarPhotos();
+sortEventsCarousel();
 </script>
 </body>
 </html>
