@@ -1169,7 +1169,7 @@ function openBio(m){
 }
 
 /* ---- What We Do rotating photos (random per visit) ---- */
-var PILLAR_PICS=['flyers/promo-shot-1.jpg','flyers/promo-shot-2.jpg','flyers/promo-shot-3.jpg','flyers/promo-shot-4.jpg','flyers/promo-shot-5.jpg','flyers/promo-shot-6.jpg','flyers/promo-shot-7.jpg','flyers/promo-shot-8.jpg'];
+var PILLAR_PICS=['flyers/promo-shot-1.jpg','flyers/promo-shot-2.jpg','flyers/promo-shot-3.jpg','flyers/promo-shot-4.jpg','flyers/promo-shot-5.jpg','flyers/promo-shot-6.jpg','flyers/promo-shot-7.jpg','flyers/promo-shot-8.jpg','flyers/hero-5.jpg','flyers/hero-6.jpg','flyers/hero-9.jpg'];
 function shufflePics(a){ var arr=a.slice(),i,j,t; for(i=arr.length-1;i>0;i--){ j=Math.floor(Math.random()*(i+1)); t=arr[i]; arr[i]=arr[j]; arr[j]=t; } return arr; }
 function renderPillarPhotos(){
   var wrap=document.getElementById('pillarPhotos');
