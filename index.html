@@ -44,6 +44,24 @@
   #announceBar{display:none;background:var(--gold);color:var(--navy-deep);text-align:center;font-size:14px;font-weight:600;padding:9px 48px;position:relative;z-index:120;}
   #announceBar.on{display:block;}
 
+  /* ---- 125th birthday countdown bar ---- */
+  .bday-bar{background:var(--navy);color:#fff;display:flex;align-items:center;justify-content:center;gap:22px;flex-wrap:wrap;padding:10px 24px;border-bottom:2px solid var(--gold);position:relative;z-index:110;}
+  .bday-label{font-size:12px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold-light);}
+  .bday-clock{display:flex;align-items:flex-start;gap:10px;}
+  .bday-unit{display:flex;flex-direction:column;align-items:center;min-width:42px;}
+  .bday-num{font-family:'Playfair Display',serif;font-size:22px;font-weight:800;color:#fff;line-height:1;}
+  .bday-u{font-size:8.5px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:rgba(255,255,255,.6);margin-top:3px;}
+  .bday-sep{font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:var(--gold);line-height:1;margin-top:1px;}
+  .bday-bar.celebrate .bday-clock{display:none;}
+  .bday-bar.celebrate .bday-label{font-size:14px;color:#fff;}
+  @media(max-width:640px){
+    .bday-bar{gap:12px;padding:8px 14px;}
+    .bday-label{font-size:10px;letter-spacing:1px;}
+    .bday-num{font-size:18px;}
+    .bday-unit{min-width:34px;}
+    .bday-sep{font-size:16px;}
+  }
+
   /* ---- NAV ---- */
   nav{position:sticky;top:0;left:0;right:0;z-index:100;background:rgba(26,62,168,.97);backdrop-filter:blur(8px);display:flex;align-items:center;justify-content:space-between;padding:0 48px;height:74px;border-bottom:1px solid rgba(196,154,62,.4);}
   .nav-logo{display:flex;align-items:center;gap:13px;text-decoration:none;}
@@ -377,6 +395,20 @@
   </ul>
   <button class="nav-toggle" onclick="var n=document.querySelector('.nav-links');n.style.display=(this.dataset.o=='1'?'none':'flex');this.dataset.o=(this.dataset.o=='1'?'0':'1');">☰</button>
 </nav>
+
+<!-- ===== 125TH BIRTHDAY COUNTDOWN ===== -->
+<div id="bday125" class="bday-bar">
+  <span class="bday-label">Counting Down to Hobart's 125th Birthday</span>
+  <div class="bday-clock" id="bdayClock">
+    <div class="bday-unit"><span class="bday-num" id="bdD">--</span><span class="bday-u">Days</span></div>
+    <span class="bday-sep">:</span>
+    <div class="bday-unit"><span class="bday-num" id="bdH">--</span><span class="bday-u">Hrs</span></div>
+    <span class="bday-sep">:</span>
+    <div class="bday-unit"><span class="bday-num" id="bdM">--</span><span class="bday-u">Min</span></div>
+    <span class="bday-sep">:</span>
+    <div class="bday-unit"><span class="bday-num" id="bdS">--</span><span class="bday-u">Sec</span></div>
+  </div>
+</div>
 
 <!-- ===== HERO ===== -->
 <section class="hero" id="top">
@@ -990,6 +1022,31 @@ function sortEventsCarousel(){
   cards.sort(function(a,b){return cardSortKey(a)-cardSortKey(b);});
   cards.forEach(function(c){track.appendChild(c);});
 }
+
+/* ---- Hobart 125th birthday countdown (target: Aug 7, 2026) ---- */
+var bday125Timer=null;
+function pad2b(v){ return (v<10?'0':'')+v; }
+function setBdTxt(id,v){ var el=document.getElementById(id); if(el) el.textContent=pad2b(v); }
+function tick125(){
+  var bar=document.getElementById('bday125');
+  if(!bar)return;
+  var target=new Date(2026,7,7,0,0,0).getTime();
+  var diff=target-(new Date()).getTime();
+  if(diff<=0){
+    bar.classList.add('celebrate');
+    var lbl=bar.querySelector('.bday-label');
+    if(lbl) lbl.textContent="Happy 125th Birthday, Hobart!  ·  August 7, 2026";
+    if(bday125Timer) clearInterval(bday125Timer);
+    return;
+  }
+  var d=Math.floor(diff/86400000);
+  var h=Math.floor((diff%86400000)/3600000);
+  var m=Math.floor((diff%3600000)/60000);
+  var s=Math.floor((diff%60000)/1000);
+  setBdTxt('bdD',d); setBdTxt('bdH',h); setBdTxt('bdM',m); setBdTxt('bdS',s);
+}
+tick125();
+bday125Timer=setInterval(tick125,1000);
 
 /* click a flyer to view the full poster in a lightbox */
 function openFlyer(src){
