@@ -45,7 +45,16 @@
   #announceBar.on{display:block;}
 
   /* ---- 125th birthday countdown bar ---- */
-  .bday-bar{background:var(--navy);color:#fff;display:flex;align-items:center;justify-content:center;gap:22px;flex-wrap:wrap;padding:10px 24px;border-bottom:2px solid var(--gold);position:relative;z-index:110;}
+  .bday-bar{background:var(--navy);color:#fff;display:flex;align-items:center;justify-content:space-between;gap:18px;flex-wrap:wrap;padding:9px 26px;border-bottom:2px solid var(--gold);position:relative;z-index:110;}
+  .bday-center{display:flex;align-items:center;gap:18px;flex-wrap:wrap;justify-content:center;}
+  .bday-side{display:flex;align-items:center;gap:9px;flex-shrink:0;}
+  .bday-side-text{font-family:'Playfair Display',serif;font-size:13px;font-weight:700;color:#fff;letter-spacing:.4px;white-space:nowrap;}
+  .paw{display:inline-flex;align-items:center;}
+  .paw-svg{width:15px;height:15px;display:block;fill:currentColor;}
+  .paw-gold{color:var(--gold);}
+  .paw-white{color:#fff;}
+  .paw-r{transform:rotate(18deg);}
+  .paw-l{transform:rotate(-18deg);}
   .bday-label{font-size:12px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold-light);}
   .bday-clock{display:flex;align-items:flex-start;gap:10px;}
   .bday-unit{display:flex;flex-direction:column;align-items:center;min-width:42px;}
@@ -54,6 +63,10 @@
   .bday-sep{font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:var(--gold);line-height:1;margin-top:1px;}
   .bday-bar.celebrate .bday-clock{display:none;}
   .bday-bar.celebrate .bday-label{font-size:14px;color:#fff;}
+  @media(max-width:980px){
+    .bday-side{display:none;}
+    .bday-bar{justify-content:center;}
+  }
   @media(max-width:640px){
     .bday-bar{gap:12px;padding:8px 14px;}
     .bday-label{font-size:10px;letter-spacing:1px;}
@@ -398,15 +411,27 @@
 
 <!-- ===== 125TH BIRTHDAY COUNTDOWN ===== -->
 <div id="bday125" class="bday-bar">
-  <span class="bday-label">Counting Down to Hobart's 125th Birthday</span>
-  <div class="bday-clock" id="bdayClock">
-    <div class="bday-unit"><span class="bday-num" id="bdD">--</span><span class="bday-u">Days</span></div>
-    <span class="bday-sep">:</span>
-    <div class="bday-unit"><span class="bday-num" id="bdH">--</span><span class="bday-u">Hrs</span></div>
-    <span class="bday-sep">:</span>
-    <div class="bday-unit"><span class="bday-num" id="bdM">--</span><span class="bday-u">Min</span></div>
-    <span class="bday-sep">:</span>
-    <div class="bday-unit"><span class="bday-num" id="bdS">--</span><span class="bday-u">Sec</span></div>
+  <div class="bday-side bday-left">
+    <span class="paw paw-gold paw-l"><svg class="paw-svg" viewBox="0 0 512 512" aria-hidden="true"><ellipse cx="256" cy="346" rx="120" ry="98"/><ellipse cx="128" cy="206" rx="46" ry="60"/><ellipse cx="210" cy="142" rx="44" ry="62"/><ellipse cx="302" cy="142" rx="44" ry="62"/><ellipse cx="384" cy="206" rx="46" ry="60"/></svg></span>
+    <span class="bday-side-text">Hobart, Oklahoma</span>
+    <span class="paw paw-white paw-r"><svg class="paw-svg" viewBox="0 0 512 512" aria-hidden="true"><ellipse cx="256" cy="346" rx="120" ry="98"/><ellipse cx="128" cy="206" rx="46" ry="60"/><ellipse cx="210" cy="142" rx="44" ry="62"/><ellipse cx="302" cy="142" rx="44" ry="62"/><ellipse cx="384" cy="206" rx="46" ry="60"/></svg></span>
+  </div>
+  <div class="bday-center">
+    <span class="bday-label">Counting Down to Hobart's 125th Birthday</span>
+    <div class="bday-clock" id="bdayClock">
+      <div class="bday-unit"><span class="bday-num" id="bdD">--</span><span class="bday-u">Days</span></div>
+      <span class="bday-sep">:</span>
+      <div class="bday-unit"><span class="bday-num" id="bdH">--</span><span class="bday-u">Hrs</span></div>
+      <span class="bday-sep">:</span>
+      <div class="bday-unit"><span class="bday-num" id="bdM">--</span><span class="bday-u">Min</span></div>
+      <span class="bday-sep">:</span>
+      <div class="bday-unit"><span class="bday-num" id="bdS">--</span><span class="bday-u">Sec</span></div>
+    </div>
+  </div>
+  <div class="bday-side bday-right">
+    <span class="paw paw-white paw-l"><svg class="paw-svg" viewBox="0 0 512 512" aria-hidden="true"><ellipse cx="256" cy="346" rx="120" ry="98"/><ellipse cx="128" cy="206" rx="46" ry="60"/><ellipse cx="210" cy="142" rx="44" ry="62"/><ellipse cx="302" cy="142" rx="44" ry="62"/><ellipse cx="384" cy="206" rx="46" ry="60"/></svg></span>
+    <span class="bday-side-text">Home of the Bearcats</span>
+    <span class="paw paw-gold paw-r"><svg class="paw-svg" viewBox="0 0 512 512" aria-hidden="true"><ellipse cx="256" cy="346" rx="120" ry="98"/><ellipse cx="128" cy="206" rx="46" ry="60"/><ellipse cx="210" cy="142" rx="44" ry="62"/><ellipse cx="302" cy="142" rx="44" ry="62"/><ellipse cx="384" cy="206" rx="46" ry="60"/></svg></span>
   </div>
 </div>
 
