@@ -122,7 +122,8 @@
   .event-card{flex:0 0 340px;scroll-snap-align:start;background:var(--white);border-radius:8px;overflow:hidden;box-shadow:0 4px 22px rgba(26,62,168,.08);display:flex;flex-direction:column;transition:transform .2s,box-shadow .2s;}
   .event-card:hover{transform:translateY(-4px);box-shadow:0 14px 40px rgba(26,62,168,.18);}
   .flyer-slot{position:relative;width:100%;aspect-ratio:1/1;background:linear-gradient(135deg,#eef2fb,#e2e9f8);display:flex;align-items:center;justify-content:center;overflow:hidden;border-bottom:3px solid var(--gold);}
-  .flyer-slot img{width:100%;height:100%;object-fit:cover;display:block;}
+  .flyer-slot img{width:100%;height:100%;object-fit:contain;display:block;position:relative;z-index:1;}
+  .flyer-backdrop{position:absolute;inset:0;background-size:cover;background-position:center;filter:blur(18px);transform:scale(1.15);z-index:0;}
   .flyer-empty{display:flex;flex-direction:column;align-items:center;gap:6px;color:#9fb0cc;}
   .flyer-empty svg{width:34px;height:34px;}
   .flyer-empty span{font-size:11px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;}
@@ -976,6 +977,31 @@ function sortEventsCarousel(){
   cards.forEach(function(c){track.appendChild(c);});
 }
 
+/* full-flyer display: the whole flyer shows (never cropped), and the square is
+   filled behind it with a blurred copy of the same flyer. Works with any flyer
+   size automatically — no re-cropping needed. */
+function applyFlyerBackdrops(){
+  var slots=document.querySelectorAll('.flyer-slot');
+  var i;
+  for(i=0;i<slots.length;i++){
+    (function(slot){
+      var img=slot.querySelector('img');
+      if(!img)return;
+      function setBg(){
+        if(slot.querySelector('.flyer-backdrop'))return;
+        if(!img.getAttribute('src'))return;
+        if(img.naturalWidth===0)return;
+        var bd=document.createElement('div');
+        bd.className='flyer-backdrop';
+        bd.style.backgroundImage="url('"+img.getAttribute('src')+"')";
+        slot.insertBefore(bd,slot.firstChild);
+      }
+      if(img.complete){ setBg(); }
+      else { img.addEventListener('load',setBg); }
+    })(slots[i]);
+  }
+}
+
 /* ============ SECRET ADMIN (Chamber settings) ============ */
 /* Open with the footer dot (tap 3x) OR visit  yoursite.com/#chamber-settings */
 var gearClicks=0,gearTimer=null;
@@ -1132,16 +1158,16 @@ function filterDir(cat,btn){
 
 /* ---- Board of Directors (click a member for their bio) ---- */
 var BOARD=[
-  {name:'Jaci Sims', title:'Director', photo:'', bio:''},
-  {name:'Jessica Lankford', title:'Director', photo:'', bio:''},
-  {name:'Hannah Felder', title:'Director', photo:'flyers/board-felder.jpg', bio:'Hannah Felder earned her Bachelor\'s degree in Agricultural Business and her Doctor of Veterinary Medicine from Oklahoma State University. She is a mixed animal veterinarian dedicated to caring for both large and small animals.||Hannah loves serving the Hobart community and is especially passionate about encouraging and investing in the next generation, supporting local kids as they pursue their unique passions. She enjoys attending Bearcat athletic, agricultural, and fine arts events and cheering on the students who make the community so special.||In her free time, she enjoys anything Oklahoma State, reading, spending time at the lake, hanging out with friends and family, and silly reality television. Above all, she is a follower of Jesus and strives to serve others with compassion, kindness, and faith.'},
-  {name:'Whitney Perez', title:'Director', photo:'', bio:''},
-  {name:'Chris Fleming', title:'Director', photo:'flyers/board-fleming.PNG', bio:'Chris Fleming is the Founder and CEO of IronSilk Strategies, a consulting firm built to help small communities tell their stories, organize their people, and advocate for their future. Through IronSilk — including its hyperlocal publication, IronSilk Weekly — he works across civic strategy, local media, and community development in Hobart and Kiowa County.||Originally from Los Angeles, California, Chris studied business and music at Southwestern Oklahoma State University and earned an associate in music business from the College of the Desert. He channels that wide-ranging creative and technical background into everything he does — as a jingle writer, Web3 developer, event coordinator, and podcast host — and into his service on the Hobart Chamber Board, the Parks and Recreation Board, and as a volunteer running city hall audio and video.||A follower of Christ and a proud father, Chris has put down deep roots in Hobart, where his children and a close circle of college-friends-turned-family make the community home.'},
-  {name:'Annie Cruz', title:'Director', photo:'', bio:''},
-  {name:'Preston Reed', title:'Director', photo:'', bio:''},
-  {name:'Tanner Heath', title:'Director', photo:'', bio:''}
+  {name:'Jaci Sims', title:'Board Member', photo:'', bio:''},
+  {name:'Jessica Lankford', title:'Board Member', photo:'', bio:''},
+  {name:'Hannah Felder', title:'Board Member', photo:'flyers/board-felder.jpg', bio:'Hannah Felder earned her Bachelor\'s degree in Agricultural Business and her Doctor of Veterinary Medicine from Oklahoma State University. She is a mixed animal veterinarian dedicated to caring for both large and small animals.||Hannah loves serving the Hobart community and is especially passionate about encouraging and investing in the next generation, supporting local kids as they pursue their unique passions. She enjoys attending Bearcat athletic, agricultural, and fine arts events and cheering on the students who make the community so special.||In her free time, she enjoys anything Oklahoma State, reading, spending time at the lake, hanging out with friends and family, and silly reality television. Above all, she is a follower of Jesus and strives to serve others with compassion, kindness, and faith.'},
+  {name:'Whitney Perez', title:'Board Member', photo:'', bio:''},
+  {name:'Chris Fleming', title:'Board Member', photo:'flyers/board-fleming.PNG', bio:'Chris Fleming is the Founder and CEO of IronSilk Strategies, a consulting firm built to help small communities tell their stories, organize their people, and advocate for their future. Through IronSilk — including its hyperlocal publication, IronSilk Weekly — he works across civic strategy, local media, and community development in Hobart and Kiowa County.||Originally from Los Angeles, California, Chris studied business and music at Southwestern Oklahoma State University and earned an associate in music business from the College of the Desert. He channels that wide-ranging creative and technical background into everything he does — as a jingle writer, Web3 developer, event coordinator, and podcast host — and into his service on the Hobart Chamber Board, the Parks and Recreation Board, and as a volunteer running city hall audio and video.||A follower of Christ and a proud father, Chris has put down deep roots in Hobart, where his children and a close circle of college-friends-turned-family make the community home.'},
+  {name:'Annie Cruz', title:'Board Member', photo:'', bio:''},
+  {name:'Preston Reed', title:'Board Member', photo:'', bio:''},
+  {name:'Tanner Heath', title:'Board Member', photo:'', bio:''}
 ];
-var BOARD_ED={name:'Jessica Williams', title:'Executive Director', photo:'', bio:'Jessica Williams stepped into the role of Executive Director of the Hobart Chamber of Commerce on June 1, 2026, bringing a lifelong love of her hometown to the position. Born and raised in Hobart and a 2005 graduate of Hobart High School, she holds an associate degree in business administration from Western Oklahoma State College. Her roots in the community run generations deep — her family first came to Hobart in the Oklahoma Land Run.||As Executive Director, Jessica is leading the Chamber through a season of renewal: guiding its reorganization, driving a new membership push, and bringing back the popular Business of the Week spotlight that recognizes a local business each week. She still remembers gathering with the whole town for Arts on the Square as a young girl, and she carries that same spirit into her work today. "I am so excited to have this position and can\'t wait to play my part in bringing ideas to life to make memories that last a lifetime for the people of Hobart," she said — a mission rooted in creating fun for local families while drawing new business to town.||The daughter of Tim and Kim Binghom, Jessica and her husband, Heath Williams, are raising two teenage daughters, Jaedyn and Jordyn. Her deep family history in Hobart and her heart for its families make her a fitting champion for the businesses and community the Chamber serves.'};
+var BOARD_ED={name:'Jessica Williams', title:'Executive Director', photo:'flyers/board-williams.jpg', bio:'Jessica Williams stepped into the role of Executive Director of the Hobart Chamber of Commerce on June 1, 2026, bringing a lifelong love of her hometown to the position. Born and raised in Hobart and a 2005 graduate of Hobart High School, she holds an associate degree in business administration from Western Oklahoma State College. Her roots in the community run generations deep — her family first came to Hobart in the Oklahoma Land Run.||As Executive Director, Jessica is leading the Chamber through a season of renewal: guiding its reorganization, driving a new membership push, and bringing back the popular Business of the Week spotlight that recognizes a local business each week. She still remembers gathering with the whole town for Arts on the Square as a young girl, and she carries that same spirit into her work today. "I am so excited to have this position and can\'t wait to play my part in bringing ideas to life to make memories that last a lifetime for the people of Hobart," she said — a mission rooted in creating fun for local families while drawing new business to town.||The daughter of Tim and Kim Binghom, Jessica and her husband, Heath Williams, are raising two teenage daughters, Jaedyn and Jordyn. Her deep family history in Hobart and her heart for its families make her a fitting champion for the businesses and community the Chamber serves.'};
 
 function bInitials(n){ var p=n.trim().split(/\s+/); return ((p[0]?p[0][0]:'')+(p[1]?p[1][0]:'')).toUpperCase(); }
 function bAvatar(m,cls){ if(m.photo){ return '<div class="'+cls+'"><img src="'+m.photo+'" alt="'+esc(m.name)+'" onerror="this.parentElement.textContent=\''+bInitials(m.name)+'\'"></div>'; } return '<div class="'+cls+'">'+bInitials(m.name)+'</div>'; }
@@ -1192,6 +1218,7 @@ initDirFilter();
 renderBoard();
 renderPillarPhotos();
 sortEventsCarousel();
+applyFlyerBackdrops();
 </script>
 </body>
 </html>
