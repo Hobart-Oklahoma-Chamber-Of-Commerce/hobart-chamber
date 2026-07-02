@@ -248,7 +248,8 @@
   .directory-head{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:12px;}
   .directory-head .section-title{color:var(--navy);}
   .directory-sub{font-size:15px;color:var(--gray);margin-bottom:26px;max-width:620px;}
-  .dir-filter{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:28px;}
+  .dir-filter{display:flex;gap:10px;overflow-x:auto;padding-bottom:14px;margin-bottom:28px;scroll-behavior:smooth;scrollbar-width:none;}
+  .dir-filter::-webkit-scrollbar{display:none;}
   .dir-chip{flex:0 0 auto;padding:9px 18px;border-radius:30px;border:1.5px solid var(--border);background:var(--white);color:var(--dark-gray);font-size:13px;font-weight:600;cursor:pointer;white-space:nowrap;transition:all .2s;}
   .dir-chip:hover{border-color:var(--navy);color:var(--navy);}
   .dir-chip.on{background:var(--navy);color:var(--white);border-color:var(--navy);}
@@ -590,7 +591,13 @@
 
 <!-- ===== DIRECTORY ===== -->
 <section class="directory" id="directory">
-  <div class="directory-head"><div><span class="section-eyebrow">Our Members</span><h2 class="section-title">Member Directory</h2></div></div>
+  <div class="directory-head">
+    <div><span class="section-eyebrow">Our Members</span><h2 class="section-title">Member Directory</h2></div>
+    <div class="events-controls">
+      <button class="ev-arrow" onclick="scrollDirFilter(-1)" aria-label="Scroll categories left">‹</button>
+      <button class="ev-arrow" onclick="scrollDirFilter(1)" aria-label="Scroll categories right">›</button>
+    </div>
+  </div>
   <p class="directory-sub">Current members since our December 2025 membership drive. These are the businesses and organizations investing in Hobart's future.</p>
   <div class="dir-filter" id="dirFilter"></div>
   <div class="directory-grid" id="directoryGrid">
@@ -1080,6 +1087,9 @@ window.addEventListener('click',function(e){ if(e.target.classList&&e.target.cla
 
 /* ---- featured events carousel ---- */
 function scrollEvents(dir){var t=document.getElementById('eventsTrack');var card=t.querySelector('.event-card');var step=card?card.offsetWidth+24:360;t.scrollBy({left:dir*step,behavior:'smooth'});}
+
+/* ---- directory filter scroll ---- */
+function scrollDirFilter(dir){var t=document.getElementById('dirFilter');var chip=t.querySelector('.dir-chip');var step=chip?chip.offsetWidth+10:150;t.scrollBy({left:dir*step*2,behavior:'smooth'});}
 
 /* auto-sort the carousel cards by date so they always run soonest-first.
    Each card sorts by its date badge (month abbrev + day). For precise control
