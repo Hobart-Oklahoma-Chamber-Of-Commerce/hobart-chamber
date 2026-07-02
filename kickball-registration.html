@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Slip & Slide Kickball Tournament Registration | Hobart Chamber of Commerce</title>
+<meta name="description" content="Register your team for the Hobart Chamber of Commerce Slip & Slide Kickball Tournament, Saturday, July 18, 2026 at Biggers Park.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
+<style>
+  :root{
+    --navy:#1a3ea8;
+    --navy-deep:#0e2056;
+    --gold:#c49a3e;
+    --gold-light:#dab65e;
+    --white:#ffffff;
+    --slate:#f3f6fc;
+    --gray:#6f7d99;
+    --dark-gray:#2c3a58;
+    --border:#dbe3f4;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:'Inter',sans-serif;color:var(--navy-deep);background:var(--slate);line-height:1.5;padding:0 0 60px;}
+  .top-bar{background:var(--navy);padding:16px 20px;text-align:center;}
+  .top-bar a{color:var(--gold-light);font-size:13px;font-weight:600;text-decoration:none;letter-spacing:.3px;}
+  .top-bar a:hover{text-decoration:underline;}
+  .wrap{max-width:640px;margin:0 auto;padding:0 20px;}
+  .hero{background:linear-gradient(135deg,var(--navy),var(--navy-deep));padding:44px 24px 38px;text-align:center;color:var(--white);}
+  .hero .eyebrow{font-size:12.5px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold-light);margin-bottom:10px;}
+  .hero h1{font-family:'Playfair Display',serif;font-size:clamp(24px,5vw,34px);font-weight:900;line-height:1.2;margin-bottom:12px;}
+  .hero p{font-size:14.5px;color:#c9d5f0;max-width:440px;margin:0 auto;}
+  .hero .meta{margin-top:16px;font-size:13.5px;color:var(--gold-light);font-weight:600;}
+  .card{background:var(--white);border-radius:10px;box-shadow:0 8px 30px rgba(26,62,168,.10);margin-top:-26px;padding:30px 24px 34px;position:relative;}
+  .sec-title{font-family:'Playfair Display',serif;font-size:18px;font-weight:700;color:var(--navy);margin:26px 0 4px;padding-bottom:8px;border-bottom:2px solid var(--border);}
+  .sec-title:first-child{margin-top:0;}
+  .sec-sub{font-size:12.5px;color:var(--gray);margin-bottom:16px;}
+  .fg{margin-bottom:16px;}
+  .fg label{display:block;font-size:12.5px;font-weight:600;color:var(--navy);margin-bottom:6px;letter-spacing:.2px;}
+  .fg input[type=text],.fg input[type=email],.fg input[type=tel],.fg input[type=number],.fg textarea{
+    width:100%;padding:12px 13px;border:1px solid var(--border);border-radius:6px;font-family:inherit;font-size:15px;color:var(--dark-gray);background:var(--white);transition:border-color .2s,box-shadow .2s;
+  }
+  .fg input:focus,.fg textarea:focus{outline:none;border-color:var(--navy);box-shadow:0 0 0 3px rgba(26,62,168,.12);}
+  .radio-grid{display:flex;flex-direction:column;gap:9px;}
+  .radio-opt{display:flex;align-items:center;gap:9px;font-size:14.5px;color:var(--dark-gray);cursor:pointer;padding:10px 12px;border:1px solid var(--border);border-radius:6px;transition:border-color .2s,background .2s;}
+  .radio-opt:has(input:checked){border-color:var(--navy);background:rgba(26,62,168,.05);}
+  .radio-opt input{width:17px;height:17px;accent-color:var(--navy);flex-shrink:0;}
+  .other-line{margin-top:8px;display:none;}
+  .other-line.on{display:block;}
+  .roster-row{display:grid;grid-template-columns:1fr 70px 30px;gap:8px;margin-bottom:8px;align-items:center;}
+  .roster-row input{padding:10px 11px;border:1px solid var(--border);border-radius:6px;font-size:14px;font-family:inherit;}
+  .roster-row .rm{width:30px;height:30px;border:none;background:none;color:#b3261e;font-size:20px;cursor:pointer;line-height:1;opacity:.55;}
+  .roster-row .rm:hover{opacity:1;}
+  .roster-num{font-size:12px;color:var(--gray);width:18px;text-align:right;flex-shrink:0;}
+  .roster-list{margin-bottom:10px;}
+  .roster-hdr{display:grid;grid-template-columns:1fr 70px 30px;gap:8px;font-size:11px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:var(--gray);margin-bottom:8px;padding:0 2px;}
+  .add-player{background:var(--slate);border:1.5px dashed var(--border);color:var(--navy);font-size:13.5px;font-weight:600;padding:11px;border-radius:6px;width:100%;cursor:pointer;transition:border-color .2s;}
+  .add-player:hover{border-color:var(--navy);}
+  .add-player:disabled{opacity:.4;cursor:not-allowed;}
+  .roster-note{font-size:12px;color:var(--gray);margin-top:6px;}
+  .fee-box{background:var(--slate);border-radius:8px;padding:16px 18px;margin-bottom:16px;font-size:14px;color:var(--dark-gray);}
+  .fee-box b{color:var(--navy);}
+  .awards-box{background:linear-gradient(135deg,#fdf8ec,#f7ecd0);border:1px solid #ecd9a6;border-radius:8px;padding:16px 18px;margin-bottom:16px;font-size:13.5px;color:var(--dark-gray);}
+  .awards-box .aw-row{display:flex;align-items:center;gap:8px;margin-top:6px;}
+  .waiver-box{background:var(--slate);border-radius:8px;padding:16px 18px;font-size:13px;color:var(--dark-gray);line-height:1.6;margin-bottom:16px;}
+  .waiver-box ul{margin:8px 0 0 18px;}
+  .ack-row{display:flex;align-items:flex-start;gap:10px;padding:12px 14px;border:1.5px solid var(--border);border-radius:6px;cursor:pointer;transition:border-color .2s,background .2s;}
+  .ack-row:has(input:checked){border-color:var(--navy);background:rgba(26,62,168,.05);}
+  .ack-row input{width:18px;height:18px;margin-top:2px;accent-color:var(--navy);flex-shrink:0;}
+  .ack-row span{font-size:13.5px;color:var(--dark-gray);line-height:1.5;}
+  .submit-btn{background:var(--gold);color:var(--navy-deep);padding:16px;border:none;border-radius:6px;font-size:15px;font-weight:700;letter-spacing:.3px;cursor:pointer;width:100%;margin-top:8px;transition:background .2s,transform .15s;}
+  .submit-btn:hover{background:var(--gold-light);}
+  .submit-btn:active{transform:scale(.98);}
+  .submit-btn:disabled{opacity:.5;cursor:not-allowed;}
+  .form-msg{display:none;margin-top:16px;padding:14px 16px;border-radius:6px;font-size:13.5px;font-weight:500;text-align:center;}
+  .foot-note{text-align:center;font-size:12.5px;color:var(--gray);margin-top:22px;}
+  .req{color:#b3261e;}
+  @media(max-width:480px){ .card{padding:24px 18px 28px;} }
+</style>
+</head>
+<body>
+
+<div class="top-bar"><a href="index.html">← Back to Hobart Chamber of Commerce</a></div>
+
+<div class="hero">
+  <div class="wrap">
+    <div class="eyebrow">Hobart Chamber of Commerce</div>
+    <h1>Slip &amp; Slide Kickball Tournament</h1>
+    <p>Register your team below — no printing, no dropping off a paper form. Your registration goes straight to the Chamber.</p>
+    <div class="meta">📅 Saturday, July 18, 2026 &nbsp;·&nbsp; 📍 Biggers Park, Hobart, Oklahoma</div>
+  </div>
+</div>
+
+<div class="wrap">
+  <div class="card">
+    <form id="kbForm" onsubmit="return false;">
+
+      <div class="sec-title">Team Information</div>
+      <div class="fg">
+        <label>Team Name <span class="req">*</span></label>
+        <input type="text" id="k_teamname" required>
+      </div>
+      <div class="fg">
+        <label>Team Type <span class="req">*</span></label>
+        <div class="radio-grid" id="teamTypeGrid">
+          <label class="radio-opt"><input type="radio" name="teamtype" value="Family Team"> Family Team</label>
+          <label class="radio-opt"><input type="radio" name="teamtype" value="Business Team"> Business Team</label>
+          <label class="radio-opt"><input type="radio" name="teamtype" value="Baseball Team"> Baseball Team</label>
+          <label class="radio-opt"><input type="radio" name="teamtype" value="Softball Team"> Softball Team</label>
+          <label class="radio-opt"><input type="radio" name="teamtype" value="Football Team"> Football Team</label>
+          <label class="radio-opt"><input type="radio" name="teamtype" value="Church Team"> Church Team</label>
+          <label class="radio-opt"><input type="radio" name="teamtype" value="Other" id="tt_other"> Other</label>
+        </div>
+        <div class="other-line" id="ttOtherLine"><input type="text" id="k_teamtype_other" placeholder="Tell us your team type"></div>
+      </div>
+
+      <div class="sec-title">Team Contact Information</div>
+      <div class="fg"><label>Main Contact Person <span class="req">*</span></label><input type="text" id="k_contact" required></div>
+      <div class="fg"><label>Phone Number <span class="req">*</span></label><input type="tel" id="k_phone" required></div>
+      <div class="fg"><label>Email Address <span class="req">*</span></label><input type="email" id="k_email" required></div>
+      <div class="fg"><label>Mailing Address</label><input type="text" id="k_addr"></div>
+
+      <div class="sec-title">Team Roster</div>
+      <div class="sec-sub">Teams must have a minimum of 10 players and a maximum of 15. Add players below.</div>
+      <div class="roster-hdr"><span>Player Name</span><span>Age</span><span></span></div>
+      <div class="roster-list" id="rosterList"></div>
+      <button type="button" class="add-player" id="addPlayerBtn" onclick="addPlayerRow()">+ Add Player</button>
+      <div class="roster-note" id="rosterCount">10 of 15 players</div>
+
+      <div class="sec-title">Registration Fee &amp; Payment</div>
+      <div class="fee-box"><b>Registration Fee:</b> $100 per team (flat fee, regardless of roster size).</div>
+      <div class="fg">
+        <label>How will your team pay? <span class="req">*</span></label>
+        <div class="radio-grid">
+          <label class="radio-opt"><input type="radio" name="paymethod" value="Cash — will pay at Chamber office"> Cash — will pay at Chamber office</label>
+          <label class="radio-opt"><input type="radio" name="paymethod" value="Check — will pay at Chamber office"> Check — will pay at Chamber office</label>
+          <label class="radio-opt"><input type="radio" name="paymethod" value="Other / will call to arrange"> Other / will call to arrange</label>
+        </div>
+      </div>
+
+      <div class="sec-title">Awards</div>
+      <div class="awards-box">
+        <div class="aw-row">🏆 <span>Winning Team Champion Trophy</span></div>
+        <div class="aw-row">🎉 <span>Best Team Spirit Award</span></div>
+      </div>
+
+      <div class="sec-title">Waiver Acknowledgment</div>
+      <div class="waiver-box">
+        By registering, your team acknowledges:
+        <ul>
+          <li>Slip &amp; slide kickball is a physical activity that may involve risk of injury.</li>
+          <li><strong>Every player must sign an individual waiver on event day</strong> before participating.</li>
+          <li>Players who have not signed a waiver will not be allowed to participate.</li>
+          <li>Your team agrees to follow all tournament rules and directions from event staff and volunteers.</li>
+        </ul>
+      </div>
+      <label class="ack-row">
+        <input type="checkbox" id="k_ack" required>
+        <span>I am the team contact and I acknowledge the waiver terms above on behalf of my team. <span class="req">*</span></span>
+      </label>
+
+      <div class="form-msg" id="k_msg"></div>
+      <button type="button" class="submit-btn" id="submitBtn" onclick="submitKickball()">Submit Registration</button>
+      <p class="foot-note">Hosted by the Hobart Chamber of Commerce · Questions? Call (580) 682-0887 or visit hobartokchamber.org</p>
+    </form>
+  </div>
+</div>
+
+<script>
+/* ---- Firebase (writes registration for Jessica's admin tracking) ---- */
+var firebaseConfig = {
+  apiKey: "AIzaSyDdoomYnp5-ASz7domQQervL8RttEtOY0o",
+  authDomain: "hobart-chamber.firebaseapp.com",
+  projectId: "hobart-chamber",
+  storageBucket: "hobart-chamber.firebasestorage.app",
+  messagingSenderId: "1018730792333",
+  appId: "1:1018730792333:web:b26c20feef8d04ed07a9c4"
+};
+var db=null, FB=false;
+try{ firebase.initializeApp(firebaseConfig); db=firebase.firestore(); FB=true; }catch(e){ console.warn('Firebase not initialized:',e); }
+
+/* ---- Web3Forms (instant email to the Chamber, belt-and-suspenders) ---- */
+var WEB3FORMS_KEY = "a35795f6-54b3-41a0-b5c8-043e93cb73a5";
+
+/* ---- roster rows ---- */
+var MIN_PLAYERS=10, MAX_PLAYERS=15, rowCount=0;
+function addPlayerRow(){
+  if(rowCount>=MAX_PLAYERS) return;
+  rowCount++;
+  var list=document.getElementById('rosterList');
+  var row=document.createElement('div');
+  row.className='roster-row';
+  row.innerHTML='<input type="text" placeholder="Player '+rowCount+' full name" class="p_name">'
+    +'<input type="number" min="0" max="120" placeholder="Age" class="p_age">'
+    +(rowCount>MIN_PLAYERS?'<button type="button" class="rm" onclick="removePlayerRow(this)">×</button>':'<span></span>');
+  list.appendChild(row);
+  updateRosterCount();
+}
+function removePlayerRow(btn){
+  btn.closest('.roster-row').remove();
+  rowCount--;
+  renumberRows();
+  updateRosterCount();
+}
+function renumberRows(){
+  var rows=document.querySelectorAll('#rosterList .roster-row .p_name');
+  rows.forEach(function(inp,i){ if(!inp.value) inp.placeholder='Player '+(i+1)+' full name'; });
+}
+function updateRosterCount(){
+  document.getElementById('rosterCount').textContent=rowCount+' of '+MAX_PLAYERS+' players'+(rowCount<MIN_PLAYERS?' (minimum 10 required)':'');
+  document.getElementById('addPlayerBtn').disabled = rowCount>=MAX_PLAYERS;
+}
+for(var i=0;i<MIN_PLAYERS;i++){ addPlayerRow(); }
+
+/* ---- "Other" team type reveal ---- */
+document.getElementById('teamTypeGrid').addEventListener('change',function(){
+  var otherOn=document.getElementById('tt_other').checked;
+  document.getElementById('ttOtherLine').classList.toggle('on',otherOn);
+});
+
+function showMsg(text,type){
+  var m=document.getElementById('k_msg');
+  m.style.display='block';
+  m.className='form-msg';
+  if(type==='ok'){ m.style.background='#e8f6ec'; m.style.color='#1c7a3e'; }
+  else if(type==='err'){ m.style.background='#fbe9e9'; m.style.color='#b3261e'; }
+  else{ m.style.background='#eef2fb'; m.style.color='#1a3ea8'; }
+  m.textContent=text;
+}
+
+function submitKickball(){
+  var teamName=document.getElementById('k_teamname').value.trim();
+  var contact=document.getElementById('k_contact').value.trim();
+  var phone=document.getElementById('k_phone').value.trim();
+  var email=document.getElementById('k_email').value.trim();
+  var addr=document.getElementById('k_addr').value.trim();
+  var ack=document.getElementById('k_ack').checked;
+
+  var typeEl=document.querySelector('input[name=teamtype]:checked');
+  var teamType=typeEl?typeEl.value:'';
+  if(teamType==='Other'){ var o=document.getElementById('k_teamtype_other').value.trim(); if(o) teamType=o; }
+
+  var payEl=document.querySelector('input[name=paymethod]:checked');
+  var payMethod=payEl?payEl.value:'';
+
+  var roster=[];
+  document.querySelectorAll('#rosterList .roster-row').forEach(function(row){
+    var n=row.querySelector('.p_name').value.trim();
+    var a=row.querySelector('.p_age').value.trim();
+    if(n) roster.push({name:n, age:a});
+  });
+
+  if(!teamName){ showMsg('Please enter your team name.','err'); return; }
+  if(!teamType){ showMsg('Please select a team type.','err'); return; }
+  if(!contact||!phone||!email){ showMsg('Please fill in contact name, phone, and email.','err'); return; }
+  if(!payMethod){ showMsg('Please select how your team will pay.','err'); return; }
+  if(roster.length<MIN_PLAYERS){ showMsg('Please list at least '+MIN_PLAYERS+' players on your roster.','err'); return; }
+  if(!ack){ showMsg('Please check the waiver acknowledgment box to submit.','err'); return; }
+
+  var btn=document.getElementById('submitBtn');
+  btn.disabled=true;
+  showMsg('Submitting your registration…','info');
+
+  var record={
+    teamName:teamName, teamType:teamType, contactName:contact, phone:phone, email:email,
+    mailingAddress:addr, paymentMethod:payMethod, roster:roster,
+    paymentReceived:false, amountPaid:'',
+    createdAt: FB ? firebase.firestore.FieldValue.serverTimestamp() : null
+  };
+
+  var savePromise = FB ? db.collection('kickball').add(record) : Promise.resolve();
+
+  savePromise.then(function(){
+    var rosterText=roster.map(function(p,i){return (i+1)+'. '+p.name+(p.age?' (age '+p.age+')':'');}).join('\n');
+    return fetch('https://api.web3forms.com/submit',{
+      method:'POST',
+      headers:{'Content-Type':'application/json','Accept':'application/json'},
+      body:JSON.stringify({
+        access_key: WEB3FORMS_KEY,
+        subject: "Kickball Tournament Registration — "+teamName,
+        from_name: "Hobart Chamber Website",
+        "Team Name": teamName,
+        "Team Type": teamType,
+        "Contact Name": contact,
+        "Phone": phone,
+        "Email": email,
+        "Mailing Address": addr || '—',
+        "Payment Method": payMethod,
+        "Number of Players": roster.length,
+        "Roster": rosterText
+      })
+    });
+  }).then(function(){
+    showMsg('You\'re registered! A confirmation has been sent to the Chamber — we\'ll be in touch about payment and check-in details.','ok');
+    document.getElementById('kbForm').reset();
+    document.getElementById('rosterList').innerHTML=''; rowCount=0;
+    for(var i=0;i<MIN_PLAYERS;i++){ addPlayerRow(); }
+    document.getElementById('ttOtherLine').classList.remove('on');
+    window.scrollTo({top:0,behavior:'smooth'});
+  }).catch(function(err){
+    console.warn(err);
+    showMsg('Something went wrong submitting your registration. Please call the Chamber at (580) 682-0887.','err');
+  }).finally(function(){
+    btn.disabled=false;
+  });
+}
+</script>
+</body>
+</html>
