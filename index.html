@@ -1326,6 +1326,7 @@ function renderAdmin(){
     +'<div class="admin-tab'+(adminTab==='banner'?' on':'')+'" onclick="switchTab(\'banner\')">Banner</div>'
     +'<div class="admin-tab'+(adminTab==='jobs'?' on':'')+'" onclick="switchTab(\'jobs\')">Jobs</div>'
     +'<div class="admin-tab'+(adminTab==='jobcreate'?' on':'')+'" onclick="switchTab(\'jobcreate\')">+ New Opening</div>'
+    +'<div class="admin-tab'+(adminTab==='kickball'?' on':'')+'" onclick="switchTab(\'kickball\')">Kickball Teams <span id="kbCount"></span></div>'
     +'<div class="admin-tab" onclick="adminLogout()" style="margin-left:auto;color:#b3261e;">Sign Out</div>'
     +'</div><div id="adminPane"></div>';
   document.getElementById('adminBody').innerHTML=h;
@@ -1335,6 +1336,7 @@ function renderAdmin(){
   else if(adminTab==='banner') paneBanner();
   else if(adminTab==='jobs') paneJobsList();
   else if(adminTab==='jobcreate') paneJobCreate(null);
+  else if(adminTab==='kickball') paneKickball();
 }
 function switchTab(t){adminTab=t;renderAdmin();}
 function adminLogout(){auth.signOut().then(function(){renderLogin();});}
@@ -1469,6 +1471,51 @@ function saveJob(){
   else{ data.createdAt=firebase.firestore.FieldValue.serverTimestamp(); p=db.collection('jobs').add(data); }
   p.then(function(){ editingJobId=null; loadJobs(); adminTab='jobs'; renderAdmin(); }).catch(function(e){ msg.style.display='block';msg.style.background='#fbe9e9';msg.style.color='#b3261e';msg.textContent='Could not save.'; });
 }
+
+/* ============ KICKBALL TOURNAMENT REGISTRATIONS (admin) ============
+   Teams register on the public kickball-registration.html page. Each
+   submission lands here automatically (no retyping) — Jessica just checks
+   the box once payment comes in and jots the amount. Team # is simply the
+   order teams registered in. */
+function paneKickball(){
+  var pane=document.getElementById('adminPane');
+  pane.innerHTML='<div class="admin-empty">Loading…</div>';
+  db.collection('kickball').get().then(function(snap){
+    var rows=[]; snap.forEach(function(doc){var x=doc.data();x.id=doc.id;rows.push(x);});
+    rows.sort(function(a,b){ return (a.createdAt&&a.createdAt.seconds||0)-(b.createdAt&&b.createdAt.seconds||0); });
+    var cnt=document.getElementById('kbCount'); if(cnt) cnt.innerHTML=rows.length?('<span class="badge-pending">'+rows.length+'</span>'):'';
+    if(!rows.length){ pane.innerHTML='<div class="admin-empty">No teams registered yet.</div>'; return; }
+    var html='<div class="admin-list">', i;
+    for(i=0;i<rows.length;i++){
+      var k=rows[i], n=i+1;
+      var roster=k.roster||[];
+      html+='<div class="admin-row" style="flex-direction:column;align-items:stretch;">'
+        +'<div style="display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;">'
+        +'<div class="info"><b>#'+n+' — '+esc(k.teamName)+'</b><small>'+esc(k.teamType||'')+' · '+esc(k.contactName||'')+' · '+esc(k.phone||'')+' · '+roster.length+' players</small></div>'
+        +'<div class="acts">'
+        +'<button class="btn-sm btn-line" onclick="toggleKbRoster(\''+k.id+'\')">Roster</button>'
+        +'<button class="btn-sm btn-red" onclick="delKickball(\''+k.id+'\')">Delete</button>'
+        +'</div></div>'
+        +'<div style="display:flex;align-items:center;gap:16px;flex-wrap:wrap;margin-top:10px;padding-top:10px;border-top:1px solid var(--border);">'
+        +'<label style="display:flex;align-items:center;gap:6px;font-size:13px;color:var(--dark-gray);cursor:pointer;"><input type="checkbox" '+(k.paymentReceived?'checked':'')+' onchange="setKbPaid(\''+k.id+'\',this.checked)"> Payment received</label>'
+        +'<label style="display:flex;align-items:center;gap:6px;font-size:13px;color:var(--dark-gray);">Amount $<input type="text" value="'+(k.amountPaid?esc(k.amountPaid):'')+'" style="width:70px;padding:5px 7px;border:1px solid var(--border);border-radius:4px;font-size:13px;" onchange="setKbAmount(\''+k.id+'\',this.value)"></label>'
+        +'<span style="font-size:12.5px;color:var(--gray);">Email: '+esc(k.email||'—')+'</span>'
+        +'</div>'
+        +'<div class="kb-roster" id="kbroster_'+k.id+'" style="display:none;margin-top:10px;padding-top:10px;border-top:1px solid var(--border);font-size:13px;color:var(--dark-gray);">'
+        +(roster.length?roster.map(function(p,idx){return (idx+1)+'. '+esc(p.name||'')+(p.age?' (age '+esc(p.age)+')':'');}).join('<br>'):'No roster submitted.')
+        +(k.mailingAddress?'<br><br><b>Mailing address:</b> '+esc(k.mailingAddress):'')
+        +'<br><br><b>Payment method selected:</b> '+esc(k.paymentMethod||'—')
+        +'</div>'
+        +'</div>';
+    }
+    html+='</div>';
+    pane.innerHTML=html;
+  }).catch(function(e){ pane.innerHTML='<div class="admin-empty">Error loading.</div>'; });
+}
+function toggleKbRoster(id){ var el=document.getElementById('kbroster_'+id); if(el) el.style.display=(el.style.display==='none'?'block':'none'); }
+function setKbPaid(id,val){ db.collection('kickball').doc(id).update({paymentReceived:val}); }
+function setKbAmount(id,val){ db.collection('kickball').doc(id).update({amountPaid:val}); }
+function delKickball(id){ if(!confirm('Delete this team registration?'))return; db.collection('kickball').doc(id).delete().then(function(){paneKickball();}); }
 
 /* announcement banner */
 function paneBanner(){
