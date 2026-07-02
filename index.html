@@ -231,6 +231,19 @@
   .botw-card p{font-size:15px;color:rgba(255,255,255,.68);line-height:1.7;}
 
   /* ---- DIRECTORY ---- */
+  .jobs-section{background:var(--white);padding:84px 60px;}
+  .jobs-section .section-title{color:var(--navy);}
+  .jobs-sub{font-size:14px;color:var(--gray);max-width:640px;margin-top:10px;margin-bottom:32px;}
+  .jobs-list{display:flex;flex-direction:column;gap:14px;max-width:820px;}
+  .job-card{background:var(--slate);border:1px solid var(--border);border-left:4px solid var(--gold);border-radius:8px;padding:20px 24px;}
+  .job-card .jc-top{display:flex;align-items:baseline;justify-content:space-between;gap:12px;flex-wrap:wrap;}
+  .job-card h5{font-family:'Playfair Display',serif;font-size:17px;font-weight:700;color:var(--navy);}
+  .job-card .jc-biz{font-size:12.5px;font-weight:600;color:var(--gold);letter-spacing:.3px;text-transform:uppercase;}
+  .job-card .jc-desc{font-size:13.5px;color:var(--dark-gray);margin-top:10px;line-height:1.55;}
+  .job-card .jc-apply{font-size:13px;color:var(--navy);margin-top:12px;font-weight:600;}
+  .job-card .jc-apply a{color:var(--navy);}
+  .jobs-empty{font-size:14px;color:var(--gray);padding:20px 0;}
+
   .directory{background:var(--slate);padding:84px 60px;}
   .directory-head{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:12px;}
   .directory-head .section-title{color:var(--navy);}
@@ -403,6 +416,7 @@
     <li><a href="#calendar">Calendar</a></li>
     <li><a href="#events">Events</a></li>
     <li><a href="#directory">Members</a></li>
+    <li><a href="#jobs">Jobs</a></li>
     <li><a href="#about">About</a></li>
     <li><a href="#membership" class="nav-cta">Join Today</a></li>
   </ul>
@@ -669,6 +683,14 @@
   <p class="directory-note">Interested in joining the directory? <a href="#membership" style="color:var(--gold)">Become a member →</a></p>
 </section>
 
+<!-- ===== JOB OPENINGS ===== -->
+<section class="jobs-section" id="jobs">
+  <span class="section-eyebrow">Work in Hobart</span>
+  <h2 class="section-title">Job Openings</h2>
+  <p class="jobs-sub">Current openings from Chamber member businesses. Postings are managed by the Chamber office — reach out to us if your business has a role to list.</p>
+  <div class="jobs-list" id="jobsList"><div class="jobs-empty">Loading openings…</div></div>
+</section>
+
 <!-- ===== BOARD ===== -->
 <section class="board" id="board">
   <div class="board-head"><span class="section-eyebrow">Leadership</span><h2 class="section-title" style="color:var(--white)">Board of Directors</h2></div>
@@ -875,6 +897,26 @@ function loadEvents(){
     renderCal();
     setStatus('Showing the Chamber\'s featured events. Community submissions appear here once approved.');
   }
+}
+
+function loadJobs(){
+  var box=document.getElementById('jobsList');
+  if(!box) return;
+  if(!FB){ box.innerHTML='<div class="jobs-empty">Job openings will appear here once the site is live.</div>'; return; }
+  db.collection('jobs').where('status','==','open').get().then(function(snap){
+    var rows=[]; snap.forEach(function(doc){var x=doc.data();x.id=doc.id;rows.push(x);});
+    rows.sort(function(a,b){ return (b.createdAt&&b.createdAt.seconds||0)-(a.createdAt&&a.createdAt.seconds||0); });
+    if(!rows.length){ box.innerHTML='<div class="jobs-empty">No openings posted right now — check back soon.</div>'; return; }
+    var html='', i;
+    for(i=0;i<rows.length;i++){
+      var j=rows[i];
+      html+='<div class="job-card"><div class="jc-top"><h5>'+esc(j.title)+'</h5><span class="jc-biz">'+esc(j.business)+'</span></div>'
+        +(j.description?'<div class="jc-desc">'+esc(j.description)+'</div>':'')
+        +(j.apply?'<div class="jc-apply">How to apply: '+esc(j.apply)+'</div>':'')
+        +'</div>';
+    }
+    box.innerHTML=html;
+  }).catch(function(e){ box.innerHTML='<div class="jobs-empty">Openings are temporarily unavailable.</div>'; });
 }
 function setStatus(msg){
   var s=document.getElementById('calStatus');
@@ -1160,6 +1202,8 @@ function renderAdmin(){
     +'<div class="admin-tab'+(adminTab==='manage'?' on':'')+'" onclick="switchTab(\'manage\')">Manage Events</div>'
     +'<div class="admin-tab'+(adminTab==='create'?' on':'')+'" onclick="switchTab(\'create\')">+ New Event</div>'
     +'<div class="admin-tab'+(adminTab==='banner'?' on':'')+'" onclick="switchTab(\'banner\')">Banner</div>'
+    +'<div class="admin-tab'+(adminTab==='jobs'?' on':'')+'" onclick="switchTab(\'jobs\')">Jobs</div>'
+    +'<div class="admin-tab'+(adminTab==='jobcreate'?' on':'')+'" onclick="switchTab(\'jobcreate\')">+ New Opening</div>'
     +'<div class="admin-tab" onclick="adminLogout()" style="margin-left:auto;color:#b3261e;">Sign Out</div>'
     +'</div><div id="adminPane"></div>';
   document.getElementById('adminBody').innerHTML=h;
@@ -1167,6 +1211,8 @@ function renderAdmin(){
   else if(adminTab==='manage') paneList('approved');
   else if(adminTab==='create') paneCreate(null);
   else if(adminTab==='banner') paneBanner();
+  else if(adminTab==='jobs') paneJobsList();
+  else if(adminTab==='jobcreate') paneJobCreate(null);
 }
 function switchTab(t){adminTab=t;renderAdmin();}
 function adminLogout(){auth.signOut().then(function(){renderLogin();});}
@@ -1215,6 +1261,52 @@ function saveEvent(){
   if(editingId){ p=db.collection('events').doc(editingId).update(data); }
   else{ data.createdAt=firebase.firestore.FieldValue.serverTimestamp(); p=db.collection('events').add(data); }
   p.then(function(){ editingId=null; loadEvents(); adminTab='manage'; renderAdmin(); }).catch(function(e){ msg.style.display='block';msg.style.background='#fbe9e9';msg.style.color='#b3261e';msg.textContent='Could not save.'; });
+}
+
+/* ============ JOB OPENINGS (admin) ============ */
+function paneJobsList(){
+  var pane=document.getElementById('adminPane');
+  pane.innerHTML='<div class="admin-empty">Loading…</div>';
+  db.collection('jobs').get().then(function(snap){
+    var rows=[]; snap.forEach(function(doc){var x=doc.data();x.id=doc.id;rows.push(x);});
+    rows.sort(function(a,b){ return (b.createdAt&&b.createdAt.seconds||0)-(a.createdAt&&a.createdAt.seconds||0); });
+    if(!rows.length){ pane.innerHTML='<div class="admin-empty">No job openings yet. Use "+ New Opening" to add one.</div>'; return; }
+    var html='<div class="admin-list">', i;
+    for(i=0;i<rows.length;i++){
+      var j=rows[i];
+      html+='<div class="admin-row"><div class="info"><b>'+esc(j.title)+'</b><small>'+esc(j.business)+(j.status==='filled'?' · <span style="color:#9a6a00;">Filled</span>':'')+'</small></div><div class="acts">';
+      html+='<button class="btn-sm btn-line" onclick="editJob(\''+j.id+'\')">Edit</button>';
+      if(j.status!=='filled') html+='<button class="btn-sm btn-green" onclick="markJobFilled(\''+j.id+'\')">Mark Filled</button>';
+      html+='<button class="btn-sm btn-red" onclick="delJob(\''+j.id+'\')">Delete</button></div></div>';
+    }
+    html+='</div>';
+    pane.innerHTML=html;
+  }).catch(function(e){ pane.innerHTML='<div class="admin-empty">Error loading.</div>'; });
+}
+function markJobFilled(id){ db.collection('jobs').doc(id).update({status:'filled'}).then(function(){loadJobs();paneJobsList();}); }
+function delJob(id){ if(!confirm('Delete this job opening?'))return; db.collection('jobs').doc(id).delete().then(function(){loadJobs();renderAdmin();}); }
+
+var editingJobId=null;
+function editJob(id){ adminTab='jobcreate'; renderAdmin(); db.collection('jobs').doc(id).get().then(function(doc){var j=doc.data();j.id=id;paneJobCreate(j);}); }
+function paneJobCreate(j){
+  editingJobId=j?j.id:null;
+  var pane=document.getElementById('adminPane');
+  pane.innerHTML=''
+    +'<div class="fg"><label>Business Name *</label><input id="j_biz" type="text" value="'+(j?esc(j.business):'')+'"></div>'
+    +'<div class="fg"><label>Job Title *</label><input id="j_title" type="text" value="'+(j?esc(j.title):'')+'"></div>'
+    +'<div class="fg"><label>Description</label><textarea id="j_desc" rows="3">'+(j?esc(j.description||''):'')+'</textarea></div>'
+    +'<div class="fg"><label>How to Apply</label><input id="j_apply" type="text" placeholder="e.g. Call (580) 555-1212 or apply in person" value="'+(j?esc(j.apply||''):'')+'"></div>'
+    +'<div class="form-msg" id="j_msg"></div>'
+    +'<button class="btn-primary" style="width:100%;text-align:center;padding:12px;" onclick="saveJob()">'+(j?'Save Changes':'Publish Opening')+'</button>';
+}
+function saveJob(){
+  var biz=val('j_biz'),t=val('j_title'),msg=document.getElementById('j_msg');
+  if(!biz||!t){ msg.style.display='block';msg.style.background='#fbe9e9';msg.style.color='#b3261e';msg.textContent='Business name and job title are required.'; return; }
+  var data={business:biz,title:t,description:val('j_desc'),apply:val('j_apply'),status:'open'};
+  var p;
+  if(editingJobId){ p=db.collection('jobs').doc(editingJobId).update(data); }
+  else{ data.createdAt=firebase.firestore.FieldValue.serverTimestamp(); p=db.collection('jobs').add(data); }
+  p.then(function(){ editingJobId=null; loadJobs(); adminTab='jobs'; renderAdmin(); }).catch(function(e){ msg.style.display='block';msg.style.background='#fbe9e9';msg.style.color='#b3261e';msg.textContent='Could not save.'; });
 }
 
 /* announcement banner */
@@ -1329,6 +1421,7 @@ function renderPillarPhotos(){
 /* ---- boot ---- */
 if(FB){ auth.onAuthStateChanged(function(u){ if(document.getElementById('adminOverlay').classList.contains('on')){ u?renderAdmin():renderLogin(); } }); }
 loadEvents();
+loadJobs();
 loadBanner();
 initDirFilter();
 renderBoard();
