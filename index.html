@@ -248,10 +248,7 @@
   .directory-head{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:12px;}
   .directory-head .section-title{color:var(--navy);}
   .directory-sub{font-size:15px;color:var(--gray);margin-bottom:26px;max-width:620px;}
-  .dir-filter-wrap{position:relative;margin-bottom:28px;}
-  .dir-filter{display:flex;gap:10px;overflow-x:auto;padding-bottom:14px;padding-right:40px;scrollbar-width:none;}
-  .dir-filter::-webkit-scrollbar{display:none;}
-  .dir-filter-wrap::after{content:'';position:absolute;top:0;right:0;bottom:14px;width:44px;background:linear-gradient(to right,rgba(243,246,252,0),var(--slate));pointer-events:none;}
+  .dir-filter{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:28px;}
   .dir-chip{flex:0 0 auto;padding:9px 18px;border-radius:30px;border:1.5px solid var(--border);background:var(--white);color:var(--dark-gray);font-size:13px;font-weight:600;cursor:pointer;white-space:nowrap;transition:all .2s;}
   .dir-chip:hover{border-color:var(--navy);color:var(--navy);}
   .dir-chip.on{background:var(--navy);color:var(--white);border-color:var(--navy);}
@@ -595,7 +592,7 @@
 <section class="directory" id="directory">
   <div class="directory-head"><div><span class="section-eyebrow">Our Members</span><h2 class="section-title">Member Directory</h2></div></div>
   <p class="directory-sub">Current members since our December 2025 membership drive. These are the businesses and organizations investing in Hobart's future.</p>
-  <div class="dir-filter-wrap"><div class="dir-filter" id="dirFilter"></div></div>
+  <div class="dir-filter" id="dirFilter"></div>
   <div class="directory-grid" id="directoryGrid">
     <div class="member t-gold" data-cat="Civic &amp; Nonprofit">
       <h5><a href="https://tommyfranksmuseum.org/" target="_blank" rel="noopener">General Tommy Franks Museum <span class="ext">↗</span></a></h5>
@@ -686,7 +683,7 @@
       <span>Insurance Agency</span>
       <div class="member-contact"><span class="mc-line">322 S Washington St</span><a class="mc-phone" href="tel:5807263076">(580) 726-3076</a></div>
     </div>
-    <div class="member t-silver" data-cat="Education &amp; Training">
+    <div class="member t-bronze" data-cat="Education &amp; Training">
       <h5><a href="https://www.westtech.edu/about-district/campuses/hobart" target="_blank" rel="noopener">Western Technology Center <span class="ext">↗</span></a></h5>
       <span>Career &amp; Technology Education · Hobart Campus</span>
       <div class="member-contact"><span class="mc-line">1000 S Bailey</span><a class="mc-phone" href="tel:5807268400">(580) 726-8400</a></div>
