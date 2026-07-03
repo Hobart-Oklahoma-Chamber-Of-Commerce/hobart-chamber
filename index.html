@@ -383,6 +383,29 @@
   .admin-row .info small{font-size:12px;color:var(--gray);}
   .admin-row .acts{display:flex;gap:7px;flex-shrink:0;}
   .admin-empty{font-size:13px;color:var(--gray);text-align:center;padding:24px;}
+  /* analytics */
+  .an-toolbar{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:16px;flex-wrap:wrap;}
+  .an-toolbar .an-note{font-size:11.5px;color:var(--gray);}
+  .an-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:24px;}
+  .an-card{border:1px solid var(--border);border-radius:10px;padding:14px 15px;background:linear-gradient(160deg,#fff,#f6f8fd);}
+  .an-card h5{margin:0 0 10px;font-size:11px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:var(--navy);border-bottom:2px solid var(--gold);padding-bottom:7px;}
+  .an-metric{display:flex;align-items:baseline;justify-content:space-between;padding:4px 0;}
+  .an-metric span{font-size:12px;color:var(--gray);}
+  .an-metric b{font-size:21px;font-weight:800;color:var(--navy);font-family:'Playfair Display',serif;line-height:1;}
+  .an-section-title{font-size:12px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:var(--navy);margin:6px 0 14px;}
+  .an-bars{display:flex;align-items:flex-end;gap:5px;height:130px;padding:0 2px 4px;border-bottom:1px solid var(--border);margin-bottom:8px;}
+  .an-bar-wrap{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:100%;}
+  .an-bar{width:100%;background:linear-gradient(180deg,var(--gold),var(--gold-light));border-radius:3px 3px 0 0;min-height:2px;transition:height .3s;}
+  .an-bar.today{background:linear-gradient(180deg,var(--navy),#2b4a86);}
+  .an-bar-lbl{font-size:9px;color:var(--gray);margin-top:5px;white-space:nowrap;}
+  .an-bar-val{font-size:9px;font-weight:700;color:var(--navy);margin-bottom:3px;}
+  .an-flyers{display:flex;flex-direction:column;gap:2px;margin-top:6px;}
+  .an-flyer-row{display:flex;align-items:center;gap:10px;padding:9px 12px;border:1px solid var(--border);border-radius:8px;}
+  .an-flyer-row .rank{font-size:12px;font-weight:800;color:var(--gold);width:20px;flex-shrink:0;}
+  .an-flyer-row .name{flex:1;font-size:13px;color:var(--navy);font-weight:600;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+  .an-flyer-row .cnt{font-size:13px;font-weight:800;color:var(--navy);flex-shrink:0;}
+  .an-flyer-row .barbg{flex:1.4;height:8px;background:#e8edf7;border-radius:5px;overflow:hidden;max-width:160px;}
+  .an-flyer-row .barfill{height:100%;background:linear-gradient(90deg,var(--gold),var(--gold-light));border-radius:5px;}
   .badge-pending{font-size:10px;font-weight:700;color:#9a6a00;background:#fdf2db;padding:2px 7px;border-radius:10px;margin-left:6px;}
 
   @media(max-width:980px){
@@ -390,6 +413,7 @@
     .nav-toggle{display:block;}
     .about,.botw{grid-template-columns:1fr;gap:44px;}
     .directory-grid,.board-grid{grid-template-columns:repeat(2,1fr);}
+    .an-grid{grid-template-columns:repeat(2,1fr);}
     .pillars-grid{grid-template-columns:1fr;}
     .pillar-photos{grid-template-columns:1fr;}
     .pillar-photo:nth-child(n+2){display:none;}
@@ -583,7 +607,7 @@
     </div>
     <div class="fg"><label>Anything else you'd like us to know?</label><textarea id="m_notes" rows="3" placeholder="Optional"></textarea></div>
     <button class="btn-primary" style="width:100%;text-align:center;padding:14px;" onclick="submitMembership()">Submit Application</button>
-    <p class="form-note">By submitting, your application is sent to the Chamber at director@hobartokchamber.org. A team member will follow up with membership level options. We accept cash, card, or check.</p>
+    <p class="form-note">By submitting, your application is sent to the Chamber at director@hobartchamber.org. A team member will follow up with membership level options. We accept cash, card, or check.</p>
     <div class="form-msg" id="m_msg"></div>
   </div>
 </section>
@@ -770,7 +794,7 @@
   <div class="footer-brand">
     <a href="#top" class="nav-logo"><span class="nav-logo-mark"><img src="flyers/chamber-logo.PNG" alt="Hobart Chamber of Commerce" onerror="this.style.display='none'"></span><span class="nav-logo-text"><span>Hobart Chamber of Commerce</span><span>Kiowa County · Oklahoma</span></span></a>
     <p>Supporting and promoting the businesses that make our community strong. Join us as we build a vibrant future for Hobart, Oklahoma.</p>
-    <div class="social-links"><a href="https://www.facebook.com/profile.php?id=61579700143153" target="_blank" rel="noopener" title="Facebook">f</a><a href="mailto:director@hobartokchamber.org" title="Email">@</a></div>
+    <div class="social-links"><a href="https://www.facebook.com/profile.php?id=61579700143153" target="_blank" rel="noopener" title="Facebook">f</a><a href="mailto:director@hobartchamber.org" title="Email">@</a></div>
   </div>
   <div><h6>Navigate</h6><ul>
     <li><a href="#calendar">Community Calendar</a></li>
@@ -789,8 +813,8 @@
   <div class="footer-contact"><h6>Visit / Contact</h6><p>
     106 W. 4th St.<br>Hobart, OK 73651<br><br>
     <a href="tel:5806820887">(580) 682-0887</a><br>
-    <a href="mailto:director@hobartokchamber.org">director@hobartokchamber.org</a><br>
-    <a href="https://www.hobartokchamber.org" target="_blank" rel="noopener">www.hobartokchamber.org</a><br><br>
+    <a href="mailto:director@hobartchamber.org">director@hobartchamber.org</a><br>
+    <a href="https://www.hobartchamber.org" target="_blank" rel="noopener">www.hobartchamber.org</a><br><br>
     <strong style="color:rgba(255,255,255,.7)">Open Hours</strong><br>Mon &amp; Thu: 8:30–11:30 AM<br>Other times by appointment
   </p></div>
 </footer>
@@ -865,7 +889,7 @@ var firebaseConfig = {
   appId: "1:1018730792333:web:b26c20feef8d04ed07a9c4"
 };
 
-var CHAMBER_EMAIL = "director@hobartokchamber.org";
+var CHAMBER_EMAIL = "director@hobartchamber.org";
 
 var db=null, auth=null, storage=null, FB=false;
 try{
@@ -1170,10 +1194,10 @@ function submitMembership(){
       ['m_biz','m_name','m_phone','m_email','m_web','m_addr','m_notes'].forEach(function(id){var el=document.getElementById(id);if(el)el.value='';});
       for(i=0;i<boxes.length;i++){ boxes[i].checked=false; }
     }else{
-      msg.style.background='#fbe9e9'; msg.style.color='#b3261e'; msg.textContent='Something went wrong. Please call the Chamber at (580) 682-0887 or email director@hobartokchamber.org.';
+      msg.style.background='#fbe9e9'; msg.style.color='#b3261e'; msg.textContent='Something went wrong. Please call the Chamber at (580) 682-0887 or email director@hobartchamber.org.';
     }
   }).catch(function(){
-    msg.style.background='#fbe9e9'; msg.style.color='#b3261e'; msg.textContent='Could not send right now. Please call (580) 682-0887 or email director@hobartokchamber.org.';
+    msg.style.background='#fbe9e9'; msg.style.color='#b3261e'; msg.textContent='Could not send right now. Please call (580) 682-0887 or email director@hobartchamber.org.';
   });
 }
 function enc(s){return encodeURIComponent(s==null?'':s);}
@@ -1243,6 +1267,7 @@ function openFlyer(src){
   var im=document.getElementById('flyerFull');
   if(im) im.src=src;
   openOverlay('flyerOverlay');
+  try{ trackFlyerClick(src); }catch(e){}
 }
 
 /* full-flyer display: the whole flyer shows (never cropped), and the square is
@@ -1283,6 +1308,132 @@ document.addEventListener('keydown',function(e){
   }
 });
 
+/* ============ SITE ANALYTICS (first-party, no third-party trackers) ============
+   Everything is stored in one Firestore collection: analytics_daily.
+   One document per calendar day (doc id = YYYY-MM-DD), holding running counters
+   that are bumped with FieldValue.increment() so writes stay cheap and never
+   need a read first. The admin dashboard reads this year's day-docs and rolls
+   them up into Today / Week / Month / Year-to-Date brackets.
+   Visitor privacy: we store a random visitor id in the browser's localStorage
+   only (never a name, email, IP, or anything personal) so we can tell a repeat
+   visitor from a new one. Nothing here identifies a real person. */
+var ANALYTICS_ON = true;
+
+function _anDayKey(d){ d=d||new Date(); return d.getFullYear()+'-'+('0'+(d.getMonth()+1)).slice(-2)+'-'+('0'+d.getDate()).slice(-2); }
+function _anVisitorId(){
+  try{ var id=localStorage.getItem('hcc_vid');
+    if(!id){ id='v'+Date.now().toString(36)+Math.random().toString(36).slice(2,8); localStorage.setItem('hcc_vid',id); }
+    return id;
+  }catch(e){ return null; }
+}
+function _anIsAdminBrowser(){ try{ return localStorage.getItem('hcc_admin')==='1'; }catch(e){ return false; } }
+function _anFlyerKey(src){ var s=(''+src).split('/').pop(); s=s.replace(/[.#$\[\]\/]/g,'_'); return s||'unknown'; }
+
+/* record one page view (called once per page load) */
+function trackView(){
+  if(!FB||!ANALYTICS_ON||_anIsAdminBrowser())return;
+  _anVisitorId();
+  var day=_anDayKey();
+  var inc=firebase.firestore.FieldValue.increment(1);
+  var payload={ day:day, views:inc };
+  var isNewToday=false;
+  try{ if(localStorage.getItem('hcc_lastday')!==day){ isNewToday=true; localStorage.setItem('hcc_lastday',day); } }catch(e){}
+  if(isNewToday) payload.uniques=inc;
+  try{ db.collection('analytics_daily').doc(day).set(payload,{merge:true}).catch(function(){}); }catch(e){}
+}
+
+/* record one flyer open (called from openFlyer) */
+function trackFlyerClick(src){
+  if(!FB||!ANALYTICS_ON||_anIsAdminBrowser())return;
+  var day=_anDayKey();
+  var inc=firebase.firestore.FieldValue.increment(1);
+  var payload={ day:day, flyerClicks:inc, perFlyer:{} };
+  payload.perFlyer[_anFlyerKey(src)]=inc;
+  try{ db.collection('analytics_daily').doc(day).set(payload,{merge:true}).catch(function(){}); }catch(e){}
+}
+
+/* ---- dashboard ---- */
+function _anStartOfWeek(now){ var d=new Date(now); d.setHours(0,0,0,0); d.setDate(d.getDate()-d.getDay()); return _anDayKey(d); }
+function _anStartOfMonth(now){ return now.getFullYear()+'-'+('0'+(now.getMonth()+1)).slice(-2)+'-01'; }
+function _anStartOfYear(now){ return now.getFullYear()+'-01-01'; }
+function _anSum(docs,from,to,field){ var t=0,i,d; for(i=0;i<docs.length;i++){ d=docs[i]; if(d.day>=from&&d.day<=to){ t+=(d[field]||0); } } return t; }
+
+function paneAnalytics(){
+  var pane=document.getElementById('adminPane');
+  pane.innerHTML='<div class="admin-empty">Loading analytics…</div>';
+  var now=new Date();
+  db.collection('analytics_daily').where('day','>=',_anStartOfYear(now)).get().then(function(snap){
+    var docs=[]; snap.forEach(function(d){ var x=d.data(); x.day=x.day||d.id; docs.push(x); });
+    docs.sort(function(a,b){ return (a.day||'').localeCompare(b.day||''); });
+    renderAnalytics(pane,docs,now);
+  }).catch(function(e){
+    pane.innerHTML='<div class="admin-empty">Analytics will appear here once the site starts logging visits. If you just added the feature, check the Firestore security rules for the <b>analytics_daily</b> collection.<br><br><small style="color:#b3261e;">'+esc(e&&e.message||'')+'</small></div>';
+  });
+}
+
+function _anPrettyFlyer(key){
+  var s=key.replace(/_(png|jpg|jpeg|gif|webp|PNG|JPG)$/,'');
+  s=s.replace(/^flyer-/,'').replace(/[_-]+/g,' ').trim();
+  return s.replace(/\b\w/g,function(c){ return c.toUpperCase(); }) || key;
+}
+
+function renderAnalytics(pane,docs,now){
+  var today=_anDayKey(now), wk=_anStartOfWeek(now), mo=_anStartOfMonth(now), yr=_anStartOfYear(now);
+  function card(label,from,to){
+    return '<div class="an-card"><h5>'+label+'</h5>'
+      +'<div class="an-metric"><span>Visits</span><b>'+_anSum(docs,from,to,'views')+'</b></div>'
+      +'<div class="an-metric"><span>Unique</span><b>'+_anSum(docs,from,to,'uniques')+'</b></div>'
+      +'<div class="an-metric"><span>Flyer opens</span><b>'+_anSum(docs,from,to,'flyerClicks')+'</b></div>'
+      +'</div>';
+  }
+  var h='<div class="an-toolbar"><div class="an-note">First-party analytics · no cookies from ad networks · updates live as people visit.</div>'
+      +'<button class="btn-sm btn-line" onclick="paneAnalytics()">Refresh</button></div>';
+  h+='<div class="an-grid">'
+    +card('Today',today,today)
+    +card('This Week',wk,today)
+    +card('This Month',mo,today)
+    +card('Year to Date',yr,today)
+    +'</div>';
+
+  /* last 14 days bar chart of visits */
+  var map={},i; for(i=0;i<docs.length;i++){ map[docs[i].day]=docs[i]; }
+  var days=[],dd; for(i=13;i>=0;i--){ dd=new Date(now); dd.setDate(dd.getDate()-i); days.push(_anDayKey(dd)); }
+  var max=1; for(i=0;i<days.length;i++){ var v=(map[days[i]]&&map[days[i]].views)||0; if(v>max)max=v; }
+  h+='<div class="an-section-title">Daily Visits — Last 14 Days</div><div class="an-bars">';
+  for(i=0;i<days.length;i++){
+    var vv=(map[days[i]]&&map[days[i]].views)||0;
+    var pct=Math.round((vv/max)*100);
+    var lbl=days[i].slice(5).replace('-','/');
+    h+='<div class="an-bar-wrap" title="'+days[i]+': '+vv+' visits">'
+      +'<div class="an-bar-val">'+(vv||'')+'</div>'
+      +'<div class="an-bar'+(days[i]===today?' today':'')+'" style="height:'+pct+'%"></div>'
+      +'<div class="an-bar-lbl">'+lbl+'</div></div>';
+  }
+  h+='</div>';
+
+  /* top flyers YTD */
+  var totals={};
+  for(i=0;i<docs.length;i++){ var pf=docs[i].perFlyer||{}; for(var k in pf){ if(pf.hasOwnProperty(k)){ totals[k]=(totals[k]||0)+(pf[k]||0); } } }
+  var arr=[]; for(var kk in totals){ if(totals.hasOwnProperty(kk)){ arr.push([kk,totals[kk]]); } }
+  arr.sort(function(a,b){ return b[1]-a[1]; });
+  h+='<div class="an-section-title" style="margin-top:26px;">Most-Opened Flyers — Year to Date</div>';
+  if(!arr.length){
+    h+='<div class="admin-empty">No flyer opens logged yet.</div>';
+  }else{
+    var fmax=arr[0][1]||1;
+    h+='<div class="an-flyers">';
+    for(i=0;i<arr.length && i<12;i++){
+      var fp=Math.round((arr[i][1]/fmax)*100);
+      h+='<div class="an-flyer-row"><span class="rank">'+(i+1)+'</span>'
+        +'<span class="name">'+esc(_anPrettyFlyer(arr[i][0]))+'</span>'
+        +'<span class="barbg"><span class="barfill" style="width:'+fp+'%"></span></span>'
+        +'<span class="cnt">'+arr[i][1]+'</span></div>';
+    }
+    h+='</div>';
+  }
+  pane.innerHTML=h;
+}
+
 /* ============ SECRET ADMIN (Chamber settings) ============ */
 /* Open with the footer dot (tap 3x) OR visit  yoursite.com/#chamber-settings */
 var gearClicks=0,gearTimer=null;
@@ -1312,7 +1463,7 @@ function renderLogin(){
 }
 function adminLogin(){
   var em=val('a_email'),pw=val('a_pass'),msg=document.getElementById('a_msg');
-  auth.signInWithEmailAndPassword(em,pw).then(function(){renderAdmin();}).catch(function(e){
+  auth.signInWithEmailAndPassword(em,pw).then(function(){try{localStorage.setItem('hcc_admin','1');}catch(e){}renderAdmin();}).catch(function(e){
     msg.style.display='block';msg.style.background='#fbe9e9';msg.style.color='#b3261e';msg.textContent='Sign in failed. Check email and password.';
   });
 }
@@ -1328,6 +1479,7 @@ function renderAdmin(){
     +'<div class="admin-tab'+(adminTab==='jobs'?' on':'')+'" onclick="switchTab(\'jobs\')">Jobs</div>'
     +'<div class="admin-tab'+(adminTab==='jobcreate'?' on':'')+'" onclick="switchTab(\'jobcreate\')">+ New Opening</div>'
     +'<div class="admin-tab'+(adminTab==='kickball'?' on':'')+'" onclick="switchTab(\'kickball\')">Kickball Teams <span id="kbCount"></span></div>'
+    +'<div class="admin-tab'+(adminTab==='analytics'?' on':'')+'" onclick="switchTab(\'analytics\')">Analytics</div>'
     +'<div class="admin-tab" onclick="adminLogout()" style="margin-left:auto;color:#b3261e;">Sign Out</div>'
     +'</div><div id="adminPane"></div>';
   document.getElementById('adminBody').innerHTML=h;
@@ -1338,9 +1490,10 @@ function renderAdmin(){
   else if(adminTab==='jobs') paneJobsList();
   else if(adminTab==='jobcreate') paneJobCreate(null);
   else if(adminTab==='kickball') paneKickball();
+  else if(adminTab==='analytics') paneAnalytics();
 }
 function switchTab(t){adminTab=t;renderAdmin();}
-function adminLogout(){auth.signOut().then(function(){renderLogin();});}
+function adminLogout(){try{localStorage.removeItem('hcc_admin');}catch(e){}auth.signOut().then(function(){renderLogin();});}
 
 function paneList(status){
   var pane=document.getElementById('adminPane');
@@ -1637,6 +1790,7 @@ renderBoard();
 renderPillarPhotos();
 sortEventsCarousel();
 applyFlyerBackdrops();
+trackView();
 </script>
 </body>
 </html>
