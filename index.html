@@ -607,7 +607,7 @@
     </div>
     <div class="fg"><label>Anything else you'd like us to know?</label><textarea id="m_notes" rows="3" placeholder="Optional"></textarea></div>
     <button class="btn-primary" style="width:100%;text-align:center;padding:14px;" onclick="submitMembership()">Submit Application</button>
-    <p class="form-note">By submitting, your application is sent to the Chamber at director@hobartchamber.org. A team member will follow up with membership level options. We accept cash, card, or check.</p>
+    <p class="form-note">By submitting, your application is sent to the Chamber at director@hobartokchamber.org. A team member will follow up with membership level options. We accept cash, card, or check.</p>
     <div class="form-msg" id="m_msg"></div>
   </div>
 </section>
@@ -794,7 +794,7 @@
   <div class="footer-brand">
     <a href="#top" class="nav-logo"><span class="nav-logo-mark"><img src="flyers/chamber-logo.PNG" alt="Hobart Chamber of Commerce" onerror="this.style.display='none'"></span><span class="nav-logo-text"><span>Hobart Chamber of Commerce</span><span>Kiowa County · Oklahoma</span></span></a>
     <p>Supporting and promoting the businesses that make our community strong. Join us as we build a vibrant future for Hobart, Oklahoma.</p>
-    <div class="social-links"><a href="https://www.facebook.com/profile.php?id=61579700143153" target="_blank" rel="noopener" title="Facebook">f</a><a href="mailto:director@hobartchamber.org" title="Email">@</a></div>
+    <div class="social-links"><a href="https://www.facebook.com/profile.php?id=61579700143153" target="_blank" rel="noopener" title="Facebook">f</a><a href="mailto:director@hobartokchamber.org" title="Email">@</a></div>
   </div>
   <div><h6>Navigate</h6><ul>
     <li><a href="#calendar">Community Calendar</a></li>
@@ -813,7 +813,7 @@
   <div class="footer-contact"><h6>Visit / Contact</h6><p>
     106 W. 4th St.<br>Hobart, OK 73651<br><br>
     <a href="tel:5806820887">(580) 682-0887</a><br>
-    <a href="mailto:director@hobartchamber.org">director@hobartchamber.org</a><br>
+    <a href="mailto:director@hobartokchamber.org">director@hobartokchamber.org</a><br>
     <a href="https://www.hobartchamber.org" target="_blank" rel="noopener">www.hobartchamber.org</a><br><br>
     <strong style="color:rgba(255,255,255,.7)">Open Hours</strong><br>Mon &amp; Thu: 8:30–11:30 AM<br>Other times by appointment
   </p></div>
@@ -889,7 +889,7 @@ var firebaseConfig = {
   appId: "1:1018730792333:web:b26c20feef8d04ed07a9c4"
 };
 
-var CHAMBER_EMAIL = "director@hobartchamber.org";
+var CHAMBER_EMAIL = "director@hobartokchamber.org";
 
 var db=null, auth=null, storage=null, FB=false;
 try{
@@ -1194,10 +1194,10 @@ function submitMembership(){
       ['m_biz','m_name','m_phone','m_email','m_web','m_addr','m_notes'].forEach(function(id){var el=document.getElementById(id);if(el)el.value='';});
       for(i=0;i<boxes.length;i++){ boxes[i].checked=false; }
     }else{
-      msg.style.background='#fbe9e9'; msg.style.color='#b3261e'; msg.textContent='Something went wrong. Please call the Chamber at (580) 682-0887 or email director@hobartchamber.org.';
+      msg.style.background='#fbe9e9'; msg.style.color='#b3261e'; msg.textContent='Something went wrong. Please call the Chamber at (580) 682-0887 or email director@hobartokchamber.org.';
     }
   }).catch(function(){
-    msg.style.background='#fbe9e9'; msg.style.color='#b3261e'; msg.textContent='Could not send right now. Please call (580) 682-0887 or email director@hobartchamber.org.';
+    msg.style.background='#fbe9e9'; msg.style.color='#b3261e'; msg.textContent='Could not send right now. Please call (580) 682-0887 or email director@hobartokchamber.org.';
   });
 }
 function enc(s){return encodeURIComponent(s==null?'':s);}
