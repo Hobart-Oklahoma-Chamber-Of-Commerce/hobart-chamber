@@ -505,7 +505,7 @@
 
 <!-- ===== STAT BAR ===== -->
 <div class="stat-bar">
-  <div class="stat-item"><span class="num">20</span><span class="label">Current Members</span></div>
+  <div class="stat-item"><span class="num" id="memberCount">22</span><span class="label">Current Members</span></div>
   <div class="stat-divider"></div>
   <div class="stat-item"><span class="num">12</span><span class="label">Summer Events</span></div>
   <div class="stat-divider"></div>
@@ -997,7 +997,10 @@ var SEED=[
   {id:'s7',title:'Hill Top National: Show Down on the Hill',date:'2026-07-18',time:'9:00 AM Tee Time',location:'Hobart Golf Course',description:'3rd Annual H.G.A. Event — four-man scramble, A-B-C flights, 100% payout based on team entries. Limited to the first 18 teams (waiting list available). $500/team. Hole sponsors welcome. To sign up, text all team members to Tom Monczunski (580) 819-2114 or TJ Wilson (580) 550-0156.',status:'approved'},
   {id:'s8',title:'Glow Golf Tournament',date:'2026-08-01',time:'Night',location:'Hobart Municipal Golf Course',description:'Glowing golf balls, illuminated fairways, and a fun evening under the stars.',status:'approved'},
   {id:'s9',title:"Hobart's 125th Birthday Celebration",date:'2026-08-07',time:'All day',location:'Downtown Hobart',description:'Celebrate 125 years of Hobart history and community in downtown Hobart. Free admission, with a community parade, live music, food vendors and refreshments, family-friendly fun and games, and a community picnic and gathering. For more information, contact Jessica Williams, Executive Director, at (580) 682-0887.',status:'approved'},
-  {id:'s11',title:"Hobart's Hometown Harvest",date:'2026-09-19',time:'All day',location:'Kiowa County Courthouse Square',description:'A fall celebration on the Kiowa County Courthouse Square featuring vendors and food trucks filling downtown Hobart. The Chamber is now taking vendor and food truck registrations. Watch the Chamber Facebook page for announcements as plans come together.',status:'approved'}
+  {id:'s11',title:"Hobart's Hometown Harvest",date:'2026-09-19',time:'All day',location:'Kiowa County Courthouse Square',description:'A fall celebration on the Kiowa County Courthouse Square featuring vendors and food trucks filling downtown Hobart. The Chamber is now taking vendor and food truck registrations. Watch the Chamber Facebook page for announcements as plans come together.',status:'approved'},
+  {id:'s12',title:'First Saturday Market',date:'2026-08-01',time:'8:00 AM – 2:00 PM',location:'207 W 4th St',description:'The monthly First Saturday Market returns to downtown Hobart, hosted by Rust Dirt Co. Shop local goods, enjoy live music, and bring the whole family. Artisans, makers, farmers, and vendors are welcome — come be part of something local.',status:'approved'},
+  {id:'s13',title:'Walmart Grand Reopening',date:'2026-07-10',time:'All day',location:'Walmart, 923 W 11th St',description:'The Hobart Walmart (Store 607) celebrates its grand reopening after a 2026 remodel — part of Walmart\'s statewide investment in 25 Oklahoma stores. The updated store features refreshed layouts, wider aisles, expanded pickup and delivery, an updated pharmacy, and a modernized Vision Center. Stop in and see what\'s new.',status:'approved'},
+  {id:'s14',title:'Elk Creek Kiowa Casino 1-Year Anniversary',date:'2026-07-25',time:'All day',location:'Elk Creek Kiowa Casino, 13765 US-183',description:'Elk Creek Kiowa Casino celebrates one year since opening in July 2025. Owned by the Kiowa Tribe of Oklahoma, the Kiowa County casino on Highway 183 features 250 slot machines, three table games, Bar 153, and the Boomarang Diner. Join the anniversary celebration. Must be 21+ to enter.',status:'approved'}
 ];
 
 var EVENTS=[];
@@ -1708,7 +1711,13 @@ function loadBanner(){
 }
 
 /* ---- member directory category filter (auto-builds from data-cat) ---- */
+function syncMemberCount(){
+  var n=document.querySelectorAll('#directoryGrid .member').length;
+  var el=document.getElementById('memberCount');
+  if(el&&n) el.textContent=n;
+}
 function initDirFilter(){
+  syncMemberCount();
   var members=Array.prototype.slice.call(document.querySelectorAll('#directoryGrid .member'));
   var cats={}; members.forEach(function(m){var c=m.getAttribute('data-cat');if(c)cats[c]=true;});
   var list=Object.keys(cats).sort();
