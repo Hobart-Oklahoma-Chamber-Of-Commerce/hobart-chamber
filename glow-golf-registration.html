@@ -249,6 +249,40 @@ if(window.firebase){
   FB=true;
 }
 
+/* Web3Forms — emails a copy of each registration to the Chamber inbox.
+   Uses the same key as the membership form, so it lands in the same place
+   (director@hobartokchamber.org). This is a notification only; the official
+   record is the entry saved to Firestore / shown in the admin panel. */
+var WEB3FORMS_KEY = "a35795f6-54b3-41a0-b5c8-043e93cb73a5";
+function notifyChamber(data){
+  try{
+    var roster=data.roster||[];
+    var lines='';
+    for(var i=0;i<roster.length;i++){
+      var p=roster[i], who=(i===0?'Player 1 (Captain)':'Player '+(i+1));
+      var bits=[]; if(p.name)bits.push(p.name); if(p.phone)bits.push(p.phone); if(p.email)bits.push(p.email);
+      lines+=who+': '+(bits.length?bits.join(' · '):'—')+'\n';
+    }
+    var payload={
+      access_key: WEB3FORMS_KEY,
+      subject: "New Glow Golf Team Registration - "+data.teamName,
+      from_name: "Hobart Chamber Website",
+      "Team Name": data.teamName,
+      "Captain": data.contactName,
+      "Captain Phone": data.phone,
+      "Captain Email": data.email,
+      "Payment Method": data.paymentMethod,
+      "Roster": lines,
+      "Event": "Glow Golf Tournament 2026 — Aug 1, Hobart Municipal Golf Course"
+    };
+    fetch('https://api.web3forms.com/submit',{
+      method:'POST',
+      headers:{'Content-Type':'application/json','Accept':'application/json'},
+      body:JSON.stringify(payload)
+    }).catch(function(){});
+  }catch(e){}
+}
+
 function val(id){ var el=document.getElementById(id); return el?el.value.trim():''; }
 function showMsg(txt,type){
   var m=document.getElementById('ggMsg');
@@ -315,6 +349,7 @@ function submitGolf(){
 
   data.createdAt=firebase.firestore.FieldValue.serverTimestamp();
   db.collection('glowgolf').add(data).then(function(){
+    notifyChamber(data);
     document.getElementById('doneTeam').textContent=teamName;
     document.getElementById('ggCard').style.display='none';
     document.getElementById('ggDone').style.display='block';
