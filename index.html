@@ -234,8 +234,9 @@
   .botw-text .section-title{color:var(--navy);margin-bottom:18px;}
   .botw-text p{font-size:16px;color:var(--gray);line-height:1.8;margin-bottom:30px;}
   .botw-card{background:var(--navy);border-radius:10px;overflow:hidden;}
-  .botw-photo{width:100%;background:linear-gradient(135deg,#2247bd,#16317f);overflow:hidden;line-height:0;}
-  .botw-photo img{width:100%;height:auto;display:block;}
+  .botw-photo{width:100%;background:linear-gradient(135deg,#2247bd,#16317f);overflow:hidden;line-height:0;position:relative;}
+  .botw-photo img{width:100%;height:auto;max-height:420px;object-fit:contain;display:block;cursor:zoom-in;}
+  .botw-photo .zoom-hint{position:absolute;bottom:10px;right:10px;background:rgba(14,32,86,.82);color:#fff;font-size:11px;font-weight:600;letter-spacing:.4px;padding:5px 10px;border-radius:20px;pointer-events:none;display:flex;align-items:center;gap:5px;}
   .botw-photo.empty{aspect-ratio:16/9;display:flex;align-items:center;justify-content:center;}
   .botw-photo .flyer-empty{color:rgba(255,255,255,.4);}
   .botw-inner{padding:34px 40px 40px;}
@@ -622,7 +623,7 @@
     <a href="#membership" class="btn-primary">Become a Member</a>
   </div>
   <div class="botw-card">
-    <div class="botw-photo"><img src="flyers/botw-mcabeefox.png" alt="McAbee Fox Roofing LLC — Business of the Week" onerror="this.parentElement.classList.add('empty');this.outerHTML=flyerPHWhite;"></div>
+    <div class="botw-photo"><img src="flyers/botw-mcabeefox.png" alt="McAbee Fox Roofing LLC — Business of the Week" onclick="openFlyer('flyers/botw-mcabeefox.png')" onerror="this.parentElement.classList.add('empty');this.outerHTML=flyerPHWhite;"><span class="zoom-hint">🔍 Click to enlarge</span></div>
     <div class="botw-inner"><span class="botw-badge">This Week's Feature</span><h3>McAbee Fox Roofing LLC</h3><p>Founded in 2011 by Seth McAbee and Ryan Fox — two young roofers who started with an idea and a borrowed trailer — McAbee Fox Roofing has grown into one of the most dependable and fastest-growing roofing contractors in Western Oklahoma. This family-owned, Hobart-based company handles residential and commercial roofing, custom metal roofs, siding, gutters, and windows across the state, backed by an A+ BBB rating and Owens Corning Preferred Contractor status. What truly sets MFR apart is its heart — a crew that genuinely cares about its customers, its community, and doing honest work the right way. Congratulations to Seth, Ryan, and the entire MFR team on being our Business of the Week. Quality roofs, honest service, genuine care — covering what YOU care about!</p></div>
   </div>
 </section>
