@@ -509,7 +509,7 @@
 <div class="stat-bar">
   <div class="stat-item"><span class="num" id="memberCount">22</span><span class="label">Current Members</span></div>
   <div class="stat-divider"></div>
-  <div class="stat-item"><span class="num">12</span><span class="label">Summer Events</span></div>
+  <div class="stat-item"><span class="num" id="eventCount">15</span><span class="label">Summer Events</span></div>
   <div class="stat-divider"></div>
   <div class="stat-item"><span class="num">Kiowa</span><span class="label">County Served</span></div>
   <div class="stat-divider"></div>
@@ -1767,8 +1767,16 @@ function syncMemberCount(){
   var el=document.getElementById('memberCount');
   if(el&&n) el.textContent=n;
 }
+function syncEventCount(){
+  var el=document.getElementById('eventCount');
+  if(!el||typeof SEED==='undefined') return;
+  var n=0,i,mo;
+  for(i=0;i<SEED.length;i++){ mo=(SEED[i].date||'').slice(5,7); if(mo==='06'||mo==='07'||mo==='08') n++; }
+  if(n) el.textContent=n;
+}
 function initDirFilter(){
   syncMemberCount();
+  syncEventCount();
   var members=Array.prototype.slice.call(document.querySelectorAll('#directoryGrid .member'));
   var cats={}; members.forEach(function(m){var c=m.getAttribute('data-cat');if(c)cats[c]=true;});
   var list=Object.keys(cats).sort();
