@@ -1,0 +1,890 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Kiowa County Free Fair 2026 — Full Catalog | Hobart Chamber of Commerce</title>
+<meta name="description" content="The complete 2026 Kiowa County Free Fair catalog — schedule, rules, 4-H and Open Class divisions, contests, and entry information. August 27–29, 2026 in Hobart, Oklahoma." />
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;800;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+  *{margin:0;padding:0;box-sizing:border-box;}
+  :root{
+    --navy:#1a3ea8;--navy-dark:#142f7e;--navy-deep:#0e2056;
+    --gold:#c49a3e;--gold-light:#dab65e;--gold-pale:#f6edd6;
+    --white:#fff;--slate:#f3f6fc;--gray:#6f7d99;--dark-gray:#2c3a58;--border:#dbe3f4;
+    --fair-green:#2f5233;--fair-red:#8c2f2f;
+  }
+  html{scroll-behavior:smooth;}
+  body{font-family:'Inter',sans-serif;color:var(--navy-deep);background:var(--slate);line-height:1.55;-webkit-font-smoothing:antialiased;}
+
+  /* header */
+  .fc-top{background:linear-gradient(135deg,#0e2056 0%,#16317f 50%,#1a3ea8 100%);color:#fff;padding:30px 24px 34px;}
+  .fc-inner{max-width:1000px;margin:0 auto;}
+  .fc-back{display:inline-block;color:var(--gold-light);text-decoration:none;font-size:13px;font-weight:600;margin-bottom:16px;}
+  .fc-back:hover{color:#fff;}
+  .fc-eyebrow{display:flex;align-items:center;gap:10px;margin-bottom:12px;}
+  .fc-eyebrow-line{width:36px;height:2px;background:var(--gold);}
+  .fc-eyebrow span{font-size:10.5px;font-weight:600;letter-spacing:2.6px;text-transform:uppercase;color:var(--gold-light);}
+  .fc-top h1{font-family:'Playfair Display',serif;font-size:clamp(28px,5.5vw,44px);font-weight:900;line-height:1.05;margin-bottom:10px;}
+  .fc-top h1 .em{color:var(--gold-light);}
+  .fc-tag{font-size:14px;color:#dfe7fb;font-style:italic;margin-bottom:16px;}
+  .fc-facts{display:flex;flex-wrap:wrap;gap:8px 20px;}
+  .fc-fact{font-size:13.5px;color:#dfe7fb;}
+  .fc-fact b{color:#fff;}
+
+  /* nav */
+  .fc-nav{background:var(--navy-deep);position:sticky;top:0;z-index:50;border-bottom:2px solid var(--gold);overflow-x:auto;-webkit-overflow-scrolling:touch;}
+  .fc-nav-in{max-width:1000px;margin:0 auto;display:flex;gap:2px;padding:0 12px;min-width:max-content;}
+  .fc-nav a{color:#c3d0ee;text-decoration:none;font-size:12.5px;font-weight:600;padding:13px 13px;white-space:nowrap;border-bottom:3px solid transparent;transition:.15s;}
+  .fc-nav a:hover{color:#fff;background:rgba(255,255,255,.07);border-bottom-color:var(--gold);}
+
+  .fc-wrap{max-width:1000px;margin:0 auto;padding:26px 16px 70px;}
+  .fc-note{background:var(--gold-pale);border-left:3px solid var(--gold);border-radius:6px;padding:13px 16px;font-size:13.5px;color:var(--dark-gray);margin-bottom:24px;line-height:1.6;}
+
+  section{background:#fff;border:1px solid var(--border);border-radius:12px;padding:26px 26px 28px;margin-bottom:20px;scroll-margin-top:60px;}
+  section > h2{font-family:'Playfair Display',serif;font-size:24px;font-weight:800;color:var(--navy-deep);margin-bottom:4px;}
+  section > .sub{font-size:13px;color:var(--gray);margin-bottom:18px;}
+  .rule{height:2px;background:linear-gradient(90deg,var(--gold),transparent);margin:0 0 18px;border-radius:2px;}
+
+  h3.blk{font-family:'Playfair Display',serif;font-size:17.5px;color:var(--navy);margin:22px 0 10px;padding-bottom:6px;border-bottom:1px solid var(--border);}
+  h3.blk:first-of-type{margin-top:0;}
+  h4.sm{font-size:12px;font-weight:700;letter-spacing:1.3px;text-transform:uppercase;color:var(--gold);margin:16px 0 8px;}
+  p.body{font-size:14px;color:var(--dark-gray);margin-bottom:11px;}
+  ul.body{margin:0 0 12px 20px;}
+  ul.body li{font-size:13.8px;color:var(--dark-gray);margin-bottom:6px;}
+  .fine{font-size:12.8px;color:var(--gray);font-style:italic;line-height:1.6;}
+
+  /* schedule */
+  .day{border:1px solid var(--border);border-left:4px solid var(--gold);border-radius:9px;padding:15px 17px;margin-bottom:12px;background:linear-gradient(160deg,#fff,#f8fafe);}
+  .day h3{font-family:'Playfair Display',serif;font-size:18px;color:var(--navy-deep);margin-bottom:3px;}
+  .day .dl{font-size:11.5px;font-weight:700;letter-spacing:1.4px;text-transform:uppercase;color:var(--gold);margin-bottom:9px;}
+  .slot{display:flex;gap:12px;padding:6px 0;border-top:1px solid #eef2fa;font-size:13.8px;color:var(--dark-gray);}
+  .slot:first-of-type{border-top:none;}
+  .slot .t{flex:0 0 108px;font-weight:700;color:var(--navy);font-size:13px;}
+
+  /* class lists */
+  .cols{column-count:2;column-gap:26px;}
+  @media(max-width:660px){.cols{column-count:1;}}
+  .clist{list-style:none;margin:0 0 14px;break-inside:avoid;}
+  .clist li{font-size:13.3px;color:var(--dark-gray);padding:2.5px 0 2.5px 30px;text-indent:-30px;line-height:1.45;}
+  .clist li b{color:var(--navy);font-weight:600;display:inline-block;min-width:24px;padding-right:6px;text-indent:0;vertical-align:top;}
+  .clist.wide li{padding-left:48px;text-indent:-48px;}
+  .clist.wide li b{min-width:40px;}
+  .grp{break-inside:avoid;margin-bottom:16px;}
+
+  .prem{display:inline-block;background:var(--slate);border:1px solid var(--border);border-radius:20px;padding:5px 13px;font-size:12.5px;color:var(--dark-gray);font-weight:600;margin-bottom:14px;}
+  .prem b{color:var(--navy);}
+
+  /* contest card */
+  .contest{border:1px solid var(--border);border-radius:10px;padding:20px;background:linear-gradient(160deg,#fff,#f7f9fe);margin-bottom:16px;}
+  .contest h3{font-family:'Playfair Display',serif;font-size:19px;color:var(--navy-deep);margin-bottom:3px;}
+  .contest .spon{font-size:12.5px;color:var(--gold);font-weight:700;font-style:italic;margin-bottom:12px;}
+  .dropoff{background:var(--navy);color:#fff;border-radius:7px;padding:11px 14px;font-size:13.2px;margin-top:12px;line-height:1.55;}
+  .dropoff b{color:var(--gold-light);}
+
+  table.brd{width:100%;border-collapse:collapse;font-size:13.3px;margin-bottom:8px;}
+  table.brd td{padding:5px 8px;border-bottom:1px solid #eef2fa;color:var(--dark-gray);vertical-align:top;}
+  table.brd td.k{font-weight:600;color:var(--navy);width:38%;}
+
+  .board-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;}
+  @media(max-width:660px){.board-grid{grid-template-columns:1fr;}}
+  .bcard{border:1px solid var(--border);border-radius:8px;padding:13px 14px;background:var(--slate);}
+  .bcard h5{font-size:11.5px;font-weight:700;letter-spacing:1.1px;text-transform:uppercase;color:var(--gold);margin-bottom:7px;}
+  .bcard p{font-size:13.2px;color:var(--dark-gray);line-height:1.65;}
+
+  .fc-foot{text-align:center;font-size:13px;color:var(--gray);margin-top:26px;line-height:1.8;}
+  .fc-foot a{color:var(--navy);font-weight:600;text-decoration:none;}
+  .totop{display:inline-block;margin-top:10px;font-size:12.5px;color:var(--navy);font-weight:600;text-decoration:none;}
+</style>
+</head>
+<body>
+
+<div class="fc-top">
+  <div class="fc-inner">
+    <a href="index.html" class="fc-back">← Back to Chamber site</a>
+    <div class="fc-eyebrow"><span class="fc-eyebrow-line"></span><span>Tradition · Community · Pride</span></div>
+    <h1>Kiowa County <span class="em">Free Fair</span> 2026</h1>
+    <p class="fc-tag">The complete fair catalog — read every rule, division, and class right here.</p>
+    <div class="fc-facts">
+      <span class="fc-fact">🗓️ <b>August 27–29, 2026</b></span>
+      <span class="fc-fact">📍 <b>Hobart, Oklahoma</b></span>
+      <span class="fc-fact">🎟️ <b>No admission · No entry fees</b></span>
+    </div>
+  </div>
+</div>
+
+<nav class="fc-nav">
+  <div class="fc-nav-in">
+    <a href="#schedule">Schedule</a>
+    <a href="#contests">Special Contests</a>
+    <a href="#entry">How to Enter</a>
+    <a href="#rules">General Rules</a>
+    <a href="#openrules">Open Class Rules</a>
+    <a href="#fourh">4-H Division</a>
+    <a href="#divA">A · Handcrafts</a>
+    <a href="#divB">B · Needlework</a>
+    <a href="#divC">C · Photography</a>
+    <a href="#divD">D · Fine Arts</a>
+    <a href="#divF">F · Floriculture</a>
+    <a href="#wheat">Best of Wheat</a>
+    <a href="#divG">G · Baked (Adult)</a>
+    <a href="#divH">H · Baked (Junior)</a>
+    <a href="#divI">I · Food Preservation</a>
+    <a href="#divJ">J · Outdoorsman</a>
+    <a href="#divK">K · Farm Products</a>
+    <a href="#board">Fair Board</a>
+  </div>
+</nav>
+
+<div class="fc-wrap">
+
+  <div class="fc-note">
+    The Kiowa County Free Fair is financed by taxation — <b>no admission is charged and there is no entry fee for exhibits</b>. Exhibitors must be a resident of, or attend school in, Kiowa County. Everything from the printed catalog is reproduced below, so you can look up a class or rule without downloading anything.
+  </div>
+
+  <!-- SCHEDULE -->
+  <section id="schedule">
+    <h2>Schedule of Events</h2>
+    <p class="sub">All exhibit activity centers on the Women's Exhibit Building and the Kiowa County Fairgrounds.</p>
+    <div class="rule"></div>
+
+    <div class="day">
+      <div class="dl">Thursday</div>
+      <h3>August 27</h3>
+      <div class="slot"><span class="t">Noon–6:00 PM</span><span>Indoor Exhibits accepted at the Women's Exhibit Building. Doors locked and closed to the public at 6:00 PM.</span></div>
+      <div class="slot"><span class="t">4:00–6:00 PM</span><span>Cake ReMix Contest and Gussied up Goose Contest entries accepted at the Women's Exhibit Building.</span></div>
+      <div class="slot"><span class="t">7:00 PM</span><span>Judging of Indoor Exhibits begins.</span></div>
+    </div>
+
+    <div class="day">
+      <div class="dl">Friday</div>
+      <h3>August 28</h3>
+      <div class="slot"><span class="t">Daytime</span><span>School tours of Indoor Exhibits with activities.</span></div>
+      <div class="slot"><span class="t">3:00–7:00 PM</span><span>Indoor Exhibits open for viewing.</span></div>
+      <div class="slot"><span class="t">6:00 PM</span><span>Cattle cards due.</span></div>
+      <div class="slot"><span class="t">7:00 PM</span><span>Cattle Show begins.</span></div>
+    </div>
+
+    <div class="day">
+      <div class="dl">Saturday</div>
+      <h3>August 29</h3>
+      <div class="slot"><span class="t">8:00 AM</span><span>Indoor Exhibits open for viewing.</span></div>
+      <div class="slot"><span class="t">9:00 AM</span><span>Rabbit / Poultry cards due, show following.*</span></div>
+      <div class="slot"><span class="t">6:00 PM</span><span>Goat and Sheep cards due.*</span></div>
+      <div class="slot"><span class="t">7:00 PM</span><span>Goat and Sheep Show begins.*</span></div>
+    </div>
+
+    <div class="day">
+      <div class="dl">Sunday</div>
+      <h3>August 30</h3>
+      <div class="slot"><span class="t">2:00–6:00 PM</span><span>Indoor Exhibit and premium pickup.</span></div>
+    </div>
+
+    <p class="fine">* Exhibitors must provide their own pens for rabbits and poultry.</p>
+  </section>
+
+  <!-- CONTESTS -->
+  <section id="contests">
+    <h2>Special Contests</h2>
+    <p class="sub">Open to all Kiowa County residents. Two divisions each: Junior (under 18) and Adult (18 and up).</p>
+    <div class="rule"></div>
+
+    <div class="contest">
+      <h3>🎂 Cake ReMix Contest</h3>
+      <p class="spon">Sponsored by Russ Real Estate</p>
+      <span class="prem">Premiums — Open Class <b>$25 / $15 / $10</b> · Junior <b>$25 / $15 / $10</b></span>
+      <ul class="body">
+        <li>Entries must have used a cake mix.</li>
+        <li>Entries can be cakes, cookies, cobblers, etc.</li>
+        <li>Entries must be accompanied by the recipe.</li>
+        <li>Entries must be covered with clear plastic wrap for viewing.</li>
+        <li>Limit one entry per person.</li>
+      </ul>
+      <div class="dropoff">Bring your completed entry form, your ReMix recipe, and your ready-to-judge entry to the <b>Women's Exhibit Building between 4:00–6:00 PM on Thursday, August 27, 2026</b>.</div>
+    </div>
+
+    <div class="contest">
+      <h3>🪿 Gussied up Goose Contest</h3>
+      <p class="spon">Sponsored by Katy Setzer</p>
+      <span class="prem">Premiums — Open Class <b>$25 / $15 / $10</b> · Junior <b>$25 / $15 / $10</b></span>
+      <ul class="body">
+        <li>Your porch goose can be made from concrete, wood, plastic, or metal.</li>
+        <li>Themes to be judged are "Farm to Table," Food, Floral, Beach, and Animals.</li>
+        <li>No advertisements, politics, religion, or offensive content.</li>
+        <li>Limit one entry per person.</li>
+      </ul>
+      <div class="dropoff">Bring your completed entry form and your Gussied up Goose entry to the <b>Women's Exhibit Building between 4:00–6:00 PM on Thursday, August 27, 2026</b>.</div>
+    </div>
+
+    <div class="contest">
+      <h3>🐢 Kiwanis Turtle Races</h3>
+      <p class="spon">For the kids</p>
+      <p class="body">A fair favorite — the Kiwanis Turtle Races return for the kids. Food trucks will be on site throughout the fair.</p>
+    </div>
+  </section>
+
+  <!-- HOW TO ENTER -->
+  <section id="entry">
+    <h2>How to Enter</h2>
+    <p class="sub">Forms are available in advance — filling one out early saves you a wait at the registration table.</p>
+    <div class="rule"></div>
+
+    <p class="body">All exhibitors must complete an exhibitor form listing every entry <em>before</em> exhibits are brought to the registration table to obtain tags. Completed forms must be submitted to registration before entering exhibits.</p>
+
+    <h4 class="sm">Which form do I use?</h4>
+    <ul class="body">
+      <li><b>4-H Division Exhibit Entry Form</b> — for 4-H exhibits (sections 4300–4325). Youth must be active 4-H members, and if in the 3rd grade, be 8 years old by September 1, 2026. Use a separate form for each person.</li>
+      <li><b>Open Class Exhibit Entry Form</b> — for Open Class divisions (A through K). Limit one entry per class per person. Use a separate form for each person. <em>4-H members wishing to enter items into open class categories must use the Open Class form for those entries.</em></li>
+      <li><b>Contest entry forms</b> — the Cake ReMix and Gussied up Goose contests each use their own entry form.</li>
+    </ul>
+
+    <div class="dropoff" style="background:var(--gold-pale);color:var(--dark-gray);border-left:3px solid var(--gold);">
+      <b style="color:var(--navy);">A note from the Fair Board:</b> To help make event entry as smooth as possible, exhibitor forms are now available to complete in advance. Completing and submitting your form early — listing all fair exhibits you'll be entering — allows the board to have your exhibit tags prepared and ready at registration on exhibit entry day. Forms not submitted in advance will need to be completed on arrival, which may mean longer wait times.
+    </div>
+
+    <p class="body" style="margin-top:14px;">Entry forms are available from the <b>Kiowa County OSU Extension Office</b>. For questions about forms, entries, or 4-H, contact Travis Tacker (Extension CED/Ag/4-H) or Charyl Workman (Admin).</p>
+  </section>
+
+  <!-- GENERAL RULES -->
+  <section id="rules">
+    <h2>General Rules &amp; Regulations</h2>
+    <p class="sub">Open exhibits may have further rules listed in each section.</p>
+    <div class="rule"></div>
+
+    <p class="body">The Kiowa County Free Fair is conducted under the provisions of and by authority of the Free Fair Law of Oklahoma. It is the purpose of the Fair Association to make these free fairs educational institutions and to encourage cooperation among the farmers and business men of Kiowa County.</p>
+    <p class="body">Management of the Kiowa County Free Fair is in the hands of the County Free Fair Association, composed of members selected from each commissioner's district in the county.</p>
+    <p class="body">The Fair is financed by taxation. No admission or charge will be made and no entry fee will be charged for exhibits. Exhibitors must be a resident or attending school in Kiowa County. Expert judges have been secured in all departments.</p>
+
+    <h3 class="blk">Rule 1 — Interpretations, Amendments and Violations</h3>
+    <ul class="body">
+      <li><b>Sec. 1</b> The Board of Directors reserves the right to interpret these rules and regulations and arbitrarily settle all questions arising in connection with the Free Fair.</li>
+      <li><b>Sec. 2</b> All entries must be made through the Fair Representatives at Exhibit Entry Registration. All entries close as set out in the schedule of events and must remain in place until released. Live items may be taken on Saturday. Any exhibitor violating the release time will forfeit premium and future exhibition rights.</li>
+      <li><b>Sec. 3</b> All property located on the Kiowa County Fairgrounds shall be subject to the control of Fair management.</li>
+      <li><b>Sec. 4</b> Separate exhibits must be provided for each entry. Individual ownership must be established if more than one entry in any class is made from the same farm or home.</li>
+      <li><b>Sec. 5</b> The Free Fair Association will not be responsible for exhibits left in the building after the Fair is closed. Exhibitors are urged to take down their exhibits as soon as the Fair is over.</li>
+    </ul>
+
+    <h3 class="blk">Rule 2 — Exhibitors and Privileges</h3>
+    <ul class="body">
+      <li><b>Sec. 1</b> All exhibits of crops must have been raised in Kiowa County by the exhibitor during the current year, and all exhibits of livestock must be owned by the exhibitor of record at the time of exhibiting.</li>
+      <li><b>Sec. 2</b> Any member of the Fair Association shall have access to all premises and property on the Fair Grounds during the Fair.</li>
+      <li><b>Sec. 3</b> Any exhibitor making a false statement regarding an animal or article, or attempting to interfere with the judges, shall be excluded from all competition and any award may be forfeited at the discretion of the Board.</li>
+      <li><b>Sec. 4</b> The decision of the judges will be final and no appeal will be considered.</li>
+      <li><b>Sec. 5</b> Management reserves the right to remove any exhibit, animal, display, sign, banner, or advertisement deemed unsuitable or objectionable, without giving reason.</li>
+      <li><b>Sec. 6</b> No diseased animal will be permitted to be exhibited or occupy exhibition stalls. Every precaution will be used to enforce this rule, but management is not responsible for any loss or damage sustained through violation of it.</li>
+      <li><b>Sec. 7</b> No claim of injury to any person or property shall be asserted, or suit instituted, against the Free Fair Association, its officers, agents, representatives, or servants.</li>
+      <li><b>Sec. 8</b> No premium will be awarded on articles not mentioned in the schedule of premiums.</li>
+      <li><b>Sec. 9</b> Exhibitors will furnish their own bedding.</li>
+      <li><b>Sec. 10</b> Fair Management shall use rules as stated in the State Fair of Oklahoma catalog to interpret situations not specified in this catalog.</li>
+    </ul>
+
+    <h3 class="blk">Special Rules</h3>
+    <ul class="body">
+      <li><b>Sec. 1</b> All exhibits must have competition to receive first prize — competition must consist of at least two entries in a class. Prizes will be paid only on items listed in the catalog.</li>
+      <li><b>Sec. 2</b> Volunteers will be appointed for exhibit entry, whose duty is to receive and verify proper classification of exhibits, arrange the exhibits, assist judges, and turn tags for display after judging.</li>
+    </ul>
+    <a class="totop" href="#schedule">↑ Back to top</a>
+  </section>
+
+  <!-- OPEN CLASS RULES -->
+  <section id="openrules">
+    <h2>Open Class Exhibit — General Rules</h2>
+    <p class="sub">See each division for any specific rules.</p>
+    <div class="rule"></div>
+    <span class="prem">Unless otherwise specified — 1st <b>$5.00</b> · 2nd <b>$4.00</b> · 3rd <b>$3.00</b></span>
+    <ul class="body">
+      <li>All entries must have been made by the exhibitor of record, within the past year (since the last fair). <em>Items made by one family member may not be entered by another family member.</em></li>
+      <li>There is a limit of <b>one entry per exhibitor per class</b>. If an entry fits one category, it cannot be placed in another category to double up on entries. If in doubt, see a Fair board representative.</li>
+      <li>All exhibitors must complete an exhibitor form listing all entries prior to exhibits being brought to the registration table to obtain tags.</li>
+      <li>No exhibits may be brought to the Division displays without being properly registered and tagged.</li>
+      <li>Superintendents/volunteers entering their own exhibits will be checked in by a different superintendent/volunteer.</li>
+      <li><b>No identifying information may be on the displayed portion of the exhibit</b> — judging is blind. If identifying information is on display, the item will be disqualified from judging.</li>
+      <li>If there is only one entry in a category, 2nd place premium will be given if the judge deems it worthy. No 1st place premiums will be given without competition.</li>
+      <li>No premium will be awarded on articles not mentioned in the schedule of premiums. You will be given a "show only" tag for your exhibit — and perhaps inspire a new class.</li>
+    </ul>
+    <a class="totop" href="#schedule">↑ Back to top</a>
+  </section>
+
+  <!-- 4-H -->
+  <section id="fourh">
+    <h2>🍀 4-H Division</h2>
+    <p class="sub">Use the 4-H Exhibit Entry Form. Details on exhibits may be found on the Oklahoma State Fair website.</p>
+    <div class="rule"></div>
+    <span class="prem">1st <b>$5.00</b> · 2nd <b>$4.00</b> · 3rd <b>$3.00</b> · 4th <b>$2.00</b></span>
+    <div class="cols">
+      <ul class="clist wide">
+        <li><b>4300</b> Poster-Art Exhibit</li>
+        <li><b>4301</b> Educational Booth Display</li>
+        <li><b>4302</b> Photography</li>
+        <li><b>4303</b> Creative Arts</li>
+        <li><b>4304</b> Technology Exhibits</li>
+        <li><b>4305</b> Science Discovery Projects</li>
+        <li><b>4306</b> Design &amp; Construction</li>
+        <li><b>4307</b> Babysitting / Childcare</li>
+        <li><b>4308</b> Food Science &amp; Nutrition</li>
+        <li><b>4309</b> Personal Development</li>
+        <li><b>4310</b> Postmark</li>
+        <li><b>4311</b> Electric Exhibits</li>
+        <li><b>4312</b> Rocketry</li>
+        <li><b>4313</b> Wood Science &amp; Industrial Arts</li>
+        <li><b>4314</b> Shooting Sports</li>
+        <li><b>4315</b> Entomology</li>
+        <li><b>4316</b> Forestry</li>
+        <li><b>4317</b> Geology</li>
+        <li><b>4318</b> Wildlife Projects</li>
+        <li><b>4319</b> Environmental Stewardship</li>
+        <li><b>4320</b> Crops</li>
+        <li><b>4321</b> Forage for Livestock / Wildlife</li>
+        <li><b>4322</b> Home Gardening</li>
+        <li><b>4323</b> Home Grounds</li>
+        <li><b>4324</b> Horticulture</li>
+        <li><b>4325</b> Companion Animals &amp; Livestock</li>
+      </ul>
+    </div>
+    <a class="totop" href="#schedule">↑ Back to top</a>
+  </section>
+
+  <!-- DIVISION A -->
+  <section id="divA">
+    <h2>Division A — Handcrafts</h2>
+    <div class="rule"></div>
+    <p class="fine">All items must have been made in the past year (since the last Fair) and made by the person entering the exhibit. No premiums will be paid for items not mentioned in the listing of classes. No first place premiums will be given if no competition in that class.</p>
+    <div class="cols" style="margin-top:14px;">
+      <div class="grp">
+        <h4 class="sm">Hobby Works</h4>
+        <ul class="clist">
+          <li><b>1.</b> 3-D Printing, Original design (10 &amp; under)</li>
+          <li><b>2.</b> 3-D Printing, Prefab design (10 &amp; under)</li>
+          <li><b>3.</b> 3-D Printing, Original design (11–17 yrs)</li>
+          <li><b>4.</b> 3-D Printing, Prefab design (11–17 yrs)</li>
+          <li><b>5.</b> Clay Art, Hardened</li>
+          <li><b>6.</b> Duct Tape, Clothing</li>
+          <li><b>7.</b> Duct Tape, Other</li>
+          <li><b>8.</b> Lego Craft, From Kit (10 &amp; under)</li>
+          <li><b>9.</b> Lego Craft, Original (10 &amp; under)</li>
+          <li><b>10.</b> Lego Craft, From Kit (11–17 yrs)</li>
+          <li><b>11.</b> Lego Craft, Original (11–17 yrs)</li>
+          <li><b>12.</b> Lego Craft, Original Design only (18 &amp; up)</li>
+          <li><b>13.</b> Macrame, From Kit</li>
+          <li><b>14.</b> Macrame, Original Design</li>
+          <li><b>15.</b> Miniatures (17 &amp; under)</li>
+          <li><b>16.</b> Miniatures (18 &amp; up)</li>
+          <li><b>17.</b> Paper Craft, Origami</li>
+          <li><b>18.</b> Paper Craft, Other (must not fit any other)</li>
+          <li><b>19.</b> Recycled Material Art</li>
+          <li><b>20.</b> Resin Art, Jewelry/Accessories</li>
+          <li><b>21.</b> Resin Art, Other</li>
+          <li><b>22.</b> String Art, Kit</li>
+          <li><b>23.</b> String Art, Original Design</li>
+          <li><b>24.</b> Wind Chimes</li>
+        </ul>
+      </div>
+      <div class="grp">
+        <h4 class="sm">Handcrafts</h4>
+        <ul class="clist">
+          <li><b>25.</b> Baskets</li>
+          <li><b>26.</b> Beadwork, Jewelry</li>
+          <li><b>27.</b> Beadwork, Other</li>
+          <li><b>28.</b> Glass Crafting</li>
+          <li><b>29.</b> Leather Craft, Clothing/Accessories</li>
+          <li><b>30.</b> Leather Craft, Tack items</li>
+          <li><b>31.</b> Leather Craft, Other</li>
+          <li><b>32.</b> Metal Craft, Jewelry</li>
+          <li><b>33.</b> Metal Craft, Punch or Weld</li>
+          <li><b>34.</b> Metal Craft, Horseshoe</li>
+          <li><b>35.</b> Metal Craft, Other</li>
+          <li><b>36.</b> Pottery</li>
+          <li><b>37.</b> Wood Craft, Carved or Turned</li>
+          <li><b>38.</b> Wood Craft, Burning</li>
+          <li><b>39.</b> Wood Craft, Barn Quilt, 12" or less</li>
+          <li><b>40.</b> Wood Craft, Barn Quilt, over 12"</li>
+          <li><b>41.</b> Wood Craft, Other</li>
+        </ul>
+      </div>
+      <div class="grp">
+        <h4 class="sm">Seasonal Crafts</h4>
+        <ul class="clist">
+          <li><b>42.</b> Cards, Christmas, Set of 3</li>
+          <li><b>43.</b> Cards, Seasonal, Set of 3</li>
+          <li><b>44.</b> Cards, Other Theme, Set of 3</li>
+          <li><b>45.</b> Wall Hanging, Christmas (not quilted)</li>
+          <li><b>46.</b> Wall Hanging, Seasonal (not quilted)</li>
+          <li><b>47.</b> Wall Hanging, Other Theme (not quilted)</li>
+          <li><b>48.</b> Wreath, Christmas</li>
+          <li><b>49.</b> Wreath, Seasonal</li>
+          <li><b>50.</b> Wreath, Other Theme</li>
+          <li><b>51.</b> Christmas Ornament, Single</li>
+          <li><b>52.</b> Christmas Ornaments, Set of 3</li>
+        </ul>
+      </div>
+    </div>
+    <a class="totop" href="#schedule">↑ Back to top</a>
+  </section>
+
+  <!-- DIVISION B -->
+  <section id="divB">
+    <h2>Division B — Needlework</h2>
+    <div class="rule"></div>
+    <p class="fine">All items must have been made in the past year (since the last Fair) and made by the person entering the exhibit. No premiums will be paid for items not mentioned in the listing of classes. No first place premiums will be given if no competition in that class.</p>
+    <div class="cols" style="margin-top:14px;">
+      <div class="grp">
+        <h4 class="sm">Sewing</h4>
+        <ul class="clist">
+          <li><b>1.</b> Apron</li>
+          <li><b>2.</b> Braided Rug</li>
+          <li><b>3.</b> Children's Costume</li>
+          <li><b>4.</b> Children's Fabric Toy</li>
+          <li><b>5.</b> Clothing, Boy's</li>
+          <li><b>6.</b> Clothing, Girl's</li>
+          <li><b>7.</b> Clothing, Men's</li>
+          <li><b>8.</b> Clothing, Women's</li>
+          <li><b>9.</b> Clothing, Infant's</li>
+          <li><b>10.</b> Pillowcase / Pillow</li>
+          <li><b>11.</b> Placemats</li>
+          <li><b>12.</b> Table Runner</li>
+          <li><b>13.</b> Tea Towel</li>
+        </ul>
+      </div>
+      <div class="grp">
+        <h4 class="sm">Quilting</h4>
+        <ul class="clist">
+          <li><b>14.</b> Hand Quilted Quilt</li>
+          <li><b>15.</b> Hand Quilted, Baby Quilt</li>
+          <li><b>16.</b> Machine Quilt, Pieced Quilt</li>
+          <li><b>17.</b> Machine Quilt, Appliqued Quilt</li>
+          <li><b>18.</b> Machine Quilt, Baby Quilt</li>
+          <li><b>19.</b> Embroidered Quilt</li>
+          <li><b>20.</b> First Timer's Quilt</li>
+          <li><b>21.</b> Novelty Quilt (T-shirt/Photo)</li>
+          <li><b>22.</b> Raggy / Shaggy Quilt</li>
+          <li><b>23.</b> Patriotic Quilt</li>
+          <li><b>24.</b> Quilted Clothing</li>
+          <li><b>25.</b> Quilted Kitchen Items</li>
+        </ul>
+      </div>
+      <div class="grp">
+        <h4 class="sm">Needlecraft</h4>
+        <ul class="clist">
+          <li><b>26.</b> Cross Stitch, Sampler, Framed</li>
+          <li><b>27.</b> Cross Stitch, Pillow, Pillowcase, or Sheet</li>
+          <li><b>28.</b> Cross Stitch, Table or Kitchen items</li>
+          <li><b>29.</b> Embroidery</li>
+          <li><b>30.</b> Felting</li>
+          <li><b>31.</b> Plastic Canvas</li>
+          <li><b>32.</b> Punch Needle</li>
+          <li><b>33.</b> Rug, latch hook</li>
+          <li><b>34.</b> Stamped pattern stitch, any</li>
+        </ul>
+      </div>
+      <div class="grp">
+        <h4 class="sm">Yarn Handiworks</h4>
+        <ul class="clist">
+          <li><b>35.</b> Crochet, Afghan — Granny Square</li>
+          <li><b>36.</b> Crochet, Afghan — other</li>
+          <li><b>37.</b> Crochet, Baby Afghan — Granny Square</li>
+          <li><b>38.</b> Crochet, Baby Afghan — other</li>
+          <li><b>39.</b> Crochet, Dresser scarf, Doily, or Runner</li>
+          <li><b>40.</b> Crochet, Hat, Scarf, Shawl</li>
+          <li><b>41.</b> Crochet, Hot Pads / Oven Mitts</li>
+          <li><b>42.</b> Crochet, Kid's toy</li>
+          <li><b>43.</b> Knit, Baby Blanket</li>
+          <li><b>44.</b> Knit, Hat, Scarf, or Shawl</li>
+          <li><b>45.</b> Knit, Socks / Slippers</li>
+        </ul>
+      </div>
+    </div>
+    <a class="totop" href="#schedule">↑ Back to top</a>
+  </section>
+
+  <!-- DIVISION C -->
+  <section id="divC">
+    <h2>Division C — Photography</h2>
+    <div class="rule"></div>
+    <p class="fine">All items must have been made in the past year (since the last Fair) and made by the person entering the exhibit. Photos of the same subject may not be entered in different categories by the same exhibitor. Photos taken with trail cameras or bird cameras must be entered in the Outdoorsman Division (J). Professional category is for those whose primary income is from photographic services. No premiums will be paid for items not mentioned in the listing of classes. No first place premiums will be given if no competition in that class.</p>
+    <div class="cols" style="margin-top:14px;">
+      <div class="grp">
+        <h4 class="sm">12 Years &amp; Under</h4>
+        <ul class="clist">
+          <li><b>1.</b> Animals/Insects</li><li><b>2.</b> Plant Life</li><li><b>3.</b> People</li><li><b>4.</b> Scenic/Landscape</li><li><b>5.</b> Urban Subjects</li><li><b>6.</b> Vacation/Travel</li><li><b>7.</b> Black &amp; White</li><li><b>8.</b> Special Effects</li><li><b>9.</b> Digitally Altered</li>
+        </ul>
+      </div>
+      <div class="grp">
+        <h4 class="sm">13 to 17 Years</h4>
+        <ul class="clist">
+          <li><b>10.</b> Animals/Insects</li><li><b>11.</b> Plant Life</li><li><b>12.</b> People</li><li><b>13.</b> Scenic/Landscape</li><li><b>14.</b> Urban Subjects</li><li><b>15.</b> Vacation/Travel</li><li><b>16.</b> Black &amp; White</li><li><b>17.</b> Special Effects</li><li><b>18.</b> Digitally Altered</li>
+        </ul>
+      </div>
+      <div class="grp">
+        <h4 class="sm">18 Years &amp; Up</h4>
+        <ul class="clist">
+          <li><b>19.</b> Animals/Insects</li><li><b>20.</b> Plant Life</li><li><b>21.</b> People</li><li><b>22.</b> Scenic/Landscape</li><li><b>23.</b> Urban Subjects</li><li><b>24.</b> Vacation/Travel</li><li><b>25.</b> Black &amp; White</li><li><b>26.</b> Special Effects</li><li><b>27.</b> Digitally Altered</li>
+        </ul>
+      </div>
+      <div class="grp">
+        <h4 class="sm">Professional</h4>
+        <ul class="clist">
+          <li><b>28.</b> Animals/Insects</li><li><b>29.</b> Plant Life</li><li><b>30.</b> People</li><li><b>31.</b> Scenic/Landscape</li><li><b>32.</b> Urban Subjects</li><li><b>33.</b> Vacation/Travel</li><li><b>34.</b> Black &amp; White</li><li><b>35.</b> Special Effects</li><li><b>36.</b> Digitally Altered</li>
+        </ul>
+      </div>
+    </div>
+    <a class="totop" href="#schedule">↑ Back to top</a>
+  </section>
+
+  <!-- DIVISION D -->
+  <section id="divD">
+    <h2>Division D — Fine Arts</h2>
+    <p class="sub">Public Stage — direct entries for all ages.</p>
+    <div class="rule"></div>
+    <p class="fine">All items must have been made in the past year (since the last Fair) and made by the person entering the exhibit. All art not on canvas must be matted and ready for hanging. No identifying information can be visible on the display side of artwork or it will be disqualified from judging. Professional category is for those whose primary income is from the sale of their artwork/prints. No premiums will be paid for items not mentioned in the listing of classes. No first place premiums will be given if no competition in that class.</p>
+    <div class="cols" style="margin-top:14px;">
+      <div class="grp">
+        <h4 class="sm">Youth under 18</h4>
+        <p class="fine" style="margin-bottom:4px;">Acrylic / Oil on Canvas</p>
+        <ul class="clist"><li><b>1.</b> Landscape</li><li><b>2.</b> Still Life</li><li><b>3.</b> Portrait or Figure</li><li><b>4.</b> Animal</li><li><b>5.</b> Cartoons</li></ul>
+        <p class="fine" style="margin-bottom:4px;">Watercolor</p>
+        <ul class="clist"><li><b>6.</b> Landscape</li><li><b>7.</b> Still Life</li><li><b>8.</b> Portrait or Figure</li><li><b>9.</b> Animal</li><li><b>10.</b> Cartoons</li></ul>
+        <p class="fine" style="margin-bottom:4px;">Pastels, Colored Pencils</p>
+        <ul class="clist"><li><b>11.</b> Landscape</li><li><b>12.</b> Still Life</li><li><b>13.</b> Portrait or Figure</li><li><b>14.</b> Animal</li><li><b>15.</b> Cartoons</li></ul>
+        <p class="fine" style="margin-bottom:4px;">Charcoals, Pencil, Ink</p>
+        <ul class="clist"><li><b>16.</b> Landscape</li><li><b>17.</b> Still Life</li><li><b>18.</b> Portrait or Figure</li><li><b>19.</b> Animal</li><li><b>20.</b> Cartoons</li></ul>
+      </div>
+      <div class="grp">
+        <h4 class="sm">18 Years &amp; Up</h4>
+        <p class="fine" style="margin-bottom:4px;">Acrylic / Oil on Canvas</p>
+        <ul class="clist"><li><b>21.</b> Landscape</li><li><b>22.</b> Still Life</li><li><b>23.</b> Portrait or Figure</li><li><b>24.</b> Animal</li><li><b>25.</b> Cartoons</li></ul>
+        <p class="fine" style="margin-bottom:4px;">Watercolor</p>
+        <ul class="clist"><li><b>26.</b> Landscape</li><li><b>27.</b> Still Life</li><li><b>28.</b> Portrait or Figure</li><li><b>29.</b> Animal</li><li><b>30.</b> Cartoons</li></ul>
+        <p class="fine" style="margin-bottom:4px;">Pastels, Colored Pencils</p>
+        <ul class="clist"><li><b>31.</b> Landscape</li><li><b>32.</b> Still Life</li><li><b>33.</b> Portrait or Figure</li><li><b>34.</b> Animal</li><li><b>35.</b> Cartoons</li></ul>
+        <p class="fine" style="margin-bottom:4px;">Charcoals, Pencil, Ink</p>
+        <ul class="clist"><li><b>36.</b> Landscape</li><li><b>37.</b> Still Life</li><li><b>38.</b> Portrait or Figure</li><li><b>39.</b> Animal</li><li><b>40.</b> Cartoons</li></ul>
+      </div>
+      <div class="grp">
+        <h4 class="sm">Professional</h4>
+        <p class="fine" style="margin-bottom:4px;">Acrylic / Oil on Canvas</p>
+        <ul class="clist"><li><b>41.</b> Landscape</li><li><b>42.</b> Still Life</li><li><b>43.</b> Portrait or Figure</li><li><b>44.</b> Animal</li><li><b>45.</b> Cartoons</li></ul>
+        <p class="fine" style="margin-bottom:4px;">Watercolor</p>
+        <ul class="clist"><li><b>46.</b> Landscape</li><li><b>47.</b> Still Life</li><li><b>48.</b> Portrait or Figure</li><li><b>49.</b> Animal</li><li><b>50.</b> Cartoons</li></ul>
+      </div>
+    </div>
+    <a class="totop" href="#schedule">↑ Back to top</a>
+  </section>
+
+  <!-- DIVISION F -->
+  <section id="divF">
+    <h2>Division F — Floriculture</h2>
+    <div class="rule"></div>
+    <p class="fine">All items must have been grown/raised by the person entering the exhibit. Please bring cut flowers in clear glass vases or clear plastic bottles so the judge can see the flower stem. No premiums will be paid for items not mentioned in the listing of classes. No first place premiums will be given if no competition in that class.</p>
+
+    <h3 class="blk">Adult Division</h3>
+    <div class="cols">
+      <div class="grp">
+        <h4 class="sm">Cut Flowers</h4>
+        <ul class="clist">
+          <li><b>1.</b> Cosmos — 1 stem</li><li><b>2.</b> Crape Myrtle — 1 stem</li><li><b>3.</b> Herb — 1 stem</li><li><b>4.</b> Hibiscus — 1 stem</li><li><b>5.</b> Lantana — 1 spray</li><li><b>6.</b> Marigold, giant — 1 stem (flower should be 2")</li><li><b>7.</b> Marigold, small — 3 stems</li><li><b>8.</b> Periwinkle — 1 stem</li><li><b>9.</b> Petunia — 1 spray</li><li><b>10.</b> Rose, miniature — 1 stem</li><li><b>11.</b> Rose, tea — 1 stem</li><li><b>12.</b> Rose, other — 1 stem</li><li><b>13.</b> Sunflower — 1 stem</li><li><b>14.</b> Wildflower — 1 stem</li><li><b>15.</b> Zinnia, giant — 1 stem</li><li><b>16.</b> Zinnia, small, button, or lilliput — 3 stems</li><li><b>17.</b> Any other cut flower — must not fit any other category</li>
+        </ul>
+      </div>
+      <div class="grp">
+        <h4 class="sm">Potted Plants</h4>
+        <ul class="clist">
+          <li><b>18.</b> African Violet — must have at least 1 bloom</li><li><b>19.</b> Cactus</li><li><b>20.</b> Fern</li><li><b>21.</b> Geranium</li><li><b>22.</b> Hanging Basket</li><li><b>23.</b> Herb</li><li><b>24.</b> Houseplant, Blooming — must not fit any other category</li><li><b>25.</b> Houseplant, Foliage — must not fit any other category</li><li><b>26.</b> Orchid</li><li><b>27.</b> Succulent</li>
+        </ul>
+        <h4 class="sm">Floriculture Specimen — Design</h4>
+        <ul class="clist">
+          <li><b>28.</b> Dish or Fairy Garden</li><li><b>29.</b> Dried Flower Arrangement</li><li><b>30.</b> Fresh Flower Arrangement</li><li><b>31.</b> Terrarium</li>
+        </ul>
+      </div>
+    </div>
+
+    <h3 class="blk">Youth Division</h3>
+    <div class="cols">
+      <div class="grp">
+        <h4 class="sm">Cut Flowers</h4>
+        <ul class="clist">
+          <li><b>32.</b> Cosmos — 1 stem</li><li><b>33.</b> Crape Myrtle — 1 stem</li><li><b>34.</b> Herb — 1 stem</li><li><b>35.</b> Hibiscus — 1 stem</li><li><b>36.</b> Lantana — 1 spray</li><li><b>37.</b> Marigold, giant — 1 stem (flower should be 2")</li><li><b>38.</b> Marigold, small — 3 stems</li><li><b>39.</b> Periwinkle — 1 stem</li><li><b>40.</b> Petunia — 1 spray</li><li><b>41.</b> Rose — 1 stem</li><li><b>42.</b> Sunflower — 1 stem</li><li><b>43.</b> Wildflower — 1 stem</li><li><b>44.</b> Zinnia, giant — 1 stem</li><li><b>45.</b> Zinnia, small, button, or lilliput — 3 stems</li><li><b>46.</b> Any other cut flower — must not fit any other category</li>
+        </ul>
+      </div>
+      <div class="grp">
+        <h4 class="sm">Potted Plants</h4>
+        <ul class="clist">
+          <li><b>47.</b> Cactus</li><li><b>48.</b> Fern</li><li><b>49.</b> Geranium</li><li><b>50.</b> Herb</li><li><b>51.</b> Houseplant, Blooming — must not fit any other category</li><li><b>52.</b> Houseplant, Foliage — must not fit any other category</li><li><b>53.</b> Orchid</li><li><b>54.</b> Succulent</li>
+        </ul>
+        <h4 class="sm">Floriculture Specimen — Design</h4>
+        <ul class="clist">
+          <li><b>55.</b> Dish or Fairy Garden</li><li><b>56.</b> Dried Flower Arrangement</li><li><b>57.</b> Fresh Flower Arrangement</li><li><b>58.</b> Terrarium</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="contest" style="margin-top:18px;">
+      <h3>🌸 Hobart Garden Club Award</h3>
+      <p class="body">In addition to the Free Fair premiums, the Hobart Garden Club generously gives a <b>$25 award</b> to the exhibitor with the most points earned in the Floriculture Division. One award is given in the Adult Section and one in the Youth Section.</p>
+      <span class="prem">Points — 1st place <b>3</b> · 2nd place <b>2</b> · 3rd place <b>1</b> · Champion <b>5</b></span>
+    </div>
+    <a class="totop" href="#schedule">↑ Back to top</a>
+  </section>
+
+  <!-- BEST OF WHEAT -->
+  <section id="wheat">
+    <h2>State "Best of Wheat" Bread Baking Contest</h2>
+    <p class="sub">Sponsored by the Oklahoma Wheat Commission</p>
+    <div class="rule"></div>
+    <div class="cols">
+      <div class="grp">
+        <h4 class="sm">Senior Division</h4>
+        <ul class="clist"><li><b>1.</b> White Bread</li><li><b>2.</b> Whole Wheat Bread</li><li><b>3.</b> Dinner Rolls</li><li><b>4.</b> Other Wheat Breads</li><li><b>5.</b> Sweet Breads</li><li><b>6.</b> Bread Machine</li></ul>
+      </div>
+      <div class="grp">
+        <h4 class="sm">Junior Division</h4>
+        <ul class="clist"><li><b>7.</b> White Bread</li><li><b>8.</b> Whole Wheat Bread</li><li><b>9.</b> Dinner Rolls</li><li><b>10.</b> Other Wheat Breads</li><li><b>11.</b> Sweet Breads</li><li><b>12.</b> Specialty Shape Breads</li><li><b>13.</b> Bread Machine</li></ul>
+      </div>
+    </div>
+
+    <h3 class="blk">2026 County Contest Rules</h3>
+    <ul class="body">
+      <li>County Champion and Reserve Champion winners (excluding bread machine classes) receive awards from the Oklahoma Wheat Commission. Premiums are not provided by the OWC; counties may offer premiums and other awards. County Champions and Reserve Champions (including bread machine classes) will be invited to the State Fair competition.</li>
+      <li>Recipes winning first place at the 2025 State contest are ineligible for the 2026 contest.</li>
+      <li>Each entry must be prepared and baked by the person whose name is on the entry form, with phone number and email submitted.</li>
+      <li>The same person may not win Champion, Reserve Champion, or Bread Machine Class unless there is minimal participation. Duplicate recipes may not be entered by different family members in any class or division. <b>A copy of the recipe is required with each entry</b> at both State and County levels. No changes to the recipe may be made at the State level.</li>
+      <li><b>Whole Wheat Bread (classes 2 &amp; 8)</b> — only whole wheat flour and/or whole white wheat flour. No all-purpose or bread flour. Dough enhancers, vital wheat gluten, and whole grains are permissible. <em>This is the first year a Whole Wheat Bread Class is offered for juniors.</em></li>
+      <li><b>Dinner Rolls (classes 3 &amp; 9)</b> — three (3) rolls per entry, any shape acceptable.</li>
+      <li><b>Other Wheat Breads (classes 4 &amp; 10)</b> — yeast breads such as cheese, French, onion, sourdough, challah, focaccia, etc. No quick breads unless yeast is used as a leavening agent.</li>
+      <li><b>Specialty Shape Breads (class 12)</b> — animals, people, objects, etc. This year's cookbook has a Route 66 theme celebrating its 100th anniversary, so specialty shapes are encouraged to highlight items on the Mother Road. All garnishes must be edible. Twists and star breads belong in "Other Wheat Breads" or "Sweet Breads," not here.</li>
+      <li>Submitted recipes must state what type of flour is used (whole wheat, bread, all-purpose, hard red or white), and whether yeast is active or instant.</li>
+      <li>This contest is judged separately from the county fair open class division. County Champion and Reserve Champion from each division are eligible for state competition at the State Fair of Oklahoma on <b>September 27, 2026</b>.</li>
+      <li>One bread machine entry from each division (classes 6 &amp; 13), determined by the county judge, is eligible for state competition. Bread machine entries are not eligible for Grand Champion or Reserve Champion at county or state level, nor the Silver Tray Award at State. If any part of the recipe is done with a bread machine, the recipe is classified in the bread machine category.</li>
+    </ul>
+    <p class="fine">The 2026 Oklahoma State Fair catalog contains the final written rules governing this contest. If questions arise, check the catalog or call (405) 608-4350.</p>
+    <a class="totop" href="#schedule">↑ Back to top</a>
+  </section>
+
+  <!-- DIVISION G -->
+  <section id="divG">
+    <h2>Division G — Open Baked Products (Adult)</h2>
+    <p class="sub">Open to exhibitors aged 18 years &amp; older.</p>
+    <div class="rule"></div>
+    <p class="fine">All items must have been made by the person entering the exhibit. Please bring items on disposable plating with clear covers for display. Please understand that judges will be tasting items. Specialty Breads: no items which would qualify for the "Best of Wheat" contest can be entered here. No premiums will be paid for items not mentioned in the listing of classes. No first place premiums will be given if no competition in that class.</p>
+    <div class="cols" style="margin-top:14px;">
+      <div class="grp">
+        <h4 class="sm">Pies</h4>
+        <ul class="clist"><li><b>1.</b> Fruit Pie, Any Kind</li><li><b>2.</b> Pecan Pie</li><li><b>3.</b> Other Pie</li></ul>
+        <h4 class="sm">Quick Breads</h4>
+        <ul class="clist"><li><b>4.</b> Coffee Cake</li><li><b>5.</b> Fruit Bread</li><li><b>6.</b> Nut Bread</li><li><b>7.</b> Vegetable Bread</li><li><b>8.</b> Muffins, Any Kind (3)</li><li><b>9.</b> Other Quick Bread — must not fit any other category</li></ul>
+        <h4 class="sm">Cakes (Whole)</h4>
+        <ul class="clist"><li><b>10.</b> Angel Food Cake</li><li><b>11.</b> Applesauce Cake</li><li><b>12.</b> Butter/Yellow/Pound Cake</li><li><b>13.</b> Carrot Cake</li><li><b>14.</b> Chocolate Cake</li><li><b>15.</b> Multiple Layer Cake with Filling</li><li><b>16.</b> Original Recipe Cake — recipe must be included</li><li><b>17.</b> Spice Cake</li><li><b>18.</b> Other Cake — must not fit any other category</li></ul>
+      </div>
+      <div class="grp">
+        <h4 class="sm">Decorated Cakes / Cookies</h4>
+        <ul class="clist"><li><b>19.</b> Fondant Decorated Cake</li><li><b>20.</b> Butter Cream Decorated Cake</li><li><b>21.</b> Decorated Cupcakes, 3</li><li><b>22.</b> Decorated Cookies, 3</li><li><b>23.</b> Other Decorated Cake/Cookie — must not fit any other category</li></ul>
+        <h4 class="sm">Cookies (Plate of 3)</h4>
+        <ul class="clist"><li><b>24.</b> Bar Cookies</li><li><b>25.</b> Brownies</li><li><b>26.</b> Chocolate Chip Cookies</li><li><b>27.</b> Oatmeal Cookies</li><li><b>28.</b> Peanut Butter Cookies</li><li><b>29.</b> Snickerdoodles</li><li><b>30.</b> Sugar Cookies</li><li><b>31.</b> Other Cookie — must not fit any other category</li></ul>
+        <h4 class="sm">Candies / Fudge (Plate of 6)</h4>
+        <ul class="clist"><li><b>32.</b> Chocolates</li><li><b>33.</b> Chocolate Fudge</li><li><b>34.</b> Peanut Brittle</li><li><b>35.</b> Other Candy or Fudge — must not fit any other category</li></ul>
+        <h4 class="sm">Specialty Breads</h4>
+        <ul class="clist"><li><b>36.</b> Sourdough Bread</li><li><b>37.</b> Flavored Sourdough Bread</li><li><b>38.</b> Focaccia Bread</li><li><b>39.</b> Other Specialty Bread — must not fit any other category</li></ul>
+      </div>
+    </div>
+    <a class="totop" href="#schedule">↑ Back to top</a>
+  </section>
+
+  <!-- DIVISION H -->
+  <section id="divH">
+    <h2>Division H — Junior Open Baked Products</h2>
+    <p class="sub">Open to exhibitors aged 17 years &amp; younger.</p>
+    <div class="rule"></div>
+    <p class="fine">All items must have been made by the person entering the exhibit. Please bring items on disposable plating with clear covers for display. Please understand that judges will be tasting items. Specialty Breads: no items which would qualify for the "Best of Wheat" contest can be entered here. No premiums will be paid for items not mentioned in the listing of classes. No first place premiums will be given if no competition in that class.</p>
+    <div class="cols" style="margin-top:14px;">
+      <div class="grp">
+        <h4 class="sm">Pies</h4>
+        <ul class="clist"><li><b>1.</b> Fruit Pie, Any Kind</li><li><b>2.</b> Pecan Pie</li><li><b>3.</b> Other Pie</li></ul>
+        <h4 class="sm">Quick Breads</h4>
+        <ul class="clist"><li><b>4.</b> Coffee Cake</li><li><b>5.</b> Fruit Bread</li><li><b>6.</b> Nut Bread</li><li><b>7.</b> Vegetable Bread</li><li><b>8.</b> Muffins, Any Kind (3)</li><li><b>9.</b> Other Quick Bread — must not fit any other category</li></ul>
+        <h4 class="sm">Cakes (Whole)</h4>
+        <ul class="clist"><li><b>10.</b> Angel Food Cake</li><li><b>11.</b> Applesauce Cake</li><li><b>12.</b> Butter/Yellow/Pound Cake</li><li><b>13.</b> Carrot Cake</li><li><b>14.</b> Chocolate Cake</li><li><b>15.</b> Multiple Layer Cake with Filling</li><li><b>16.</b> Original Recipe Cake — recipe must be included</li><li><b>17.</b> Spice Cake</li><li><b>18.</b> Other Cake — must not fit any other category</li></ul>
+      </div>
+      <div class="grp">
+        <h4 class="sm">Decorated Cakes / Cookies</h4>
+        <ul class="clist"><li><b>19.</b> Fondant Decorated Cake</li><li><b>20.</b> Butter Cream Decorated Cake</li><li><b>21.</b> Decorated Cupcakes, 3</li><li><b>22.</b> Decorated Cookies, 3</li><li><b>23.</b> Other Decorated Cake/Cookie — must not fit any other category</li></ul>
+        <h4 class="sm">Cookies (Plate of 3)</h4>
+        <ul class="clist"><li><b>24.</b> Bar Cookies</li><li><b>25.</b> Brownies</li><li><b>26.</b> Chocolate Chip Cookies</li><li><b>27.</b> Oatmeal Cookies</li><li><b>28.</b> Peanut Butter Cookies</li><li><b>29.</b> Snickerdoodles</li><li><b>30.</b> Sugar Cookies</li><li><b>31.</b> Other Cookie — must not fit any other category</li></ul>
+        <h4 class="sm">Candies / Fudge (Plate of 6)</h4>
+        <ul class="clist"><li><b>32.</b> Chocolates</li><li><b>33.</b> Chocolate Fudge</li><li><b>34.</b> Peanut Brittle</li><li><b>35.</b> Other Candy or Fudge — must not fit any other category</li></ul>
+        <h4 class="sm">Specialty Breads</h4>
+        <ul class="clist"><li><b>36.</b> Sourdough Bread</li><li><b>37.</b> Flavored Sourdough Bread</li><li><b>38.</b> Focaccia Bread</li><li><b>39.</b> Other Specialty Bread — must not fit any other category</li></ul>
+      </div>
+    </div>
+    <a class="totop" href="#schedule">↑ Back to top</a>
+  </section>
+
+  <!-- DIVISION I -->
+  <section id="divI">
+    <h2>Division I — Food Preservation</h2>
+    <div class="rule"></div>
+    <p class="fine">All items must have been made in the past year (since the last Fair) and made by the person entering the exhibit. All items must be processed according to safe processing guidelines — canned goods in clear jars properly sealed with proper head space; dehydrated foods properly stored in clear containers or bags for display. No identifying information may be showing on items to be judged. No premiums will be paid for items not mentioned in the listing of classes. No first place premiums will be given if no competition in that class.</p>
+    <h3 class="blk">Canned Goods</h3>
+    <div class="cols">
+      <div class="grp">
+        <h4 class="sm">Fruits</h4>
+        <ul class="clist"><li><b>1.</b> Apples</li><li><b>2.</b> Cherries, Sour</li><li><b>3.</b> Pears</li><li><b>4.</b> Plums</li><li><b>5.</b> Other Fruit — must not fit any other category</li></ul>
+        <h4 class="sm">Vegetables</h4>
+        <ul class="clist"><li><b>6.</b> Beans, Green</li><li><b>7.</b> Carrots</li><li><b>8.</b> Other Vegetable — must not fit any other category</li></ul>
+        <h4 class="sm">Jams, Jellies, Preserves</h4>
+        <ul class="clist"><li><b>9.</b> Blackberry Jam</li><li><b>10.</b> Peach Jam</li><li><b>11.</b> Plum Jam</li><li><b>12.</b> Strawberry Jam</li><li><b>13.</b> Apple Jelly</li><li><b>14.</b> Cherry Jelly</li><li><b>15.</b> Grape Jelly</li><li><b>16.</b> Plum Jelly</li><li><b>17.</b> Wild Plum Jelly</li><li><b>18.</b> Cherry Preserves</li><li><b>19.</b> Peach Preserves</li><li><b>20.</b> Pear Preserves</li><li><b>21.</b> Strawberry Preserves</li><li><b>22.</b> Other Jam, Jelly or Preserve — must not fit any other category</li></ul>
+      </div>
+      <div class="grp">
+        <h4 class="sm">Butters, Honey</h4>
+        <ul class="clist"><li><b>23.</b> Apple Butter</li><li><b>24.</b> Peach Butter</li><li><b>25.</b> Honey, Strained, 1 lb jar</li><li><b>26.</b> Honey, Comb, Pint Jar</li><li><b>27.</b> Other Butter or Honey — must not fit any other category</li></ul>
+        <h4 class="sm">Pickles</h4>
+        <ul class="clist"><li><b>28.</b> Bread &amp; Butter Pickles</li><li><b>29.</b> Chow Chow</li><li><b>30.</b> Cucumber Pickles, Dill</li><li><b>31.</b> Cucumber Pickles, Any other</li><li><b>32.</b> Fruit Pickles</li><li><b>33.</b> Pickled Okra</li><li><b>34.</b> Other Pickle — must not fit any other category</li></ul>
+        <h4 class="sm">Relishes, Salsas, Sauces</h4>
+        <ul class="clist"><li><b>35.</b> Salsa, Fruit</li><li><b>36.</b> Salsa, Green</li><li><b>37.</b> Salsa, Red</li><li><b>38.</b> BBQ Sauce</li><li><b>39.</b> Chili Sauce</li><li><b>40.</b> Hot Sauce</li><li><b>41.</b> Other Relish, Salsa, or Sauce — must not fit any other category</li></ul>
+        <h4 class="sm">Dehydrated Foods</h4>
+        <ul class="clist"><li><b>42.</b> Fruit</li><li><b>43.</b> Fruit Leather</li><li><b>44.</b> Vegetable/Mushroom</li><li><b>45.</b> Jerky, Beef</li><li><b>46.</b> Jerky, Any Other Meat</li><li><b>47.</b> Other Dehydrated Food — must not fit any other category</li></ul>
+      </div>
+    </div>
+    <a class="totop" href="#schedule">↑ Back to top</a>
+  </section>
+
+  <!-- DIVISION J -->
+  <section id="divJ">
+    <h2>Division J — Outdoorsman</h2>
+    <div class="rule"></div>
+    <p class="fine">Exhibits in this section must have been harvested in Oklahoma according to Oklahoma Department of Wildlife regulations within the past 2 years. Specimens may only be exhibited once. Photos from one trail camera may only be submitted by one family member; the same applies to bird cameras. No premiums will be paid for items not mentioned in the listing of classes. No first place premiums will be given if no competition in that class.</p>
+    <div class="cols" style="margin-top:14px;">
+      <div class="grp">
+        <h4 class="sm">Taxidermy Plus — Antlers</h4>
+        <ul class="clist"><li><b>1.</b> Shoulder Mount</li><li><b>2.</b> European Mount</li><li><b>3.</b> Deer Shed (can be single shed)</li><li><b>4.</b> Elk Shed (can be single shed)</li></ul>
+        <h4 class="sm">Turkey</h4>
+        <ul class="clist"><li><b>5.</b> Turkey Fan Mount</li></ul>
+        <h4 class="sm">Pelts</h4>
+        <ul class="clist"><li><b>6.</b> Small animal, tanned</li><li><b>7.</b> Large animal, tanned</li></ul>
+        <h4 class="sm">Trail Camera Photos</h4>
+        <ul class="clist"><li><b>8.</b> Best Deer Picture</li><li><b>9.</b> Best Other Animal Picture</li><li><b>10.</b> Best Other Picture</li></ul>
+      </div>
+      <div class="grp">
+        <h4 class="sm">The Angler</h4>
+        <ul class="clist"><li><b>11.</b> Fly-tying</li><li><b>12.</b> Lure Making</li></ul>
+        <h4 class="sm">Backyard &amp; Beyond — Arrowheads</h4>
+        <ul class="clist"><li><b>13.</b> Arrowhead, found in Kiowa County</li><li><b>14.</b> Arrowhead, found in OK, not in Kiowa County</li></ul>
+        <h4 class="sm">Bird Camera Photos</h4>
+        <ul class="clist"><li><b>15.</b> Best Bird Picture</li><li><b>16.</b> Best Other Animal Picture (not insects)</li><li><b>17.</b> Best Other Picture</li></ul>
+      </div>
+    </div>
+    <a class="totop" href="#schedule">↑ Back to top</a>
+  </section>
+
+  <!-- DIVISION K -->
+  <section id="divK">
+    <h2>Division K — Farm Products</h2>
+    <p class="sub">Crops · Horticulture · Animal Products</p>
+    <div class="rule"></div>
+    <p class="fine">Exhibits in Division K must have been grown in Kiowa County by the exhibitor of record. No premiums will be paid for items not mentioned in the listing of classes. No first place premiums will be given if no competition in that class.</p>
+
+    <h3 class="blk">Crops</h3>
+    <div class="cols">
+      <div class="grp">
+        <h4 class="sm">4-H Small Grains Exhibit</h4>
+        <ul class="clist">
+          <li><b>1.</b> Early Maturity Wheat <span class="fine">(Ex: Armour, Baker's Ann, Bentley, Fuller, Jagger, LCS Atomic AS, Lonerider, Overley, Ruby Lee, Skydance, Stardust, TAM 112, WB4303, WB4458)</span></li>
+          <li><b>2.</b> Medium Maturity Wheat <span class="fine">(Ex: AM Cartwright, Doans, Duster, Gallagher, Green Hammer, Greer, Iba, Larry, Smith's Gold, Spirit Rider, TAM 114, TAM 205, WB4418, WB4462, WB4595)</span></li>
+          <li><b>3.</b> Late Maturity Wheat <span class="fine">(Ex: Doublestop CL Plus, Endurance, Garrison, Joe, LCS Chrome, Mac, OK Corral, Overland, Showdown, TAM 111, TAM 115, TAM 204, WB4515, WB4699, WB4721, WB-Grainfield)</span></li>
+          <li><b>4.</b> Other Wheat Variety, not listed</li><li><b>5.</b> Oats, Any Variety</li><li><b>6.</b> Barley, Any Variety</li><li><b>7.</b> Rye, Any Variety</li>
+        </ul>
+        <h4 class="sm">Cotton Exhibit</h4>
+        <ul class="clist"><li><b>8.</b> Cotton, 20 Open Bolls</li><li><b>9.</b> Cotton Stalk, Stripper Variety</li><li><b>10.</b> Cotton Stalk, Most Bolls</li></ul>
+        <h4 class="sm">Grain Sorghum Exhibit</h4>
+        <ul class="clist"><li><b>11.</b> Grain Sorghum, 10 Heads</li><li><b>12.</b> Grain Sorghum, Threshed</li></ul>
+        <h4 class="sm">Alfalfa Exhibit</h4>
+        <ul class="clist"><li><b>13.</b> Alfalfa, 1 Bale</li><li><b>14.</b> Alfalfa, Bundle</li><li><b>15.</b> Alfalfa, Seed</li></ul>
+        <h4 class="sm">Miscellaneous Crops Exhibit</h4>
+        <ul class="clist"><li><b>16.</b> Corn, 10 Ears</li><li><b>17.</b> Mung Beans / Cow Peas</li><li><b>18.</b> Other Crops, not listed</li></ul>
+      </div>
+      <div class="grp">
+        <h4 class="sm">Tame Forage Grasses</h4>
+        <ul class="clist"><li><b>19.</b> Fine-Stemmed</li><li><b>20.</b> Coarse-Stemmed</li></ul>
+        <h4 class="sm">Native Grass Bundles</h4>
+        <ul class="clist"><li><b>21.</b> Short Native Grass</li><li><b>22.</b> Medium Native Grass</li><li><b>23.</b> Tall Native Grass</li></ul>
+        <h4 class="sm">Native Range Plants Exhibit</h4>
+        <ul class="clist"><li><b>24.</b> With Good or Fair Grazing Value</li><li><b>25.</b> With Poor Grazing Value</li></ul>
+        <h4 class="sm">Native Range Grasses, Legumes, Forbs &amp; Weeds Exhibit</h4>
+        <ul class="clist"><li><b>26.</b> Native Range Grasses, Legumes, Forbs, and Weeds</li></ul>
+      </div>
+    </div>
+
+    <h3 class="blk">Horticulture</h3>
+    <div class="cols">
+      <div class="grp">
+        <h4 class="sm">Fruits</h4>
+        <ul class="clist"><li><b>27.</b> Apples, Red, plate of 5</li><li><b>28.</b> Apples, Yellow, plate of 5</li><li><b>29.</b> Pears, Any Variety, plate of 5</li><li><b>30.</b> Other Fruit — must not fit any other category</li></ul>
+        <h4 class="sm">Vegetables</h4>
+        <ul class="clist"><li><b>31.</b> Potatoes, Red, Plate of 3</li><li><b>32.</b> Potatoes, White, Plate of 3</li><li><b>33.</b> Sweet Potatoes, Any Var., Plate of 2</li><li><b>34.</b> Onions, Any Variety, Plate of 3</li><li><b>35.</b> Cantaloupe, Any Variety, 1</li><li><b>36.</b> Squash, Winter, 1</li><li><b>37.</b> Squash, Summer, Plate of 2</li><li><b>38.</b> Watermelon, 1</li><li><b>39.</b> Pumpkin, 1</li><li><b>40.</b> Pumpkin, Giant Variety, 1</li></ul>
+      </div>
+      <div class="grp">
+        <h4 class="sm">Fresh Vegetables</h4>
+        <ul class="clist"><li><b>41.</b> Cucumbers, Plate of 3</li><li><b>42.</b> Eggplant, 1</li><li><b>43.</b> Okra, Cooking, Plate of 6 pods</li><li><b>44.</b> Okra, Pickling, Plate of 6 pods</li><li><b>45.</b> Peppers, Sweet, Large, Plate of 4</li><li><b>46.</b> Peppers, Hot, Plate of 4</li><li><b>47.</b> Tomatoes, Cherry, Plate of 6</li><li><b>48.</b> Tomatoes, Cutting, Plate of 3</li><li><b>49.</b> Other Vegetable, Plate of 3 — must not fit any other category</li></ul>
+        <h4 class="sm">Specialty Fruits / Vegetables</h4>
+        <ul class="clist"><li><b>50.</b> Largest Potato</li><li><b>51.</b> Largest Pumpkin</li><li><b>52.</b> Largest Tomato</li><li><b>53.</b> Largest Watermelon</li><li><b>54.</b> Largest Zucchini</li></ul>
+      </div>
+    </div>
+
+    <h3 class="blk">Animal Products</h3>
+    <div class="cols">
+      <div class="grp">
+        <h4 class="sm">Youth — Chicken Eggs</h4>
+        <ul class="clist"><li><b>55.</b> ½ dozen white eggs, in carton</li><li><b>56.</b> ½ dozen brown eggs, in carton</li><li><b>57.</b> ½ dozen multi-colored (no white or brown), in carton</li></ul>
+        <h4 class="sm">Youth — Duck Eggs</h4>
+        <ul class="clist"><li><b>58.</b> ½ dozen white eggs, in carton</li><li><b>59.</b> ½ dozen brown eggs, in carton</li><li><b>60.</b> ½ dozen other eggs (no white or brown), in carton</li></ul>
+        <h4 class="sm">Youth — Other Eggs</h4>
+        <ul class="clist"><li><b>61.</b> ½ dozen turkey eggs, in carton</li><li><b>62.</b> ½ dozen quail eggs, in carton</li><li><b>63.</b> ½ dozen other species eggs — must not fit any other category</li></ul>
+      </div>
+      <div class="grp">
+        <h4 class="sm">Adults — Chicken Eggs</h4>
+        <ul class="clist"><li><b>64.</b> ½ dozen white eggs, in carton</li><li><b>65.</b> ½ dozen brown eggs, in carton</li><li><b>66.</b> ½ dozen multi-colored (no white or brown), in carton</li></ul>
+        <h4 class="sm">Adults — Duck Eggs</h4>
+        <ul class="clist"><li><b>67.</b> ½ dozen white eggs, in carton</li><li><b>68.</b> ½ dozen brown eggs, in carton</li><li><b>69.</b> ½ dozen other eggs (no white or brown), in carton</li></ul>
+        <h4 class="sm">Adults — Other Eggs</h4>
+        <ul class="clist"><li><b>70.</b> ½ dozen turkey eggs, in carton</li><li><b>71.</b> ½ dozen quail eggs, in carton</li><li><b>72.</b> ½ dozen other species eggs — must not fit any other category</li></ul>
+      </div>
+    </div>
+    <a class="totop" href="#schedule">↑ Back to top</a>
+  </section>
+
+  <!-- BOARD -->
+  <section id="board">
+    <h2>Kiowa County Free Fair Association Board</h2>
+    <div class="rule"></div>
+    <table class="brd">
+      <tr><td class="k">President</td><td>Candace Thurmond</td></tr>
+      <tr><td class="k">Vice President</td><td>Korey Setzer</td></tr>
+      <tr><td class="k">Secretary</td><td>Landri Null</td></tr>
+      <tr><td class="k">Treasurer</td><td>Trevor Johnson</td></tr>
+    </table>
+
+    <h3 class="blk">Districts</h3>
+    <div class="board-grid">
+      <div class="bcard"><h5>District 1</h5><p>Trevor Johnson<br>Michael Dooley<br>Korey Setzer</p></div>
+      <div class="bcard"><h5>District 2</h5><p>Landri Null<br>Derek Blevins<br>Tyler Jenkins</p></div>
+      <div class="bcard"><h5>District 3</h5><p>Candace Thurmond<br>Daniel Dempsey<br>Kendra Barnes</p></div>
+    </div>
+
+    <h3 class="blk">Supporting Boards &amp; Staff</h3>
+    <div class="board-grid">
+      <div class="bcard"><h5>County Commissioners</h5><p>Reeder Reese, Mountain View<br>Brent Straub, Lone Wolf<br>Gary Jennings, Snyder</p></div>
+      <div class="bcard"><h5>Excise Board</h5><p>Dallon Heller, Gotebo<br>Jimmy Tepe, Lone Wolf<br>Wayne Barker, Snyder</p></div>
+      <div class="bcard"><h5>County Ag Teachers</h5><p>Sadie Raasch, Hobart<br>Jay Pye, Mtn. View-Gotebo<br>Brent Ervin, Snyder</p></div>
+      <div class="bcard"><h5>Kiowa County OSU Extension</h5><p>Travis Tacker, Extension CED/Ag/4-H<br>Charyl Workman, Admin</p></div>
+      <div class="bcard"><h5>Junior Fair Board</h5><p>Dagyn Herbst, Hobart<br>Emmalynn Hester, Snyder<br>Hannah Gather, Hobart<br>Clayton Martin, Hobart<br>Lacy Talley, Hobart<br>Dakota Thurmond, Roosevelt</p></div>
+    </div>
+    <a class="totop" href="#schedule">↑ Back to top</a>
+  </section>
+
+  <div class="fc-foot">
+    <b>Kiowa County Free Fair</b> · Hobart, Oklahoma · Tradition. Community. Pride.<br>
+    Follow <b>Kiowa County Free Fair</b> on Facebook for updates.<br>
+    Entry forms and 4-H questions: Kiowa County OSU Extension Office.<br>
+    <a href="index.html">← Return to the Hobart Chamber of Commerce</a>
+  </div>
+
+</div>
+</body>
+</html>
