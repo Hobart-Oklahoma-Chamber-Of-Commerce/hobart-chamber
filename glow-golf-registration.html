@@ -36,6 +36,9 @@
   /* form card */
   .gg-wrap{max-width:680px;margin:-20px auto 60px;padding:0 16px;position:relative;z-index:3;}
   .gg-card{background:#fff;border:1px solid var(--border);border-radius:14px;box-shadow:0 10px 40px rgba(14,32,86,.10);padding:30px 26px;}
+  .cap-banner{display:none;border-radius:8px;padding:12px 15px;font-size:13.5px;line-height:1.55;margin-bottom:16px;background:#e8f1ff;border-left:3px solid var(--navy);color:var(--dark-gray);}
+  .cap-banner.low{background:#fff5e0;border-left-color:var(--gold);}
+  .cap-banner.full{background:#fbe9e9;border-left-color:#b3261e;color:#7a1f1a;}
   .gg-note{background:var(--gold-pale);border-left:3px solid var(--gold);border-radius:6px;padding:12px 15px;font-size:13px;color:var(--dark-gray);margin-bottom:26px;line-height:1.55;}
 
   .gg-section{margin-bottom:26px;}
@@ -119,7 +122,9 @@
 <div class="gg-wrap">
   <div class="gg-card" id="ggCard">
 
-    <div class="gg-note">Register your 4-person team below. After you submit, the Chamber receives your registration automatically — no need to turn in the paper form. Payment ($240 per team) can be made by cash, check, or credit card; the Chamber will follow up to collect it.</div>
+    <div class="cap-banner" id="capBanner"></div>
+
+    <div class="gg-note" id="ggNote">Register your 4-person team below. After you submit, the Chamber receives your registration automatically — no need to turn in the paper form. Payment ($240 per team) can be made by cash, check, or credit card; the Chamber will follow up to collect it.</div>
 
     <!-- TEAM -->
     <div class="gg-section">
@@ -190,7 +195,7 @@
     </div>
 
     <!-- PAYMENT -->
-    <div class="gg-section">
+    <div class="gg-section" id="paySection">
       <div class="gg-section-head"><span class="n">4</span><h2>Payment</h2><span class="sub">$240 per team</span></div>
       <label class="fl">How will your team pay? <span class="req">*</span></label>
       <div class="pay-opts">
@@ -248,6 +253,7 @@ if(window.firebase){
   db=firebase.firestore();
   FB=true;
 }
+document.addEventListener('DOMContentLoaded', function(){ checkCapacity(); });
 
 /* Web3Forms — emails a copy of each registration to the Chamber inbox.
    Uses the same key as the membership form, so it lands in the same place
@@ -283,6 +289,50 @@ function notifyChamber(data){
   }catch(e){}
 }
 
+/* ============ CAPACITY / WAITLIST ============
+   The tournament is capped at 18 teams. On load we count confirmed teams; once
+   the field is full the form flips to pre-registration for the next Glow Golf,
+   so nobody who shows up late just bounces off a dead end. Waitlist entries are
+   saved to the same collection with waitlist:true so the Chamber can call them
+   first if a spot opens, and has a head start on next year's field. */
+var TEAM_CAP = 18;
+var IS_WAITLIST = false;
+
+function applyCapacityUI(count){
+  var left = TEAM_CAP - count;
+  var banner = document.getElementById('capBanner');
+  var btn = document.getElementById('ggSubmit');
+  if(!banner) return;
+  if(left > 0){
+    banner.className = 'cap-banner' + (left <= 3 ? ' low' : '');
+    banner.innerHTML = left <= 3
+      ? '🔥 <b>Only ' + left + ' spot' + (left===1?'':'s') + ' left</b> — ' + count + ' of ' + TEAM_CAP + ' teams registered.'
+      : '<b>' + left + ' of ' + TEAM_CAP + ' spots open</b> — ' + count + ' team' + (count===1?'':'s') + ' registered so far.';
+    banner.style.display = 'block';
+    IS_WAITLIST = false;
+  }else{
+    IS_WAITLIST = true;
+    banner.className = 'cap-banner full';
+    banner.innerHTML = '<b>The field is full.</b> All ' + TEAM_CAP + ' spots for the 2026 Glow Golf Tournament are taken — but don\'t miss the next one. '
+      + 'Pre-register below and the Chamber will contact you <b>first</b> when the next tournament opens, and if a spot opens up this year.';
+    banner.style.display = 'block';
+    if(btn) btn.textContent = 'Pre-Register My Team';
+    var note = document.getElementById('ggNote');
+    if(note) note.innerHTML = 'This year\'s field is full, so this form now takes <b>pre-registrations for the next Glow Golf Tournament</b>. You\'ll get first call when spots open — and if a team drops out this year, the Chamber works down this list in order.';
+    var payHead = document.getElementById('paySection');
+    if(payHead) payHead.style.display = 'none';
+  }
+}
+
+function checkCapacity(){
+  if(!FB) return;
+  db.collection('glowgolf').get().then(function(snap){
+    var n=0;
+    snap.forEach(function(d){ var x=d.data(); if(!x.waitlist) n++; });
+    applyCapacityUI(n);
+  }).catch(function(){});
+}
+
 function val(id){ var el=document.getElementById(id); return el?el.value.trim():''; }
 function showMsg(txt,type){
   var m=document.getElementById('ggMsg');
@@ -313,7 +363,7 @@ function submitGolf(){
 
   if(!teamName){ showMsg('Please enter a team name.','err'); return; }
   if(!capName||!capPhone||!capEmail){ showMsg('Please fill in the captain name, phone, and email.','err'); return; }
-  if(!pay){ showMsg('Please choose a payment method.','err'); return; }
+  if(!pay && !IS_WAITLIST){ showMsg('Please choose a payment method.','err'); return; }
   if(!agreed){ showMsg('Please agree to the waiver to complete registration.','err'); return; }
 
   /* build roster — player 1 defaults to captain */
@@ -333,13 +383,14 @@ function submitGolf(){
     paymentMethod: pay,
     paymentReceived: false,
     amountPaid: '',
-    event: 'Glow Golf Tournament 2026',
+    event: IS_WAITLIST ? 'Glow Golf — Pre-Registration (next tournament)' : 'Glow Golf Tournament 2026',
+    waitlist: IS_WAITLIST,
     waiverAgreed: true
   };
 
   var btn=document.getElementById('ggSubmit');
   btn.disabled=true;
-  showMsg('Sending your registration…','info');
+  showMsg(IS_WAITLIST?'Adding you to the pre-registration list…':'Sending your registration…','info');
 
   if(!FB){
     showMsg('Preview mode: registration not sent (Firebase not connected). On the live site this saves to the Chamber.','info');
@@ -351,6 +402,13 @@ function submitGolf(){
   db.collection('glowgolf').add(data).then(function(){
     notifyChamber(data);
     document.getElementById('doneTeam').textContent=teamName;
+    if(IS_WAITLIST){
+      var done=document.getElementById('ggDone');
+      done.querySelector('h2').textContent="You're on the list!";
+      var ps=done.querySelectorAll('p');
+      ps[0].innerHTML='Thanks, <span class="team-name">'+teamName.replace(/</g,'&lt;')+'</span> — this year\'s field was full, so you\'re pre-registered for the next Glow Golf Tournament. The Chamber will contact you first when it opens.';
+      ps[1].textContent='If a team drops out this year, we work down this list in order — so you may still hear from us about August 1st.';
+    }
     document.getElementById('ggCard').style.display='none';
     document.getElementById('ggDone').style.display='block';
     window.scrollTo({top:0,behavior:'smooth'});

@@ -259,6 +259,62 @@
   .job-card .jc-apply a{color:var(--navy);}
   .jobs-empty{font-size:14px;color:var(--gray);padding:20px 0;}
 
+  /* ---- LOCAL SALES ---- */
+  .deals-section{background:var(--white);padding:84px 60px;}
+  .deals-section .section-title{color:var(--navy);}
+  .deals-sub{font-size:14px;color:var(--gray);max-width:660px;margin-top:10px;margin-bottom:32px;}
+  .deals-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;}
+  .deal-card{background:var(--slate);border:1px solid var(--border);border-radius:10px;overflow:hidden;display:flex;flex-direction:column;transition:transform .15s,box-shadow .15s;}
+  .deal-card:hover{transform:translateY(-3px);box-shadow:0 10px 28px rgba(14,32,86,.10);}
+  .deal-flyer{width:100%;background:linear-gradient(135deg,#eef2fb,#dfe7f7);line-height:0;cursor:zoom-in;}
+  .deal-flyer img{width:100%;height:auto;max-height:260px;object-fit:contain;display:block;}
+  .deal-body{padding:16px 18px 18px;flex:1;display:flex;flex-direction:column;}
+  .deal-biz{font-size:11.5px;font-weight:700;letter-spacing:1.1px;text-transform:uppercase;color:var(--gold);margin-bottom:5px;}
+  .deal-card h5{font-family:'Playfair Display',serif;font-size:17px;font-weight:700;color:var(--navy);margin-bottom:7px;line-height:1.25;}
+  .deal-card p{font-size:13.3px;color:var(--dark-gray);line-height:1.55;flex:1;}
+  .deal-meta{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-top:12px;padding-top:11px;border-top:1px solid var(--border);}
+  .deal-dates{font-size:11.5px;color:var(--gray);font-weight:600;}
+  .deal-badge{font-size:10px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;background:var(--gold);color:var(--navy-deep);padding:3px 8px;border-radius:20px;}
+  .deal-badge.ending{background:#b3261e;color:#fff;}
+  .deal-link{margin-left:auto;font-size:12.5px;font-weight:700;color:var(--navy);text-decoration:none;}
+  .deals-empty{grid-column:1/-1;text-align:center;padding:44px 24px;border:1.5px dashed var(--border);border-radius:12px;background:var(--slate);}
+  .deals-empty h4{font-family:'Playfair Display',serif;font-size:19px;color:var(--navy);margin-bottom:8px;}
+  .deals-empty p{font-size:13.5px;color:var(--gray);max-width:440px;margin:0 auto;line-height:1.6;}
+  .deals-empty a{color:var(--navy);font-weight:600;}
+
+  /* ---- NOTIFY / SUBSCRIBE ---- */
+  .notify{background:linear-gradient(135deg,#0e2056 0%,#16317f 55%,#1a3ea8 100%);padding:74px 60px;color:#fff;}
+  .notify-in{max-width:900px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:44px;align-items:center;}
+  .notify h2{font-family:'Playfair Display',serif;font-size:31px;font-weight:800;line-height:1.1;margin-bottom:12px;}
+  .notify h2 .em{color:var(--gold-light);}
+  .notify p.lead{font-size:14.5px;color:#dfe7fb;line-height:1.65;margin-bottom:14px;}
+  .notify ul{list-style:none;margin:0;}
+  .notify ul li{font-size:13.5px;color:#dfe7fb;padding:4px 0 4px 22px;position:relative;}
+  .notify ul li:before{content:'✓';position:absolute;left:0;color:var(--gold-light);font-weight:700;}
+  .notify-card{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.16);border-radius:12px;padding:24px;}
+  .notify-card label{display:block;font-size:11.5px;font-weight:700;letter-spacing:.6px;text-transform:uppercase;color:var(--gold-light);margin-bottom:6px;}
+  .notify-card input[type=text],.notify-card input[type=email],.notify-card input[type=tel]{width:100%;padding:11px 13px;border:1px solid rgba(255,255,255,.22);border-radius:7px;font-size:14px;font-family:'Inter',sans-serif;background:rgba(255,255,255,.10);color:#fff;margin-bottom:13px;}
+  .notify-card input::placeholder{color:rgba(255,255,255,.45);}
+  .notify-card input:focus{outline:none;border-color:var(--gold);background:rgba(255,255,255,.15);}
+  .notify-opts{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px;}
+  .notify-opt{flex:1;min-width:120px;}
+  .notify-opt input{position:absolute;opacity:0;pointer-events:none;}
+  .notify-opt label{display:block;text-align:center;padding:10px 8px;border:1px solid rgba(255,255,255,.22);border-radius:7px;font-size:12.5px;font-weight:600;color:#dfe7fb;cursor:pointer;letter-spacing:0;text-transform:none;margin:0;transition:.15s;}
+  .notify-opt input:checked+label{background:var(--gold);border-color:var(--gold);color:var(--navy-deep);}
+  .notify-btn{width:100%;padding:13px;background:var(--gold);color:var(--navy-deep);border:none;border-radius:8px;font-size:15px;font-weight:700;font-family:'Inter',sans-serif;cursor:pointer;}
+  .notify-btn:hover{background:var(--gold-light);}
+  .notify-btn:disabled{background:rgba(255,255,255,.3);color:rgba(255,255,255,.6);cursor:not-allowed;}
+  .notify-fine{font-size:11.5px;color:rgba(223,231,251,.72);margin-top:11px;line-height:1.5;text-align:center;}
+  .notify-msg{display:none;margin-top:12px;padding:11px 13px;border-radius:7px;font-size:13.5px;line-height:1.5;}
+  @media(max-width:860px){
+    .deals-grid{grid-template-columns:repeat(2,1fr);}
+    .notify-in{grid-template-columns:1fr;gap:28px;}
+  }
+  @media(max-width:600px){
+    .deals-grid{grid-template-columns:1fr;}
+    .deals-section,.notify{padding-left:24px;padding-right:24px;}
+  }
+
   .directory{background:var(--slate);padding:84px 60px;}
   .directory-head{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:12px;}
   .directory-head .section-title{color:var(--navy);}
@@ -375,8 +431,11 @@
   .btn-green:hover{background:#d2ecda;}
 
   /* admin */
-  .admin-tabs{display:flex;gap:6px;border-bottom:1px solid var(--border);margin-bottom:20px;}
-  .admin-tab{padding:10px 16px;font-size:13px;font-weight:600;color:var(--gray);cursor:pointer;border-bottom:2px solid transparent;}
+  .admin-tabs{display:flex;gap:6px;border-bottom:1px solid var(--border);margin-bottom:20px;overflow-x:auto;overflow-y:hidden;-webkit-overflow-scrolling:touch;scrollbar-width:thin;scrollbar-color:var(--border) transparent;}
+  .admin-tabs::-webkit-scrollbar{height:6px;}
+  .admin-tabs::-webkit-scrollbar-thumb{background:var(--border);border-radius:3px;}
+  .admin-tabs::-webkit-scrollbar-track{background:transparent;}
+  .admin-tab{padding:10px 16px;font-size:13px;font-weight:600;color:var(--gray);cursor:pointer;border-bottom:2px solid transparent;white-space:nowrap;flex:0 0 auto;}
   .admin-tab.on{color:var(--navy);border-bottom-color:var(--gold);}
   .admin-list{display:flex;flex-direction:column;gap:10px;max-height:340px;overflow-y:auto;}
   .admin-row{border:1px solid var(--border);border-radius:8px;padding:13px 15px;display:flex;align-items:center;justify-content:between;gap:12px;}
@@ -454,7 +513,8 @@
   <ul class="nav-links">
     <li><a href="#calendar">Calendar</a></li>
     <li><a href="#events">Events</a></li>
-    <li><a href="#directory">Members</a></li>
+    <li><a href="#deals">Deals</a>
+      <a href="#directory">Members</a></li>
     <li><a href="#jobs">Jobs</a></li>
     <li><a href="#about">About</a></li>
     <li><a href="#membership" class="nav-cta">Join Today</a></li>
@@ -509,7 +569,9 @@
 <div class="stat-bar">
   <div class="stat-item"><span class="num" id="memberCount">22</span><span class="label">Current Members</span></div>
   <div class="stat-divider"></div>
-  <div class="stat-item"><span class="num" id="eventCount">15</span><span class="label">Summer Events</span></div>
+  <div class="stat-item"><span class="num" id="eventCount">13</span><span class="label">Summer Events</span></div>
+  <div class="stat-divider"></div>
+  <div class="stat-item"><span class="num" id="eventsLeft">13</span><span class="label">Still to Come</span></div>
   <div class="stat-divider"></div>
   <div class="stat-item"><span class="num">Kiowa</span><span class="label">County Served</span></div>
   <div class="stat-divider"></div>
@@ -545,20 +607,20 @@
   </div>
   <p class="events-sub">Our marquee summer events. Mark your calendar and watch this space — event flyers and details are added as each one is announced.</p>
   <div class="events-track" id="eventsTrack">
-    <div class="event-card"><div class="flyer-slot"><img src="flyers/flyer-back2schooldrive.jpg" alt="" onerror="this.parentElement.classList.add('empty');this.outerHTML=flyerPH;"></div><div class="event-top"><div class="event-date"><span class="m">Jul</span><span class="d">1</span></div><div class="event-meta"><h4>Back-to-School Supply Drive</h4><span class="loc">📍 Great Plains Youth &amp; Family Services</span></div></div><div class="event-body"><p>The supply donation campaign kicks off July 1. Donate school supplies so local students start the year prepared. Drop off at the GPYFS office, 901 S Broadway.</p></div><div class="event-foot"><span class="event-tag">Community Drive</span></div></div>
-    <div class="event-card"><div class="flyer-slot"><img src="flyers/flyer-back2school.jpg" alt="" onerror="this.parentElement.classList.add('empty');this.outerHTML=flyerPH;"></div><div class="event-top"><div class="event-date"><span class="m">Jul</span><span class="d">30</span></div><div class="event-meta"><h4>Back2School Bash</h4><span class="loc">📍 Western Technology Center · 10 AM – 12 PM</span></div></div><div class="event-body"><p>Great Plains Youth &amp; Family Services hosts the Back2School Bash. Pre-registered families shop 10–11:30 AM, then it opens to the public 11:30 AM–12 PM. A sensory-friendly option is available. Registration opens July 8.</p></div><div class="event-foot"><span class="event-tag">Family · Back to School</span></div></div>
-    <div class="event-card"><div class="flyer-slot"><img src="flyers/flyer-1st-saturday-market.jpg" alt="" onerror="this.parentElement.classList.add('empty');this.outerHTML=flyerPH;"></div><div class="event-top"><div class="event-date"><span class="m">Jul</span><span class="d">4</span></div><div class="event-meta"><h4>First Saturday Market: Red, White &amp; Local</h4><span class="loc">📍 207 W 4th St · 8 AM – 2 PM</span></div></div><div class="event-body"><p>A Fourth of July edition of Rust Dirt Co's monthly market. Shop local goods, enjoy live music, and bring the whole family. Vendors welcome.</p></div><div class="event-foot"><span class="event-tag">Shop Local · Holiday</span></div></div>
-    <div class="event-card"><div class="flyer-slot"><img src="flyers/flyer-relayforlife.jpg" alt="" onerror="this.parentElement.classList.add('empty');this.outerHTML=flyerPH;"></div><div class="event-top"><div class="event-date"><span class="m">Jul</span><span class="d">10</span></div><div class="event-meta"><h4>Relay for Life</h4><span class="loc">📍 Hancock Event Center · 6 PM – Midnight</span></div></div><div class="event-body"><p>Our community celebrates survivors, remembers loved ones, and supports the fight against cancer. Everyone is encouraged to attend.</p></div><div class="event-foot"><span class="event-tag">Signature Event</span></div></div>
-    <div class="event-card"><div class="flyer-slot"><img src="flyers/flyer-hilltop-jrclinic.jpg" alt="" onerror="this.parentElement.classList.add('empty');this.outerHTML=flyerPH;"></div><div class="event-top"><div class="event-date"><span class="m">Jul</span><span class="d">13</span></div><div class="event-meta"><h4>Hilltop National Junior Golf Clinic</h4><span class="loc">📍 <a href="https://hobartok.gov/golf-course" target="_blank" rel="noopener">Hobart Municipal Golf Course</a> · Jul 13–15</span></div></div><div class="event-body"><p>Under Armour Junior Tour clinic coached by Bobby Taylor, Director of Golf Instruction. Ages 6–10 ($150, entry 8–9:30 AM) and ages 11–18 ($150, entry 10 AM–12 PM). To register, call Brian Baker at the golf shop: (580) 530-9177.</p></div><div class="event-foot"><span class="event-tag">Youth · Golf</span></div></div>
-    <div class="event-card"><div class="flyer-slot"><img src="flyers/flyer-fitnessandhealth.png" alt="" onerror="this.parentElement.classList.add('empty');this.outerHTML=flyerPH;"></div><div class="event-top"><div class="event-date"><span class="m">Jul</span><span class="d">17</span></div><div class="event-meta"><h4>Family Health &amp; Fitness Day</h4><span class="loc">📍 <a href="https://elkviewhospital.com/" target="_blank" rel="noopener">Elkview General Hospital</a> · 6–8:30 PM</span></div></div><div class="event-body"><p>An evening focused on health, wellness, and fun for the whole family. Proceeds benefit victims of child abuse throughout Southwest Oklahoma.</p></div><div class="event-foot"><span class="event-tag">Family · Wellness</span></div></div>
-    <div class="event-card"><div class="flyer-slot"><img src="flyers/flyer-farmers-market.jpg" alt="" onerror="this.parentElement.classList.add('empty');this.outerHTML=flyerPH;"></div><div class="event-top"><div class="event-date"><span class="m">Jul</span><span class="d">18</span></div><div class="event-meta"><h4>Farmers Market</h4><span class="loc">📍 Hunter Park · Morning</span></div></div><div class="event-body"><p>Support local growers, makers, and vendors. Fresh produce, baked goods, handmade items, plus kids' activities all morning.</p></div><div class="event-foot"><span class="event-tag">Shop Local</span></div></div>
-    <div class="event-card"><div class="flyer-slot"><img src="flyers/flyer-kickball.png" alt="" onerror="this.parentElement.classList.add('empty');this.outerHTML=flyerPH;"></div><div class="event-top"><div class="event-date"><span class="m">Jul</span><span class="d">18</span></div><div class="event-meta"><h4>Family Slip 'N Slide Kickball</h4><span class="loc">📍 Biggers Park · Evening</span></div></div><div class="event-body"><p>One of the most exciting family events of the summer. Gather your team for an evening of fun and friendly competition.</p></div><div class="event-foot"><span class="event-tag">Family · Sports</span><a href="kickball-registration.html" style="font-size:12.5px;font-weight:700;color:var(--navy);text-decoration:none;">Register Your Team →</a></div></div>
-    <div class="event-card"><div class="flyer-slot"><img src="flyers/flyer-showdown-hill.jpg" alt="" onerror="this.parentElement.classList.add('empty');this.outerHTML=flyerPH;"></div><div class="event-top"><div class="event-date"><span class="m">Jul</span><span class="d">18</span></div><div class="event-meta"><h4>Hill Top National: Show Down on the Hill</h4><span class="loc">📍 <a href="https://hobartok.gov/golf-course" target="_blank" rel="noopener">Hobart Golf Course</a> · 9 AM Tee Time</span></div></div><div class="event-body"><p>3rd Annual H.G.A. Event — four-man scramble, A-B-C flights, 100% payout based on team entries. Limited to the first 18 teams (waiting list available). $500/team. Hole sponsors welcome. To sign up, text all team members to Tom Monczunski (580) 819-2114 or TJ Wilson (580) 550-0156.</p></div><div class="event-foot"><span class="event-tag">Golf · Tournament</span></div></div>
-    <div class="event-card"><div class="flyer-slot"><img src="flyers/flyer-glowgolf.png" alt="" onerror="this.parentElement.classList.add('empty');this.outerHTML=flyerPH;"></div><div class="event-top"><div class="event-date"><span class="m">Aug</span><span class="d">1</span></div><div class="event-meta"><h4>Glow Golf Tournament Returns</h4><span class="loc">📍 <a href="https://hobartok.gov/golf-course" target="_blank" rel="noopener">Hobart Municipal Golf Course</a> · Night</span></div></div><div class="event-body"><p>The popular nighttime event is back — glowing golf balls, illuminated fairways, and a fun evening under the stars.</p></div><div class="event-foot"><span class="event-tag">Golf · Night Event</span><a href="glow-golf-registration.html" style="font-size:12.5px;font-weight:700;color:var(--navy);text-decoration:none;">Register Your Team →</a></div></div>
-    <div class="event-card"><div class="flyer-slot"><img src="flyers/flyer-hobart-125th-bday.png" alt="" onerror="this.parentElement.classList.add('empty');this.outerHTML=flyerPH;"></div><div class="event-top"><div class="event-date"><span class="m">Aug</span><span class="d">7</span></div><div class="event-meta"><h4>Hobart's 125th Birthday Celebration</h4><span class="loc">📍 Downtown Hobart · Free Admission</span></div></div><div class="event-body"><p>Celebrate 125 years of Hobart with Dragging Main, live music, family games, and a community picnic. The Chamber will be selling hot dogs, chips, and drinks. Everyone is welcome.</p></div><div class="event-foot"><span class="event-tag">Community · Celebration</span></div></div>
-    <div class="event-card"><div class="flyer-slot"><img src="flyers/flyer-hobart-bday-aug8.jpg" alt="" onerror="this.parentElement.classList.add('empty');this.outerHTML=flyerPH;"></div><div class="event-top"><div class="event-date"><span class="m">Aug</span><span class="d">8</span></div><div class="event-meta"><h4>Hobart's 125th Birthday Gala: A Night to Remember</h4><span class="loc">📍 The Stanley Building · Doors 6 PM</span></div></div><div class="event-body"><p>A formal evening honoring 125 years of Hobart. Enjoy a catered steak dinner, dueling pianos, guest speakers, and live &amp; silent auctions, plus a 25-year time capsule. Cocktail / semi-formal attire. Tickets $125 couple / $65 single at City Hall — limited.</p></div><div class="event-foot"><span class="event-tag">Gala · Ticketed Event</span></div></div>
-    <div class="event-card"><div class="flyer-slot"><img src="flyers/flyer-free-fair.png" alt="" onerror="this.parentElement.classList.add('empty');this.outerHTML=flyerPH;"></div><div class="event-top"><div class="event-date"><span class="m">Aug</span><span class="d">27</span></div><div class="event-meta"><h4>Kiowa County Free Fair</h4><span class="loc">📍 Kiowa County Fairgrounds · Aug 27–29</span></div></div><div class="event-body"><p>Tradition, community, and pride. Livestock shows, 4-H and Open Class exhibits, the Cake ReMix and Gussied-Up Porch Goose contests, Kiwanis turtle races, and food trucks on site. No admission, no entry fees — read the full catalog right here on the site.</p></div><div class="event-foot"><span class="event-tag">Fair · Free Admission</span><a href="fair-catalog.html" style="font-size:12.5px;font-weight:700;color:var(--navy);text-decoration:none;">Full Catalog →</a></div></div>
-    <div class="event-card"><div class="flyer-slot"><img src="flyers/flyer-hometown-harvest.png" alt="" onerror="this.parentElement.classList.add('empty');this.outerHTML=flyerPH;"></div><div class="event-top"><div class="event-date"><span class="m">Sep</span><span class="d">19</span></div><div class="event-meta"><h4>Hobart's Hometown Harvest</h4><span class="loc">📍 Kiowa County Courthouse Square</span></div></div><div class="event-body"><p>A fall celebration on the Courthouse Square with vendors and food trucks filling downtown. Now taking vendor and food truck registrations — watch the Chamber's Facebook page for announcements.</p></div><div class="event-foot"><span class="event-tag">Shop Local · Fall Festival</span></div></div>
+    <div class="event-card" data-date="2026-07-01"><div class="flyer-slot"><img src="flyers/flyer-back2schooldrive.jpg" alt="" onerror="this.parentElement.classList.add('empty');this.outerHTML=flyerPH;"></div><div class="event-top"><div class="event-date"><span class="m">Jul</span><span class="d">1</span></div><div class="event-meta"><h4>Back-to-School Supply Drive</h4><span class="loc">📍 Great Plains Youth &amp; Family Services</span></div></div><div class="event-body"><p>The supply donation campaign kicks off July 1. Donate school supplies so local students start the year prepared. Drop off at the GPYFS office, 901 S Broadway.</p></div><div class="event-foot"><span class="event-tag">Community Drive</span></div></div>
+    <div class="event-card" data-date="2026-07-30"><div class="flyer-slot"><img src="flyers/flyer-back2school.jpg" alt="" onerror="this.parentElement.classList.add('empty');this.outerHTML=flyerPH;"></div><div class="event-top"><div class="event-date"><span class="m">Jul</span><span class="d">30</span></div><div class="event-meta"><h4>Back2School Bash</h4><span class="loc">📍 Western Technology Center · 10 AM – 12 PM</span></div></div><div class="event-body"><p>Great Plains Youth &amp; Family Services hosts the Back2School Bash. Pre-registered families shop 10–11:30 AM, then it opens to the public 11:30 AM–12 PM. A sensory-friendly option is available. Registration opens July 8.</p></div><div class="event-foot"><span class="event-tag">Family · Back to School</span></div></div>
+    <div class="event-card" data-date="2026-07-04"><div class="flyer-slot"><img src="flyers/flyer-1st-saturday-market.jpg" alt="" onerror="this.parentElement.classList.add('empty');this.outerHTML=flyerPH;"></div><div class="event-top"><div class="event-date"><span class="m">Jul</span><span class="d">4</span></div><div class="event-meta"><h4>First Saturday Market: Red, White &amp; Local</h4><span class="loc">📍 207 W 4th St · 8 AM – 2 PM</span></div></div><div class="event-body"><p>A Fourth of July edition of Rust Dirt Co's monthly market. Shop local goods, enjoy live music, and bring the whole family. Vendors welcome.</p></div><div class="event-foot"><span class="event-tag">Shop Local · Holiday</span></div></div>
+    <div class="event-card" data-date="2026-07-10"><div class="flyer-slot"><img src="flyers/flyer-relayforlife.jpg" alt="" onerror="this.parentElement.classList.add('empty');this.outerHTML=flyerPH;"></div><div class="event-top"><div class="event-date"><span class="m">Jul</span><span class="d">10</span></div><div class="event-meta"><h4>Relay for Life</h4><span class="loc">📍 Hancock Event Center · 6 PM – Midnight</span></div></div><div class="event-body"><p>Our community celebrates survivors, remembers loved ones, and supports the fight against cancer. Everyone is encouraged to attend.</p></div><div class="event-foot"><span class="event-tag">Signature Event</span></div></div>
+    <div class="event-card" data-date="2026-07-13"><div class="flyer-slot"><img src="flyers/flyer-hilltop-jrclinic.jpg" alt="" onerror="this.parentElement.classList.add('empty');this.outerHTML=flyerPH;"></div><div class="event-top"><div class="event-date"><span class="m">Jul</span><span class="d">13</span></div><div class="event-meta"><h4>Hilltop National Junior Golf Clinic</h4><span class="loc">📍 <a href="https://hobartok.gov/golf-course" target="_blank" rel="noopener">Hobart Municipal Golf Course</a> · Jul 13–15</span></div></div><div class="event-body"><p>Under Armour Junior Tour clinic coached by Bobby Taylor, Director of Golf Instruction. Ages 6–10 ($150, entry 8–9:30 AM) and ages 11–18 ($150, entry 10 AM–12 PM). To register, call Brian Baker at the golf shop: (580) 530-9177.</p></div><div class="event-foot"><span class="event-tag">Youth · Golf</span></div></div>
+    <div class="event-card" data-date="2026-07-17"><div class="flyer-slot"><img src="flyers/flyer-fitnessandhealth.png" alt="" onerror="this.parentElement.classList.add('empty');this.outerHTML=flyerPH;"></div><div class="event-top"><div class="event-date"><span class="m">Jul</span><span class="d">17</span></div><div class="event-meta"><h4>Family Health &amp; Fitness Day</h4><span class="loc">📍 <a href="https://elkviewhospital.com/" target="_blank" rel="noopener">Elkview General Hospital</a> · 6–8:30 PM</span></div></div><div class="event-body"><p>An evening focused on health, wellness, and fun for the whole family. Proceeds benefit victims of child abuse throughout Southwest Oklahoma.</p></div><div class="event-foot"><span class="event-tag">Family · Wellness</span></div></div>
+    <div class="event-card" data-date="2026-07-18"><div class="flyer-slot"><img src="flyers/flyer-farmers-market.jpg" alt="" onerror="this.parentElement.classList.add('empty');this.outerHTML=flyerPH;"></div><div class="event-top"><div class="event-date"><span class="m">Jul</span><span class="d">18</span></div><div class="event-meta"><h4>Farmers Market</h4><span class="loc">📍 Hunter Park · Morning</span></div></div><div class="event-body"><p>Support local growers, makers, and vendors. Fresh produce, baked goods, handmade items, plus kids' activities all morning.</p></div><div class="event-foot"><span class="event-tag">Shop Local</span></div></div>
+    <div class="event-card" data-date="2026-07-18"><div class="flyer-slot"><img src="flyers/flyer-kickball.png" alt="" onerror="this.parentElement.classList.add('empty');this.outerHTML=flyerPH;"></div><div class="event-top"><div class="event-date"><span class="m">Jul</span><span class="d">18</span></div><div class="event-meta"><h4>Family Slip 'N Slide Kickball</h4><span class="loc">📍 Biggers Park · Evening</span></div></div><div class="event-body"><p>One of the most exciting family events of the summer. Gather your team for an evening of fun and friendly competition.</p></div><div class="event-foot"><span class="event-tag">Family · Sports</span><a href="kickball-registration.html" style="font-size:12.5px;font-weight:700;color:var(--navy);text-decoration:none;">Register Your Team →</a></div></div>
+    
+    <div class="event-card" data-date="2026-08-01"><div class="flyer-slot"><img src="flyers/flyer-glowgolf.png" alt="" onerror="this.parentElement.classList.add('empty');this.outerHTML=flyerPH;"></div><div class="event-top"><div class="event-date"><span class="m">Aug</span><span class="d">1</span></div><div class="event-meta"><h4>Glow Golf Tournament Returns</h4><span class="loc">📍 <a href="https://hobartok.gov/golf-course" target="_blank" rel="noopener">Hobart Municipal Golf Course</a> · Night</span></div></div><div class="event-body"><p>The popular nighttime event is back — glowing golf balls, illuminated fairways, and a fun evening under the stars.</p></div><div class="event-foot"><span class="event-tag">Golf · Night Event</span><a href="glow-golf-registration.html" style="font-size:12.5px;font-weight:700;color:var(--navy);text-decoration:none;">Register Your Team →</a></div></div>
+    <div class="event-card" data-date="2026-08-07"><div class="flyer-slot"><img src="flyers/flyer-hobart-125th-bday.png" alt="" onerror="this.parentElement.classList.add('empty');this.outerHTML=flyerPH;"></div><div class="event-top"><div class="event-date"><span class="m">Aug</span><span class="d">7</span></div><div class="event-meta"><h4>Hobart's 125th Birthday Celebration</h4><span class="loc">📍 Downtown Hobart · Free Admission</span></div></div><div class="event-body"><p>Celebrate 125 years of Hobart with Dragging Main, live music, family games, and a community picnic. The Chamber will be selling hot dogs, chips, and drinks. Everyone is welcome.</p></div><div class="event-foot"><span class="event-tag">Community · Celebration</span></div></div>
+    <div class="event-card" data-date="2026-08-08"><div class="flyer-slot"><img src="flyers/flyer-hobart-bday-aug8.jpg" alt="" onerror="this.parentElement.classList.add('empty');this.outerHTML=flyerPH;"></div><div class="event-top"><div class="event-date"><span class="m">Aug</span><span class="d">8</span></div><div class="event-meta"><h4>Hobart's 125th Birthday Gala: A Night to Remember</h4><span class="loc">📍 The Stanley Building · Doors 6 PM</span></div></div><div class="event-body"><p>A formal evening honoring 125 years of Hobart. Enjoy a catered steak dinner, dueling pianos, guest speakers, and live &amp; silent auctions, plus a 25-year time capsule. Cocktail / semi-formal attire. Tickets $125 couple / $65 single at City Hall — limited.</p></div><div class="event-foot"><span class="event-tag">Gala · Ticketed Event</span></div></div>
+    <div class="event-card" data-date="2026-08-27"><div class="flyer-slot"><img src="flyers/flyer-free-fair.png" alt="" onerror="this.parentElement.classList.add('empty');this.outerHTML=flyerPH;"></div><div class="event-top"><div class="event-date"><span class="m">Aug</span><span class="d">27</span></div><div class="event-meta"><h4>Kiowa County Free Fair</h4><span class="loc">📍 Kiowa County Fairgrounds · Aug 27–29</span></div></div><div class="event-body"><p>Tradition, community, and pride. Livestock shows, 4-H and Open Class exhibits, the Cake ReMix and Gussied-Up Porch Goose contests, Kiwanis turtle races, and food trucks on site. No admission, no entry fees — read the full catalog right here on the site.</p></div><div class="event-foot"><span class="event-tag">Fair · Free Admission</span><a href="fair-catalog.html" style="font-size:12.5px;font-weight:700;color:var(--navy);text-decoration:none;">Full Catalog →</a></div></div>
+    <div class="event-card" data-date="2026-09-19"><div class="flyer-slot"><img src="flyers/flyer-hometown-harvest.png" alt="" onerror="this.parentElement.classList.add('empty');this.outerHTML=flyerPH;"></div><div class="event-top"><div class="event-date"><span class="m">Sep</span><span class="d">19</span></div><div class="event-meta"><h4>Hobart's Hometown Harvest</h4><span class="loc">📍 Kiowa County Courthouse Square</span></div></div><div class="event-body"><p>A fall celebration on the Courthouse Square with vendors and food trucks filling downtown. Now taking vendor and food truck registrations — watch the Chamber's Facebook page for announcements.</p></div><div class="event-foot"><span class="event-tag">Shop Local · Fall Festival</span></div></div>
   </div>
 </section>
 
@@ -579,6 +641,39 @@
   </div>
   <div class="cal-grid" id="calGrid"></div>
   <div class="cal-legend"><span id="calStatus"></span></div>
+</section>
+
+<!-- ===== NOTIFY / SUBSCRIBE ===== -->
+<section class="notify" id="notify">
+  <div class="notify-in">
+    <div>
+      <h2>Never Miss What's <span class="em">Happening in Hobart</span></h2>
+      <p class="lead">Get Chamber events, community happenings, and the monthly newsletter delivered straight to you — no digging through Facebook to find out what's going on.</p>
+      <ul>
+        <li>Reminders before Chamber &amp; community events</li>
+        <li>The monthly Chamber newsletter</li>
+        <li>Member deals and local sales</li>
+        <li>Unsubscribe anytime — we never sell your info</li>
+      </ul>
+    </div>
+    <div class="notify-card">
+      <label for="subName">Name</label>
+      <input type="text" id="subName" placeholder="Your name" />
+      <label for="subEmail">Email</label>
+      <input type="email" id="subEmail" placeholder="name@email.com" />
+      <label for="subPhone">Mobile (optional — for text alerts)</label>
+      <input type="tel" id="subPhone" placeholder="(580) 000-0000" />
+      <label>What do you want?</label>
+      <div class="notify-opts">
+        <div class="notify-opt"><input type="checkbox" id="optEvents" checked><label for="optEvents">Event alerts</label></div>
+        <div class="notify-opt"><input type="checkbox" id="optNews" checked><label for="optNews">Newsletter</label></div>
+        <div class="notify-opt"><input type="checkbox" id="optDeals"><label for="optDeals">Local deals</label></div>
+      </div>
+      <button class="notify-btn" id="subBtn" onclick="submitSubscribe()">Keep Me Posted</button>
+      <div class="notify-msg" id="subMsg"></div>
+      <p class="notify-fine">Free to join. Standard message rates may apply for text alerts.</p>
+    </div>
+  </div>
 </section>
 
 <!-- ===== MEMBERSHIP FORM ===== -->
@@ -773,6 +868,14 @@
     </div>
   </div>
   <p class="directory-note">Interested in joining the directory? <a href="#membership" style="color:var(--gold)">Become a member →</a></p>
+</section>
+
+<!-- ===== LOCAL SALES ===== -->
+<section class="deals-section" id="deals">
+  <span class="section-eyebrow">Shop Hobart</span>
+  <h2 class="section-title">Local Sales &amp; Deals</h2>
+  <p class="deals-sub">Sales, specials, and weekly ads from Chamber member businesses. When our members have something going on, you'll find it here first — because a dollar spent in Hobart stays in Hobart. Members: contact the Chamber office to get your deal or weekly ad posted.</p>
+  <div class="deals-grid" id="dealsGrid"><div class="deals-empty"><h4>Loading deals…</h4></div></div>
 </section>
 
 <!-- ===== JOB OPENINGS ===== -->
@@ -1018,7 +1121,6 @@ var SEED=[
   {id:'s4',title:'Family Health & Fitness Day',date:'2026-07-17',time:'6:00–8:30 PM',location:'Elkview General Hospital',description:'An evening of health, wellness, and fun for the whole family. Proceeds benefit victims of child abuse throughout Southwest Oklahoma.',status:'approved'},
   {id:'s5',title:'Farmers Market',date:'2026-07-18',time:'Morning',location:'Hunter Park',description:'Support local growers, makers, and vendors, plus special kids activities all morning.',status:'approved'},
   {id:'s6',title:"Family Slip 'N Slide Kickball",date:'2026-07-18',time:'Evening',location:'Biggers Park',description:'An evening of fun and friendly competition. Teams welcome from families, businesses, and groups of friends.',status:'approved',registerUrl:'kickball-registration.html'},
-  {id:'s7',title:'Hill Top National: Show Down on the Hill',date:'2026-07-18',time:'9:00 AM Tee Time',location:'Hobart Golf Course',description:'3rd Annual H.G.A. Event — four-man scramble, A-B-C flights, 100% payout based on team entries. Limited to the first 18 teams (waiting list available). $500/team. Hole sponsors welcome. To sign up, text all team members to Tom Monczunski (580) 819-2114 or TJ Wilson (580) 550-0156.',status:'approved'},
   {id:'s8',title:'Glow Golf Tournament',date:'2026-08-01',time:'Night',location:'Hobart Municipal Golf Course',description:'Glowing golf balls, illuminated fairways, and a fun evening under the stars. 4-man scramble, $240 per team, limited to 18 teams. Register your team online.',status:'approved',registerUrl:'glow-golf-registration.html'},
   {id:'s9',title:"Hobart's 125th Birthday Celebration",date:'2026-08-07',time:'All day',location:'Downtown Hobart',description:'Celebrate 125 years of Hobart history and community in downtown Hobart. Free admission, with Dragging Main, live music, family-friendly fun and games, and a community picnic and gathering. The Chamber will be selling hot dogs, chips, and drinks. For more information, contact Jessica Williams, Executive Director, at (580) 682-0887.',status:'approved'},
   {id:'s15',title:"Hobart's 125th Birthday Gala: A Night to Remember",date:'2026-08-08',time:'Doors 6:00 PM',location:'The Stanley Building, Downtown Hobart',description:'The City of Hobart invites you to a formal evening celebrating 125 years — honoring our past, celebrating our present, and building our future. The night features a catered steak dinner, dueling pianos, guest speakers, and both live and silent auctions, plus a 25-year time capsule to be opened on Hobart\'s 150th birthday. Attire is cocktail or semi-formal. Tickets are $125 per couple or $65 single, available at City Hall — seating is limited.',status:'approved'},
@@ -1209,6 +1311,7 @@ function renderAdminEventCards(){
   var adminEvents=EVENTS.filter(function(e){return e._admin;});
   for(i=0;i<adminEvents.length;i++){ track.insertAdjacentHTML('beforeend', buildEventCardHTML(adminEvents[i])); }
   sortEventsCarousel();
+  pruneCarousel();
   applyFlyerBackdrops();
   syncEventCount();
 }
@@ -1482,6 +1585,110 @@ document.addEventListener('keydown',function(e){
   }
 });
 
+/* ============ NOTIFICATION SUBSCRIBERS ============
+   Captures who wants event alerts / the newsletter / deal notices into the
+   'subscribers' Firestore collection. This is the SIGN-UP + LIST half of the
+   system: it stores the audience and lets the Chamber export or compose to it
+   from the admin panel. Actually DELIVERING email/SMS needs a sending service
+   (see the setup notes) — a static site can't send mail on its own.
+   'tier' is stored on every subscriber so this can be price-gated later
+   (free = community list, supporter = paid individual/family membership)
+   without having to re-collect anyone. */
+function subMsgShow(txt,type){
+  var m=document.getElementById('subMsg');
+  if(!m)return;
+  m.style.display='block';
+  m.textContent=txt;
+  if(type==='err'){ m.style.background='rgba(255,120,120,.18)'; m.style.color='#ffd9d9'; }
+  else if(type==='ok'){ m.style.background='rgba(140,230,170,.18)'; m.style.color='#d7f7e2'; }
+  else{ m.style.background='rgba(255,255,255,.12)'; m.style.color='#dfe7fb'; }
+}
+function submitSubscribe(){
+  var name=(document.getElementById('subName').value||'').trim();
+  var email=(document.getElementById('subEmail').value||'').trim();
+  var phone=(document.getElementById('subPhone').value||'').trim();
+  var wEvents=document.getElementById('optEvents').checked;
+  var wNews=document.getElementById('optNews').checked;
+  var wDeals=document.getElementById('optDeals').checked;
+
+  if(!name){ subMsgShow('Please enter your name.','err'); return; }
+  if(!email && !phone){ subMsgShow('Please give us an email or a mobile number so we can reach you.','err'); return; }
+  if(email && email.indexOf('@')<1){ subMsgShow('That email address doesn\'t look right.','err'); return; }
+  if(!wEvents && !wNews && !wDeals){ subMsgShow('Pick at least one thing you\'d like to hear about.','err'); return; }
+
+  var btn=document.getElementById('subBtn');
+  btn.disabled=true;
+  subMsgShow('Adding you to the list…','info');
+
+  if(!FB){ subMsgShow('Preview mode — not saved. This works on the live site.','info'); btn.disabled=false; return; }
+
+  var data={
+    name:name, email:email, phone:phone,
+    wantsEvents:wEvents, wantsNewsletter:wNews, wantsDeals:wDeals,
+    channel: (email&&phone)?'both':(email?'email':'sms'),
+    tier:'free',            /* 'free' | 'supporter' — price-gate hook */
+    active:true,
+    source:'website',
+    createdAt: firebase.firestore.FieldValue.serverTimestamp()
+  };
+  db.collection('subscribers').add(data).then(function(){
+    btn.disabled=false;
+    subMsgShow('You\'re on the list, '+name.split(' ')[0]+'! We\'ll be in touch.','ok');
+    document.getElementById('subName').value='';
+    document.getElementById('subEmail').value='';
+    document.getElementById('subPhone').value='';
+  }).catch(function(){
+    btn.disabled=false;
+    subMsgShow('Something went wrong. Please try again, or call the Chamber at (580) 682-0887.','err');
+  });
+}
+
+/* ============ LOCAL SALES / DEALS ============
+   Member deals are managed from the admin panel and stored in 'deals'.
+   A deal shows publicly while active and between its start/end dates. */
+function dealsEmptyHTML(msg){
+  return '<div class="deals-empty"><h4>'+(msg||'No sales running right now')+'</h4>'
+    +'<p>Check back soon — when our member businesses have a sale, special, or weekly ad going, it shows up here first. '
+    +'Member business with a deal to promote? <a href="#membership">Get in touch with the Chamber</a> and we\'ll post it.</p></div>';
+}
+function loadDeals(){
+  var grid=document.getElementById('dealsGrid');
+  if(!grid) return;
+  if(!FB){ grid.innerHTML=dealsEmptyHTML(); return; }
+  db.collection('deals').where('active','==',true).get().then(function(snap){
+    var rows=[]; snap.forEach(function(d){ var x=d.data(); x.id=d.id; rows.push(x); });
+    var today=_anDayKey();
+    rows=rows.filter(function(d){
+      if(d.startDate && d.startDate>today) return false;   /* not started yet */
+      if(d.endDate && d.endDate<today) return false;       /* already expired */
+      return true;
+    });
+    rows.sort(function(a,b){ return (a.endDate||'9999').localeCompare(b.endDate||'9999'); });
+    if(!rows.length){ grid.innerHTML=dealsEmptyHTML(); return; }
+    var h='',i,d,ending;
+    for(i=0;i<rows.length;i++){
+      d=rows[i];
+      ending = d.endDate && (new Date(d.endDate+'T00:00:00') - new Date()) < 3*864e5;
+      h+='<div class="deal-card">';
+      if(d.flyerUrl) h+='<div class="deal-flyer" onclick="openFlyer(\''+esc(d.flyerUrl)+'\')"><img src="'+esc(d.flyerUrl)+'" alt="'+esc(d.title||'')+'" onerror="this.parentElement.style.display=\'none\';"></div>';
+      h+='<div class="deal-body">'
+        +(d.business?'<span class="deal-biz">'+esc(d.business)+'</span>':'')
+        +'<h5>'+esc(d.title||'')+'</h5>'
+        +'<p>'+esc(d.description||'')+'</p>'
+        +'<div class="deal-meta">';
+      if(d.endDate) h+='<span class="deal-badge'+(ending?' ending':'')+'">'+(ending?'Ends soon':'Thru '+_dealDate(d.endDate))+'</span>';
+      if(d.startDate&&d.endDate) h+='<span class="deal-dates">'+_dealDate(d.startDate)+' – '+_dealDate(d.endDate)+'</span>';
+      if(d.linkUrl) h+='<a class="deal-link" href="'+esc(d.linkUrl)+'" target="_blank" rel="noopener">Details →</a>';
+      h+='</div></div></div>';
+    }
+    grid.innerHTML=h;
+  }).catch(function(){ grid.innerHTML=dealsEmptyHTML(); });
+}
+function _dealDate(s){
+  var p=(s||'').split('-'); if(p.length<3) return s;
+  return (MN[(+p[1])-1]||'').slice(0,3)+' '+(+p[2]);
+}
+
 /* ============ SITE ANALYTICS (first-party, no third-party trackers) ============
    Everything is stored in one Firestore collection: analytics_daily.
    One document per calendar day (doc id = YYYY-MM-DD), holding running counters
@@ -1654,6 +1861,8 @@ function renderAdmin(){
     +'<div class="admin-tab'+(adminTab==='jobcreate'?' on':'')+'" onclick="switchTab(\'jobcreate\')">+ New Opening</div>'
     +'<div class="admin-tab'+(adminTab==='kickball'?' on':'')+'" onclick="switchTab(\'kickball\')">Kickball Teams <span id="kbCount"></span></div>'
     +'<div class="admin-tab'+(adminTab==='glowgolf'?' on':'')+'" onclick="switchTab(\'glowgolf\')">Glow Golf <span id="ggCount"></span></div>'
+    +'<div class="admin-tab'+(adminTab==='deals'?' on':'')+'" onclick="switchTab(\'deals\')">Local Sales <span id="dlCount"></span></div>'
+    +'<div class="admin-tab'+(adminTab==='subs'?' on':'')+'" onclick="switchTab(\'subs\')">Subscribers <span id="sbCount"></span></div>'
     +'<div class="admin-tab'+(adminTab==='analytics'?' on':'')+'" onclick="switchTab(\'analytics\')">Analytics</div>'
     +'<div class="admin-tab" onclick="adminLogout()" style="margin-left:auto;color:#b3261e;">Sign Out</div>'
     +'</div><div id="adminPane"></div>';
@@ -1666,6 +1875,8 @@ function renderAdmin(){
   else if(adminTab==='jobcreate') paneJobCreate(null);
   else if(adminTab==='kickball') paneKickball();
   else if(adminTab==='glowgolf') paneGolf();
+  else if(adminTab==='deals') paneDeals();
+  else if(adminTab==='subs') paneSubs();
   else if(adminTab==='analytics') paneAnalytics();
 }
 function switchTab(t){adminTab=t;renderAdmin();}
@@ -1855,13 +2066,16 @@ function paneGolf(){
   var pane=document.getElementById('adminPane');
   pane.innerHTML='<div class="admin-empty">Loading…</div>';
   db.collection('glowgolf').get().then(function(snap){
-    var rows=[]; snap.forEach(function(doc){var x=doc.data();x.id=doc.id;rows.push(x);});
-    rows.sort(function(a,b){ return (a.createdAt&&a.createdAt.seconds||0)-(b.createdAt&&b.createdAt.seconds||0); });
-    var cnt=document.getElementById('ggCount'); if(cnt) cnt.innerHTML=rows.length?('<span class="badge-pending">'+rows.length+'</span>'):'';
-    if(!rows.length){ pane.innerHTML='<div class="admin-empty">No teams registered yet.</div>'; return; }
+    var all=[]; snap.forEach(function(doc){var x=doc.data();x.id=doc.id;all.push(x);});
+    all.sort(function(a,b){ return (a.createdAt&&a.createdAt.seconds||0)-(b.createdAt&&b.createdAt.seconds||0); });
+    var rows=all.filter(function(x){return !x.waitlist;});
+    var wait=all.filter(function(x){return x.waitlist;});
+    var cnt=document.getElementById('ggCount'); if(cnt) cnt.innerHTML=all.length?('<span class="badge-pending">'+all.length+'</span>'):'';
+    if(!all.length){ pane.innerHTML='<div class="admin-empty">No teams registered yet.</div>'; return; }
     var paid=0,i; for(i=0;i<rows.length;i++){ if(rows[i].paymentReceived) paid++; }
-    var capNote=rows.length>=18?' · <b style="color:#b3261e;">field full (18 team cap)</b>':(' · '+(18-rows.length)+' spots left');
-    var html='<div style="font-size:13px;color:var(--gray);margin-bottom:14px;">'+rows.length+' team'+(rows.length===1?'':'s')+' registered · '+paid+' paid'+capNote+'</div><div class="admin-list">';
+    var capNote=rows.length>=18?' · <b style="color:#b3261e;">field full (18 team cap) — registrations now go to the pre-registration list</b>':(' · '+(18-rows.length)+' spots left');
+    var html='<div style="font-size:13px;color:var(--gray);margin-bottom:14px;">'+rows.length+' team'+(rows.length===1?'':'s')+' registered · '+paid+' paid'+capNote
+      +(wait.length?' · <b>'+wait.length+'</b> pre-registered for next time':'')+'</div><div class="admin-list">';
     for(i=0;i<rows.length;i++){
       var k=rows[i], n=i+1;
       var roster=k.roster||[];
@@ -1884,13 +2098,186 @@ function paneGolf(){
         +'</div>';
     }
     html+='</div>';
+    if(wait.length){
+      html+='<div class="an-section-title" style="margin-top:26px;">Pre-Registered for the Next Tournament ('+wait.length+')</div>'
+        +'<div style="font-size:12.5px;color:var(--gray);margin-bottom:10px;">Signed up after the field filled. Call these in order if a spot opens, and first when the next tournament opens.</div>'
+        +'<div class="admin-list">';
+      for(i=0;i<wait.length;i++){
+        var w=wait[i];
+        html+='<div class="admin-row"><div class="info"><b>#'+(i+1)+' — '+esc(w.teamName)+'</b>'
+          +'<small>'+esc(w.contactName||'')+' · '+esc(w.phone||'')+' · '+esc(w.email||'')+'</small></div>'
+          +'<div class="acts"><button class="btn-sm btn-line" onclick="promoteGg(\''+w.id+'\')">Move to Field</button>'
+          +'<button class="btn-sm btn-red" onclick="delGolf(\''+w.id+'\')">Delete</button></div></div>';
+      }
+      html+='</div>';
+    }
     pane.innerHTML=html;
   }).catch(function(e){ pane.innerHTML='<div class="admin-empty">Error loading.</div>'; });
+}
+function promoteGg(id){
+  if(!confirm('Move this team into the tournament field?'))return;
+  db.collection('glowgolf').doc(id).update({waitlist:false, event:'Glow Golf Tournament 2026'}).then(function(){paneGolf();});
 }
 function toggleGgRoster(id){ var el=document.getElementById('ggroster_'+id); if(el) el.style.display=(el.style.display==='none'?'block':'none'); }
 function setGgPaid(id,val){ db.collection('glowgolf').doc(id).update({paymentReceived:val}); }
 function setGgAmount(id,val){ db.collection('glowgolf').doc(id).update({amountPaid:val}); }
 function delGolf(id){ if(!confirm('Delete this team registration?'))return; db.collection('glowgolf').doc(id).delete().then(function(){paneGolf();}); }
+
+/* ---- Local Sales / deals admin ---- */
+function paneDeals(){
+  var pane=document.getElementById('adminPane');
+  pane.innerHTML='<div class="admin-empty">Loading…</div>';
+  db.collection('deals').get().then(function(snap){
+    var rows=[]; snap.forEach(function(d){var x=d.data();x.id=d.id;rows.push(x);});
+    rows.sort(function(a,b){ return (b.createdAt&&b.createdAt.seconds||0)-(a.createdAt&&a.createdAt.seconds||0); });
+    var live=rows.filter(function(d){ return d.active; }).length;
+    var cnt=document.getElementById('dlCount'); if(cnt) cnt.innerHTML=live?('<span class="badge-pending">'+live+'</span>'):'';
+    var h='<button class="btn-sm btn-gold" style="margin-bottom:14px;" onclick="editDeal()">+ Post a Deal</button>'
+      +'<div style="font-size:12.5px;color:var(--gray);margin-bottom:12px;">'+rows.length+' total · '+live+' showing on the site. Deals hide themselves automatically once the end date passes.</div>'
+      +'<div class="admin-list">';
+    if(!rows.length) h+='<div class="admin-empty">No deals posted yet. Use “Post a Deal” to add a member sale or upload a weekly ad flyer.</div>';
+    var i,d;
+    for(i=0;i<rows.length;i++){
+      d=rows[i];
+      var expired = d.endDate && d.endDate < _anDayKey();
+      h+='<div class="admin-row"><div class="info"><b>'+esc(d.title||'(untitled)')+(expired?' <span style="color:#b3261e;font-size:11px;">EXPIRED</span>':'')+(d.active?'':' <span style="color:var(--gray);font-size:11px;">HIDDEN</span>')+'</b>'
+        +'<small>'+esc(d.business||'—')+(d.startDate||d.endDate?(' · '+esc(d.startDate||'')+' → '+esc(d.endDate||'no end')):'')+'</small></div>'
+        +'<div class="acts">'
+        +'<button class="btn-sm btn-line" onclick="toggleDeal(\''+d.id+'\','+(d.active?'false':'true')+')">'+(d.active?'Hide':'Show')+'</button>'
+        +'<button class="btn-sm btn-line" onclick="editDeal(\''+d.id+'\')">Edit</button>'
+        +'<button class="btn-sm btn-red" onclick="delDeal(\''+d.id+'\')">Delete</button>'
+        +'</div></div>';
+    }
+    h+='</div>';
+    pane.innerHTML=h;
+  }).catch(function(e){ pane.innerHTML='<div class="admin-empty">Error loading. If this is the first time using Local Sales, add the <b>deals</b> rule in Firestore.<br><br><small style="color:#b3261e;">'+esc(e&&e.message||'')+'</small></div>'; });
+}
+function editDeal(id){
+  var pane=document.getElementById('adminPane');
+  var d={title:'',business:'',description:'',flyerUrl:'',linkUrl:'',startDate:'',endDate:'',active:true};
+  function form(){
+    pane.innerHTML='<div style="max-width:620px;">'
+      +'<h4 style="font-family:Playfair Display,serif;font-size:19px;color:var(--navy);margin-bottom:14px;">'+(id?'Edit Deal':'Post a Deal')+'</h4>'
+      +'<div class="fg"><label>Business *</label><input id="dlBiz" type="text" value="'+esc(d.business)+'" placeholder="e.g. Clink\'s Foods"></div>'
+      +'<div class="fg"><label>Deal Title *</label><input id="dlTitle" type="text" value="'+esc(d.title)+'" placeholder="e.g. Weekly Ad — Aug 3–9"></div>'
+      +'<div class="fg"><label>Details</label><textarea id="dlDesc" rows="3" placeholder="What\'s on sale?">'+esc(d.description)+'</textarea></div>'
+      +'<div class="fg"><label>Flyer / Ad Image Path</label><input id="dlFlyer" type="text" value="'+esc(d.flyerUrl)+'" placeholder="flyers/ad-clinks-aug3.jpg">'
+      +'<div style="font-size:11.5px;color:var(--gray);margin-top:5px;">Upload the image to the <b>flyers</b> folder in GitHub, then put the path here. Shoppers can tap it to read the full ad.</div></div>'
+      +'<div class="fg"><label>Link (optional)</label><input id="dlLink" type="text" value="'+esc(d.linkUrl)+'" placeholder="https://…"></div>'
+      +'<div class="fg-row">'
+      +'<div class="fg"><label>Starts</label><input id="dlStart" type="date" value="'+esc(d.startDate)+'"></div>'
+      +'<div class="fg"><label>Ends</label><input id="dlEnd" type="date" value="'+esc(d.endDate)+'"></div>'
+      +'</div>'
+      +'<div style="font-size:11.5px;color:var(--gray);margin:-6px 0 14px;">Leave “Ends” blank for an ongoing deal. Otherwise it disappears from the site by itself the day after it ends.</div>'
+      +'<div style="display:flex;gap:8px;margin-top:6px;">'
+      +'<button class="btn-sm btn-gold" onclick="saveDeal('+(id?'\''+id+'\'':'null')+')">Save</button>'
+      +'<button class="btn-sm btn-line" onclick="paneDeals()">Cancel</button>'
+      +'</div></div>';
+  }
+  if(id){ db.collection('deals').doc(id).get().then(function(doc){ if(doc.exists){ var x=doc.data(); for(var k in x){ if(x.hasOwnProperty(k)) d[k]=x[k]; } } form(); }); }
+  else form();
+}
+function saveDeal(id){
+  var data={
+    business:(document.getElementById('dlBiz').value||'').trim(),
+    title:(document.getElementById('dlTitle').value||'').trim(),
+    description:(document.getElementById('dlDesc').value||'').trim(),
+    flyerUrl:(document.getElementById('dlFlyer').value||'').trim(),
+    linkUrl:(document.getElementById('dlLink').value||'').trim(),
+    startDate:document.getElementById('dlStart').value||'',
+    endDate:document.getElementById('dlEnd').value||'',
+    active:true
+  };
+  if(!data.business||!data.title){ alert('Business and deal title are required.'); return; }
+  var p;
+  if(id) p=db.collection('deals').doc(id).update(data);
+  else { data.createdAt=firebase.firestore.FieldValue.serverTimestamp(); p=db.collection('deals').add(data); }
+  p.then(function(){ paneDeals(); loadDeals(); }).catch(function(e){ alert('Could not save: '+(e&&e.message||'')); });
+}
+function toggleDeal(id,val){ db.collection('deals').doc(id).update({active:val}).then(function(){ paneDeals(); loadDeals(); }); }
+function delDeal(id){ if(!confirm('Delete this deal?'))return; db.collection('deals').doc(id).delete().then(function(){ paneDeals(); loadDeals(); }); }
+
+/* ---- Subscribers admin ----
+   The list lives here. Sending is done by exporting to your mail/SMS service —
+   a GitHub Pages site has no server, so it cannot send email or texts itself. */
+function paneSubs(){
+  var pane=document.getElementById('adminPane');
+  pane.innerHTML='<div class="admin-empty">Loading…</div>';
+  db.collection('subscribers').get().then(function(snap){
+    var rows=[]; snap.forEach(function(d){var x=d.data();x.id=d.id;rows.push(x);});
+    rows.sort(function(a,b){ return (b.createdAt&&b.createdAt.seconds||0)-(a.createdAt&&a.createdAt.seconds||0); });
+    var cnt=document.getElementById('sbCount'); if(cnt) cnt.innerHTML=rows.length?('<span class="badge-pending">'+rows.length+'</span>'):'';
+    var act=rows.filter(function(s){return s.active!==false;});
+    var em=act.filter(function(s){return s.email;}).length;
+    var sms=act.filter(function(s){return s.phone;}).length;
+    var news=act.filter(function(s){return s.wantsNewsletter;}).length;
+    var evs=act.filter(function(s){return s.wantsEvents;}).length;
+    var dls=act.filter(function(s){return s.wantsDeals;}).length;
+    var sup=act.filter(function(s){return s.tier==='supporter';}).length;
+
+    var h='<div class="an-grid" style="grid-template-columns:repeat(4,1fr);">'
+      +'<div class="an-card"><h5>List</h5>'
+        +'<div class="an-metric"><span>Active</span><b>'+act.length+'</b></div>'
+        +'<div class="an-metric"><span>Email</span><b>'+em+'</b></div>'
+        +'<div class="an-metric"><span>Mobile</span><b>'+sms+'</b></div></div>'
+      +'<div class="an-card"><h5>Wants</h5>'
+        +'<div class="an-metric"><span>Events</span><b>'+evs+'</b></div>'
+        +'<div class="an-metric"><span>Newsletter</span><b>'+news+'</b></div>'
+        +'<div class="an-metric"><span>Deals</span><b>'+dls+'</b></div></div>'
+      +'<div class="an-card"><h5>Tier</h5>'
+        +'<div class="an-metric"><span>Free</span><b>'+(act.length-sup)+'</b></div>'
+        +'<div class="an-metric"><span>Supporter</span><b>'+sup+'</b></div></div>'
+      +'<div class="an-card"><h5>Export</h5>'
+        +'<div style="display:flex;flex-direction:column;gap:6px;margin-top:4px;">'
+        +'<button class="btn-sm btn-gold" onclick="exportSubs(\'all\')">All (CSV)</button>'
+        +'<button class="btn-sm btn-line" onclick="exportSubs(\'newsletter\')">Newsletter list</button>'
+        +'<button class="btn-sm btn-line" onclick="exportSubs(\'events\')">Event list</button>'
+        +'</div></div>'
+      +'</div>';
+
+    h+='<div style="background:var(--gold-pale);border-left:3px solid var(--gold);border-radius:6px;padding:12px 14px;font-size:12.5px;color:var(--dark-gray);line-height:1.6;margin-bottom:16px;">'
+      +'<b>How sending works:</b> this site collects and stores the list, but it can\'t send email or texts by itself — a GitHub Pages site has no server behind it. '
+      +'Export a CSV above and import it into a sending service (Mailchimp and Brevo both have free tiers for a list this size; Twilio for texts). '
+      +'That keeps you CAN-SPAM/10DLC compliant and handles unsubscribes for you.</div>';
+
+    if(!rows.length){ h+='<div class="admin-empty">No subscribers yet.</div>'; pane.innerHTML=h; return; }
+    h+='<div class="admin-list">';
+    var i,s;
+    for(i=0;i<rows.length;i++){
+      s=rows[i];
+      var wants=[]; if(s.wantsEvents)wants.push('Events'); if(s.wantsNewsletter)wants.push('Newsletter'); if(s.wantsDeals)wants.push('Deals');
+      h+='<div class="admin-row"><div class="info"><b>'+esc(s.name||'(no name)')+(s.tier==='supporter'?' <span style="color:var(--gold);font-size:11px;">SUPPORTER</span>':'')+(s.active===false?' <span style="color:var(--gray);font-size:11px;">UNSUBSCRIBED</span>':'')+'</b>'
+        +'<small>'+esc(s.email||'—')+(s.phone?(' · '+esc(s.phone)):'')+' · '+(wants.join(', ')||'—')+'</small></div>'
+        +'<div class="acts">'
+        +'<button class="btn-sm btn-line" onclick="toggleSubTier(\''+s.id+'\',\''+(s.tier==='supporter'?'free':'supporter')+'\')">'+(s.tier==='supporter'?'Make Free':'Make Supporter')+'</button>'
+        +'<button class="btn-sm btn-red" onclick="delSub(\''+s.id+'\')">Delete</button>'
+        +'</div></div>';
+    }
+    h+='</div>';
+    pane.innerHTML=h;
+  }).catch(function(e){ pane.innerHTML='<div class="admin-empty">Error loading. If this is the first time using Subscribers, add the <b>subscribers</b> rule in Firestore.<br><br><small style="color:#b3261e;">'+esc(e&&e.message||'')+'</small></div>'; });
+}
+function toggleSubTier(id,tier){ db.collection('subscribers').doc(id).update({tier:tier}).then(function(){paneSubs();}); }
+function delSub(id){ if(!confirm('Remove this subscriber?'))return; db.collection('subscribers').doc(id).delete().then(function(){paneSubs();}); }
+function exportSubs(which){
+  db.collection('subscribers').get().then(function(snap){
+    var rows=[]; snap.forEach(function(d){ rows.push(d.data()); });
+    rows=rows.filter(function(s){ return s.active!==false; });
+    if(which==='newsletter') rows=rows.filter(function(s){return s.wantsNewsletter;});
+    if(which==='events') rows=rows.filter(function(s){return s.wantsEvents;});
+    if(!rows.length){ alert('Nothing to export for that list yet.'); return; }
+    var csv='Name,Email,Phone,Events,Newsletter,Deals,Tier\n';
+    rows.forEach(function(s){
+      function q(v){ return '"'+String(v==null?'':v).replace(/"/g,'""')+'"'; }
+      csv+=[q(s.name),q(s.email),q(s.phone),q(s.wantsEvents?'yes':'no'),q(s.wantsNewsletter?'yes':'no'),q(s.wantsDeals?'yes':'no'),q(s.tier||'free')].join(',')+'\n';
+    });
+    var blob=new Blob([csv],{type:'text/csv;charset=utf-8;'});
+    var a=document.createElement('a');
+    a.href=URL.createObjectURL(blob);
+    a.download='hobart-chamber-subscribers-'+which+'-'+_anDayKey()+'.csv';
+    document.body.appendChild(a); a.click(); document.body.removeChild(a);
+  }).catch(function(e){ alert('Could not export: '+(e&&e.message||'')); });
+}
 
 /* announcement banner */
 function paneBanner(){
@@ -1924,21 +2311,49 @@ function syncMemberCount(){
   var el=document.getElementById('memberCount');
   if(el&&n) el.textContent=n;
 }
-/* Summer Events = the Chamber's FEATURED events (the carousel cards) falling in
-   June/July/August. Counted off the rendered cards, so admin-added featured
-   events count too, and the 100+ Bearcat games on the calendar never inflate it. */
-function syncEventCount(){
-  var el=document.getElementById('eventCount');
+/* Hide featured events once they're over — a card disappears from the carousel
+   the day AFTER its date. We hide rather than delete so the "Summer Events"
+   total still reflects everything the Chamber put on this summer, while
+   "Still to Come" counts only what's left. */
+function pruneCarousel(){
   var track=document.getElementById('eventsTrack');
-  if(!el||!track) return;
-  var cards=track.querySelectorAll('.event-card'), n=0, i, m;
+  if(!track) return;
+  var cards=track.querySelectorAll('.event-card'), i, ds, p, d;
+  var today=new Date(); today.setHours(0,0,0,0);
   for(i=0;i<cards.length;i++){
-    m=cards[i].querySelector('.event-date .m');
-    if(!m) continue;
-    m=(m.textContent||'').trim().toLowerCase().slice(0,3);
-    if(m==='jun'||m==='jul'||m==='aug') n++;
+    ds=cards[i].getAttribute('data-date');
+    if(!ds) continue;
+    p=ds.split('-');
+    d=new Date(+p[0], (+p[1])-1, +p[2]);
+    if(d.getTime() < today.getTime()){
+      cards[i].style.display='none';
+      cards[i].setAttribute('data-past','1');
+    }else{
+      cards[i].style.display='';
+      cards[i].removeAttribute('data-past');
+    }
   }
-  if(n) el.textContent=n;
+}
+
+/* Summer Events = the Chamber's FEATURED events (carousel cards) in Jun/Jul/Aug.
+   Reads the cards themselves, so admin-added featured events count automatically
+   and the Bearcat games + federal holidays on the calendar never inflate it. */
+function syncEventCount(){
+  var track=document.getElementById('eventsTrack');
+  if(!track) return;
+  var cards=track.querySelectorAll('.event-card'), i, ds, mo, total=0, left=0;
+  for(i=0;i<cards.length;i++){
+    ds=cards[i].getAttribute('data-date');
+    if(!ds) continue;
+    mo=ds.slice(5,7);
+    if(mo!=='06'&&mo!=='07'&&mo!=='08') continue;
+    total++;
+    if(!cards[i].getAttribute('data-past')) left++;
+  }
+  var elT=document.getElementById('eventCount');
+  var elL=document.getElementById('eventsLeft');
+  if(elT&&total) elT.textContent=total;
+  if(elL&&total) elL.textContent=left;
 }
 function initDirFilter(){
   syncMemberCount();
@@ -2033,7 +2448,10 @@ initDirFilter();
 renderBoard();
 renderPillarPhotos();
 sortEventsCarousel();
+pruneCarousel();
+syncEventCount();
 applyFlyerBackdrops();
+loadDeals();
 trackView();
 </script>
 </body>
