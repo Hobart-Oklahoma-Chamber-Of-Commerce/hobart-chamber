@@ -2070,11 +2070,16 @@ function paneGolf(){
     all.sort(function(a,b){ return (a.createdAt&&a.createdAt.seconds||0)-(b.createdAt&&b.createdAt.seconds||0); });
     var rows=all.filter(function(x){return !x.waitlist;});
     var wait=all.filter(function(x){return x.waitlist;});
+    /* Keep the public capacity counter honest: set it to the real confirmed
+       count every time this pane loads. This self-heals any drift from the
+       public page and seeds the counter for fields registered before it existed. */
+    db.collection('counters').doc('glowgolf').set({confirmed: rows.length}, {merge:true}).catch(function(){});
     var cnt=document.getElementById('ggCount'); if(cnt) cnt.innerHTML=all.length?('<span class="badge-pending">'+all.length+'</span>'):'';
     if(!all.length){ pane.innerHTML='<div class="admin-empty">No teams registered yet.</div>'; return; }
     var paid=0,i; for(i=0;i<rows.length;i++){ if(rows[i].paymentReceived) paid++; }
     var capNote=rows.length>=18?' · <b style="color:#b3261e;">field full (18 team cap) — registrations now go to the pre-registration list</b>':(' · '+(18-rows.length)+' spots left');
-    var html='<div style="font-size:13px;color:var(--gray);margin-bottom:14px;">'+rows.length+' team'+(rows.length===1?'':'s')+' registered · '+paid+' paid'+capNote
+    var fieldBadge='<div style="display:inline-block;background:'+(rows.length>=18?'#b3261e':'var(--navy)')+';color:#fff;font-weight:700;font-size:13px;padding:4px 12px;border-radius:20px;margin-bottom:12px;">⛳ Field: '+rows.length+'/18</div><br>';
+    var html=fieldBadge+'<div style="font-size:13px;color:var(--gray);margin-bottom:14px;">'+rows.length+' team'+(rows.length===1?'':'s')+' registered · '+paid+' paid'+capNote
       +(wait.length?' · <b>'+wait.length+'</b> pre-registered for next time':'')+'</div><div class="admin-list">';
     for(i=0;i<rows.length;i++){
       var k=rows[i], n=i+1;
