@@ -1859,7 +1859,6 @@ function renderAdmin(){
     +'<div class="admin-tab'+(adminTab==='banner'?' on':'')+'" onclick="switchTab(\'banner\')">Banner</div>'
     +'<div class="admin-tab'+(adminTab==='jobs'?' on':'')+'" onclick="switchTab(\'jobs\')">Jobs</div>'
     +'<div class="admin-tab'+(adminTab==='jobcreate'?' on':'')+'" onclick="switchTab(\'jobcreate\')">+ New Opening</div>'
-    +'<div class="admin-tab'+(adminTab==='kickball'?' on':'')+'" onclick="switchTab(\'kickball\')">Kickball Teams <span id="kbCount"></span></div>'
     +'<div class="admin-tab'+(adminTab==='glowgolf'?' on':'')+'" onclick="switchTab(\'glowgolf\')">Glow Golf <span id="ggCount"></span></div>'
     +'<div class="admin-tab'+(adminTab==='deals'?' on':'')+'" onclick="switchTab(\'deals\')">Local Sales <span id="dlCount"></span></div>'
     +'<div class="admin-tab'+(adminTab==='subs'?' on':'')+'" onclick="switchTab(\'subs\')">Subscribers <span id="sbCount"></span></div>'
@@ -1873,7 +1872,6 @@ function renderAdmin(){
   else if(adminTab==='banner') paneBanner();
   else if(adminTab==='jobs') paneJobsList();
   else if(adminTab==='jobcreate') paneJobCreate(null);
-  else if(adminTab==='kickball') paneKickball();
   else if(adminTab==='glowgolf') paneGolf();
   else if(adminTab==='deals') paneDeals();
   else if(adminTab==='subs') paneSubs();
