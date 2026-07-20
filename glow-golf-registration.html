@@ -313,12 +313,13 @@ function applyCapacityUI(count){
   }else{
     IS_WAITLIST = true;
     banner.className = 'cap-banner full';
-    banner.innerHTML = '<b>The field is full.</b> All ' + TEAM_CAP + ' spots for the 2026 Glow Golf Tournament are taken — but don\'t miss the next one. '
-      + 'Pre-register below and the Chamber will contact you <b>first</b> when the next tournament opens, and if a spot opens up this year.';
+    banner.innerHTML = '🚫 <b>EVENT FULL</b> — all ' + TEAM_CAP + ' teams for the 2026 Glow Golf Tournament are registered. '
+      + 'You can <b>pre-register for next year\'s Glow Golf Tournament</b> below so your team gets first call when registration opens. '
+      + 'If a spot opens up this year, the Chamber works down this list in order.';
     banner.style.display = 'block';
-    if(btn) btn.textContent = 'Pre-Register My Team';
+    if(btn) btn.textContent = 'Pre-Register for Next Year';
     var note = document.getElementById('ggNote');
-    if(note) note.innerHTML = 'This year\'s field is full, so this form now takes <b>pre-registrations for the next Glow Golf Tournament</b>. You\'ll get first call when spots open — and if a team drops out this year, the Chamber works down this list in order.';
+    if(note) note.innerHTML = '<b>This year\'s tournament is full.</b> This form is now taking <b>pre-registrations for next year\'s Glow Golf Tournament</b>. You\'ll be first in line when registration opens — and if a team drops out this year, the Chamber calls this list in order.';
     var payHead = document.getElementById('paySection');
     if(payHead) payHead.style.display = 'none';
   }
@@ -399,15 +400,30 @@ function submitGolf(){
   }
 
   data.createdAt=firebase.firestore.FieldValue.serverTimestamp();
-  db.collection('glowgolf').add(data).then(function(){
+  /* Final capacity check the instant before we save. Someone may have opened
+     this form while spots were open and submitted after the field filled — this
+     re-counts live and, if we've hit the cap, converts their entry to a
+     pre-registration for next year rather than silently overbooking. */
+  db.collection('glowgolf').get().then(function(snap){
+    var confirmed=0;
+    snap.forEach(function(d){ var x=d.data(); if(!x.waitlist) confirmed++; });
+    if(!IS_WAITLIST && confirmed >= TEAM_CAP){
+      IS_WAITLIST = true;
+      data.waitlist = true;
+      data.event = 'Glow Golf — Pre-Registration (next year)';
+      applyCapacityUI(confirmed);
+      showMsg('The last spot was just taken — adding you to next year\u2019s pre-registration list instead\u2026','info');
+    }
+    return db.collection('glowgolf').add(data);
+  }).then(function(){
     notifyChamber(data);
     document.getElementById('doneTeam').textContent=teamName;
     if(IS_WAITLIST){
       var done=document.getElementById('ggDone');
       done.querySelector('h2').textContent="You're on the list!";
       var ps=done.querySelectorAll('p');
-      ps[0].innerHTML='Thanks, <span class="team-name">'+teamName.replace(/</g,'&lt;')+'</span> — this year\'s field was full, so you\'re pre-registered for the next Glow Golf Tournament. The Chamber will contact you first when it opens.';
-      ps[1].textContent='If a team drops out this year, we work down this list in order — so you may still hear from us about August 1st.';
+      ps[0].innerHTML='Thanks, <span class="team-name">'+teamName.replace(/</g,'&lt;')+'</span> — this year\'s tournament is full, so you\'re pre-registered for next year\'s Glow Golf Tournament. The Chamber will contact you first when registration opens.';
+      ps[1].textContent='If a team drops out this year, we work down this list in order — so you may still hear from us about this year\'s event.';
     }
     document.getElementById('ggCard').style.display='none';
     document.getElementById('ggDone').style.display='block';
