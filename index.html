@@ -781,6 +781,11 @@
       <span>Banking &amp; Finance</span>
       <div class="member-contact"><span class="mc-line">429 S Broadway</span><a class="mc-phone" href="tel:5807262212">(580) 726-2212</a></div>
     </div>
+    <div class="member t-gold" data-cat="Banking &amp; Finance">
+      <h5><a href="https://www.interbank.com/branch/hobart/" target="_blank" rel="noopener">InterBank <span class="ext">↗</span></a></h5>
+      <span>Banking &amp; Finance</span>
+      <div class="member-contact"><span class="mc-line">400 S Main St</span><a class="mc-phone" href="tel:5807265577">(580) 726-5577</a></div>
+    </div>
     <div class="member t-silver" data-cat="Civic &amp; Nonprofit">
       <h5>Hobart Lions Club</h5>
       <span>Civic Organization</span>
@@ -2141,8 +2146,10 @@ function paneGolf(){
     var paid=0,i; for(i=0;i<rows.length;i++){ if(rows[i].paymentReceived) paid++; }
     var capNote=rows.length>=18?' · <b style="color:#b3261e;">field full (18 team cap) — registrations now go to the pre-registration list</b>':(' · '+(18-rows.length)+' spots left');
     var fieldBadge='<div style="display:inline-block;background:'+(rows.length>=18?'#b3261e':'var(--navy)')+';color:#fff;font-weight:700;font-size:13px;padding:4px 12px;border-radius:20px;margin-bottom:12px;">⛳ Field: '+rows.length+'/18</div><br>';
-    var html=fieldBadge+'<div style="font-size:13px;color:var(--gray);margin-bottom:14px;">'+rows.length+' team'+(rows.length===1?'':'s')+' registered · '+paid+' paid'+capNote
-      +(wait.length?' · <b>'+wait.length+'</b> pre-registered for next time':'')+'</div><div class="admin-list">';
+    var html=fieldBadge+'<div style="font-size:13px;color:var(--gray);margin-bottom:8px;">'+rows.length+' team'+(rows.length===1?'':'s')+' registered · '+paid+' paid'+capNote
+      +(wait.length?' · <b>'+wait.length+'</b> pre-registered for next time':'')+'</div>'
+      +'<div style="margin-bottom:16px;"><button class="btn-sm btn-gold" onclick="exportGolf()">⬇ Export All Teams (CSV)</button></div>'
+      +'<div class="admin-list">';
     for(i=0;i<rows.length;i++){
       var k=rows[i], n=i+1;
       var roster=k.roster||[];
@@ -2151,6 +2158,7 @@ function paneGolf(){
         +'<div class="info"><b>#'+n+' — '+esc(k.teamName)+'</b><small>Captain: '+esc(k.contactName||'')+' · '+esc(k.phone||'')+' · '+roster.length+' players</small></div>'
         +'<div class="acts">'
         +'<button class="btn-sm btn-line" onclick="toggleGgRoster(\''+k.id+'\')">Roster</button>'
+        +'<button class="btn-sm btn-line" onclick="editGolf(\''+k.id+'\')">Edit</button>'
         +'<button class="btn-sm btn-red" onclick="delGolf(\''+k.id+'\')">Delete</button>'
         +'</div></div>'
         +'<div style="display:flex;align-items:center;gap:16px;flex-wrap:wrap;margin-top:10px;padding-top:10px;border-top:1px solid var(--border);">'
@@ -2174,6 +2182,7 @@ function paneGolf(){
         html+='<div class="admin-row"><div class="info"><b>#'+(i+1)+' — '+esc(w.teamName)+'</b>'
           +'<small>'+esc(w.contactName||'')+' · '+esc(w.phone||'')+' · '+esc(w.email||'')+'</small></div>'
           +'<div class="acts"><button class="btn-sm btn-line" onclick="promoteGg(\''+w.id+'\')">Move to Field</button>'
+          +'<button class="btn-sm btn-line" onclick="editGolf(\''+w.id+'\')">Edit</button>'
           +'<button class="btn-sm btn-red" onclick="delGolf(\''+w.id+'\')">Delete</button></div></div>';
       }
       html+='</div>';
@@ -2184,6 +2193,83 @@ function paneGolf(){
 function promoteGg(id){
   if(!confirm('Move this team into the tournament field?'))return;
   db.collection('glowgolf').doc(id).update({waitlist:false, event:'Glow Golf Tournament 2026'}).then(function(){paneGolf();});
+}
+
+/* ---- Edit a Glow Golf registration in place (team, captain, all 4 players) ---- */
+function editGolf(id){
+  var pane=document.getElementById('adminPane');
+  pane.innerHTML='<div class="admin-empty">Loading…</div>';
+  db.collection('glowgolf').doc(id).get().then(function(doc){
+    if(!doc.exists){ paneGolf(); return; }
+    var k=doc.data();
+    var r=k.roster||[];
+    while(r.length<4) r.push({name:'',phone:'',email:''});
+    function pRow(i){
+      var lbl=i===0?'Player 1 (Captain)':'Player '+(i+1);
+      return '<div style="border:1px solid var(--border);border-radius:8px;padding:12px 14px;margin-bottom:10px;background:var(--slate);">'
+        +'<div style="font-size:11.5px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:var(--gold);margin-bottom:8px;">'+lbl+'</div>'
+        +'<div class="fg"><label>Name</label><input id="egP'+i+'name" type="text" value="'+esc(r[i].name||'')+'"></div>'
+        +'<div class="fg-row"><div class="fg"><label>Phone</label><input id="egP'+i+'phone" type="text" value="'+esc(r[i].phone||'')+'"></div>'
+        +'<div class="fg"><label>Email</label><input id="egP'+i+'email" type="text" value="'+esc(r[i].email||'')+'"></div></div></div>';
+    }
+    var h='<div style="max-width:640px;">'
+      +'<h4 style="font-family:Playfair Display,serif;font-size:19px;color:var(--navy);margin-bottom:4px;">Edit Registration</h4>'
+      +'<div style="font-size:12.5px;color:var(--gray);margin-bottom:16px;">'+esc(k.teamName||'')+(k.waitlist?' · pre-registration':'')+'</div>'
+      +'<div class="fg"><label>Team Name *</label><input id="egTeam" type="text" value="'+esc(k.teamName||'')+'"></div>'
+      +'<div class="fg"><label>Captain Name *</label><input id="egCapName" type="text" value="'+esc(k.contactName||'')+'"></div>'
+      +'<div class="fg-row"><div class="fg"><label>Captain Phone *</label><input id="egCapPhone" type="text" value="'+esc(k.phone||'')+'"></div>'
+      +'<div class="fg"><label>Captain Email *</label><input id="egCapEmail" type="text" value="'+esc(k.email||'')+'"></div></div>'
+      +'<div class="fg"><label>Payment Method</label><input id="egPay" type="text" value="'+esc(k.paymentMethod||'')+'" placeholder="Cash / Check / Credit Card"></div>'
+      +'<div style="font-size:11.5px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:var(--navy);margin:18px 0 10px;">Roster</div>'
+      +pRow(0)+pRow(1)+pRow(2)+pRow(3)
+      +'<div style="display:flex;gap:8px;margin-top:8px;">'
+      +'<button class="btn-sm btn-gold" onclick="saveGolf(\''+id+'\')">Save Changes</button>'
+      +'<button class="btn-sm btn-line" onclick="paneGolf()">Cancel</button>'
+      +'</div></div>';
+    pane.innerHTML=h;
+  }).catch(function(){ paneGolf(); });
+}
+function saveGolf(id){
+  function v(x){ var el=document.getElementById(x); return el?el.value.trim():''; }
+  var team=v('egTeam'), capName=v('egCapName'), capPhone=v('egCapPhone'), capEmail=v('egCapEmail');
+  if(!team||!capName){ alert('Team name and captain name are required.'); return; }
+  var roster=[];
+  for(var i=0;i<4;i++){ roster.push({ name:v('egP'+i+'name'), phone:v('egP'+i+'phone'), email:v('egP'+i+'email') }); }
+  if(!roster[0].name) roster[0].name=capName;
+  if(!roster[0].phone) roster[0].phone=capPhone;
+  if(!roster[0].email) roster[0].email=capEmail;
+  db.collection('glowgolf').doc(id).update({
+    teamName:team, contactName:capName, phone:capPhone, email:capEmail,
+    paymentMethod:v('egPay'), roster:roster
+  }).then(function(){ paneGolf(); }).catch(function(e){ alert('Could not save: '+(e&&e.message||'')); });
+}
+
+/* ---- Export every team + full roster to one CSV ---- */
+function exportGolf(){
+  db.collection('glowgolf').get().then(function(snap){
+    var rows=[]; snap.forEach(function(d){ rows.push(d.data()); });
+    if(!rows.length){ alert('No registrations to export yet.'); return; }
+    rows.sort(function(a,b){
+      if(!!a.waitlist!==!!b.waitlist) return a.waitlist?1:-1;
+      return (a.createdAt&&a.createdAt.seconds||0)-(b.createdAt&&b.createdAt.seconds||0);
+    });
+    function q(v){ return '"'+String(v==null?'':v).replace(/"/g,'""')+'"'; }
+    var head=['Status','Team Name','Captain','Captain Phone','Captain Email','Payment Method','Payment Received','Amount Paid'];
+    for(var p=1;p<=4;p++){ head.push('Player '+p+' Name','Player '+p+' Phone','Player '+p+' Email'); }
+    var csv=head.map(q).join(',')+'\n';
+    rows.forEach(function(k){
+      var r=k.roster||[];
+      var line=[ k.waitlist?'Pre-Registration':'Confirmed', k.teamName, k.contactName, k.phone, k.email,
+        k.paymentMethod, k.paymentReceived?'Yes':'No', k.amountPaid||'' ];
+      for(var i=0;i<4;i++){ var pl=r[i]||{}; line.push(pl.name||'',pl.phone||'',pl.email||''); }
+      csv+=line.map(q).join(',')+'\n';
+    });
+    var blob=new Blob([csv],{type:'text/csv;charset=utf-8;'});
+    var a=document.createElement('a');
+    a.href=URL.createObjectURL(blob);
+    a.download='glow-golf-teams-'+_anDayKey()+'.csv';
+    document.body.appendChild(a); a.click(); document.body.removeChild(a);
+  }).catch(function(e){ alert('Could not export: '+(e&&e.message||'')); });
 }
 function toggleGgRoster(id){ var el=document.getElementById('ggroster_'+id); if(el) el.style.display=(el.style.display==='none'?'block':'none'); }
 function setGgPaid(id,val){ db.collection('glowgolf').doc(id).update({paymentReceived:val}); }
