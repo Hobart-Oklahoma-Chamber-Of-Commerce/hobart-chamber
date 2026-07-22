@@ -1104,7 +1104,7 @@ var flyerPHWhite=flyerPH;
 /* hero background — random photo on each visit, with the dark gradient kept
    on top so the headline stays readable. Falls back to hiding the layer if an
    image is missing. */
-var HERO_PICS=['flyers/hero.jpg','flyers/hero-2.jpg','flyers/hero-4.jpg','flyers/hero-7.jpg','flyers/hero-8.jpg','flyers/hero-10.jpg','flyers/hero-11.jpg'];
+var HERO_PICS=['flyers/hero-46.jpg','flyers/hero-30.jpg','flyers/hero-29.jpg','flyers/hero-40.jpg','flyers/hero-36.jpg','flyers/hero-33.jpg'];
 var HERO_GRAD='linear-gradient(to bottom,rgba(14,32,86,.45) 0%,rgba(14,32,86,.6) 45%,rgba(14,32,86,.92) 100%)';
 (function(){
   var h=document.getElementById('heroPhoto');
@@ -2579,7 +2579,7 @@ function openBio(m){
 }
 
 /* ---- What We Do rotating photos (random per visit) ---- */
-var PILLAR_PICS=['flyers/promo-shot-1.jpg','flyers/promo-shot-2.jpg','flyers/promo-shot-3.jpg','flyers/promo-shot-4.jpg','flyers/promo-shot-5.jpg','flyers/promo-shot-6.jpg','flyers/promo-shot-7.jpg','flyers/promo-shot-8.jpg','flyers/hero-5.jpg','flyers/hero-6.jpg','flyers/hero-9.jpg'];
+var PILLAR_PICS=['flyers/hero-28.jpg','flyers/hero-45.jpg','flyers/hero-29.jpg','flyers/hero-27.jpg','flyers/hero-26.jpg','flyers/hero-25.jpg','flyers/hero-44.jpg','flyers/hero-43.jpg','flyers/hero-23.jpg','flyers/hero-31.jpg'];
 function shufflePics(a){ var arr=a.slice(),i,j,t; for(i=arr.length-1;i>0;i--){ j=Math.floor(Math.random()*(i+1)); t=arr[i]; arr[i]=arr[j]; arr[j]=t; } return arr; }
 function renderPillarPhotos(){
   var wrap=document.getElementById('pillarPhotos');
