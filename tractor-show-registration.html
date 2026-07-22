@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Tractor Show Registration — Hobart's Hometown Harvest</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;800;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
+<style>
+  *{margin:0;padding:0;box-sizing:border-box;}
+  :root{
+    --navy:#1a3ea8;--navy-dark:#142f7e;--navy-deep:#0e2056;--navy-hover:#2247bd;
+    --gold:#c49a3e;--gold-light:#dab65e;--gold-pale:#f6edd6;
+    --harvest:#9a5b1e;--harvest-light:#c8873f;
+    --white:#ffffff;--slate:#f3f6fc;--gray:#6f7d99;--dark-gray:#2c3a58;--border:#dbe3f4;
+  }
+  body{font-family:'Inter',sans-serif;color:var(--navy-deep);background:var(--slate);line-height:1.5;-webkit-font-smoothing:antialiased;}
+
+  /* header */
+  .tr-top{background:linear-gradient(135deg,#0e2056 0%,#16317f 45%,#1a3ea8 100%);color:#fff;padding:34px 24px 40px;position:relative;overflow:hidden;}
+  .tr-top .glow{position:absolute;border-radius:50%;filter:blur(46px);opacity:.5;}
+  .tr-top .glow.a{width:220px;height:220px;background:#e0a552;top:-70px;right:-40px;}
+  .tr-top .glow.b{width:180px;height:180px;background:#dab65e;bottom:-80px;left:-30px;opacity:.4;}
+  .tr-inner{max-width:680px;margin:0 auto;position:relative;z-index:2;}
+  .tr-back{display:inline-block;color:var(--gold-light);text-decoration:none;font-size:13px;font-weight:600;margin-bottom:18px;letter-spacing:.3px;}
+  .tr-back:hover{color:#fff;}
+  .tr-eyebrow{display:flex;align-items:center;gap:10px;margin-bottom:14px;}
+  .tr-eyebrow-line{width:38px;height:2px;background:var(--gold);}
+  .tr-eyebrow span{font-size:10.5px;font-weight:600;letter-spacing:2.6px;text-transform:uppercase;color:var(--gold-light);}
+  .tr-top h1{font-family:'Playfair Display',serif;font-size:clamp(28px,5.5vw,44px);font-weight:900;line-height:1.04;margin-bottom:14px;}
+  .tr-top h1 .em{color:var(--gold-light);}
+  .tr-facts{display:flex;flex-wrap:wrap;gap:8px 20px;margin-top:20px;}
+  .tr-fact{display:flex;align-items:center;gap:7px;font-size:13.5px;color:#dfe7fb;}
+  .tr-fact b{color:#fff;font-weight:700;}
+
+  /* form card */
+  .tr-wrap{max-width:680px;margin:-20px auto 60px;padding:0 16px;position:relative;z-index:3;}
+  .tr-card{background:#fff;border:1px solid var(--border);border-radius:14px;box-shadow:0 10px 40px rgba(14,32,86,.10);padding:30px 26px;}
+  .tr-note{background:var(--gold-pale);border-left:3px solid var(--gold);border-radius:6px;padding:12px 15px;font-size:13px;color:var(--dark-gray);margin-bottom:26px;line-height:1.55;}
+
+  .tr-section{margin-bottom:26px;}
+  .tr-section-head{display:flex;align-items:center;gap:10px;margin-bottom:15px;}
+  .tr-section-head .n{width:26px;height:26px;border-radius:50%;background:var(--navy);color:#fff;font-size:13px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-family:'Playfair Display',serif;}
+  .tr-section-head h2{font-family:'Playfair Display',serif;font-size:19px;font-weight:800;color:var(--navy-deep);}
+
+  label.fl{display:block;font-size:12.5px;font-weight:600;color:var(--dark-gray);margin-bottom:6px;}
+  label.fl .req{color:#c0392b;}
+  .fg{margin-bottom:16px;}
+  input[type=text],input[type=tel],input[type=email],select{width:100%;padding:11px 13px;border:1.5px solid var(--border);border-radius:8px;font-size:14.5px;font-family:'Inter',sans-serif;color:var(--navy-deep);background:#fff;transition:border-color .15s,box-shadow .15s;}
+  input:focus,select:focus{outline:none;border-color:var(--navy);box-shadow:0 0 0 3px rgba(26,62,168,.12);}
+  input::placeholder{color:#a7b2c9;}
+  .fg-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+  .fg-row-3{display:grid;grid-template-columns:2fr 1fr 1fr;gap:12px;}
+
+  /* condition options */
+  .cond-opts{display:flex;flex-wrap:wrap;gap:10px;}
+  .cond-opt{flex:1;min-width:130px;}
+  .cond-opt input{position:absolute;opacity:0;pointer-events:none;}
+  .cond-opt label{display:block;text-align:center;padding:13px 10px;border:1.5px solid var(--border);border-radius:9px;font-size:14px;font-weight:600;color:var(--dark-gray);cursor:pointer;transition:all .15s;background:#fff;}
+  .cond-opt input:checked+label{border-color:var(--navy);background:var(--navy);color:#fff;box-shadow:0 4px 14px rgba(26,62,168,.22);}
+
+  /* fee box */
+  .fee-box{background:linear-gradient(160deg,#fff,#faf4e6);border:1px solid var(--gold);border-radius:10px;padding:16px 18px;display:flex;align-items:center;gap:14px;margin-bottom:14px;}
+  .fee-amt{font-family:'Playfair Display',serif;font-size:34px;font-weight:800;color:var(--harvest);line-height:1;flex-shrink:0;}
+  .fee-txt{font-size:13px;color:var(--dark-gray);line-height:1.5;}
+  .fee-txt b{color:var(--navy-deep);}
+
+  /* agreement */
+  .agree-box{border:1px solid var(--border);border-radius:9px;padding:15px 16px;background:var(--slate);font-size:12.5px;color:var(--dark-gray);line-height:1.6;font-style:italic;margin-bottom:14px;}
+  .agree{display:flex;align-items:flex-start;gap:10px;font-size:13.5px;color:var(--dark-gray);cursor:pointer;}
+  .agree input{margin-top:3px;width:17px;height:17px;flex-shrink:0;accent-color:var(--navy);cursor:pointer;}
+
+  .tr-submit{width:100%;padding:15px;background:var(--navy);color:#fff;border:none;border-radius:10px;font-size:16px;font-weight:700;font-family:'Inter',sans-serif;cursor:pointer;letter-spacing:.3px;transition:background .18s,transform .1s;margin-top:6px;}
+  .tr-submit:hover{background:var(--navy-hover);}
+  .tr-submit:active{transform:translateY(1px);}
+  .tr-submit:disabled{background:var(--gray);cursor:not-allowed;}
+
+  .tr-msg{display:none;padding:13px 15px;border-radius:9px;font-size:14px;margin-top:16px;line-height:1.5;}
+
+  /* success */
+  .tr-done{display:none;text-align:center;padding:20px 10px;}
+  .tr-done .check{width:66px;height:66px;border-radius:50%;background:#e8f6ec;color:#1c7a3e;font-size:34px;display:flex;align-items:center;justify-content:center;margin:0 auto 18px;}
+  .tr-done h2{font-family:'Playfair Display',serif;font-size:24px;color:var(--navy-deep);margin-bottom:10px;}
+  .tr-done p{font-size:14.5px;color:var(--dark-gray);max-width:460px;margin:0 auto 8px;line-height:1.6;}
+  .tr-done .who{color:var(--navy);font-weight:700;}
+  .tr-done a{display:inline-block;margin-top:20px;color:var(--navy);font-weight:700;text-decoration:none;font-size:14px;}
+  .tr-done a:hover{color:var(--gold);}
+
+  .tr-foot{text-align:center;font-size:12.5px;color:var(--gray);margin-top:22px;line-height:1.7;}
+  .tr-foot a{color:var(--navy);text-decoration:none;font-weight:600;}
+
+  @media(max-width:520px){
+    .tr-card{padding:24px 18px;}
+    .fg-row,.fg-row-3{grid-template-columns:1fr;}
+  }
+</style>
+</head>
+<body>
+
+<div class="tr-top">
+  <div class="glow a"></div>
+  <div class="glow b"></div>
+  <div class="tr-inner">
+    <a href="index.html" class="tr-back">← Back to Chamber site</a>
+    <div class="tr-eyebrow"><span class="tr-eyebrow-line"></span><span>Hobart Chamber of Commerce</span></div>
+    <h1>Hometown Harvest <span class="em">Tractor Show</span></h1>
+    <div class="tr-facts">
+      <span class="tr-fact">🚜 <b>Antique &amp; Classic Tractors</b></span>
+      <span class="tr-fact">💵 <b>$20 registration</b></span>
+      <span class="tr-fact">📍 <b>Hobart, Oklahoma</b></span>
+    </div>
+  </div>
+</div>
+
+<div class="tr-wrap">
+  <div class="tr-card" id="trCard">
+
+    <div class="tr-note">Register your tractor for the Hometown Harvest Tractor Show below. The $20 registration fee is collected the day of the event — cash, card, or check. After you submit, the Chamber receives your registration automatically.</div>
+
+    <div style="background:linear-gradient(160deg,#fff,#faf4e6);border:1px solid var(--gold);border-radius:10px;padding:16px 18px;margin-bottom:26px;">
+      <div style="font-size:11px;font-weight:700;letter-spacing:1.4px;text-transform:uppercase;color:var(--harvest);margin-bottom:10px;">🏆 Award Categories</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px 18px;font-size:13px;color:var(--dark-gray);">
+        <span>• Best Restored Tractor</span>
+        <span>• Best Antique Tractor</span>
+        <span>• Best Original Tractor</span>
+        <span>• Best Working Tractor</span>
+        <span>• Oldest Tractor</span>
+        <span>• Longest Distance Traveled</span>
+        <span>• People's Choice</span>
+      </div>
+    </div>
+
+    <!-- OWNER -->
+    <div class="tr-section">
+      <div class="tr-section-head"><span class="n">1</span><h2>Your Information</h2></div>
+      <div class="fg">
+        <label class="fl" for="ownerName">Name <span class="req">*</span></label>
+        <input type="text" id="ownerName" placeholder="Full name" />
+      </div>
+      <div class="fg">
+        <label class="fl" for="address">Address <span class="req">*</span></label>
+        <input type="text" id="address" placeholder="Street address" />
+      </div>
+      <div class="fg-row-3">
+        <div class="fg">
+          <label class="fl" for="city">City <span class="req">*</span></label>
+          <input type="text" id="city" placeholder="City" />
+        </div>
+        <div class="fg">
+          <label class="fl" for="state">State <span class="req">*</span></label>
+          <input type="text" id="state" placeholder="OK" maxlength="2" />
+        </div>
+        <div class="fg">
+          <label class="fl" for="zip">ZIP <span class="req">*</span></label>
+          <input type="text" id="zip" placeholder="73651" />
+        </div>
+      </div>
+      <div class="fg-row">
+        <div class="fg">
+          <label class="fl" for="phone">Phone <span class="req">*</span></label>
+          <input type="tel" id="phone" placeholder="(580) 000-0000" />
+        </div>
+        <div class="fg">
+          <label class="fl" for="email">Email <span class="req">*</span></label>
+          <input type="email" id="email" placeholder="name@email.com" />
+        </div>
+      </div>
+    </div>
+
+    <!-- TRACTOR -->
+    <div class="tr-section">
+      <div class="tr-section-head"><span class="n">2</span><h2>Tractor Details</h2></div>
+      <div class="fg">
+        <label class="fl" for="make">Make <span class="req">*</span></label>
+        <input type="text" id="make" placeholder="John Deere, Ford, Case, Farmall, etc." />
+      </div>
+      <div class="fg-row">
+        <div class="fg">
+          <label class="fl" for="model">Model <span class="req">*</span></label>
+          <input type="text" id="model" placeholder="e.g. Model B, 8N, 4020" />
+        </div>
+        <div class="fg">
+          <label class="fl" for="year">Year <span class="req">*</span></label>
+          <input type="text" id="year" placeholder="e.g. 1952" />
+        </div>
+      </div>
+      <label class="fl">Condition <span class="req">*</span></label>
+      <div class="cond-opts">
+        <div class="cond-opt"><input type="radio" name="cond" id="condRestored" value="Restored"><label for="condRestored">Restored</label></div>
+        <div class="cond-opt"><input type="radio" name="cond" id="condOriginal" value="Original"><label for="condOriginal">Original</label></div>
+      </div>
+      <div class="fg" style="margin-top:16px;">
+        <label class="fl" for="history">Brief History of the Tractor <span style="color:var(--gray);font-weight:400;">(optional)</span></label>
+        <textarea id="history" rows="3" placeholder="Anything you'd like to share — family history, restoration story, how you found it…" style="width:100%;padding:11px 13px;border:1.5px solid var(--border);border-radius:8px;font-size:14.5px;font-family:'Inter',sans-serif;color:var(--navy-deep);background:#fff;resize:vertical;"></textarea>
+      </div>
+    </div>
+
+    <!-- SHOW INFO -->
+    <div class="tr-section">
+      <div class="tr-section-head"><span class="n">3</span><h2>Show Information</h2></div>
+      <div class="fg">
+        <label class="fl">Will you be driving your tractor in the parade? <span class="req">*</span></label>
+        <div class="cond-opts">
+          <div class="cond-opt"><input type="radio" name="parade" id="paradeYes" value="Yes"><label for="paradeYes">Yes</label></div>
+          <div class="cond-opt"><input type="radio" name="parade" id="paradeNo" value="No"><label for="paradeNo">No</label></div>
+        </div>
+      </div>
+      <div class="fg">
+        <label class="fl">Do you need trailer parking? <span class="req">*</span></label>
+        <div class="cond-opts">
+          <div class="cond-opt"><input type="radio" name="trailer" id="trailerYes" value="Yes"><label for="trailerYes">Yes</label></div>
+          <div class="cond-opt"><input type="radio" name="trailer" id="trailerNo" value="No"><label for="trailerNo">No</label></div>
+        </div>
+      </div>
+      <div class="fg">
+        <label class="fl">Will you unload the tractor, or will it stay trailered? <span class="req">*</span></label>
+        <div class="cond-opts">
+          <div class="cond-opt"><input type="radio" name="unload" id="unloadOff" value="Unloading from trailer"><label for="unloadOff">Unloading it</label></div>
+          <div class="cond-opt"><input type="radio" name="unload" id="unloadStay" value="Staying trailered"><label for="unloadStay">Staying trailered</label></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- FEE -->
+    <div class="tr-section">
+      <div class="tr-section-head"><span class="n">4</span><h2>Registration Fee</h2></div>
+      <div class="fee-box">
+        <div class="fee-amt">$20</div>
+        <div class="fee-txt"><b>Due the day of the event</b><br>Payable by cash, card, or check at check-in. No payment is collected on this form.</div>
+      </div>
+    </div>
+
+    <!-- AGREEMENT -->
+    <div class="tr-section">
+      <div class="tr-section-head"><span class="n">5</span><h2>Participant Agreement</h2></div>
+      <div class="agree-box">"I certify that I am the owner or have permission to exhibit this tractor. I understand that participation is voluntary and agree to operate my equipment safely. I release the Hobart Chamber of Commerce, the City of Hobart, volunteers, sponsors, and event organizers from liability for any injury, loss, theft, or damage to persons or property during the event."</div>
+      <label class="agree"><input type="checkbox" id="agree"> <span>I have read and agree to the terms above, and agree to pay the $20 registration fee at the event. <span class="req">*</span></span></label>
+    </div>
+
+    <button class="tr-submit" id="trSubmit" onclick="submitTractor()">Register My Tractor</button>
+    <div class="tr-msg" id="trMsg"></div>
+
+    <div class="tr-foot">
+      Questions? Hobart Chamber of Commerce · <a href="tel:5806820887">(580) 682-0887</a><br>
+      <a href="mailto:director@hobartokchamber.org">director@hobartokchamber.org</a>
+    </div>
+  </div>
+
+  <!-- SUCCESS -->
+  <div class="tr-card tr-done" id="trDone">
+    <div class="check">✓</div>
+    <h2>You're registered!</h2>
+    <p>Thanks, <span class="who" id="doneName">friend</span> — your <span class="who" id="doneTractor">tractor</span> is registered for the Hometown Harvest Tractor Show. The Chamber has your information and will see you at the event.</p>
+    <p>Remember to bring your <b>$20 registration fee</b> (cash, card, or check) to check-in.</p>
+    <a href="index.html">← Return to Chamber site</a>
+  </div>
+</div>
+
+<script>
+/* ============================================================
+   HOMETOWN HARVEST TRACTOR SHOW — registration
+   Writes to Firestore collection 'tractorshow'. Registrations show up
+   automatically in the Chamber admin panel under the Tractor Show tab,
+   and an email notification is sent to the Chamber inbox.
+   String-concatenation only, no template literals (house style).
+   ============================================================ */
+var firebaseConfig = {
+  apiKey: "AIzaSyDdoomYnp5-ASz7domQQervL8RttEtOY0o",
+  authDomain: "hobart-chamber.firebaseapp.com",
+  projectId: "hobart-chamber",
+  storageBucket: "hobart-chamber.firebasestorage.app",
+  messagingSenderId: "1018730792333",
+  appId: "1:1018730792333:web:b26c20feef8d04ed07a9c4"
+};
+
+var db=null, FB=false;
+if(window.firebase){
+  firebase.initializeApp(firebaseConfig);
+  db=firebase.firestore();
+  FB=true;
+}
+
+/* Web3Forms — emails a copy of each registration to the Chamber inbox
+   (same key as the membership + golf forms, lands in the same place). */
+var WEB3FORMS_KEY = "a35795f6-54b3-41a0-b5c8-043e93cb73a5";
+function notifyChamber(data){
+  try{
+    var payload={
+      access_key: WEB3FORMS_KEY,
+      subject: "New Tractor Show Registration - "+data.make+" "+data.model,
+      from_name: "Hobart Chamber Website",
+      "Name": data.ownerName,
+      "Address": data.address+", "+data.city+", "+data.state+" "+data.zip,
+      "Phone": data.phone,
+      "Email": data.email,
+      "Tractor": data.year+" "+data.make+" "+data.model,
+      "Condition": data.condition,
+      "History": data.history || "(none provided)",
+      "In Parade": data.inParade,
+      "Needs Trailer Parking": data.needsTrailerParking,
+      "Unload Plan": data.unloadPlan,
+      "Event": "Hometown Harvest Tractor Show 2026",
+      "Fee": "$20 due day of event"
+    };
+    fetch('https://api.web3forms.com/submit',{
+      method:'POST',
+      headers:{'Content-Type':'application/json','Accept':'application/json'},
+      body:JSON.stringify(payload)
+    }).catch(function(){});
+  }catch(e){}
+}
+
+function val(id){ var el=document.getElementById(id); return el?el.value.trim():''; }
+function showMsg(txt,type){
+  var m=document.getElementById('trMsg');
+  m.style.display='block';
+  m.textContent=txt;
+  if(type==='err'){ m.style.background='#fbe9e9'; m.style.color='#b3261e'; }
+  else if(type==='ok'){ m.style.background='#e8f6ec'; m.style.color='#1c7a3e'; }
+  else{ m.style.background='#eef2fb'; m.style.color='#1a3ea8'; }
+}
+function condition(){
+  var r=document.querySelectorAll('input[name="cond"]'), i;
+  for(i=0;i<r.length;i++){ if(r[i].checked) return r[i].value; }
+  return '';
+}
+function radioVal(name){
+  var r=document.querySelectorAll('input[name="'+name+'"]'), i;
+  for(i=0;i<r.length;i++){ if(r[i].checked) return r[i].value; }
+  return '';
+}
+
+function submitTractor(){
+  var ownerName=val('ownerName'), address=val('address'), city=val('city'), state=val('state'), zip=val('zip');
+  var phone=val('phone'), email=val('email');
+  var make=val('make'), model=val('model'), year=val('year');
+  var cond=condition();
+  var history=val('history');
+  var parade=radioVal('parade'), trailer=radioVal('trailer'), unload=radioVal('unload');
+  var agreed=document.getElementById('agree').checked;
+
+  if(!ownerName){ showMsg('Please enter your name.','err'); return; }
+  if(!address||!city||!state||!zip){ showMsg('Please fill in your full address.','err'); return; }
+  if(!phone||!email){ showMsg('Please enter your phone and email.','err'); return; }
+  if(email.indexOf('@')<1){ showMsg('That email address doesn\'t look right.','err'); return; }
+  if(!make||!model||!year){ showMsg('Please fill in the tractor make, model, and year.','err'); return; }
+  if(!cond){ showMsg('Please select Restored or Original.','err'); return; }
+  if(!parade){ showMsg('Please let us know if you\'ll drive in the parade.','err'); return; }
+  if(!trailer){ showMsg('Please let us know if you need trailer parking.','err'); return; }
+  if(!unload){ showMsg('Please let us know if you\'ll unload or stay trailered.','err'); return; }
+  if(!agreed){ showMsg('Please agree to the terms to complete registration.','err'); return; }
+
+  var data={
+    ownerName: ownerName,
+    address: address, city: city, state: state.toUpperCase(), zip: zip,
+    phone: phone, email: email,
+    make: make, model: model, year: year,
+    condition: cond,
+    history: history,
+    inParade: parade, needsTrailerParking: trailer, unloadPlan: unload,
+    event: 'Hometown Harvest Tractor Show 2026',
+    feePaid: false,
+    paymentMethod: '',
+    agreed: true
+  };
+
+  var btn=document.getElementById('trSubmit');
+  btn.disabled=true;
+  showMsg('Sending your registration…','info');
+
+  if(!FB){
+    showMsg('Preview mode: registration not sent (Firebase not connected). On the live site this saves to the Chamber.','info');
+    btn.disabled=false;
+    return;
+  }
+
+  data.createdAt=firebase.firestore.FieldValue.serverTimestamp();
+  db.collection('tractorshow').add(data).then(function(){
+    notifyChamber(data);
+    document.getElementById('doneName').textContent=ownerName.split(' ')[0];
+    document.getElementById('doneTractor').textContent=year+' '+make+' '+model;
+    document.getElementById('trCard').style.display='none';
+    document.getElementById('trDone').style.display='block';
+    window.scrollTo({top:0,behavior:'smooth'});
+  }).catch(function(e){
+    btn.disabled=false;
+    showMsg('Something went wrong saving your registration. Please try again, or call the Chamber at (580) 682-0887.','err');
+  });
+}
+</script>
+</body>
+</html>
