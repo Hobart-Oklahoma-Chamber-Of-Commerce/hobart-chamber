@@ -1104,16 +1104,25 @@ var flyerPHWhite=flyerPH;
 /* hero background — random photo on each visit, with the dark gradient kept
    on top so the headline stays readable. Falls back to hiding the layer if an
    image is missing. */
-var HERO_PICS=['flyers/hero-46.jpg','flyers/hero-30.jpg','flyers/hero-29.jpg','flyers/hero-40.jpg','flyers/hero-36.jpg','flyers/hero-33.jpg'];
+var HERO_PICS=[
+  'flyers/hero.jpg','flyers/hero-2.jpg','flyers/hero-4.jpg','flyers/hero-7.jpg','flyers/hero-8.jpg','flyers/hero-10.jpg','flyers/hero-11.jpg',
+  'flyers/hero-46.jpg','flyers/hero-30.jpg','flyers/hero-40.jpg','flyers/hero-36.jpg','flyers/hero-33.jpg','flyers/hero-34.jpg','flyers/hero-29.jpg','flyers/hero-28.jpg','flyers/hero-27.jpg','flyers/hero-25.jpg','flyers/hero-16.jpg','flyers/hero-26b.jpg','flyers/hero-43.jpg','flyers/hero-44.jpg','flyers/hero-45.jpg'
+];
 var HERO_GRAD='linear-gradient(to bottom,rgba(14,32,86,.45) 0%,rgba(14,32,86,.6) 45%,rgba(14,32,86,.92) 100%)';
 (function(){
   var h=document.getElementById('heroPhoto');
   if(!h)return;
-  var src=HERO_PICS[Math.floor(Math.random()*HERO_PICS.length)];
-  var test=new Image();
-  test.onload=function(){ h.style.backgroundImage=HERO_GRAD+",url('"+src+"')"; h.classList.remove('empty'); };
-  test.onerror=function(){ h.classList.add('empty'); };
-  test.src=src;
+  var order=shufflePics(HERO_PICS);   /* random order through the ENTIRE list */
+  var i=0;
+  function tryNext(){
+    if(i>=order.length){ h.classList.add('empty'); return; }  /* nothing loaded */
+    var src=order[i++];
+    var test=new Image();
+    test.onload=function(){ h.style.backgroundImage=HERO_GRAD+",url('"+src+"')"; h.classList.remove('empty'); };
+    test.onerror=tryNext;   /* skip a missing/broken file, try the next */
+    test.src=src;
+  }
+  tryNext();
 })();
 
 /* ---- Built-in chamber events (always shown on the calendar) ---- */
@@ -2579,16 +2588,25 @@ function openBio(m){
 }
 
 /* ---- What We Do rotating photos (random per visit) ---- */
-var PILLAR_PICS=['flyers/hero-28.jpg','flyers/hero-45.jpg','flyers/hero-29.jpg','flyers/hero-27.jpg','flyers/hero-26.jpg','flyers/hero-25.jpg','flyers/hero-44.jpg','flyers/hero-43.jpg','flyers/hero-23.jpg','flyers/hero-31.jpg'];
+var PILLAR_PICS=['flyers/hero-28.jpg','flyers/hero-45.jpg','flyers/hero-29.jpg','flyers/hero-27.jpg','flyers/hero-26.jpg','flyers/hero-26b.jpg','flyers/hero-25.jpg','flyers/hero-44.jpg','flyers/hero-43.jpg','flyers/hero-23.jpg','flyers/hero-31.jpg','flyers/hero-13.jpg','flyers/hero-14.jpg','flyers/hero-15.jpg','flyers/hero-17.jpg','flyers/hero-18.jpg','flyers/hero-19.jpg','flyers/hero-20.jpg','flyers/hero-21.jpg','flyers/hero-22.jpg','flyers/hero-33.jpg','flyers/hero-34.jpg','flyers/hero-36.jpg','flyers/hero-37.jpg','flyers/hero-38.jpg','flyers/hero-39.jpg'];
 function shufflePics(a){ var arr=a.slice(),i,j,t; for(i=arr.length-1;i>0;i--){ j=Math.floor(Math.random()*(i+1)); t=arr[i]; arr[i]=arr[j]; arr[j]=t; } return arr; }
 function renderPillarPhotos(){
   var wrap=document.getElementById('pillarPhotos');
   if(!wrap)return;
   var imgs=wrap.querySelectorAll('img');
   var pick=shufflePics(PILLAR_PICS);
-  var i;
-  for(i=0;i<imgs.length;i++){
-    (function(img,src){ img.onerror=function(){ img.parentElement.style.display='none'; }; img.src=src; })(imgs[i],pick[i]);
+  var next=imgs.length;   /* next index in the shuffled pool to fall back to */
+  for(var i=0;i<imgs.length;i++){
+    (function(img){
+      function set(src){
+        img.onerror=function(){
+          if(next<pick.length){ set(pick[next++]); }   /* try another from the pool */
+          else{ img.parentElement.style.display='none'; }
+        };
+        img.src=src;
+      }
+      set(pick[i]);
+    })(imgs[i]);
   }
 }
 
