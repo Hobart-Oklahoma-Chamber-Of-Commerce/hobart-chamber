@@ -116,6 +116,24 @@
 
   /* ---- STAT BAR ---- */
   .stat-bar{background:var(--gold);padding:22px 60px;display:flex;align-items:center;justify-content:space-around;gap:20px;flex-wrap:wrap;}
+
+  /* ---- Tractor show announcement banner ---- */
+  .announce-banner{display:block;text-decoration:none;background:linear-gradient(120deg,#0e2056 0%,#16317f 55%,#1a3ea8 100%);border-top:3px solid var(--gold);border-bottom:3px solid var(--gold);}
+  .announce-in{max-width:1180px;margin:0 auto;padding:20px 60px;display:flex;align-items:center;justify-content:space-between;gap:22px;flex-wrap:wrap;}
+  .announce-left{display:flex;align-items:center;gap:18px;}
+  .announce-emoji{font-size:44px;line-height:1;flex-shrink:0;}
+  .announce-text{display:flex;flex-direction:column;gap:2px;}
+  .announce-eyebrow{font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--gold-light,#dab65e);}
+  .announce-title{font-family:'Playfair Display',serif;font-size:23px;font-weight:800;color:#fff;line-height:1.15;}
+  .announce-sub{font-size:13.5px;color:#dfe7fb;margin-top:2px;}
+  .announce-btn{background:var(--gold);color:var(--navy-deep,#0e2056);font-size:15px;font-weight:700;padding:13px 26px;border-radius:8px;white-space:nowrap;flex-shrink:0;transition:transform .12s,background .15s;}
+  .announce-banner:hover .announce-btn{background:var(--gold-light,#dab65e);transform:translateX(3px);}
+  @media(max-width:640px){
+    .announce-in{padding:18px 22px;flex-direction:column;align-items:flex-start;gap:16px;}
+    .announce-emoji{font-size:36px;}
+    .announce-title{font-size:20px;}
+    .announce-btn{width:100%;text-align:center;}
+  }
   .stat-item{display:flex;flex-direction:column;align-items:center;gap:3px;}
   .stat-item .num{font-family:'Playfair Display',serif;font-size:30px;font-weight:800;color:var(--navy-deep);line-height:1;}
   .stat-item .label{font-size:10.5px;font-weight:600;letter-spacing:1.4px;text-transform:uppercase;color:rgba(14,32,86,.72);text-align:center;}
@@ -182,6 +200,16 @@
   .cal-head .section-title{color:var(--navy);}
   .cal-sub{font-size:15px;color:var(--gray);max-width:600px;margin-bottom:30px;}
   .cal-toolbar{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;margin-bottom:18px;}
+
+  /* ---- Calendar type filter ---- */
+  .cal-filter{display:flex;gap:9px;overflow-x:auto;padding-bottom:12px;margin-bottom:16px;scroll-behavior:smooth;scrollbar-width:none;}
+  .cal-filter::-webkit-scrollbar{display:none;}
+  .cal-chipbtn{flex:0 0 auto;display:flex;align-items:center;gap:7px;padding:8px 16px;border-radius:30px;border:1.5px solid var(--border);background:var(--white);color:var(--dark-gray);font-size:12.5px;font-weight:600;cursor:pointer;white-space:nowrap;transition:all .18s;font-family:'Inter',sans-serif;}
+  .cal-chipbtn:hover{border-color:var(--navy);color:var(--navy);}
+  .cal-chipbtn.on{background:var(--navy);color:var(--white);border-color:var(--navy);}
+  .cal-chipbtn .dot{width:9px;height:9px;border-radius:50%;flex-shrink:0;}
+  .cal-chipbtn .ct{font-size:11px;opacity:.65;font-weight:500;}
+  .cal-chipbtn.on .ct{opacity:.85;}
   .cal-nav{display:flex;align-items:center;gap:14px;}
   .cal-nav button{width:40px;height:40px;border-radius:8px;border:1.5px solid var(--border);background:var(--white);color:var(--navy);font-size:17px;cursor:pointer;transition:all .2s;}
   .cal-nav button:hover{background:var(--navy);color:var(--white);border-color:var(--navy);}
@@ -195,6 +223,10 @@
   .cal-cell .dnum{font-size:12px;font-weight:600;color:var(--dark-gray);}
   .cal-cell.dim .dnum{color:#c2cbdd;}
   .cal-chip{font-size:10.5px;font-weight:600;line-height:1.25;padding:3px 6px;border-radius:4px;background:rgba(26,62,168,.1);color:var(--navy);cursor:pointer;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;border-left:3px solid var(--gold);}
+  .cal-chip[data-cat="sports"]{background:rgba(47,122,62,.11);color:#256434;border-left-color:#2f7a3e;}
+  .cal-chip[data-cat="school"]{background:rgba(107,63,160,.11);color:#59338a;border-left-color:#6b3fa0;}
+  .cal-chip[data-cat="holiday"]{background:rgba(179,38,30,.10);color:#96201a;border-left-color:#b3261e;}
+  .cal-chip[data-cat="community"]{background:rgba(194,106,30,.12);color:#9c5518;border-left-color:#c26a1e;}
   .cal-chip:hover{background:rgba(26,62,168,.2);}
   .cal-more{font-size:10px;font-weight:600;color:var(--gold);cursor:pointer;}
   .cal-legend{margin-top:16px;font-size:12.5px;color:var(--gray);display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
@@ -493,6 +525,10 @@
     .cal-cell .dnum{font-size:13px;}
     .cal-dow{font-size:10px;padding:10px 2px;}
     .cal-chip{font-size:0;height:5px;min-height:5px;padding:0;border:none;border-radius:3px;background:var(--navy);margin-top:1px;pointer-events:none;}
+    .cal-chip[data-cat="sports"]{background:#2f7a3e;}
+    .cal-chip[data-cat="school"]{background:#6b3fa0;}
+    .cal-chip[data-cat="holiday"]{background:#b3261e;}
+    .cal-chip[data-cat="community"]{background:#c26a1e;}
     .cal-more{font-size:9px;}
   }
 </style>
@@ -578,6 +614,21 @@
   <div class="stat-item"><span class="num">Mon&nbsp;&amp;&nbsp;Thu</span><span class="label">Office Hours · 8:30–11:30 AM</span></div>
 </div>
 
+<!-- ===== TRACTOR SHOW ANNOUNCEMENT ===== -->
+<a href="tractor-show-registration.html" class="announce-banner">
+  <div class="announce-in">
+    <div class="announce-left">
+      <span class="announce-emoji">🚜</span>
+      <div class="announce-text">
+        <span class="announce-eyebrow">Now Accepting Entries</span>
+        <span class="announce-title">Hometown Harvest Tractor Show</span>
+        <span class="announce-sub">Antique &amp; classic tractors · $20 entry · Register your tractor online</span>
+      </div>
+    </div>
+    <span class="announce-btn">Register Your Tractor →</span>
+  </div>
+</a>
+
 <!-- ===== PILLARS ===== -->
 <section class="pillars">
   <div class="pillars-header">
@@ -639,6 +690,7 @@
     </div>
     <button class="btn-sm btn-line" onclick="calToday()">Today</button>
   </div>
+  <div class="cal-filter" id="calFilter"></div>
   <div class="cal-grid" id="calGrid"></div>
   <div class="cal-legend"><span id="calStatus"></span></div>
 </section>
@@ -1127,25 +1179,25 @@ var HERO_GRAD='linear-gradient(to bottom,rgba(14,32,86,.45) 0%,rgba(14,32,86,.6)
 
 /* ---- Built-in chamber events (always shown on the calendar) ---- */
 var SEED=[
-  {id:'s0',title:'Hobart First Saturday Market: Red, White & Local',date:'2026-07-04',time:'8:00 AM – 2:00 PM',location:'207 W 4th St',description:'A patriotic Fourth of July edition of the First Saturday Market, hosted by Rust Dirt Co. Shop local goods, enjoy live music, and bring the family. Artisans, makers, farmers, and more are welcome — be part of something local.',status:'approved'},
-  {id:'s1',title:'Back2School Bash',date:'2026-07-30',time:'10:00 AM – 12:00 PM',location:'Western Technology Center, 1000 S Bailey St',description:'Great Plains Youth & Family Services hosts the Back2School Bash. Pre-registered families shop from 10:00 to 11:30 AM, and shopping opens to the public from 11:30 AM to 12:00 PM. A sensory-friendly environment is available — select "yes" on the registration if needed. Registration opens Wednesday, July 8. Questions? Call or text 580-682-9761.',status:'approved'},
-  {id:'s10',title:'Back-to-School Supply Drive',date:'2026-07-01',time:'All day',location:'Great Plains Youth & Family Services',description:'The supply donation campaign kicks off. Donate school supplies so local students start the year prepared. Drop off at the Great Plains Youth & Family Services office, 901 S Broadway.',status:'approved'},
-  {id:'s2',title:'Relay for Life',date:'2026-07-10',time:'6:00 PM – Midnight',location:'Hancock Event Center',description:'Celebrate survivors, remember loved ones, and support the fight against cancer.',status:'approved'},
-  {id:'s3',title:'Hilltop National Junior Golf Clinic',date:'2026-07-13',time:'July 13–15',location:'Hobart Municipal Golf Course',description:'Under Armour Junior Tour clinic coached by Bobby Taylor, Director of Golf Instruction. Ages 6–10 ($150, entry 8–9:30 AM) and ages 11–18 ($150, entry 10 AM–12 PM). To register, call Brian Baker at the golf shop: (580) 530-9177.',status:'approved'},
-  {id:'s4',title:'Family Health & Fitness Day',date:'2026-07-17',time:'6:00–8:30 PM',location:'Elkview General Hospital',description:'An evening of health, wellness, and fun for the whole family. Proceeds benefit victims of child abuse throughout Southwest Oklahoma.',status:'approved'},
-  {id:'s5',title:'Farmers Market',date:'2026-07-18',time:'Morning',location:'Hunter Park',description:'Support local growers, makers, and vendors, plus special kids activities all morning.',status:'approved'},
+  {id:'s0',title:'Hobart First Saturday Market: Red, White & Local',date:'2026-07-04',time:'8:00 AM – 2:00 PM',location:'207 W 4th St',description:'A patriotic Fourth of July edition of the First Saturday Market, hosted by Rust Dirt Co. Shop local goods, enjoy live music, and bring the family. Artisans, makers, farmers, and more are welcome — be part of something local.',status:'approved',cat:'community'},
+  {id:'s1',title:'Back2School Bash',date:'2026-07-30',time:'10:00 AM – 12:00 PM',location:'Western Technology Center, 1000 S Bailey St',description:'Great Plains Youth & Family Services hosts the Back2School Bash. Pre-registered families shop from 10:00 to 11:30 AM, and shopping opens to the public from 11:30 AM to 12:00 PM. A sensory-friendly environment is available — select "yes" on the registration if needed. Registration opens Wednesday, July 8. Questions? Call or text 580-682-9761.',status:'approved',cat:'community'},
+  {id:'s10',title:'Back-to-School Supply Drive',date:'2026-07-01',time:'All day',location:'Great Plains Youth & Family Services',description:'The supply donation campaign kicks off. Donate school supplies so local students start the year prepared. Drop off at the Great Plains Youth & Family Services office, 901 S Broadway.',status:'approved',cat:'community'},
+  {id:'s2',title:'Relay for Life',date:'2026-07-10',time:'6:00 PM – Midnight',location:'Hancock Event Center',description:'Celebrate survivors, remember loved ones, and support the fight against cancer.',status:'approved',cat:'community'},
+  {id:'s3',title:'Hilltop National Junior Golf Clinic',date:'2026-07-13',time:'July 13–15',location:'Hobart Municipal Golf Course',description:'Under Armour Junior Tour clinic coached by Bobby Taylor, Director of Golf Instruction. Ages 6–10 ($150, entry 8–9:30 AM) and ages 11–18 ($150, entry 10 AM–12 PM). To register, call Brian Baker at the golf shop: (580) 530-9177.',status:'approved',cat:'community'},
+  {id:'s4',title:'Family Health & Fitness Day',date:'2026-07-17',time:'6:00–8:30 PM',location:'Elkview General Hospital',description:'An evening of health, wellness, and fun for the whole family. Proceeds benefit victims of child abuse throughout Southwest Oklahoma.',status:'approved',cat:'community'},
+  {id:'s5',title:'Farmers Market',date:'2026-07-18',time:'Morning',location:'Hunter Park',description:'Support local growers, makers, and vendors, plus special kids activities all morning.',status:'approved',cat:'community'},
   {id:'s6',title:"Family Slip 'N Slide Kickball",date:'2026-07-18',time:'Evening',location:'Biggers Park',description:'An evening of fun and friendly competition. Teams welcome from families, businesses, and groups of friends.',status:'approved',registerUrl:'kickball-registration.html'},
   {id:'s8',title:'Glow Golf Tournament',date:'2026-08-01',time:'Night',location:'Hobart Municipal Golf Course',description:'Glowing golf balls, illuminated fairways, and a fun evening under the stars. 4-man scramble, $240 per team, limited to 18 teams. Register your team online.',status:'approved',registerUrl:'glow-golf-registration.html'},
   {id:'s9',title:"Hobart's 125th Birthday Celebration",date:'2026-08-07',time:'All day',location:'Downtown Hobart',description:'Celebrate 125 years of Hobart history and community in downtown Hobart. Free admission, with Dragging Main, live music, family-friendly fun and games, and a community picnic and gathering. The Chamber will be selling hot dogs, chips, and drinks. For more information, contact Jessica Williams, Executive Director, at (580) 682-0887.',status:'approved'},
-  {id:'s15',title:"Hobart's 125th Birthday Gala: A Night to Remember",date:'2026-08-08',time:'Doors 6:00 PM',location:'The Stanley Building, Downtown Hobart',description:'The City of Hobart invites you to a formal evening celebrating 125 years — honoring our past, celebrating our present, and building our future. The night features a catered steak dinner, dueling pianos, guest speakers, and both live and silent auctions, plus a 25-year time capsule to be opened on Hobart\'s 150th birthday. Attire is cocktail or semi-formal. Tickets are $125 per couple or $65 single, available at City Hall — seating is limited.',status:'approved'},
+  {id:'s15',title:"Hobart's 125th Birthday Gala: A Night to Remember",date:'2026-08-08',time:'Doors 6:00 PM',location:'The Stanley Building, Downtown Hobart',description:'The City of Hobart invites you to a formal evening celebrating 125 years — honoring our past, celebrating our present, and building our future. The night features a catered steak dinner, dueling pianos, guest speakers, and both live and silent auctions, plus a 25-year time capsule to be opened on Hobart\'s 150th birthday. Attire is cocktail or semi-formal. Tickets are $125 per couple or $65 single, available at City Hall — seating is limited.',status:'approved',cat:'community'},
   {id:'s11',title:"Hobart's Hometown Harvest",date:'2026-09-19',time:'All day',location:'Kiowa County Courthouse Square',description:'A fall celebration on the Kiowa County Courthouse Square featuring vendors and food trucks filling downtown Hobart, plus the Hometown Harvest Tractor Show. Antique and classic tractor owners can register online ($20 fee due the day of the event). The Chamber is also taking vendor and food truck registrations. Watch the Chamber Facebook page for announcements as plans come together.',status:'approved',linkUrl:'tractor-show-registration.html',linkLabel:'Register Your Tractor'},
-  {id:'s12',title:'First Saturday Market',date:'2026-08-01',time:'8:00 AM – 2:00 PM',location:'207 W 4th St',description:'The monthly First Saturday Market returns to downtown Hobart, hosted by Rust Dirt Co. Shop local goods, enjoy live music, and bring the whole family. Artisans, makers, farmers, and vendors are welcome — come be part of something local.',status:'approved'},
-  {id:'s13',title:'Walmart Grand Reopening',date:'2026-07-10',time:'All day',location:'Walmart, 923 W 11th St',description:'The Hobart Walmart (Store 607) celebrates its grand reopening after a 2026 remodel — part of Walmart\'s statewide investment in 25 Oklahoma stores. The updated store features refreshed layouts, wider aisles, expanded pickup and delivery, an updated pharmacy, and a modernized Vision Center. Stop in and see what\'s new.',status:'approved'},
-  {id:'s14',title:'Elk Creek Kiowa Casino 1-Year Anniversary',date:'2026-07-25',time:'All day',location:'Elk Creek Kiowa Casino, 13765 US-183',description:'Elk Creek Kiowa Casino celebrates one year since opening in July 2025. Owned by the Kiowa Tribe of Oklahoma, the Kiowa County casino on Highway 183 features 250 slot machines, three table games, Bar 153, and the Boomarang Diner. Join the anniversary celebration. Must be 21+ to enter.',status:'approved'},
-  {id:'f1',title:'Kiowa County Free Fair Opens',date:'2026-08-27',time:'Noon - 6:00 PM',location:"Women's Exhibit Building, Kiowa County Fairgrounds",description:'Opening day of the 2026 Kiowa County Free Fair. Indoor Exhibits are accepted from noon to 6:00 PM at the Women\'s Exhibit Building; doors lock and close to the public at 6:00 PM. Cake ReMix and Gussied up Goose contest entries are accepted 4:00-6:00 PM. Judging of Indoor Exhibits begins at 7:00 PM. No admission is charged and there is no entry fee for exhibits. Exhibitors must be a resident of, or attend school in, Kiowa County. Tap below to read the full catalog - schedule, rules, divisions, and every class.',status:'approved',linkUrl:'fair-catalog.html',linkLabel:'View Full Fair Catalog'},
-  {id:'f2',title:'Free Fair: Cattle Show',date:'2026-08-28',time:'7:00 PM',location:'Kiowa County Fairgrounds',description:'Day two of the Kiowa County Free Fair. School tours of the Indoor Exhibits with activities run during the day, and Indoor Exhibits are open for viewing from 3:00 to 7:00 PM. Cattle cards are due at 6:00 PM and the Cattle Show begins at 7:00 PM. Food trucks on site.',status:'approved',linkUrl:'fair-catalog.html',linkLabel:'View Full Fair Catalog'},
-  {id:'f3',title:'Free Fair: Rabbit, Poultry, Goat & Sheep Shows',date:'2026-08-29',time:'8:00 AM - Evening',location:'Kiowa County Fairgrounds',description:'The big day at the Kiowa County Free Fair. Indoor Exhibits open for viewing at 8:00 AM. Rabbit and Poultry cards are due at 9:00 AM with the show following. Goat and Sheep cards are due at 6:00 PM, with that show beginning at 7:00 PM. Exhibitors must provide their own pens for rabbits and poultry. Food trucks on site and Kiwanis Turtle Races for the kids.',status:'approved',linkUrl:'fair-catalog.html',linkLabel:'View Full Fair Catalog'},
-  {id:'f4',title:'Free Fair: Exhibit & Premium Pickup',date:'2026-08-30',time:'2:00 - 6:00 PM',location:"Women's Exhibit Building, Kiowa County Fairgrounds",description:'Indoor Exhibit and premium pickup from 2:00 to 6:00 PM. The Free Fair Association is not responsible for exhibits left in the building after the Fair closes, so exhibitors are urged to pick up their items during this window.',status:'approved',linkUrl:'fair-catalog.html',linkLabel:'View Full Fair Catalog'},
+  {id:'s12',title:'First Saturday Market',date:'2026-08-01',time:'8:00 AM – 2:00 PM',location:'207 W 4th St',description:'The monthly First Saturday Market returns to downtown Hobart, hosted by Rust Dirt Co. Shop local goods, enjoy live music, and bring the whole family. Artisans, makers, farmers, and vendors are welcome — come be part of something local.',status:'approved',cat:'community'},
+  {id:'s13',title:'Walmart Grand Reopening',date:'2026-07-10',time:'All day',location:'Walmart, 923 W 11th St',description:'The Hobart Walmart (Store 607) celebrates its grand reopening after a 2026 remodel — part of Walmart\'s statewide investment in 25 Oklahoma stores. The updated store features refreshed layouts, wider aisles, expanded pickup and delivery, an updated pharmacy, and a modernized Vision Center. Stop in and see what\'s new.',status:'approved',cat:'community'},
+  {id:'s14',title:'Elk Creek Kiowa Casino 1-Year Anniversary',date:'2026-07-25',time:'All day',location:'Elk Creek Kiowa Casino, 13765 US-183',description:'Elk Creek Kiowa Casino celebrates one year since opening in July 2025. Owned by the Kiowa Tribe of Oklahoma, the Kiowa County casino on Highway 183 features 250 slot machines, three table games, Bar 153, and the Boomarang Diner. Join the anniversary celebration. Must be 21+ to enter.',status:'approved',cat:'community'},
+  {id:'f1',title:'Kiowa County Free Fair Opens',date:'2026-08-27',time:'Noon - 6:00 PM',location:"Women's Exhibit Building, Kiowa County Fairgrounds",description:'Opening day of the 2026 Kiowa County Free Fair. Indoor Exhibits are accepted from noon to 6:00 PM at the Women\'s Exhibit Building; doors lock and close to the public at 6:00 PM. Cake ReMix and Gussied up Goose contest entries are accepted 4:00-6:00 PM. Judging of Indoor Exhibits begins at 7:00 PM. No admission is charged and there is no entry fee for exhibits. Exhibitors must be a resident of, or attend school in, Kiowa County. Tap below to read the full catalog - schedule, rules, divisions, and every class.',status:'approved',linkUrl:'fair-catalog.html',linkLabel:'View Full Fair Catalog',cat:'community'},
+  {id:'f2',title:'Free Fair: Cattle Show',date:'2026-08-28',time:'7:00 PM',location:'Kiowa County Fairgrounds',description:'Day two of the Kiowa County Free Fair. School tours of the Indoor Exhibits with activities run during the day, and Indoor Exhibits are open for viewing from 3:00 to 7:00 PM. Cattle cards are due at 6:00 PM and the Cattle Show begins at 7:00 PM. Food trucks on site.',status:'approved',linkUrl:'fair-catalog.html',linkLabel:'View Full Fair Catalog',cat:'community'},
+  {id:'f3',title:'Free Fair: Rabbit, Poultry, Goat & Sheep Shows',date:'2026-08-29',time:'8:00 AM - Evening',location:'Kiowa County Fairgrounds',description:'The big day at the Kiowa County Free Fair. Indoor Exhibits open for viewing at 8:00 AM. Rabbit and Poultry cards are due at 9:00 AM with the show following. Goat and Sheep cards are due at 6:00 PM, with that show beginning at 7:00 PM. Exhibitors must provide their own pens for rabbits and poultry. Food trucks on site and Kiwanis Turtle Races for the kids.',status:'approved',linkUrl:'fair-catalog.html',linkLabel:'View Full Fair Catalog',cat:'community'},
+  {id:'f4',title:'Free Fair: Exhibit & Premium Pickup',date:'2026-08-30',time:'2:00 - 6:00 PM',location:"Women's Exhibit Building, Kiowa County Fairgrounds",description:'Indoor Exhibit and premium pickup from 2:00 to 6:00 PM. The Free Fair Association is not responsible for exhibits left in the building after the Fair closes, so exhibitors are urged to pick up their items during this window.',status:'approved',linkUrl:'fair-catalog.html',linkLabel:'View Full Fair Catalog',cat:'community'},
   {id:'sp1',title:'🏈 HS Football Scrimmage vs Merritt',date:'2026-08-21',time:'6:00 PM',location:'Hobart Bearcat Stadium',description:'Hobart Bearcat high school football. Preseason scrimmage against Merritt.',status:'approved',cat:'sports'},
   {id:'sp2',title:'🏈 HS Football @ Minco',date:'2026-08-28',time:'7:00 PM',location:'Away',description:'Hobart Bearcat high school football. Regular season game at Minco.',status:'approved',cat:'sports'},
   {id:'sp3',title:'🏈 HS Football vs Sayre',date:'2026-09-04',time:'7:00 PM',location:'Hobart Bearcat Stadium',description:'Hobart Bearcat high school football. Regular season game at home.',status:'approved',cat:'sports'},
@@ -1339,7 +1391,19 @@ var SEED=[
   {id:'sc61',title:'📚 Semester Tests',date:'2027-05-13',time:'All day',location:'Hobart Public Schools',description:'Semester tests. Part of May 12-13.',status:'approved',cat:'school'},
   {id:'sc62',title:'📚 Student\'s Final Day',date:'2027-05-13',time:'All day',location:'Hobart Public Schools',description:'Last day of school for students.',status:'approved',cat:'school'},
   {id:'sc63',title:'📚 Professional Day',date:'2027-05-14',time:'All day',location:'Hobart Public Schools',description:'Teacher professional day.',status:'approved',cat:'school'},
-  {id:'sc64',title:'📚 Commencement',date:'2027-05-14',time:'All day',location:'Hobart Public Schools',description:'Hobart High School commencement / graduation.',status:'approved',cat:'school'}
+  {id:'sc64',title:'📚 Commencement',date:'2027-05-14',time:'All day',location:'Hobart Public Schools',description:'Hobart High School commencement / graduation.',status:'approved',cat:'school'},
+  {id:'fp1',title:'🥫 Hobart Food Pantry',date:'2026-01-21',time:'9:00 AM',location:'Hobart Food Pantry',description:'Monthly food distribution at the Hobart Food Pantry. Distribution begins at 9:00 AM.',status:'approved',cat:'community'},
+  {id:'fp2',title:'🥫 Hobart Food Pantry',date:'2026-02-18',time:'9:00 AM',location:'Hobart Food Pantry',description:'Monthly food distribution at the Hobart Food Pantry. Distribution begins at 9:00 AM.',status:'approved',cat:'community'},
+  {id:'fp3',title:'🥫 Hobart Food Pantry',date:'2026-03-18',time:'9:00 AM',location:'Hobart Food Pantry',description:'Monthly food distribution at the Hobart Food Pantry. Distribution begins at 9:00 AM.',status:'approved',cat:'community'},
+  {id:'fp4',title:'🥫 Hobart Food Pantry',date:'2026-04-22',time:'9:00 AM',location:'Hobart Food Pantry',description:'Monthly food distribution at the Hobart Food Pantry. Distribution begins at 9:00 AM.',status:'approved',cat:'community'},
+  {id:'fp5',title:'🥫 Hobart Food Pantry',date:'2026-05-20',time:'9:00 AM',location:'Hobart Food Pantry',description:'Monthly food distribution at the Hobart Food Pantry. Distribution begins at 9:00 AM.',status:'approved',cat:'community'},
+  {id:'fp6',title:'🥫 Hobart Food Pantry',date:'2026-06-17',time:'9:00 AM',location:'Hobart Food Pantry',description:'Monthly food distribution at the Hobart Food Pantry. Distribution begins at 9:00 AM.',status:'approved',cat:'community'},
+  {id:'fp7',title:'🥫 Hobart Food Pantry',date:'2026-07-22',time:'9:00 AM',location:'Hobart Food Pantry',description:'Monthly food distribution at the Hobart Food Pantry. Distribution begins at 9:00 AM.',status:'approved',cat:'community'},
+  {id:'fp8',title:'🥫 Hobart Food Pantry',date:'2026-08-19',time:'9:00 AM',location:'Hobart Food Pantry',description:'Monthly food distribution at the Hobart Food Pantry. Distribution begins at 9:00 AM.',status:'approved',cat:'community'},
+  {id:'fp9',title:'🥫 Hobart Food Pantry',date:'2026-09-23',time:'9:00 AM',location:'Hobart Food Pantry',description:'Monthly food distribution at the Hobart Food Pantry. Distribution begins at 9:00 AM.',status:'approved',cat:'community'},
+  {id:'fp10',title:'🥫 Hobart Food Pantry',date:'2026-10-21',time:'9:00 AM',location:'Hobart Food Pantry',description:'Monthly food distribution at the Hobart Food Pantry. Distribution begins at 9:00 AM.',status:'approved',cat:'community'},
+  {id:'fp11',title:'🥫 Hobart Food Pantry',date:'2026-11-18',time:'9:00 AM',location:'Hobart Food Pantry',description:'Monthly food distribution at the Hobart Food Pantry. Distribution begins at 9:00 AM.',status:'approved',cat:'community'},
+  {id:'fp12',title:'🥫 Hobart Food Pantry',date:'2026-12-22',time:'9:00 AM',location:'Hobart Food Pantry',description:'Monthly food distribution at the Hobart Food Pantry. Note: this month\'s distribution is on a TUESDAY, not the usual Wednesday. Distribution begins at 9:00 AM.',status:'approved',cat:'community'}
 ];
 
 var EVENTS=[];
@@ -1355,11 +1419,12 @@ function loadEvents(){
     db.collection('events').where('status','==','approved').get().then(function(snap){
       EVENTS=SEED.slice();
       snap.forEach(function(doc){var x=doc.data();x.id=doc.id;x._admin=true;EVENTS.push(x);});
-      renderCal(); setStatus('');
+      initCalFilter(); renderCal(); setStatus('');
       renderAdminEventCards();
-    }).catch(function(e){ console.warn(e); EVENTS=SEED.slice(); renderCal(); setStatus(''); });
+    }).catch(function(e){ console.warn(e); EVENTS=SEED.slice(); initCalFilter(); renderCal(); setStatus(''); });
   }else{
     EVENTS=SEED.slice();
+    initCalFilter();
     renderCal();
     setStatus('Showing the Chamber\'s featured events. Community submissions appear here once approved.');
   }
@@ -1419,6 +1484,53 @@ function setStatus(msg){
   s.innerHTML='<span class="cal-mode">'+msg+'</span>';
 }
 
+/* ---- Calendar type filter ----
+   Events carry an optional 'cat' (sports / school / holiday / community).
+   Chamber & community-submitted events have no cat, so they group as 'chamber'.
+   CAL_TYPES drives both the filter chips and the color coding. */
+var calFilter='All';
+var CAL_TYPES=[
+  {key:'chamber',   label:'Chamber Events', color:'#1a3ea8'},
+  {key:'community', label:'Community',      color:'#c26a1e'},
+  {key:'sports',    label:'Bearcat Sports', color:'#2f7a3e'},
+  {key:'school',    label:'School',         color:'#6b3fa0'},
+  {key:'holiday',   label:'Holidays',       color:'#b3261e'}
+];
+function evCat(e){ return (e && e.cat) ? e.cat : 'chamber'; }
+function calMatches(e){ return calFilter==='All' || evCat(e)===calFilter; }
+
+function initCalFilter(){
+  var bar=document.getElementById('calFilter');
+  if(!bar) return;
+  /* count what actually exists so we never show an empty category */
+  var counts={}, i;
+  for(i=0;i<EVENTS.length;i++){ var c=evCat(EVENTS[i]); counts[c]=(counts[c]||0)+1; }
+  bar.innerHTML='';
+  bar.appendChild(mkCalChip('All','All',EVENTS.length,null));
+  CAL_TYPES.forEach(function(t){
+    if(counts[t.key]) bar.appendChild(mkCalChip(t.key,t.label,counts[t.key],t.color));
+  });
+}
+function mkCalChip(key,label,count,color){
+  var b=document.createElement('button');
+  b.className='cal-chipbtn'+(calFilter===key?' on':'');
+  b.setAttribute('data-key',key);
+  var h='';
+  if(color) h+='<span class="dot" style="background:'+color+';"></span>';
+  h+='<span>'+label+'</span><span class="ct">'+count+'</span>';
+  b.innerHTML=h;
+  b.addEventListener('click',function(){ filterCal(key); });
+  return b;
+}
+function filterCal(key){
+  calFilter=key;
+  var chips=document.querySelectorAll('#calFilter .cal-chipbtn'), i;
+  for(i=0;i<chips.length;i++){
+    chips[i].classList.toggle('on', chips[i].getAttribute('data-key')===key);
+  }
+  renderCal();
+}
+
 function renderCal(){
   document.getElementById('calMonth').textContent=MN[view.getMonth()]+' '+view.getFullYear();
   var grid=document.getElementById('calGrid'); grid.innerHTML='';
@@ -1440,14 +1552,14 @@ function renderCal(){
     if(inMonth){
       var ds=yr+'-'+pad(mo+1)+'-'+pad(dayNum);
       if(ds===todayStr) cell.classList.add('today');
-      var dayEvents=EVENTS.filter(function(e){return e.date===ds;});
+      var dayEvents=EVENTS.filter(function(e){return e.date===ds && calMatches(e);});
       if(dayEvents.length){
         cell.classList.add('has-ev');
         (function(list){ cell.addEventListener('click',function(){ showDay(list); }); })(dayEvents);
       }
       var shown=dayEvents.slice(0,2), k;
       for(k=0;k<shown.length;k++){
-        (function(ev){var chip=document.createElement('div');chip.className='cal-chip';chip.textContent=ev.title;chip.onclick=function(e){e.stopPropagation();showDetail(ev);};cell.appendChild(chip);})(shown[k]);
+        (function(ev){var chip=document.createElement('div');chip.className='cal-chip';chip.setAttribute('data-cat',evCat(ev));chip.textContent=ev.title;chip.onclick=function(e){e.stopPropagation();showDetail(ev);};cell.appendChild(chip);})(shown[k]);
       }
       if(dayEvents.length>2){
         var more=document.createElement('div'); more.className='cal-more'; more.textContent='+'+(dayEvents.length-2)+' more';
@@ -1456,6 +1568,24 @@ function renderCal(){
       }
     }
     grid.appendChild(cell);
+  }
+  /* If a filter is on and this month has none of that type, say so —
+     an empty grid otherwise looks like something broke. */
+  if(calFilter!=='All'){
+    var monthCount=0, j;
+    for(j=0;j<EVENTS.length;j++){
+      var d=EVENTS[j].date||'';
+      if(d.slice(0,4)==String(yr) && d.slice(5,7)==pad(mo+1) && calMatches(EVENTS[j])) monthCount++;
+    }
+    if(!monthCount){
+      var lbl=calFilter;
+      CAL_TYPES.forEach(function(t){ if(t.key===calFilter) lbl=t.label; });
+      setStatus('No '+lbl+' events in '+MN[mo]+' '+yr+'. Use the arrows to browse other months, or choose “All”.');
+    }else{
+      setStatus('');
+    }
+  }else{
+    setStatus('');
   }
 }
 
