@@ -117,6 +117,26 @@
   /* ---- STAT BAR ---- */
   .stat-bar{background:var(--gold);padding:22px 60px;display:flex;align-items:center;justify-content:space-around;gap:20px;flex-wrap:wrap;}
 
+  /* ---- 125th t-shirt pre-order banner ---- */
+  .tee-banner{background:linear-gradient(120deg,#fffdf7 0%,#fdf6e6 55%,#f8eed6 100%);border-top:3px solid var(--navy);border-bottom:3px solid var(--gold);}
+  .tee-in{max-width:1180px;margin:0 auto;padding:22px 60px;display:flex;align-items:center;gap:28px;}
+  .tee-img{flex-shrink:0;display:block;line-height:0;border-radius:10px;overflow:hidden;box-shadow:0 6px 22px rgba(14,32,86,.16);transition:transform .15s;}
+  .tee-img:hover{transform:translateY(-2px);}
+  .tee-img img{height:150px;width:auto;display:block;}
+  .tee-text{display:flex;flex-direction:column;gap:5px;min-width:0;}
+  .tee-eyebrow{display:inline-block;align-self:flex-start;background:#b3261e;color:#fff;font-size:10.5px;font-weight:700;letter-spacing:1.4px;text-transform:uppercase;padding:4px 11px;border-radius:20px;}
+  .tee-title{font-family:'Playfair Display',serif;font-size:26px;font-weight:800;color:var(--navy-deep);line-height:1.12;margin:2px 0 0;}
+  .tee-sub{font-size:14px;color:var(--dark-gray);line-height:1.55;max-width:620px;margin-bottom:6px;}
+  .tee-btn{align-self:flex-start;background:var(--navy);color:#fff;font-size:15px;font-weight:700;padding:12px 26px;border-radius:8px;text-decoration:none;white-space:nowrap;transition:background .15s,transform .12s;}
+  .tee-btn:hover{background:var(--gold);color:var(--navy-deep);transform:translateX(3px);}
+  @media(max-width:760px){
+    .tee-in{padding:20px 22px;flex-direction:column;align-items:flex-start;gap:16px;}
+    .tee-img{align-self:center;}
+    .tee-img img{height:190px;}
+    .tee-title{font-size:22px;}
+    .tee-btn{width:100%;text-align:center;}
+  }
+
   /* ---- Tractor show announcement banner ---- */
   .announce-banner{display:block;text-decoration:none;background:linear-gradient(120deg,#0e2056 0%,#16317f 55%,#1a3ea8 100%);border-top:3px solid var(--gold);border-bottom:3px solid var(--gold);}
   .announce-in{max-width:1180px;margin:0 auto;padding:20px 60px;display:flex;align-items:center;justify-content:space-between;gap:22px;flex-wrap:wrap;}
@@ -613,6 +633,21 @@
   <div class="stat-divider"></div>
   <div class="stat-item"><span class="num">Mon&nbsp;&amp;&nbsp;Thu</span><span class="label">Office Hours · 8:30–11:30 AM</span></div>
 </div>
+
+<!-- ===== 125TH T-SHIRT PRE-ORDER (time-sensitive — remove when orders close) ===== -->
+<section class="tee-banner">
+  <div class="tee-in">
+    <a class="tee-img" href="https://www.facebook.com/share/p/1Jg2FyhyD4/?mibextid=wwXIfr" target="_blank" rel="noopener">
+      <img src="flyers/125-tshirt.jpg" alt="Hobart 125th Birthday commemorative t-shirt" onerror="this.parentElement.style.display='none';">
+    </a>
+    <div class="tee-text">
+      <span class="tee-eyebrow">⏰ Pre-Order Deadline Approaching</span>
+      <h3 class="tee-title">Hobart 125th Birthday T-Shirts</h3>
+      <p class="tee-sub">125 years of community, pride &amp; memories — on a shirt. Pre-orders are being taken now by <b>Small Town Tees</b>, and only for a limited time. Once the order window closes, that's it.</p>
+      <a class="tee-btn" href="https://www.facebook.com/share/p/1Jg2FyhyD4/?mibextid=wwXIfr" target="_blank" rel="noopener">Pre-Order Yours on Facebook →</a>
+    </div>
+  </div>
+</section>
 
 <!-- ===== TRACTOR SHOW ANNOUNCEMENT ===== -->
 <a href="tractor-show-registration.html" class="announce-banner">
