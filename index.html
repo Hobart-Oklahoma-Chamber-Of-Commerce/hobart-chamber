@@ -138,6 +138,19 @@
   }
 
   /* ---- Tractor show announcement banner ---- */
+  /* ---- Quiet community notice bar (single line — deliberately low-key) ---- */
+  .notice-bar{display:flex;align-items:center;gap:14px;max-width:1180px;margin:0 auto;padding:11px 60px;text-decoration:none;background:var(--slate);border-top:1px solid var(--border);border-bottom:1px solid var(--border);transition:background .15s;}
+  .notice-bar:hover{background:#eaf0fb;}
+  .notice-qr{width:34px;height:34px;object-fit:cover;border-radius:5px;flex-shrink:0;border:1px solid var(--border);}
+  .notice-text{flex:1;font-size:13px;color:var(--dark-gray);line-height:1.4;min-width:0;}
+  .notice-text b{color:var(--navy-deep);}
+  .notice-link{color:var(--navy);font-weight:600;}
+  .notice-cta{flex-shrink:0;font-size:12.5px;font-weight:700;color:var(--navy);white-space:nowrap;}
+  @media(max-width:680px){
+    .notice-bar{padding:11px 20px;flex-wrap:wrap;}
+    .notice-cta{width:100%;text-align:right;}
+  }
+
   .announce-banner{display:block;text-decoration:none;background:linear-gradient(120deg,#0e2056 0%,#16317f 55%,#1a3ea8 100%);border-top:3px solid var(--gold);border-bottom:3px solid var(--gold);}
   .announce-in{max-width:1180px;margin:0 auto;padding:20px 60px;display:flex;align-items:center;justify-content:space-between;gap:22px;flex-wrap:wrap;}
   .announce-left{display:flex;align-items:center;gap:18px;}
@@ -730,6 +743,13 @@
   <div class="cal-legend"><span id="calStatus"></span></div>
 </section>
 
+<!-- ===== COMMUNITY NOTICE (CADC survey — quiet, single-line) ===== -->
+<a href="https://www.cadcok.org" target="_blank" rel="noopener" class="notice-bar">
+  <img class="notice-qr" src="flyers/flyer-cadc-questionaire.jpg" alt="Scan to take the CADC Community Needs Survey">
+  <span class="notice-text"><b>Community Action Development Corp.</b> wants to hear from you — take the 2026 Community Needs Survey at <span class="notice-link">cadcok.org</span></span>
+  <span class="notice-cta">Take the Survey →</span>
+</a>
+
 <!-- ===== NOTIFY / SUBSCRIBE ===== -->
 <section class="notify" id="notify">
   <div class="notify-in">
@@ -807,7 +827,7 @@
     <a href="#membership" class="btn-primary">Become a Member</a>
   </div>
   <div class="botw-card">
-    <div class="botw-photo"><img src="flyers/botw-bancfirst.png" alt="BancFirst — Business of the Week" onclick="openFlyer('flyers/botw-bancfirst.png')" onerror="this.parentElement.classList.add('empty');this.outerHTML=flyerPHWhite;"><span class="zoom-hint">🔍 Click to enlarge</span></div>
+    <div class="botw-photo"><img src="flyers/botw-bancfirst-team.jpg" alt="BancFirst Hobart branch team — Business of the Week" onclick="openFlyer('flyers/botw-bancfirst-team.jpg')" onerror="this.parentElement.classList.add('empty');this.outerHTML=flyerPHWhite;"><span class="zoom-hint">🔍 Click to enlarge</span></div>
     <div class="botw-inner"><span class="botw-badge">This Week's Feature</span><h3>BancFirst</h3><p>Known across Oklahoma as one of the state's strongest financial institutions, BancFirst is known in Hobart for something more important — its commitment to the community. The Hobart branch, led by President Creed Sherle, employs 17 local professionals serving individuals, families, farmers, and businesses each day. With roots dating to the Oklahoma Land Run of 1889, BancFirst has grown into Oklahoma's largest state-chartered bank, named one of America's Safest &amp; Strongest Banks for 19 consecutive years and the state's #1 SBA loan originator for 34. But its real strength here is how it invests back — supporting the Chamber, cheering on the Bearcats, and standing as a major contributor to the Kiowa County Junior Livestock Show. More than a bank, BancFirst is a trusted neighbor investing in the success of Hobart every day. Congratulations to the entire BancFirst team on being our Business of the Week!</p></div>
   </div>
 </section>
