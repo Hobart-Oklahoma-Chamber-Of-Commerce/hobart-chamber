@@ -2171,6 +2171,7 @@ function renderAdmin(){
     +'<div class="admin-tab'+(adminTab==='jobcreate'?' on':'')+'" onclick="switchTab(\'jobcreate\')">+ New Opening</div>'
     +'<div class="admin-tab'+(adminTab==='glowgolf'?' on':'')+'" onclick="switchTab(\'glowgolf\')">Glow Golf <span id="ggCount"></span></div>'
     +'<div class="admin-tab'+(adminTab==='tractor'?' on':'')+'" onclick="switchTab(\'tractor\')">Tractor Show <span id="tsCount"></span></div>'
+    +'<div class="admin-tab'+(adminTab==='scavenger'?' on':'')+'" onclick="switchTab(\'scavenger\')">Scavenger Hunt <span id="shCount"></span></div>'
     +'<div class="admin-tab'+(adminTab==='deals'?' on':'')+'" onclick="switchTab(\'deals\')">Local Sales <span id="dlCount"></span></div>'
     +'<div class="admin-tab'+(adminTab==='subs'?' on':'')+'" onclick="switchTab(\'subs\')">Subscribers <span id="sbCount"></span></div>'
     +'<div class="admin-tab'+(adminTab==='analytics'?' on':'')+'" onclick="switchTab(\'analytics\')">Analytics</div>'
@@ -2185,6 +2186,7 @@ function renderAdmin(){
   else if(adminTab==='jobcreate') paneJobCreate(null);
   else if(adminTab==='glowgolf') paneGolf();
   else if(adminTab==='tractor') paneTractor();
+  else if(adminTab==='scavenger') paneScavenger();
   else if(adminTab==='deals') paneDeals();
   else if(adminTab==='subs') paneSubs();
   else if(adminTab==='analytics') paneAnalytics();
@@ -2577,6 +2579,60 @@ function exportTractor(){
   }).catch(function(e){ alert('Could not export: '+(e&&e.message||'')); });
 }
 
+/* ---- 125th Birthday Business Scavenger Hunt entries ---- */
+function paneScavenger(){
+  var pane=document.getElementById('adminPane');
+  pane.innerHTML='<div class="admin-empty">Loading…</div>';
+  db.collection('scavengerhunt').get().then(function(snap){
+    var rows=[]; snap.forEach(function(doc){var x=doc.data();x.id=doc.id;rows.push(x);});
+    rows.sort(function(a,b){ return (b.createdAt&&b.createdAt.seconds||0)-(a.createdAt&&a.createdAt.seconds||0); });
+    var cnt=document.getElementById('shCount'); if(cnt) cnt.innerHTML=rows.length?('<span class="badge-pending">'+rows.length+'</span>'):'';
+    if(!rows.length){ pane.innerHTML='<div class="admin-empty">No scavenger hunt entries yet.</div>'; return; }
+    var totalPhotos=0,i; for(i=0;i<rows.length;i++){ totalPhotos+=(rows[i].photoUrls||[]).length; }
+    var html='<div style="font-size:13px;color:var(--gray);margin-bottom:16px;">'+rows.length+' entr'+(rows.length===1?'y':'ies')+' · '+totalPhotos+' photos total</div>'
+      +'<div style="margin-bottom:16px;"><button class="btn-sm btn-gold" onclick="exportScavenger()">⬇ Export Entrants (CSV)</button></div>'
+      +'<div class="admin-list">';
+    for(i=0;i<rows.length;i++){
+      var s=rows[i], photos=s.photoUrls||[];
+      html+='<div class="admin-row" style="flex-direction:column;align-items:stretch;">'
+        +'<div style="display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;">'
+        +'<div class="info"><b>'+esc(s.name||'(no name)')+'</b>'
+        +'<small>'+esc(s.phone||'')+' · '+esc(s.email||'')+' · '+photos.length+' photo'+(photos.length===1?'':'s')+'</small></div>'
+        +'<div class="acts"><button class="btn-sm btn-red" onclick="delScavenger(\''+s.id+'\')">Delete</button></div>'
+        +'</div>';
+      if(s.businesses) html+='<div style="font-size:12.5px;color:var(--gray);margin-top:8px;"><b style="color:var(--dark-gray);">Visited:</b> '+esc(s.businesses)+'</div>';
+      if(photos.length){
+        html+='<div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:10px;padding-top:10px;border-top:1px solid var(--border);">';
+        photos.forEach(function(url){
+          html+='<img src="'+esc(url)+'" onclick="openFlyer(\''+esc(url)+'\')" style="width:64px;height:64px;object-fit:cover;border-radius:6px;border:1px solid var(--border);cursor:pointer;">';
+        });
+        html+='</div>';
+      }
+      html+='</div>';
+    }
+    html+='</div>';
+    pane.innerHTML=html;
+  }).catch(function(e){ pane.innerHTML='<div class="admin-empty">Error loading. If this is the first time viewing the Scavenger Hunt, add the <b>scavengerhunt</b> rule in Firestore.<br><br><small style="color:#b3261e;">'+esc(e&&e.message||'')+'</small></div>'; });
+}
+function delScavenger(id){ if(!confirm('Delete this entry? (Photos already uploaded to Storage will stay there, but the entry record and its links will be gone.)'))return; db.collection('scavengerhunt').doc(id).delete().then(function(){paneScavenger();}); }
+function exportScavenger(){
+  db.collection('scavengerhunt').get().then(function(snap){
+    var rows=[]; snap.forEach(function(d){ rows.push(d.data()); });
+    if(!rows.length){ alert('No entries to export yet.'); return; }
+    rows.sort(function(a,b){ return (a.createdAt&&a.createdAt.seconds||0)-(b.createdAt&&b.createdAt.seconds||0); });
+    function q(v){ return '"'+String(v==null?'':v).replace(/"/g,'""')+'"'; }
+    var csv=['Name','Phone','Email','Businesses Visited','Photo Count'].map(q).join(',')+'\n';
+    rows.forEach(function(s){
+      csv+=[q(s.name),q(s.phone),q(s.email),q(s.businesses||''),q((s.photoUrls||[]).length)].join(',')+'\n';
+    });
+    var blob=new Blob([csv],{type:'text/csv;charset=utf-8;'});
+    var a=document.createElement('a');
+    a.href=URL.createObjectURL(blob);
+    a.download='scavenger-hunt-entrants-'+_anDayKey()+'.csv';
+    document.body.appendChild(a); a.click(); document.body.removeChild(a);
+  }).catch(function(e){ alert('Could not export: '+(e&&e.message||'')); });
+}
+
 /* ---- Local Sales / deals admin ---- */
 function paneDeals(){
   var pane=document.getElementById('adminPane');
@@ -2848,6 +2904,7 @@ var BOARD=[
   {name:'Whitney Perez', title:'Board Member', photo:'flyers/board-perez.jpg', bio:'Whitney was born and raised in Hobart and is proud to call Southwest Oklahoma home. After graduating from Hobart High School, she attended the University of Oklahoma, where she earned a Bachelor of Science in Dental Hygiene. She is also a NASM Certified Personal Trainer and yoga instructor.||Whitney and her husband, Ryan, are the owners of Red Dirt Media & Marketing LLC, where they provide professional real estate photography, videography, drone services, and 3D tours for clients throughout Southwest Oklahoma. Whitney enjoys helping local businesses and real estate professionals showcase their properties with high-quality visual marketing.||Whitney and Ryan have two beautiful daughters, and as a family they love spending time outdoors exploring, gardening, and making memories together. Whitney\'s happy place is in her flower garden, where she enjoys growing cut flowers and creating spaces that bring beauty to others.||As a lifelong member of the Hobart community, Whitney is proud to be a Bearcat, and is passionate about supporting local businesses and helping Hobart continue to grow and thrive.'},
   {name:'Annie Cruz', title:'Board Member', photo:'', bio:''},
   {name:'Preston Reed', title:'Board Member', photo:'flyers/board-reed.jpg', bio:'Dr. Preston Reed is a proud native of Hobart, Oklahoma, where he was born and raised. Growing up, Preston was actively involved in the community and proudly represented the Hobart Bearcats as a dedicated student-athlete throughout his school years.||After graduating from Hobart High School, Preston pursued his passion for helping others by earning his degree in chiropractic care. Today, he serves patients at Reed Chiropractic Clinic, providing compassionate, high-quality chiropractic services in both Hobart and Altus. He is committed to helping individuals and families improve their health, recover from injuries, and live healthier lives.||Preston is married to his wife, Callie, and together they are the proud parents of their son, Beckett. After completing his education, Preston chose to return home to Hobart to build both his career and his family in the community that played such an important role in shaping his life.||As a lifelong Hobart resident, Preston is passionate about giving back to the town that invested in him. Through his professional work, community involvement, and dedication to serving others, he continues to make a positive impact on the place he proudly calls home.'},
+  {name:'Angie Sutton', title:'Board Member', photo:'flyers/board-sutton.jpg', bio:'Angie Sutton has proudly been with Walmart since 1999 and currently serves as the Store Manager of the Hobart Walmart. She is passionate about creating a welcoming environment for customers, investing in her associates, and building a culture where people feel valued, supported, and empowered to succeed.||Angie believes in giving back to the communities she serves through volunteerism, local partnerships, and community involvement. She is honored to serve on the Hobart Chamber of Commerce Board and is excited to help strengthen connections that support local businesses and the growth of the Hobart community.||Outside of work, Angie enjoys spending time with her husband, Tyler, and their children. As a family, they love spending time outdoors, homesteading, farming, creating homemade products, gardening, and making lasting memories together.'},
   {name:'Tanner Heath', title:'Board Member', photo:'', bio:''}
 ];
 var BOARD_ED={name:'Jessica Williams', title:'Executive Director', photo:'flyers/board-williams.jpg', bio:'Jessica Williams stepped into the role of Executive Director of the Hobart Chamber of Commerce on June 1, 2026, bringing a lifelong love of her hometown to the position. Born and raised in Hobart and a 2005 graduate of Hobart High School, she holds an associate degree in business administration from Western Oklahoma State College. Her roots in the community run generations deep — her family first came to Hobart in the Oklahoma Land Run.||As Executive Director, Jessica is leading the Chamber through a season of renewal: guiding its reorganization, driving a new membership push, and bringing back the popular Business of the Week spotlight that recognizes a local business each week. She still remembers gathering with the whole town for Arts on the Square as a young girl, and she carries that same spirit into her work today. "I am so excited to have this position and can\'t wait to play my part in bringing ideas to life to make memories that last a lifetime for the people of Hobart," she said — a mission rooted in creating fun for local families while drawing new business to town.||The daughter of Tim and Kim Binghom, Jessica and her husband, Heath Williams, are raising two teenage daughters, Jaedyn and Jordyn. Her deep family history in Hobart and her heart for its families make her a fitting champion for the businesses and community the Chamber serves.'};
