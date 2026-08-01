@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Scavenger Hunt — Hobart's 125th Birthday</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;800;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-storage-compat.js"></script>
+<style>
+  *{margin:0;padding:0;box-sizing:border-box;}
+  :root{
+    --navy:#1a3ea8;--navy-dark:#142f7e;--navy-deep:#0e2056;--navy-hover:#2247bd;
+    --gold:#c49a3e;--gold-light:#dab65e;--gold-pale:#f6edd6;
+    --white:#ffffff;--slate:#f3f6fc;--gray:#6f7d99;--dark-gray:#2c3a58;--border:#dbe3f4;
+    --green:#1c7a3e;--green-pale:#e8f6ec;
+  }
+  body{font-family:'Inter',sans-serif;color:var(--navy-deep);background:var(--slate);line-height:1.5;-webkit-font-smoothing:antialiased;padding-bottom:40px;}
+
+  .sh-top{background:linear-gradient(135deg,#0e2056 0%,#16317f 45%,#1a3ea8 100%);color:#fff;padding:34px 24px 40px;position:relative;overflow:hidden;}
+  .sh-top .glow{position:absolute;border-radius:50%;filter:blur(46px);opacity:.5;}
+  .sh-top .glow.a{width:220px;height:220px;background:#e0a552;top:-70px;right:-40px;}
+  .sh-top .glow.b{width:180px;height:180px;background:#dab65e;bottom:-80px;left:-30px;opacity:.4;}
+  .sh-inner{max-width:680px;margin:0 auto;position:relative;z-index:2;}
+  .sh-back{display:inline-block;color:var(--gold-light);text-decoration:none;font-size:13px;font-weight:600;margin-bottom:18px;letter-spacing:.3px;}
+  .sh-back:hover{color:#fff;}
+  .sh-eyebrow{display:flex;align-items:center;gap:10px;margin-bottom:14px;}
+  .sh-eyebrow-line{width:38px;height:2px;background:var(--gold);}
+  .sh-eyebrow span{font-size:10.5px;font-weight:600;letter-spacing:2.6px;text-transform:uppercase;color:var(--gold-light);}
+  .sh-top h1{font-family:'Playfair Display',serif;font-size:clamp(26px,5vw,40px);font-weight:900;line-height:1.06;margin-bottom:14px;}
+  .sh-top h1 .em{color:var(--gold-light);}
+  .sh-facts{display:flex;flex-wrap:wrap;gap:8px 20px;margin-top:20px;}
+  .sh-fact{display:flex;align-items:center;gap:7px;font-size:13.5px;color:#dfe7fb;}
+  .sh-fact b{color:#fff;font-weight:700;}
+
+  .sh-wrap{max-width:680px;margin:-20px auto 0;padding:0 16px;position:relative;z-index:3;}
+  .sh-card{background:#fff;border:1px solid var(--border);border-radius:14px;box-shadow:0 10px 40px rgba(14,32,86,.10);padding:28px 24px;margin-bottom:18px;}
+  .sh-note{background:var(--gold-pale);border-left:3px solid var(--gold);border-radius:6px;padding:12px 15px;font-size:13px;color:var(--dark-gray);margin-bottom:20px;line-height:1.55;}
+  .sh-note b{color:var(--navy-deep);}
+
+  label.fl{display:block;font-size:12.5px;font-weight:600;color:var(--dark-gray);margin-bottom:6px;}
+  label.fl .req{color:#c0392b;}
+  .fg{margin-bottom:16px;}
+  input[type=text],input[type=tel],input[type=email]{width:100%;padding:12px 14px;border:1.5px solid var(--border);border-radius:8px;font-size:15px;font-family:'Inter',sans-serif;color:var(--navy-deep);background:#fff;}
+  input:focus{outline:none;border-color:var(--navy);box-shadow:0 0 0 3px rgba(26,62,168,.12);}
+  input::placeholder{color:#a7b2c9;}
+
+  .sh-submit{width:100%;padding:15px;background:var(--navy);color:#fff;border:none;border-radius:10px;font-size:16px;font-weight:700;font-family:'Inter',sans-serif;cursor:pointer;letter-spacing:.3px;transition:background .18s;}
+  .sh-submit:hover{background:var(--navy-hover);}
+  .sh-submit:disabled{background:var(--gray);cursor:not-allowed;}
+
+  .sh-msg{display:none;padding:13px 15px;border-radius:9px;font-size:14px;margin-top:16px;line-height:1.5;}
+
+  #shDash{display:none;}
+  .welcome{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:6px;flex-wrap:wrap;}
+  .welcome h2{font-family:'Playfair Display',serif;font-size:21px;color:var(--navy-deep);}
+  .switch-user{font-size:12px;color:var(--gray);text-decoration:underline;cursor:pointer;background:none;border:none;font-family:inherit;}
+  .deadline-pill{display:inline-block;background:#fbe9e9;color:#b3261e;font-size:12px;font-weight:700;padding:5px 12px;border-radius:20px;margin-top:8px;}
+
+  .progress-row{display:flex;gap:12px;margin-top:18px;}
+  .progress-card{flex:1;border:1.5px solid var(--border);border-radius:10px;padding:14px;text-align:center;cursor:pointer;transition:border-color .15s,background .15s;}
+  .progress-card.active{border-color:var(--navy);background:#eef2fb;}
+  .progress-card .pc-name{font-family:'Playfair Display',serif;font-weight:800;font-size:16px;color:var(--navy-deep);margin-bottom:6px;}
+  .progress-card .pc-count{font-size:22px;font-weight:800;color:var(--navy);}
+  .progress-card .pc-total{font-size:13px;color:var(--gray);}
+  .progress-card .pc-bar{height:6px;background:var(--slate);border-radius:4px;margin-top:8px;overflow:hidden;}
+  .progress-card .pc-bar i{display:block;height:100%;background:var(--gold);width:0%;transition:width .3s;}
+  .progress-card.done{border-color:var(--green);background:var(--green-pale);}
+  .progress-card.done .pc-count{color:var(--green);}
+
+  .entries-note{font-size:12.5px;color:var(--gray);text-align:center;margin-top:12px;}
+  .entries-note b{color:var(--navy-deep);}
+
+  .list-title{font-family:'Playfair Display',serif;font-size:19px;font-weight:800;color:var(--navy-deep);margin:8px 0 4px;}
+  .list-sub{font-size:12.5px;color:var(--gray);margin-bottom:16px;}
+  .stop-row{display:flex;align-items:center;gap:12px;padding:12px 0;border-top:1px solid var(--border);}
+  .stop-row:first-of-type{border-top:none;}
+  .stop-num{width:26px;height:26px;border-radius:50%;background:var(--slate);color:var(--gray);font-size:12.5px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+  .stop-row.done .stop-num{background:var(--green);color:#fff;}
+  .stop-info{flex:1;min-width:0;}
+  .stop-info .sn{font-size:14px;font-weight:700;color:var(--navy-deep);line-height:1.35;}
+  .stop-info .sa{font-size:12px;color:var(--gray);}
+  .stop-thumb{width:46px;height:46px;border-radius:7px;object-fit:cover;flex-shrink:0;border:1px solid var(--border);cursor:pointer;}
+  .stop-btn{flex-shrink:0;font-size:12.5px;font-weight:700;padding:9px 14px;border-radius:7px;border:1.5px solid var(--navy);color:var(--navy);background:#fff;cursor:pointer;white-space:nowrap;font-family:inherit;}
+  .stop-btn:hover{background:var(--navy);color:#fff;}
+  .stop-btn.retake{border-color:var(--border);color:var(--gray);}
+  .stop-btn[disabled]{opacity:.5;cursor:wait;}
+  .stop-file{display:none;}
+
+  .list-complete{background:var(--green-pale);border:1.5px solid var(--green);border-radius:10px;padding:16px;text-align:center;margin-top:16px;display:none;}
+  .list-complete h4{font-family:'Playfair Display',serif;color:var(--green);font-size:17px;margin-bottom:4px;}
+  .list-complete p{font-size:13px;color:var(--dark-gray);}
+
+  .sh-foot{text-align:center;font-size:12.5px;color:var(--gray);margin-top:8px;line-height:1.7;padding:0 16px;}
+  .sh-foot a{color:var(--navy);text-decoration:none;font-weight:600;}
+
+  @media(max-width:520px){
+    .sh-card{padding:22px 16px;}
+    .stop-btn{font-size:11.5px;padding:8px 10px;}
+  }
+</style>
+</head>
+<body>
+
+<div class="sh-top">
+  <div class="glow a"></div>
+  <div class="glow b"></div>
+  <div class="sh-inner">
+    <a href="index.html" class="sh-back">← Back to Chamber site</a>
+    <div class="sh-eyebrow"><span class="sh-eyebrow-line"></span><span>Hobart Chamber of Commerce</span></div>
+    <h1>125th Birthday <span class="em">Scavenger Hunt</span></h1>
+    <div class="sh-facts">
+      <span class="sh-fact">📅 <b>Aug 3 – Aug 7, 2026</b></span>
+      <span class="sh-fact">📸 <b>#Hobart125</b></span>
+      <span class="sh-fact">🏆 <b>Prize drawing Friday</b></span>
+    </div>
+  </div>
+</div>
+
+<div class="sh-wrap">
+
+  <div class="sh-card" id="shStart">
+    <div class="sh-note">
+      Snap a selfie or eye-catching photo with someone in the picture at each stop, then upload it right here — no app, no password. <b>Pick up a printed copy of the lists at the Chamber office</b> (106 W 4th St) if you'd rather carry a paper checklist while you go, or just follow along on your phone below.
+    </div>
+    <div class="fg">
+      <label class="fl" for="idName">Your Name <span class="req">*</span></label>
+      <input type="text" id="idName" placeholder="Full name" />
+    </div>
+    <div class="fg">
+      <label class="fl" for="idPhone">Phone Number <span class="req">*</span></label>
+      <input type="tel" id="idPhone" placeholder="(580) 000-0000" />
+    </div>
+    <div class="fg" style="margin-bottom:8px;">
+      <label class="fl" for="idEmail">Email <span style="color:var(--gray);font-weight:400;">(optional)</span></label>
+      <input type="email" id="idEmail" placeholder="name@email.com" />
+    </div>
+    <div style="font-size:12px;color:var(--gray);margin-bottom:16px;">Your phone number is how the site remembers your progress — come back anytime on any device and pick up right where you left off.</div>
+    <button class="sh-submit" id="idSubmit" onclick="startOrResume()">Start / Continue My Hunt</button>
+    <div class="sh-msg" id="idMsg"></div>
+  </div>
+
+  <div id="shDash">
+    <div class="sh-card">
+      <div class="welcome">
+        <h2 id="welcomeName">Welcome!</h2>
+        <button class="switch-user" onclick="switchUser()">Not you? Switch</button>
+      </div>
+      <div class="deadline-pill">⏰ All photos due Friday, August 7 by 3:00 PM</div>
+      <div class="progress-row">
+        <div class="progress-card active" id="cardA" onclick="showList('A')">
+          <div class="pc-name">List A</div>
+          <div class="pc-count"><span id="countA">0</span><span class="pc-total">/15</span></div>
+          <div class="pc-bar"><i id="barA"></i></div>
+        </div>
+        <div class="progress-card" id="cardB" onclick="showList('B')">
+          <div class="pc-name">List B</div>
+          <div class="pc-count"><span id="countB">0</span><span class="pc-total">/15</span></div>
+          <div class="pc-bar"><i id="barB"></i></div>
+        </div>
+      </div>
+      <div class="entries-note">Complete <b>one</b> list = 1 entry into the prize drawing. Complete <b>both</b> = 2 entries. Plus a special prize for the Most Creative Selfie!</div>
+    </div>
+
+    <div class="sh-card">
+      <div class="list-title" id="listTitle">List A</div>
+      <div class="list-sub">Tap "Upload Photo" at each stop once you've got your shot. Photos upload right away — no need to save them all up.</div>
+      <div id="stopsWrap"></div>
+      <div class="list-complete" id="completeA">
+        <h4>🎉 List A complete!</h4>
+        <p>You're entered in the drawing. Want a second entry? Switch to List B above.</p>
+      </div>
+      <div class="list-complete" id="completeB">
+        <h4>🎉 List B complete!</h4>
+        <p>Nice work — that's your entry locked in.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="sh-foot">
+    Questions? Hobart Chamber of Commerce · <a href="tel:5806820887">(580) 682-0887</a><br>
+    <a href="mailto:director@hobartokchamber.org">director@hobartokchamber.org</a> · Physical lists available at 106 W 4th St
+  </div>
+</div>
+
+<script>
+/* ============================================================
+   HOBART 125TH BIRTHDAY SCAVENGER HUNT — checklist + one-by-one upload
+   Identity is the participant's PHONE NUMBER (digits-only) used as the
+   Firestore document ID under 'scavengerhunt' — no password, no account.
+   Same phone on any device resumes the same progress. Each business slot
+   is its own field (a1..a15, b1..b15) holding a Storage download URL,
+   updated independently the moment that one photo finishes uploading.
+   String-concatenation only, no template literals (house style).
+   ============================================================ */
+var firebaseConfig = {
+  apiKey: "AIzaSyDdoomYnp5-ASz7domQQervL8RttEtOY0o",
+  authDomain: "hobart-chamber.firebaseapp.com",
+  projectId: "hobart-chamber",
+  storageBucket: "hobart-chamber.firebasestorage.app",
+  messagingSenderId: "1018730792333",
+  appId: "1:1018730792333:web:b26c20feef8d04ed07a9c4"
+};
+var db=null, storage=null, FB=false;
+if(window.firebase){
+  firebase.initializeApp(firebaseConfig);
+  db=firebase.firestore();
+  storage=firebase.storage();
+  FB=true;
+}
+
+var WEB3FORMS_KEY = "a35795f6-54b3-41a0-b5c8-043e93cb73a5";
+function notifyChamberNew(data){
+  try{
+    fetch('https://api.web3forms.com/submit',{
+      method:'POST', headers:{'Content-Type':'application/json','Accept':'application/json'},
+      body:JSON.stringify({
+        access_key: WEB3FORMS_KEY,
+        subject: "New Scavenger Hunt Participant - "+data.name,
+        from_name: "Hobart Chamber Website",
+        "Name": data.name, "Phone": data.phone, "Email": data.email||"(none)",
+        "Event": "Hobart's 125th Birthday Scavenger Hunt"
+      })
+    }).catch(function(){});
+  }catch(e){}
+}
+
+var LIST_A=[
+  ["Cocina De Mi Pueblo","13742 US-183"],
+  ["Cotton Creek Boutique","321 S Main St"],
+  ["Western Equipment","1029 E 11th St"],
+  ["Blanket Flower Boutique","331 S Main St"],
+  ["Clink's Supermarket","410 S Broadway"],
+  ["BancFirst (Outside Photo)","105 W 4th St"],
+  ["McCollom Market","100 W 4th St"],
+  ["Flower Shoppe on Main","418 S Main St"],
+  ["Small Town Tees","219 W 3rd St"],
+  ["Sno Busters","116 North Jefferson"],
+  ["City of Hobart","Any City Facility \u2014 Library, City Hall, Police Dept, Fire Dept, Golf Course"],
+  ["Great Plains Bank (Outside Photo)","429 S Broadway"],
+  ["Vintage Rose","322 S Washington"],
+  ["TH Rogers Lumber Co.","431 S Washington St"],
+  ["Elite Retreat","524 S Broadway"]
+];
+var LIST_B=[
+  ["Walmart (Outside Photo)","923 W 11th St"],
+  ["Frazer Bank (Outside Photo)","229 S Broadway"],
+  ["Hometown Pizza","104 E 4th St"],
+  ["Nuevo Leon Restaurant","118 N Broadway St"],
+  ["General Tommy Franks Leadership Institute & Museum","507 S Main St"],
+  ["Hobart Farm & Garden","1030 S Monroe St"],
+  ["Reed Chiropractic Clinic","116 W 4th St"],
+  ["Kiowa County Farm Bureau","801 S Broadway"],
+  ["InterBank","400 S Main St"],
+  ["Parts City","115 W 11th St"],
+  ["Krieger Insurance Agency","322 S Washington"],
+  ["The Grind House","728 S Broadway"],
+  ["Frisco Creek BBQ","420 S Grant St"],
+  ["Hobart Fitness Center","304 S Broadway"],
+  ["Big A Burger","418 S Jefferson"]
+];
+
+var MAX_UPLOAD_MB=20, IMG_MAX_DIM=1600, IMG_QUALITY=0.82;
+var state={docId:null, name:'', phone:'', email:'', data:{}, activeList:'A'};
+
+function digitsOnly(s){ return (s||'').replace(/\D/g,''); }
+function val(id){ var el=document.getElementById(id); return el?el.value.trim():''; }
+function esc(s){ return String(s==null?'':s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];}); }
+
+function showMsg(id,txt,type){
+  var m=document.getElementById(id);
+  m.style.display='block'; m.textContent=txt;
+  if(type==='err'){ m.style.background='#fbe9e9'; m.style.color='#b3261e'; }
+  else if(type==='ok'){ m.style.background='#e8f6ec'; m.style.color='#1c7a3e'; }
+  else{ m.style.background='#eef2fb'; m.style.color='#1a3ea8'; }
+}
+
+(function(){
+  try{
+    var savedName=localStorage.getItem('sh_name'), savedPhone=localStorage.getItem('sh_phone');
+    if(savedName) document.getElementById('idName').value=savedName;
+    if(savedPhone) document.getElementById('idPhone').value=savedPhone;
+  }catch(e){}
+})();
+
+function startOrResume(){
+  var name=val('idName'), phone=val('idPhone'), email=val('idEmail');
+  var phoneId=digitsOnly(phone);
+  if(!name){ showMsg('idMsg','Please enter your name.','err'); return; }
+  if(phoneId.length<10){ showMsg('idMsg','Please enter a valid 10-digit phone number.','err'); return; }
+
+  var btn=document.getElementById('idSubmit');
+  btn.disabled=true; showMsg('idMsg','One moment…','info');
+
+  if(!FB){ showMsg('idMsg','Preview mode — not connected to the live site.','info'); btn.disabled=false; return; }
+
+  try{ localStorage.setItem('sh_name',name); localStorage.setItem('sh_phone',phone); }catch(e){}
+
+  db.collection('scavengerhunt').doc(phoneId).get().then(function(doc){
+    if(doc.exists){
+      state.data=doc.data();
+      db.collection('scavengerhunt').doc(phoneId).set({name:name,phone:phone,email:email||state.data.email||'',updatedAt:firebase.firestore.FieldValue.serverTimestamp()},{merge:true});
+    }else{
+      state.data={name:name,phone:phone,email:email};
+      db.collection('scavengerhunt').doc(phoneId).set({
+        name:name, phone:phone, email:email||'',
+        createdAt: firebase.firestore.FieldValue.serverTimestamp()
+      },{merge:true});
+      notifyChamberNew({name:name,phone:phone,email:email});
+    }
+    state.docId=phoneId; state.name=name; state.phone=phone; state.email=email;
+    enterDashboard();
+  }).catch(function(e){
+    btn.disabled=false;
+    showMsg('idMsg','Something went wrong. Please try again, or call the Chamber at (580) 682-0887.','err');
+  });
+}
+
+function switchUser(){
+  document.getElementById('shDash').style.display='none';
+  document.getElementById('shStart').style.display='block';
+  document.getElementById('idSubmit').disabled=false;
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function countDone(prefix){
+  var n=0,i; for(i=1;i<=15;i++){ if(state.data[prefix+i]) n++; }
+  return n;
+}
+
+function enterDashboard(){
+  document.getElementById('shStart').style.display='none';
+  document.getElementById('shDash').style.display='block';
+  document.getElementById('welcomeName').textContent='Welcome, '+state.name.split(' ')[0]+'!';
+  refreshProgress();
+  showList('A');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function refreshProgress(){
+  var a=countDone('a'), b=countDone('b');
+  document.getElementById('countA').textContent=a;
+  document.getElementById('countB').textContent=b;
+  document.getElementById('barA').style.width=Math.round(a/15*100)+'%';
+  document.getElementById('barB').style.width=Math.round(b/15*100)+'%';
+  document.getElementById('cardA').classList.toggle('done', a===15);
+  document.getElementById('cardB').classList.toggle('done', b===15);
+  document.getElementById('completeA').style.display = a===15 ? 'block':'none';
+  document.getElementById('completeB').style.display = b===15 ? 'block':'none';
+}
+
+function showList(which){
+  state.activeList=which;
+  document.getElementById('cardA').classList.toggle('active', which==='A');
+  document.getElementById('cardB').classList.toggle('active', which==='B');
+  document.getElementById('listTitle').textContent='List '+which;
+  renderStops();
+}
+
+function renderStops(){
+  var list = state.activeList==='A' ? LIST_A : LIST_B;
+  var prefix = state.activeList==='A' ? 'a' : 'b';
+  var wrap=document.getElementById('stopsWrap');
+  var h='';
+  for(var i=0;i<list.length;i++){
+    var n=i+1, key=prefix+n, url=state.data[key];
+    h+='<div class="stop-row'+(url?' done':'')+'" id="row_'+key+'">'
+      +'<div class="stop-num">'+(url?'✓':n)+'</div>'
+      +'<div class="stop-info"><div class="sn">'+esc(list[i][0])+'</div><div class="sa">'+esc(list[i][1])+'</div></div>'
+      +(url?'<img class="stop-thumb" src="'+esc(url)+'" onclick="window.open(\''+esc(url)+'\',\'_blank\')">':'')
+      +'<button type="button" class="stop-btn'+(url?' retake':'')+'" onclick="document.getElementById(\'file_'+key+'\').click()">'+(url?'Retake':'Upload Photo')+'</button>'
+      +'<input type="file" accept="image/*" class="stop-file" id="file_'+key+'" onchange="handlePick(this,\''+prefix+'\','+n+')">'
+      +'</div>';
+  }
+  wrap.innerHTML=h;
+}
+
+function compressImageFile(file, cb){
+  if(file.size > MAX_UPLOAD_MB*1024*1024){ cb(null,'That photo is larger than '+MAX_UPLOAD_MB+'MB.'); return; }
+  var url=URL.createObjectURL(file);
+  var img=new Image();
+  img.onload=function(){
+    try{
+      var w=img.naturalWidth,h=img.naturalHeight;
+      if(!w||!h){ URL.revokeObjectURL(url); cb(file,null); return; }
+      var scale=Math.min(1, IMG_MAX_DIM/Math.max(w,h));
+      var cw=Math.round(w*scale), ch=Math.round(h*scale);
+      var canvas=document.createElement('canvas'); canvas.width=cw; canvas.height=ch;
+      canvas.getContext('2d').drawImage(img,0,0,cw,ch);
+      canvas.toBlob(function(blob){ URL.revokeObjectURL(url); cb(blob||file,null); }, 'image/jpeg', IMG_QUALITY);
+    }catch(err){ URL.revokeObjectURL(url); cb(file,null); }
+  };
+  img.onerror=function(){ URL.revokeObjectURL(url); cb(file,null); };
+  img.src=url;
+}
+
+function handlePick(inputEl, prefix, n){
+  var file=inputEl.files && inputEl.files[0];
+  if(!file) return;
+  var key=prefix+n;
+  var row=document.getElementById('row_'+key);
+  var btn=row.querySelector('.stop-btn');
+  btn.disabled=true; btn.textContent='Uploading…';
+
+  if(!FB){ btn.disabled=false; btn.textContent='Upload Photo'; alert('Preview mode — not connected to the live site.'); return; }
+
+  compressImageFile(file, function(blob, err){
+    if(err){ btn.disabled=false; btn.textContent='Upload Photo'; alert(err); return; }
+    var path='scavenger-hunt/'+state.docId+'_'+key+'_'+Date.now()+'.jpg';
+    var ref=storage.ref().child(path);
+    ref.put(blob, {contentType:'image/jpeg'}).then(function(snap){
+      return snap.ref.getDownloadURL();
+    }).then(function(url){
+      var patch={}; patch[key]=url; patch[key+'_at']=firebase.firestore.FieldValue.serverTimestamp();
+      patch.updatedAt=firebase.firestore.FieldValue.serverTimestamp();
+      return db.collection('scavengerhunt').doc(state.docId).set(patch,{merge:true}).then(function(){
+        state.data[key]=url;
+        renderStops();
+        refreshProgress();
+      });
+    }).catch(function(e){
+      btn.disabled=false; btn.textContent='Upload Photo';
+      alert('Upload failed — please check your connection and try again.');
+    });
+  });
+}
+</script>
+</body>
+</html>

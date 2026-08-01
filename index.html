@@ -683,6 +683,21 @@
   </div>
 </a>
 
+<!-- ===== SCAVENGER HUNT ANNOUNCEMENT ===== -->
+<a href="scavenger-hunt-upload.html" class="announce-banner">
+  <div class="announce-in">
+    <div class="announce-left">
+      <span class="announce-emoji">📸</span>
+      <div class="announce-text">
+        <span class="announce-eyebrow">August 3 – August 7</span>
+        <span class="announce-title">125th Birthday Scavenger Hunt</span>
+        <span class="announce-sub">Visit local businesses, snap a photo, win prizes · Pick up a printed list at the Chamber, 106 W 4th St</span>
+      </div>
+    </div>
+    <span class="announce-btn">Start the Hunt →</span>
+  </div>
+</a>
+
 <!-- ===== PILLARS ===== -->
 <section class="pillars">
   <div class="pillars-header">
@@ -2591,50 +2606,86 @@ function paneScavenger(){
   pane.innerHTML='<div class="admin-empty">Loading…</div>';
   db.collection('scavengerhunt').get().then(function(snap){
     var rows=[]; snap.forEach(function(doc){var x=doc.data();x.id=doc.id;rows.push(x);});
-    rows.sort(function(a,b){ return (b.createdAt&&b.createdAt.seconds||0)-(a.createdAt&&a.createdAt.seconds||0); });
+    rows.sort(function(a,b){ return (b.updatedAt&&b.updatedAt.seconds||b.createdAt&&b.createdAt.seconds||0)-(a.updatedAt&&a.updatedAt.seconds||a.createdAt&&a.createdAt.seconds||0); });
     var cnt=document.getElementById('shCount'); if(cnt) cnt.innerHTML=rows.length?('<span class="badge-pending">'+rows.length+'</span>'):'';
-    if(!rows.length){ pane.innerHTML='<div class="admin-empty">No scavenger hunt entries yet.</div>'; return; }
-    var totalPhotos=0,i; for(i=0;i<rows.length;i++){ totalPhotos+=(rows[i].photoUrls||[]).length; }
-    var html='<div style="font-size:13px;color:var(--gray);margin-bottom:16px;">'+rows.length+' entr'+(rows.length===1?'y':'ies')+' · '+totalPhotos+' photos total</div>'
-      +'<div style="margin-bottom:16px;"><button class="btn-sm btn-gold" onclick="exportScavenger()">⬇ Export Entrants (CSV)</button></div>'
-      +'<div class="admin-list">';
+    if(!rows.length){ pane.innerHTML='<div class="admin-empty">No scavenger hunt participants yet.</div>'; return; }
+
+    function progress(s,prefix){ var n=0,i; for(i=1;i<=15;i++){ if(s[prefix+i]) n++; } return n; }
+    var doneA=0,doneB=0,doneBoth=0,i;
     for(i=0;i<rows.length;i++){
-      var s=rows[i], photos=s.photoUrls||[];
-      html+='<div class="admin-row" style="flex-direction:column;align-items:stretch;">'
+      var pa=progress(rows[i],'a'), pb=progress(rows[i],'b');
+      if(pa===15) doneA++; if(pb===15) doneB++; if(pa===15&&pb===15) doneBoth++;
+    }
+    var totalEntries = doneA + doneB; // 1 entry per completed list, so a person with both counts twice — matches the flyer's own rule
+
+    var html='<div style="font-size:13px;color:var(--gray);margin-bottom:6px;">'+rows.length+' participant'+(rows.length===1?'':'s')+' · '+doneA+' completed List A · '+doneB+' completed List B · <b style="color:var(--navy-deep);">'+totalEntries+' total drawing entries</b></div>'
+      +'<div style="display:flex;gap:10px;flex-wrap:wrap;margin-bottom:16px;">'
+      +'<button class="btn-sm btn-gold" onclick="exportScavenger()">⬇ Export Participants (CSV)</button>'
+      +'<input type="text" id="shSearch" placeholder="Search by name or phone…" oninput="filterScavenger()" style="flex:1;min-width:180px;padding:8px 12px;border:1px solid var(--border);border-radius:6px;font-size:13px;">'
+      +'</div>'
+      +'<div class="admin-list" id="shList">';
+
+    for(i=0;i<rows.length;i++){
+      var s=rows[i], pa=progress(s,'a'), pb=progress(s,'b');
+      var searchKey=((s.name||'')+' '+(s.phone||'')).toLowerCase();
+      html+='<div class="admin-row sh-entry" data-key="'+esc(searchKey)+'" style="flex-direction:column;align-items:stretch;">'
         +'<div style="display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;">'
-        +'<div class="info"><b>'+esc(s.name||'(no name)')+'</b>'
-        +'<small>'+esc(s.phone||'')+' · '+esc(s.email||'')+' · '+photos.length+' photo'+(photos.length===1?'':'s')+'</small></div>'
-        +'<div class="acts"><button class="btn-sm btn-red" onclick="delScavenger(\''+s.id+'\')">Delete</button></div>'
+        +'<div class="info"><b>'+esc(s.name||'(no name)')+(pa===15?' <span style="color:var(--gold);font-size:11px;">✓ LIST A</span>':'')+(pb===15?' <span style="color:var(--gold);font-size:11px;">✓ LIST B</span>':'')+'</b>'
+        +'<small>'+esc(s.phone||'')+(s.email?(' · '+esc(s.email)):'')+' · List A: '+pa+'/15 · List B: '+pb+'/15</small></div>'
+        +'<div class="acts"><button class="btn-sm btn-line" onclick="toggleSh(\''+s.id+'\')">View Photos</button><button class="btn-sm btn-red" onclick="delScavenger(\''+s.id+'\')">Delete</button></div>'
+        +'</div>'
+        +'<div id="shPhotos_'+s.id+'" style="display:none;margin-top:10px;padding-top:10px;border-top:1px solid var(--border);"></div>'
         +'</div>';
-      if(s.businesses) html+='<div style="font-size:12.5px;color:var(--gray);margin-top:8px;"><b style="color:var(--dark-gray);">Visited:</b> '+esc(s.businesses)+'</div>';
-      if(photos.length){
-        html+='<div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:10px;padding-top:10px;border-top:1px solid var(--border);">';
-        photos.forEach(function(url){
-          html+='<img src="'+esc(url)+'" onclick="openFlyer(\''+esc(url)+'\')" style="width:64px;height:64px;object-fit:cover;border-radius:6px;border:1px solid var(--border);cursor:pointer;">';
-        });
-        html+='</div>';
-      }
-      html+='</div>';
     }
     html+='</div>';
     pane.innerHTML=html;
+    window._shRows=rows; // cache for the photo-grid expand and CSV export without a re-fetch
   }).catch(function(e){ pane.innerHTML='<div class="admin-empty">Error loading. If this is the first time viewing the Scavenger Hunt, add the <b>scavengerhunt</b> rule in Firestore.<br><br><small style="color:#b3261e;">'+esc(e&&e.message||'')+'</small></div>'; });
 }
-function delScavenger(id){ if(!confirm('Delete this entry? (Photos already uploaded to Storage will stay there, but the entry record and its links will be gone.)'))return; db.collection('scavengerhunt').doc(id).delete().then(function(){paneScavenger();}); }
+function filterScavenger(){
+  var q=(document.getElementById('shSearch').value||'').toLowerCase();
+  var rows=document.querySelectorAll('#shList .sh-entry'), i;
+  for(i=0;i<rows.length;i++){ rows[i].style.display = rows[i].getAttribute('data-key').indexOf(q)>-1 ? '' : 'none'; }
+}
+function toggleSh(id){
+  var box=document.getElementById('shPhotos_'+id);
+  if(!box) return;
+  if(box.style.display==='block'){ box.style.display='none'; return; }
+  var s=(window._shRows||[]).find(function(r){return r.id===id;});
+  if(!s){ box.style.display='none'; return; }
+  function grid(prefix,label){
+    var h='<div style="font-size:11px;font-weight:700;color:var(--gray);text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px;">'+label+'</div><div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px;">';
+    var any=false,i;
+    for(i=1;i<=15;i++){
+      var url=s[prefix+i];
+      if(!url) continue;
+      any=true;
+      h+='<img src="'+esc(url)+'" title="Stop '+i+'" onclick="openFlyer(\''+esc(url)+'\')" style="width:56px;height:56px;object-fit:cover;border-radius:6px;border:1px solid var(--border);cursor:pointer;">';
+    }
+    h+='</div>';
+    return any?h:'<div style="font-size:12px;color:var(--gray);margin-bottom:12px;">'+label+': no photos yet</div>';
+  }
+  box.innerHTML=grid('a','List A photos')+grid('b','List B photos');
+  box.style.display='block';
+}
+function delScavenger(id){ if(!confirm('Delete this participant? (Photos already uploaded to Storage will stay there, but their entry record and progress will be gone.)'))return; db.collection('scavengerhunt').doc(id).delete().then(function(){paneScavenger();}); }
 function exportScavenger(){
   db.collection('scavengerhunt').get().then(function(snap){
     var rows=[]; snap.forEach(function(d){ rows.push(d.data()); });
-    if(!rows.length){ alert('No entries to export yet.'); return; }
-    rows.sort(function(a,b){ return (a.createdAt&&a.createdAt.seconds||0)-(b.createdAt&&b.createdAt.seconds||0); });
+    if(!rows.length){ alert('No participants to export yet.'); return; }
+    function progress(s,prefix){ var n=0,i; for(i=1;i<=15;i++){ if(s[prefix+i]) n++; } return n; }
+    rows.sort(function(a,b){ return (a.name||'').localeCompare(b.name||''); });
     function q(v){ return '"'+String(v==null?'':v).replace(/"/g,'""')+'"'; }
-    var csv=['Name','Phone','Email','Businesses Visited','Photo Count'].map(q).join(',')+'\n';
+    var csv=['Name','Phone','Email','List A Progress','List B Progress','List A Complete','List B Complete','Total Entries'].map(q).join(',')+'\n';
     rows.forEach(function(s){
-      csv+=[q(s.name),q(s.phone),q(s.email),q(s.businesses||''),q((s.photoUrls||[]).length)].join(',')+'\n';
+      var pa=progress(s,'a'), pb=progress(s,'b');
+      var entries=(pa===15?1:0)+(pb===15?1:0);
+      csv+=[q(s.name),q(s.phone),q(s.email||''),q(pa+'/15'),q(pb+'/15'),q(pa===15?'Yes':'No'),q(pb===15?'Yes':'No'),q(entries)].join(',')+'\n';
     });
     var blob=new Blob([csv],{type:'text/csv;charset=utf-8;'});
     var a=document.createElement('a');
     a.href=URL.createObjectURL(blob);
-    a.download='scavenger-hunt-entrants-'+_anDayKey()+'.csv';
+    a.download='scavenger-hunt-participants-'+_anDayKey()+'.csv';
     document.body.appendChild(a); a.click(); document.body.removeChild(a);
   }).catch(function(e){ alert('Could not export: '+(e&&e.message||'')); });
 }
