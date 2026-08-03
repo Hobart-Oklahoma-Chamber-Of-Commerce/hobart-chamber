@@ -190,7 +190,7 @@
    Identity is the participant's PHONE NUMBER (digits-only) used as the
    Firestore document ID under 'scavengerhunt' — no password, no account.
    Same phone on any device resumes the same progress. Each business slot
-   is its own field (a1..a15, b1..b15) holding a Storage download URL,
+   is its own field (a1..a16, b1..b17) holding a Storage download URL,
    updated independently the moment that one photo finishes uploading.
    String-concatenation only, no template literals (house style).
    ============================================================ */
@@ -241,7 +241,8 @@ var LIST_A=[
   ["Great Plains Bank (Outside Photo)","429 S Broadway"],
   ["Vintage Rose","322 S Washington"],
   ["TH Rogers Lumber Co.","431 S Washington St"],
-  ["Elite Retreat","524 S Broadway"]
+  ["Elite Retreat (take 2 photos, from 2 different services inside)","524 S Broadway"],
+  ["McAbee Fox Roofing LLC","510 S Broadway"]
 ];
 var LIST_B=[
   ["Walmart (Outside Photo)","923 W 11th St"],
@@ -256,9 +257,11 @@ var LIST_B=[
   ["Parts City","115 W 11th St"],
   ["Krieger Insurance Agency","322 S Washington"],
   ["The Grind House","728 S Broadway"],
-  ["Frisco Creek BBQ","420 S Grant St"],
+  ["Frisco Creek Barbeque","1020 S Main St"],
   ["Hobart Fitness Center","304 S Broadway"],
-  ["Big A Burger","418 S Jefferson"]
+  ["Big A Burger","418 S Jefferson"],
+  ["Blissful Burro","119 W 4th St"],
+  ["Edward Jones (Outside Photo)","411 S Main St"]
 ];
 
 var MAX_UPLOAD_MB=20, IMG_MAX_DIM=1600, IMG_QUALITY=0.82;
@@ -325,7 +328,8 @@ function switchUser(){
 }
 
 function countDone(prefix){
-  var n=0,i; for(i=1;i<=15;i++){ if(state.data[prefix+i]) n++; }
+  var total = prefix==='a' ? LIST_A.length : LIST_B.length;
+  var n=0,i; for(i=1;i<=total;i++){ if(state.data[prefix+i]) n++; }
   return n;
 }
 
@@ -340,14 +344,17 @@ function enterDashboard(){
 
 function refreshProgress(){
   var a=countDone('a'), b=countDone('b');
+  var totalA=LIST_A.length, totalB=LIST_B.length;
   document.getElementById('countA').textContent=a;
   document.getElementById('countB').textContent=b;
-  document.getElementById('barA').style.width=Math.round(a/15*100)+'%';
-  document.getElementById('barB').style.width=Math.round(b/15*100)+'%';
-  document.getElementById('cardA').classList.toggle('done', a===15);
-  document.getElementById('cardB').classList.toggle('done', b===15);
-  document.getElementById('completeA').style.display = a===15 ? 'block':'none';
-  document.getElementById('completeB').style.display = b===15 ? 'block':'none';
+  document.querySelectorAll('#cardA .pc-total')[0].textContent='/'+totalA;
+  document.querySelectorAll('#cardB .pc-total')[0].textContent='/'+totalB;
+  document.getElementById('barA').style.width=Math.round(a/totalA*100)+'%';
+  document.getElementById('barB').style.width=Math.round(b/totalB*100)+'%';
+  document.getElementById('cardA').classList.toggle('done', a===totalA);
+  document.getElementById('cardB').classList.toggle('done', b===totalB);
+  document.getElementById('completeA').style.display = a===totalA ? 'block':'none';
+  document.getElementById('completeB').style.display = b===totalB ? 'block':'none';
 }
 
 function showList(which){
