@@ -7,7 +7,6 @@
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;800;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
 <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-storage-compat.js"></script>
 <style>
   *{margin:0;padding:0;box-sizing:border-box;}
   :root{
@@ -198,16 +197,35 @@ var firebaseConfig = {
   apiKey: "AIzaSyDdoomYnp5-ASz7domQQervL8RttEtOY0o",
   authDomain: "hobart-chamber.firebaseapp.com",
   projectId: "hobart-chamber",
-  storageBucket: "hobart-chamber.appspot.com",
+  storageBucket: "hobart-chamber.firebasestorage.app",
   messagingSenderId: "1018730792333",
   appId: "1:1018730792333:web:b26c20feef8d04ed07a9c4"
 };
-var db=null, storage=null, FB=false;
+var db=null, FB=false;
 if(window.firebase){
   firebase.initializeApp(firebaseConfig);
   db=firebase.firestore();
-  storage=firebase.storage();
   FB=true;
+}
+
+/* ---- Photo hosting: Cloudinary (free, no billing account needed) ----
+   Firebase Storage requires their paid "Blaze" plan just to create a bucket,
+   even though actual usage here would cost close to $0 — Chris asked for a
+   genuinely no-cost option instead, so photos go to Cloudinary's free tier
+   (25GB storage/bandwidth, no credit card to sign up) and only the resulting
+   URL gets saved in Firestore, same as before.
+
+   TO ACTIVATE — one-time setup (see CLOUDINARY-SETUP.md for full steps):
+   1. Create a free account at cloudinary.com
+   2. Copy your "Cloud Name" from the dashboard, paste it below
+   3. Create an UNSIGNED upload preset (Settings → Upload → Upload presets)
+      and paste its name below
+   Until both are filled in, uploads will show a clear setup-needed message
+   instead of silently failing. */
+var CLOUDINARY_CLOUD_NAME = "w96y2par";
+var CLOUDINARY_UPLOAD_PRESET = "scavenger_hunt";
+function cloudinaryReady(){
+  return CLOUDINARY_CLOUD_NAME!=="YOUR_CLOUD_NAME" && CLOUDINARY_UPLOAD_PRESET!=="YOUR_UPLOAD_PRESET";
 }
 
 var WEB3FORMS_KEY = "a35795f6-54b3-41a0-b5c8-043e93cb73a5";
@@ -402,34 +420,76 @@ function compressImageFile(file, cb){
   img.src=url;
 }
 
+function stopError(row, msg){
+  var old=row.querySelector('.stop-err');
+  if(old) old.remove();
+  var e=document.createElement('div');
+  e.className='stop-err';
+  e.style.cssText='flex-basis:100%;font-size:12px;color:#b3261e;background:#fbe9e9;border-radius:6px;padding:7px 10px;margin-top:6px;';
+  e.textContent=msg;
+  row.appendChild(e);
+}
+function withTimeout(promise, ms, label){
+  return new Promise(function(resolve,reject){
+    var done=false;
+    var timer=setTimeout(function(){
+      if(done) return; done=true;
+      reject(new Error('timeout:'+label));
+    }, ms);
+    promise.then(function(v){ if(done)return; done=true; clearTimeout(timer); resolve(v); },
+                 function(e){ if(done)return; done=true; clearTimeout(timer); reject(e); });
+  });
+}
+
 function handlePick(inputEl, prefix, n){
   var file=inputEl.files && inputEl.files[0];
   if(!file) return;
   var key=prefix+n;
   var row=document.getElementById('row_'+key);
   var btn=row.querySelector('.stop-btn');
+  var oldErr=row.querySelector('.stop-err'); if(oldErr) oldErr.remove();
   btn.disabled=true; btn.textContent='Uploading…';
 
-  if(!FB){ btn.disabled=false; btn.textContent='Upload Photo'; alert('Preview mode — not connected to the live site.'); return; }
+  if(!FB){ btn.disabled=false; btn.textContent='Upload Photo'; stopError(row,'Preview mode — not connected to the live site.'); return; }
+  if(!cloudinaryReady()){ btn.disabled=false; btn.textContent='Upload Photo'; stopError(row,'Photo hosting isn\u2019t set up yet — tell the Chamber to finish the Cloudinary setup step.'); return; }
 
-  compressImageFile(file, function(blob, err){
-    if(err){ btn.disabled=false; btn.textContent='Upload Photo'; alert(err); return; }
-    var path='scavenger-hunt/'+state.docId+'_'+key+'_'+Date.now()+'.jpg';
-    var ref=storage.ref().child(path);
-    ref.put(blob, {contentType:'image/jpeg'}).then(function(snap){
-      return snap.ref.getDownloadURL();
-    }).then(function(url){
-      var patch={}; patch[key]=url; patch[key+'_at']=firebase.firestore.FieldValue.serverTimestamp();
-      patch.updatedAt=firebase.firestore.FieldValue.serverTimestamp();
-      return db.collection('scavengerhunt').doc(state.docId).set(patch,{merge:true}).then(function(){
-        state.data[key]=url;
-        renderStops();
-        refreshProgress();
-      });
-    }).catch(function(e){
-      btn.disabled=false; btn.textContent='Upload Photo';
-      alert('Upload failed — please check your connection and try again.');
+  /* Nothing here is allowed to hang forever — every stage below has its own
+     timeout, so "stuck on Uploading…" can no longer happen even if the
+     network, Cloudinary, or Firestore rules are misconfigured. Whatever
+     goes wrong shows up as a specific message on the row instead of silence. */
+  withTimeout(new Promise(function(resolve,reject){
+    compressImageFile(file, function(blob, err){ if(err) reject(new Error(err)); else resolve(blob); });
+  }), 15000, 'compress').then(function(blob){
+    var form=new FormData();
+    form.append('file', blob, key+'.jpg');
+    form.append('upload_preset', CLOUDINARY_UPLOAD_PRESET);
+    form.append('public_id', 'scavenger-hunt/'+state.docId+'_'+key+'_'+Date.now());
+    var uploadUrl='https://api.cloudinary.com/v1_1/'+CLOUDINARY_CLOUD_NAME+'/image/upload';
+    return withTimeout(fetch(uploadUrl, {method:'POST', body:form}), 30000, 'photo-upload').then(function(resp){
+      if(!resp.ok) throw new Error('photo-upload-http-'+resp.status);
+      return resp.json();
+    }).then(function(json){
+      if(!json.secure_url) throw new Error('photo-upload-no-url');
+      return json.secure_url;
     });
+  }).then(function(url){
+    var patch={}; patch[key]=url; patch[key+'_at']=firebase.firestore.FieldValue.serverTimestamp();
+    patch.updatedAt=firebase.firestore.FieldValue.serverTimestamp();
+    return withTimeout(db.collection('scavengerhunt').doc(state.docId).set(patch,{merge:true}), 15000, 'firestore-save').then(function(){
+      state.data[key]=url;
+      renderStops();
+      refreshProgress();
+    });
+  }).catch(function(e){
+    btn.disabled=false; btn.textContent='Upload Photo';
+    var reason=(e&&e.message)||'';
+    var msg='Upload failed — please try again.';
+    if(reason.indexOf('timeout:compress')===0) msg='That photo took too long to process — try a different photo or a smaller one.';
+    else if(reason.indexOf('timeout:photo-upload')===0) msg='Upload timed out — check your connection and try again. (If this keeps happening, tell the Chamber it\u2019s stuck at the "photo upload" step.)';
+    else if(reason.indexOf('photo-upload-http-')===0) msg='The photo host rejected this upload (tell the Chamber: "'+reason+'"). Double-check the Cloudinary upload preset is set to Unsigned.';
+    else if(reason.indexOf('timeout:firestore-save')===0) msg='Photo uploaded, but saving your progress timed out — try again. (Tell the Chamber it\u2019s stuck at the "save" step.)';
+    else if(/permission|denied/i.test(reason)) msg='This photo can\u2019t be saved right now — permissions issue on our end. Please tell the Chamber it says "permission denied."';
+    stopError(row, msg);
   });
 }
 </script>
