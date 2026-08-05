@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Parade Registration · Hobart's Hometown Harvest</title>
+<meta name="description" content="Join Hobart's Hometown Harvest Parade! Register your group, business, or organization to participate." />
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;800;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
+
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+  :root{
+    --navy:#1a3ea8;
+    --navy-dark:#142f7e;
+    --navy-deep:#0e2056;
+    --navy-hover:#2247bd;
+    --gold:#c49a3e;
+    --gold-light:#dab65e;
+    --gold-pale:#f6edd6;
+    --white:#ffffff;
+    --slate:#f3f6fc;
+    --gray:#6f7d99;
+    --dark-gray:#2c3a58;
+    --border:#dbe3f4;
+  }
+  html{scroll-behavior:smooth;}
+  body{font-family:'Inter',sans-serif;color:var(--navy-deep);background:var(--white);overflow-x:hidden;}
+
+  /* NAV */
+  nav{background:rgba(26,62,168,.97);display:flex;align-items:center;justify-content:space-between;padding:0 48px;height:74px;border-bottom:1px solid rgba(196,154,62,.4);}
+  .nav-logo{display:flex;align-items:center;gap:12px;text-decoration:none;}
+  .nav-logo-mark{width:42px;height:42px;border-radius:50%;background:var(--gold-pale);display:flex;align-items:center;justify-content:center;overflow:hidden;flex-shrink:0;}
+  .nav-logo-mark img{width:100%;height:100%;object-fit:cover;}
+  .nav-logo-text{display:flex;flex-direction:column;}
+  .nav-logo-text span:first-child{font-family:'Playfair Display',serif;font-size:16px;font-weight:700;color:var(--white);line-height:1.2;}
+  .nav-logo-text span:last-child{font-size:10.5px;font-weight:500;color:rgba(255,255,255,.55);letter-spacing:.5px;}
+  .nav-back{font-size:13px;font-weight:600;color:rgba(255,255,255,.7);text-decoration:none;padding:9px 18px;border:1px solid rgba(255,255,255,.25);border-radius:5px;transition:all .2s;}
+  .nav-back:hover{color:#fff;border-color:rgba(255,255,255,.6);}
+
+  /* HERO */
+  .hero{background:linear-gradient(135deg,var(--navy-deep) 0%,var(--navy) 60%,#1f4fbf 100%);padding:64px 48px 56px;text-align:center;position:relative;overflow:hidden;}
+  .hero::before{content:'PARADE';position:absolute;font-family:'Playfair Display',serif;font-size:180px;font-weight:900;color:rgba(255,255,255,.04);top:50%;left:50%;transform:translate(-50%,-50%);white-space:nowrap;pointer-events:none;}
+  .hero-inner{position:relative;z-index:2;max-width:680px;margin:0 auto;}
+  .hero-eyebrow{font-size:11px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--gold-light);margin-bottom:12px;}
+  .hero-title{font-family:'Playfair Display',serif;font-size:clamp(32px,5vw,52px);font-weight:800;color:var(--white);line-height:1.15;margin-bottom:16px;}
+  .hero-title em{font-style:normal;color:var(--gold-light);}
+  .hero-sub{font-size:16px;color:rgba(255,255,255,.7);line-height:1.7;margin-bottom:28px;}
+  .hero-badges{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;}
+  .badge{background:rgba(255,255,255,.08);border:1px solid rgba(196,154,62,.3);border-radius:20px;padding:7px 16px;font-size:13px;font-weight:600;color:rgba(255,255,255,.85);}
+  .badge strong{color:var(--gold-light);}
+
+  /* TIME NOTICE */
+  .time-notice{background:var(--gold-pale);border-left:4px solid var(--gold);border-radius:8px;padding:20px 24px;max-width:680px;margin:0 auto 0;font-size:14.5px;color:var(--dark-gray);line-height:1.6;}
+  .time-notice strong:first-child{color:var(--navy);display:block;margin-bottom:10px;font-size:15.5px;letter-spacing:.2px;}
+  .time-notice p{margin:0;line-height:1.75;}
+  .time-notice p strong{color:var(--navy-deep);font-weight:700;}
+
+  /* MAIN */
+  main{max-width:780px;margin:0 auto;padding:52px 24px 80px;}
+
+  /* FORM CARD */
+  .form-card{background:var(--white);border:1px solid var(--border);border-radius:12px;padding:40px;box-shadow:0 4px 24px rgba(26,62,168,.07);}
+  .form-section-title{font-family:'Playfair Display',serif;font-size:18px;font-weight:700;color:var(--navy);margin:28px 0 16px;padding-bottom:10px;border-bottom:1px solid var(--border);}
+  .form-section-title:first-child{margin-top:0;}
+  .fg{display:flex;flex-direction:column;gap:6px;margin-bottom:16px;}
+  .fg label{font-size:13px;font-weight:600;color:var(--dark-gray);}
+  .fg label .req{color:var(--gold);margin-left:2px;}
+  .fg input,.fg textarea,.fg select{padding:11px 14px;border:1px solid var(--border);border-radius:6px;font-size:14.5px;font-family:'Inter',sans-serif;color:var(--navy-deep);background:var(--white);transition:border-color .2s,box-shadow .2s;width:100%;}
+  .fg input:focus,.fg textarea:focus,.fg select:focus{outline:none;border-color:var(--navy);box-shadow:0 0 0 3px rgba(26,62,168,.1);}
+  .fg textarea{resize:vertical;min-height:88px;}
+  .fg .hint{font-size:11.5px;color:var(--gray);margin-top:2px;line-height:1.5;}
+  .fg-row{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+
+  /* CHECK ROW */
+  .check-group{display:flex;flex-direction:column;gap:10px;}
+  .check-item{display:flex;align-items:flex-start;gap:10px;cursor:pointer;font-size:14px;color:var(--dark-gray);line-height:1.45;}
+  .check-item input[type="checkbox"]{margin-top:2px;accent-color:var(--navy);width:16px;height:16px;flex-shrink:0;cursor:pointer;}
+
+  /* SUBMIT BTN */
+  .btn-submit{width:100%;background:var(--navy);color:var(--white);border:none;border-radius:7px;padding:16px 24px;font-size:16px;font-weight:700;font-family:'Inter',sans-serif;cursor:pointer;transition:background .2s,transform .1s;margin-top:8px;letter-spacing:.3px;}
+  .btn-submit:hover{background:var(--navy-hover);}
+  .btn-submit:active{transform:scale(.99);}
+  .btn-submit:disabled{background:var(--gray);cursor:not-allowed;}
+
+  /* FORM MSG */
+  .form-msg{display:none;border-radius:7px;padding:14px 18px;font-size:14px;font-weight:500;line-height:1.5;margin-top:14px;}
+  .form-msg.ok{background:#e8f6ec;color:#1c7a3e;display:block;}
+  .form-msg.err{background:#fbe9e9;color:#b3261e;display:block;}
+
+  /* WHAT TO KNOW */
+  .info-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:40px;}
+  .info-card{background:var(--slate);border-radius:10px;padding:20px 22px;}
+  .info-card .ic-icon{font-size:26px;margin-bottom:8px;}
+  .info-card .ic-label{font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold);margin-bottom:5px;}
+  .info-card .ic-val{font-size:15px;font-weight:600;color:var(--navy);line-height:1.4;}
+  .info-card .ic-note{font-size:12.5px;color:var(--gray);margin-top:4px;line-height:1.45;}
+
+  /* FOOTER */
+  .page-footer{background:var(--navy-dark);padding:32px 48px;text-align:center;}
+  .page-footer p{font-size:13px;color:rgba(255,255,255,.45);}
+  .page-footer a{color:var(--gold-light);text-decoration:none;}
+  .page-footer a:hover{text-decoration:underline;}
+
+  @media(max-width:640px){
+    nav{padding:0 20px;}
+    .hero{padding:44px 22px 40px;}
+    .form-card{padding:26px 20px;}
+    .fg-row{grid-template-columns:1fr;}
+    .info-grid{grid-template-columns:1fr;}
+    .page-footer{padding:24px 22px;}
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="index.html" class="nav-logo">
+    <span class="nav-logo-mark">
+      <img src="flyers/chamber-logo.PNG" alt="Hobart Chamber of Commerce" onerror="this.onerror=null;this.style.display='none';" />
+    </span>
+    <span class="nav-logo-text">
+      <span>Hobart Chamber of Commerce</span>
+      <span>Kiowa County · Oklahoma</span>
+    </span>
+  </a>
+  <a href="index.html" class="nav-back">← Back to Site</a>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-inner">
+    <div class="hero-eyebrow">Hobart's Hometown Harvest · September 19, 2026</div>
+    <h1 class="hero-title">Join the <em>Parade!</em></h1>
+    <p class="hero-sub">Whether you're a local business, civic group, school club, or just a crew who wants to roll down Main Street and throw candy — you're welcome here. No floats required. Just show up and represent Hobart.</p>
+    <div class="hero-badges">
+      <span class="badge">🎉 All Groups Welcome</span>
+      <span class="badge">🍬 Candy Encouraged</span>
+      <span class="badge">📍 <strong>Line Up 1 Hour Prior</strong></span>
+    </div>
+  </div>
+</div>
+
+<!-- MAIN -->
+<main>
+
+  <!-- TIME NOTICE -->
+  <div class="time-notice" style="margin-bottom:36px;">
+    <strong>⏰ Parade Time — To Be Confirmed</strong>
+    <p>Parade start time is scheduled for <strong>5:30 PM</strong>, with line-up beginning <strong>one hour prior.</strong> Official time will be locked in and sent to every registered participant before the end of this month — so make sure your contact info below is accurate.</p>
+  </div>
+
+  <!-- INFO CARDS -->
+  <div class="info-grid">
+    <div class="info-card">
+      <div class="ic-icon">📅</div>
+      <div class="ic-label">Date</div>
+      <div class="ic-val">Saturday, September 19, 2026</div>
+      <div class="ic-note">Part of Hobart's Hometown Harvest Festival</div>
+    </div>
+    <div class="info-card">
+      <div class="ic-icon">⏰</div>
+      <div class="ic-label">Parade Start</div>
+      <div class="ic-val">~5:30 PM · To Be Confirmed</div>
+      <div class="ic-note">Line up 1 hour prior — details sent to all registrants</div>
+    </div>
+    <div class="info-card">
+      <div class="ic-icon">📍</div>
+      <div class="ic-label">Location</div>
+      <div class="ic-val">Downtown Hobart</div>
+      <div class="ic-note">Route details provided upon confirmation</div>
+    </div>
+    <div class="info-card">
+      <div class="ic-icon">🎉</div>
+      <div class="ic-label">Who Can Participate</div>
+      <div class="ic-val">Anyone & Everyone</div>
+      <div class="ic-note">Businesses, clubs, families, organizations — all welcome</div>
+    </div>
+  </div>
+
+  <!-- FORM -->
+  <div class="form-card">
+    <h2 style="font-family:'Playfair Display',serif;font-size:24px;font-weight:700;color:var(--navy);margin-bottom:6px;">Parade Entry Registration</h2>
+    <p style="font-size:14px;color:var(--gray);margin-bottom:28px;">Fill out the form below and the Chamber will be in touch with your line-up details. Fields marked <span style="color:var(--gold);">*</span> are required.</p>
+
+    <!-- CONTACT INFO -->
+    <div class="form-section-title">Contact Information</div>
+
+    <div class="fg-row">
+      <div class="fg">
+        <label>First Name <span class="req">*</span></label>
+        <input type="text" id="p_fname" placeholder="First name" autocomplete="given-name" />
+      </div>
+      <div class="fg">
+        <label>Last Name <span class="req">*</span></label>
+        <input type="text" id="p_lname" placeholder="Last name" autocomplete="family-name" />
+      </div>
+    </div>
+
+    <div class="fg-row">
+      <div class="fg">
+        <label>Phone Number <span class="req">*</span></label>
+        <input type="tel" id="p_phone" placeholder="(580) 000-0000" autocomplete="tel" />
+      </div>
+      <div class="fg">
+        <label>Email Address <span class="req">*</span></label>
+        <input type="email" id="p_email" placeholder="you@email.com" autocomplete="email" />
+        <span class="hint">We'll send your line-up details here once time is confirmed.</span>
+      </div>
+    </div>
+
+    <!-- ENTRY INFO -->
+    <div class="form-section-title">Your Entry</div>
+
+    <div class="fg">
+      <label>Business / Organization / Group Name <span class="req">*</span></label>
+      <input type="text" id="p_org" placeholder="e.g. Smith Family, Hobart Lions Club, Joe's Hardware..." />
+      <span class="hint">Use whatever name you want displayed — your business, your club, your family. All good.</span>
+    </div>
+
+    <div class="fg">
+      <label>Approximate Number of People in Your Entry</label>
+      <select id="p_size">
+        <option value="">— Select —</option>
+        <option>1–5</option>
+        <option>6–15</option>
+        <option>16–30</option>
+        <option>31–50</option>
+        <option>50+</option>
+      </select>
+    </div>
+
+    <div class="fg">
+      <label>Will you have any vehicles, trailers, or animals?</label>
+      <select id="p_vehicles">
+        <option value="">— Select —</option>
+        <option>Walking only</option>
+        <option>1 vehicle</option>
+        <option>2–3 vehicles</option>
+        <option>4+ vehicles / trailer</option>
+        <option>Horse(s) / livestock</option>
+        <option>Mix of the above</option>
+      </select>
+      <span class="hint">Helps us with spacing at line-up — no pressure on what you bring.</span>
+    </div>
+
+    <!-- OPTIONAL -->
+    <div class="form-section-title">A Little More (Optional)</div>
+
+    <div class="fg">
+      <label>Anything you'd like us to know about your entry?</label>
+      <textarea id="p_notes" placeholder="Special requests, accessibility needs, questions for the Chamber — anything at all..."></textarea>
+    </div>
+
+    <div class="fg">
+      <label style="margin-bottom:8px;">Check any that apply:</label>
+      <div class="check-group">
+        <label class="check-item"><input type="checkbox" id="p_candy"> 🍬 We plan to throw candy or hand out items to the crowd</label>
+        <label class="check-item"><input type="checkbox" id="p_music"> 🔊 We'll have music / a speaker on our entry</label>
+        <label class="check-item"><input type="checkbox" id="p_returning"> 🎉 We've participated in a Hobart parade before</label>
+        <label class="check-item"><input type="checkbox" id="p_updates"> 📲 Text me updates as the parade date gets closer</label>
+      </div>
+    </div>
+
+    <div class="form-msg" id="p_msg"></div>
+    <button class="btn-submit" id="p_btn" onclick="submitParade()">Submit My Entry →</button>
+
+    <p style="font-size:12px;color:var(--gray);margin-top:14px;text-align:center;line-height:1.6;">Questions? Call or text the Chamber at <a href="tel:5806820887" style="color:var(--navy);font-weight:600;">(580) 682-0887</a> or email <a href="mailto:director@hobartokchamber.org" style="color:var(--navy);font-weight:600;">director@hobartokchamber.org</a></p>
+  </div>
+
+</main>
+
+<!-- FOOTER -->
+<div class="page-footer">
+  <p>Hobart Chamber of Commerce · 106 W 4th St, Hobart, OK 73651 · <a href="tel:5806820887">(580) 682-0887</a> · <a href="mailto:director@hobartokchamber.org">director@hobartokchamber.org</a></p>
+  <p style="margin-top:6px;"><a href="index.html">← Back to hobartchamber.org</a></p>
+</div>
+
+<script>
+/* ---- Firebase init (matches main site) ---- */
+var FB=false, db=null;
+try{
+  var firebaseConfig={
+    apiKey:"AIzaSyBExample",
+    authDomain:"hobart-chamber.firebaseapp.com",
+    projectId:"hobart-chamber",
+    storageBucket:"hobart-chamber.appspot.com",
+    messagingSenderId:"000000000000",
+    appId:"1:000000000000:web:0000000000000000"
+  };
+  /* Config is injected by the live site's build — this page shares the same
+     Firebase project so Firestore submissions land in the same console Jessica uses. */
+  if(typeof firebase!=='undefined'){
+    if(!firebase.apps.length) firebase.initializeApp(firebaseConfig);
+    db=firebase.firestore();
+    FB=true;
+  }
+}catch(e){}
+
+var WEB3FORMS_KEY="a35795f6-54b3-41a0-b5c8-043e93cb73a5";
+
+function val(id){ var el=document.getElementById(id); return el?(el.value||'').trim():''; }
+function checked(id){ var el=document.getElementById(id); return el?el.checked:false; }
+
+function submitParade(){
+  var fname=val('p_fname'), lname=val('p_lname');
+  var phone=val('p_phone'), email=val('p_email'), org=val('p_org');
+  var msg=document.getElementById('p_msg');
+  var btn=document.getElementById('p_btn');
+
+  if(!fname||!lname||!phone||!email||!org){
+    msg.className='form-msg err';
+    msg.textContent='Please fill in your name, phone, email, and entry name.';
+    return;
+  }
+
+  btn.disabled=true;
+  btn.textContent='Sending...';
+  msg.className='form-msg';
+  msg.style.display='none';
+
+  var extras=[];
+  if(checked('p_candy'))  extras.push('Throwing candy / handing out items');
+  if(checked('p_music'))  extras.push('Will have music / speaker');
+  if(checked('p_returning')) extras.push('Previous parade participant');
+  if(checked('p_updates'))   extras.push('Wants text updates');
+
+  var data={
+    access_key: WEB3FORMS_KEY,
+    subject: "Hometown Harvest Parade Entry — "+org,
+    from_name: "Hobart Chamber Website",
+    "Contact Name": fname+' '+lname,
+    "Phone": phone,
+    "Email": email,
+    "Business / Organization / Group": org,
+    "Approximate Group Size": val('p_size')||'Not specified',
+    "Vehicles / Animals": val('p_vehicles')||'Not specified',
+    "Additional Info": val('p_notes')||'—',
+    "Checkboxes": extras.length?extras.join('; '):'None selected',
+    "Submitted": new Date().toLocaleString('en-US',{timeZone:'America/Chicago'})
+  };
+
+  /* Also write to Firestore so the admin panel can list registrations */
+  if(FB){
+    var fsData={
+      firstName:fname, lastName:lname, phone:phone, email:email, org:org,
+      groupSize:val('p_size'), vehicles:val('p_vehicles'), notes:val('p_notes'),
+      candy:checked('p_candy'), music:checked('p_music'),
+      returning:checked('p_returning'), wantsUpdates:checked('p_updates'),
+      createdAt:firebase.firestore.FieldValue.serverTimestamp()
+    };
+    db.collection('parade').add(fsData).catch(function(){});
+  }
+
+  fetch('https://api.web3forms.com/submit',{
+    method:'POST',
+    headers:{'Content-Type':'application/json','Accept':'application/json'},
+    body:JSON.stringify(data)
+  }).then(function(r){return r.json();}).then(function(res){
+    if(res.success){
+      msg.className='form-msg ok';
+      msg.textContent="You're in! 🎉 We'll send your line-up details to "+email+" once the parade time is confirmed. See you on September 19th!";
+      btn.style.display='none';
+      ['p_fname','p_lname','p_phone','p_email','p_org','p_notes'].forEach(function(id){var el=document.getElementById(id);if(el)el.value='';});
+      document.getElementById('p_size').value='';
+      document.getElementById('p_vehicles').value='';
+      ['p_candy','p_music','p_returning','p_updates'].forEach(function(id){var el=document.getElementById(id);if(el)el.checked=false;});
+    }else{
+      msg.className='form-msg err';
+      msg.textContent='Something went wrong. Please call the Chamber at (580) 682-0887 or email director@hobartokchamber.org.';
+      btn.disabled=false; btn.textContent='Submit My Entry →';
+    }
+  }).catch(function(){
+    msg.className='form-msg err';
+    msg.textContent='Could not send right now. Please call (580) 682-0887 or email director@hobartokchamber.org.';
+    btn.disabled=false; btn.textContent='Submit My Entry →';
+  });
+}
+</script>
+</body>
+</html>
