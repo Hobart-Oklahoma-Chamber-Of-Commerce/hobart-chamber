@@ -300,7 +300,22 @@
   .upl-status.ok{color:#1c7a3e;}
   .upl-remove{font-size:12px;color:#b3261e;cursor:pointer;font-weight:600;margin-left:10px;text-decoration:underline;}
 
-  /* ---- BOTW ---- */
+  /* ---- BOTW Archive ---- */
+  .botw-archive{padding:48px 60px;background:var(--slate);border-top:1px solid var(--border);}
+  .botw-archive .section-eyebrow{display:block;margin-bottom:6px;}
+  .botw-archive-title{font-family:'Playfair Display',serif;font-size:26px;font-weight:700;color:var(--navy);margin-bottom:6px;}
+  .botw-archive-sub{font-size:14px;color:var(--gray);margin-bottom:28px;line-height:1.6;}
+  .botw-archive-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:16px;}
+  .botw-archive-card{background:var(--white);border:1px solid var(--border);border-radius:8px;overflow:hidden;transition:box-shadow .2s,transform .15s;cursor:pointer;}
+  .botw-archive-card:hover{box-shadow:0 6px 24px rgba(26,62,168,.12);transform:translateY(-2px);}
+  .botw-archive-thumb{width:100%;aspect-ratio:4/3;object-fit:cover;background:linear-gradient(135deg,#2247bd,#16317f);display:block;}
+  .botw-archive-thumb.empty-thumb{display:flex;align-items:center;justify-content:center;font-size:32px;color:rgba(255,255,255,.3);}
+  .botw-archive-info{padding:12px 14px;}
+  .botw-archive-name{font-family:'Playfair Display',serif;font-size:14px;font-weight:700;color:var(--navy);line-height:1.3;margin-bottom:3px;}
+  .botw-archive-week{font-size:11px;color:var(--gray);}
+  .botw-archive-empty{text-align:center;color:var(--gray);font-size:14px;padding:32px;}
+
+  @media(max-width:700px){.botw-archive{padding:36px 22px;}}
   .botw{padding:84px 60px;background:var(--white);display:grid;grid-template-columns:1fr 1fr;gap:70px;align-items:center;}
   .botw-text .section-title{color:var(--navy);margin-bottom:18px;}
   .botw-text p{font-size:16px;color:var(--gray);line-height:1.8;margin-bottom:30px;}
@@ -605,7 +620,7 @@
     <span class="paw paw-white paw-r"><svg class="paw-svg" viewBox="0 0 512 512" aria-hidden="true"><ellipse cx="256" cy="346" rx="120" ry="98"/><ellipse cx="128" cy="206" rx="46" ry="60"/><ellipse cx="210" cy="142" rx="44" ry="62"/><ellipse cx="302" cy="142" rx="44" ry="62"/><ellipse cx="384" cy="206" rx="46" ry="60"/></svg></span>
   </div>
   <div class="bday-center">
-    <span class="bday-label">Counting Down to Hobart's 125th Birthday</span>
+    <span class="bday-label" id="harvestLabel">🌽 Counting Down to Hometown Harvest — September 19</span>
     <div class="bday-clock" id="bdayClock">
       <div class="bday-unit"><span class="bday-num" id="bdD">--</span><span class="bday-u">Days</span></div>
       <span class="bday-sep">:</span>
@@ -653,21 +668,6 @@
   <div class="stat-item"><span class="num">Mon&nbsp;&amp;&nbsp;Thu</span><span class="label">Office Hours · 8:30–11:30 AM</span></div>
 </div>
 
-<!-- ===== 125TH T-SHIRT PRE-ORDER (time-sensitive — remove when orders close) ===== -->
-<section class="tee-banner">
-  <div class="tee-in">
-    <a class="tee-img" href="https://www.facebook.com/share/p/1Jg2FyhyD4/?mibextid=wwXIfr" target="_blank" rel="noopener">
-      <img src="flyers/125-tshirt.jpg" alt="Hobart 125th Birthday commemorative t-shirt" onerror="this.parentElement.style.display='none';">
-    </a>
-    <div class="tee-text">
-      <span class="tee-eyebrow">⏰ Pre-Order Deadline Approaching</span>
-      <h3 class="tee-title">Hobart 125th Birthday T-Shirts</h3>
-      <p class="tee-sub">125 years of community, pride &amp; memories — on a shirt. Pre-orders are being taken now by <b>Small Town Tees</b>, and only for a limited time. Once the order window closes, that's it.</p>
-      <a class="tee-btn" href="https://www.facebook.com/share/p/1Jg2FyhyD4/?mibextid=wwXIfr" target="_blank" rel="noopener">Pre-Order Yours on Facebook →</a>
-    </div>
-  </div>
-</section>
-
 <!-- ===== TRACTOR SHOW ANNOUNCEMENT ===== -->
 <a href="tractor-show-registration.html" class="announce-banner">
   <div class="announce-in">
@@ -680,21 +680,6 @@
       </div>
     </div>
     <span class="announce-btn">Register Your Tractor →</span>
-  </div>
-</a>
-
-<!-- ===== SCAVENGER HUNT ANNOUNCEMENT ===== -->
-<a href="scavenger-hunt-upload.html" class="announce-banner">
-  <div class="announce-in">
-    <div class="announce-left">
-      <span class="announce-emoji">📸</span>
-      <div class="announce-text">
-        <span class="announce-eyebrow">August 3 – August 7</span>
-        <span class="announce-title">125th Birthday Scavenger Hunt</span>
-        <span class="announce-sub">Visit local businesses, snap a photo, win prizes · Pick up a printed list at the Chamber, 106 W 4th St</span>
-      </div>
-    </div>
-    <span class="announce-btn">Start the Hunt →</span>
   </div>
 </a>
 
@@ -737,7 +722,6 @@
     <div class="event-card" data-date="2026-07-18"><div class="flyer-slot"><img src="flyers/flyer-kickball.png" alt="" onerror="this.parentElement.classList.add('empty');this.outerHTML=flyerPH;"></div><div class="event-top"><div class="event-date"><span class="m">Jul</span><span class="d">18</span></div><div class="event-meta"><h4>Family Slip 'N Slide Kickball</h4><span class="loc">📍 Biggers Park · Evening</span></div></div><div class="event-body"><p>One of the most exciting family events of the summer. Gather your team for an evening of fun and friendly competition.</p></div><div class="event-foot"><span class="event-tag">Family · Sports</span><a href="kickball-registration.html" style="font-size:12.5px;font-weight:700;color:var(--navy);text-decoration:none;">Register Your Team →</a></div></div>
     
     <div class="event-card" data-date="2026-08-01"><div class="flyer-slot"><img src="flyers/flyer-glowgolf.png" alt="" onerror="this.parentElement.classList.add('empty');this.outerHTML=flyerPH;"></div><div class="event-top"><div class="event-date"><span class="m">Aug</span><span class="d">1</span></div><div class="event-meta"><h4>Glow Golf Tournament Returns</h4><span class="loc">📍 <a href="https://hobartok.gov/golf-course" target="_blank" rel="noopener">Hobart Municipal Golf Course</a> · Night</span></div></div><div class="event-body"><p>The popular nighttime event is back — glowing golf balls, illuminated fairways, and a fun evening under the stars.</p></div><div class="event-foot"><span class="event-tag">Golf · Night Event</span><a href="glow-golf-registration.html" style="font-size:12.5px;font-weight:700;color:var(--navy);text-decoration:none;">Register Your Team →</a></div></div>
-    <div class="event-card" data-date="2026-08-03"><div class="flyer-slot"><img src="flyers/flyer-scavengerhunt-game.jpg" alt="" onerror="this.parentElement.classList.add('empty');this.outerHTML=flyerPH;"></div><div class="event-top"><div class="event-date"><span class="m">Aug</span><span class="d">3</span></div><div class="event-meta"><h4>125th Birthday Scavenger Hunt</h4><span class="loc">📍 Businesses throughout Hobart</span></div></div><div class="event-body"><p>Pick List A or List B, visit every stop, snap a photo, and upload it right on the site. Photos due Friday, Aug 7 by 3:00 PM. Complete one list for 1 drawing entry, both for 2. Printed lists available at the Chamber.</p></div><div class="event-foot"><span class="event-tag">Community · #Hobart125</span><a href="scavenger-hunt-upload.html" style="font-size:12.5px;font-weight:700;color:var(--navy);text-decoration:none;">Start the Hunt →</a></div></div>
     <div class="event-card" data-date="2026-08-07"><div class="flyer-slot"><img src="flyers/flyer-bearcat-car-wash.jpg" alt="" onerror="this.parentElement.classList.add('empty');this.outerHTML=flyerPH;"></div><div class="event-top"><div class="event-date"><span class="m">Aug</span><span class="d">7</span></div><div class="event-meta"><h4>Bearcat Football Car Wash</h4><span class="loc">📍 Waterworks Car Wash, Hobart</span></div></div><div class="event-body"><p>Get your vehicle cleaned up and support Hobart Bearcat football — all donations go to the football program. 10:00 AM – 2:00 PM.</p></div><div class="event-foot"><span class="event-tag">Fundraiser · Bearcat Athletics</span></div></div>
     <div class="event-card" data-date="2026-08-07"><div class="flyer-slot"><img src="flyers/flyer-hobart-125th-bday.png" alt="" onerror="this.parentElement.classList.add('empty');this.outerHTML=flyerPH;"></div><div class="event-top"><div class="event-date"><span class="m">Aug</span><span class="d">7</span></div><div class="event-meta"><h4>Hobart's 125th Birthday Celebration</h4><span class="loc">📍 Downtown Hobart · Free Admission</span></div></div><div class="event-body"><p>Celebrate 125 years of Hobart with Dragging Main, live music, family games, and a community picnic. The Chamber will be selling hot dogs, chips, and drinks. Everyone is welcome.</p></div><div class="event-foot"><span class="event-tag">Community · Celebration</span></div></div>
     <div class="event-card" data-date="2026-08-08"><div class="flyer-slot"><img src="flyers/flyer-hobart-bday-aug8.jpg" alt="" onerror="this.parentElement.classList.add('empty');this.outerHTML=flyerPH;"></div><div class="event-top"><div class="event-date"><span class="m">Aug</span><span class="d">8</span></div><div class="event-meta"><h4>Hobart's 125th Birthday Gala: A Night to Remember</h4><span class="loc">📍 The Stanley Building · Doors 6 PM</span></div></div><div class="event-body"><p>A formal evening honoring 125 years of Hobart. Enjoy a catered steak dinner, dueling pianos, guest speakers, and live &amp; silent auctions, plus a 25-year time capsule. Cocktail / semi-formal attire. Tickets $125 couple / $65 single at City Hall — limited.</p></div><div class="event-foot"><span class="event-tag">Gala · Ticketed Event</span></div></div>
@@ -747,7 +731,7 @@
     <div class="event-card" data-date="2026-08-22"><div class="flyer-slot"><img src="flyers/flyer-bearcat-scramble.jpg" alt="" onerror="this.parentElement.classList.add('empty');this.outerHTML=flyerPH;"></div><div class="event-top"><div class="event-date"><span class="m">Aug</span><span class="d">22</span></div><div class="event-meta"><h4>Hobart Bearcats 4-Person Scramble</h4><span class="loc">📍 Hobart Municipal Golf Course</span></div></div><div class="event-body"><p>A golf scramble benefiting all of Bearcat Athletics. Sponsorships available: Corporate $500, Team $325, Hole $100. Contact Coach Joe Jones at (580) 916-5387 to sponsor or play.</p></div><div class="event-foot"><span class="event-tag">Golf · Bearcat Athletics</span><a href="tel:5809165387" style="font-size:12.5px;font-weight:700;color:var(--navy);text-decoration:none;">Text Coach Jones →</a></div></div>
     <div class="event-card" data-date="2026-08-27"><div class="flyer-slot"><img src="flyers/flyer-free-fair.png" alt="" onerror="this.parentElement.classList.add('empty');this.outerHTML=flyerPH;"></div><div class="event-top"><div class="event-date"><span class="m">Aug</span><span class="d">27</span></div><div class="event-meta"><h4>Kiowa County Free Fair</h4><span class="loc">📍 Kiowa County Fairgrounds · Aug 27–29</span></div></div><div class="event-body"><p>Tradition, community, and pride. Livestock shows, 4-H and Open Class exhibits, the Cake ReMix and Gussied-Up Porch Goose contests, Kiwanis turtle races, and food trucks on site. No admission, no entry fees — read the full catalog right here on the site.</p></div><div class="event-foot"><span class="event-tag">Fair · Free Admission</span><a href="fair-catalog.html" style="font-size:12.5px;font-weight:700;color:var(--navy);text-decoration:none;">Full Catalog →</a></div></div>
     <div class="event-card" data-date="2026-08-29"><div class="flyer-slot"><img src="flyers/flyer-riding-club-playday.jpg" alt="" onerror="this.parentElement.classList.add('empty');this.outerHTML=flyerPH;"></div><div class="event-top"><div class="event-date"><span class="m">Aug</span><span class="d">29</span></div><div class="event-meta"><h4>Hobart Riding Club Playday</h4><span class="loc">📍 Hobart Riding Club Arena</span></div></div><div class="event-body"><p>Join the fun — barrels, poles, bowtie, and spur. Starts at 9:00 AM. Entry fee $10. Snack bar will be open.</p></div><div class="event-foot"><span class="event-tag">Rodeo · Playday</span></div></div>
-    <div class="event-card" data-date="2026-09-19"><div class="flyer-slot"><img src="flyers/flyer-hometown-harvest.png" alt="" onerror="this.parentElement.classList.add('empty');this.outerHTML=flyerPH;"></div><div class="event-top"><div class="event-date"><span class="m">Sep</span><span class="d">19</span></div><div class="event-meta"><h4>Hobart's Hometown Harvest</h4><span class="loc">📍 Kiowa County Courthouse Square</span></div></div><div class="event-body"><p>A fall celebration on the Courthouse Square with vendors and food trucks filling downtown. Featuring the Hometown Harvest Tractor Show and Community Parade. Everyone is welcome to march, ride, or roll.</p></div><div class="event-foot"><span class="event-tag">Shop Local · Fall Festival</span><a href="tractor-show-registration.html" style="font-size:12.5px;font-weight:700;color:var(--navy);text-decoration:none;">Register Tractor →</a> &nbsp; <a href="parade-registration.html" style="font-size:12.5px;font-weight:700;color:var(--gold);text-decoration:none;">Join the Parade →</a></div></div>
+    <div class="event-card" data-date="2026-09-19"><div class="flyer-slot"><img src="flyers/flyer-hometown-harvest.png" alt="" onerror="this.parentElement.classList.add('empty');this.outerHTML=flyerPH;"></div><div class="event-top"><div class="event-date"><span class="m">Sep</span><span class="d">19</span></div><div class="event-meta"><h4>Hobart's Hometown Harvest</h4><span class="loc">📍 Kiowa County Courthouse Square</span></div></div><div class="event-body"><p>A fall celebration on the Courthouse Square with vendors and food trucks filling downtown. Featuring the Hometown Harvest Tractor Show and Community Parade. Everyone is welcome to march, ride, or roll.</p></div><div class="event-foot"><span class="event-tag">Shop Local · Fall Festival</span><a href="tractor-show-registration.html" style="font-size:12.5px;font-weight:700;color:var(--navy);text-decoration:none;">Register Tractor →</a> &nbsp; <a href="parade-registration.html" style="font-size:12.5px;font-weight:700;color:var(--gold);text-decoration:none;">Join the Parade →</a> &nbsp; <a href="vendor-registration.html" style="font-size:12.5px;font-weight:700;color:var(--navy);text-decoration:none;">Vend Here →</a></div></div>
     <div class="event-card" data-date="2026-09-19"><div class="flyer-slot"><img src="flyers/flyer-pokerrun-sept2026.jpg" alt="" onerror="this.parentElement.classList.add('empty');this.outerHTML=flyerPH;"></div><div class="event-top"><div class="event-date"><span class="m">Sep</span><span class="d">19</span></div><div class="event-meta"><h4>Full Throttle Fall Crawl — Poker Run</h4><span class="loc">📍 Elk Creek Kiowa Casino · Start &amp; Finish</span></div></div><div class="event-body"><p>Hosted by Temple Guardians Widows Sons (Oklahoma Masonic Riders Assn.). Registration 9 AM, last bike out 11 AM, last bike in 4 PM. High Hand Prize $1,000 · Low Hand Prize $500. Raffle with proceeds benefiting Toys for Tots.</p></div><div class="event-foot"><span class="event-tag">Motorcycle · Fundraiser</span></div></div>
     <div class="event-card" data-date="2026-10-03"><div class="flyer-slot"><img src="flyers/flyer-garage-sale-hobart.jpg" alt="" onerror="this.parentElement.classList.add('empty');this.outerHTML=flyerPH;"></div><div class="event-top"><div class="event-date"><span class="m">Oct</span><span class="d">3</span></div><div class="event-meta"><h4>Hobart, OK Town Wide Garage Sale</h4><span class="loc">📍 Hobart, OK</span></div></div><div class="event-body"><p>One town, one day, great finds everywhere! Have a sale? Come by the Chamber (106 W 4th St) to get your address listed and pick up the required City of Hobart paperwork.</p></div><div class="event-foot"><span class="event-tag">Shop Local · Community Sale</span><a href="tel:5806820887" style="font-size:12.5px;font-weight:700;color:var(--navy);text-decoration:none;">Call to List Your Sale →</a></div></div>
   </div>
@@ -882,6 +866,16 @@
   <div class="botw-card">
     <div class="botw-photo"><img src="flyers/botw-bancfirst-team.jpg" alt="BancFirst Hobart branch team — Business of the Week" onclick="openFlyer('flyers/botw-bancfirst-team.jpg')" onerror="this.parentElement.classList.add('empty');this.outerHTML=flyerPHWhite;"><span class="zoom-hint">🔍 Click to enlarge</span></div>
     <div class="botw-inner"><span class="botw-badge">This Week's Feature</span><h3>BancFirst</h3><p>Known across Oklahoma as one of the state's strongest financial institutions, BancFirst is known in Hobart for something more important — its commitment to the community. The Hobart branch, led by President Creed Sherle, employs 17 local professionals serving individuals, families, farmers, and businesses each day. With roots dating to the Oklahoma Land Run of 1889, BancFirst has grown into Oklahoma's largest state-chartered bank, named one of America's Safest &amp; Strongest Banks for 19 consecutive years and the state's #1 SBA loan originator for 34. But its real strength here is how it invests back — supporting the Chamber, cheering on the Bearcats, and standing as a major contributor to the Kiowa County Junior Livestock Show. More than a bank, BancFirst is a trusted neighbor investing in the success of Hobart every day. Congratulations to the entire BancFirst team on being our Business of the Week!</p></div>
+  </div>
+</section>
+
+<!-- ===== BOTW ARCHIVE ===== -->
+<section class="botw-archive" id="botwArchive">
+  <span class="section-eyebrow">Member Spotlight</span>
+  <div class="botw-archive-title">Previous Businesses of the Week</div>
+  <p class="botw-archive-sub">Every business that's been featured — a running record of the businesses that make Hobart move.</p>
+  <div class="botw-archive-grid" id="botwArchiveGrid">
+    <div class="botw-archive-empty">Archive loading…</div>
   </div>
 </section>
 
@@ -1045,6 +1039,11 @@
       <h5>Parts City</h5>
       <span>Auto Parts &amp; Accessories</span>
       <div class="member-contact"><span class="mc-line">115 W 11th St</span><a class="mc-phone" href="tel:5807266688">(580) 726-6688</a></div>
+    </div>
+    <div class="member t-bronze" data-cat="Retail &amp; Shopping">
+      <h5><a href="https://facebook.com/vintagrose318" target="_blank" rel="noopener">Vintage Rose Boutique <span class="ext">↗</span></a></h5>
+      <span>Boutique · Women's Clothing &amp; Gifts</span>
+      <div class="member-contact"><span class="mc-line">318 S Jefferson St</span><a class="mc-phone" href="tel:5805800567">(580) 580-0567</a></div>
     </div>
   </div>
   <p class="directory-note">Interested in joining the directory? <a href="#membership" style="color:var(--gold)">Become a member →</a></p>
@@ -1553,7 +1552,6 @@ var SEED=[
   {id:'sg16',title:'🎭 Antlia Pneumatica',date:'2027-04-25',time:'See listing for showtime',location:'Shortgrass Playhouse, 103 1/2 E. 3rd St',description:'Shortgrass Playhouse presents "Antlia Pneumatica" (Adult Dramatic Comedy). 103 1/2 E. 3rd St, Hobart. Regular ticket prices: Seniors (60+) $12, Adults $15, Students $10, Ages 2-5 $5, under 2 free. Season patron memberships are also available and support the playhouse fundraising for the season.',status:'approved',cat:'community'},
   {id:'ev1',title:'Hobart, OK Town Wide Garage Sale',date:'2026-10-03',time:'All day',location:'Hobart, OK',description:'One town, one day, great finds everywhere! Clear out, cash in, have fun — Hobart is open for deals. Have a sale? Come by the Hobart Chamber of Commerce (106 W 4th Street) to get your address listed so shoppers know where to find you, and to pick up the required paperwork for the City of Hobart. Let\'s make this the best garage sale day ever!',status:'approved',linkUrl:'tel:5806820887',linkLabel:'Call the Chamber to List Your Sale'},
   {id:'ev2',title:'Hobart Riding Club Playday',date:'2026-08-29',time:'9:00 AM',location:'Hobart Riding Club Arena',description:'Join the fun at the Hobart Riding Club Playday — barrels, poles, bowtie, and spur. Entry fee $10. Snack bar will be open.',status:'approved',cat:'community'},
-  {id:'ev3',title:"Hobart's 125th Birthday Scavenger Hunt",date:'2026-08-03',time:'Aug 3 - Aug 7, 3:00 PM',location:'Businesses throughout Hobart',description:'Pick List A (16 Hobart businesses) or List B (17 Hobart businesses), visit every stop, and take a selfie or eye-catching photo with someone in the picture at each location. Upload your photos right on the Chamber website as you go. All photos are due by Friday, August 7 at 3:00 PM. Completing one list earns one entry into the prize drawing; completing both lists earns two entries. Gift baskets donated by participating businesses, plus a special prize for the Most Creative Selfie. Winners drawn at Hobart\'s Birthday Celebration Friday evening. Printed lists available at the Chamber office, 106 W 4th St.',status:'approved',linkUrl:'scavenger-hunt-upload.html',linkLabel:'Start the Hunt'},
   {id:'ev4',title:'McAbee Fox Roofing Customer Appreciation',date:'2026-08-14',time:'11:00 AM - 2:00 PM',location:'McAbee Fox Roofing, Hobart',description:"You're invited! Come see the McAbee Fox Roofing office and shops, and visit with the owners, salesmen, delivery crew, and office staff. Giveaways throughout the event. Thank you for your trust and support!",status:'approved',cat:'community'},
   {id:'ev5',title:"Kiowa County 4-H Open House",date:'2026-08-11',time:'5:30 - 7:00 PM',location:"Women's Exhibit Building, 302 N. Lincoln St",description:"Kick off another exciting 4-H year! Whether you're a current 4-H member ready to enroll, a family interested in learning what 4-H is all about, an adult looking for a meaningful volunteer opportunity, or a community member who wants to support local youth — everyone is welcome. Hosted by Kiowa County OSU Extension. For more information, call (580) 726-5643 or email kiowacounty@okstate.edu.",status:'approved',cat:'community'},
   {id:'ev6',title:'Back to School Bash — Tax Free Weekend',date:'2026-08-08',time:'All day',location:'Vintage Rose, Cotton Creek Boutique, Blissful Burro & The Last Straw — Hobart',description:"Four great shops, one great day! Shop tax-free and score big deals across four Hobart boutiques. First 20 shoppers to make a purchase receive a FREE backpack. Backpack drawing — one boy and one girl backpack with school-supply gift cards. 50% off dresses and denim jeans in the Jean Room; 20% off clothing in the boutique. The Last Straw will be set up outside Cotton Creek Boutique. Shop local, save big, support local.",status:'approved',cat:'community'},
@@ -1611,6 +1609,7 @@ function renderAdminEventCards(){
   sortEventsCarousel();
   pruneCarousel();
   applyFlyerBackdrops();
+  loadBotwArchive();
   syncEventCount();
 }
 
@@ -1877,19 +1876,40 @@ function sortEventsCarousel(){
   cards.forEach(function(c){track.appendChild(c);});
 }
 
-/* ---- Hobart 125th birthday countdown (target: Aug 7, 2026) ---- */
+/* ---- BOTW Archive (public — loads from botw_archive collection) ---- */
+function loadBotwArchive(){
+  var grid=document.getElementById('botwArchiveGrid');
+  if(!grid||typeof db==='undefined')return;
+  db.collection('botw_archive').orderBy('weekOf','desc').get().then(function(snap){
+    if(snap.empty){grid.innerHTML='<div class="botw-archive-empty">No previous features yet — check back soon.</div>';return;}
+    var html='';
+    snap.forEach(function(doc){
+      var x=doc.data();
+      var img=x.photo?'<img class="botw-archive-thumb" src="'+esc(x.photo)+'" alt="'+esc(x.name)+'" onerror="this.classList.add(\'empty-thumb\');this.outerHTML=\'<div class=\\\"botw-archive-thumb empty-thumb\\\">🏪</div>\';">'
+        :'<div class="botw-archive-thumb empty-thumb">🏪</div>';
+      html+='<div class="botw-archive-card" onclick="openFlyer(\''+(x.photo||'')+'\')">'+img
+        +'<div class="botw-archive-info">'
+        +'<div class="botw-archive-name">'+esc(x.name||'')+'</div>'
+        +'<div class="botw-archive-week">'+(x.weekOf||'')+'</div>'
+        +'</div></div>';
+    });
+    grid.innerHTML=html;
+  }).catch(function(){grid.innerHTML='<div class="botw-archive-empty">Could not load archive.</div>';});
+}
+
+/* ---- Hometown Harvest countdown (target: Sep 19, 2026) ---- */
 var bday125Timer=null;
 function pad2b(v){ return (v<10?'0':'')+v; }
 function setBdTxt(id,v){ var el=document.getElementById(id); if(el) el.textContent=pad2b(v); }
 function tick125(){
   var bar=document.getElementById('bday125');
   if(!bar)return;
-  var target=new Date(2026,7,7,0,0,0).getTime();
+  var target=new Date(2026,8,19,0,0,0).getTime();
   var diff=target-(new Date()).getTime();
   if(diff<=0){
     bar.classList.add('celebrate');
-    var lbl=bar.querySelector('.bday-label');
-    if(lbl) lbl.textContent="Happy 125th Birthday, Hobart!  ·  August 7, 2026";
+    var lbl=document.getElementById('harvestLabel');
+    if(lbl) lbl.textContent="🌽 It's Hometown Harvest Day! — September 19, 2026";
     if(bday125Timer) clearInterval(bday125Timer);
     return;
   }
@@ -2220,11 +2240,13 @@ function renderAdmin(){
     +'<div class="admin-tab'+(adminTab==='manage'?' on':'')+'" onclick="switchTab(\'manage\')">Manage Events</div>'
     +'<div class="admin-tab'+(adminTab==='create'?' on':'')+'" onclick="switchTab(\'create\')">+ New Event</div>'
     +'<div class="admin-tab'+(adminTab==='banner'?' on':'')+'" onclick="switchTab(\'banner\')">Banner</div>'
+    +'<div class="admin-tab'+(adminTab==='botw'?' on':'')+'" onclick="switchTab(\'botw\')">BOTW Archive</div>'
     +'<div class="admin-tab'+(adminTab==='jobs'?' on':'')+'" onclick="switchTab(\'jobs\')">Jobs</div>'
     +'<div class="admin-tab'+(adminTab==='jobcreate'?' on':'')+'" onclick="switchTab(\'jobcreate\')">+ New Opening</div>'
     +'<div class="admin-tab'+(adminTab==='glowgolf'?' on':'')+'" onclick="switchTab(\'glowgolf\')">Glow Golf <span id="ggCount"></span></div>'
     +'<div class="admin-tab'+(adminTab==='parade'?' on':'')+'" onclick="switchTab(\'parade\')">Parade <span id="prCount"></span></div>'
     +'<div class="admin-tab'+(adminTab==='tractor'?' on':'')+'" onclick="switchTab(\'tractor\')">Tractor Show <span id="tsCount"></span></div>'
+    +'<div class="admin-tab'+(adminTab==='vendor'?' on':'')+'" onclick="switchTab(\'vendor\')">Vendors <span id="vnCount"></span></div>'
     +'<div class="admin-tab'+(adminTab==='scavenger'?' on':'')+'" onclick="switchTab(\'scavenger\')">Scavenger Hunt <span id="shCount"></span></div>'
     +'<div class="admin-tab'+(adminTab==='deals'?' on':'')+'" onclick="switchTab(\'deals\')">Local Sales <span id="dlCount"></span></div>'
     +'<div class="admin-tab'+(adminTab==='subs'?' on':'')+'" onclick="switchTab(\'subs\')">Subscribers <span id="sbCount"></span></div>'
@@ -2239,8 +2261,10 @@ function renderAdmin(){
   else if(adminTab==='jobs') paneJobsList();
   else if(adminTab==='jobcreate') paneJobCreate(null);
   else if(adminTab==='glowgolf') paneGolf();
+  else if(adminTab==='botw') paneBotw();
   else if(adminTab==='parade') paneParade();
   else if(adminTab==='tractor') paneTractor();
+  else if(adminTab==='vendor') paneVendor();
   else if(adminTab==='scavenger') paneScavenger();
   else if(adminTab==='deals') paneDeals();
   else if(adminTab==='subs') paneSubs();
@@ -2777,6 +2801,88 @@ function exportScavenger(){
     a.download='scavenger-hunt-participants-'+_anDayKey()+'.csv';
     document.body.appendChild(a); a.click(); document.body.removeChild(a);
   }).catch(function(e){ alert('Could not export: '+(e&&e.message||'')); });
+}
+
+/* ---- BOTW Archive admin ---- */
+function paneBotw(){
+  var pane=document.getElementById('adminPane');
+  pane.innerHTML='<div class="admin-empty">Loading…</div>';
+  db.collection('botw_archive').orderBy('weekOf','desc').get().then(function(snap){
+    var rows=[]; snap.forEach(function(doc){var x=doc.data();x.id=doc.id;rows.push(x);});
+    var addForm='<div style="background:var(--slate);border-radius:8px;padding:18px;margin-bottom:20px;">'
+      +'<div style="font-weight:700;font-size:13px;color:var(--navy);margin-bottom:12px;">+ Add to Archive</div>'
+      +'<div class="fg-row" style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:10px;">'
+      +'<div class="fg"><label style="font-size:12px;font-weight:600;">Business Name</label><input id="botw_name" type="text" placeholder="e.g. BancFirst" style="width:100%;padding:8px 10px;border:1px solid var(--border);border-radius:5px;font-size:13px;"></div>'
+      +'<div class="fg"><label style="font-size:12px;font-weight:600;">Week Of (e.g. "Week of Aug 4, 2026")</label><input id="botw_week" type="text" placeholder="Week of Aug 4, 2026" style="width:100%;padding:8px 10px;border:1px solid var(--border);border-radius:5px;font-size:13px;"></div>'
+      +'</div>'
+      +'<div class="fg" style="margin-bottom:10px;"><label style="font-size:12px;font-weight:600;">Photo URL (flyers/ path)</label><input id="botw_photo" type="text" placeholder="flyers/botw-bancfirst-team.jpg" style="width:100%;padding:8px 10px;border:1px solid var(--border);border-radius:5px;font-size:13px;"></div>'
+      +'<div class="fg" style="margin-bottom:10px;"><label style="font-size:12px;font-weight:600;">Short blurb (optional)</label><textarea id="botw_blurb" style="width:100%;padding:8px 10px;border:1px solid var(--border);border-radius:5px;font-size:13px;min-height:60px;"></textarea></div>'
+      +'<button class="btn-sm btn-gold" onclick="addBotwEntry()">Add to Archive</button>'
+      +'<span id="botw_msg" style="font-size:12px;margin-left:10px;color:var(--navy);"></span>'
+      +'</div>';
+    var listHtml=rows.length?'<div class="admin-list">'+rows.map(function(r){
+      return '<div class="admin-row"><div class="info"><b>'+esc(r.name||'')+'</b><small>'+esc(r.weekOf||'')+'</small>'+(r.photo?'<small>'+esc(r.photo)+'</small>':'')+'</div>'
+        +'<div class="acts"><button class="btn-sm btn-red" onclick="delBotwEntry(\''+r.id+'\')">Remove</button></div></div>';
+    }).join('')+'</div>':'<div class="admin-empty" style="margin-top:0;">No entries yet — add the first one above.</div>';
+    pane.innerHTML=addForm+listHtml;
+  }).catch(function(){pane.innerHTML='<div class="admin-empty">Error — make sure <b>botw_archive</b> collection exists in Firestore and has a read rule for auth users.</div>';});
+}
+function addBotwEntry(){
+  var name=val('botw_name'),week=val('botw_week'),photo=val('botw_photo'),blurb=val('botw_blurb'),msg=document.getElementById('botw_msg');
+  if(!name||!week){msg.textContent='Name and week are required.';return;}
+  msg.textContent='Saving…';
+  db.collection('botw_archive').add({name:name,weekOf:week,photo:photo||'',blurb:blurb||'',createdAt:firebase.firestore.FieldValue.serverTimestamp()}).then(function(){
+    msg.textContent='Added!';
+    setTimeout(function(){paneBotw();},600);
+  }).catch(function(){msg.textContent='Error saving.';});
+}
+function delBotwEntry(id){if(!confirm('Remove this entry from the archive?'))return;db.collection('botw_archive').doc(id).delete().then(function(){paneBotw();});}
+
+/* ---- Hometown Harvest Vendor registrations ---- */
+function paneVendor(){
+  var pane=document.getElementById('adminPane');
+  pane.innerHTML='<div class="admin-empty">Loading…</div>';
+  db.collection('vendors').get().then(function(snap){
+    var rows=[]; snap.forEach(function(doc){var x=doc.data();x.id=doc.id;rows.push(x);});
+    rows.sort(function(a,b){return (a.createdAt&&a.createdAt.seconds||0)-(b.createdAt&&b.createdAt.seconds||0);});
+    var cnt=document.getElementById('vnCount'); if(cnt) cnt.innerHTML=rows.length?('<span class="badge-pending">'+rows.length+'</span>'):'';
+    if(!rows.length){pane.innerHTML='<div class="admin-empty">No vendor applications yet.</div>';return;}
+    var food=rows.filter(function(r){return r.vendorType==='Food / Beverage';}).length;
+    var html='<div style="font-size:12.5px;color:var(--gray);margin-bottom:14px;">'+rows.length+' application'+(rows.length===1?'':'s')+' · '+food+' food/beverage</div>';
+    html+='<button class="btn-sm btn-gold" style="margin-bottom:14px;" onclick="exportVendors()">Export CSV</button>';
+    html+='<div class="admin-list">';
+    rows.forEach(function(r){
+      html+='<div class="admin-row" style="flex-direction:column;align-items:stretch;">'
+        +'<div style="display:flex;justify-content:space-between;align-items:flex-start;gap:10px;flex-wrap:wrap;">'
+        +'<div class="info"><b>'+esc(r.businessName||'—')+'</b>'
+        +'<small>'+esc(r.contactName||'')+'  ·  '+esc(r.phone||'')+'  ·  '+esc(r.email||'')+'</small>'
+        +'<small>'+esc(r.vendorType||'')+(r.spaceSize?' · '+esc(r.spaceSize):'')+'</small>'
+        +(r.products?'<small>Products: '+esc(r.products)+'</small>':'')
+        +(r.electricity?'<small>⚡ Electricity requested</small>':'')
+        +(r.notes?'<small style="font-style:italic;">'+esc(r.notes)+'</small>':'')
+        +'</div>'
+        +'<div class="acts"><button class="btn-sm btn-red" onclick="delVendor(\''+r.id+'\')">Delete</button></div>'
+        +'</div></div>';
+    });
+    html+='</div>';
+    pane.innerHTML=html;
+  }).catch(function(e){pane.innerHTML='<div class="admin-empty">Error loading vendor applications.<br><small>'+esc(e&&e.message||'')+'</small></div>';});
+}
+function delVendor(id){if(!confirm('Delete this vendor application?'))return;db.collection('vendors').doc(id).delete().then(function(){paneVendor();});}
+function exportVendors(){
+  db.collection('vendors').get().then(function(snap){
+    var rows=[]; snap.forEach(function(d){rows.push(d.data());});
+    if(!rows.length){alert('No applications to export.');return;}
+    var csv='Business,Contact,Phone,Email,Type,Space,Electricity,Products,Notes\n';
+    rows.forEach(function(r){
+      function q(v){return '"'+String(v==null?'':v).replace(/"/g,'""')+'"';}
+      csv+=[q(r.businessName),q(r.contactName),q(r.phone),q(r.email),q(r.vendorType),q(r.spaceSize),q(r.electricity?'Yes':'No'),q(r.products),q(r.notes)].join(',')+'\n';
+    });
+    var blob=new Blob([csv],{type:'text/csv;charset=utf-8;'});
+    var a=document.createElement('a');a.href=URL.createObjectURL(blob);
+    a.download='vendors-hometown-harvest-'+new Date().toISOString().slice(0,10)+'.csv';
+    document.body.appendChild(a);a.click();document.body.removeChild(a);
+  });
 }
 
 /* ---- Local Sales / deals admin ---- */
