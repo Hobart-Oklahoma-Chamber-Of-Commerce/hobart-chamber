@@ -1631,7 +1631,7 @@ function renderAdminEventCards(){
   sortEventsCarousel();
   pruneCarousel();
   applyFlyerBackdrops();
-  loadBotwArchive();
+  // loadBotwArchive(); // re-enable once botw_archive collection has entries
   syncEventCount();
 }
 
@@ -1903,8 +1903,9 @@ function loadBotwArchive(){
   var grid=document.getElementById('botwArchiveGrid');
   if(!grid||typeof db==='undefined')return;
   db.collection('botw_archive').orderBy('weekOf','desc').get().then(function(snap){
-    if(snap.empty){grid.innerHTML='<div class="botw-archive-empty">No previous features yet — check back soon.</div>';return;}
-    var html='';
+    if(snap.empty) return; // nothing in Firestore — hardcoded cards stay
+    // Firestore has entries — render them AFTER the hardcoded cards
+    var html=grid.innerHTML; // preserve hardcoded cards
     snap.forEach(function(doc){
       var x=doc.data();
       var img=x.photo?'<img class="botw-archive-thumb" src="'+esc(x.photo)+'" alt="'+esc(x.name)+'" onerror="this.classList.add(\'empty-thumb\');this.outerHTML=\'<div class=\\\"botw-archive-thumb empty-thumb\\\">🏪</div>\';">'
@@ -1916,7 +1917,7 @@ function loadBotwArchive(){
         +'</div></div>';
     });
     grid.innerHTML=html;
-  }).catch(function(){grid.innerHTML='<div class="botw-archive-empty">Could not load archive.</div>';});
+  }).catch(function(){}); // silently fail — hardcoded cards stay visible
 }
 
 /* ---- Hometown Harvest countdown (target: Sep 19, 2026) ---- */
