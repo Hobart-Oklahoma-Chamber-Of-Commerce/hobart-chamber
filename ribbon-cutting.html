@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Request a Ribbon Cutting · Hobart Chamber of Commerce</title>
+<meta name="description" content="Request an official ribbon cutting ceremony from the Hobart Chamber of Commerce for your new business, grand opening, or milestone."/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,800;0,900;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+  :root{--navy:#1a3ea8;--navy-dark:#142f7e;--navy-deep:#0e2056;--navy-hover:#2247bd;--gold:#c49a3e;--gold-light:#dab65e;--gold-pale:#f6edd6;--white:#fff;--slate:#f3f6fc;--gray:#6f7d99;--dark-gray:#2c3a58;--border:#dbe3f4;}
+  body{font-family:'Inter',sans-serif;color:var(--navy-deep);background:var(--white);}
+  nav{background:rgba(26,62,168,.97);display:flex;align-items:center;justify-content:space-between;padding:0 48px;height:74px;border-bottom:1px solid rgba(196,154,62,.4);}
+  .nav-logo{display:flex;align-items:center;gap:12px;text-decoration:none;}
+  .nav-logo-mark{width:42px;height:42px;border-radius:50%;background:var(--gold-pale);display:flex;align-items:center;justify-content:center;overflow:hidden;flex-shrink:0;}
+  .nav-logo-mark img{width:100%;height:100%;object-fit:cover;}
+  .nav-logo-text{display:flex;flex-direction:column;}
+  .nav-logo-text span:first-child{font-family:'Playfair Display',serif;font-size:16px;font-weight:700;color:#fff;line-height:1.2;}
+  .nav-logo-text span:last-child{font-size:10.5px;color:rgba(255,255,255,.55);}
+  .nav-back{font-size:13px;font-weight:600;color:rgba(255,255,255,.7);text-decoration:none;padding:9px 18px;border:1px solid rgba(255,255,255,.25);border-radius:5px;}
+  .nav-back:hover{color:#fff;}
+  .hero{background:linear-gradient(135deg,var(--navy-deep) 0%,var(--navy) 60%,#1f4fbf 100%);padding:56px 48px 48px;text-align:center;position:relative;overflow:hidden;}
+  .hero::before{content:'✂️';position:absolute;font-size:180px;opacity:.05;top:50%;left:50%;transform:translate(-50%,-50%);}
+  .hero-inner{position:relative;z-index:2;max-width:660px;margin:0 auto;}
+  .eyebrow{font-size:11px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--gold-light);margin-bottom:10px;}
+  .hero-title{font-family:'Playfair Display',serif;font-size:clamp(26px,5vw,44px);font-weight:800;color:#fff;line-height:1.15;margin-bottom:12px;}
+  .hero-title em{font-style:normal;color:var(--gold-light);}
+  .hero-sub{font-size:14px;color:rgba(255,255,255,.72);line-height:1.8;margin-bottom:20px;}
+  .hero-badges{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;}
+  .badge{background:rgba(255,255,255,.08);border:1px solid rgba(196,154,62,.3);border-radius:20px;padding:6px 14px;font-size:12px;font-weight:600;color:rgba(255,255,255,.85);}
+  main{max-width:760px;margin:0 auto;padding:40px 24px 80px;}
+  .what-box{background:var(--gold-pale);border-left:4px solid var(--gold);border-radius:8px;padding:18px 22px;margin-bottom:28px;font-size:13px;color:var(--dark-gray);line-height:1.75;}
+  .what-box strong{color:var(--navy);display:block;font-size:14.5px;margin-bottom:5px;}
+  .form-card{background:var(--white);border:1px solid var(--border);border-radius:12px;padding:38px;box-shadow:0 4px 24px rgba(26,62,168,.07);}
+  .form-section-title{font-family:'Playfair Display',serif;font-size:17px;font-weight:700;color:var(--navy);margin:22px 0 13px;padding-bottom:8px;border-bottom:1px solid var(--border);}
+  .form-section-title:first-child{margin-top:0;}
+  .fg{display:flex;flex-direction:column;gap:5px;margin-bottom:13px;}
+  .fg label{font-size:13px;font-weight:600;color:var(--dark-gray);}
+  .fg label .req{color:var(--gold);margin-left:2px;}
+  .fg input,.fg textarea,.fg select{padding:10px 13px;border:1px solid var(--border);border-radius:6px;font-size:14px;font-family:'Inter',sans-serif;color:var(--navy-deep);width:100%;transition:border-color .2s,box-shadow .2s;}
+  .fg input:focus,.fg textarea:focus,.fg select:focus{outline:none;border-color:var(--navy);box-shadow:0 0 0 3px rgba(26,62,168,.1);}
+  .fg textarea{resize:vertical;min-height:80px;}
+  .fg .hint{font-size:11px;color:var(--gray);line-height:1.5;}
+  .fg-row{display:grid;grid-template-columns:1fr 1fr;gap:13px;}
+  .btn-submit{width:100%;background:var(--navy);color:#fff;border:none;border-radius:7px;padding:14px;font-size:15px;font-weight:700;font-family:'Inter',sans-serif;cursor:pointer;margin-top:6px;transition:background .2s;}
+  .btn-submit:hover{background:var(--navy-hover);}
+  .btn-submit:disabled{background:var(--gray);cursor:not-allowed;}
+  .form-msg{display:none;border-radius:7px;padding:12px 16px;font-size:13.5px;font-weight:500;line-height:1.5;margin-top:12px;}
+  .form-msg.ok{background:#e8f6ec;color:#1c7a3e;display:block;}
+  .form-msg.err{background:#fbe9e9;color:#b3261e;display:block;}
+  .page-footer{background:var(--navy-dark);padding:26px 48px;text-align:center;}
+  .page-footer p{font-size:13px;color:rgba(255,255,255,.45);}
+  .page-footer a{color:var(--gold-light);text-decoration:none;}
+  @media(max-width:640px){nav{padding:0 18px;}.hero{padding:36px 18px 30px;}.form-card{padding:22px 16px;}.fg-row{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+<nav>
+  <a href="index.html" class="nav-logo">
+    <span class="nav-logo-mark"><img src="flyers/chamber-logo.PNG" alt="Hobart Chamber" onerror="this.onerror=null;this.style.display='none';"/></span>
+    <span class="nav-logo-text"><span>Hobart Chamber of Commerce</span><span>Kiowa County · Oklahoma</span></span>
+  </a>
+  <a href="index.html" class="nav-back">← Back to Site</a>
+</nav>
+
+<div class="hero">
+  <div class="hero-inner">
+    <div class="eyebrow">Hobart Chamber of Commerce</div>
+    <h1 class="hero-title">✂️ Request a <em>Ribbon Cutting</em></h1>
+    <p class="hero-sub">New business. Grand reopening. Major milestone. Whatever the occasion — let the Chamber celebrate with you. We bring the ribbon, the scissors, and the community.</p>
+    <div class="hero-badges">
+      <span class="badge">🎉 Free for Members</span>
+      <span class="badge">📸 Photos & Social Announcement</span>
+      <span class="badge">📣 Community Presence</span>
+    </div>
+  </div>
+</div>
+
+<main>
+  <div class="what-box">
+    <strong>What to Expect</strong>
+    After submitting your request the Chamber will reach out within 2 business days to confirm a date and time. On the day of your ceremony we'll coordinate Board members and community supporters, bring the official ribbon and scissors, take photos for social media and the Chamber archive, and announce your ceremony to the community ahead of time.
+  </div>
+
+  <div class="form-card">
+    <h2 style="font-family:'Playfair Display',serif;font-size:21px;font-weight:700;color:var(--navy);margin-bottom:5px;">Ribbon Cutting Request</h2>
+    <p style="font-size:13px;color:var(--gray);margin-bottom:24px;">Fields marked <span style="color:var(--gold);font-weight:700;">*</span> are required.</p>
+
+    <div class="form-section-title">Business Information</div>
+    <div class="fg">
+      <label>Business Name <span class="req">*</span></label>
+      <input type="text" id="rc_biz" placeholder="Your business name"/>
+    </div>
+    <div class="fg">
+      <label>Type of Occasion <span class="req">*</span></label>
+      <select id="rc_type">
+        <option value="">— Select —</option>
+        <option>New Business Opening</option>
+        <option>Grand Reopening</option>
+        <option>New Location</option>
+        <option>Major Renovation / Expansion</option>
+        <option>Business Milestone / Anniversary</option>
+        <option>Other</option>
+      </select>
+    </div>
+    <div class="fg">
+      <label>Business Address <span class="req">*</span></label>
+      <input type="text" id="rc_address" placeholder="Street address in Hobart, OK"/>
+    </div>
+
+    <div class="form-section-title">Contact & Timing</div>
+    <div class="fg-row">
+      <div class="fg">
+        <label>Contact Name <span class="req">*</span></label>
+        <input type="text" id="rc_name" placeholder="First and last name"/>
+      </div>
+      <div class="fg">
+        <label>Phone Number <span class="req">*</span></label>
+        <input type="tel" id="rc_phone" placeholder="(580) 000-0000"/>
+      </div>
+    </div>
+    <div class="fg">
+      <label>Email Address <span class="req">*</span></label>
+      <input type="email" id="rc_email" placeholder="you@email.com"/>
+    </div>
+    <div class="fg-row">
+      <div class="fg">
+        <label>Preferred Date</label>
+        <input type="date" id="rc_date"/>
+        <span class="hint">We'll confirm availability.</span>
+      </div>
+      <div class="fg">
+        <label>Preferred Time</label>
+        <input type="text" id="rc_time" placeholder="e.g. 10:00 AM"/>
+      </div>
+    </div>
+
+    <div class="form-section-title">Tell Us More (Optional)</div>
+    <div class="fg">
+      <label>Brief description of your business or milestone</label>
+      <textarea id="rc_desc" placeholder="What do you do? What are you celebrating? This helps us announce you to the community…"></textarea>
+    </div>
+    <div class="fg">
+      <label>Estimated number of guests</label>
+      <select id="rc_guests">
+        <option value="">— Select —</option>
+        <option>Just us — small and intimate</option>
+        <option>10–25 guests</option>
+        <option>25–50 guests</option>
+        <option>50+ guests</option>
+      </select>
+    </div>
+
+    <div class="form-msg" id="rc_msg"></div>
+    <button class="btn-submit" id="rc_btn" onclick="submitRC()">Submit Request →</button>
+    <p style="font-size:12px;color:var(--gray);margin-top:13px;text-align:center;line-height:1.6;">Questions? Call <a href="tel:5806820887" style="color:var(--navy);font-weight:600;">(580) 682-0887</a> or email <a href="mailto:director@hobartokchamber.org" style="color:var(--navy);font-weight:600;">director@hobartokchamber.org</a></p>
+  </div>
+</main>
+
+<div class="page-footer">
+  <p>Hobart Chamber of Commerce · 106 W 4th St, Hobart, OK 73651 · <a href="tel:5806820887">(580) 682-0887</a></p>
+  <p style="margin-top:6px;"><a href="index.html">← Back to hobartchamber.org</a></p>
+</div>
+
+<script>
+var firebaseConfig={apiKey:"AIzaSyDdoomYnp5-ASz7domQQervL8RttEtOY0o",authDomain:"hobart-chamber.firebaseapp.com",projectId:"hobart-chamber",storageBucket:"hobart-chamber.firebasestorage.app",messagingSenderId:"1018730792333",appId:"1:1018730792333:web:b26c20feef8d04ed07a9c4"};
+var db=null;
+try{if(!firebase.apps.length)firebase.initializeApp(firebaseConfig);db=firebase.firestore();}catch(e){}
+var WEB3FORMS_KEY="a35795f6-54b3-41a0-b5c8-043e93cb73a5";
+function val(id){var el=document.getElementById(id);return el?(el.value||'').trim():'';}
+function submitRC(){
+  var biz=val('rc_biz'),type=val('rc_type'),address=val('rc_address'),name=val('rc_name'),phone=val('rc_phone'),email=val('rc_email');
+  var msg=document.getElementById('rc_msg'),btn=document.getElementById('rc_btn');
+  if(!biz||!type||!address||!name||!phone||!email){msg.className='form-msg err';msg.textContent='Please fill in all required fields.';return;}
+  btn.disabled=true;btn.textContent='Sending…';msg.className='form-msg';msg.style.display='none';
+  var fsData={businessName:biz,occasionType:type,address:address,contactName:name,phone:phone,email:email,preferredDate:val('rc_date'),preferredTime:val('rc_time'),description:val('rc_desc'),expectedGuests:val('rc_guests'),createdAt:firebase.firestore.FieldValue.serverTimestamp()};
+  if(db)db.collection('ribbon_cuttings').add(fsData).catch(function(){});
+  fetch('https://api.web3forms.com/submit',{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify({access_key:WEB3FORMS_KEY,subject:'Ribbon Cutting Request — '+biz,from_name:'Hobart Chamber Website','Business':biz,'Occasion':type,'Address':address,'Contact':name,'Phone':phone,'Email':email,'Preferred Date':val('rc_date')||'Flexible','Preferred Time':val('rc_time')||'Flexible','Description':val('rc_desc')||'—','Expected Guests':val('rc_guests')||'Not specified'})})
+  .then(function(r){return r.json();}).then(function(res){
+    if(res.success){msg.className='form-msg ok';msg.textContent='Request received! ✂️ The Chamber will reach out within 2 business days to confirm your ceremony. We\'re excited to celebrate with you!';btn.style.display='none';}
+    else{msg.className='form-msg err';msg.textContent='Something went wrong. Please call (580) 682-0887.';btn.disabled=false;btn.textContent='Submit Request →';}
+  }).catch(function(){msg.className='form-msg err';msg.textContent='Could not send. Please call (580) 682-0887.';btn.disabled=false;btn.textContent='Submit Request →';});
+}
+</script>
+</body>
+</html>
