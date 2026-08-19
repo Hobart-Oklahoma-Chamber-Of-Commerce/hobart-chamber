@@ -5,6 +5,22 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Hobart Chamber of Commerce | Hobart, Oklahoma</title>
 <meta name="description" content="The Hobart Chamber of Commerce supports local business and strengthens community in Hobart and Kiowa County, Oklahoma." />
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"LocalBusiness",
+  "name":"Hobart Chamber of Commerce",
+  "description":"The Hobart Chamber of Commerce supports local businesses and strengthens community in Hobart and Kiowa County, Oklahoma.",
+  "url":"https://www.hobartchamber.org",
+  "telephone":"+15806820887",
+  "email":"director@hobartokchamber.org",
+  "address":{"@type":"PostalAddress","streetAddress":"106 W 4th St","addressLocality":"Hobart","addressRegion":"OK","postalCode":"73651","addressCountry":"US"},
+  "geo":{"@type":"GeoCoordinates","latitude":34.9917,"longitude":-99.0887},
+  "areaServed":{"@type":"City","name":"Hobart","containedInPlace":{"@type":"AdministrativeArea","name":"Kiowa County, Oklahoma"}},
+  "openingHoursSpecification":{"@type":"OpeningHoursSpecification","dayOfWeek":["Monday","Tuesday","Wednesday","Thursday","Friday"],"opens":"08:00","closes":"17:00"},
+  "sameAs":["https://www.facebook.com/HobartChamberOfCommerce"]
+}
+</script>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;800;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
 
 <!-- Firebase (compat) — loads on the LIVE site. In this preview it won't load, so the calendar runs in demo mode. -->
@@ -299,6 +315,37 @@
   .upl-status.err{color:#b3261e;}
   .upl-status.ok{color:#1c7a3e;}
   .upl-remove{font-size:12px;color:#b3261e;cursor:pointer;font-weight:600;margin-left:10px;text-decoration:underline;}
+
+  /* ---- TESTIMONIALS ---- */
+  .testimonials{padding:64px 60px;background:var(--navy-deep);position:relative;overflow:hidden;}
+  .testimonials-head{text-align:center;margin-bottom:44px;}
+  .testimonials-head .section-eyebrow{color:var(--gold-light);}
+  .testimonials-head .section-title{color:var(--white);}
+  .testimonials-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;max-width:1180px;margin:0 auto;}
+  .tcard{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.1);border-radius:12px;padding:26px;display:flex;flex-direction:column;gap:14px;transition:background .2s;}
+  .tcard:hover{background:rgba(255,255,255,.1);}
+  .tcard-quote{font-size:14px;color:rgba(255,255,255,.82);line-height:1.8;flex:1;font-style:italic;}
+  .tcard-quote::before{content:'\201C';font-family:'Playfair Display',serif;font-size:30px;color:var(--gold);line-height:0;vertical-align:-10px;margin-right:3px;}
+  .tcard-author{display:flex;align-items:center;gap:12px;border-top:1px solid rgba(255,255,255,.1);padding-top:14px;}
+  .tcard-avatar{width:42px;height:42px;border-radius:50%;background:var(--gold-pale);border:2px solid var(--gold);display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:15px;font-weight:700;color:var(--navy);flex-shrink:0;overflow:hidden;}
+  .tcard-avatar img{width:100%;height:100%;object-fit:cover;}
+  .tcard-name{font-size:13.5px;font-weight:700;color:var(--white);line-height:1.2;}
+  .tcard-biz{font-size:11.5px;color:var(--gold-light);}
+  @media(max-width:900px){.testimonials-grid{grid-template-columns:1fr 1fr;}.testimonials{padding:44px 28px;}}
+  @media(max-width:600px){.testimonials-grid{grid-template-columns:1fr;}}
+
+  /* ---- RIBBON CUTTING NOTICE ---- */
+  .ribbon-notice-wrap{max-width:1180px;margin:34px auto;padding:0 60px;}
+  .ribbon-notice{background:linear-gradient(135deg,var(--navy) 0%,var(--navy-dark) 100%);border-radius:12px;padding:32px 36px;display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap;}
+  .rn-eyebrow{font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--gold-light);margin-bottom:6px;display:block;}
+  .ribbon-notice h3{font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:var(--white);margin-bottom:6px;}
+  .ribbon-notice p{font-size:13px;color:rgba(255,255,255,.65);line-height:1.65;max-width:500px;}
+  .ribbon-notice-btns{display:flex;gap:10px;flex-wrap:wrap;flex-shrink:0;}
+  .btn-ribbon{background:var(--gold);color:var(--navy-deep);border:none;border-radius:6px;padding:11px 20px;font-size:13px;font-weight:700;font-family:'Inter',sans-serif;cursor:pointer;text-decoration:none;display:inline-block;transition:background .2s;}
+  .btn-ribbon:hover{background:var(--gold-light);}
+  .btn-ribbon.outline{background:transparent;border:1px solid rgba(255,255,255,.3);color:rgba(255,255,255,.8);}
+  .btn-ribbon.outline:hover{border-color:#fff;color:#fff;}
+  @media(max-width:700px){.ribbon-notice-wrap{padding:0 18px;}.ribbon-notice{padding:24px 22px;flex-direction:column;}.ribbon-notice-btns{width:100%;}}
 
   /* ---- BOTW Archive ---- */
   .botw-archive{padding:48px 60px;background:var(--slate);border-top:1px solid var(--border);}
@@ -606,6 +653,7 @@
     <li><a href="#deals">Deals</a></li>
     <li><a href="#directory">Members</a></li>
     <li><a href="#jobs">Jobs</a></li>
+    <li><a href="moving-to-hobart.html">Moving Here</a></li>
     <li><a href="#about">About</a></li>
     <li><a href="#membership" class="nav-cta">Join Today</a></li>
   </ul>
@@ -701,6 +749,21 @@
   </div>
 </section>
 
+<!-- ===== RIBBON CUTTING NOTICE ===== -->
+<div class="ribbon-notice-wrap">
+  <div class="ribbon-notice">
+    <div>
+      <span class="rn-eyebrow">New Business? Grand Opening? Major Milestone?</span>
+      <h3>✂️ Request a Ribbon Cutting</h3>
+      <p>The Hobart Chamber celebrates new businesses and milestones with an official ceremony. We bring the ribbon, the scissors, and the community — you just show up ready to celebrate.</p>
+    </div>
+    <div class="ribbon-notice-btns">
+      <a href="ribbon-cutting.html" class="btn-ribbon">Request a Ceremony →</a>
+      <a href="#directory" class="btn-ribbon outline">View Members</a>
+    </div>
+  </div>
+</div>
+
 <!-- ===== EVENTS CAROUSEL ===== -->
 <section class="events-section" id="events">
   <div class="events-head">
@@ -741,7 +804,10 @@
 <section class="cal-section" id="calendar">
   <div class="cal-head">
     <div><span class="section-eyebrow">Hobart Happenings</span><h2 class="section-title">Community Calendar</h2></div>
-    <button class="btn-primary" onclick="openSubmit()">+ Submit an Event</button>
+    <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap;">
+      <a href="hobart-chamber.ics" download="hobart-chamber-events.ics" class="btn-sm btn-line" style="text-decoration:none;display:inline-flex;align-items:center;gap:5px;">📅 Subscribe</a>
+      <button class="btn-primary" onclick="openSubmit()">+ Submit an Event</button>
+    </div>
   </div>
   <p class="cal-sub">See what's happening across Hobart and Kiowa County. Anyone can submit a community event — submissions are reviewed by the Chamber before they appear on the calendar.</p>
   <div class="cal-toolbar">
@@ -1139,10 +1205,12 @@
     <li><a href="#directory">Member Directory</a></li>
     <li><a href="#board">Board of Directors</a></li>
     <li><a href="#about">About</a></li>
+    <li><a href="moving-to-hobart.html">Moving to Hobart</a></li>
   </ul></div>
   <div><h6>Get Involved</h6><ul>
     <li><a href="#membership">Membership</a></li>
     <li><a onclick="openSubmit()">Submit an Event</a></li>
+    <li><a href="ribbon-cutting.html">Request Ribbon Cutting</a></li>
     <li><a href="#membership">Sponsorship</a></li>
     <li><a href="#membership">Volunteer</a></li>
     <li><a href="#directory">Business of the Week</a></li>
@@ -2270,6 +2338,7 @@ function renderAdmin(){
     +'<div class="admin-tab'+(adminTab==='parade'?' on':'')+'" onclick="switchTab(\'parade\')">Parade <span id="prCount"></span></div>'
     +'<div class="admin-tab'+(adminTab==='tractor'?' on':'')+'" onclick="switchTab(\'tractor\')">Tractor Show <span id="tsCount"></span></div>'
     +'<div class="admin-tab'+(adminTab==='vendor'?' on':'')+'" onclick="switchTab(\'vendor\')">Vendors <span id="vnCount"></span></div>'
+    +'<div class="admin-tab'+(adminTab==='ribbon'?' on':'')+'" onclick="switchTab(\'ribbon\')">Ribbon Cuttings <span id="rcCount"></span></div>'
     +'<div class="admin-tab'+(adminTab==='scavenger'?' on':'')+'" onclick="switchTab(\'scavenger\')">Scavenger Hunt <span id="shCount"></span></div>'
     +'<div class="admin-tab'+(adminTab==='deals'?' on':'')+'" onclick="switchTab(\'deals\')">Local Sales <span id="dlCount"></span></div>'
     +'<div class="admin-tab'+(adminTab==='subs'?' on':'')+'" onclick="switchTab(\'subs\')">Subscribers <span id="sbCount"></span></div>'
@@ -2288,6 +2357,7 @@ function renderAdmin(){
   else if(adminTab==='parade') paneParade();
   else if(adminTab==='tractor') paneTractor();
   else if(adminTab==='vendor') paneVendor();
+  else if(adminTab==='ribbon') paneRibbon();
   else if(adminTab==='scavenger') paneScavenger();
   else if(adminTab==='deals') paneDeals();
   else if(adminTab==='subs') paneSubs();
@@ -2907,6 +2977,34 @@ function exportVendors(){
     document.body.appendChild(a);a.click();document.body.removeChild(a);
   });
 }
+
+/* ---- Ribbon Cuttings admin ---- */
+function paneRibbon(){
+  var pane=document.getElementById('adminPane');
+  pane.innerHTML='<div class="admin-empty">Loading…</div>';
+  db.collection('ribbon_cuttings').orderBy('createdAt','desc').get().then(function(snap){
+    var rows=[]; snap.forEach(function(doc){var x=doc.data();x.id=doc.id;rows.push(x);});
+    var cnt=document.getElementById('rcCount'); if(cnt) cnt.innerHTML=rows.length?('<span class="badge-pending">'+rows.length+'</span>'):'';
+    if(!rows.length){pane.innerHTML='<div class="admin-empty">No ribbon cutting requests yet. Share the link: <b>ribbon-cutting.html</b></div>';return;}
+    var html='<div class="admin-list">';
+    rows.forEach(function(r){
+      html+='<div class="admin-row"><div class="info">'
+        +'<b>✂️ '+esc(r.businessName||'—')+'</b>'
+        +'<small>'+esc(r.occasionType||'')+'</small>'
+        +'<small>'+esc(r.address||'')+'</small>'
+        +'<small>'+esc(r.contactName||'')+'  ·  '+esc(r.phone||'')+'  ·  '+esc(r.email||'')+'</small>'
+        +(r.preferredDate?'<small>Requested: '+esc(r.preferredDate)+(r.preferredTime?' at '+esc(r.preferredTime):'')+'</small>':'')
+        +(r.expectedGuests?'<small>Guests: '+esc(r.expectedGuests)+'</small>':'')
+        +(r.description?'<small style="font-style:italic;">'+esc(r.description)+'</small>':'')
+        +'</div>'
+        +'<div class="acts"><button class="btn-sm btn-red" onclick="delRibbon(\''+r.id+'\')">Delete</button></div>'
+        +'</div>';
+    });
+    html+='</div>';
+    pane.innerHTML=html;
+  }).catch(function(e){pane.innerHTML='<div class="admin-empty">Error loading. Add <b>ribbon_cuttings</b> to Firestore rules.<br><small>'+esc(e&&e.message||'')+'</small></div>';});
+}
+function delRibbon(id){if(!confirm('Delete this ribbon cutting request?'))return;db.collection('ribbon_cuttings').doc(id).delete().then(function(){paneRibbon();});}
 
 /* ---- Local Sales / deals admin ---- */
 function paneDeals(){
