@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Hometown Harvest 2026 · Hobart, Oklahoma · Saturday, Sept. 19</title>
+<meta name="description" content="Hobart's Hometown Harvest — Saturday, September 19, 2026. Tractor Show, Parade, Vendors, Food Trucks, Kids Activities, and more on the Courthouse Square." />
+<link rel="icon" href="flyers/chamber-logo.PNG" />
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;800;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  --navy:#1a3ea8;
+  --navy-dark:#142f7e;
+  --navy-deep:#0e2056;
+  --navy-hover:#2247bd;
+  --gold:#c49a3e;
+  --gold-light:#dab65e;
+  --gold-pale:#f6edd6;
+  --harvest-orange:#b84c12;
+  --harvest-rust:#8b3a0f;
+  --harvest-cream:#fdf8f0;
+  --white:#ffffff;
+  --slate:#f3f6fc;
+  --gray:#6f7d99;
+  --border:#dbe3f4;
+}
+html{scroll-behavior:smooth;}
+body{font-family:'Inter',sans-serif;color:var(--navy-deep);background:var(--white);overflow-x:hidden;}
+
+/* ---- NAV ---- */
+nav{background:var(--navy);padding:0 40px;height:64px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:200;box-shadow:0 2px 12px rgba(14,32,86,.18);}
+.nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none;}
+.nav-logo-mark img{height:36px;width:36px;object-fit:contain;border-radius:50%;}
+.nav-logo-text span:first-child{font-family:'Playfair Display',serif;font-weight:700;font-size:15px;color:var(--white);letter-spacing:.4px;line-height:1.15;white-space:nowrap;display:block;}
+.nav-logo-text span:last-child{font-size:9.5px;color:var(--gold-light);letter-spacing:2px;text-transform:uppercase;font-weight:500;display:block;}
+.nav-back{color:var(--gold-light);font-size:13px;font-weight:600;text-decoration:none;letter-spacing:.4px;display:flex;align-items:center;gap:6px;}
+.nav-back:hover{color:var(--white);}
+
+/* ---- HERO ---- */
+.hero{background:linear-gradient(160deg,var(--harvest-rust) 0%,var(--harvest-orange) 40%,#c8621a 70%,#8b4513 100%);min-height:420px;display:flex;align-items:center;justify-content:center;text-align:center;padding:60px 24px;position:relative;overflow:hidden;}
+.hero::before{content:'';position:absolute;inset:0;background:url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");pointer-events:none;}
+.hero-eyebrow{display:flex;align-items:center;gap:12px;justify-content:center;margin-bottom:18px;}
+.hero-eyebrow-line{width:40px;height:2px;background:var(--gold-light);}
+.hero-eyebrow span{font-size:11px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:var(--gold-light);}
+.hero-title{font-family:'Playfair Display',serif;font-size:clamp(52px,10vw,96px);font-weight:900;line-height:.92;color:var(--white);margin-bottom:10px;}
+.hero-title .accent{color:var(--gold-light);display:block;}
+.hero-date{font-family:'Playfair Display',serif;font-size:clamp(18px,3vw,26px);font-weight:700;color:rgba(255,255,255,.9);margin-bottom:6px;letter-spacing:.5px;}
+.hero-sub{font-size:15px;color:rgba(255,255,255,.72);margin-bottom:32px;letter-spacing:.3px;}
+.hero-btns{display:flex;gap:14px;flex-wrap:wrap;justify-content:center;}
+.btn-harvest{background:var(--gold);color:var(--navy-deep);font-weight:700;font-size:14px;padding:13px 26px;border-radius:4px;text-decoration:none;letter-spacing:.3px;transition:background .2s;}
+.btn-harvest:hover{background:var(--gold-light);}
+.btn-harvest-ghost{background:transparent;color:var(--white);font-weight:700;font-size:14px;padding:12px 24px;border-radius:4px;border:2px solid rgba(255,255,255,.5);text-decoration:none;letter-spacing:.3px;transition:border-color .2s,color .2s;}
+.btn-harvest-ghost:hover{border-color:var(--white);color:var(--white);}
+
+/* ---- COUNTDOWN ---- */
+.countdown-bar{background:var(--navy-deep);padding:22px 40px;display:flex;align-items:center;justify-content:center;gap:40px;flex-wrap:wrap;}
+.cd-label{font-size:11px;font-weight:600;letter-spacing:2.5px;text-transform:uppercase;color:var(--gold-light);}
+.cd-units{display:flex;gap:6px;align-items:center;}
+.cd-unit{text-align:center;}
+.cd-num{font-family:'Playfair Display',serif;font-size:32px;font-weight:800;color:var(--white);line-height:1;display:block;}
+.cd-u{font-size:9px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:var(--gray);display:block;margin-top:2px;}
+.cd-sep{font-family:'Playfair Display',serif;font-size:28px;font-weight:700;color:var(--gold);line-height:1;margin-bottom:14px;}
+
+/* ---- QUICK INFO STRIP ---- */
+.info-strip{background:var(--gold-pale);border-top:3px solid var(--gold);border-bottom:3px solid var(--gold);padding:20px 40px;display:flex;justify-content:center;gap:48px;flex-wrap:wrap;}
+.info-item{display:flex;align-items:center;gap:10px;}
+.info-icon{font-size:20px;}
+.info-text strong{display:block;font-size:13px;font-weight:700;color:var(--navy-deep);letter-spacing:.3px;}
+.info-text span{font-size:12px;color:var(--harvest-orange);font-weight:600;}
+
+/* ---- SECTION SHARED ---- */
+.section-eyebrow{display:block;font-size:10px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:6px;}
+.section-title{font-family:'Playfair Display',serif;font-size:clamp(28px,4vw,42px);font-weight:800;color:var(--navy);line-height:1.1;margin-bottom:14px;}
+.section-sub{font-size:15px;color:var(--gray);line-height:1.7;max-width:580px;}
+
+/* ---- REGISTER SECTION ---- */
+.register{padding:72px 60px;background:var(--white);}
+.register-inner{max-width:1100px;margin:0 auto;}
+.register-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:24px;margin-top:40px;}
+.reg-card{border:2px solid var(--border);border-radius:10px;overflow:hidden;transition:box-shadow .2s,transform .15s;}
+.reg-card:hover{box-shadow:0 8px 32px rgba(26,62,168,.12);transform:translateY(-3px);}
+.reg-card-head{padding:24px 26px 16px;border-bottom:1px solid var(--border);}
+.reg-card-icon{font-size:32px;margin-bottom:12px;display:block;}
+.reg-card-title{font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:var(--navy);margin-bottom:6px;}
+.reg-card-meta{font-size:12px;font-weight:600;letter-spacing:.5px;color:var(--harvest-orange);text-transform:uppercase;}
+.reg-card-body{padding:16px 26px 24px;}
+.reg-card-body p{font-size:14px;color:var(--gray);line-height:1.65;margin-bottom:18px;}
+.reg-card-body ul{list-style:none;margin-bottom:18px;}
+.reg-card-body ul li{font-size:13px;color:var(--navy-deep);padding:4px 0;display:flex;gap:8px;align-items:flex-start;}
+.reg-card-body ul li::before{content:'→';color:var(--gold);font-weight:700;flex-shrink:0;margin-top:1px;}
+.btn-reg{display:inline-block;background:var(--navy);color:var(--white);font-weight:700;font-size:13px;padding:11px 22px;border-radius:4px;text-decoration:none;letter-spacing:.3px;transition:background .2s;}
+.btn-reg:hover{background:var(--navy-hover);}
+.btn-reg.gold{background:var(--gold);color:var(--navy-deep);}
+.btn-reg.gold:hover{background:var(--gold-light);}
+.btn-reg.rust{background:var(--harvest-orange);color:var(--white);}
+.btn-reg.rust:hover{background:var(--harvest-rust);}
+.reg-note{font-size:11px;color:var(--gray);margin-top:8px;}
+
+/* ---- ACTIVITIES ---- */
+.activities{padding:72px 60px;background:var(--harvest-cream);}
+.activities-inner{max-width:1100px;margin:0 auto;}
+.act-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:16px;margin-top:36px;}
+.act-item{background:var(--white);border:1px solid var(--border);border-radius:8px;padding:20px 14px;text-align:center;}
+.act-icon{font-size:28px;display:block;margin-bottom:8px;}
+.act-name{font-size:12px;font-weight:700;color:var(--navy-deep);letter-spacing:.3px;line-height:1.3;}
+
+/* ---- SCHEDULE ---- */
+.schedule{padding:72px 60px;background:var(--white);}
+.schedule-inner{max-width:900px;margin:0 auto;}
+.sched-list{margin-top:36px;border-left:3px solid var(--gold);padding-left:0;}
+.sched-item{display:grid;grid-template-columns:110px 1fr;gap:20px;padding:18px 0 18px 28px;border-bottom:1px solid var(--border);position:relative;}
+.sched-item::before{content:'';position:absolute;left:-7px;top:24px;width:12px;height:12px;background:var(--gold);border-radius:50%;}
+.sched-time{font-family:'Playfair Display',serif;font-size:15px;font-weight:700;color:var(--harvest-orange);}
+.sched-detail strong{display:block;font-size:15px;font-weight:700;color:var(--navy-deep);margin-bottom:3px;}
+.sched-detail span{font-size:13px;color:var(--gray);}
+.sched-note{display:inline-block;margin-top:5px;font-size:11px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:var(--harvest-orange);background:var(--gold-pale);padding:2px 8px;border-radius:20px;}
+
+/* ---- MAP PLACEHOLDER ---- */
+.map-section{padding:72px 60px;background:var(--slate);}
+.map-inner{max-width:1100px;margin:0 auto;}
+.map-placeholder{margin-top:36px;background:var(--white);border:2px dashed var(--border);border-radius:10px;min-height:300px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;color:var(--gray);}
+.map-placeholder-icon{font-size:48px;}
+.map-placeholder p{font-size:14px;font-weight:600;color:var(--gray);}
+
+/* ---- CONTACT CTA ---- */
+.cta{padding:72px 60px;background:var(--navy);text-align:center;}
+.cta .section-title{color:var(--white);}
+.cta .section-sub{color:rgba(255,255,255,.68);margin:0 auto 32px;}
+.cta-contacts{display:flex;justify-content:center;gap:40px;flex-wrap:wrap;margin-top:32px;}
+.cta-contact a{color:var(--gold-light);font-weight:600;font-size:15px;text-decoration:none;}
+.cta-contact a:hover{color:var(--white);}
+.cta-contact span{display:block;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.4);margin-bottom:4px;}
+
+/* ---- FOOTER ---- */
+footer{background:var(--navy-deep);padding:48px 60px 32px;display:grid;grid-template-columns:2fr 1fr 1fr 1.4fr;gap:40px;}
+footer h6{font-size:10px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--gold-light);margin-bottom:16px;}
+footer ul{list-style:none;}
+footer ul li{margin-bottom:8px;}
+footer ul li a{font-size:13px;color:rgba(255,255,255,.6);text-decoration:none;transition:color .15s;}
+footer ul li a:hover{color:var(--gold-light);}
+.footer-brand p{font-size:13px;color:rgba(255,255,255,.5);line-height:1.7;margin-top:10px;}
+.footer-contact p{font-size:13px;color:rgba(255,255,255,.6);line-height:1.9;}
+.footer-contact a{color:rgba(255,255,255,.6);text-decoration:none;}
+.footer-contact a:hover{color:var(--gold-light);}
+.footer-bottom{background:var(--navy-deep);border-top:1px solid rgba(255,255,255,.08);padding:16px 60px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;}
+.footer-bottom p{font-size:12px;color:rgba(255,255,255,.35);}
+.social-links{display:flex;gap:10px;margin-top:14px;}
+.social-links a{width:34px;height:34px;background:rgba(255,255,255,.08);border-radius:50%;display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.6);font-size:13px;font-weight:700;text-decoration:none;transition:background .2s;}
+.social-links a:hover{background:var(--gold);color:var(--navy-deep);}
+
+/* ---- RESPONSIVE ---- */
+@media(max-width:900px){
+  nav{padding:0 22px;}
+  .register,.activities,.schedule,.map-section,.cta{padding:52px 22px;}
+  .info-strip{gap:24px;padding:18px 22px;}
+  .countdown-bar{gap:20px;padding:18px 22px;}
+  footer{grid-template-columns:1fr 1fr;padding:40px 22px 24px;}
+  .footer-bottom{padding:14px 22px;}
+}
+@media(max-width:600px){
+  .hero{padding:48px 18px;}
+  .hero-btns{flex-direction:column;align-items:center;}
+  .sched-item{grid-template-columns:1fr;gap:4px;}
+  footer{grid-template-columns:1fr;}
+  .act-grid{grid-template-columns:repeat(3,1fr);}
+}
+</style>
+</head>
+<body>
+
+<!-- ===== NAV ===== -->
+<nav>
+  <a href="index.html" class="nav-logo">
+    <span class="nav-logo-mark"><img src="flyers/chamber-logo.PNG" alt="Hobart Chamber of Commerce" onerror="this.style.display='none'" /></span>
+    <span class="nav-logo-text"><span>Hobart Chamber of Commerce</span><span>Kiowa County · Oklahoma</span></span>
+  </a>
+  <a href="index.html" class="nav-back">← Back to hobartchamber.org</a>
+</nav>
+
+<!-- ===== HERO ===== -->
+<section class="hero">
+  <div>
+    <div class="hero-eyebrow">
+      <div class="hero-eyebrow-line"></div>
+      <span>Hobart, Oklahoma · September 19, 2026</span>
+      <div class="hero-eyebrow-line"></div>
+    </div>
+    <h1 class="hero-title">Hometown<span class="accent">Harvest</span></h1>
+    <p class="hero-date">Saturday, September 19 · Starting at 10 AM</p>
+    <p class="hero-sub">Kiowa County Courthouse Square · Fun for All Ages</p>
+    <div class="hero-btns">
+      <a href="#register" class="btn-harvest">Register Now</a>
+      <a href="#schedule" class="btn-harvest-ghost">View Schedule</a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== COUNTDOWN ===== -->
+<div class="countdown-bar">
+  <span class="cd-label">Counting Down</span>
+  <div class="cd-units">
+    <div class="cd-unit"><span class="cd-num" id="cdD">--</span><span class="cd-u">Days</span></div>
+    <span class="cd-sep">:</span>
+    <div class="cd-unit"><span class="cd-num" id="cdH">--</span><span class="cd-u">Hrs</span></div>
+    <span class="cd-sep">:</span>
+    <div class="cd-unit"><span class="cd-num" id="cdM">--</span><span class="cd-u">Min</span></div>
+    <span class="cd-sep">:</span>
+    <div class="cd-unit"><span class="cd-num" id="cdS">--</span><span class="cd-u">Sec</span></div>
+  </div>
+</div>
+
+<!-- ===== INFO STRIP ===== -->
+<div class="info-strip">
+  <div class="info-item"><span class="info-icon">📍</span><div class="info-text"><strong>Kiowa County Courthouse Square</strong><span>Downtown Hobart, Oklahoma</span></div></div>
+  <div class="info-item"><span class="info-icon">📅</span><div class="info-text"><strong>Saturday, September 19, 2026</strong><span>Starting at 10:00 AM</span></div></div>
+  <div class="info-item"><span class="info-icon">🎟️</span><div class="info-text"><strong>Free Admission</strong><span>All ages welcome</span></div></div>
+  <div class="info-item"><span class="info-icon">📞</span><div class="info-text"><strong>(580) 682-0887</strong><span>Chamber office</span></div></div>
+</div>
+
+<!-- ===== REGISTER ===== -->
+<section class="register" id="register">
+  <div class="register-inner">
+    <span class="section-eyebrow">Participate</span>
+    <h2 class="section-title">Register for Hometown Harvest</h2>
+    <p class="section-sub">Whether you're showing a tractor, marching in the parade, setting up a booth, or bringing the kids — here's everything you need to get signed up.</p>
+
+    <div class="register-grid">
+
+      <!-- TRACTOR SHOW -->
+      <div class="reg-card">
+        <div class="reg-card-head">
+          <span class="reg-card-icon">🚜</span>
+          <div class="reg-card-title">Tractor Show</div>
+          <div class="reg-card-meta">$20 Entry Fee</div>
+        </div>
+        <div class="reg-card-body">
+          <p>Antique and classic tractors on display at the Courthouse Square. Show off your piece of history and compete for recognition.</p>
+          <ul>
+            <li>Antique &amp; classic tractors welcome</li>
+            <li>$20 registration fee</li>
+            <li>Display on the Courthouse Square</li>
+          </ul>
+          <a href="tractor-show-registration.html" class="btn-reg rust">Register Your Tractor →</a>
+        </div>
+      </div>
+
+      <!-- PARADE -->
+      <div class="reg-card">
+        <div class="reg-card-head">
+          <span class="reg-card-icon">🎺</span>
+          <div class="reg-card-title">Community Parade</div>
+          <div class="reg-card-meta">Free to Enter</div>
+        </div>
+        <div class="reg-card-body">
+          <p>March, ride, or roll in the Hometown Harvest Community Parade through downtown Hobart. Everyone is welcome.</p>
+          <ul>
+            <li>Open to all — march, ride, or roll</li>
+            <li>Floats, vehicles, groups, bands</li>
+            <li>No entry fee</li>
+          </ul>
+          <a href="parade-registration.html" class="btn-reg gold">Join the Parade →</a>
+        </div>
+      </div>
+
+      <!-- VENDOR -->
+      <div class="reg-card">
+        <div class="reg-card-head">
+          <span class="reg-card-icon">🏪</span>
+          <div class="reg-card-title">Vendor / Booth</div>
+          <div class="reg-card-meta">Limited Spots</div>
+        </div>
+        <div class="reg-card-body">
+          <p>Set up your booth on the Courthouse Square alongside food trucks and other vendors for one of Hobart's biggest fall events.</p>
+          <ul>
+            <li>Craft vendors, food, retail</li>
+            <li>Prime downtown foot traffic</li>
+            <li>Limited spaces — register early</li>
+          </ul>
+          <a href="vendor-registration.html" class="btn-reg">Vend Here →</a>
+        </div>
+      </div>
+
+      <!-- KIDS WRISTBAND -->
+      <div class="reg-card">
+        <div class="reg-card-head">
+          <span class="reg-card-icon">🎡</span>
+          <div class="reg-card-title">Kids Wristband</div>
+          <div class="reg-card-meta">Pre-Register · Coming Soon</div>
+        </div>
+        <div class="reg-card-body">
+          <p>Pre-register your child for a kids activity wristband — bounce houses, pumpkin painting, petting zoo, pony rides, and more included.</p>
+          <ul>
+            <li>Bounce houses</li>
+            <li>Pumpkin painting &amp; rolling race</li>
+            <li>Petting zoo &amp; pony rides</li>
+            <li>Chalk drawing, sack races &amp; more</li>
+          </ul>
+          <span style="display:inline-block;background:var(--gold-pale);color:var(--harvest-orange);font-size:12px;font-weight:700;padding:10px 18px;border-radius:4px;letter-spacing:.3px;">Registration Opening Soon</span>
+          <p class="reg-note">Check back or call (580) 682-0887 for updates.</p>
+        </div>
+      </div>
+
+      <!-- LIL MR & MISS -->
+      <div class="reg-card">
+        <div class="reg-card-head">
+          <span class="reg-card-icon">👑</span>
+          <div class="reg-card-title">Lil' Mr. &amp; Miss Hometown Harvest</div>
+          <div class="reg-card-meta">Coming Soon</div>
+        </div>
+        <div class="reg-card-body">
+          <p>Enter your little one in the Lil' Mr. &amp; Miss Hometown Harvest pageant — a fun celebration for Hobart's youngest community members.</p>
+          <ul>
+            <li>Boys &amp; girls welcome</li>
+            <li>Age divisions available</li>
+            <li>Crown, sash &amp; prizes</li>
+          </ul>
+          <span style="display:inline-block;background:var(--gold-pale);color:var(--harvest-orange);font-size:12px;font-weight:700;padding:10px 18px;border-radius:4px;letter-spacing:.3px;">Registration Opening Soon</span>
+          <p class="reg-note">Check back or call (580) 682-0887 for updates.</p>
+        </div>
+      </div>
+
+      <!-- SCARECROW CONTEST -->
+      <div class="reg-card">
+        <div class="reg-card-head">
+          <span class="reg-card-icon">🌾</span>
+          <div class="reg-card-title">Scarecrow Contest</div>
+          <div class="reg-card-meta">Coming Soon</div>
+        </div>
+        <div class="reg-card-body">
+          <p>Build your best scarecrow and display it on the Courthouse Square for the community to admire and vote on.</p>
+          <ul>
+            <li>Open to individuals, families &amp; businesses</li>
+            <li>Community voting</li>
+            <li>Prizes for top entries</li>
+          </ul>
+          <span style="display:inline-block;background:var(--gold-pale);color:var(--harvest-orange);font-size:12px;font-weight:700;padding:10px 18px;border-radius:4px;letter-spacing:.3px;">Registration Opening Soon</span>
+          <p class="reg-note">Check back or call (580) 682-0887 for updates.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ===== ACTIVITIES ===== -->
+<section class="activities" id="activities">
+  <div class="activities-inner">
+    <span class="section-eyebrow">What's Happening</span>
+    <h2 class="section-title">A Full Day of Fun</h2>
+    <p class="section-sub">Something for everyone — from the littlest Bearcats to the biggest tractor fans in Kiowa County.</p>
+    <div class="act-grid">
+      <div class="act-item"><span class="act-icon">🚜</span><span class="act-name">Tractor Show</span></div>
+      <div class="act-item"><span class="act-icon">🎺</span><span class="act-name">Community Parade</span></div>
+      <div class="act-item"><span class="act-icon">🏪</span><span class="act-name">Vendors</span></div>
+      <div class="act-item"><span class="act-icon">🍔</span><span class="act-name">Food Trucks</span></div>
+      <div class="act-item"><span class="act-icon">🏰</span><span class="act-name">Bounce Houses</span></div>
+      <div class="act-item"><span class="act-icon">🎃</span><span class="act-name">Pumpkin Rolling Race</span></div>
+      <div class="act-item"><span class="act-icon">🎨</span><span class="act-name">Pumpkin Painting</span></div>
+      <div class="act-item"><span class="act-icon">🌾</span><span class="act-name">Scarecrow Contest</span></div>
+      <div class="act-item"><span class="act-icon">🤠</span><span class="act-name">Roping Contest</span></div>
+      <div class="act-item"><span class="act-icon">🖍️</span><span class="act-name">Chalk Drawing Contest</span></div>
+      <div class="act-item"><span class="act-icon">🐴</span><span class="act-name">Petting Zoo &amp; Pony Rides</span></div>
+      <div class="act-item"><span class="act-icon">🎱</span><span class="act-name">Bingo</span></div>
+      <div class="act-item"><span class="act-icon">❓</span><span class="act-name">Trivia Game</span></div>
+      <div class="act-item"><span class="act-icon">👑</span><span class="act-name">Lil' Mr. &amp; Miss Hometown Harvest</span></div>
+      <div class="act-item"><span class="act-icon">🏃</span><span class="act-name">Sack Races</span></div>
+      <div class="act-item"><span class="act-icon">🃏</span><span class="act-name">Poker Run</span></div>
+      <div class="act-item"><span class="act-icon">🔨</span><span class="act-name">Silent Auction</span></div>
+      <div class="act-item"><span class="act-icon">✨</span><span class="act-name">And So Much More</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== SCHEDULE ===== -->
+<section class="schedule" id="schedule">
+  <div class="schedule-inner">
+    <span class="section-eyebrow">Day Of</span>
+    <h2 class="section-title">Schedule of Events</h2>
+    <p class="section-sub">Full schedule for Saturday, September 19. Times subject to update — check back closer to the event.</p>
+    <div class="sched-list">
+      <div class="sched-item">
+        <div class="sched-time">10:00 AM</div>
+        <div class="sched-detail"><strong>Gates Open — Hometown Harvest Begins</strong><span>Courthouse Square, Downtown Hobart</span></div>
+      </div>
+      <div class="sched-item">
+        <div class="sched-time">10:00 AM</div>
+        <div class="sched-detail"><strong>Tractor Show Display Opens</strong><span>Antique &amp; classic tractors on display all day</span></div>
+      </div>
+      <div class="sched-item">
+        <div class="sched-time">10:00 AM</div>
+        <div class="sched-detail"><strong>Kids Activity Zone Opens</strong><span>Bounce houses · Petting Zoo · Pony Rides · Pumpkin Painting · Chalk Drawing</span><span class="sched-note">Wristband Required</span></div>
+      </div>
+      <div class="sched-item">
+        <div class="sched-time">10:00 AM</div>
+        <div class="sched-detail"><strong>Vendors &amp; Food Trucks Open</strong><span>Shop local, eat local, support Hobart</span></div>
+      </div>
+      <div class="sched-item">
+        <div class="sched-time">TBA</div>
+        <div class="sched-detail"><strong>Community Parade</strong><span>Route through downtown Hobart — time to be announced</span></div>
+      </div>
+      <div class="sched-item">
+        <div class="sched-time">TBA</div>
+        <div class="sched-detail"><strong>Pumpkin Rolling Race</strong><span>Sign up day-of at the activity tent</span></div>
+      </div>
+      <div class="sched-item">
+        <div class="sched-time">TBA</div>
+        <div class="sched-detail"><strong>Roping Contest</strong><span>Time &amp; location to be announced</span></div>
+      </div>
+      <div class="sched-item">
+        <div class="sched-time">TBA</div>
+        <div class="sched-detail"><strong>Scarecrow Contest Judging</strong><span>Community vote + judged categories</span></div>
+      </div>
+      <div class="sched-item">
+        <div class="sched-time">TBA</div>
+        <div class="sched-detail"><strong>Lil' Mr. &amp; Miss Hometown Harvest</strong><span>Crowning ceremony — time to be announced</span></div>
+      </div>
+      <div class="sched-item">
+        <div class="sched-time">TBA</div>
+        <div class="sched-detail"><strong>Trivia Game &amp; Bingo</strong><span>Location to be announced — watch the Chamber Facebook page</span></div>
+      </div>
+      <div class="sched-item">
+        <div class="sched-time">TBA</div>
+        <div class="sched-detail"><strong>Silent Auction Closes</strong><span>Winners announced at closing</span></div>
+      </div>
+    </div>
+    <p style="margin-top:20px;font-size:13px;color:var(--gray);">📢 Full schedule with confirmed times will be published closer to September 19. Follow the <a href="https://www.facebook.com/profile.php?id=61579700143153" target="_blank" rel="noopener" style="color:var(--navy);font-weight:600;">Chamber on Facebook</a> for updates.</p>
+  </div>
+</section>
+
+<!-- ===== MAP PLACEHOLDER ===== -->
+<section class="map-section" id="map">
+  <div class="map-inner">
+    <span class="section-eyebrow">Find Your Way</span>
+    <h2 class="section-title">Event Map</h2>
+    <p class="section-sub">A detailed map showing where everything is located on the Courthouse Square is coming soon.</p>
+    <div class="map-placeholder">
+      <span class="map-placeholder-icon">🗺️</span>
+      <p>Interactive event map coming soon</p>
+      <p style="font-size:12px;">Kiowa County Courthouse Square · Downtown Hobart, OK 73651</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CONTACT CTA ===== -->
+<section class="cta">
+  <span class="section-eyebrow" style="color:var(--gold-light);">Questions?</span>
+  <h2 class="section-title">We're Here to Help</h2>
+  <p class="section-sub">Call, text, or email the Hobart Chamber of Commerce with any questions about Hometown Harvest registration, sponsorships, or logistics.</p>
+  <div class="hero-btns" style="margin-top:0;">
+    <a href="tractor-show-registration.html" class="btn-harvest">Register Now</a>
+    <a href="index.html" class="btn-harvest-ghost">← Back to hobartchamber.org</a>
+  </div>
+  <div class="cta-contacts">
+    <div class="cta-contact"><span>Call or Text</span><a href="tel:5806820887">(580) 682-0887</a></div>
+    <div class="cta-contact"><span>Email</span><a href="mailto:director@hobartokchamber.org">director@hobartokchamber.org</a></div>
+    <div class="cta-contact"><span>Facebook</span><a href="https://www.facebook.com/profile.php?id=61579700143153" target="_blank" rel="noopener">Hobart Chamber of Commerce</a></div>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer>
+  <div class="footer-brand">
+    <a href="index.html" class="nav-logo">
+      <span class="nav-logo-mark"><img src="flyers/chamber-logo.PNG" alt="Hobart Chamber of Commerce" onerror="this.style.display='none'" style="height:36px;width:36px;object-fit:contain;border-radius:50%;"></span>
+      <span class="nav-logo-text"><span>Hobart Chamber of Commerce</span><span>Kiowa County · Oklahoma</span></span>
+    </a>
+    <p>Supporting and promoting the businesses that make our community strong. Building a vibrant future for Hobart, Oklahoma.</p>
+    <div class="social-links">
+      <a href="https://www.facebook.com/profile.php?id=61579700143153" target="_blank" rel="noopener">f</a>
+      <a href="mailto:director@hobartokchamber.org">@</a>
+    </div>
+  </div>
+  <div><h6>Hometown Harvest</h6><ul>
+    <li><a href="#register">Register</a></li>
+    <li><a href="#activities">Activities</a></li>
+    <li><a href="#schedule">Schedule</a></li>
+    <li><a href="#map">Event Map</a></li>
+  </ul></div>
+  <div><h6>Register</h6><ul>
+    <li><a href="tractor-show-registration.html">Tractor Show</a></li>
+    <li><a href="parade-registration.html">Community Parade</a></li>
+    <li><a href="vendor-registration.html">Vendor Booth</a></li>
+    <li><a href="#register">Kids Wristband</a></li>
+  </ul></div>
+  <div class="footer-contact"><h6>Visit / Contact</h6><p>
+    106 W. 4th St.<br>Hobart, OK 73651<br><br>
+    <a href="tel:5806820887">(580) 682-0887</a><br>
+    <a href="mailto:director@hobartokchamber.org">director@hobartokchamber.org</a><br>
+    <a href="https://www.hobartchamber.org" target="_blank" rel="noopener">www.hobartchamber.org</a><br><br>
+    <strong style="color:rgba(255,255,255,.7)">Office Hours</strong><br>Mon &amp; Wed: 1:30–4:30 PM
+  </p></div>
+</footer>
+<div class="footer-bottom">
+  <p>© 2026 Hobart Chamber of Commerce · All Rights Reserved</p>
+  <p>Hometown Harvest · Saturday, September 19, 2026</p>
+</div>
+
+<script>
+// Countdown to Sept 19 2026 10am CDT
+(function(){
+  var target=new Date('2026-09-19T10:00:00-05:00');
+  function tick(){
+    var now=new Date(), diff=target-now;
+    if(diff<=0){
+      document.getElementById('cdD').textContent='0';
+      document.getElementById('cdH').textContent='0';
+      document.getElementById('cdM').textContent='0';
+      document.getElementById('cdS').textContent='0';
+      return;
+    }
+    var d=Math.floor(diff/86400000);
+    var h=Math.floor((diff%86400000)/3600000);
+    var m=Math.floor((diff%3600000)/60000);
+    var s=Math.floor((diff%60000)/1000);
+    document.getElementById('cdD').textContent=d;
+    document.getElementById('cdH').textContent=String(h).padStart(2,'0');
+    document.getElementById('cdM').textContent=String(m).padStart(2,'0');
+    document.getElementById('cdS').textContent=String(s).padStart(2,'0');
+  }
+  tick();
+  setInterval(tick,1000);
+})();
+</script>
+</body>
+</html>
