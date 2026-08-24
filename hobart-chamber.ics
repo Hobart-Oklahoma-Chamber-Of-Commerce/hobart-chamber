@@ -1,0 +1,792 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Hobart Chamber of Commerce//Community Calendar//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALNAME:Hobart Chamber of Commerce
+X-WR-TIMEZONE:America/Chicago
+X-WR-CALDESC:Community events\, sports\, and activities for Hobart and Kiowa County\, Oklahoma. Powered by hobartchamber.org.
+BEGIN:VEVENT
+UID:s0@hobartchamber.org
+DTSTAMP:20260824T144151Z
+DTSTART;TZID=America/Chicago:20260704T080000
+DTEND;TZID=America/Chicago:20260704T100000
+SUMMARY:Hobart First Saturday Market: Red\, White & Local
+DESCRIPTION:A patriotic Fourth of July edition of the First Saturday Market hosted by Rust Dirt Co.
+LOCATION:207 W 4th St\, Hobart
+END:VEVENT
+BEGIN:VEVENT
+UID:s1@hobartchamber.org
+DTSTAMP:20260824T144151Z
+DTSTART;TZID=America/Chicago:20260730T100000
+DTEND;TZID=America/Chicago:20260730T120000
+SUMMARY:Back2School Bash
+DESCRIPTION:Great Plains Youth & Family Services hosts the Back2School Bash. Pre-registered families shop 10-11:30 AM\, public 11:30 AM-Noon. Questions? Call/text 580-682-9761.
+LOCATION:Western Technology Center\, 1000 S Bailey St
+END:VEVENT
+BEGIN:VEVENT
+UID:s2@hobartchamber.org
+DTSTAMP:20260824T144151Z
+DTSTART;TZID=America/Chicago:20260710T180000
+DTEND;TZID=America/Chicago:20260710T200000
+SUMMARY:Relay for Life
+DESCRIPTION:Celebrate survivors\, remember loved ones\, and support the fight against cancer.
+LOCATION:Hancock Event Center\, Hobart
+END:VEVENT
+BEGIN:VEVENT
+UID:s3@hobartchamber.org
+DTSTAMP:20260824T144151Z
+DTSTART;TZID=America/Chicago:20260713T080000
+DTEND;TZID=America/Chicago:20260713T100000
+SUMMARY:Hilltop National Junior Golf Clinic
+DESCRIPTION:Under Armour Junior Tour clinic coached by Bobby Taylor. Ages 6-10 ($150) and 11-18 ($150). Call Brian Baker at the golf shop: (580) 530-9177.
+LOCATION:Hobart Municipal Golf Course
+END:VEVENT
+BEGIN:VEVENT
+UID:s4@hobartchamber.org
+DTSTAMP:20260824T144151Z
+DTSTART;TZID=America/Chicago:20260717T180000
+DTEND;TZID=America/Chicago:20260717T200000
+SUMMARY:Family Health & Fitness Day
+DESCRIPTION:An evening of health\, wellness\, and fun for the whole family. Proceeds benefit victims of child abuse throughout Southwest Oklahoma.
+LOCATION:Elkview General Hospital\, Hobart
+END:VEVENT
+BEGIN:VEVENT
+UID:s5@hobartchamber.org
+DTSTAMP:20260824T144151Z
+DTSTART;TZID=America/Chicago:20260718T080000
+DTEND;TZID=America/Chicago:20260718T100000
+SUMMARY:Farmers Market
+DESCRIPTION:Support local growers\, makers\, and vendors\, plus special kids activities all morning.
+LOCATION:Hunter Park\, Hobart
+END:VEVENT
+BEGIN:VEVENT
+UID:s8@hobartchamber.org
+DTSTAMP:20260824T144151Z
+DTSTART;TZID=America/Chicago:20260801T200000
+DTEND;TZID=America/Chicago:20260801T220000
+SUMMARY:Glow Golf Tournament
+DESCRIPTION:4-man scramble\, $240 per team\, limited to 18 teams. Glowing golf balls\, illuminated fairways. Register online at hobartchamber.org.
+LOCATION:Hobart Municipal Golf Course
+END:VEVENT
+BEGIN:VEVENT
+UID:s12@hobartchamber.org
+DTSTAMP:20260824T144151Z
+DTSTART;TZID=America/Chicago:20260801T080000
+DTEND;TZID=America/Chicago:20260801T100000
+SUMMARY:First Saturday Market
+DESCRIPTION:The monthly First Saturday Market hosted by Rust Dirt Co. Shop local goods\, enjoy live music.
+LOCATION:207 W 4th St\, Hobart
+END:VEVENT
+BEGIN:VEVENT
+UID:s13@hobartchamber.org
+DTSTAMP:20260824T144151Z
+DTSTART;VALUE=DATE:20260710
+DTEND;VALUE=DATE:20260711
+SUMMARY:Walmart Grand Reopening
+DESCRIPTION:Hobart Walmart (Store 607) grand reopening after 2026 remodel. Updated layouts\, wider aisles\, pharmacy\, and Vision Center.
+LOCATION:Walmart\, 923 W 11th St\, Hobart
+END:VEVENT
+BEGIN:VEVENT
+UID:s14@hobartchamber.org
+DTSTAMP:20260824T144151Z
+DTSTART;VALUE=DATE:20260725
+DTEND;VALUE=DATE:20260726
+SUMMARY:Elk Creek Kiowa Casino 1-Year Anniversary
+DESCRIPTION:Elk Creek Kiowa Casino celebrates one year since opening. 250 slots\, three table games\, Bar 153\, Boomarang Diner. Must be 21+.
+LOCATION:Elk Creek Kiowa Casino\, 13765 US-183
+END:VEVENT
+BEGIN:VEVENT
+UID:f1@hobartchamber.org
+DTSTAMP:20260824T144151Z
+DTSTART;TZID=America/Chicago:20260827T120000
+DTEND;TZID=America/Chicago:20260827T140000
+SUMMARY:Kiowa County Free Fair Opens
+DESCRIPTION:Opening day of 2026 Kiowa County Free Fair. Indoor Exhibits accepted Noon-6 PM. Judging of Indoor Exhibits begins 7 PM. No admission or entry fee.
+LOCATION:Kiowa County Fairgrounds\, Hobart
+END:VEVENT
+BEGIN:VEVENT
+UID:f2@hobartchamber.org
+DTSTAMP:20260824T144151Z
+DTSTART;TZID=America/Chicago:20260828T190000
+DTEND;TZID=America/Chicago:20260828T210000
+SUMMARY:Free Fair: Cattle Show
+DESCRIPTION:Day two of the Kiowa County Free Fair. Indoor Exhibits open 3-7 PM. Cattle cards due 6 PM\, Cattle Show at 7 PM. Food trucks on site.
+LOCATION:Kiowa County Fairgrounds\, Hobart
+END:VEVENT
+BEGIN:VEVENT
+UID:f3@hobartchamber.org
+DTSTAMP:20260824T144151Z
+DTSTART;TZID=America/Chicago:20260829T080000
+DTEND;TZID=America/Chicago:20260829T100000
+SUMMARY:Free Fair: Rabbit\, Poultry\, Goat & Sheep Shows
+DESCRIPTION:Indoor Exhibits open 8 AM. Rabbit/Poultry cards due 9 AM. Goat/Sheep cards due 6 PM\, show at 7 PM. Kiwanis Turtle Races for kids.
+LOCATION:Kiowa County Fairgrounds\, Hobart
+END:VEVENT
+BEGIN:VEVENT
+UID:f4@hobartchamber.org
+DTSTAMP:20260824T144151Z
+DTSTART;TZID=America/Chicago:20260830T140000
+DTEND;TZID=America/Chicago:20260830T160000
+SUMMARY:Free Fair: Exhibit & Premium Pickup
+DESCRIPTION:Indoor Exhibit and premium pickup 2-6 PM.
+LOCATION:Kiowa County Fairgrounds\, Hobart
+END:VEVENT
+BEGIN:VEVENT
+UID:sp1@hobartchamber.org
+DTSTAMP:20260824T144151Z
+DTSTART;TZID=America/Chicago:20260821T180000
+DTEND;TZID=America/Chicago:20260821T200000
+SUMMARY:HS Football Scrimmage vs Merritt
+DESCRIPTION:Hobart Bearcat football preseason scrimmage against Merritt.
+LOCATION:Hobart Bearcat Stadium
+END:VEVENT
+BEGIN:VEVENT
+UID:sp2@hobartchamber.org
+DTSTAMP:20260824T144151Z
+DTSTART;TZID=America/Chicago:20260828T190000
+DTEND;TZID=America/Chicago:20260828T210000
+SUMMARY:HS Football @ Minco
+DESCRIPTION:Hobart Bearcat football. Regular season game at Minco.
+LOCATION:Minco (Away)
+END:VEVENT
+BEGIN:VEVENT
+UID:sp3@hobartchamber.org
+DTSTAMP:20260824T144151Z
+DTSTART;TZID=America/Chicago:20260904T190000
+DTEND;TZID=America/Chicago:20260904T210000
+SUMMARY:HS Football vs Sayre
+DESCRIPTION:Hobart Bearcat football. Regular season home game vs Sayre.
+LOCATION:Hobart Bearcat Stadium
+END:VEVENT
+BEGIN:VEVENT
+UID:sp4@hobartchamber.org
+DTSTAMP:20260824T144151Z
+DTSTART;TZID=America/Chicago:20260911T190000
+DTEND;TZID=America/Chicago:20260911T210000
+SUMMARY:HS Football @ Mangum
+DESCRIPTION:Hobart Bearcat football. Regular season game at Mangum.
+LOCATION:Mangum (Away)
+END:VEVENT
+BEGIN:VEVENT
+UID:sp5@hobartchamber.org
+DTSTAMP:20260824T144151Z
+DTSTART;TZID=America/Chicago:20260918T193000
+DTEND;TZID=America/Chicago:20260918T213000
+SUMMARY:HS Football vs Tishomingo — HOMECOMING
+DESCRIPTION:Hobart Bearcat football. HOMECOMING. Regular season home game vs Tishomingo.
+LOCATION:Hobart Bearcat Stadium
+END:VEVENT
+BEGIN:VEVENT
+UID:sp6@hobartchamber.org
+DTSTAMP:20260824T144151Z
+DTSTART;TZID=America/Chicago:20260925T190000
+DTEND;TZID=America/Chicago:20260925T210000
+SUMMARY:HS Football @ Southwest Covenant
+DESCRIPTION:Hobart Bearcat football. District game at Southwest Covenant.
+LOCATION:Southwest Covenant (Away)
+END:VEVENT
+BEGIN:VEVENT
+UID:sp7@hobartchamber.org
+DTSTAMP:20260824T144151Z
+DTSTART;TZID=America/Chicago:20261009T190000
+DTEND;TZID=America/Chicago:20261009T210000
+SUMMARY:HS Football @ Apache
+DESCRIPTION:Hobart Bearcat football. District game at Apache.
+LOCATION:Apache (Away)
+END:VEVENT
+BEGIN:VEVENT
+UID:sp8@hobartchamber.org
+DTSTAMP:20260824T144151Z
+DTSTART;TZID=America/Chicago:20261015T190000
+DTEND;TZID=America/Chicago:20261015T210000
+SUMMARY:HS Football vs Empire
+DESCRIPTION:Hobart Bearcat football. District home game vs Empire. Thursday night.
+LOCATION:Hobart Bearcat Stadium
+END:VEVENT
+BEGIN:VEVENT
+UID:sp9@hobartchamber.org
+DTSTAMP:20260824T144151Z
+DTSTART;TZID=America/Chicago:20261023T190000
+DTEND;TZID=America/Chicago:20261023T210000
+SUMMARY:HS Football vs Thomas-Fay-Custer
+DESCRIPTION:Hobart Bearcat football. District home game vs Thomas-Fay-Custer.
+LOCATION:Hobart Bearcat Stadium
+END:VEVENT
+BEGIN:VEVENT
+UID:sp10@hobartchamber.org
+DTSTAMP:20260824T144151Z
+DTSTART;TZID=America/Chicago:20261030T190000
+DTEND;TZID=America/Chicago:20261030T210000
+SUMMARY:HS Football @ Mooreland
+DESCRIPTION:Hobart Bearcat football. District game at Mooreland.
+LOCATION:Mooreland (Away)
+END:VEVENT
+BEGIN:VEVENT
+UID:sp11@hobartchamber.org
+DTSTAMP:20260824T144151Z
+DTSTART;TZID=America/Chicago:20261106T190000
+DTEND;TZID=America/Chicago:20261106T210000
+SUMMARY:HS Football vs Carnegie — SENIOR NIGHT
+DESCRIPTION:Hobart Bearcat football. SENIOR NIGHT. District home game vs Carnegie.
+LOCATION:Hobart Bearcat Stadium
+END:VEVENT
+BEGIN:VEVENT
+UID:sp12@hobartchamber.org
+DTSTAMP:20260824T144151Z
+DTSTART;TZID=America/Chicago:20260831T173000
+DTEND;TZID=America/Chicago:20260831T193000
+SUMMARY:JH Football vs Mangum
+DESCRIPTION:Hobart Bearcat junior high football. Games at 5:30 and 7:00 PM.
+LOCATION:Hobart Bearcat Stadium
+END:VEVENT
+BEGIN:VEVENT
+UID:sp13@hobartchamber.org
+DTSTAMP:20260824T144151Z
+DTSTART;TZID=America/Chicago:20260908T173000
+DTEND;TZID=America/Chicago:20260908T193000
+SUMMARY:JH Football @ Apache
+DESCRIPTION:Hobart Bearcat junior high football. Games at 5:30 and 7:00 PM.
+LOCATION:Apache (Away)
+END:VEVENT
+BEGIN:VEVENT
+UID:sp14@hobartchamber.org
+DTSTAMP:20260824T144151Z
+DTSTART;TZID=America/Chicago:20260914T173000
+DTEND;TZID=America/Chicago:20260914T193000
+SUMMARY:JH Football vs Merritt
+DESCRIPTION:Hobart Bearcat junior high football. Games at 5:30 and 7:00 PM.
+LOCATION:Hobart Bearcat Stadium
+END:VEVENT
+BEGIN:VEVENT
+UID:sp15@hobartchamber.org
+DTSTAMP:20260824T144151Z
+DTSTART;TZID=America/Chicago:20260921T173000
+DTEND;TZID=America/Chicago:20260921T193000
+SUMMARY:JH Football vs Carnegie
+DESCRIPTION:Hobart Bearcat junior high football. Games at 5:30 and 7:00 PM.
+LOCATION:Hobart Bearcat Stadium
+END:VEVENT
+BEGIN:VEVENT
+UID:sp16@hobartchamber.org
+DTSTAMP:20260824T144151Z
+DTSTART;TZID=America/Chicago:20260928T173000
+DTEND;TZID=America/Chicago:20260928T193000
+SUMMARY:JH Football @ Thomas
+DESCRIPTION:Hobart Bearcat junior high football. Games at 5:30 and 7:00 PM.
+LOCATION:Thomas (Away)
+END:VEVENT
+BEGIN:VEVENT
+UID:sp17@hobartchamber.org
+DTSTAMP:20260824T144151Z
+DTSTART;TZID=America/Chicago:20261005T173000
+DTEND;TZID=America/Chicago:20261005T193000
+SUMMARY:JH Football vs Frederick
+DESCRIPTION:Hobart Bearcat junior high football. Games at 5:30 and 7:00 PM.
+LOCATION:Hobart Bearcat Stadium
+END:VEVENT
+BEGIN:VEVENT
+UID:sp18@hobartchamber.org
+DTSTAMP:20260824T144151Z
+DTSTART;TZID=America/Chicago:20261012T173000
+DTEND;TZID=America/Chicago:20261012T193000
+SUMMARY:JH Football @ Sayre
+DESCRIPTION:Hobart Bearcat junior high football. Games at 5:30 and 7:00 PM.
+LOCATION:Sayre (Away)
+END:VEVENT
+BEGIN:VEVENT
+UID:sp19@hobartchamber.org
+DTSTAMP:20260824T144151Z
+DTSTART;TZID=America/Chicago:20261019T173000
+DTEND;TZID=America/Chicago:20261019T193000
+SUMMARY:JH Football @ Hinton
+DESCRIPTION:Hobart Bearcat junior high football. Games at 5:30 and 7:00 PM.
+LOCATION:Hinton (Away)
+END:VEVENT
+BEGIN:VEVENT
+UID:sp20@hobartchamber.org
+DTSTAMP:20260824T144151Z
+DTSTART;VALUE=DATE:20260822
+DTEND;VALUE=DATE:20260823
+SUMMARY:Cross Country: Weatherford HS
+DESCRIPTION:Hobart Bearcat cross country meet.
+LOCATION:Weatherford
+END:VEVENT
+BEGIN:VEVENT
+UID:sp21@hobartchamber.org
+DTSTAMP:20260824T144151Z
+DTSTART;VALUE=DATE:20260903
+DTEND;VALUE=DATE:20260904
+SUMMARY:Cross Country: Merritt JH/HS
+DESCRIPTION:Hobart Bearcat cross country meet.
+LOCATION:Merritt
+END:VEVENT
+BEGIN:VEVENT
+UID:sp22@hobartchamber.org
+DTSTAMP:20260824T144151Z
+DTSTART;VALUE=DATE:20260912
+DTEND;VALUE=DATE:20260913
+SUMMARY:Cross Country: Sweetwater JH/HS
+DESCRIPTION:Hobart Bearcat cross country meet.
+LOCATION:Sweetwater
+END:VEVENT
+BEGIN:VEVENT
+UID:sp23@hobartchamber.org
+DTSTAMP:20260824T144151Z
+DTSTART;VALUE=DATE:20260916
+DTEND;VALUE=DATE:20260917
+SUMMARY:Cross Country: Sayre JH/HS
+DESCRIPTION:Hobart Bearcat cross country meet.
+LOCATION:Sayre
+END:VEVENT
+BEGIN:VEVENT
+UID:sp24@hobartchamber.org
+DTSTAMP:20260824T144151Z
+DTSTART;VALUE=DATE:20260919
+DTEND;VALUE=DATE:20260920
+SUMMARY:Cross Country: Hollis JH/HS
+DESCRIPTION:Hobart Bearcat cross country meet.
+LOCATION:Hollis
+END:VEVENT
+BEGIN:VEVENT
+UID:sp25@hobartchamber.org
+DTSTAMP:20260824T144151Z
+DTSTART;VALUE=DATE:20260925
+DTEND;VALUE=DATE:20260926
+SUMMARY:Cross Country: Cameron HS
+DESCRIPTION:Hobart Bearcat cross country meet.
+LOCATION:Cameron University\, Lawton
+END:VEVENT
+BEGIN:VEVENT
+UID:sp26@hobartchamber.org
+DTSTAMP:20260824T144151Z
+DTSTART;VALUE=DATE:20260930
+DTEND;VALUE=DATE:20261001
+SUMMARY:Cross Country: Hobart Elem\, JH/HS
+DESCRIPTION:Hobart Bearcat cross country meet — hosted in Hobart.
+LOCATION:Hobart
+END:VEVENT
+BEGIN:VEVENT
+UID:sp27@hobartchamber.org
+DTSTAMP:20260824T144151Z
+DTSTART;VALUE=DATE:20261007
+DTEND;VALUE=DATE:20261008
+SUMMARY:Cross Country: Frederick Elem\, JH/HS
+DESCRIPTION:Hobart Bearcat cross country meet.
+LOCATION:Frederick
+END:VEVENT
+BEGIN:VEVENT
+UID:sp28@hobartchamber.org
+DTSTAMP:20260824T144151Z
+DTSTART;VALUE=DATE:20261017
+DTEND;VALUE=DATE:20261018
+SUMMARY:Cross Country: Regionals
+DESCRIPTION:Hobart Bearcat cross country — Regionals.
+LOCATION:TBD
+END:VEVENT
+BEGIN:VEVENT
+UID:sp29@hobartchamber.org
+DTSTAMP:20260824T144151Z
+DTSTART;VALUE=DATE:20261024
+DTEND;VALUE=DATE:20261025
+SUMMARY:Cross Country: State
+DESCRIPTION:Hobart Bearcat cross country — State.
+LOCATION:TBD
+END:VEVENT
+BEGIN:VEVENT
+UID:sp30@hobartchamber.org
+DTSTAMP:20260824T144151Z
+DTSTART;TZID=America/Chicago:20260810T163000
+DTEND;TZID=America/Chicago:20260810T183000
+SUMMARY:JH Softball @ BFDC
+DESCRIPTION:Hobart Lady Cat JH softball.
+LOCATION:Away
+END:VEVENT
+BEGIN:VEVENT
+UID:sp31@hobartchamber.org
+DTSTAMP:20260824T144151Z
+DTSTART;TZID=America/Chicago:20260811T163000
+DTEND;TZID=America/Chicago:20260811T183000
+SUMMARY:JH Softball vs Sentinel
+DESCRIPTION:Hobart Lady Cat JH softball.
+LOCATION:Hobart
+END:VEVENT
+BEGIN:VEVENT
+UID:sp32@hobartchamber.org
+DTSTAMP:20260824T144151Z
+DTSTART;TZID=America/Chicago:20260818T163000
+DTEND;TZID=America/Chicago:20260818T183000
+SUMMARY:JH Softball @ Frederick
+DESCRIPTION:Hobart Lady Cat JH softball.
+LOCATION:Frederick (Away)
+END:VEVENT
+BEGIN:VEVENT
+UID:sp33@hobartchamber.org
+DTSTAMP:20260824T144151Z
+DTSTART;TZID=America/Chicago:20260820T163000
+DTEND;TZID=America/Chicago:20260820T183000
+SUMMARY:JH Softball vs Cordell
+DESCRIPTION:Hobart Lady Cat JH softball.
+LOCATION:Hobart
+END:VEVENT
+BEGIN:VEVENT
+UID:sp34@hobartchamber.org
+DTSTAMP:20260824T144151Z
+DTSTART;TZID=America/Chicago:20260821T163000
+DTEND;TZID=America/Chicago:20260821T183000
+SUMMARY:JH Softball vs Snyder
+DESCRIPTION:Hobart Lady Cat JH softball.
+LOCATION:Hobart
+END:VEVENT
+BEGIN:VEVENT
+UID:sp35@hobartchamber.org
+DTSTAMP:20260824T144151Z
+DTSTART;VALUE=DATE:20260822
+DTEND;VALUE=DATE:20260823
+SUMMARY:JH Softball Hinton Tournament
+DESCRIPTION:Hobart Lady Cat JH softball tournament at Hinton.
+LOCATION:Hinton
+END:VEVENT
+BEGIN:VEVENT
+UID:sp36@hobartchamber.org
+DTSTAMP:20260824T144151Z
+DTSTART;VALUE=DATE:20260824
+DTEND;VALUE=DATE:20260825
+SUMMARY:JH Softball Hobart Tournament
+DESCRIPTION:Hobart Lady Cat JH softball tournament at home.
+LOCATION:Hobart
+END:VEVENT
+BEGIN:VEVENT
+UID:sp37@hobartchamber.org
+DTSTAMP:20260824T144151Z
+DTSTART;TZID=America/Chicago:20260825T163000
+DTEND;TZID=America/Chicago:20260825T183000
+SUMMARY:JH Softball vs Sayre
+DESCRIPTION:Hobart Lady Cat JH softball.
+LOCATION:Hobart
+END:VEVENT
+BEGIN:VEVENT
+UID:sp38@hobartchamber.org
+DTSTAMP:20260824T144151Z
+DTSTART;TZID=America/Chicago:20260831T163000
+DTEND;TZID=America/Chicago:20260831T183000
+SUMMARY:JH Softball @ MVG
+DESCRIPTION:Hobart Lady Cat JH softball.
+LOCATION:Away
+END:VEVENT
+BEGIN:VEVENT
+UID:sp39@hobartchamber.org
+DTSTAMP:20260824T144151Z
+DTSTART;TZID=America/Chicago:20260901T163000
+DTEND;TZID=America/Chicago:20260901T183000
+SUMMARY:JH Softball vs Navajo
+DESCRIPTION:Hobart Lady Cat JH softball.
+LOCATION:Hobart
+END:VEVENT
+BEGIN:VEVENT
+UID:sp40@hobartchamber.org
+DTSTAMP:20260824T144151Z
+DTSTART;TZID=America/Chicago:20260903T170000
+DTEND;TZID=America/Chicago:20260903T190000
+SUMMARY:JH Softball @ Frederick
+DESCRIPTION:Hobart Lady Cat JH softball.
+LOCATION:Frederick (Away)
+END:VEVENT
+BEGIN:VEVENT
+UID:sp41@hobartchamber.org
+DTSTAMP:20260824T144151Z
+DTSTART;VALUE=DATE:20260914
+DTEND;VALUE=DATE:20260915
+SUMMARY:JH Softball Conference Tournament
+DESCRIPTION:Hobart Lady Cat JH softball conference tournament hosted in Hobart.
+LOCATION:Hobart
+END:VEVENT
+BEGIN:VEVENT
+UID:sp42@hobartchamber.org
+DTSTAMP:20260824T144151Z
+DTSTART;TZID=America/Chicago:20260915T163000
+DTEND;TZID=America/Chicago:20260915T183000
+SUMMARY:JH Softball @ Sayre
+DESCRIPTION:Hobart Lady Cat JH softball.
+LOCATION:Sayre (Away)
+END:VEVENT
+BEGIN:VEVENT
+UID:sp43@hobartchamber.org
+DTSTAMP:20260824T144151Z
+DTSTART;TZID=America/Chicago:20260921T163000
+DTEND;TZID=America/Chicago:20260921T183000
+SUMMARY:JH Softball @ Merritt
+DESCRIPTION:Hobart Lady Cat JH softball.
+LOCATION:Merritt (Away)
+END:VEVENT
+BEGIN:VEVENT
+UID:sp44@hobartchamber.org
+DTSTAMP:20260824T144151Z
+DTSTART;TZID=America/Chicago:20260810T173000
+DTEND;TZID=America/Chicago:20260810T193000
+SUMMARY:HS Softball @ BFDC
+DESCRIPTION:Hobart Lady Cat HS softball.
+LOCATION:Away
+END:VEVENT
+BEGIN:VEVENT
+UID:sp45@hobartchamber.org
+DTSTAMP:20260824T144151Z
+DTSTART;TZID=America/Chicago:20260811T173000
+DTEND;TZID=America/Chicago:20260811T193000
+SUMMARY:HS Softball vs Sentinel
+DESCRIPTION:Hobart Lady Cat HS softball.
+LOCATION:Hobart
+END:VEVENT
+BEGIN:VEVENT
+UID:bf1@hobartchamber.org
+DTSTAMP:20260824T144151Z
+DTSTART;VALUE=DATE:20260803
+DTEND;VALUE=DATE:20260804
+SUMMARY:First Day of Bearcat Pride Week
+DESCRIPTION:First day of Bearcat Pride Week for Hobart Bearcat football.
+LOCATION:Hobart High School
+END:VEVENT
+BEGIN:VEVENT
+UID:bf3@hobartchamber.org
+DTSTAMP:20260824T144151Z
+DTSTART;TZID=America/Chicago:20260806T090000
+DTEND;TZID=America/Chicago:20260806T110000
+SUMMARY:Senior Banner Pictures
+DESCRIPTION:Senior banner pictures for Hobart Bearcat football seniors.
+LOCATION:The HEC\, Hobart
+END:VEVENT
+BEGIN:VEVENT
+UID:bf4@hobartchamber.org
+DTSTAMP:20260824T144151Z
+DTSTART;TZID=America/Chicago:20260807T100000
+DTEND;TZID=America/Chicago:20260807T120000
+SUMMARY:Bearcat Football Car Wash Fundraiser
+DESCRIPTION:Car wash fundraiser supporting Hobart Bearcat football\, 10 AM to 2 PM. All donations go to the football program.
+LOCATION:Waterworks Car Wash\, Hobart
+END:VEVENT
+BEGIN:VEVENT
+UID:bf5@hobartchamber.org
+DTSTAMP:20260824T144151Z
+DTSTART;TZID=America/Chicago:20260810T193000
+DTEND;TZID=America/Chicago:20260810T213000
+SUMMARY:Player / Parent Meeting
+DESCRIPTION:Hobart Bearcat football player and parent meeting.
+LOCATION:The HEC\, Hobart
+END:VEVENT
+BEGIN:VEVENT
+UID:bf6@hobartchamber.org
+DTSTAMP:20260824T144151Z
+DTSTART;VALUE=DATE:20260819
+DTEND;VALUE=DATE:20260820
+SUMMARY:Fan Pledge Fundraiser
+DESCRIPTION:Fan pledge fundraiser supporting Hobart Bearcat football.
+LOCATION:Hobart
+END:VEVENT
+BEGIN:VEVENT
+UID:bf7@hobartchamber.org
+DTSTAMP:20260824T144151Z
+DTSTART;VALUE=DATE:20260821
+DTEND;VALUE=DATE:20260822
+SUMMARY:Bearcat Blast
+DESCRIPTION:The Bearcat Blast\, held the same evening as the Merritt scrimmage.
+LOCATION:Hobart Bearcat Stadium
+END:VEVENT
+BEGIN:VEVENT
+UID:bf8@hobartchamber.org
+DTSTAMP:20260824T144151Z
+DTSTART;VALUE=DATE:20260822
+DTEND;VALUE=DATE:20260823
+SUMMARY:Hobart Bearcats 4-Person Golf Scramble
+DESCRIPTION:4-Person Scramble benefiting all of Bearcat Athletics. Corporate Sponsor $500\, Team Sponsor $325\, Hole Sponsor $100. Contact Coach Joe Jones: (580) 916-5387.
+LOCATION:Hobart Municipal Golf Course
+END:VEVENT
+BEGIN:VEVENT
+UID:sg1@hobartchamber.org
+DTSTAMP:20260824T144151Z
+DTSTART;VALUE=DATE:20261003
+DTEND;VALUE=DATE:20261004
+SUMMARY:Shortgrass Playhouse: Have a Nice Doomsday
+DESCRIPTION:Adult Comedy. Seniors $12\, Adults $15\, Students $10\, Ages 2-5 $5\, under 2 free.
+LOCATION:Shortgrass Playhouse\, 103 1/2 E. 3rd St\, Hobart
+END:VEVENT
+BEGIN:VEVENT
+UID:sg2@hobartchamber.org
+DTSTAMP:20260824T144151Z
+DTSTART;VALUE=DATE:20261004
+DTEND;VALUE=DATE:20261005
+SUMMARY:Shortgrass Playhouse: Have a Nice Doomsday
+DESCRIPTION:Adult Comedy. Seniors $12\, Adults $15\, Students $10\, Ages 2-5 $5\, under 2 free.
+LOCATION:Shortgrass Playhouse\, 103 1/2 E. 3rd St\, Hobart
+END:VEVENT
+BEGIN:VEVENT
+UID:sg3@hobartchamber.org
+DTSTAMP:20260824T144151Z
+DTSTART;VALUE=DATE:20261010
+DTEND;VALUE=DATE:20261011
+SUMMARY:Shortgrass Playhouse: Have a Nice Doomsday
+DESCRIPTION:Adult Comedy. Seniors $12\, Adults $15\, Students $10\, Ages 2-5 $5\, under 2 free.
+LOCATION:Shortgrass Playhouse\, 103 1/2 E. 3rd St\, Hobart
+END:VEVENT
+BEGIN:VEVENT
+UID:sg4@hobartchamber.org
+DTSTAMP:20260824T144151Z
+DTSTART;VALUE=DATE:20261011
+DTEND;VALUE=DATE:20261012
+SUMMARY:Shortgrass Playhouse: Have a Nice Doomsday
+DESCRIPTION:Adult Comedy. Seniors $12\, Adults $15\, Students $10\, Ages 2-5 $5\, under 2 free.
+LOCATION:Shortgrass Playhouse\, 103 1/2 E. 3rd St\, Hobart
+END:VEVENT
+BEGIN:VEVENT
+UID:sg5@hobartchamber.org
+DTSTAMP:20260824T144151Z
+DTSTART;VALUE=DATE:20261128
+DTEND;VALUE=DATE:20261129
+SUMMARY:Shortgrass Playhouse: A Dickens Christmas Carol
+DESCRIPTION:Childrens Show. Seniors $12\, Adults $15\, Students $10\, Ages 2-5 $5\, under 2 free.
+LOCATION:Shortgrass Playhouse\, 103 1/2 E. 3rd St\, Hobart
+END:VEVENT
+BEGIN:VEVENT
+UID:sg6@hobartchamber.org
+DTSTAMP:20260824T144151Z
+DTSTART;VALUE=DATE:20261129
+DTEND;VALUE=DATE:20261130
+SUMMARY:Shortgrass Playhouse: A Dickens Christmas Carol
+DESCRIPTION:Childrens Show. Seniors $12\, Adults $15\, Students $10\, Ages 2-5 $5\, under 2 free.
+LOCATION:Shortgrass Playhouse\, 103 1/2 E. 3rd St\, Hobart
+END:VEVENT
+BEGIN:VEVENT
+UID:sg7@hobartchamber.org
+DTSTAMP:20260824T144151Z
+DTSTART;VALUE=DATE:20261205
+DTEND;VALUE=DATE:20261206
+SUMMARY:Shortgrass Playhouse: A Dickens Christmas Carol
+DESCRIPTION:Childrens Show. Seniors $12\, Adults $15\, Students $10\, Ages 2-5 $5\, under 2 free.
+LOCATION:Shortgrass Playhouse\, 103 1/2 E. 3rd St\, Hobart
+END:VEVENT
+BEGIN:VEVENT
+UID:sg8@hobartchamber.org
+DTSTAMP:20260824T144151Z
+DTSTART;VALUE=DATE:20261206
+DTEND;VALUE=DATE:20261207
+SUMMARY:Shortgrass Playhouse: A Dickens Christmas Carol
+DESCRIPTION:Childrens Show. Seniors $12\, Adults $15\, Students $10\, Ages 2-5 $5\, under 2 free.
+LOCATION:Shortgrass Playhouse\, 103 1/2 E. 3rd St\, Hobart
+END:VEVENT
+BEGIN:VEVENT
+UID:sg9@hobartchamber.org
+DTSTAMP:20260824T144151Z
+DTSTART;VALUE=DATE:20270227
+DTEND;VALUE=DATE:20270228
+SUMMARY:Shortgrass Playhouse: This Murder Was Staged
+DESCRIPTION:Teen Show. Seniors $12\, Adults $15\, Students $10\, Ages 2-5 $5\, under 2 free.
+LOCATION:Shortgrass Playhouse\, 103 1/2 E. 3rd St\, Hobart
+END:VEVENT
+BEGIN:VEVENT
+UID:sg10@hobartchamber.org
+DTSTAMP:20260824T144151Z
+DTSTART;VALUE=DATE:20270228
+DTEND;VALUE=DATE:20270301
+SUMMARY:Shortgrass Playhouse: This Murder Was Staged
+DESCRIPTION:Teen Show. Seniors $12\, Adults $15\, Students $10\, Ages 2-5 $5\, under 2 free.
+LOCATION:Shortgrass Playhouse\, 103 1/2 E. 3rd St\, Hobart
+END:VEVENT
+BEGIN:VEVENT
+UID:sg11@hobartchamber.org
+DTSTAMP:20260824T144151Z
+DTSTART;VALUE=DATE:20270306
+DTEND;VALUE=DATE:20270307
+SUMMARY:Shortgrass Playhouse: This Murder Was Staged
+DESCRIPTION:Teen Show. Seniors $12\, Adults $15\, Students $10\, Ages 2-5 $5\, under 2 free.
+LOCATION:Shortgrass Playhouse\, 103 1/2 E. 3rd St\, Hobart
+END:VEVENT
+BEGIN:VEVENT
+UID:sg12@hobartchamber.org
+DTSTAMP:20260824T144151Z
+DTSTART;VALUE=DATE:20270307
+DTEND;VALUE=DATE:20270308
+SUMMARY:Shortgrass Playhouse: This Murder Was Staged
+DESCRIPTION:Teen Show. Seniors $12\, Adults $15\, Students $10\, Ages 2-5 $5\, under 2 free.
+LOCATION:Shortgrass Playhouse\, 103 1/2 E. 3rd St\, Hobart
+END:VEVENT
+BEGIN:VEVENT
+UID:sg13@hobartchamber.org
+DTSTAMP:20260824T144151Z
+DTSTART;VALUE=DATE:20270417
+DTEND;VALUE=DATE:20270418
+SUMMARY:Shortgrass Playhouse: Antlia Pneumatica
+DESCRIPTION:Adult Dramatic Comedy. Seniors $12\, Adults $15\, Students $10\, Ages 2-5 $5\, under 2 free.
+LOCATION:Shortgrass Playhouse\, 103 1/2 E. 3rd St\, Hobart
+END:VEVENT
+BEGIN:VEVENT
+UID:sg14@hobartchamber.org
+DTSTAMP:20260824T144151Z
+DTSTART;VALUE=DATE:20270418
+DTEND;VALUE=DATE:20270419
+SUMMARY:Shortgrass Playhouse: Antlia Pneumatica
+DESCRIPTION:Adult Dramatic Comedy. Seniors $12\, Adults $15\, Students $10\, Ages 2-5 $5\, under 2 free.
+LOCATION:Shortgrass Playhouse\, 103 1/2 E. 3rd St\, Hobart
+END:VEVENT
+BEGIN:VEVENT
+UID:sg15@hobartchamber.org
+DTSTAMP:20260824T144151Z
+DTSTART;VALUE=DATE:20270424
+DTEND;VALUE=DATE:20270425
+SUMMARY:Shortgrass Playhouse: Antlia Pneumatica
+DESCRIPTION:Adult Dramatic Comedy. Seniors $12\, Adults $15\, Students $10\, Ages 2-5 $5\, under 2 free.
+LOCATION:Shortgrass Playhouse\, 103 1/2 E. 3rd St\, Hobart
+END:VEVENT
+BEGIN:VEVENT
+UID:sg16@hobartchamber.org
+DTSTAMP:20260824T144151Z
+DTSTART;VALUE=DATE:20270425
+DTEND;VALUE=DATE:20270426
+SUMMARY:Shortgrass Playhouse: Antlia Pneumatica
+DESCRIPTION:Adult Dramatic Comedy. Seniors $12\, Adults $15\, Students $10\, Ages 2-5 $5\, under 2 free.
+LOCATION:Shortgrass Playhouse\, 103 1/2 E. 3rd St\, Hobart
+END:VEVENT
+BEGIN:VEVENT
+UID:fp8@hobartchamber.org
+DTSTAMP:20260824T144151Z
+DTSTART;TZID=America/Chicago:20260819T090000
+DTEND;TZID=America/Chicago:20260819T110000
+SUMMARY:Hobart Food Pantry Distribution
+DESCRIPTION:Monthly food distribution. Begins at 9:00 AM.
+LOCATION:Hobart Food Pantry
+END:VEVENT
+BEGIN:VEVENT
+UID:fp9@hobartchamber.org
+DTSTAMP:20260824T144151Z
+DTSTART;TZID=America/Chicago:20260923T090000
+DTEND;TZID=America/Chicago:20260923T110000
+SUMMARY:Hobart Food Pantry Distribution
+DESCRIPTION:Monthly food distribution. Begins at 9:00 AM.
+LOCATION:Hobart Food Pantry
+END:VEVENT
+BEGIN:VEVENT
+UID:fp10@hobartchamber.org
+DTSTAMP:20260824T144151Z
+DTSTART;TZID=America/Chicago:20261021T090000
+DTEND;TZID=America/Chicago:20261021T110000
+SUMMARY:Hobart Food Pantry Distribution
+DESCRIPTION:Monthly food distribution. Begins at 9:00 AM.
+LOCATION:Hobart Food Pantry
+END:VEVENT
+BEGIN:VEVENT
+UID:fp11@hobartchamber.org
+DTSTAMP:20260824T144151Z
+DTSTART;TZID=America/Chicago:20261118T090000
+DTEND;TZID=America/Chicago:20261118T110000
+SUMMARY:Hobart Food Pantry Distribution
+DESCRIPTION:Monthly food distribution. Begins at 9:00 AM.
+LOCATION:Hobart Food Pantry
+END:VEVENT
+BEGIN:VEVENT
+UID:fp12@hobartchamber.org
+DTSTAMP:20260824T144151Z
+DTSTART;TZID=America/Chicago:20261222T090000
+DTEND;TZID=America/Chicago:20261222T110000
+SUMMARY:Hobart Food Pantry Distribution
+DESCRIPTION:Monthly food distribution. Note: TUESDAY this month\, not the usual Wednesday.
+LOCATION:Hobart Food Pantry
+END:VEVENT
+END:VCALENDAR
