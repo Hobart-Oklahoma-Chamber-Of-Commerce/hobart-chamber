@@ -2383,7 +2383,7 @@ function paneList(status){
     var rows=[]; snap.forEach(function(doc){var x=doc.data();x.id=doc.id;rows.push(x);});
     /* Also show hardcoded SEED events in the manage tab so everything is visible */
     if(status==='approved'){
-      SEED_EVENTS.forEach(function(s){
+      SEED.forEach(function(s){
         rows.push({id:'seed_'+s.id,title:s.title,date:s.date,time:s.time||'',location:s.location||'',_seed:true});
       });
     }
