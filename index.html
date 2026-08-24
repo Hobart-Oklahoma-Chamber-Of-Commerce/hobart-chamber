@@ -1341,20 +1341,25 @@ function compressImageFile(file, cb){
 }
 
 function uploadFlyerImage(file, folder, onStatus, onDone){
-  if(!FB || !storage){ onStatus('Photo upload needs a live connection — try again once you\'re back online.', true); return; }
   onStatus('Preparing photo…', false);
   compressImageFile(file, function(blob, err){
     if(err){ onStatus(err, true); return; }
     onStatus('Uploading photo…', false);
-    var ext = (blob.type==='image/jpeg' || blob===file && /\.(jpe?g)$/i.test(file.name)) ? 'jpg' : (blob.type==='image/png'?'png':'jpg');
-    var path=folder+'/'+Date.now()+'_'+Math.random().toString(36).slice(2,8)+'.'+ext;
-    var ref=storage.ref().child(path);
-    ref.put(blob, {contentType: blob.type || 'image/jpeg'}).then(function(snap){
-      return snap.ref.getDownloadURL();
-    }).then(function(url){
-      onStatus('', false);
-      onDone(url);
-    }).catch(function(e){
+    var formData=new FormData();
+    formData.append('file', blob, 'upload.jpg');
+    formData.append('upload_preset', 'scavenger_hunt');
+    formData.append('folder', folder);
+    fetch('https://api.cloudinary.com/v1_1/w96y2par/image/upload', {
+      method:'POST',
+      body: formData
+    }).then(function(r){ return r.json(); }).then(function(data){
+      if(data.secure_url){
+        onStatus('', false);
+        onDone(data.secure_url);
+      } else {
+        onStatus('Upload failed — ' + (data.error&&data.error.message||'please try again.'), true);
+      }
+    }).catch(function(){
       onStatus('Upload failed — check your connection and try again.', true);
     });
   });
