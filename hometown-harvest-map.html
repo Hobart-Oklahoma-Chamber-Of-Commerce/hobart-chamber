@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Hometown Harvest — Live Map Editor</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+<style>
+  *{box-sizing:border-box;margin:0;padding:0;}
+  :root{--navy:#1a3ea8;--navy-deep:#0e2056;--gold:#c49a3e;--gold-light:#dab65e;--gold-pale:#f6edd6;--white:#fff;--slate:#f3f6fc;--gray:#6f7d99;--border:#dbe3f4;}
+  body{font-family:'Inter',sans-serif;background:var(--slate);min-height:100vh;}
+  .topbar{background:var(--navy-deep);padding:0 20px;height:60px;display:flex;align-items:center;justify-content:space-between;gap:12px;}
+  .topbar-title{font-family:'Playfair Display',serif;font-size:17px;font-weight:700;color:#fff;}
+  .topbar-sub{font-size:11px;color:rgba(255,255,255,.5);margin-top:1px;}
+  .tbtn{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);color:#fff;border-radius:5px;padding:6px 12px;font-size:12px;font-weight:600;font-family:'Inter',sans-serif;cursor:pointer;}
+  .tbtn:hover{background:rgba(255,255,255,.2);}
+  .tbtn.gold{background:var(--gold);border-color:var(--gold);color:var(--navy-deep);}
+  .tbtn.gold:hover{background:var(--gold-light);}
+  .layout{display:flex;height:calc(100vh - 60px);}
+  .sidebar{width:210px;background:var(--white);border-right:1px solid var(--border);display:flex;flex-direction:column;flex-shrink:0;overflow-y:auto;}
+  .sb-section{padding:14px 14px 6px;}
+  .sb-title{font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold);margin-bottom:9px;}
+  .cat-btn{width:100%;display:flex;align-items:center;gap:8px;padding:7px 10px;border-radius:6px;border:none;background:var(--slate);cursor:pointer;font-size:12px;font-weight:600;color:var(--navy-deep);margin-bottom:4px;font-family:'Inter',sans-serif;text-align:left;}
+  .cat-btn:hover{background:var(--border);}
+  .cat-btn.active{background:#e8eefb;}
+  .cat-btn .dot{width:11px;height:11px;border-radius:3px;flex-shrink:0;}
+  .sb-divider{height:1px;background:var(--border);margin:8px 14px;}
+  .marker-list{padding:0 10px 14px;display:flex;flex-direction:column;gap:3px;}
+  .marker-chip{display:flex;align-items:center;gap:6px;padding:5px 8px;background:var(--slate);border-radius:5px;font-size:11px;color:var(--navy-deep);cursor:pointer;}
+  .marker-chip:hover{background:var(--border);}
+  .chip-dot{width:9px;height:9px;border-radius:2px;flex-shrink:0;}
+  .chip-name{flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+  .chip-del{color:#b3261e;font-weight:700;font-size:14px;line-height:1;opacity:.4;flex-shrink:0;}
+  .chip-del:hover{opacity:1;}
+  .empty-msg{font-size:11px;color:var(--gray);padding:6px 14px 12px;font-style:italic;line-height:1.5;}
+  .map-area{flex:1;position:relative;overflow:hidden;}
+  #mapSvg{position:absolute;top:0;left:0;width:100%;height:100%;cursor:crosshair;}
+  #mapSvg.move-mode{cursor:default;}
+  #tooltip{position:fixed;background:#0e2056;color:#fff;font-size:11.5px;font-weight:600;padding:4px 10px;border-radius:5px;pointer-events:none;display:none;z-index:1000;white-space:nowrap;}
+  .modal-bg{position:fixed;inset:0;background:rgba(0,0,0,.4);display:none;align-items:center;justify-content:center;z-index:2000;}
+  .modal-bg.on{display:flex;}
+  .modal{background:#fff;border-radius:10px;padding:22px;width:300px;box-shadow:0 20px 60px rgba(0,0,0,.25);}
+  .modal h3{font-family:'Playfair Display',serif;font-size:17px;color:var(--navy);margin-bottom:14px;}
+  .fg{display:flex;flex-direction:column;gap:4px;margin-bottom:11px;}
+  .fg label{font-size:11.5px;font-weight:600;color:var(--gray);}
+  .fg input,.fg select{padding:8px 10px;border:1px solid var(--border);border-radius:5px;font-size:13px;font-family:'Inter',sans-serif;width:100%;}
+  .fg input:focus,.fg select:focus{outline:none;border-color:var(--navy);}
+  .modal-btns{display:flex;gap:8px;margin-top:14px;}
+  .mbtn{flex:1;padding:9px;border-radius:5px;border:none;font-size:12.5px;font-weight:700;font-family:'Inter',sans-serif;cursor:pointer;}
+  .mbtn.primary{background:var(--navy);color:#fff;}
+  .mbtn.secondary{background:var(--slate);color:var(--navy-deep);}
+  .mbtn.danger{background:#fbe9e9;color:#b3261e;}
+  .mode-pill{display:flex;background:rgba(255,255,255,.1);border-radius:6px;overflow:hidden;border:1px solid rgba(255,255,255,.15);}
+  .mode-opt{padding:6px 14px;font-size:11.5px;font-weight:600;color:rgba(255,255,255,.6);cursor:pointer;font-family:'Inter',sans-serif;border:none;background:transparent;}
+  .mode-opt.active{background:var(--gold);color:var(--navy-deep);}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div>
+    <div class="topbar-title">🌽 Hometown Harvest — Live Map Editor</div>
+    <div class="topbar-sub">September 19, 2026 · Courthouse Square · Hobart, OK</div>
+  </div>
+  <div style="display:flex;gap:10px;align-items:center;">
+    <div class="mode-pill">
+      <button class="mode-opt active" id="modeAdd" onclick="setMode('add')">+ Add</button>
+      <button class="mode-opt" id="modeDrag" onclick="setMode('drag')">✥ Move</button>
+    </div>
+    <button class="tbtn" onclick="clearAll()">Clear All</button>
+    <button class="tbtn gold" onclick="exportSVG()">Export SVG</button>
+  </div>
+</div>
+
+<div class="layout">
+  <div class="sidebar">
+    <div class="sb-section">
+      <div class="sb-title">Categories</div>
+      <button class="cat-btn active" id="cat-vendor" onclick="setActiveCat('vendor')"><span class="dot" style="background:#c49a3e;"></span>Vendor Booth</button>
+      <button class="cat-btn" id="cat-food" onclick="setActiveCat('food')"><span class="dot" style="background:#e05c2a;"></span>Food Truck</button>
+      <button class="cat-btn" id="cat-stage" onclick="setActiveCat('stage')"><span class="dot" style="background:#1a3ea8;"></span>Stage / Entertainment</button>
+      <button class="cat-btn" id="cat-parking" onclick="setActiveCat('parking')"><span class="dot" style="background:#6f7d99;"></span>Parking</button>
+      <button class="cat-btn" id="cat-info" onclick="setActiveCat('info')"><span class="dot" style="background:#2eaa6e;"></span>Info / Restrooms</button>
+      <button class="cat-btn" id="cat-parade" onclick="setActiveCat('parade')"><span class="dot" style="background:#9b3dc8;"></span>Parade Route</button>
+      <button class="cat-btn" id="cat-custom" onclick="setActiveCat('custom')"><span class="dot" style="background:#555;"></span>Custom</button>
+    </div>
+    <div class="sb-divider"></div>
+    <div class="sb-section" style="padding-bottom:4px;"><div class="sb-title">Placed Markers</div></div>
+    <div class="marker-list" id="markerList"><div class="empty-msg">No markers yet.<br>Pick a category, then tap the map.</div></div>
+  </div>
+
+  <div class="map-area">
+    <svg id="mapSvg" viewBox="0 0 700 600" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet" onclick="handleMapClick(event)">
+
+      <!-- BG -->
+      <rect width="700" height="600" fill="#e4e8f4"/>
+      <!-- Streets -->
+      <rect x="0" y="0" width="700" height="78" fill="#cdd3e8"/>
+      <rect x="0" y="522" width="700" height="78" fill="#cdd3e8"/>
+      <rect x="0" y="0" width="78" height="600" fill="#cdd3e8"/>
+      <rect x="622" y="0" width="78" height="600" fill="#cdd3e8"/>
+      <!-- Centerlines -->
+      <line x1="0" y1="39" x2="700" y2="39" stroke="#b0bcd8" stroke-width="1.2" stroke-dasharray="12,9"/>
+      <line x1="0" y1="561" x2="700" y2="561" stroke="#b0bcd8" stroke-width="1.2" stroke-dasharray="12,9"/>
+      <line x1="39" y1="0" x2="39" y2="600" stroke="#b0bcd8" stroke-width="1.2" stroke-dasharray="12,9"/>
+      <line x1="661" y1="0" x2="661" y2="600" stroke="#b0bcd8" stroke-width="1.2" stroke-dasharray="12,9"/>
+      <!-- Street names -->
+      <text x="350" y="27" text-anchor="middle" font-size="14" font-weight="700" fill="#3a4470" letter-spacing=".6">S Jefferson St</text>
+      <text x="350" y="553" text-anchor="middle" font-size="14" font-weight="700" fill="#3a4470" letter-spacing=".6">S Main St</text>
+      <text x="39" y="305" text-anchor="middle" font-size="13" font-weight="700" fill="#3a4470" transform="rotate(-90,39,305)" letter-spacing=".5">E 3rd St</text>
+      <text x="661" y="305" text-anchor="middle" font-size="13" font-weight="700" fill="#3a4470" transform="rotate(90,661,305)" letter-spacing=".5">E 4th St</text>
+      <!-- Square grounds -->
+      <rect x="78" y="78" width="544" height="444" fill="#bfd4a0" rx="3"/>
+      <rect x="78" y="78" width="544" height="444" fill="none" stroke="#90b060" stroke-width="2.5"/>
+      <!-- Parking strips -->
+      <rect x="80" y="80" width="540" height="30" fill="#a8bcd8" rx="2" opacity=".4"/>
+      <rect x="80" y="490" width="540" height="30" fill="#a8bcd8" rx="2" opacity=".4"/>
+      <rect x="80" y="80" width="30" height="440" fill="#a8bcd8" rx="2" opacity=".4"/>
+      <rect x="590" y="80" width="30" height="440" fill="#a8bcd8" rx="2" opacity=".4"/>
+      <!-- Walkways -->
+      <line x1="110" y1="110" x2="308" y2="278" stroke="#ddd4a8" stroke-width="14" stroke-linecap="round"/>
+      <line x1="590" y1="110" x2="392" y2="278" stroke="#ddd4a8" stroke-width="14" stroke-linecap="round"/>
+      <line x1="110" y1="490" x2="308" y2="322" stroke="#ddd4a8" stroke-width="14" stroke-linecap="round"/>
+      <line x1="590" y1="490" x2="392" y2="322" stroke="#ddd4a8" stroke-width="14" stroke-linecap="round"/>
+      <line x1="350" y1="110" x2="350" y2="234" stroke="#ddd4a8" stroke-width="12" stroke-linecap="round"/>
+      <line x1="350" y1="366" x2="350" y2="490" stroke="#ddd4a8" stroke-width="12" stroke-linecap="round"/>
+      <line x1="110" y1="300" x2="234" y2="300" stroke="#ddd4a8" stroke-width="12" stroke-linecap="round"/>
+      <line x1="466" y1="300" x2="590" y2="300" stroke="#ddd4a8" stroke-width="12" stroke-linecap="round"/>
+      <!-- Courthouse -->
+      <rect x="228" y="224" width="194" height="152" fill="#c4baa8" rx="4" stroke="#9a9080" stroke-width="2"/>
+      <rect x="244" y="236" width="162" height="128" fill="#b8ae9c" rx="2"/>
+      <ellipse cx="325" cy="295" rx="26" ry="20" fill="#aaa090" stroke="#9a9080" stroke-width="1"/>
+      <text x="325" y="299" text-anchor="middle" font-size="10" font-weight="700" fill="#5a5040">COURTHOUSE</text>
+      <!-- Trees -->
+      <g fill="#6aaa44" opacity=".72">
+        <circle cx="130" cy="140" r="20"/><circle cx="168" cy="122" r="15"/><circle cx="148" cy="172" r="13"/>
+        <circle cx="570" cy="140" r="20"/><circle cx="532" cy="122" r="15"/><circle cx="552" cy="172" r="13"/>
+        <circle cx="130" cy="460" r="20"/><circle cx="168" cy="478" r="15"/><circle cx="148" cy="428" r="13"/>
+        <circle cx="570" cy="460" r="20"/><circle cx="532" cy="478" r="15"/><circle cx="552" cy="428" r="13"/>
+        <circle cx="210" cy="158" r="11"/><circle cx="490" cy="158" r="11"/>
+        <circle cx="210" cy="442" r="11"/><circle cx="490" cy="442" r="11"/>
+        <circle cx="570" cy="300" r="13"/><circle cx="130" cy="300" r="13"/>
+      </g>
+      <!-- Gazebo — SE quadrant between courthouse east wall and east path, south of center path -->
+      <circle cx="448" cy="368" r="28" fill="#e4dab8" stroke="#9a8850" stroke-width="2.5"/>
+      <circle cx="448" cy="368" r="19" fill="#d4ca98" stroke="#9a8850" stroke-width="1.5"/>
+      <circle cx="448" cy="368" r="7" fill="#9a8850"/>
+      <line x1="448" y1="340" x2="448" y2="349" stroke="#9a8850" stroke-width="1.5"/>
+      <line x1="448" y1="387" x2="448" y2="396" stroke="#9a8850" stroke-width="1.5"/>
+      <line x1="420" y1="368" x2="429" y2="368" stroke="#9a8850" stroke-width="1.5"/>
+      <line x1="467" y1="368" x2="476" y2="368" stroke="#9a8850" stroke-width="1.5"/>
+      <line x1="429" y1="349" x2="436" y2="356" stroke="#9a8850" stroke-width="1.5"/>
+      <line x1="460" y1="380" x2="467" y2="387" stroke="#9a8850" stroke-width="1.5"/>
+      <line x1="467" y1="349" x2="460" y2="356" stroke="#9a8850" stroke-width="1.5"/>
+      <line x1="429" y1="387" x2="436" y2="380" stroke="#9a8850" stroke-width="1.5"/>
+      <text x="448" y="408" text-anchor="middle" font-size="9" font-weight="700" fill="#6a5820">GAZEBO</text>
+      <!-- Compass -->
+      <g transform="translate(648,102)">
+        <circle r="22" fill="white" stroke="#1a3ea8" stroke-width="1.5"/>
+        <text y="-7" text-anchor="middle" font-size="12" font-weight="800" fill="#1a3ea8">N</text>
+        <polygon points="0,-16 4.5,-4 0,-8 -4.5,-4" fill="#1a3ea8"/>
+      </g>
+      <!-- Marker layer -->
+      <g id="markerLayer"></g>
+    </svg>
+  </div>
+</div>
+
+<div id="tooltip"></div>
+
+<!-- ADD MODAL -->
+<div class="modal-bg" id="addModal">
+  <div class="modal">
+    <h3>Place Marker</h3>
+    <div class="fg"><label>Label</label><input type="text" id="m_label" placeholder="e.g. Vendor #1, Stage, Restrooms…"/></div>
+    <div class="fg"><label>Category</label>
+      <select id="m_cat">
+        <option value="vendor">Vendor Booth</option>
+        <option value="food">Food Truck</option>
+        <option value="stage">Stage / Entertainment</option>
+        <option value="parking">Parking</option>
+        <option value="info">Info / Restrooms</option>
+        <option value="parade">Parade Route</option>
+        <option value="custom">Custom</option>
+      </select>
+    </div>
+    <div class="fg"><label>Notes (optional)</label><input type="text" id="m_notes" placeholder="Any details…"/></div>
+    <div class="modal-btns">
+      <button class="mbtn secondary" onclick="closeAdd()">Cancel</button>
+      <button class="mbtn primary" onclick="confirmAdd()">Place It</button>
+    </div>
+  </div>
+</div>
+
+<!-- EDIT MODAL -->
+<div class="modal-bg" id="editModal">
+  <div class="modal">
+    <h3>Edit Marker</h3>
+    <div class="fg"><label>Label</label><input type="text" id="em_label"/></div>
+    <div class="fg"><label>Category</label>
+      <select id="em_cat">
+        <option value="vendor">Vendor Booth</option>
+        <option value="food">Food Truck</option>
+        <option value="stage">Stage / Entertainment</option>
+        <option value="parking">Parking</option>
+        <option value="info">Info / Restrooms</option>
+        <option value="parade">Parade Route</option>
+        <option value="custom">Custom</option>
+      </select>
+    </div>
+    <div class="fg"><label>Notes (optional)</label><input type="text" id="em_notes"/></div>
+    <div class="modal-btns">
+      <button class="mbtn danger" onclick="deleteMarker()">Delete</button>
+      <button class="mbtn secondary" onclick="closeEdit()">Cancel</button>
+      <button class="mbtn primary" onclick="confirmEdit()">Save</button>
+    </div>
+  </div>
+</div>
+
+<script>
+var CATS={
+  vendor: {color:'#c49a3e',label:'Vendor Booth'},
+  food:   {color:'#e05c2a',label:'Food Truck'},
+  stage:  {color:'#1a3ea8',label:'Stage'},
+  parking:{color:'#6f7d99',label:'Parking'},
+  info:   {color:'#2eaa6e',label:'Info / Restrooms'},
+  parade: {color:'#9b3dc8',label:'Parade Route'},
+  custom: {color:'#555555',label:'Custom'}
+};
+
+var MODE='add', activeCat='vendor', markers=[], nextId=1;
+var pendingX=0, pendingY=0, editingId=null;
+var dragging=null, dragOffX=0, dragOffY=0;
+
+/* load */
+try{var s=localStorage.getItem('hh2026');if(s){markers=JSON.parse(s);nextId=markers.reduce(function(m,x){return Math.max(m,x.id+1);},1);}}catch(e){}
+renderAll();
+
+function save(){try{localStorage.setItem('hh2026',JSON.stringify(markers));}catch(e){}}
+
+function setMode(m){
+  MODE=m;
+  document.getElementById('modeAdd').classList.toggle('active',m==='add');
+  document.getElementById('modeDrag').classList.toggle('active',m==='drag');
+  document.getElementById('mapSvg').classList.toggle('move-mode',m==='drag');
+}
+
+function setActiveCat(c){
+  activeCat=c;
+  Object.keys(CATS).forEach(function(k){
+    var el=document.getElementById('cat-'+k);
+    if(el) el.classList.toggle('active',k===c);
+  });
+  document.getElementById('m_cat').value=c;
+}
+
+function svgPoint(e){
+  var svg=document.getElementById('mapSvg');
+  var pt=svg.createSVGPoint();
+  pt.x=e.clientX; pt.y=e.clientY;
+  return pt.matrixTransform(svg.getScreenCTM().inverse());
+}
+
+function handleMapClick(e){
+  if(MODE!=='add') return;
+  if(e.target.closest('#markerLayer .mg')) return;
+  var p=svgPoint(e);
+  pendingX=p.x; pendingY=p.y;
+  document.getElementById('m_cat').value=activeCat;
+  document.getElementById('m_label').value='';
+  document.getElementById('m_notes').value='';
+  document.getElementById('addModal').classList.add('on');
+  setTimeout(function(){document.getElementById('m_label').focus();},80);
+}
+
+function confirmAdd(){
+  var label=document.getElementById('m_label').value.trim()||'Marker';
+  markers.push({id:nextId++,x:pendingX,y:pendingY,label:label,cat:document.getElementById('m_cat').value,notes:document.getElementById('m_notes').value.trim()});
+  save(); renderAll(); closeAdd();
+}
+function closeAdd(){document.getElementById('addModal').classList.remove('on');}
+
+function openEdit(id){
+  if(MODE==='drag') return;
+  var m=markers.find(function(x){return x.id===id;});
+  if(!m) return;
+  editingId=id;
+  document.getElementById('em_label').value=m.label;
+  document.getElementById('em_cat').value=m.cat;
+  document.getElementById('em_notes').value=m.notes||'';
+  document.getElementById('editModal').classList.add('on');
+}
+function confirmEdit(){
+  var m=markers.find(function(x){return x.id===editingId;});
+  if(!m) return;
+  m.label=document.getElementById('em_label').value.trim()||m.label;
+  m.cat=document.getElementById('em_cat').value;
+  m.notes=document.getElementById('em_notes').value.trim();
+  save(); renderAll(); closeEdit();
+}
+function deleteMarker(){markers=markers.filter(function(x){return x.id!==editingId;});save();renderAll();closeEdit();}
+function closeEdit(){document.getElementById('editModal').classList.remove('on');}
+
+/* drag */
+function startDrag(e,id){
+  if(MODE!=='drag') return;
+  e.preventDefault(); e.stopPropagation();
+  dragging=id;
+  var m=markers.find(function(x){return x.id===id;});
+  var p=svgPoint(e);
+  dragOffX=p.x-m.x; dragOffY=p.y-m.y;
+  var svg=document.getElementById('mapSvg');
+  svg.addEventListener('mousemove',onMove);
+  svg.addEventListener('mouseup',endDrag);
+  svg.addEventListener('touchmove',onMoveT,{passive:false});
+  svg.addEventListener('touchend',endDrag);
+}
+function onMove(e){
+  if(!dragging) return;
+  var p=svgPoint(e);
+  var m=markers.find(function(x){return x.id===dragging;});
+  if(m){m.x=p.x-dragOffX; m.y=p.y-dragOffY;}
+  var g=document.getElementById('mg-'+dragging);
+  if(g) g.setAttribute('transform','translate('+m.x+','+m.y+')');
+}
+function onMoveT(e){e.preventDefault();if(e.touches[0]) onMove(e.touches[0]);}
+function endDrag(){
+  var svg=document.getElementById('mapSvg');
+  svg.removeEventListener('mousemove',onMove);
+  svg.removeEventListener('mouseup',endDrag);
+  svg.removeEventListener('touchmove',onMoveT);
+  svg.removeEventListener('touchend',endDrag);
+  save(); dragging=null;
+}
+
+/* render */
+function renderAll(){renderLayer();renderSidebar();}
+
+function renderLayer(){
+  var layer=document.getElementById('markerLayer');
+  layer.innerHTML='';
+  markers.forEach(function(m){
+    var cat=CATS[m.cat]||CATS.custom;
+    var ns='http://www.w3.org/2000/svg';
+    var g=document.createElementNS(ns,'g');
+    g.setAttribute('id','mg-'+m.id);
+    g.setAttribute('class','mg');
+    g.setAttribute('transform','translate('+m.x+','+m.y+')');
+    g.style.cursor='pointer';
+
+    var pin=document.createElementNS(ns,'path');
+    pin.setAttribute('d','M0,-24 C-11,-24 -17,-15 -17,-8 C-17,4 0,18 0,18 C0,18 17,4 17,-8 C17,-15 11,-24 0,-24 Z');
+    pin.setAttribute('fill',cat.color);
+    pin.setAttribute('stroke','rgba(255,255,255,0.6)');
+    pin.setAttribute('stroke-width','1.5');
+    g.appendChild(pin);
+
+    var dot=document.createElementNS(ns,'circle');
+    dot.setAttribute('cy','-8'); dot.setAttribute('r','6'); dot.setAttribute('fill','rgba(255,255,255,0.75)');
+    g.appendChild(dot);
+
+    var txt=document.createElementNS(ns,'text');
+    txt.setAttribute('y','30'); txt.setAttribute('text-anchor','middle');
+    txt.setAttribute('font-size','9'); txt.setAttribute('font-weight','700');
+    txt.setAttribute('fill',cat.color);
+    txt.setAttribute('stroke','white'); txt.setAttribute('stroke-width','2.5');
+    txt.setAttribute('paint-order','stroke');
+    txt.textContent=m.label;
+    g.appendChild(txt);
+
+    g.addEventListener('mousedown',function(e){startDrag(e,m.id);});
+    g.addEventListener('click',function(e){e.stopPropagation();openEdit(m.id);});
+    g.addEventListener('mouseenter',function(e){
+      var tt=document.getElementById('tooltip');
+      tt.textContent=m.label+(m.notes?' — '+m.notes:'')+(m.cat?' · '+((CATS[m.cat]||{}).label||''):'');
+      tt.style.display='block'; tt.style.left=(e.clientX+14)+'px'; tt.style.top=(e.clientY-8)+'px';
+    });
+    g.addEventListener('mousemove',function(e){
+      var tt=document.getElementById('tooltip');
+      tt.style.left=(e.clientX+14)+'px'; tt.style.top=(e.clientY-8)+'px';
+    });
+    g.addEventListener('mouseleave',function(){document.getElementById('tooltip').style.display='none';});
+    layer.appendChild(g);
+  });
+}
+
+function renderSidebar(){
+  var list=document.getElementById('markerList');
+  if(!markers.length){list.innerHTML='<div class="empty-msg">No markers yet.<br>Pick a category,<br>then tap the map.</div>';return;}
+  list.innerHTML=markers.map(function(m){
+    var c=CATS[m.cat]||CATS.custom;
+    return '<div class="marker-chip" onclick="openEdit('+m.id+')">'
+      +'<span class="chip-dot" style="background:'+c.color+'"></span>'
+      +'<span class="chip-name">'+esc(m.label)+'</span>'
+      +'<span class="chip-del" onclick="event.stopPropagation();qDel('+m.id+')">×</span>'
+      +'</div>';
+  }).join('');
+}
+
+function qDel(id){markers=markers.filter(function(x){return x.id!==id;});save();renderAll();}
+function clearAll(){if(!confirm('Remove all markers?')) return;markers=[];save();renderAll();}
+function esc(s){return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+
+function exportSVG(){
+  var svgEl=document.getElementById('mapSvg');
+  var s=new XMLSerializer().serializeToString(svgEl);
+  var a=document.createElement('a');
+  a.href='data:image/svg+xml;charset=utf-8,'+encodeURIComponent(s);
+  a.download='hometown-harvest-map.svg';
+  document.body.appendChild(a);a.click();document.body.removeChild(a);
+}
+
+document.addEventListener('keydown',function(e){
+  if(e.key==='Escape'){closeAdd();closeEdit();}
+  if(e.key==='Enter'){
+    if(document.getElementById('addModal').classList.contains('on')) confirmAdd();
+    if(document.getElementById('editModal').classList.contains('on')) confirmEdit();
+  }
+});
+</script>
+</body>
+</html>
