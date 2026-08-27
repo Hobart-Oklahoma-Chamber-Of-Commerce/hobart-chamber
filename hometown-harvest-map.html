@@ -1060,7 +1060,7 @@ function renderObjects(){
 
       /* label at midpoint */
       if(o.label){
-        var mid={(x:(start.x+end.x)/2,y:(start.y+end.y)/2)};
+        var mid={x:(start.x+end.x)/2,y:(start.y+end.y)/2};
         g.appendChild(makeLabelEl(ns,mid.x,mid.y-sw*3,o.label,o.color));
       }
 
