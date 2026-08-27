@@ -83,6 +83,7 @@
       <button class="cat-btn" id="cat-info" onclick="setActiveCat('info')"><span class="dot" style="background:#2eaa6e;"></span>Info / Restrooms</button>
       <button class="cat-btn" id="cat-parade" onclick="setActiveCat('parade')"><span class="dot" style="background:#9b3dc8;"></span>Parade Route</button>
       <button class="cat-btn" id="cat-custom" onclick="setActiveCat('custom')"><span class="dot" style="background:#555;"></span>Custom</button>
+      <button class="cat-btn" id="cat-gazebo" onclick="setActiveCat('gazebo')"><span class="dot" style="background:#9a8850;"></span>Gazebo / Structure</button>
     </div>
     <div class="sb-divider"></div>
     <div class="sb-section" style="padding-bottom:4px;"><div class="sb-title">Placed Markers</div></div>
@@ -141,19 +142,7 @@
         <circle cx="210" cy="442" r="11"/><circle cx="490" cy="442" r="11"/>
         <circle cx="570" cy="300" r="13"/><circle cx="130" cy="300" r="13"/>
       </g>
-      <!-- Gazebo — SE quadrant between courthouse east wall and east path, south of center path -->
-      <circle cx="448" cy="368" r="28" fill="#e4dab8" stroke="#9a8850" stroke-width="2.5"/>
-      <circle cx="448" cy="368" r="19" fill="#d4ca98" stroke="#9a8850" stroke-width="1.5"/>
-      <circle cx="448" cy="368" r="7" fill="#9a8850"/>
-      <line x1="448" y1="340" x2="448" y2="349" stroke="#9a8850" stroke-width="1.5"/>
-      <line x1="448" y1="387" x2="448" y2="396" stroke="#9a8850" stroke-width="1.5"/>
-      <line x1="420" y1="368" x2="429" y2="368" stroke="#9a8850" stroke-width="1.5"/>
-      <line x1="467" y1="368" x2="476" y2="368" stroke="#9a8850" stroke-width="1.5"/>
-      <line x1="429" y1="349" x2="436" y2="356" stroke="#9a8850" stroke-width="1.5"/>
-      <line x1="460" y1="380" x2="467" y2="387" stroke="#9a8850" stroke-width="1.5"/>
-      <line x1="467" y1="349" x2="460" y2="356" stroke="#9a8850" stroke-width="1.5"/>
-      <line x1="429" y1="387" x2="436" y2="380" stroke="#9a8850" stroke-width="1.5"/>
-      <text x="448" y="408" text-anchor="middle" font-size="9" font-weight="700" fill="#6a5820">GAZEBO</text>
+      <!-- Gazebo — placed via marker tool -->
       <!-- Compass -->
       <g transform="translate(648,102)">
         <circle r="22" fill="white" stroke="#1a3ea8" stroke-width="1.5"/>
@@ -182,6 +171,7 @@
         <option value="info">Info / Restrooms</option>
         <option value="parade">Parade Route</option>
         <option value="custom">Custom</option>
+        <option value="gazebo">Gazebo / Structure</option>
       </select>
     </div>
     <div class="fg"><label>Notes (optional)</label><input type="text" id="m_notes" placeholder="Any details…"/></div>
@@ -206,6 +196,7 @@
         <option value="info">Info / Restrooms</option>
         <option value="parade">Parade Route</option>
         <option value="custom">Custom</option>
+        <option value="gazebo">Gazebo / Structure</option>
       </select>
     </div>
     <div class="fg"><label>Notes (optional)</label><input type="text" id="em_notes"/></div>
@@ -225,7 +216,8 @@ var CATS={
   parking:{color:'#6f7d99',label:'Parking'},
   info:   {color:'#2eaa6e',label:'Info / Restrooms'},
   parade: {color:'#9b3dc8',label:'Parade Route'},
-  custom: {color:'#555555',label:'Custom'}
+  custom: {color:'#555555',label:'Custom'},
+  gazebo: {color:'#9a8850',label:'Gazebo / Structure'}
 };
 
 var MODE='add', activeCat='vendor', markers=[], nextId=1;
