@@ -142,7 +142,8 @@ html,body{height:100%;overflow:hidden;font-family:'DM Sans',sans-serif;backgroun
   background:rgba(20,20,35,.92);backdrop-filter:blur(16px);
   border:1px solid var(--border);border-radius:40px;
   padding:8px 16px;display:flex;align-items:center;gap:10px;
-  box-shadow:var(--shadow);z-index:50;
+  box-shadow:var(--shadow);z-index:200;
+  pointer-events:all;
   display:none;
 }
 .ft-title{font-family:'Playfair Display',serif;font-size:13px;color:var(--gold);font-weight:700;white-space:nowrap;}
@@ -163,8 +164,9 @@ html,body{height:100%;overflow:hidden;font-family:'DM Sans',sans-serif;backgroun
   padding:10px 14px;
   display:none;
   gap:6px;
-  box-shadow:var(--shadow);z-index:50;
+  box-shadow:var(--shadow);z-index:200;
   align-items:center;
+  pointer-events:all;
 }
 .fb-tool{
   width:48px;height:48px;border-radius:13px;
@@ -744,14 +746,12 @@ function toSVG(cx,cy){
    EVENTS
 ═══════════════════════════════════════ */
 function setupEvents(){
-  var wrap=document.getElementById('mapArea');
-
-  wrap.addEventListener('touchstart',onTouchStart,{passive:false});
-  wrap.addEventListener('touchmove',onTouchMove,{passive:false});
-  wrap.addEventListener('touchend',onTouchEnd,{passive:true});
-
-  /* Desktop mouse */
   var svg=document.getElementById('mapSvg');
+
+  svg.addEventListener('touchstart',onTouchStart,{passive:false});
+  svg.addEventListener('touchmove',onTouchMove,{passive:false});
+  svg.addEventListener('touchend',onTouchEnd,{passive:true});
+
   svg.addEventListener('mousedown',onMouseDown);
   svg.addEventListener('mousemove',onMouseMove);
   svg.addEventListener('mouseup',onMouseUp);
@@ -761,8 +761,9 @@ function setupEvents(){
 function onTouchStart(e){
   if(STATE.pan) return;
   if(e.touches.length>1) return;
-  e.preventDefault();
   var t=e.touches[0];
+  /* Only prevent default if touch is actually on the SVG map content */
+  e.preventDefault();
   handleStart(t.clientX,t.clientY,e);
 }
 function onTouchMove(e){
@@ -800,6 +801,10 @@ function handleStart(cx,cy,e){
 
   /* hit test existing object */
   var el=(e&&e.target)||document.elementFromPoint(cx,cy);
+
+  /* ignore clicks on UI elements outside the SVG */
+  if(el&&!el.closest('#mapSvg')){return;}
+
   var oid=el&&el.closest('[data-oid]');
   if(oid&&STATE.tool!=='zone'&&STATE.tool!=='free'){
     selectObject(parseInt(oid.dataset.oid));
