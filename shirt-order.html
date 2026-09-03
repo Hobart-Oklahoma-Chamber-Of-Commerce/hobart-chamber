@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Hometown Harvest 2026 T-Shirt Order</title>
+<meta name="description" content="Order your official Hometown Harvest 2026 t-shirt from the Hobart Chamber of Commerce. $20 each. Gildan Softstyle, natural color."/>
+<!-- Open Graph for Facebook share -->
+<meta property="og:title" content="🌽 Hometown Harvest 2026 T-Shirts — Order Now!"/>
+<meta property="og:description" content="Get your official Hometown Harvest 2026 shirt! $20 each · Gildan Softstyle · Natural color · Sizes Youth XS – Adult 3X · Order online today."/>
+<meta property="og:image" content="https://hobartchamber.org/flyers/harvest-shirt-preview.jpg"/>
+<meta property="og:url" content="https://hobartchamber.org/shirt-order.html"/>
+<meta property="og:type" content="website"/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,800;0,900;1,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  --navy:#1a3ea8;--navy-dark:#142f7e;--navy-deep:#0e2056;
+  --gold:#c49a3e;--gold-light:#dab65e;--gold-pale:#f6edd6;
+  --harvest:#c44b0a;--harvest-light:#e05c1a;
+  --white:#fff;--slate:#f3f6fc;--gray:#6f7d99;--dark-gray:#2c3a58;--border:#dbe3f4;
+}
+html{scroll-behavior:smooth;}
+body{font-family:'Inter',sans-serif;color:var(--navy-deep);background:var(--white);}
+
+/* NAV */
+nav{background:rgba(26,62,168,.97);display:flex;align-items:center;justify-content:space-between;padding:0 24px;height:64px;border-bottom:2px solid var(--gold);gap:12px;}
+.nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none;flex:1;min-width:0;}
+.nav-logo-mark{width:40px;height:40px;border-radius:50%;background:var(--gold-pale);overflow:hidden;flex-shrink:0;display:flex;align-items:center;justify-content:center;}
+.nav-logo-mark img{width:100%;height:100%;object-fit:cover;}
+.nav-logo-text span:first-child{font-family:'Playfair Display',serif;font-size:15px;font-weight:700;color:#fff;display:block;white-space:nowrap;}
+.nav-logo-text span:last-child{font-size:10px;color:rgba(255,255,255,.5);}
+.nav-back{font-size:12px;font-weight:600;color:rgba(255,255,255,.7);text-decoration:none;padding:7px 13px;border:1px solid rgba(255,255,255,.25);border-radius:5px;white-space:nowrap;flex-shrink:0;}
+
+/* HERO */
+.hero{background:linear-gradient(160deg,#3a1200 0%,#7a2800 45%,#c44b0a 100%);padding:0;position:relative;overflow:hidden;}
+.hero-grid{display:grid;grid-template-columns:1fr 1fr;max-width:1100px;margin:0 auto;align-items:center;gap:0;}
+.hero-img{padding:32px 24px 32px 40px;}
+.hero-img img{width:100%;max-width:420px;border-radius:16px;box-shadow:0 24px 64px rgba(0,0,0,.4);display:block;}
+.hero-text{padding:40px 40px 40px 24px;}
+.hero-eyebrow{font-size:11px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:rgba(255,255,255,.6);margin-bottom:10px;}
+.hero-title{font-family:'Playfair Display',serif;font-size:clamp(32px,4vw,52px);font-weight:900;color:#fff;line-height:1.1;margin-bottom:8px;}
+.hero-title em{font-style:italic;color:#f6b84a;}
+.hero-price{font-size:42px;font-weight:800;color:#f6b84a;margin:12px 0 4px;}
+.hero-price span{font-size:16px;font-weight:500;color:rgba(255,255,255,.6);}
+.hero-detail{font-size:14px;color:rgba(255,255,255,.7);line-height:1.75;margin-bottom:20px;}
+.hero-detail strong{color:#fff;}
+.hero-cta{display:inline-block;background:var(--gold);color:var(--navy-deep);font-size:15px;font-weight:700;padding:14px 28px;border-radius:8px;text-decoration:none;transition:background .2s;}
+.hero-cta:hover{background:var(--gold-light);}
+
+/* MAIN */
+main{max-width:680px;margin:0 auto;padding:44px 20px 80px;}
+
+/* NOTICE */
+.notice{background:var(--gold-pale);border-left:4px solid var(--gold);border-radius:8px;padding:16px 20px;margin-bottom:32px;font-size:13.5px;color:var(--dark-gray);line-height:1.7;}
+.notice strong{color:var(--navy);display:block;margin-bottom:4px;font-size:14.5px;}
+
+/* FORM CARD */
+.form-card{background:var(--white);border:1px solid var(--border);border-radius:12px;padding:36px;box-shadow:0 4px 24px rgba(26,62,168,.07);}
+.form-section-title{font-family:'Playfair Display',serif;font-size:17px;font-weight:700;color:var(--navy);margin:24px 0 14px;padding-bottom:8px;border-bottom:1px solid var(--border);}
+.form-section-title:first-child{margin-top:0;}
+.fg{display:flex;flex-direction:column;gap:5px;margin-bottom:14px;}
+.fg label{font-size:13px;font-weight:600;color:var(--dark-gray);}
+.fg label .req{color:var(--gold);margin-left:2px;}
+.fg input,.fg select,.fg textarea{padding:11px 13px;border:1.5px solid var(--border);border-radius:7px;font-size:15px;font-family:'Inter',sans-serif;color:var(--navy-deep);width:100%;transition:border-color .2s,box-shadow .2s;-webkit-appearance:none;}
+.fg input:focus,.fg select:focus,.fg textarea:focus{outline:none;border-color:var(--navy);box-shadow:0 0 0 3px rgba(26,62,168,.1);}
+.fg .hint{font-size:11.5px;color:var(--gray);line-height:1.5;}
+.fg-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+
+/* SIZE TABLE */
+.size-section{margin-bottom:20px;}
+.size-header{display:grid;grid-template-columns:1fr 80px 80px;gap:8px;padding:8px 12px;background:var(--navy);border-radius:7px 7px 0 0;font-size:11.5px;font-weight:700;color:rgba(255,255,255,.8);text-transform:uppercase;letter-spacing:.5px;}
+.size-group-label{font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--gold);padding:10px 12px 4px;background:var(--gold-pale);border-left:1px solid var(--border);border-right:1px solid var(--border);}
+.size-row{display:grid;grid-template-columns:1fr 80px 80px;gap:8px;padding:10px 12px;border:1px solid var(--border);border-top:none;align-items:center;transition:background .15s;}
+.size-row:hover{background:var(--slate);}
+.size-row:last-child{border-radius:0 0 7px 7px;}
+.size-name{font-size:14px;font-weight:600;color:var(--navy-deep);}
+.size-price{font-size:13px;color:var(--gray);font-weight:500;}
+.size-qty input{width:68px;padding:8px 10px;border:1.5px solid var(--border);border-radius:6px;font-size:15px;font-family:'Inter',sans-serif;text-align:center;color:var(--navy-deep);}
+.size-qty input:focus{outline:none;border-color:var(--navy);}
+
+/* ORDER SUMMARY */
+.order-summary{background:var(--slate);border-radius:8px;padding:18px 20px;margin:20px 0;display:none;}
+.order-summary.show{display:block;}
+.os-title{font-size:13px;font-weight:700;color:var(--navy);margin-bottom:10px;}
+.os-line{display:flex;justify-content:space-between;font-size:13px;color:var(--dark-gray);padding:3px 0;}
+.os-total{display:flex;justify-content:space-between;font-size:16px;font-weight:800;color:var(--navy);padding-top:10px;border-top:2px solid var(--border);margin-top:8px;}
+
+/* PAYMENT INFO */
+.payment-box{background:var(--navy-deep);border-radius:8px;padding:18px 20px;margin-bottom:20px;color:#fff;}
+.payment-box h4{font-family:'Playfair Display',serif;font-size:16px;font-weight:700;color:var(--gold-light);margin-bottom:8px;}
+.payment-box p{font-size:13px;color:rgba(255,255,255,.7);line-height:1.7;}
+.payment-box strong{color:#fff;}
+
+/* SUBMIT */
+.btn-submit{width:100%;background:var(--harvest);color:#fff;border:none;border-radius:8px;padding:16px;font-size:16px;font-weight:700;font-family:'Inter',sans-serif;cursor:pointer;transition:background .2s;margin-top:4px;}
+.btn-submit:hover{background:var(--harvest-light);}
+.btn-submit:disabled{background:var(--gray);cursor:not-allowed;}
+.form-msg{display:none;border-radius:8px;padding:14px 18px;font-size:14px;font-weight:500;line-height:1.5;margin-top:14px;}
+.form-msg.ok{background:#e8f6ec;color:#1c7a3e;display:block;}
+.form-msg.err{background:#fbe9e9;color:#b3261e;display:block;}
+
+/* FOOTER */
+.page-footer{background:var(--navy-dark);padding:24px;text-align:center;}
+.page-footer p{font-size:13px;color:rgba(255,255,255,.4);}
+.page-footer a{color:var(--gold-light);text-decoration:none;}
+
+@media(max-width:700px){
+  .hero-grid{grid-template-columns:1fr;}
+  .hero-img{padding:28px 20px 0;text-align:center;}
+  .hero-img img{max-width:280px;margin:0 auto;}
+  .hero-text{padding:20px 20px 32px;}
+  .form-card{padding:22px 16px;}
+  .fg-row{grid-template-columns:1fr;}
+  nav{padding:0 14px;}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">
+    <span class="nav-logo-mark"><img src="flyers/chamber-logo.PNG" alt="" onerror="this.onerror=null;this.style.display='none';"/></span>
+    <span class="nav-logo-text"><span>Hobart Chamber of Commerce</span><span>Kiowa County · Oklahoma</span></span>
+  </a>
+  <a href="index.html" class="nav-back">← Back to Site</a>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-grid">
+    <div class="hero-img">
+      <img src="flyers/harvest-shirt-preview.jpg" alt="Hometown Harvest 2026 T-Shirt" onerror="this.style.background='rgba(255,255,255,.1)';this.style.minHeight='280px';this.style.borderRadius='16px';"/>
+    </div>
+    <div class="hero-text">
+      <div class="hero-eyebrow">Official Event Merchandise</div>
+      <h1 class="hero-title">Hometown<br><em>Harvest 2026</em><br>T-Shirt</h1>
+      <div class="hero-price">$20 <span>each</span></div>
+      <div class="hero-detail">
+        <strong>Gildan Softstyle</strong> · Natural Color<br>
+        Adult S – 3XL · Youth XS – Youth XL<br>
+        <em style="font-size:12px;">If natural is out of stock, sand color will be used</em>
+      </div>
+      <a href="#order-form" class="hero-cta">Order Now →</a>
+    </div>
+  </div>
+</div>
+
+<!-- MAIN -->
+<main id="order-form">
+
+  <div class="notice">
+    <strong>📦 Pre-Order — How It Works</strong>
+    Fill out the form below with your sizes and quantities. The Chamber will contact you to arrange payment (cash, check, or card) and pickup. Orders are confirmed once payment is received. Questions? Call <strong>(580) 682-0887</strong>.
+  </div>
+
+  <div class="form-card">
+    <h2 style="font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:var(--navy);margin-bottom:5px;">Place Your Order</h2>
+    <p style="font-size:13px;color:var(--gray);margin-bottom:26px;">Fields marked <span style="color:var(--gold);font-weight:700;">*</span> are required. Select your sizes and quantities below.</p>
+
+    <!-- CONTACT -->
+    <div class="form-section-title">Your Information</div>
+    <div class="fg-row">
+      <div class="fg">
+        <label>First Name <span class="req">*</span></label>
+        <input type="text" id="o_fname" autocomplete="given-name" placeholder="First name"/>
+      </div>
+      <div class="fg">
+        <label>Last Name <span class="req">*</span></label>
+        <input type="text" id="o_lname" autocomplete="family-name" placeholder="Last name"/>
+      </div>
+    </div>
+    <div class="fg-row">
+      <div class="fg">
+        <label>Phone Number <span class="req">*</span></label>
+        <input type="tel" id="o_phone" autocomplete="tel" placeholder="(580) 000-0000"/>
+      </div>
+      <div class="fg">
+        <label>Email Address</label>
+        <input type="email" id="o_email" autocomplete="email" placeholder="you@email.com"/>
+      </div>
+    </div>
+
+    <!-- SIZES -->
+    <div class="form-section-title">Select Sizes & Quantities</div>
+    <p style="font-size:13px;color:var(--gray);margin-bottom:16px;line-height:1.6;">Enter the quantity you want for each size. Leave blank or 0 if you don't need that size. All shirts are <strong style="color:var(--navy);">$20 each</strong>.</p>
+
+    <div class="size-section">
+      <div class="size-header"><span>Size</span><span>Price</span><span>Qty</span></div>
+
+      <div class="size-group-label">Adult Sizes — Gildan Softstyle (Natural / Sand if unavailable)</div>
+      <div class="size-row"><span class="size-name">Small</span><span class="size-price">$20</span><div class="size-qty"><input type="number" id="sz_s" min="0" max="99" value="" placeholder="0" oninput="updateSummary()"/></div></div>
+      <div class="size-row"><span class="size-name">Medium</span><span class="size-price">$20</span><div class="size-qty"><input type="number" id="sz_m" min="0" max="99" value="" placeholder="0" oninput="updateSummary()"/></div></div>
+      <div class="size-row"><span class="size-name">Large</span><span class="size-price">$20</span><div class="size-qty"><input type="number" id="sz_l" min="0" max="99" value="" placeholder="0" oninput="updateSummary()"/></div></div>
+      <div class="size-row"><span class="size-name">XL</span><span class="size-price">$20</span><div class="size-qty"><input type="number" id="sz_xl" min="0" max="99" value="" placeholder="0" oninput="updateSummary()"/></div></div>
+      <div class="size-row"><span class="size-name">2XL</span><span class="size-price">$20</span><div class="size-qty"><input type="number" id="sz_2xl" min="0" max="99" value="" placeholder="0" oninput="updateSummary()"/></div></div>
+      <div class="size-row"><span class="size-name">3XL</span><span class="size-price">$20</span><div class="size-qty"><input type="number" id="sz_3xl" min="0" max="99" value="" placeholder="0" oninput="updateSummary()"/></div></div>
+
+      <div class="size-group-label">Youth Sizes — Gildan Softstyle (Natural / Sand if unavailable)</div>
+      <div class="size-row"><span class="size-name">Youth XS</span><span class="size-price">$20</span><div class="size-qty"><input type="number" id="sz_yxs" min="0" max="99" value="" placeholder="0" oninput="updateSummary()"/></div></div>
+      <div class="size-row"><span class="size-name">Youth S</span><span class="size-price">$20</span><div class="size-qty"><input type="number" id="sz_ys" min="0" max="99" value="" placeholder="0" oninput="updateSummary()"/></div></div>
+      <div class="size-row"><span class="size-name">Youth M</span><span class="size-price">$20</span><div class="size-qty"><input type="number" id="sz_ym" min="0" max="99" value="" placeholder="0" oninput="updateSummary()"/></div></div>
+      <div class="size-row"><span class="size-name">Youth L</span><span class="size-price">$20</span><div class="size-qty"><input type="number" id="sz_yl" min="0" max="99" value="" placeholder="0" oninput="updateSummary()"/></div></div>
+      <div class="size-row"><span class="size-name">Youth XL</span><span class="size-price">$20</span><div class="size-qty"><input type="number" id="sz_yxl" min="0" max="99" value="" placeholder="0" oninput="updateSummary()"/></div></div>
+    </div>
+
+    <!-- SUMMARY -->
+    <div class="order-summary" id="orderSummary">
+      <div class="os-title">Order Summary</div>
+      <div id="summaryLines"></div>
+      <div class="os-total"><span>Total Due</span><span id="summaryTotal">$0</span></div>
+    </div>
+
+    <!-- NOTES -->
+    <div class="fg">
+      <label>Any special notes or questions?</label>
+      <textarea id="o_notes" rows="2" placeholder="Anything you'd like us to know…"></textarea>
+    </div>
+
+    <!-- PAYMENT -->
+    <div class="payment-box">
+      <h4>💳 Payment Information</h4>
+      <p>Payment is due upon confirmation. We accept <strong>cash, check, or card</strong>. Checks payable to <strong>Hobart Chamber of Commerce</strong>. The Chamber will reach out to arrange payment and pickup details.</p>
+    </div>
+
+    <div class="form-msg" id="o_msg"></div>
+    <button class="btn-submit" id="o_btn" onclick="submitOrder()">Submit Order →</button>
+
+    <p style="font-size:12px;color:var(--gray);margin-top:14px;text-align:center;line-height:1.6;">Questions? Call <a href="tel:5806820887" style="color:var(--navy);font-weight:600;">(580) 682-0887</a> or email <a href="mailto:director@hobartokchamber.org" style="color:var(--navy);font-weight:600;">director@hobartokchamber.org</a></p>
+  </div>
+
+</main>
+
+<div class="page-footer">
+  <p>Hobart Chamber of Commerce · 106 W 4th St · Hobart, OK 73651 · <a href="tel:5806820887">(580) 682-0887</a></p>
+  <p style="margin-top:6px;"><a href="index.html">← Back to hobartchamber.org</a></p>
+</div>
+
+<script>
+/* Firebase */
+var firebaseConfig={apiKey:"AIzaSyDdoomYnp5-ASz7domQQervL8RttEtOY0o",authDomain:"hobart-chamber.firebaseapp.com",projectId:"hobart-chamber",storageBucket:"hobart-chamber.firebasestorage.app",messagingSenderId:"1018730792333",appId:"1:1018730792333:web:b26c20feef8d04ed07a9c4"};
+var db=null;
+try{if(!firebase.apps.length)firebase.initializeApp(firebaseConfig);db=firebase.firestore();}catch(e){}
+var WEB3FORMS_KEY="a35795f6-54b3-41a0-b5c8-043e93cb73a5";
+
+var SIZES=[
+  {id:'sz_s',  label:'Adult Small'},
+  {id:'sz_m',  label:'Adult Medium'},
+  {id:'sz_l',  label:'Adult Large'},
+  {id:'sz_xl', label:'Adult XL'},
+  {id:'sz_2xl',label:'Adult 2XL'},
+  {id:'sz_3xl',label:'Adult 3XL'},
+  {id:'sz_yxs',label:'Youth XS'},
+  {id:'sz_ys', label:'Youth S'},
+  {id:'sz_ym', label:'Youth M'},
+  {id:'sz_yl', label:'Youth L'},
+  {id:'sz_yxl',label:'Youth XL'}
+];
+
+function getQty(id){var el=document.getElementById(id);var v=parseInt(el&&el.value)||0;return Math.max(0,v);}
+
+function updateSummary(){
+  var lines=[],total=0;
+  SIZES.forEach(function(s){
+    var q=getQty(s.id);
+    if(q>0){lines.push({label:s.label,qty:q,amt:q*20});total+=q*20;}
+  });
+  var sumEl=document.getElementById('orderSummary');
+  var linesEl=document.getElementById('summaryLines');
+  var totalEl=document.getElementById('summaryTotal');
+  if(!lines.length){sumEl.classList.remove('show');return;}
+  sumEl.classList.add('show');
+  linesEl.innerHTML=lines.map(function(l){
+    return '<div class="os-line"><span>'+l.label+' × '+l.qty+'</span><span>$'+l.amt+'</span></div>';
+  }).join('');
+  totalEl.textContent='$'+total;
+}
+
+function val(id){var el=document.getElementById(id);return el?(el.value||'').trim():'';}
+
+function submitOrder(){
+  var fname=val('o_fname'),lname=val('o_lname'),phone=val('o_phone');
+  var msg=document.getElementById('o_msg'),btn=document.getElementById('o_btn');
+
+  if(!fname||!lname||!phone){
+    msg.className='form-msg err';
+    msg.textContent='Please fill in your name and phone number.';
+    return;
+  }
+
+  var items=[],total=0;
+  SIZES.forEach(function(s){var q=getQty(s.id);if(q>0){items.push(s.label+' x'+q);total+=q*20;}});
+
+  if(!items.length){
+    msg.className='form-msg err';
+    msg.textContent='Please enter at least one size quantity.';
+    return;
+  }
+
+  btn.disabled=true;btn.textContent='Sending…';
+  msg.className='form-msg';msg.style.display='none';
+
+  var orderData={
+    contactName:fname+' '+lname,
+    phone:phone,email:val('o_email'),
+    items:items,totalDue:'$'+total,
+    notes:val('o_notes'),
+    createdAt:firebase.firestore&&firebase.firestore.FieldValue?firebase.firestore.FieldValue.serverTimestamp():new Date().toISOString()
+  };
+  /* size breakdown */
+  SIZES.forEach(function(s){orderData[s.label]=getQty(s.id)||0;});
+
+  if(db) db.collection('shirt_orders').add(orderData).catch(function(){});
+
+  var emailData={
+    access_key:WEB3FORMS_KEY,
+    subject:'Hometown Harvest Shirt Order — '+fname+' '+lname+' · $'+total,
+    from_name:'Hobart Chamber Website',
+    'Customer':fname+' '+lname,
+    'Phone':phone,
+    'Email':val('o_email')||'—',
+    'Sizes Ordered':items.join(', '),
+    'Total Due':'$'+total,
+    'Notes':val('o_notes')||'—'
+  };
+
+  fetch('https://api.web3forms.com/submit',{
+    method:'POST',
+    headers:{'Content-Type':'application/json','Accept':'application/json'},
+    body:JSON.stringify(emailData)
+  }).then(function(r){return r.json();}).then(function(res){
+    if(res.success){
+      msg.className='form-msg ok';
+      msg.innerHTML='Order received! 🌽 <strong>Total due: $'+total+'</strong><br>The Chamber will contact you at '+phone+' to arrange payment and pickup. Thank you!';
+      btn.style.display='none';
+    } else {
+      msg.className='form-msg err';
+      msg.textContent='Something went wrong. Please call (580) 682-0887.';
+      btn.disabled=false;btn.textContent='Submit Order →';
+    }
+  }).catch(function(){
+    msg.className='form-msg err';
+    msg.textContent='Could not send. Please call (580) 682-0887.';
+    btn.disabled=false;btn.textContent='Submit Order →';
+  });
+}
+</script>
+</body>
+</html>
