@@ -10,7 +10,8 @@
 <style>
   *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
   :root{--navy:#1a3ea8;--navy-dark:#142f7e;--navy-deep:#0e2056;--navy-hover:#2247bd;--gold:#c49a3e;--gold-light:#dab65e;--gold-pale:#f6edd6;--white:#fff;--slate:#f3f6fc;--gray:#6f7d99;--dark-gray:#2c3a58;--border:#dbe3f4;}
-  body{font-family:'Inter',sans-serif;color:var(--navy-deep);background:var(--white);}
+  html{background:#fff;}
+  body{font-family:'Inter',sans-serif;color:var(--navy-deep);background:#fff;}
   nav{background:rgba(26,62,168,.97);display:flex;align-items:center;justify-content:space-between;padding:0 24px;height:74px;border-bottom:1px solid rgba(196,154,62,.4);gap:12px;}
   .nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none;min-width:0;flex:1;}
   .nav-logo-mark{width:40px;height:40px;border-radius:50%;background:var(--gold-pale);display:flex;align-items:center;justify-content:center;overflow:hidden;flex-shrink:0;}
@@ -32,12 +33,12 @@
   .welcome{background:var(--gold-pale);border-bottom:2px solid var(--gold);padding:26px 60px;text-align:center;}
   .welcome p{font-size:14.5px;color:var(--dark-gray);line-height:1.8;max-width:760px;margin:0 auto;}
   .welcome p strong{color:var(--navy);}
-  .quick-stats{display:grid;grid-template-columns:repeat(4,1fr);border-bottom:1px solid var(--border);}
+  .quick-stats{display:grid;grid-template-columns:repeat(4,1fr);border-bottom:1px solid var(--border);background:var(--white);}
   .qs-item{text-align:center;padding:26px 20px;border-right:1px solid var(--border);}
   .qs-item:last-child{border-right:none;}
   .qs-num{font-family:'Playfair Display',serif;font-size:34px;font-weight:800;color:var(--navy);margin-bottom:4px;}
   .qs-label{font-size:11.5px;color:var(--gray);font-weight:600;text-transform:uppercase;letter-spacing:.8px;}
-  main{max-width:1100px;margin:0 auto;padding:48px 24px 80px;}
+  main{max-width:1100px;margin:0 auto;padding:48px 24px 80px;background:var(--white);}
   .section-header{margin-bottom:28px;}
   .section-header .eyebrow{font-size:10px;letter-spacing:2px;text-transform:uppercase;font-weight:700;color:var(--gold);margin-bottom:5px;}
   .section-header h2{font-family:'Playfair Display',serif;font-size:26px;font-weight:700;color:var(--navy);}
@@ -194,7 +195,7 @@
   <div class="schools-grid">
     <div class="school-card"><div class="school-icon">🐱</div><div>
       <div class="school-name">Hobart Public Schools</div>
-      <div class="school-detail">Home of the Bearcats · PreK–12th grade<br><strong>Office:</strong> <a href="tel:5807263341">(580) 726-3341</a><br><a href="https://www.hobartschools.net" target="_blank" rel="noopener">hobartschools.net</a><br>Contact school office for new student enrollment</div>
+      <div class="school-detail">Home of the Bearcats · PreK–12th grade<br><strong>Office:</strong> <a href="tel:5807263341">(580) 726-3341</a><br><a href="https://www.hobart.k12.ok.us" target="_blank" rel="noopener">hobart.k12.ok.us</a><br>Contact school office for new student enrollment</div>
     </div></div>
     <div class="school-card"><div class="school-icon">🔧</div><div>
       <div class="school-name">Western Technology Center</div>
@@ -245,7 +246,7 @@
     </div>
     <div class="faq-item">
       <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">How do I enroll my child in Hobart Public Schools? <span class="arr">›</span></div>
-      <div class="faq-a">Contact Hobart Public Schools at (580) 726-3341 or visit hobartschools.net. You'll typically need proof of residency, immunization records, and prior school records.</div>
+      <div class="faq-a">Contact Hobart Public Schools at (580) 726-3341 or visit <a href="https://www.hobart.k12.ok.us" target="_blank" rel="noopener" style="color:var(--navy);font-weight:600;">hobart.k12.ok.us</a>. You'll typically need proof of residency, immunization records, and prior school records.</div>
     </div>
     <div class="faq-item">
       <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">What's the best way to stay connected to what's happening? <span class="arr">›</span></div>
