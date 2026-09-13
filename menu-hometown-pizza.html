@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="color-scheme" content="light only"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Hometown Pizza — Menu | Hobart Chamber of Commerce</title>
+<meta name="description" content="Full menu for Hometown Pizza in Hobart, Oklahoma. Specialty pizzas, buffet, subs, calzones, pasta, wings, salad bar and gluten free options. 104 E 4th St · (580) 726-2225."/>
+<meta property="og:title" content="Hometown Pizza — Menu | Hobart, OK"/>
+<meta property="og:description" content="Specialty pizzas, lunch buffet, subs, calzones, pasta and a salad bar. 104 E 4th St, Hobart · (580) 726-2225"/>
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"Restaurant",
+  "name":"Hometown Pizza",
+  "description":"Pizza restaurant in Hobart, Oklahoma serving specialty pizzas, a lunch buffet, subs, calzones, pasta and a salad bar.",
+  "address":{"@type":"PostalAddress","streetAddress":"104 E 4th Street","addressLocality":"Hobart","addressRegion":"OK","postalCode":"73651","addressCountry":"US"},
+  "telephone":"+15807262225",
+  "servesCuisine":["Pizza","Italian","American"],
+  "priceRange":"$$",
+  "hasMenu":"https://hobartchamber.org/menu-hometown-pizza.html",
+  "openingHoursSpecification":[
+    {"@type":"OpeningHoursSpecification","dayOfWeek":["Sunday","Monday","Tuesday","Wednesday"],"opens":"11:00","closes":"14:00"},
+    {"@type":"OpeningHoursSpecification","dayOfWeek":["Thursday","Friday"],"opens":"11:00","closes":"14:00"},
+    {"@type":"OpeningHoursSpecification","dayOfWeek":["Thursday","Friday"],"opens":"17:00","closes":"20:00"}
+  ]
+}
+</script>
+<link href="https://fonts.googleapis.com/css2?family=Bree+Serif&family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  color-scheme:light;
+  --navy:#1a3ea8;--navy-dark:#142f7e;--navy-deep:#0e2056;
+  --gold:#c49a3e;--gold-light:#dab65e;--gold-pale:#f6edd6;
+  --white:#fff;--slate:#f3f6fc;--gray:#6f7d99;--dark-gray:#2c3a58;--border:#dbe3f4;
+  /* Hometown Pizza brand */
+  --hp-cream:#fdf1e6;--hp-red:#e04e39;--hp-deep:#b83a26;
+  --hp-yellow:#f5c842;--hp-teal:#1a7a6a;
+}
+html{background:#fff !important;scroll-behavior:smooth;}
+body{font-family:'Inter',sans-serif;color:var(--navy-deep);background:#fff !important;overflow-x:hidden;}
+
+nav{background:rgba(26,62,168,.97);display:flex;align-items:center;justify-content:space-between;padding:0 22px;height:62px;border-bottom:2px solid var(--gold);gap:12px;position:sticky;top:0;z-index:100;}
+.nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none;flex:1;min-width:0;}
+.nav-logo-mark{width:38px;height:38px;border-radius:50%;background:var(--gold-pale);overflow:hidden;flex-shrink:0;}
+.nav-logo-mark img{width:100%;height:100%;object-fit:cover;}
+.nav-logo-text span:first-child{font-family:'Playfair Display',serif;font-size:14.5px;font-weight:700;color:#fff;display:block;white-space:nowrap;}
+.nav-logo-text span:last-child{font-size:10px;color:rgba(255,255,255,.5);}
+.nav-back{font-size:12px;font-weight:600;color:rgba(255,255,255,.7);text-decoration:none;padding:7px 13px;border:1px solid rgba(255,255,255,.25);border-radius:5px;white-space:nowrap;flex-shrink:0;}
+.nav-back:hover{color:#fff;border-color:rgba(255,255,255,.6);}
+.member-bar{background:var(--gold-pale);border-bottom:1px solid var(--gold);padding:8px 24px;text-align:center;}
+.member-bar span{font-size:11.5px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:var(--navy);}
+
+/* HERO */
+.hero{background:var(--hp-cream);padding:34px 22px 32px;text-align:center;border-bottom:4px solid var(--hp-red);}
+.hero-name1{font-family:'Bree Serif',serif;font-size:clamp(28px,6vw,46px);color:var(--hp-red);letter-spacing:2px;line-height:1;}
+.hero-name2{font-family:'Bree Serif',serif;font-style:italic;font-size:clamp(34px,8vw,58px);color:var(--hp-yellow);line-height:1;letter-spacing:1px;text-shadow:2px 2px 0 var(--hp-red);}
+.hero-phone{display:inline-block;font-family:'Bree Serif',serif;font-size:clamp(20px,4.5vw,30px);color:var(--hp-red);margin-top:10px;text-decoration:none;letter-spacing:1px;}
+.hero-addr{font-size:13.5px;color:#7a6a5e;margin-top:6px;}
+.hero-chips{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-top:16px;}
+.chip{background:#fff;border:1.5px solid var(--hp-red);border-radius:20px;padding:6px 14px;font-size:12px;font-weight:700;color:var(--hp-red);}
+
+/* HOURS STRIP */
+.hours{background:var(--hp-teal);color:#fff;padding:16px 20px;}
+.hours-inner{max-width:900px;margin:0 auto;display:flex;flex-wrap:wrap;gap:8px;justify-content:center;align-items:center;}
+.hours-label{font-family:'Bree Serif',serif;font-size:16px;letter-spacing:1px;margin-right:6px;}
+.hr{background:rgba(255,255,255,.14);border-radius:18px;padding:5px 13px;font-size:12.5px;font-weight:600;}
+.hr b{font-weight:800;}
+
+/* JUMP NAV */
+.jump-nav{background:var(--slate);border-bottom:1px solid var(--border);padding:11px 14px;display:flex;gap:7px;overflow-x:auto;scrollbar-width:none;position:sticky;top:62px;z-index:90;}
+.jump-nav::-webkit-scrollbar{display:none;}
+.jump-link{padding:7px 14px;background:#fff;border:1px solid var(--border);border-radius:20px;font-size:12.5px;font-weight:600;color:var(--hp-deep);text-decoration:none;white-space:nowrap;flex-shrink:0;}
+.jump-link:hover{background:var(--hp-red);color:#fff;border-color:var(--hp-red);}
+
+main{max-width:900px;margin:0 auto;padding:34px 18px 80px;background:#fff;}
+.menu-section{margin-bottom:40px;scroll-margin-top:128px;}
+.menu-head{display:flex;align-items:baseline;gap:12px;margin-bottom:14px;padding-bottom:9px;border-bottom:3px solid var(--hp-red);}
+.menu-head h2{font-family:'Bree Serif',serif;font-size:25px;color:var(--hp-red);letter-spacing:.5px;}
+.menu-note{font-size:12px;color:var(--gray);font-style:italic;margin-left:auto;}
+
+/* SIZE HEADER for pizza */
+.size-bar{display:grid;grid-template-columns:1fr 70px 70px 70px;gap:6px;padding:8px 12px;background:var(--hp-red);border-radius:8px 8px 0 0;align-items:center;}
+.size-bar .sb-l{font-size:11px;font-weight:800;color:rgba(255,255,255,.85);text-transform:uppercase;letter-spacing:.8px;}
+.size-bar .sb-s{font-size:11.5px;font-weight:800;color:#fff;text-align:center;}
+.pz{display:grid;grid-template-columns:1fr 70px 70px 70px;gap:6px;padding:12px;border:1px solid var(--border);border-top:none;align-items:center;}
+.pz:last-of-type{border-radius:0 0 8px 8px;}
+.pz:hover{background:var(--hp-cream);}
+.pz-name{font-size:14.5px;font-weight:800;color:var(--dark-gray);}
+.pz-desc{font-size:11.5px;color:var(--gray);line-height:1.45;margin-top:2px;}
+.pz-p{font-size:14px;font-weight:700;color:var(--hp-deep);text-align:center;font-variant-numeric:tabular-nums;}
+
+/* SIMPLE ITEM */
+.menu-item{display:flex;align-items:baseline;gap:11px;padding:11px 4px;flex-wrap:wrap;border-bottom:1px dotted var(--border);}
+.menu-item:last-child{border-bottom:none;}
+.mi-name{font-size:15px;font-weight:700;color:var(--dark-gray);flex:1 1 auto;min-width:0;overflow-wrap:anywhere;}
+.mi-name small{display:block;font-size:11.5px;font-weight:400;color:var(--gray);line-height:1.45;margin-top:2px;max-width:100%;}
+.mi-dots{flex:1 1 20px;border-bottom:1px dotted #c8d2e8;min-width:14px;transform:translateY(-4px);}
+.mi-price{font-size:15px;font-weight:800;color:var(--hp-deep);flex-shrink:0;font-variant-numeric:tabular-nums;}
+.mi-tiers{display:flex;gap:14px;flex-shrink:0;}
+.mi-tier{text-align:center;}
+.mi-tier .t-qty{font-size:10px;color:var(--gray);font-weight:700;display:block;text-transform:uppercase;}
+.mi-tier .t-price{font-size:14px;font-weight:800;color:var(--hp-deep);font-variant-numeric:tabular-nums;}
+
+/* PANELS */
+.panel{border-radius:14px;padding:24px;margin-top:14px;}
+.panel.red{background:var(--hp-red);}
+.panel.cream{background:var(--hp-cream);border:2px solid var(--hp-red);}
+.panel.teal{background:var(--hp-teal);}
+.panel-title{font-family:'Bree Serif',serif;font-size:21px;letter-spacing:.8px;margin-bottom:3px;}
+.panel.red .panel-title,.panel.teal .panel-title{color:var(--hp-yellow);}
+.panel.cream .panel-title{color:var(--hp-red);}
+.panel-sub{font-size:12px;line-height:1.55;margin-bottom:14px;}
+.panel.red .panel-sub,.panel.teal .panel-sub{color:rgba(255,255,255,.72);}
+.panel.cream .panel-sub{color:#8a7668;}
+.p-item{display:flex;align-items:baseline;gap:11px;padding:8px 0;flex-wrap:wrap;border-bottom:1px dotted rgba(255,255,255,.24);}
+.panel.cream .p-item{border-bottom-color:rgba(224,78,57,.25);}
+.p-item:last-child{border-bottom:none;}
+.p-name{font-size:14.5px;font-weight:700;flex:1 1 auto;min-width:0;overflow-wrap:anywhere;}
+.panel.red .p-name,.panel.teal .p-name{color:#fff;}
+.panel.cream .p-name{color:var(--dark-gray);}
+.p-name small{display:block;font-size:11px;font-weight:400;opacity:.72;margin-top:1px;}
+.p-dots{flex:1 1 20px;border-bottom:1px dotted rgba(255,255,255,.3);min-width:14px;transform:translateY(-4px);}
+.panel.cream .p-dots{border-bottom-color:rgba(224,78,57,.3);}
+.p-price{font-size:15.5px;font-weight:800;flex-shrink:0;font-variant-numeric:tabular-nums;}
+.panel.red .p-price,.panel.teal .p-price{color:var(--hp-yellow);}
+.panel.cream .p-price{color:var(--hp-deep);}
+
+/* TOPPINGS */
+.top-group{margin-bottom:12px;}
+.top-label{font-size:11.5px;font-weight:800;text-transform:uppercase;letter-spacing:1px;color:var(--hp-red);margin-bottom:6px;}
+.top-chips{display:flex;flex-wrap:wrap;gap:6px;}
+.tchip{background:#fff;border:1px solid var(--border);border-radius:14px;padding:5px 11px;font-size:12px;color:var(--dark-gray);font-weight:500;}
+.addon-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px;padding-top:13px;border-top:1px dotted rgba(224,78,57,.3);}
+.addon-chip{background:#fff;border-radius:16px;padding:6px 13px;font-size:12px;color:var(--dark-gray);font-weight:500;}
+.addon-chip b{color:var(--hp-deep);font-weight:800;}
+
+.contact-card{background:var(--hp-red);border-radius:14px;padding:28px;text-align:center;margin-top:40px;}
+.contact-card h3{font-family:'Bree Serif',serif;font-size:23px;color:var(--hp-yellow);margin-bottom:6px;letter-spacing:.5px;}
+.contact-card p{font-size:13.5px;color:rgba(255,255,255,.8);line-height:1.7;margin-bottom:18px;}
+.contact-btns{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;}
+.c-btn{display:inline-flex;align-items:center;gap:7px;padding:12px 22px;border-radius:7px;font-size:14px;font-weight:700;text-decoration:none;}
+.c-btn.primary{background:var(--hp-yellow);color:var(--hp-deep);}
+.c-btn.outline{border:1.5px solid rgba(255,255,255,.4);color:#fff;}
+.disclaimer{margin-top:22px;padding:14px 18px;background:var(--slate);border-radius:8px;font-size:12px;color:var(--gray);line-height:1.6;text-align:center;}
+.page-footer{background:var(--navy-dark);padding:24px;text-align:center;}
+.page-footer p{font-size:13px;color:rgba(255,255,255,.4);}
+.page-footer a{color:var(--gold-light);text-decoration:none;}
+
+@media(max-width:700px){
+  .size-bar,.pz{grid-template-columns:1fr 52px 52px 52px;gap:4px;padding:10px 8px;}
+  .size-bar .sb-s{font-size:10px;}
+  .pz-p{font-size:12.5px;}
+  .pz-name{font-size:13.5px;}
+}
+@media(max-width:640px){
+  nav{padding:0 13px;}
+  .jump-nav{top:62px;}
+  main{padding:24px 13px 60px;}
+  .menu-head h2{font-size:21px;}
+  .menu-note{display:none;}
+  .panel{padding:18px 16px;}
+}
+
+  /* --- overflow containment --- */
+  .menu-section,.panel,.specials{max-width:100%;overflow-wrap:break-word;}
+  .mi-price,.p-price{margin-left:auto;}
+  @media(max-width:560px){
+    .mi-dots,.p-dots{display:none;}
+    .mi-name small,.p-name small{max-width:100%;}
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">
+    <span class="nav-logo-mark"><img src="flyers/chamber-logo.PNG" alt="" onerror="this.onerror=null;this.style.display='none';"/></span>
+    <span class="nav-logo-text"><span>Hobart Chamber of Commerce</span><span>Member Menus</span></span>
+  </a>
+  <a href="index.html#directory" class="nav-back">← Directory</a>
+</nav>
+
+<div class="member-bar"><span>⭐ Hobart Chamber Member</span></div>
+
+<div class="hero">
+  <div class="hero-name1">HOMETOWN</div>
+  <div class="hero-name2">Pizza</div>
+  <a href="tel:5807262225" class="hero-phone">580-726-2225</a>
+  <div class="hero-addr">104 E 4th Street · Hobart, OK 73651</div>
+  <div class="hero-chips">
+    <span class="chip">🍕 Specialty Pizzas</span>
+    <span class="chip">🥗 Salad Bar</span>
+    <span class="chip">🍽️ Lunch Buffet</span>
+    <span class="chip">🌾 Gluten Free</span>
+  </div>
+</div>
+
+<div class="hours">
+  <div class="hours-inner">
+    <span class="hours-label">OPEN</span>
+    <span class="hr"><b>Sun</b> 11–2</span>
+    <span class="hr"><b>Mon</b> 11–2</span>
+    <span class="hr"><b>Tue</b> 11–2</span>
+    <span class="hr"><b>Wed</b> 11–2</span>
+    <span class="hr"><b>Thu</b> 11–2 · 5–8</span>
+    <span class="hr"><b>Fri</b> 11–2 · 5–8</span>
+  </div>
+</div>
+
+<div class="jump-nav">
+  <a href="#specialty" class="jump-link">Specialty Pizza</a>
+  <a href="#createown" class="jump-link">Create Your Own</a>
+  <a href="#glutenfree" class="jump-link">Gluten Free</a>
+  <a href="#buffet" class="jump-link">Buffet</a>
+  <a href="#salad" class="jump-link">Salad Bar</a>
+  <a href="#subs" class="jump-link">Sandwiches &amp; Subs</a>
+  <a href="#sides" class="jump-link">Sides &amp; Wings</a>
+  <a href="#calzones" class="jump-link">Calzones</a>
+  <a href="#pasta" class="jump-link">Pasta</a>
+  <a href="#desserts" class="jump-link">Desserts</a>
+</div>
+
+<main>
+
+  <!-- SPECIALTY PIZZA -->
+  <section class="menu-section" id="specialty">
+    <div class="menu-head"><h2>Specialty Pizza</h2><span class="menu-note">Thin crust available in 16"</span></div>
+    <div class="size-bar">
+      <span class="sb-l">Pizza</span>
+      <span class="sb-s">10"</span><span class="sb-s">12"</span><span class="sb-s">14" / 16" thin</span>
+    </div>
+    <div class="pz"><div><div class="pz-name">Meat Combo</div><div class="pz-desc">Salami, Canadian bacon, pepperoni, sausage, hamburger and bacon</div></div><span class="pz-p">$15</span><span class="pz-p">$17</span><span class="pz-p">$22</span></div>
+    <div class="pz"><div><div class="pz-name">Supreme</div><div class="pz-desc">Pepperoni, sausage, hamburger, bell peppers, onions and mushrooms</div></div><span class="pz-p">$15</span><span class="pz-p">$17</span><span class="pz-p">$21</span></div>
+    <div class="pz"><div><div class="pz-name">Chicken Alfredo</div><div class="pz-desc">Alfredo sauce, grilled chicken, and black pepper</div></div><span class="pz-p">$13</span><span class="pz-p">$16</span><span class="pz-p">$18</span></div>
+    <div class="pz"><div><div class="pz-name">Veggie</div><div class="pz-desc">Mushrooms, bell peppers, onions, black olives and tomato</div></div><span class="pz-p">$15</span><span class="pz-p">$17</span><span class="pz-p">$21</span></div>
+    <div class="pz"><div><div class="pz-name">Hawaiian</div><div class="pz-desc">Canadian bacon and pineapple</div></div><span class="pz-p">$10</span><span class="pz-p">$13</span><span class="pz-p">$15</span></div>
+    <div class="pz"><div><div class="pz-name">Hot 'n Spicy</div><div class="pz-desc">Pepperoni, sausage and jalapeños</div></div><span class="pz-p">$11</span><span class="pz-p">$14</span><span class="pz-p">$16</span></div>
+    <div class="pz"><div><div class="pz-name">Bacon Cheeseburger</div><div class="pz-desc">Hamburger, bacon, cheddar jack cheese</div></div><span class="pz-p">$10</span><span class="pz-p">$13</span><span class="pz-p">$15</span></div>
+    <div class="pz"><div><div class="pz-name">Chicken, Bacon, Ranch</div><div class="pz-desc">Grilled chicken, bacon and ranch drizzle</div></div><span class="pz-p">$10</span><span class="pz-p">$13</span><span class="pz-p">$16</span></div>
+    <div class="pz"><div><div class="pz-name">The Ricky (Vaughn)</div><div class="pz-desc">Olive oil, mozzarella, and ricotta cheese</div></div><span class="pz-p">$11</span><span class="pz-p">$14</span><span class="pz-p">$16</span></div>
+    <div class="pz"><div><div class="pz-name">Mia's in the Park-er</div><div class="pz-desc">Alfredo sauce, Canadian bacon, pineapple</div></div><span class="pz-p">$11</span><span class="pz-p">$14</span><span class="pz-p">$16</span></div>
+    <div class="pz"><div><div class="pz-name">The Single</div><div class="pz-desc">Buffalo sauce, mozzarella, grilled chicken, ranch drizzle</div></div><span class="pz-p">$11</span><span class="pz-p">$14</span><span class="pz-p">$16</span></div>
+    <div class="pz"><div><div class="pz-name">The Double</div><div class="pz-desc">Salami, pepperoni, banana peppers with a honey drizzle</div></div><span class="pz-p">$13</span><span class="pz-p">$16</span><span class="pz-p">$18</span></div>
+    <div class="pz"><div><div class="pz-name">The Triple (Chicken Florentine)</div><div class="pz-desc">Alfredo sauce, grilled chicken, bacon, spinach, mushroom and tomato</div></div><span class="pz-p">$15</span><span class="pz-p">$17</span><span class="pz-p">$21</span></div>
+    <div class="pz"><div><div class="pz-name">Taco Pizza</div><div class="pz-desc">Refried beans, hamburger, taco seasoning, mozzarella, topped with lettuce, tomato, onion, cheddar cheese</div></div><span class="pz-p">$16</span><span class="pz-p">$18</span><span class="pz-p">$22</span></div>
+    <div class="pz"><div><div class="pz-name">Elote</div><div class="pz-desc">Mayonnaise, mozzarella, grilled corn topped with parmesan and Tajín</div></div><span class="pz-p">$13</span><span class="pz-p">$16</span><span class="pz-p">$18</span></div>
+  </section>
+
+  <!-- CREATE YOUR OWN -->
+  <section class="menu-section" id="createown">
+    <div class="menu-head"><h2>Create Your Own</h2><span class="menu-note">Single topping base price</span></div>
+    <div class="size-bar">
+      <span class="sb-l">Single Topping Pizza</span>
+      <span class="sb-s">10"</span><span class="sb-s">12"</span><span class="sb-s">14" / 16" thin</span>
+    </div>
+    <div class="pz"><div><div class="pz-name">Build Your Own Pizza</div><div class="pz-desc">Pick your sauce, cheese and toppings</div></div><span class="pz-p">$10</span><span class="pz-p">$13</span><span class="pz-p">$15</span></div>
+    <div class="pz"><div><div class="pz-name">Additional Toppings</div><div class="pz-desc">Per topping, by size</div></div><span class="pz-p">$1</span><span class="pz-p">$1.50</span><span class="pz-p">$2</span></div>
+    <div class="pz"><div><div class="pz-name">Stuffed Crust</div><div class="pz-desc">Extra, by size</div></div><span class="pz-p">$2</span><span class="pz-p">$3</span><span class="pz-p">$4</span></div>
+
+    <div class="panel cream">
+      <div class="panel-title">Toppings</div>
+      <div class="panel-sub">Alfredo sauce available for $1.00 extra</div>
+      <div class="top-group">
+        <div class="top-label">Meats</div>
+        <div class="top-chips">
+          <span class="tchip">Pepperoni</span><span class="tchip">Salami</span><span class="tchip">Hamburger (Beef)</span>
+          <span class="tchip">Sausage</span><span class="tchip">Grilled Chicken</span><span class="tchip">Canadian Bacon</span>
+          <span class="tchip">Chopped Ham</span>
+        </div>
+      </div>
+      <div class="top-group">
+        <div class="top-label">Veggies</div>
+        <div class="top-chips">
+          <span class="tchip">Bell Pepper</span><span class="tchip">Banana Pepper</span><span class="tchip">Jalapeño Peppers</span>
+          <span class="tchip">Mushrooms</span><span class="tchip">Black Olives</span><span class="tchip">Tomatoes</span>
+          <span class="tchip">Onions</span><span class="tchip">Spinach</span><span class="tchip">Pineapples</span>
+        </div>
+      </div>
+      <div class="top-group" style="margin-bottom:0;">
+        <div class="top-label">Cheese</div>
+        <div class="top-chips">
+          <span class="tchip">Mozzarella</span><span class="tchip">Cheddar Jack</span><span class="tchip">Ricotta</span><span class="tchip">Feta</span>
+        </div>
+      </div>
+      <div class="addon-row">
+        <span class="addon-chip">Alfredo Sauce <b>+$1.00</b></span>
+        <span class="addon-chip">Extra Sauce or Ranch <b>+$0.50</b></span>
+      </div>
+    </div>
+  </section>
+
+  <!-- GLUTEN FREE -->
+  <section class="menu-section" id="glutenfree">
+    <div class="menu-head"><h2>Gluten Free Options</h2></div>
+    <div class="panel teal">
+      <div class="panel-title">🌾 Cauliflower Gluten Free Crust</div>
+      <div class="panel-sub">Available in small only</div>
+      <div class="p-item"><span class="p-name">Cauliflower Crust <small>additional charge</small></span><span class="p-dots"></span><span class="p-price">+$3.00</span></div>
+      <div class="p-item"><span class="p-name">Crustless Pizza <small>10" only — a cheese crust with dollops of sauce and your choice of 4 toppings ($1.00 each additional topping)</small></span><span class="p-dots"></span><span class="p-price">$9.00</span></div>
+      <div class="p-item"><span class="p-name">Pizza in a Bowl <small>Your choice of toppings cooked then tossed with marinara, topped with mozzarella and cooked to perfection</small></span><span class="p-dots"></span><span class="p-price">$10.00</span></div>
+    </div>
+  </section>
+
+  <!-- BUFFET -->
+  <section class="menu-section" id="buffet">
+    <div class="menu-head"><h2>Buffet</h2><span class="menu-note">Includes pizza, salad bar and drink</span></div>
+    <div class="panel red">
+      <div class="panel-title">🍽️ Lunch Buffet</div>
+      <div class="panel-sub">Sunday through Friday 11–2 · Friday Night 5–8</div>
+      <div class="p-item"><span class="p-name">Adults</span><span class="p-dots"></span><span class="p-price">$13.50</span></div>
+      <div class="p-item"><span class="p-name">Children <small>8 years and under</small></span><span class="p-dots"></span><span class="p-price">$9.00</span></div>
+    </div>
+  </section>
+
+  <!-- SALAD BAR -->
+  <section class="menu-section" id="salad">
+    <div class="menu-head"><h2>Salad Bar</h2><span class="menu-note">Eat your veggies</span></div>
+    <div class="menu-item"><span class="mi-name">One Trip Salad</span><span class="mi-dots"></span><span class="mi-price">$9.00</span></div>
+    <div class="menu-item"><span class="mi-name">All You Can Eat Salad Bar</span><span class="mi-dots"></span><span class="mi-price">$11.50</span></div>
+    <div class="menu-item"><span class="mi-name">To Go Salad Bar <small>Per pound</small></span><span class="mi-dots"></span><span class="mi-price">$8.00</span></div>
+  </section>
+
+  <!-- SANDWICHES & SUBS -->
+  <section class="menu-section" id="subs">
+    <div class="menu-head"><h2>Sandwiches &amp; Subs</h2><span class="menu-note">Served with chips and a pickle</span></div>
+    <div class="menu-item"><span class="mi-name">Hometown Sub<small>Salami, Canadian bacon, pepperoni, mozzarella on a garlic buttered hoagie, toasted and topped with lettuce, tomato, onion and house Italian</small></span><span class="mi-dots"></span><span class="mi-price">$11.00</span></div>
+    <div class="menu-item"><span class="mi-name">Chicken Parmigiana<small>Breaded chicken breast with marinara and mozzarella toasted on a garlic buttered hoagie</small></span><span class="mi-dots"></span><span class="mi-price">$11.00</span></div>
+    <div class="menu-item"><span class="mi-name">Chicken, Bacon, Ranch<small>Breaded chicken breast with mozzarella toasted on a garlic butter hoagie topped with lettuce, tomato, onion and ranch dressing</small></span><span class="mi-dots"></span><span class="mi-price">$11.00</span></div>
+    <div class="menu-item"><span class="mi-name">Meatball Sub<small>Meatballs, marinara and mozzarella toasted on a garlic buttered hoagie</small></span><span class="mi-dots"></span><span class="mi-price">$11.00</span></div>
+    <div class="menu-item"><span class="mi-name">Buffalo Chicken Sandwich<small>Breaded chicken breast tossed in buffalo sauce on a toasted bun topped with lettuce and blue cheese dressing</small></span><span class="mi-dots"></span><span class="mi-price">$11.00</span></div>
+    <div class="menu-item"><span class="mi-name">Spicy Pimento Chicken Sandwich<small>Breaded chicken breast on a toasted bun topped with spicy pimento cheese and honey drizzle</small></span><span class="mi-dots"></span><span class="mi-price">$11.00</span></div>
+    <div class="menu-item"><span class="mi-name">Grilled Cheese<small>Cheddar jack cheese on your choice of white or wheat bread</small></span><span class="mi-dots"></span><span class="mi-price">$8.00</span></div>
+    <div class="menu-item"><span class="mi-name">Aunt Pam's Chicken Salad Sandwich<small>Your choice of white or wheat bread, toasted or not toasted</small></span><span class="mi-dots"></span><span class="mi-price">$8.00</span></div>
+  </section>
+
+  <!-- SIDES -->
+  <section class="menu-section" id="sides">
+    <div class="menu-head"><h2>Sides &amp; Wings</h2></div>
+    <div class="menu-item">
+      <span class="mi-name">Cheese Sticks</span><span class="mi-dots"></span>
+      <div class="mi-tiers">
+        <div class="mi-tier"><span class="t-qty">10"</span><span class="t-price">$8</span></div>
+        <div class="mi-tier"><span class="t-qty">12"</span><span class="t-price">$11</span></div>
+        <div class="mi-tier"><span class="t-qty">14"</span><span class="t-price">$13</span></div>
+      </div>
+    </div>
+    <div class="menu-item"><span class="mi-name">Fried Ravioli</span><span class="mi-dots"></span><span class="mi-price">$10.00</span></div>
+    <div class="menu-item"><span class="mi-name">Bone-in Wings <small>6 wings</small></span><span class="mi-dots"></span><span class="mi-price">$10.00</span></div>
+    <div class="menu-item"><span class="mi-name">Boneless Wings <small>8 wings</small></span><span class="mi-dots"></span><span class="mi-price">$10.00</span></div>
+    <div class="menu-item"><span class="mi-name">Extra Sides of Sauce or Ranch</span><span class="mi-dots"></span><span class="mi-price">$0.50</span></div>
+  </section>
+
+  <!-- CALZONES -->
+  <section class="menu-section" id="calzones">
+    <div class="menu-head"><h2>Calzones</h2></div>
+    <div class="menu-item"><span class="mi-name">Calzone <small>One topping</small></span><span class="mi-dots"></span><span class="mi-price">$10.00</span></div>
+    <div class="menu-item"><span class="mi-name">Additional Toppings <small>Each</small></span><span class="mi-dots"></span><span class="mi-price">$1.00</span></div>
+  </section>
+
+  <!-- PASTA -->
+  <section class="menu-section" id="pasta">
+    <div class="menu-head"><h2>Pasta</h2></div>
+    <div class="menu-item"><span class="mi-name">Spaghetti</span><span class="mi-dots"></span><span class="mi-price">$12.00</span></div>
+    <div class="menu-item"><span class="mi-name">Chicken Parmigiana</span><span class="mi-dots"></span><span class="mi-price">$13.00</span></div>
+    <div class="menu-item"><span class="mi-name">Chicken Fettuccine Alfredo</span><span class="mi-dots"></span><span class="mi-price">$13.00</span></div>
+  </section>
+
+  <!-- DESSERTS -->
+  <section class="menu-section" id="desserts">
+    <div class="menu-head"><h2>Desserts</h2></div>
+    <div class="menu-item">
+      <span class="mi-name">Cinnamon Sticks</span><span class="mi-dots"></span>
+      <div class="mi-tiers">
+        <div class="mi-tier"><span class="t-qty">10"</span><span class="t-price">$8</span></div>
+        <div class="mi-tier"><span class="t-qty">12"</span><span class="t-price">$11</span></div>
+        <div class="mi-tier"><span class="t-qty">14"</span><span class="t-price">$13</span></div>
+      </div>
+    </div>
+    <div class="menu-item"><span class="mi-name">Cherry Dessert Pizza <small>12" only</small></span><span class="mi-dots"></span><span class="mi-price">$15.00</span></div>
+    <div class="menu-item"><span class="mi-name">Apple Dessert Pizza <small>12" only</small></span><span class="mi-dots"></span><span class="mi-price">$15.00</span></div>
+  </section>
+
+  <div class="contact-card">
+    <h3>Hometown Pizza</h3>
+    <p>104 E 4th Street · Hobart, OK 73651<br>Open Sunday–Friday · Closed Saturday</p>
+    <div class="contact-btns">
+      <a href="tel:5807262225" class="c-btn primary">📞 Call (580) 726-2225</a>
+      <a href="https://maps.google.com/?q=104+E+4th+Street,+Hobart,+OK+73651" target="_blank" rel="noopener" class="c-btn outline">📍 Get Directions</a>
+    </div>
+  </div>
+
+  <div class="disclaimer">
+    Menu and prices provided by Hometown Pizza and published as a service of the Hobart Chamber of Commerce. Prices subject to change — please call to confirm. Last updated September 2026.
+  </div>
+
+</main>
+
+<div class="page-footer">
+  <p>Hobart Chamber of Commerce · 106 W 4th St · Hobart, OK 73651 · <a href="tel:5806820887">(580) 682-0887</a></p>
+  <p style="margin-top:6px;"><a href="index.html#directory">← Back to Member Directory</a></p>
+</div>
+
+</body>
+</html>
