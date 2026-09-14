@@ -2,1025 +2,307 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no,viewport-fit=cover"/>
-<title>Hometown Harvest — Map Editor</title>
+<meta name="color-scheme" content="light only"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Event Map · Hobart's Hometown Harvest 2026</title>
+<meta name="description" content="Event map for Hobart's Hometown Harvest, Saturday September 19, 2026. See where the stage, food trucks, vendor booths, parade route, activities and parking are on the Kiowa County Courthouse Square."/>
+<meta property="og:title" content="Hometown Harvest 2026 — Event Map"/>
+<meta property="og:description" content="Where everything is happening on the Courthouse Square, and what time to be there."/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800;900&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
 <style>
-*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;user-select:none;}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
 :root{
-  --bg:#13131f;--panel:#1a1a2e;--panel2:#22223a;
-  --border:rgba(255,255,255,.09);--text:#eeeef8;--muted:rgba(238,238,248,.4);
-  --gold:#c49a3e;--navy:#1a3ea8;--coral:#e85d2a;--sage:#5aaa38;--purple:#9b3dc8;
-  --red:#e53935;--gray:#6f7d99;--tan:#9a8850;--yellow:#d4b010;
-}
-html,body{height:100%;overflow:hidden;background:var(--bg);font-family:-apple-system,BlinkMacSystemFont,'DM Sans',sans-serif;color:var(--text);}
-.app{display:flex;height:100%;flex-direction:column;}
-
-/* ── TOP BAR ── */
-.topbar{
-  height:54px;background:var(--panel);border-bottom:1px solid var(--border);
-  display:flex;align-items:center;gap:0;flex-shrink:0;
-  padding:0 8px;overflow-x:auto;scrollbar-width:none;
-}
-.topbar::-webkit-scrollbar{display:none;}
-.tb-title{font-size:13px;font-weight:700;color:var(--gold);white-space:nowrap;padding:0 10px 0 4px;border-right:1px solid var(--border);margin-right:8px;}
-
-/* Tool buttons */
-.t-btn{
-  display:flex;flex-direction:column;align-items:center;justify-content:center;
-  gap:1px;min-width:52px;height:42px;border-radius:9px;border:1.5px solid transparent;
-  background:transparent;color:var(--muted);cursor:pointer;font-size:10px;font-weight:600;
-  padding:0 6px;flex-shrink:0;transition:all .12s;
-}
-.t-btn:active{transform:scale(.92);}
-.t-btn.on{border-color:var(--tc,var(--gold));background:rgba(196,154,62,.14);color:var(--tc,var(--gold));}
-.t-btn:hover:not(.on){background:var(--panel2);color:var(--text);}
-.t-icon{font-size:19px;line-height:1;}
-.t-sep{width:1px;height:32px;background:var(--border);margin:0 6px;flex-shrink:0;}
-
-/* color dots in topbar */
-.c-dot{width:26px;height:26px;border-radius:50%;border:2.5px solid transparent;cursor:pointer;flex-shrink:0;transition:transform .12s;}
-.c-dot.on{border-color:#fff;transform:scale(1.18);}
-.c-dot:active{transform:scale(.9);}
-
-/* stroke buttons */
-.s-btn{min-width:34px;height:30px;border-radius:6px;border:1.5px solid var(--border);
-  background:var(--panel2);color:var(--muted);font-size:10px;font-weight:700;cursor:pointer;
-  display:flex;align-items:center;justify-content:center;flex-shrink:0;}
-.s-btn.on{border-color:var(--gold);color:var(--gold);}
-
-/* ── CANVAS AREA ── */
-.canvas-wrap{flex:1;position:relative;overflow:hidden;background:#1a1a10;touch-action:none;}
-#c{position:absolute;top:0;left:0;touch-action:none;cursor:crosshair;}
-#c.grab{cursor:grab;}
-#c.grabbing{cursor:grabbing;}
-#c.move-obj{cursor:move;}
-
-/* ── BOTTOM STATUS ── */
-.statusbar{
-  height:36px;background:var(--panel);border-top:1px solid var(--border);
-  display:flex;align-items:center;justify-content:space-between;
-  padding:0 14px;flex-shrink:0;
-}
-.st-hint{font-size:11px;color:var(--muted);font-style:italic;}
-.st-right{display:flex;gap:14px;align-items:center;}
-.st-info{font-size:11px;color:var(--muted);}
-.st-btn{font-size:11px;font-weight:700;color:var(--gold);cursor:pointer;background:none;border:none;font-family:inherit;}
-
-/* ── MODALS ── */
-.overlay{position:fixed;inset:0;background:rgba(0,0,0,.55);display:none;align-items:flex-end;justify-content:center;z-index:500;}
-.overlay.on{display:flex;}
-.sheet{background:var(--panel);border-radius:20px 20px 0 0;padding:20px 18px max(28px,env(safe-area-inset-bottom));width:100%;max-width:480px;max-height:80vh;overflow-y:auto;}
-.sheet-handle{width:38px;height:4px;background:var(--border);border-radius:2px;margin:0 auto 16px;}
-.sheet h3{font-size:17px;font-weight:700;color:var(--gold);margin-bottom:16px;}
-.fg{display:flex;flex-direction:column;gap:5px;margin-bottom:13px;}
-.fg label{font-size:12px;font-weight:600;color:var(--muted);}
-.fg input,.fg select{padding:12px 13px;background:var(--panel2);border:1.5px solid var(--border);border-radius:9px;font-size:15px;color:var(--text);font-family:inherit;width:100%;}
-.fg input:focus,.fg select:focus{outline:none;border-color:var(--gold);}
-.sbtns{display:flex;gap:8px;margin-top:16px;}
-.sb{flex:1;padding:13px;border-radius:9px;border:none;font-size:14px;font-weight:700;font-family:inherit;cursor:pointer;}
-.sb.pri{background:var(--gold);color:#0a0a00;}
-.sb.sec{background:var(--panel2);color:var(--muted);}
-.sb.del{background:rgba(232,89,58,.18);color:var(--coral);}
-
-/* snap indicator */
-.snap-badge{position:fixed;bottom:44px;left:50%;transform:translateX(-50%);background:rgba(196,154,62,.9);color:#000;font-size:11px;font-weight:700;padding:4px 12px;border-radius:12px;display:none;pointer-events:none;z-index:100;}
-.snap-badge.on{display:block;}
-
-/* zoom indicator */
-.zoom-badge{position:absolute;bottom:44px;right:14px;background:rgba(0,0,0,.6);color:var(--muted);font-size:11px;font-weight:600;padding:3px 8px;border-radius:6px;pointer-events:none;}
+  color-scheme:light;--navy:#1a3ea8;--navy-dark:#142f7e;--navy-deep:#0e2056;--gold:#c49a3e;--gold-light:#dab65e;--gold-pale:#f6edd6;--harvest:#c44b0a;--white:#fff;--slate:#f3f6fc;--gray:#6f7d99;--dark-gray:#2c3a58;--border:#dbe3f4;}
+html{background:#fff;}
+body{font-family:'Inter',sans-serif;color:var(--navy-deep);background:#fff;}
+nav{background:rgba(26,62,168,.97);display:flex;align-items:center;justify-content:space-between;padding:0 22px;height:62px;border-bottom:2px solid var(--gold);gap:12px;}
+.nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none;flex:1;min-width:0;}
+.nav-logo-mark{width:38px;height:38px;border-radius:50%;background:var(--gold-pale);overflow:hidden;flex-shrink:0;}
+.nav-logo-mark img{width:100%;height:100%;object-fit:cover;}
+.nav-logo-text span:first-child{font-family:'Playfair Display',serif;font-size:14.5px;font-weight:700;color:#fff;display:block;white-space:nowrap;}
+.nav-logo-text span:last-child{font-size:10px;color:rgba(255,255,255,.5);}
+.nav-back{font-size:12px;font-weight:600;color:rgba(255,255,255,.7);text-decoration:none;padding:7px 13px;border:1px solid rgba(255,255,255,.25);border-radius:5px;white-space:nowrap;flex-shrink:0;}
+.hero{background:linear-gradient(150deg,#3a1200,#7a2800 50%,#c44b0a);padding:32px 20px 28px;text-align:center;}
+.hero-eyebrow{font-size:10.5px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:rgba(255,255,255,.6);margin-bottom:8px;}
+.hero h1{font-family:'Playfair Display',serif;font-size:clamp(25px,5vw,40px);font-weight:900;color:#fff;line-height:1.1;margin-bottom:6px;}
+.hero h1 em{font-style:italic;color:#f6b84a;}
+.hero-sub{font-size:13px;color:rgba(255,255,255,.7);}
+main{max-width:1020px;margin:0 auto;padding:26px 14px 70px;}
+.map-frame{background:#fff;border:1px solid var(--border);border-radius:12px;padding:12px;box-shadow:0 6px 28px rgba(26,62,168,.09);}
+.map-svg{width:100%;height:auto;display:block;}
+.map-legend{margin-top:20px;display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:9px;}
+.mleg{display:flex;align-items:flex-start;gap:9px;padding:10px 13px;background:var(--slate);border-radius:8px;font-size:12.5px;font-weight:700;color:var(--navy-deep);line-height:1.35;}
+.mleg-sw{width:14px;height:14px;border-radius:4px;flex-shrink:0;margin-top:2px;}
+.mleg-n{width:20px;height:20px;border-radius:50%;flex-shrink:0;color:#fff;font-size:11.5px;font-weight:800;display:flex;align-items:center;justify-content:center;margin-top:-1px;}
+.mleg small{display:block;font-size:10.5px;font-weight:500;color:var(--gray);margin-top:2px;}
+.map-note{margin-top:16px;font-size:12px;color:var(--gray);font-style:italic;text-align:center;line-height:1.6;}
+.cta-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:26px;justify-content:center;}
+.cta{display:inline-flex;align-items:center;gap:7px;padding:12px 22px;border-radius:8px;font-size:13.5px;font-weight:700;text-decoration:none;}
+.cta.primary{background:var(--navy);color:#fff;}
+.cta.gold{background:var(--gold);color:var(--navy-deep);}
+.cta.outline{border:1.5px solid var(--border);color:var(--navy);}
+.page-footer{background:var(--navy-dark);padding:22px;text-align:center;}
+.page-footer p{font-size:12.5px;color:rgba(255,255,255,.4);}
+.page-footer a{color:var(--gold-light);text-decoration:none;}
+@media(max-width:640px){nav{padding:0 13px;}main{padding:18px 10px 50px;}.map-frame{padding:7px;}.map-legend{grid-template-columns:1fr;}}
 </style>
 </head>
 <body>
-<div class="app">
-
-<!-- TOP BAR -->
-<div class="topbar" id="topbar">
-  <div class="tb-title">🌽 Map</div>
-
-  <!-- TOOLS -->
-  <div class="t-btn on" id="tb-select" style="--tc:var(--gold)" onclick="setTool('select')" title="Select & Move">
-    <span class="t-icon">↖</span>Select
-  </div>
-  <div class="t-btn" id="tb-pin" style="--tc:var(--gold)" onclick="setTool('pin')" title="Pin marker">
-    <span class="t-icon">📍</span>Pin
-  </div>
-  <div class="t-btn" id="tb-rect" style="--tc:var(--navy)" onclick="setTool('rect')" title="Rectangle zone">
-    <span class="t-icon">▭</span>Zone
-  </div>
-  <div class="t-btn" id="tb-circle" style="--tc:var(--sage)" onclick="setTool('circle')" title="Circle zone">
-    <span class="t-icon">◯</span>Circle
-  </div>
-  <div class="t-btn" id="tb-arrow" style="--tc:var(--coral)" onclick="setTool('arrow')" title="Flow arrow">
-    <span class="t-icon">➜</span>Flow
-  </div>
-  <div class="t-btn" id="tb-free" style="--tc:var(--purple)" onclick="setTool('free')" title="Freehand">
-    <span class="t-icon">✏</span>Draw
-  </div>
-
-  <div class="t-sep"></div>
-
-  <!-- COLORS -->
-  <div id="colorDots"></div>
-
-  <div class="t-sep"></div>
-
-  <!-- STROKE -->
-  <div style="display:flex;gap:4px;align-items:center;">
-    <div class="s-btn on" id="sw-2" onclick="setStroke(2)">2</div>
-    <div class="s-btn" id="sw-4" onclick="setStroke(4)">4</div>
-    <div class="s-btn" id="sw-8" onclick="setStroke(8)">8</div>
-    <div class="s-btn" id="sw-14" onclick="setStroke(14)">14</div>
-  </div>
-
-  <div class="t-sep"></div>
-
-  <!-- SNAP TOGGLE -->
-  <div class="t-btn" id="tb-snap" onclick="toggleSnap()" title="Shape snap">
-    <span class="t-icon">⬡</span>Snap
-  </div>
-
-  <div class="t-sep"></div>
-
-  <!-- ACTIONS -->
-  <div class="t-btn" onclick="undoLast()" title="Undo"><span class="t-icon">↩</span>Undo</div>
-  <div class="t-btn" onclick="clearAll()" title="Clear all"><span class="t-icon">🗑</span>Clear</div>
-  <div class="t-btn" onclick="exportPNG()" title="Export" style="--tc:var(--gold)"><span class="t-icon">⬇</span>Export</div>
+<nav>
+  <a href="index.html" class="nav-logo">
+    <span class="nav-logo-mark"><img src="flyers/chamber-logo.PNG" alt="" onerror="this.onerror=null;this.style.display='none';"/></span>
+    <span class="nav-logo-text"><span>Hobart Chamber of Commerce</span><span>Kiowa County · Oklahoma</span></span>
+  </a>
+  <a href="hometown-harvest.html" class="nav-back">← Event Info</a>
+</nav>
+<div class="hero">
+  <div class="hero-eyebrow">Saturday, September 19, 2026</div>
+  <h1>Hometown Harvest <em>Event Map</em></h1>
+  <p class="hero-sub">Where everything is happening — and what time to be there</p>
 </div>
+<main>
+  <div class="map-frame">
+<svg class="map-svg" viewBox="0 0 780 790" xmlns="http://www.w3.org/2000/svg" font-family="Inter, sans-serif" role="img" aria-label="Hometown Harvest event map, Kiowa County Courthouse Square, Hobart Oklahoma">
+        <defs><style>
+          .bdg{font-size:13px;font-weight:800;fill:#fff;text-anchor:middle;}
+          .lbl{font-size:10px;font-weight:800;}
+          .sub{font-size:8.5px;font-weight:700;}
+        </style></defs>
+        <rect width="780" height="790" fill="#eef1f8"/>
 
-<!-- CANVAS -->
-<div class="canvas-wrap" id="canvasWrap">
-  <canvas id="c"></canvas>
-  <div class="zoom-badge" id="zoomBadge">100%</div>
-</div>
+        <!-- STREETS — courthouse-front view: S Main at bottom, doors face top -->
+        <rect x="0" y="0" width="780" height="112" fill="#cdd3e8"/>
+        <rect x="0" y="566" width="780" height="224" fill="#cdd3e8"/>
+        <rect x="0" y="0" width="96" height="790" fill="#cdd3e8"/>
+        <rect x="684" y="0" width="96" height="790" fill="#cdd3e8"/>
+        <g stroke="#b0bcd8" stroke-width="1.3" stroke-dasharray="13,9">
+          <line x1="0" y1="56" x2="780" y2="56"/><line x1="48" y1="0" x2="48" y2="790"/>
+          <line x1="732" y1="0" x2="732" y2="790"/>
+        </g>
+        <text x="390" y="24" text-anchor="middle" font-size="12.5" font-weight="700" fill="#3a4470" letter-spacing=".7">S JEFFERSON ST</text>
+        <text x="390" y="782" text-anchor="middle" font-size="12.5" font-weight="700" fill="#3a4470" letter-spacing=".7">S MAIN ST</text>
+        <text x="22" y="340" text-anchor="middle" font-size="12" font-weight="700" fill="#3a4470" transform="rotate(-90,22,340)" letter-spacing=".6">E 3RD ST</text>
+        <text x="758" y="340" text-anchor="middle" font-size="12" font-weight="700" fill="#3a4470" transform="rotate(90,758,340)" letter-spacing=".6">E 4TH ST</text>
 
-<!-- STATUS -->
-<div class="statusbar">
-  <span class="st-hint" id="hint">↖ Select an object to move it, or pick a tool to draw</span>
-  <div class="st-right">
-    <span class="st-info" id="objInfo">0 objects</span>
-    <button class="st-btn" onclick="showList()">☰ List</button>
+        <!-- GROUNDS 588 x 454 (true 1.296 aspect) -->
+        <rect x="96" y="112" width="588" height="454" fill="#c9dca8"/>
+        <rect x="96" y="112" width="588" height="454" fill="none" stroke="#88a855" stroke-width="3"/>
+
+        <!-- WALKWAYS -->
+        <g stroke="#e0d4a0" stroke-linecap="round">
+          <line x1="126" y1="142" x2="318" y2="292" stroke-width="13"/>
+          <line x1="654" y1="142" x2="470" y2="292" stroke-width="13"/>
+          <line x1="126" y1="536" x2="318" y2="396" stroke-width="13"/>
+          <line x1="654" y1="536" x2="470" y2="396" stroke-width="13"/>
+          <line x1="390" y1="142" x2="390" y2="230" stroke-width="11"/>
+          <line x1="390" y1="388" x2="390" y2="536" stroke-width="11"/>
+          <line x1="126" y1="339" x2="270" y2="339" stroke-width="11"/>
+          <line x1="460" y1="339" x2="654" y2="339" stroke-width="11"/>
+        </g>
+
+        <!-- TREES -->
+        <g opacity=".68">
+          <circle cx="152" cy="168" r="20" fill="#5a9e3a"/><circle cx="196" cy="140" r="14" fill="#6aaa48"/>
+          <circle cx="612" cy="164" r="21" fill="#5a9e3a"/><circle cx="655" cy="192" r="15" fill="#58962e"/>
+          <circle cx="560" cy="160" r="17" fill="#6aaa48"/><circle cx="656" cy="300" r="16" fill="#5a9e3a"/>
+          <circle cx="146" cy="480" r="19" fill="#5a9e3a"/><circle cx="182" cy="518" r="14" fill="#6aaa48"/>
+          <circle cx="632" cy="490" r="20" fill="#5a9e3a"/><circle cx="596" cy="520" r="15" fill="#58962e"/>
+          <circle cx="480" cy="200" r="15" fill="#6aaa48"/><circle cx="252" cy="452" r="16" fill="#58962e"/>
+          <circle cx="124" cy="300" r="14" fill="#5a9e3a"/><circle cx="352" cy="470" r="15" fill="#6aaa48"/>
+        </g>
+
+        <!-- COUNTY PARKING LOT (northwest) -->
+        <rect x="174" y="215" width="146" height="53" fill="#b6bfd2" fill-opacity=".55" stroke="#6f7d99" stroke-width="1.8" stroke-dasharray="6,4" rx="4"/>
+        <text x="247" y="246" text-anchor="middle" class="sub" fill="#4d586f">COUNTY LOT</text>
+
+        <!-- COURTHOUSE ANNEX (west wing) -->
+        <rect x="272" y="252" width="57" height="111" fill="#8f8878" stroke="#6f6a5c" stroke-width="1.5" rx="3"/>
+
+        <!-- COURTHOUSE — front doors face EAST (top of this view) -->
+        <rect x="330" y="237" width="130" height="151" fill="rgba(0,0,0,.13)" rx="4"/>
+        <rect x="326" y="233" width="130" height="151" fill="#c4baa8" stroke="#9a9080" stroke-width="2" rx="4"/>
+        <rect x="338" y="245" width="106" height="127" fill="#b8ae9c" rx="2"/>
+        <ellipse cx="391" cy="308" rx="25" ry="20" fill="#aaa090" stroke="#988e78" stroke-width="1.2"/>
+        <text x="391" y="312" text-anchor="middle" font-size="8.5" font-weight="800" fill="#5a5040" letter-spacing=".3">COURTHOUSE</text>
+        <rect x="366" y="225" width="50" height="8" fill="#b4a890" rx="1"/>
+        <rect x="374" y="217" width="34" height="8" fill="#bab090" rx="1"/>
+        <text x="391" y="209" text-anchor="middle" class="sub" fill="#6f6a5c">▲ FRONT DOORS</text>
+
+        <!-- ===== NUMBERED ZONES ===== -->
+
+        <!-- 9 PAVILION -->
+        <rect x="145" y="392" width="64" height="76" fill="#7b3fa0" fill-opacity=".26" stroke="#7b3fa0" stroke-width="2.4" rx="5"/>
+        <circle cx="145" cy="392" r="13" fill="#7b3fa0"/><text x="145" y="397" class="bdg">9</text>
+        <text x="177" y="422" text-anchor="middle" class="lbl" fill="#66348a">PAVILION</text>
+        <text x="177" y="436" text-anchor="middle" class="sub" fill="#66348a">Bingo · Trivia</text>
+        <text x="177" y="448" text-anchor="middle" class="sub" fill="#66348a">Name That</text>
+        <text x="177" y="459" text-anchor="middle" class="sub" fill="#66348a">Tune</text>
+
+        <!-- 5 DUNK TANK + OFFICER AREA -->
+        <rect x="242" y="278" width="58" height="82" fill="#0e7c9e" fill-opacity=".26" stroke="#0e7c9e" stroke-width="2.4" rx="5"/>
+        <circle cx="242" cy="278" r="13" fill="#0e7c9e"/><text x="242" y="283" class="bdg">5</text>
+        <text x="271" y="306" text-anchor="middle" class="lbl" fill="#0a5c76">DUNK</text>
+        <text x="271" y="319" text-anchor="middle" class="lbl" fill="#0a5c76">TANK</text>
+        <text x="271" y="333" text-anchor="middle" class="sub" fill="#0a5c76">M.O.T.</text>
+        <text x="271" y="348" text-anchor="middle" class="sub" fill="#0a5c76">Officer Area</text>
+
+        <!-- 6 BATHROOMS -->
+        <rect x="333" y="396" width="50" height="50" fill="#4a7fb5" fill-opacity=".3" stroke="#37628f" stroke-width="2.2" rx="5"/>
+        <circle cx="333" cy="396" r="12" fill="#37628f"/><text x="333" y="401" class="bdg">6</text>
+        <text x="358" y="420" text-anchor="middle" font-size="12">🚻</text>
+        <text x="358" y="437" text-anchor="middle" class="sub" fill="#2d5278">BATHROOMS</text>
+
+        <!-- 3 PETTING ZOO -->
+        <rect x="406" y="396" width="58" height="80" fill="#c2870f" fill-opacity=".26" stroke="#a06f08" stroke-width="2.4" rx="16"/>
+        <circle cx="406" cy="396" r="13" fill="#a06f08"/><text x="406" y="401" class="bdg">3</text>
+        <text x="435" y="426" text-anchor="middle" font-size="13">🐐</text>
+        <text x="435" y="444" text-anchor="middle" class="sub" fill="#7d5606">PETTING</text>
+        <text x="435" y="456" text-anchor="middle" class="sub" fill="#7d5606">ZOO</text>
+
+        <!-- 4 BOUNCE HOUSES -->
+        <rect x="483" y="400" width="56" height="72" fill="#d4306b" fill-opacity=".24" stroke="#d4306b" stroke-width="2.2" rx="6"/>
+        <circle cx="483" cy="400" r="12" fill="#d4306b"/><text x="483" y="405" class="bdg">4</text>
+        <text x="511" y="430" text-anchor="middle" font-size="13">🎪</text>
+        <text x="511" y="448" text-anchor="middle" class="sub" fill="#a41f50">BOUNCE</text>
+        <rect x="619" y="400" width="56" height="72" fill="#d4306b" fill-opacity=".24" stroke="#d4306b" stroke-width="2.2" rx="6"/>
+        <circle cx="619" cy="400" r="12" fill="#d4306b"/><text x="619" y="405" class="bdg">4</text>
+        <text x="647" y="430" text-anchor="middle" font-size="13">🎪</text>
+        <text x="647" y="448" text-anchor="middle" class="sub" fill="#a41f50">BOUNCE</text>
+
+        <!-- 10 GAZEBO -->
+        <circle cx="585" cy="384" r="30" fill="#e4dab8" stroke="#9a8850" stroke-width="2.4"/>
+        <circle cx="585" cy="384" r="19" fill="#d4ca98" stroke="#9a8850" stroke-width="1.3"/>
+        <circle cx="585" cy="384" r="6" fill="#9a8850"/>
+        <g stroke="#9a8850" stroke-width="1.3">
+          <line x1="585" y1="354" x2="585" y2="364"/><line x1="585" y1="404" x2="585" y2="414"/>
+          <line x1="555" y1="384" x2="565" y2="384"/><line x1="605" y1="384" x2="615" y2="384"/>
+        </g>
+        <circle cx="562" cy="361" r="13" fill="#c49a3e"/><text x="562" y="366" class="bdg">10</text>
+        <rect x="541" y="300" width="88" height="14" fill="#fff" fill-opacity=".93" rx="3"/>
+        <text x="585" y="310" text-anchor="middle" class="lbl" fill="#6a5820">GAZEBO</text>
+        <rect x="525" y="316" width="120" height="24" fill="#fff" fill-opacity=".86" rx="3"/>
+        <text x="585" y="325" text-anchor="middle" class="sub" fill="#8a6a1e">Kids Pageant 10 AM</text>
+        <text x="585" y="336" text-anchor="middle" class="sub" fill="#8a6a1e">Scarecrow 12 PM</text>
+
+        <!-- 11 KID ACTIVITIES -->
+        <rect x="471" y="264" width="62" height="108" fill="#2e9e6b" fill-opacity=".24" stroke="#208054" stroke-width="2.4" rx="5"/>
+        <circle cx="471" cy="264" r="13" fill="#208054"/><text x="471" y="269" class="bdg">11</text>
+        <text x="502" y="300" text-anchor="middle" class="lbl" fill="#166446">KID</text>
+        <text x="502" y="314" text-anchor="middle" class="lbl" fill="#166446">ACTIVITIES</text>
+        <text x="502" y="330" text-anchor="middle" class="sub" fill="#166446">Games</text>
+        <text x="502" y="342" text-anchor="middle" class="sub" fill="#166446">Races</text>
+        <text x="502" y="354" text-anchor="middle" class="sub" fill="#166446">All day</text>
+
+        <!-- 2 VENDOR SPACES — two runs along S Main side -->
+        <rect x="185" y="499" width="118" height="59" fill="#c49a3e" fill-opacity=".3" stroke="#c49a3e" stroke-width="2.4" rx="4"/>
+        <g stroke="#c49a3e" stroke-width="1" opacity=".7">
+          <line x1="224" y1="499" x2="224" y2="558"/><line x1="264" y1="499" x2="264" y2="558"/>
+        </g>
+        <circle cx="185" cy="499" r="12" fill="#c49a3e"/><text x="185" y="504" class="bdg">2</text>
+        <text x="244" y="534" text-anchor="middle" class="sub" fill="#8a6a1e">VENDORS</text>
+        <rect x="404" y="499" width="128" height="59" fill="#c49a3e" fill-opacity=".3" stroke="#c49a3e" stroke-width="2.4" rx="4"/>
+        <g stroke="#c49a3e" stroke-width="1" opacity=".7">
+          <line x1="447" y1="499" x2="447" y2="558"/><line x1="489" y1="499" x2="489" y2="558"/>
+        </g>
+        <circle cx="404" cy="499" r="12" fill="#c49a3e"/><text x="404" y="504" class="bdg">2</text>
+        <text x="468" y="534" text-anchor="middle" class="sub" fill="#8a6a1e">VENDORS</text>
+
+        <!-- 1 REGISTRATION / CHECK IN -->
+        <rect x="313" y="477" width="80" height="81" fill="#c0392b" fill-opacity=".3" stroke="#c0392b" stroke-width="2.6" rx="5"/>
+        <circle cx="313" cy="477" r="14" fill="#c0392b"/><text x="313" y="482" class="bdg">1</text>
+        <text x="353" y="500" text-anchor="middle" class="lbl" fill="#a02d20">CHECK IN</text>
+        <text x="353" y="514" text-anchor="middle" class="sub" fill="#a02d20">Vendor · Tractor</text>
+        <text x="353" y="526" text-anchor="middle" class="sub" fill="#a02d20">Registration</text>
+        <text x="353" y="538" text-anchor="middle" class="sub" fill="#a02d20">Kids Bracelets</text>
+        <text x="353" y="550" text-anchor="middle" class="sub" fill="#a02d20">Raffle Tickets</text>
+
+        <!-- 12 CORN PLAY -->
+        <rect x="548" y="487" width="52" height="71" fill="#d68910" fill-opacity=".26" stroke="#b8770c" stroke-width="2.2" rx="5"/>
+        <circle cx="548" cy="487" r="12" fill="#b8770c"/><text x="548" y="492" class="bdg">12</text>
+        <text x="574" y="514" text-anchor="middle" font-size="12">🌽</text>
+        <text x="574" y="532" text-anchor="middle" class="sub" fill="#8a5908">CORN</text>
+        <text x="574" y="544" text-anchor="middle" class="sub" fill="#8a5908">PLAY</text>
+
+        <!-- 13 HANDICAP PARKING — S Jefferson (top) -->
+        <rect x="204" y="22" width="123" height="66" fill="#6f7d99" fill-opacity=".28" stroke="#6f7d99" stroke-width="2.4" rx="5"/>
+        <circle cx="204" cy="22" r="12" fill="#6f7d99"/><text x="204" y="27" class="bdg">13</text>
+        <text x="265" y="62" text-anchor="middle" class="lbl" fill="#4d586f">♿ HANDICAP</text>
+        <rect x="402" y="22" width="122" height="66" fill="#6f7d99" fill-opacity=".28" stroke="#6f7d99" stroke-width="2.4" rx="5"/>
+        <circle cx="402" cy="22" r="12" fill="#6f7d99"/><text x="402" y="27" class="bdg">13</text>
+        <text x="463" y="62" text-anchor="middle" class="lbl" fill="#4d586f">♿ HANDICAP</text>
+
+        <!-- 7 TRAILER — E 4th, north portion -->
+        <rect x="692" y="118" width="80" height="211" fill="#1a3ea8" fill-opacity=".24" stroke="#1a3ea8" stroke-width="2.4" rx="5"/>
+        <circle cx="692" cy="118" r="13" fill="#1a3ea8"/><text x="692" y="123" class="bdg">7</text>
+        <text x="732" y="196" text-anchor="middle" font-size="15">🎤</text>
+        <text x="732" y="224" text-anchor="middle" class="lbl" fill="#1a3ea8" transform="rotate(90,732,224)">TRAILER · MUSIC · WINNERS 6 PM</text>
+
+        <!-- 8 FOOD TRUCKS — E 4th, south portion -->
+        <rect x="692" y="351" width="80" height="209" fill="#e05c2a" fill-opacity=".24" stroke="#e05c2a" stroke-width="2.4" stroke-dasharray="8,4" rx="5"/>
+        <circle cx="692" cy="351" r="13" fill="#e05c2a"/><text x="692" y="356" class="bdg">8</text>
+        <text x="732" y="424" text-anchor="middle" font-size="15">🚚</text>
+        <text x="732" y="456" text-anchor="middle" class="lbl" fill="#b8461d" transform="rotate(90,732,456)">FOOD TRUCKS · OPEN 10 AM</text>
+
+        <!-- SERVICE VEHICLES — curb of S Main, facing north (left) -->
+        <rect x="155" y="574" width="494" height="28" fill="#2e7d5b" fill-opacity=".26" stroke="#2e7d5b" stroke-width="2.2" rx="4"/>
+        <polygon points="143,588 158,581 158,595" fill="#2e7d5b"/>
+        <text x="402" y="593" text-anchor="middle" class="sub" fill="#1f5c42">🚓 🚒 SERVICE VEHICLES — FACING NORTH · EXIT LANE KEPT CLEAR</text>
+
+        <!-- PARADE ROUTE — center of S Main, south to north (right to left) -->
+        <line x1="700" y1="630" x2="150" y2="630" stroke="#c0392b" stroke-width="7" stroke-linecap="round"/>
+        <polygon points="118,630 156,612 156,648" fill="#c0392b"/>
+        <rect x="300" y="620" width="230" height="18" fill="#fff" fill-opacity=".93" rx="3"/>
+        <text x="415" y="634" text-anchor="middle" font-size="11" font-weight="800" fill="#a02d20">← PARADE ROUTE · 5:30 PM</text>
+
+        <!-- LINEUP + TRACTOR SHOW -->
+        <rect x="430" y="662" width="248" height="44" fill="#8a5a2b" fill-opacity=".2" stroke="#8a5a2b" stroke-width="2.2" stroke-dasharray="6,4" rx="5"/>
+        <text x="554" y="680" text-anchor="middle" class="lbl" fill="#6b451f">PARADE LINEUP · 4:30 PM</text>
+        <text x="554" y="694" text-anchor="middle" class="sub" fill="#6b451f">Tommy Franks Museum — heads north ←</text>
+        <rect x="120" y="662" width="248" height="44" fill="#4a7c2f" fill-opacity=".2" stroke="#4a7c2f" stroke-width="2.2" stroke-dasharray="6,4" rx="5"/>
+        <text x="244" y="680" text-anchor="middle" class="lbl" fill="#37601f">🚜 TRACTOR SHOW</text>
+        <text x="244" y="694" text-anchor="middle" class="sub" fill="#37601f">Main Street · Touch-a-Truck</text>
+
+        <text x="390" y="730" text-anchor="middle" class="sub" fill="#4d586f">Silent Auction at the Stanley Building · opens 9 AM</text>
+
+        <!-- COMPASS — north points LEFT in this view -->
+        <g transform="translate(722,676)">
+          <circle r="26" fill="#fff" stroke="#1a3ea8" stroke-width="1.6"/>
+          <polygon points="-18,0 -5,-5 -8,0 -5,5" fill="#1a3ea8"/>
+          <polygon points="18,0 5,-5 8,0 5,5" fill="#c4c4c4"/>
+          <circle r="3" fill="#1a3ea8"/>
+          <text x="-19" y="-9" text-anchor="middle" font-size="11" font-weight="800" fill="#1a3ea8">N</text>
+        </g>
+      </svg>
   </div>
-</div>
-
-<div class="snap-badge" id="snapBadge">⬡ Snap ON</div>
-
-<!-- LABEL MODAL -->
-<div class="overlay" id="labelModal">
-  <div class="sheet">
-    <div class="sheet-handle"></div>
-    <h3 id="labelTitle">Label this object</h3>
-    <div class="fg"><label>Label (optional)</label>
-      <input id="m_lbl" type="text" placeholder="e.g. Vendor #1, Food Truck Zone…" autocomplete="off"/>
+<div class="map-legend">
+      <div class="mleg"><span class="mleg-n" style="background:#c0392b">1</span><span>Check In<small>Vendor &amp; tractor registration · kids bracelets · raffle tickets</small></span></div>
+      <div class="mleg"><span class="mleg-n" style="background:#c49a3e">2</span><span>Vendor Spaces<small>Two runs along S Main side · open 10 AM</small></span></div>
+      <div class="mleg"><span class="mleg-n" style="background:#a06f08">3</span><span>Petting Zoo<small>Closes 5 PM</small></span></div>
+      <div class="mleg"><span class="mleg-n" style="background:#d4306b">4</span><span>Bounce Houses<small>Two locations · all day</small></span></div>
+      <div class="mleg"><span class="mleg-n" style="background:#0e7c9e">5</span><span>Dunk Tank &amp; Officer Area<small>Hosted by M.O.T.</small></span></div>
+      <div class="mleg"><span class="mleg-n" style="background:#37628f">6</span><span>Bathrooms<small>West of the courthouse</small></span></div>
+      <div class="mleg"><span class="mleg-n" style="background:#1a3ea8">7</span><span>Trailer<small>Live music · winner announcements 6 PM · street dance 6:30 PM</small></span></div>
+      <div class="mleg"><span class="mleg-n" style="background:#e05c2a">8</span><span>Food Trucks<small>E 4th St · open 10 AM</small></span></div>
+      <div class="mleg"><span class="mleg-n" style="background:#7b3fa0">9</span><span>Pavilion<small>Bingo 11 AM · Trivia 1:30 PM · Name That Tune 3 PM</small></span></div>
+      <div class="mleg"><span class="mleg-n" style="background:#c49a3e">10</span><span>Gazebo<small>Kids Pageant 10 AM · Scarecrow Contest 12 PM</small></span></div>
+      <div class="mleg"><span class="mleg-n" style="background:#208054">11</span><span>Kid Activities<small>Sack races · chalk contest · pumpkin roll &amp; painting · egg relay · duck duck goose · stick horse race · freeze dance</small></span></div>
+      <div class="mleg"><span class="mleg-n" style="background:#b8770c">12</span><span>Corn Play</span></div>
+      <div class="mleg"><span class="mleg-n" style="background:#6f7d99">13</span><span>Handicap Parking<small>S Jefferson St</small></span></div>
+      <div class="mleg"><span class="mleg-sw" style="background:#2e7d5b"></span><span>Service Vehicles<small>Curbside on S Main, facing north · exit lane kept clear</small></span></div>
+      <div class="mleg"><span class="mleg-sw" style="background:#c0392b"></span><span>Parade Route<small>Center of S Main · south to north · 5:30 PM</small></span></div>
+      <div class="mleg"><span class="mleg-sw" style="background:#8a5a2b"></span><span>Parade Lineup<small>Tommy Franks Museum · 4:30 PM</small></span></div>
+      <div class="mleg"><span class="mleg-sw" style="background:#4a7c2f"></span><span>Tractor Show &amp; Touch-a-Truck<small>Main Street</small></span></div>
     </div>
-    <div class="sbtns">
-      <button class="sb sec" onclick="closeLabel()">Skip</button>
-      <button class="sb pri" onclick="confirmLabel()">Done →</button>
-    </div>
+  <p class="map-note">Oriented the way you see the square from the courthouse front doors — S Main St along the bottom. North points left (see compass).<br>Layout approximate and subject to change. Kiowa County Courthouse Square · 316 S Main St, Hobart, OK 73651</p>
+  <div class="cta-row">
+    <a href="hometown-harvest.html" class="cta primary">📋 Full Event Schedule</a>
+    <a href="hometown-harvest.html#register" class="cta gold">🛖 Participate</a>
+    <a href="index.html" class="cta outline">🏛️ Chamber Home</a>
   </div>
+</main>
+<div class="page-footer">
+  <p>Hobart Chamber of Commerce · 106 W 4th St · Hobart, OK 73651 · <a href="tel:5806820887">(580) 682-0887</a></p>
+  <p style="margin-top:5px;"><a href="hometown-harvest.html">← Back to Hometown Harvest</a></p>
 </div>
-
-<!-- EDIT MODAL -->
-<div class="overlay" id="editModal">
-  <div class="sheet">
-    <div class="sheet-handle"></div>
-    <h3>Edit Object</h3>
-    <div class="fg"><label>Label</label><input id="e_lbl" type="text" autocomplete="off"/></div>
-    <div class="fg"><label>Color</label>
-      <div id="editColors" style="display:flex;flex-wrap:wrap;gap:8px;margin-top:4px;"></div>
-    </div>
-    <div class="sbtns">
-      <button class="sb del" onclick="deleteSelected()">Delete</button>
-      <button class="sb sec" onclick="closeEdit()">Cancel</button>
-      <button class="sb pri" onclick="saveEdit()">Save</button>
-    </div>
-  </div>
-</div>
-
-<!-- LIST MODAL -->
-<div class="overlay" id="listModal">
-  <div class="sheet">
-    <div class="sheet-handle"></div>
-    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;">
-      <h3 style="margin:0;">All Objects</h3>
-      <span style="font-size:22px;color:var(--muted);cursor:pointer;" onclick="closeList()">×</span>
-    </div>
-    <div id="listItems"></div>
-  </div>
-</div>
-
-<script>
-/* ═══════════════════════════════════════
-   CONFIG
-═══════════════════════════════════════ */
-var COLORS=[
-  {hex:'#c49a3e',name:'Gold'},
-  {hex:'#e85d2a',name:'Orange'},
-  {hex:'#1a3ea8',name:'Navy'},
-  {hex:'#5aaa38',name:'Green'},
-  {hex:'#9b3dc8',name:'Purple'},
-  {hex:'#e53935',name:'Red'},
-  {hex:'#6f7d99',name:'Gray'},
-  {hex:'#9a8850',name:'Tan'},
-  {hex:'#d4b010',name:'Yellow'},
-  {hex:'#ffffff',name:'White'}
-];
-
-var HINTS={
-  select:'↖ Tap/click to select · Drag to move · Double-tap to edit',
-  pin:'📍 Tap anywhere to place a pin',
-  rect:'▭ Drag to draw a rectangular zone',
-  circle:'◯ Drag to draw a circle zone',
-  arrow:'➜ Tap START point · then tap END point for a straight arrow',
-  free:'✏ Drag to draw freehand'
-};
-
-/* ═══════════════════════════════════════
-   STATE
-═══════════════════════════════════════ */
-var S={
-  tool:'select',color:'#c49a3e',stroke:2,snap:true,
-  objects:[],nid:1,selected:null,
-  // viewport transform
-  ox:0,oy:0,scale:1,
-  // drawing
-  drawing:false,pts:[],drawStart:null,
-  // arrow
-  arrowStart:null,
-  // drag
-  dragging:false,dragObj:null,dragOx:0,dragOy:0,
-  // panning
-  panning:false,panStart:{x:0,y:0},panOrigin:{x:0,y:0},
-  // pinch zoom
-  pinchDist:0,
-  // pending label
-  pending:null
-};
-
-/* load */
-try{var _sv=localStorage.getItem('hh_v5');if(_sv){var _d=JSON.parse(_sv);S.objects=_d.o||[];S.nid=_d.n||1;}}catch(e){}
-
-/* ═══════════════════════════════════════
-   CANVAS SETUP
-═══════════════════════════════════════ */
-var canvas=document.getElementById('c');
-var ctx=canvas.getContext('2d');
-var wrap=document.getElementById('canvasWrap');
-
-function resize(){
-  var r=wrap.getBoundingClientRect();
-  canvas.width=r.width;canvas.height=r.height;
-  // center map on first load
-  if(S.ox===0&&S.oy===0){
-    S.ox=(r.width-700*S.scale)/2;
-    S.oy=(r.height-600*S.scale)/2;
-  }
-  draw();
-}
-window.addEventListener('resize',resize);
-resize();
-
-/* ═══════════════════════════════════════
-   COORD TRANSFORMS
-═══════════════════════════════════════ */
-function toMap(cx,cy){return {x:(cx-S.ox)/S.scale,y:(cy-S.oy)/S.scale};}
-function toCanvas(mx,my){return {x:mx*S.scale+S.ox,y:my*S.scale+S.oy};}
-
-function setZoom(newScale,cx,cy){
-  newScale=Math.min(8,Math.max(0.15,newScale));
-  var mp=toMap(cx,cy);
-  S.scale=newScale;
-  S.ox=cx-mp.x*S.scale;
-  S.oy=cy-mp.y*S.scale;
-  updateZoomBadge();draw();
-}
-function updateZoomBadge(){
-  document.getElementById('zoomBadge').textContent=Math.round(S.scale*100)+'%';
-}
-
-/* ═══════════════════════════════════════
-   DRAW BASE MAP
-═══════════════════════════════════════ */
-function draw(){
-  var W=canvas.width,H=canvas.height;
-  ctx.clearRect(0,0,W,H);
-  ctx.save();
-  ctx.translate(S.ox,S.oy);
-  ctx.scale(S.scale,S.scale);
-
-  drawBaseMap();
-  drawObjects();
-  drawPreview();
-  drawArrowStart();
-
-  ctx.restore();
-}
-
-function drawBaseMap(){
-  var cx=ctx;
-
-  /* background */
-  cx.fillStyle='#dce4f0';cx.fillRect(0,0,700,600);
-
-  /* streets */
-  cx.fillStyle='#c8d0e8';
-  cx.fillRect(0,0,700,78);cx.fillRect(0,522,700,78);
-  cx.fillRect(0,0,78,600);cx.fillRect(622,0,78,600);
-
-  /* street dashes */
-  cx.strokeStyle='#b4bcd8';cx.lineWidth=1.5;cx.setLineDash([16,10]);
-  line(0,39,700,39);line(0,561,700,561);
-  line(39,0,39,600);line(661,0,661,600);
-  cx.setLineDash([]);
-
-  /* street names */
-  cx.fillStyle='#3a4470';cx.font='bold 13px DM Sans,sans-serif';cx.textAlign='center';
-  cx.fillText('S JEFFERSON ST',350,26);
-  cx.fillText('S MAIN ST',350,553);
-  cx.save();cx.translate(39,305);cx.rotate(-Math.PI/2);cx.fillText('E 3RD ST',0,0);cx.restore();
-  cx.save();cx.translate(661,305);cx.rotate(Math.PI/2);cx.fillText('E 4TH ST',0,0);cx.restore();
-
-  /* grounds */
-  cx.fillStyle='#c9dca8';roundRect(78,78,544,444,4);cx.fill();
-  cx.strokeStyle='#88a855';cx.lineWidth=3;roundRect(78,78,544,444,4);cx.stroke();
-
-  /* parking strips */
-  cx.fillStyle='rgba(164,184,216,0.38)';
-  cx.fillRect(82,82,536,32);cx.fillRect(82,486,536,32);
-  cx.fillRect(82,82,32,436);cx.fillRect(586,82,32,436);
-
-  /* parking ticks */
-  cx.strokeStyle='rgba(136,152,184,0.5)';cx.lineWidth=1;
-  for(var tx=100;tx<622;tx+=20){line(tx,82,tx,114);}
-
-  /* walkways */
-  cx.strokeStyle='#e0d4a0';cx.lineWidth=16;cx.lineCap='round';
-  line(114,114,308,278);line(586,114,392,278);
-  line(114,486,308,322);line(586,486,392,322);
-  cx.lineWidth=13;
-  line(350,114,350,238);line(350,362,350,486);
-  line(114,300,238,300);line(462,300,586,300);
-  cx.lineWidth=1;cx.lineCap='butt';
-
-  /* courthouse shadow */
-  cx.fillStyle='rgba(0,0,0,0.18)';cx.fillRect(236,232,186,144);
-  cx.fillStyle='#c8bea8';cx.strokeStyle='#9a9080';cx.lineWidth=2;
-  roundRect(232,228,186,144,5);cx.fill();cx.stroke();
-  cx.fillStyle='#b8ae9c';roundRect(240,236,170,128,3);cx.fill();
-  cx.fillStyle='#bab09a';cx.fillRect(256,250,138,100);
-  /* dome */
-  cx.fillStyle='#a89e88';cx.strokeStyle='#988e78';cx.lineWidth=1.5;
-  cx.beginPath();cx.ellipse(325,295,28,22,0,0,Math.PI*2);cx.fill();cx.stroke();
-  cx.fillStyle='#b0a890';cx.beginPath();cx.ellipse(325,291,20,16,0,0,Math.PI*2);cx.fill();
-  cx.fillStyle='#5a5040';cx.font='bold 9px DM Sans,sans-serif';cx.textAlign='center';
-  cx.fillText('COURTHOUSE',325,299);
-  /* steps */
-  cx.fillStyle='#b4a890';cx.fillRect(300,372,50,8);cx.fillRect(306,364,38,8);
-
-  /* trees */
-  var trees=[
-    [130,148,22,'#5a9e3a'],[163,128,16,'#6aaa48'],[152,168,14,'#58962e'],[188,148,11,'#62a240'],
-    [570,148,22,'#5a9e3a'],[537,128,16,'#6aaa48'],[548,168,14,'#58962e'],[512,148,11,'#62a240'],
-    [130,452,22,'#5a9e3a'],[163,472,16,'#6aaa48'],[152,432,14,'#58962e'],[188,460,10,'#62a240'],
-    [570,452,22,'#5a9e3a'],[537,472,16,'#6aaa48'],[548,432,14,'#58962e'],[512,460,10,'#62a240'],
-    [572,300,14,'#5a9e3a'],[128,300,14,'#5a9e3a'],
-    [220,165,10,'#6aaa48'],[480,165,10,'#6aaa48'],[220,435,10,'#6aaa48'],[480,435,10,'#6aaa48']
-  ];
-  trees.forEach(function(t){
-    cx.fillStyle=t[3];cx.globalAlpha=0.82;
-    cx.beginPath();cx.arc(t[0],t[1],t[2],0,Math.PI*2);cx.fill();
-    /* highlight */
-    cx.fillStyle='rgba(160,224,96,0.28)';
-    cx.beginPath();cx.arc(t[0]-t[2]*0.25,t[1]-t[2]*0.25,t[2]*0.45,0,Math.PI*2);cx.fill();
-  });
-  cx.globalAlpha=1;
-
-  /* compass */
-  cx.save();cx.translate(652,108);
-  cx.fillStyle='rgba(255,255,255,0.95)';cx.shadowBlur=8;cx.shadowColor='rgba(0,0,0,0.3)';
-  cx.beginPath();cx.arc(0,0,24,0,Math.PI*2);cx.fill();
-  cx.shadowBlur=0;
-  cx.strokeStyle='#1a3ea8';cx.lineWidth=1.5;cx.beginPath();cx.arc(0,0,24,0,Math.PI*2);cx.stroke();
-  cx.fillStyle='#1a3ea8';
-  cx.beginPath();cx.moveTo(0,-18);cx.lineTo(5,-6);cx.lineTo(0,-10);cx.lineTo(-5,-6);cx.closePath();cx.fill();
-  cx.fillStyle='#aaa';
-  cx.beginPath();cx.moveTo(0,18);cx.lineTo(5,6);cx.lineTo(0,10);cx.lineTo(-5,6);cx.closePath();cx.fill();
-  cx.beginPath();cx.moveTo(-18,0);cx.lineTo(-6,-5);cx.lineTo(-10,0);cx.lineTo(-6,5);cx.closePath();cx.fill();
-  cx.beginPath();cx.moveTo(18,0);cx.lineTo(6,-5);cx.lineTo(10,0);cx.lineTo(6,5);cx.closePath();cx.fill();
-  cx.fillStyle='#1a3ea8';cx.beginPath();cx.arc(0,0,4,0,Math.PI*2);cx.fill();
-  cx.fillStyle='#1a3ea8';cx.font='bold 12px DM Sans,sans-serif';cx.textAlign='center';cx.fillText('N',0,-22);
-  cx.restore();
-
-  /* map title */
-  cx.fillStyle='rgba(58,68,112,0.4)';cx.font='bold 10px DM Sans,sans-serif';cx.textAlign='center';
-  cx.fillText('HOBART HOMETOWN HARVEST 2026 · KIOWA COUNTY COURTHOUSE SQUARE',350,572);
-}
-
-function line(x1,y1,x2,y2){ctx.beginPath();ctx.moveTo(x1,y1);ctx.lineTo(x2,y2);ctx.stroke();}
-function roundRect(x,y,w,h,r){ctx.beginPath();ctx.moveTo(x+r,y);ctx.lineTo(x+w-r,y);ctx.arcTo(x+w,y,x+w,y+r,r);ctx.lineTo(x+w,y+h-r);ctx.arcTo(x+w,y+h,x+w-r,y+h,r);ctx.lineTo(x+r,y+h);ctx.arcTo(x,y+h,x,y+h-r,r);ctx.lineTo(x,y+r);ctx.arcTo(x,y,x+r,y,r);ctx.closePath();}
-
-/* ═══════════════════════════════════════
-   DRAW OBJECTS
-═══════════════════════════════════════ */
-function drawObjects(){
-  S.objects.forEach(function(o){drawObj(o,o.id===S.selected);});
-}
-
-function drawObj(o,selected){
-  var cx=ctx;cx.save();
-  var color=o.color||'#c49a3e';
-  var sw=o.stroke||2;
-
-  if(selected){
-    cx.shadowBlur=16/S.scale;cx.shadowColor=color;
-  }
-
-  if(o.type==='pin'){
-    drawPin(cx,o.x,o.y,color,o.label,selected);
-  }
-  else if(o.type==='rect'){
-    cx.strokeStyle=color;cx.lineWidth=sw;cx.setLineDash([8/S.scale,4/S.scale]);
-    cx.fillStyle=hexAlpha(color,0.18);
-    roundRect(o.x,o.y,o.w,o.h,5);cx.fill();cx.stroke();
-    cx.setLineDash([]);
-    if(selected) drawHandles(cx,o);
-    if(o.label) drawLabel(cx,o.x+o.w/2,o.y+o.h/2,o.label,color);
-  }
-  else if(o.type==='circle'){
-    cx.strokeStyle=color;cx.lineWidth=sw;cx.setLineDash([8/S.scale,4/S.scale]);
-    cx.fillStyle=hexAlpha(color,0.18);
-    cx.beginPath();cx.ellipse(o.cx,o.cy,o.rx,o.ry,0,0,Math.PI*2);cx.fill();cx.stroke();
-    cx.setLineDash([]);
-    if(selected) drawHandlesCircle(cx,o);
-    if(o.label) drawLabel(cx,o.cx,o.cy,o.label,color);
-  }
-  else if(o.type==='arrow'){
-    var s=o.pts[0],e=o.pts[1];
-    var dx=e.x-s.x,dy=e.y-s.y,len=Math.sqrt(dx*dx+dy*dy)||1;
-    var ux=dx/len,uy=dy/len;
-    var arrowSz=sw*5;
-    cx.strokeStyle=color;cx.lineWidth=sw;cx.lineCap='round';
-    cx.beginPath();cx.moveTo(s.x,s.y);cx.lineTo(e.x-ux*arrowSz*0.7,e.y-uy*arrowSz*0.7);cx.stroke();
-    /* arrowhead */
-    var lx=e.x-ux*arrowSz,ly=e.y-uy*arrowSz;
-    var px=-uy*arrowSz*0.45,py=ux*arrowSz*0.45;
-    cx.fillStyle=color;cx.beginPath();
-    cx.moveTo(lx+px,ly+py);cx.lineTo(e.x,e.y);cx.lineTo(lx-px,ly-py);cx.closePath();cx.fill();
-    /* start dot */
-    cx.fillStyle=color;cx.beginPath();cx.arc(s.x,s.y,sw*1.2,0,Math.PI*2);cx.fill();
-    if(selected){
-      cx.strokeStyle='rgba(255,255,255,0.5)';cx.lineWidth=2/S.scale;cx.setLineDash([4/S.scale,3/S.scale]);
-      cx.beginPath();cx.moveTo(s.x,s.y);cx.lineTo(e.x,e.y);cx.stroke();cx.setLineDash([]);
-    }
-    if(o.label){var mx=(s.x+e.x)/2,my=(s.y+e.y)/2;drawLabel(cx,mx,my-sw*3,o.label,color);}
-  }
-  else if(o.type==='free'){
-    if(!o.pts||o.pts.length<2){cx.restore();return;}
-    cx.strokeStyle=color;cx.lineWidth=sw;cx.lineCap='round';cx.lineJoin='round';
-    cx.beginPath();cx.moveTo(o.pts[0].x,o.pts[0].y);
-    for(var i=1;i<o.pts.length;i++) cx.lineTo(o.pts[i].x,o.pts[i].y);
-    cx.stroke();
-    if(o.label){var mp=o.pts[Math.floor(o.pts.length/2)];drawLabel(cx,mp.x,mp.y-sw*2,o.label,color);}
-  }
-
-  cx.restore();
-}
-
-function drawPin(cx,x,y,color,label,selected){
-  /* shadow */
-  cx.fillStyle='rgba(0,0,0,0.22)';
-  cx.beginPath();cx.ellipse(x+2,y+25,12,5,0,0,Math.PI*2);cx.fill();
-  /* body */
-  if(selected){cx.shadowBlur=20/S.scale;cx.shadowColor=color;}
-  cx.fillStyle=color;
-  cx.beginPath();
-  cx.moveTo(x,y-32);cx.bezierCurveTo(x-16,y-32,x-22,y-20,x-22,y-12);
-  cx.bezierCurveTo(x-22,y+4,x,y+26,x,y+26);
-  cx.bezierCurveTo(x,y+26,x+22,y+4,x+22,y-12);
-  cx.bezierCurveTo(x+22,y-20,x+16,y-32,x,y-32);
-  cx.closePath();cx.fill();
-  cx.strokeStyle='rgba(255,255,255,0.4)';cx.lineWidth=1.5/S.scale;cx.stroke();
-  /* inner */
-  cx.shadowBlur=0;
-  cx.fillStyle='rgba(255,255,255,0.72)';
-  cx.beginPath();cx.arc(x,y-12,10,0,Math.PI*2);cx.fill();
-  if(label) drawLabel(cx,x,y+40,label,color);
-  if(selected){
-    cx.strokeStyle='rgba(255,255,255,0.7)';cx.lineWidth=2/S.scale;cx.setLineDash([4/S.scale,3/S.scale]);
-    cx.beginPath();cx.arc(x,y,36,0,Math.PI*2);cx.stroke();cx.setLineDash([]);
-  }
-}
-
-function drawLabel(cx,x,y,text,color){
-  cx.font='bold '+(11/S.scale+2)+'px DM Sans,sans-serif';
-  var w=cx.measureText(text).width+14/S.scale;
-  var h=16/S.scale;
-  cx.fillStyle='rgba(255,255,255,0.92)';
-  roundRect(x-w/2,y-h,w,h,3/S.scale);cx.fill();
-  cx.fillStyle=color||'#333';cx.textAlign='center';cx.textBaseline='middle';
-  cx.fillText(text,x,y-h/2);
-  cx.textBaseline='alphabetic';
-}
-
-function drawHandles(cx,o){
-  var hpts=[
-    {x:o.x,y:o.y},{x:o.x+o.w/2,y:o.y},{x:o.x+o.w,y:o.y},
-    {x:o.x+o.w,y:o.y+o.h/2},{x:o.x+o.w,y:o.y+o.h},
-    {x:o.x+o.w/2,y:o.y+o.h},{x:o.x,y:o.y+o.h},{x:o.x,y:o.y+o.h/2}
-  ];
-  var hs=6/S.scale;
-  hpts.forEach(function(p){
-    cx.fillStyle='#fff';cx.strokeStyle=o.color;cx.lineWidth=1.5/S.scale;
-    cx.fillRect(p.x-hs/2,p.y-hs/2,hs,hs);cx.strokeRect(p.x-hs/2,p.y-hs/2,hs,hs);
-  });
-}
-
-function drawHandlesCircle(cx,o){
-  var hs=6/S.scale;
-  var pts=[{x:o.cx-o.rx,y:o.cy},{x:o.cx+o.rx,y:o.cy},{x:o.cx,y:o.cy-o.ry},{x:o.cx,y:o.cy+o.ry}];
-  pts.forEach(function(p){
-    cx.fillStyle='#fff';cx.strokeStyle=o.color;cx.lineWidth=1.5/S.scale;
-    cx.fillRect(p.x-hs/2,p.y-hs/2,hs,hs);cx.strokeRect(p.x-hs/2,p.y-hs/2,hs,hs);
-  });
-}
-
-/* ═══════════════════════════════════════
-   DRAW PREVIEW (while dragging)
-═══════════════════════════════════════ */
-function drawPreview(){
-  if(!S.drawing||!S.drawStart) return;
-  var cx=ctx;cx.save();
-  var color=S.color;var sw=S.stroke;
-  var p=S._previewPt;if(!p) return;
-
-  if(S.tool==='rect'){
-    var x=Math.min(S.drawStart.x,p.x),y=Math.min(S.drawStart.y,p.y);
-    var w=Math.abs(p.x-S.drawStart.x),h=Math.abs(p.y-S.drawStart.y);
-    if(S.snap){
-      var sz=Math.max(w,h);
-      /* snap to square if within 15% */
-      if(Math.abs(w-h)<Math.max(w,h)*0.2){w=sz;h=sz;x=S.drawStart.x<p.x?S.drawStart.x:S.drawStart.x-sz;y=S.drawStart.y<p.y?S.drawStart.y:S.drawStart.y-sz;}
-    }
-    cx.strokeStyle=color;cx.lineWidth=sw;cx.setLineDash([8/S.scale,4/S.scale]);
-    cx.fillStyle=hexAlpha(color,0.15);
-    roundRect(x,y,w,h,5);cx.fill();cx.stroke();cx.setLineDash([]);
-  }
-  else if(S.tool==='circle'){
-    var dx=p.x-S.drawStart.x,dy=p.y-S.drawStart.y;
-    var rx=Math.abs(dx),ry=Math.abs(dy);
-    if(S.snap){
-      var r=Math.max(rx,ry);
-      /* snap to circle if within 20% */
-      if(Math.abs(rx-ry)<Math.max(rx,ry)*0.25){rx=r;ry=r;}
-    }
-    cx.strokeStyle=color;cx.lineWidth=sw;cx.setLineDash([8/S.scale,4/S.scale]);
-    cx.fillStyle=hexAlpha(color,0.15);
-    cx.beginPath();cx.ellipse(S.drawStart.x,S.drawStart.y,rx||1,ry||1,0,0,Math.PI*2);cx.fill();cx.stroke();
-    cx.setLineDash([]);
-  }
-  else if(S.tool==='free'&&S.pts.length>1){
-    cx.strokeStyle=color;cx.lineWidth=sw;cx.lineCap='round';cx.lineJoin='round';
-    cx.beginPath();cx.moveTo(S.pts[0].x,S.pts[0].y);
-    for(var i=1;i<S.pts.length;i++) cx.lineTo(S.pts[i].x,S.pts[i].y);
-    cx.stroke();
-  }
-  cx.restore();
-}
-
-function drawArrowStart(){
-  if(!S.arrowStart) return;
-  var cx=ctx;cx.save();
-  var color=S.color;
-  cx.fillStyle=hexAlpha(color,0.25);
-  cx.beginPath();cx.arc(S.arrowStart.x,S.arrowStart.y,18/S.scale,0,Math.PI*2);cx.fill();
-  cx.fillStyle=color;cx.strokeStyle='#fff';cx.lineWidth=2/S.scale;
-  cx.beginPath();cx.arc(S.arrowStart.x,S.arrowStart.y,8/S.scale,0,Math.PI*2);cx.fill();cx.stroke();
-  cx.fillStyle=color;cx.font='bold '+(11/S.scale)+'px DM Sans,sans-serif';cx.textAlign='center';cx.textBaseline='middle';
-  cx.fillText('START',S.arrowStart.x,S.arrowStart.y-22/S.scale);
-  cx.textBaseline='alphabetic';
-  cx.restore();
-}
-
-/* ═══════════════════════════════════════
-   HIT TESTING
-═══════════════════════════════════════ */
-function hitTest(mx,my){
-  /* reverse order so top-drawn is hit first */
-  for(var i=S.objects.length-1;i>=0;i--){
-    var o=S.objects[i];
-    if(hitObj(o,mx,my)) return o;
-  }
-  return null;
-}
-
-function hitObj(o,mx,my){
-  var pad=12/S.scale;
-  if(o.type==='pin'){return Math.sqrt((mx-o.x)*(mx-o.x)+(my-(o.y-12))*(my-(o.y-12)))<24/S.scale;}
-  if(o.type==='rect'){return mx>=o.x-pad&&mx<=o.x+o.w+pad&&my>=o.y-pad&&my<=o.y+o.h+pad;}
-  if(o.type==='circle'){return ((mx-o.cx)/o.rx)*((mx-o.cx)/o.rx)+((my-o.cy)/o.ry)*((my-o.cy)/o.ry)<=1.2;}
-  if(o.type==='arrow'){
-    var s=o.pts[0],e=o.pts[1];
-    var dx=e.x-s.x,dy=e.y-s.y,len=Math.sqrt(dx*dx+dy*dy)||1;
-    var t=((mx-s.x)*dx+(my-s.y)*dy)/(len*len);
-    t=Math.max(0,Math.min(1,t));
-    var nearX=s.x+t*dx,nearY=s.y+t*dy;
-    return Math.sqrt((mx-nearX)*(mx-nearX)+(my-nearY)*(my-nearY))<16/S.scale;
-  }
-  if(o.type==='free'){
-    for(var j=0;j<o.pts.length-1;j++){
-      var p1=o.pts[j],p2=o.pts[j+1];
-      var dx2=p2.x-p1.x,dy2=p2.y-p1.y,len2=Math.sqrt(dx2*dx2+dy2*dy2)||1;
-      var t2=((mx-p1.x)*dx2+(my-p1.y)*dy2)/(len2*len2);
-      t2=Math.max(0,Math.min(1,t2));
-      var nx=p1.x+t2*dx2,ny=p1.y+t2*dy2;
-      if(Math.sqrt((mx-nx)*(mx-nx)+(my-ny)*(my-ny))<14/S.scale) return true;
-    }
-  }
-  return false;
-}
-
-/* ═══════════════════════════════════════
-   POINTER EVENTS (unified mouse+touch)
-═══════════════════════════════════════ */
-var _lastTap=0,_tapTimer=null;
-var _ptrs={};  /* active pointer ids */
-
-canvas.addEventListener('pointerdown',function(e){
-  e.preventDefault();
-  canvas.setPointerCapture(e.pointerId);
-  _ptrs[e.pointerId]={x:e.clientX,y:e.clientY};
-  var pcount=Object.keys(_ptrs).length;
-
-  if(pcount===2){
-    /* start pinch */
-    var ids=Object.keys(_ptrs);
-    var p1=_ptrs[ids[0]],p2=_ptrs[ids[1]];
-    S.pinchDist=Math.hypot(p2.x-p1.x,p2.y-p1.y);
-    S.pinchMid={x:(p1.x+p2.x)/2,y:(p1.y+p2.y)/2};
-    S.drawing=false;S.dragging=false;S.panning=false;
-    return;
-  }
-
-  var mp=toMap(e.clientX,e.clientY);
-
-  /* double tap to edit */
-  var now=Date.now();
-  if(now-_lastTap<350&&S.selected){
-    _lastTap=0;openEdit();return;
-  }
-  _lastTap=now;
-
-  if(S.tool==='select'){
-    var hit=hitTest(mp.x,mp.y);
-    if(hit){
-      S.selected=hit.id;
-      S.dragging=true;S.dragObj=hit;
-      S.dragOx=mp.x-(hit.x||hit.cx||0);
-      S.dragOy=mp.y-(hit.y||hit.cy||0);
-      canvas.style.cursor='move';
-    } else {
-      S.selected=null;
-      S.panning=true;
-      S.panStart={x:e.clientX,y:e.clientY};
-      S.panOrigin={x:S.ox,y:S.oy};
-      canvas.style.cursor='grabbing';
-    }
-    draw();return;
-  }
-
-  if(S.tool==='arrow'){
-    if(!S.arrowStart){
-      S.arrowStart={x:mp.x,y:mp.y};
-      setHint('Now tap the END point of the arrow ↗');
-    } else {
-      var obj={id:S.nid++,type:'arrow',pts:[S.arrowStart,{x:mp.x,y:mp.y}],color:S.color,stroke:S.stroke,label:''};
-      S.arrowStart=null;
-      S.pending=obj;
-      openLabel('Name This Flow Arrow');
-    }
-    draw();return;
-  }
-
-  if(S.tool==='pin'){
-    var pinObj={id:S.nid++,type:'pin',x:mp.x,y:mp.y,color:S.color,stroke:S.stroke,label:''};
-    S.pending=pinObj;
-    openLabel('Name This Pin');
-    return;
-  }
-
-  if(S.tool==='rect'||S.tool==='circle'||S.tool==='free'){
-    S.drawing=true;S.drawStart={x:mp.x,y:mp.y};S.pts=[{x:mp.x,y:mp.y}];
-    S._previewPt={x:mp.x,y:mp.y};
-  }
-},{passive:false});
-
-canvas.addEventListener('pointermove',function(e){
-  if(!_ptrs[e.pointerId]) return;
-  _ptrs[e.pointerId]={x:e.clientX,y:e.clientY};
-  var pcount=Object.keys(_ptrs).length;
-
-  if(pcount>=2){
-    var ids=Object.keys(_ptrs);
-    var p1=_ptrs[ids[0]],p2=_ptrs[ids[1]];
-    var dist=Math.hypot(p2.x-p1.x,p2.y-p1.y);
-    var mid={x:(p1.x+p2.x)/2,y:(p1.y+p2.y)/2};
-    if(S.pinchDist>0){
-      var newScale=S.scale*(dist/S.pinchDist);
-      setZoom(newScale,mid.x,mid.y);
-    }
-    S.pinchDist=dist;S.pinchMid=mid;
-    return;
-  }
-
-  var mp=toMap(e.clientX,e.clientY);
-
-  if(S.panning){
-    S.ox=S.panOrigin.x+(e.clientX-S.panStart.x);
-    S.oy=S.panOrigin.y+(e.clientY-S.panStart.y);
-    draw();return;
-  }
-
-  if(S.dragging&&S.dragObj){
-    var o=S.dragObj;
-    if(o.type==='pin'){o.x=mp.x;o.y=mp.y;}
-    else if(o.type==='rect'){o.x=mp.x-S.dragOx;o.y=mp.y-S.dragOy;}
-    else if(o.type==='circle'){o.cx=mp.x;o.cy=mp.y;}
-    else if(o.type==='arrow'){
-      var dx2=o.pts[1].x-o.pts[0].x,dy2=o.pts[1].y-o.pts[0].y;
-      var ox2=S.dragOx,oy2=S.dragOy;
-      o.pts[0]={x:mp.x-ox2,y:mp.y-oy2};
-      o.pts[1]={x:mp.x-ox2+dx2,y:mp.y-oy2+dy2};
-    }
-    else if(o.type==='free'){
-      var ddx=mp.x-S.dragOx-S.objects.find(function(x){return x.id===o.id;}).pts[0].x;
-      var ddy=mp.y-S.dragOy-S.objects.find(function(x){return x.id===o.id;}).pts[0].y;
-      /* recalc offset from first point each time */
-      S.dragOx=mp.x-o.pts[0].x;S.dragOy=mp.y-o.pts[0].y;
-      o.pts=o.pts.map(function(p){return {x:p.x+ddx,y:p.y+ddy};});
-    }
-    draw();return;
-  }
-
-  if(S.drawing){
-    S._previewPt={x:mp.x,y:mp.y};
-    if(S.tool==='free') S.pts.push({x:mp.x,y:mp.y});
-    draw();
-  }
-},{passive:true});
-
-canvas.addEventListener('pointerup',function(e){
-  delete _ptrs[e.pointerId];
-  S.pinchDist=0;
-  var mp=toMap(e.clientX,e.clientY);
-
-  if(S.panning){S.panning=false;canvas.style.cursor='crosshair';return;}
-
-  if(S.dragging){
-    S.dragging=false;S.dragObj=null;
-    canvas.style.cursor='crosshair';
-    save();draw();return;
-  }
-
-  if(S.drawing){
-    S.drawing=false;
-    var ds=S.drawStart,pe=S._previewPt;
-    if(!ds||!pe) return;
-
-    if(S.tool==='rect'){
-      var x=Math.min(ds.x,pe.x),y=Math.min(ds.y,pe.y);
-      var w=Math.abs(pe.x-ds.x),h=Math.abs(pe.y-ds.y);
-      if(S.snap&&Math.abs(w-h)<Math.max(w,h)*0.2){var sz=Math.max(w,h);x=ds.x<pe.x?ds.x:ds.x-sz;y=ds.y<pe.y?ds.y:ds.y-sz;w=sz;h=sz;}
-      if(w<8||h<8) return;
-      S.pending={id:S.nid++,type:'rect',x:x,y:y,w:w,h:h,color:S.color,stroke:S.stroke,label:''};
-      openLabel('Name This Zone');
-    }
-    else if(S.tool==='circle'){
-      var rx=Math.abs(pe.x-ds.x),ry=Math.abs(pe.y-ds.y);
-      if(S.snap&&Math.abs(rx-ry)<Math.max(rx,ry)*0.25){var r=Math.max(rx,ry);rx=r;ry=r;}
-      if(rx<4||ry<4) return;
-      S.pending={id:S.nid++,type:'circle',cx:ds.x,cy:ds.y,rx:rx,ry:ry,color:S.color,stroke:S.stroke,label:''};
-      openLabel('Name This Zone');
-    }
-    else if(S.tool==='free'){
-      if(S.pts.length<3) return;
-      S.pending={id:S.nid++,type:'free',pts:S.pts.slice(),color:S.color,stroke:S.stroke,label:''};
-      S.pts=[];
-      openLabel('Name This Drawing');
-    }
-    S.drawStart=null;S._previewPt=null;
-  }
-},{passive:true});
-
-/* SCROLL = zoom on desktop */
-canvas.addEventListener('wheel',function(e){
-  e.preventDefault();
-  var delta=e.deltaY>0?0.9:1.1;
-  setZoom(S.scale*delta,e.clientX,e.clientY);
-},{passive:false});
-
-/* ═══════════════════════════════════════
-   TOOLBAR
-═══════════════════════════════════════ */
-var TOOLS=['select','pin','rect','circle','arrow','free'];
-function setTool(t){
-  S.tool=t;S.arrowStart=null;S.drawing=false;S.pts=[];
-  TOOLS.forEach(function(id){
-    var el=document.getElementById('tb-'+id);
-    if(el) el.classList.toggle('on',id===t);
-  });
-  canvas.style.cursor=t==='select'?'default':'crosshair';
-  setHint(HINTS[t]||'');
-  draw();
-}
-
-function setHint(h){document.getElementById('hint').textContent=h;}
-
-/* BUILD COLOR DOTS */
-(function(){
-  var cd=document.getElementById('colorDots');
-  cd.style.display='flex';cd.style.gap='5px';cd.style.alignItems='center';
-  COLORS.forEach(function(c){
-    var d=document.createElement('div');
-    d.className='c-dot'+(c.hex===S.color?' on':'');
-    d.style.background=c.hex;d.title=c.name;
-    d.onclick=function(){
-      S.color=c.hex;
-      document.querySelectorAll('.c-dot').forEach(function(el){el.classList.remove('on');});
-      d.classList.add('on');
-    };
-    cd.appendChild(d);
-  });
-})();
-
-/* STROKE */
-function setStroke(v){
-  S.stroke=v;
-  [2,4,8,14].forEach(function(s){
-    var el=document.getElementById('sw-'+s);
-    if(el) el.classList.toggle('on',s===v);
-  });
-}
-
-/* SNAP */
-function toggleSnap(){
-  S.snap=!S.snap;
-  document.getElementById('tb-snap').classList.toggle('on',S.snap);
-  var badge=document.getElementById('snapBadge');
-  badge.textContent=S.snap?'⬡ Snap ON':'Snap OFF';
-  badge.classList.add('on');
-  setTimeout(function(){badge.classList.remove('on');},1500);
-}
-document.getElementById('tb-snap').classList.add('on');
-
-/* ═══════════════════════════════════════
-   LABEL MODAL
-═══════════════════════════════════════ */
-function openLabel(title){
-  document.getElementById('labelTitle').textContent=title;
-  document.getElementById('m_lbl').value='';
-  document.getElementById('labelModal').classList.add('on');
-  setTimeout(function(){document.getElementById('m_lbl').focus();},100);
-}
-function closeLabel(){document.getElementById('labelModal').classList.remove('on');S.pending=null;draw();}
-function confirmLabel(){
-  if(!S.pending) return;
-  S.pending.label=document.getElementById('m_lbl').value.trim();
-  S.objects.push(S.pending);
-  S.selected=S.pending.id;
-  S.pending=null;
-  save();draw();updateObjInfo();closeLabel();
-}
-
-/* ═══════════════════════════════════════
-   EDIT MODAL
-═══════════════════════════════════════ */
-function openEdit(){
-  var o=S.objects.find(function(x){return x.id===S.selected;});
-  if(!o) return;
-  document.getElementById('e_lbl').value=o.label||'';
-  /* build color swatches */
-  var ec=document.getElementById('editColors');
-  ec.innerHTML=COLORS.map(function(c){
-    return '<div style="width:32px;height:32px;border-radius:50%;background:'+c.hex+';border:3px solid '+(c.hex===o.color?'#fff':'transparent')+';cursor:pointer;" onclick="setSelectedColor(\''+c.hex+'\')" title="'+c.name+'"></div>';
-  }).join('');
-  document.getElementById('editModal').classList.add('on');
-  setTimeout(function(){document.getElementById('e_lbl').focus();},100);
-}
-function setSelectedColor(hex){
-  var o=S.objects.find(function(x){return x.id===S.selected;});
-  if(o){o.color=hex;save();draw();}
-  /* refresh swatches */
-  var ec=document.getElementById('editColors');
-  ec.querySelectorAll('div').forEach(function(d){
-    d.style.borderColor=d.style.background===hex?'#fff':'transparent';
-  });
-}
-function closeEdit(){document.getElementById('editModal').classList.remove('on');}
-function saveEdit(){
-  var o=S.objects.find(function(x){return x.id===S.selected;});
-  if(!o) return;
-  o.label=document.getElementById('e_lbl').value.trim();
-  save();draw();updateObjInfo();closeEdit();
-}
-function deleteSelected(){
-  S.objects=S.objects.filter(function(x){return x.id!==S.selected;});
-  S.selected=null;
-  save();draw();updateObjInfo();closeEdit();
-}
-
-/* ═══════════════════════════════════════
-   LIST
-═══════════════════════════════════════ */
-function showList(){
-  var items=document.getElementById('listItems');
-  if(!S.objects.length){
-    items.innerHTML='<div style="padding:20px;text-align:center;color:var(--muted);font-size:14px;">Nothing placed yet.</div>';
-  } else {
-    var icons={pin:'📍',rect:'▭',circle:'◯',arrow:'➜',free:'✏'};
-    items.innerHTML=S.objects.map(function(o){
-      return '<div style="display:flex;align-items:center;gap:10px;padding:12px 0;border-bottom:1px solid var(--border);cursor:pointer;" onclick="selectFromList('+o.id+')">'
-        +'<div style="width:12px;height:12px;border-radius:3px;background:'+o.color+';flex-shrink:0;"></div>'
-        +'<span style="flex:1;font-size:14px;font-weight:600;">'+(icons[o.type]||'●')+' '+(o.label||'<em style="opacity:.4">unlabeled</em>')+'</span>'
-        +'<span style="font-size:12px;color:var(--gold);cursor:pointer;" onclick="event.stopPropagation();selectFromList('+o.id+');openEdit()">Edit</span>'
-        +'</div>';
-    }).join('');
-  }
-  document.getElementById('listModal').classList.add('on');
-}
-function closeList(){document.getElementById('listModal').classList.remove('on');}
-function selectFromList(id){S.selected=id;draw();closeList();}
-
-/* ═══════════════════════════════════════
-   UTILITIES
-═══════════════════════════════════════ */
-function save(){
-  try{localStorage.setItem('hh_v5',JSON.stringify({o:S.objects,n:S.nid}));}catch(e){}
-}
-function updateObjInfo(){
-  document.getElementById('objInfo').textContent=S.objects.length+' object'+(S.objects.length===1?'':'s');
-}
-function undoLast(){
-  if(!S.objects.length) return;
-  S.objects.pop();S.selected=null;
-  save();draw();updateObjInfo();
-}
-function clearAll(){
-  if(!S.objects.length) return;
-  if(!confirm('Clear all objects?')) return;
-  S.objects=[];S.selected=null;S.nid=1;
-  save();draw();updateObjInfo();
-}
-function exportPNG(){
-  /* render at 2x for crisp export */
-  var ec=document.createElement('canvas');
-  ec.width=700*2;ec.height=600*2;
-  var ectx=ec.getContext('2d');
-  ectx.scale(2,2);
-  var saved={ox:S.ox,oy:S.oy,scale:S.scale};
-  S.ox=0;S.oy=0;S.scale=1;
-  var oldCtx=ctx;
-  /* swap context */
-  var origCanvas=canvas;
-  ctx=ectx;
-  drawBaseMap();drawObjects();
-  ctx=oldCtx;
-  S.ox=saved.ox;S.oy=saved.oy;S.scale=saved.scale;
-  var a=document.createElement('a');
-  a.download='hometown-harvest-map.png';
-  a.href=ec.toDataURL('image/png');
-  document.body.appendChild(a);a.click();document.body.removeChild(a);
-}
-
-function hexAlpha(hex,a){
-  var r=parseInt(hex.slice(1,3),16),g=parseInt(hex.slice(3,5),16),b=parseInt(hex.slice(5,7),16);
-  return 'rgba('+r+','+g+','+b+','+a+')';
-}
-
-/* Close modals on backdrop */
-['labelModal','editModal','listModal'].forEach(function(id){
-  document.getElementById(id).addEventListener('click',function(e){if(e.target===this)this.classList.remove('on');});
-});
-
-/* Keyboard */
-document.addEventListener('keydown',function(e){
-  var tag=document.activeElement&&document.activeElement.tagName;
-  if(tag==='INPUT'||tag==='TEXTAREA') return;
-  if(e.key==='Escape'){['labelModal','editModal','listModal'].forEach(function(id){document.getElementById(id).classList.remove('on');});S.arrowStart=null;draw();}
-  if(e.key==='z'&&(e.metaKey||e.ctrlKey)){e.preventDefault();undoLast();}
-  if((e.key==='Delete'||e.key==='Backspace')&&S.selected) deleteSelected();
-  if(e.key==='Enter'&&S.selected) openEdit();
-  if(e.key==='v'||e.key==='Escape') setTool('select');
-  if(e.key==='p') setTool('pin');
-  if(e.key==='r') setTool('rect');
-  if(e.key==='c') setTool('circle');
-  if(e.key==='a') setTool('arrow');
-  if(e.key==='f') setTool('free');
-});
-
-/* ── INIT ── */
-setTool('select');
-updateObjInfo();
-updateZoomBadge();
-setHint(HINTS['select']);
-</script>
 </body>
 </html>
