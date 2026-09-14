@@ -2354,11 +2354,13 @@ function renderAdmin(){
     +'<div class="admin-tab'+(adminTab==='botw'?' on':'')+'" onclick="switchTab(\'botw\')">BOTW Archive</div>'
     +'<div class="admin-tab'+(adminTab==='jobs'?' on':'')+'" onclick="switchTab(\'jobs\')">Jobs</div>'
     +'<div class="admin-tab'+(adminTab==='jobcreate'?' on':'')+'" onclick="switchTab(\'jobcreate\')">+ New Opening</div>'
-    +'<div class="admin-tab'+(adminTab==='glowgolf'?' on':'')+'" onclick="switchTab(\'glowgolf\')">Glow Golf <span id="ggCount"></span></div>'
     +'<div class="admin-tab'+(adminTab==='parade'?' on':'')+'" onclick="switchTab(\'parade\')">Parade <span id="prCount"></span></div>'
     +'<div class="admin-tab'+(adminTab==='tractor'?' on':'')+'" onclick="switchTab(\'tractor\')">Tractor Show <span id="tsCount"></span></div>'
     +'<div class="admin-tab'+(adminTab==='vendor'?' on':'')+'" onclick="switchTab(\'vendor\')">Vendors <span id="vnCount"></span></div>'
     +'<div class="admin-tab'+(adminTab==='ribbon'?' on':'')+'" onclick="switchTab(\'ribbon\')">Ribbon Cuttings <span id="rcCount"></span></div>'
+    +'<div class="admin-tab'+(adminTab==='wrist'?' on':'')+'" onclick="switchTab(\'wrist\')">Wristbands <span id="wbCount"></span></div>'
+    +'<div class="admin-tab'+(adminTab==='scarecrow'?' on':'')+'" onclick="switchTab(\'scarecrow\')">Scarecrow <span id="scCount"></span></div>'
+    +'<div class="admin-tab'+(adminTab==='pageant'?' on':'')+'" onclick="switchTab(\'pageant\')">Pageant <span id="pgCount"></span></div>'
     +'<div class="admin-tab'+(adminTab==='scavenger'?' on':'')+'" onclick="switchTab(\'scavenger\')">Scavenger Hunt <span id="shCount"></span></div>'
     +'<div class="admin-tab'+(adminTab==='deals'?' on':'')+'" onclick="switchTab(\'deals\')">Local Sales <span id="dlCount"></span></div>'
     +'<div class="admin-tab'+(adminTab==='subs'?' on':'')+'" onclick="switchTab(\'subs\')">Subscribers <span id="sbCount"></span></div>'
@@ -2372,12 +2374,14 @@ function renderAdmin(){
   else if(adminTab==='banner') paneBanner();
   else if(adminTab==='jobs') paneJobsList();
   else if(adminTab==='jobcreate') paneJobCreate(null);
-  else if(adminTab==='glowgolf') paneGolf();
   else if(adminTab==='botw') paneBotw();
   else if(adminTab==='parade') paneParade();
   else if(adminTab==='tractor') paneTractor();
   else if(adminTab==='vendor') paneVendor();
   else if(adminTab==='ribbon') paneRibbon();
+  else if(adminTab==='wrist') paneWrist();
+  else if(adminTab==='scarecrow') paneScarecrow();
+  else if(adminTab==='pageant') panePageant();
   else if(adminTab==='scavenger') paneScavenger();
   else if(adminTab==='deals') paneDeals();
   else if(adminTab==='subs') paneSubs();
@@ -3033,6 +3037,85 @@ function paneRibbon(){
   }).catch(function(e){pane.innerHTML='<div class="admin-empty">Error loading. Add <b>ribbon_cuttings</b> to Firestore rules.<br><small>'+esc(e&&e.message||'')+'</small></div>';});
 }
 function delRibbon(id){if(!confirm('Delete this ribbon cutting request?'))return;db.collection('ribbon_cuttings').doc(id).delete().then(function(){paneRibbon();});}
+
+
+/* ---- Generic registration pane builder ---- */
+function regPane(coll, countId, emptyMsg, rowFn, csvFn){
+  var pane=document.getElementById('adminPane');
+  pane.innerHTML='<div class="admin-empty">Loading…</div>';
+  db.collection(coll).get().then(function(snap){
+    var rows=[]; snap.forEach(function(doc){var x=doc.data();x.id=doc.id;rows.push(x);});
+    rows.sort(function(a,b){return (a.createdAt&&a.createdAt.seconds||0)-(b.createdAt&&b.createdAt.seconds||0);});
+    var cnt=document.getElementById(countId);
+    if(cnt) cnt.innerHTML=rows.length?('<span class="badge-pending">'+rows.length+'</span>'):'';
+    if(!rows.length){pane.innerHTML='<div class="admin-empty">'+emptyMsg+'</div>';return;}
+    var html='<div style="font-size:12.5px;color:var(--gray);margin-bottom:12px;">'+rows.length+' registration'+(rows.length===1?'':'s')+'</div>';
+    html+='<button class="btn-sm btn-gold" style="margin-bottom:14px;" onclick="'+csvFn+'()">Export CSV</button>';
+    html+='<div class="admin-list">';
+    rows.forEach(function(r){
+      html+='<div class="admin-row"><div class="info">'+rowFn(r)+'</div>'
+        +'<div class="acts"><button class="btn-sm btn-red" onclick="delReg(\''+coll+'\',\''+r.id+'\')">Delete</button></div></div>';
+    });
+    html+='</div>';
+    pane.innerHTML=html;
+  }).catch(function(e){pane.innerHTML='<div class="admin-empty">Error loading. Check Firestore rules for <b>'+coll+'</b>.<br><small>'+esc(e&&e.message||'')+'</small></div>';});
+}
+function delReg(coll,id){
+  if(!confirm('Delete this registration?'))return;
+  db.collection(coll).doc(id).delete().then(function(){switchTab(adminTab);});
+}
+function regCSV(coll, cols, filename){
+  db.collection(coll).get().then(function(snap){
+    var out=[cols.map(function(c){return c[0];}).join(',')];
+    snap.forEach(function(doc){
+      var d=doc.data();
+      out.push(cols.map(function(c){return '"'+String(d[c[1]]||'').replace(/"/g,'""')+'"';}).join(','));
+    });
+    var blob=new Blob([out.join('\n')],{type:'text/csv'});
+    var a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=filename;
+    document.body.appendChild(a);a.click();document.body.removeChild(a);
+  });
+}
+
+/* ---- Wristbands ---- */
+function paneWrist(){
+  regPane('wristbands','wbCount','No wristband registrations yet. Share the link: <b>wristband-registration.html</b>',
+    function(r){
+      return '<b>🎟️ '+esc(r.contactName||'—')+'</b>'
+        +'<small>'+esc(r.phone||'')+(r.email?'  ·  '+esc(r.email):'')+'</small>'
+        +'<small><b>'+esc(r.quantity||'?')+'</b> wristband(s)</small>'
+        +(r.children?'<small>Children: '+esc(r.children)+'</small>':'')
+        +(r.notes?'<small style="font-style:italic;">'+esc(r.notes)+'</small>':'');
+    },'exportWrist');
+}
+function exportWrist(){regCSV('wristbands',[['Parent/Guardian','contactName'],['Phone','phone'],['Email','email'],['Quantity','quantity'],['Children','children'],['Notes','notes']],'wristband-registrations.csv');}
+
+/* ---- Scarecrow Contest ---- */
+function paneScarecrow(){
+  regPane('scarecrow','scCount','No scarecrow entries yet. Share the link: <b>scarecrow-registration.html</b>',
+    function(r){
+      return '<b>🎃 '+esc(r.entryName||'—')+'</b>'
+        +'<small>'+esc(r.category||'')+' · entered by '+esc(r.enteredBy||'')+'</small>'
+        +'<small>'+esc(r.contactName||'')+'  ·  '+esc(r.phone||'')+(r.email?'  ·  '+esc(r.email):'')+'</small>'
+        +(r.description?'<small style="font-style:italic;">'+esc(r.description)+'</small>':'')
+        +((r.needsHelp==='Yes'||r.needsStaking==='Yes')?'<small>⚠️ '+(r.needsHelp==='Yes'?'Needs setup help. ':'')+(r.needsStaking==='Yes'?'Needs staking.':'')+'</small>':'');
+    },'exportScarecrow');
+}
+function exportScarecrow(){regCSV('scarecrow',[['Entry Name','entryName'],['Category','category'],['Entered By','enteredBy'],['Contact','contactName'],['Phone','phone'],['Email','email'],['Description','description'],['Needs Help','needsHelp'],['Needs Staking','needsStaking']],'scarecrow-entries.csv');}
+
+/* ---- Lil Mr & Miss Pageant ---- */
+function panePageant(){
+  regPane('pageant','pgCount','No pageant registrations yet. Share the link: <b>pageant-registration.html</b>',
+    function(r){
+      return '<b>👑 '+esc(r.childName||'—')+'</b>'
+        +'<small>'+esc(r.division||'')+' · '+esc(r.ageGroup||'')+'</small>'
+        +(r.hometown?'<small>'+esc(r.hometown)+'</small>':'')
+        +'<small>Parent: '+esc(r.contactName||'')+'  ·  '+esc(r.phone||'')+(r.email?'  ·  '+esc(r.email):'')+'</small>'
+        +(r.notes?'<small style="font-style:italic;">'+esc(r.notes)+'</small>':'')
+        +'<small>Photo consent: <b>'+esc(r.photoConsent||'No')+'</b></small>';
+    },'exportPageant');
+}
+function exportPageant(){regCSV('pageant',[['Child','childName'],['Division','division'],['Age Group','ageGroup'],['Hometown/School','hometown'],['Parent','contactName'],['Phone','phone'],['Email','email'],['Notes','notes'],['Photo Consent','photoConsent']],'pageant-registrations.csv');}
 
 /* ---- Local Sales / deals admin ---- */
 function paneDeals(){

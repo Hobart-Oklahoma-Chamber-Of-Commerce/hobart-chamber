@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="color-scheme" content="light only"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Lil' Mr. & Miss Hometown Harvest Registration · Hobart's Hometown Harvest 2026</title>
+<meta name="description" content="Register for the Lil' Mr. & Miss Hometown Harvest Pageant, Saturday September 19, 2026 at 10:00 AM at the Gazebo in Hobart, Oklahoma."/>
+<meta property="og:title" content="Lil' Mr. & Miss Hometown Harvest Registration — Hometown Harvest 2026"/>
+<meta property="og:description" content="Register for the Lil' Mr. & Miss Hometown Harvest Pageant, Saturday September 19, 2026 at 10:00 AM at the Gazebo in Hobart, Oklahoma."/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,800;0,900;1,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+:root{color-scheme:light;--navy:#1a3ea8;--navy-dark:#142f7e;--navy-deep:#0e2056;--gold:#c49a3e;--gold-light:#dab65e;--gold-pale:#f6edd6;--harvest:#c44b0a;--harvest-l:#e05c1a;--white:#fff;--slate:#f3f6fc;--gray:#6f7d99;--dark-gray:#2c3a58;--border:#dbe3f4;}
+html{background:#fff !important;}
+body{font-family:'Inter',sans-serif;color:var(--navy-deep);background:#fff !important;overflow-x:hidden;}
+nav{background:rgba(26,62,168,.97);display:flex;align-items:center;justify-content:space-between;padding:0 20px;height:62px;border-bottom:2px solid var(--gold);gap:10px;}
+.nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none;flex:1;min-width:0;}
+.nav-logo-mark{width:38px;height:38px;border-radius:50%;background:var(--gold-pale);overflow:hidden;flex-shrink:0;}
+.nav-logo-mark img{width:100%;height:100%;object-fit:cover;}
+.nav-logo-text span:first-child{font-family:'Playfair Display',serif;font-size:14px;font-weight:700;color:#fff;display:block;white-space:nowrap;}
+.nav-logo-text span:last-child{font-size:10px;color:rgba(255,255,255,.5);}
+.nav-back{font-size:12px;font-weight:600;color:rgba(255,255,255,.7);text-decoration:none;padding:7px 12px;border:1px solid rgba(255,255,255,.25);border-radius:5px;white-space:nowrap;flex-shrink:0;}
+.hero{background:linear-gradient(150deg,#3a1200,#7a2800 50%,#9b3dc8);padding:40px 20px 34px;text-align:center;}
+.hero-eyebrow{font-size:10.5px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:rgba(255,255,255,.6);margin-bottom:8px;}
+.hero h1{font-family:'Playfair Display',serif;font-size:clamp(26px,5.5vw,42px);font-weight:900;color:#fff;line-height:1.1;margin-bottom:10px;}
+.hero h1 em{font-style:italic;color:#f6b84a;}
+.hero-sub{font-size:14px;color:rgba(255,255,255,.75);line-height:1.7;max-width:520px;margin:0 auto;}
+.hero-chips{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-top:16px;}
+.chip{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.22);border-radius:20px;padding:6px 14px;font-size:12px;font-weight:600;color:rgba(255,255,255,.9);}
+main{max-width:660px;margin:0 auto;padding:36px 18px 80px;}
+.notice{background:var(--gold-pale);border-left:4px solid var(--gold);border-radius:8px;padding:16px 20px;margin-bottom:28px;font-size:13.5px;color:var(--dark-gray);line-height:1.7;}
+.notice strong{color:var(--navy);display:block;margin-bottom:4px;font-size:14.5px;}
+.form-card{background:#fff;border:1px solid var(--border);border-radius:12px;padding:32px;box-shadow:0 4px 24px rgba(26,62,168,.07);}
+.form-sec{font-family:'Playfair Display',serif;font-size:17px;font-weight:700;color:var(--navy);margin:24px 0 14px;padding-bottom:8px;border-bottom:1px solid var(--border);}
+.form-sec:first-of-type{margin-top:0;}
+.fg{display:flex;flex-direction:column;gap:5px;margin-bottom:14px;}
+.fg label{font-size:13px;font-weight:600;color:var(--dark-gray);}
+.fg label .req{color:var(--gold);margin-left:2px;}
+.fg input,.fg select,.fg textarea{padding:11px 13px;border:1.5px solid var(--border);border-radius:7px;font-size:16px;font-family:'Inter',sans-serif;color:var(--navy-deep);width:100%;-webkit-appearance:none;}
+.fg input:focus,.fg select:focus,.fg textarea:focus{outline:none;border-color:var(--navy);box-shadow:0 0 0 3px rgba(26,62,168,.1);}
+.fg .hint{font-size:11.5px;color:var(--gray);line-height:1.5;}
+.fg-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+.check-row{display:flex;flex-direction:column;gap:9px;margin-top:4px;}
+.check-item{display:flex;align-items:flex-start;gap:9px;font-size:13.5px;color:var(--dark-gray);line-height:1.5;}
+.check-item input{width:auto;margin-top:2px;flex-shrink:0;}
+.btn-submit{width:100%;background:var(--harvest);color:#fff;border:none;border-radius:8px;padding:16px;font-size:16px;font-weight:700;font-family:'Inter',sans-serif;cursor:pointer;margin-top:6px;}
+.btn-submit:hover{background:var(--harvest-l);}
+.btn-submit:disabled{background:var(--gray);cursor:not-allowed;}
+.form-msg{display:none;border-radius:8px;padding:14px 18px;font-size:14px;font-weight:500;line-height:1.6;margin-top:14px;}
+.form-msg.ok{background:#e8f6ec;color:#1c7a3e;display:block;}
+.form-msg.err{background:#fbe9e9;color:#b3261e;display:block;}
+.page-footer{background:var(--navy-dark);padding:24px;text-align:center;}
+.page-footer p{font-size:12.5px;color:rgba(255,255,255,.4);}
+.page-footer a{color:var(--gold-light);text-decoration:none;}
+@media(max-width:640px){nav{padding:0 13px;}.form-card{padding:20px 15px;}.fg-row{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+<nav>
+  <a href="index.html" class="nav-logo">
+    <span class="nav-logo-mark"><img src="flyers/chamber-logo.PNG" alt="" onerror="this.onerror=null;this.style.display='none';"/></span>
+    <span class="nav-logo-text"><span>Hobart Chamber of Commerce</span><span>Hometown Harvest 2026</span></span>
+  </a>
+  <a href="hometown-harvest.html" class="nav-back">← Event Info</a>
+</nav>
+
+<div class="hero">
+  <div class="hero-eyebrow">Saturday, September 19, 2026</div>
+  <h1>Lil' Mr. &amp; Miss <em>Hometown Harvest</em></h1>
+  <p class="hero-sub">Our youngest community stars take the Gazebo at 10:00 AM. Open to boys and girls — register your little one below.</p>
+  <div class="hero-chips"><span class="chip">👑 10:00 AM</span><span class="chip">📍 At the Gazebo</span><span class="chip">🏆 Crowning Ceremony</span></div>
+</div>
+
+<main>
+  <div class="notice"><strong>👑 Pageant Details</strong>The Lil' Mr. &amp; Miss Hometown Harvest Pageant takes place at the <strong>Gazebo at 10:00 AM</strong>. Please arrive by <strong>9:30 AM</strong> to check in. Contestants should wear their Sunday best or fall-themed attire — no formal wear required. Every participant gets recognized!</div>
+
+  <div class="form-card">
+    <h2 style="font-family:'Playfair Display',serif;font-size:21px;font-weight:700;color:var(--navy);margin-bottom:5px;">Pageant Registration</h2>
+    <p style="font-size:13px;color:var(--gray);margin-bottom:24px;">Fields marked <span style="color:var(--gold);font-weight:700;">*</span> are required.</p>
+    <div class="form-sec">Contestant</div>
+    <div class="fg-row">
+      <div class="fg"><label>Child's First Name <span class="req">*</span></label><input type="text" id="f_cfirst"/></div>
+      <div class="fg"><label>Child's Last Name <span class="req">*</span></label><input type="text" id="f_clast"/></div>
+    </div>
+    <div class="fg-row">
+      <div class="fg">
+        <label>Division <span class="req">*</span></label>
+        <select id="f_div"><option value="">— Select —</option><option>Lil' Mr. Hometown Harvest</option><option>Lil' Miss Hometown Harvest</option></select>
+      </div>
+      <div class="fg">
+        <label>Age Group <span class="req">*</span></label>
+        <select id="f_age"><option value="">— Select —</option><option>0–2 years</option><option>3–4 years</option><option>5–6 years</option><option>7–8 years</option><option>9–10 years</option></select>
+      </div>
+    </div>
+    <div class="fg">
+      <label>Hometown / School (optional)</label>
+      <input type="text" id="f_town" placeholder="e.g. Hobart · Hobart Elementary"/>
+      <span class="hint">Read aloud during introductions.</span>
+    </div>
+    <div class="form-sec">Parent / Guardian</div>
+    <div class="fg-row">
+      <div class="fg"><label>Parent / Guardian Name <span class="req">*</span></label><input type="text" id="f_pname" autocomplete="name"/></div>
+      <div class="fg"><label>Phone <span class="req">*</span></label><input type="tel" id="f_phone" placeholder="(580) 000-0000"/></div>
+    </div>
+    <div class="fg"><label>Email</label><input type="email" id="f_email" placeholder="you@email.com"/></div>
+    <div class="form-sec">Additional</div>
+    <div class="fg">
+      <label>Anything we should know?</label>
+      <textarea id="f_notes" rows="2" placeholder="Accessibility needs, a sibling entering too, questions…"></textarea>
+    </div>
+    <div class="fg">
+      <div class="check-row">
+        <label class="check-item"><input type="checkbox" id="f_photo"/> I give permission for photos of my child to be used in Chamber social media and event coverage</label>
+      </div>
+    </div>
+
+    <div class="form-msg" id="f_msg"></div>
+    <button class="btn-submit" id="f_btn" onclick="submitForm()">Register My Child →</button>
+    <p style="font-size:12px;color:var(--gray);margin-top:14px;text-align:center;line-height:1.6;">Questions? Call <a href="tel:5806820887" style="color:var(--navy);font-weight:600;">(580) 682-0887</a> or email <a href="mailto:director@hobartokchamber.org" style="color:var(--navy);font-weight:600;">director@hobartokchamber.org</a></p>
+  </div>
+</main>
+
+<div class="page-footer">
+  <p>Hobart Chamber of Commerce · 106 W 4th St · Hobart, OK 73651 · <a href="tel:5806820887">(580) 682-0887</a></p>
+  <p style="margin-top:6px;"><a href="hometown-harvest.html">← Back to Hometown Harvest</a></p>
+</div>
+
+<script>
+var firebaseConfig={apiKey:"AIzaSyDdoomYnp5-ASz7domQQervL8RttEtOY0o",authDomain:"hobart-chamber.firebaseapp.com",projectId:"hobart-chamber",storageBucket:"hobart-chamber.firebasestorage.app",messagingSenderId:"1018730792333",appId:"1:1018730792333:web:b26c20feef8d04ed07a9c4"};
+var db=null;
+try{if(!firebase.apps.length)firebase.initializeApp(firebaseConfig);db=firebase.firestore();}catch(e){}
+var WEB3FORMS_KEY="a35795f6-54b3-41a0-b5c8-043e93cb73a5";
+var CHAMBER_EMAIL="director@hobartokchamber.org";
+function val(id){var el=document.getElementById(id);return el?(el.value||'').trim():'';}
+function chk(id){var el=document.getElementById(id);return el?el.checked:false;}
+function submitForm(){
+  var msg=document.getElementById('f_msg'),btn=document.getElementById('f_btn');
+  if(!val('f_cfirst')||!val('f_clast')||!val('f_div')||!val('f_age')||!val('f_pname')||!val('f_phone')){
+    msg.className='form-msg err';msg.textContent='Please fill in all required fields.';return;}
+  btn.disabled=true;btn.textContent='Sending…';msg.className='form-msg';msg.style.display='none';
+  var fsData={childName:val('f_cfirst')+' '+val('f_clast'),division:val('f_div'),ageGroup:val('f_age'),
+    hometown:val('f_town'),contactName:val('f_pname'),phone:val('f_phone'),email:val('f_email'),
+    notes:val('f_notes'),photoConsent:chk('f_photo')?'Yes':'No'};
+  fsData.createdAt=(firebase.firestore&&firebase.firestore.FieldValue)?firebase.firestore.FieldValue.serverTimestamp():new Date().toISOString();
+  if(db) db.collection('pageant').add(fsData).catch(function(){});
+  var payload={access_key:WEB3FORMS_KEY,subject:'Pageant Registration — '+(fsData.contactName||fsData.entryName||'New entry'),from_name:'Hobart Chamber Website',to:CHAMBER_EMAIL,replyto:fsData.email||CHAMBER_EMAIL};
+  for(var k in fsData){ if(k!=='createdAt') payload[k]=fsData[k]; }
+  fetch('https://api.web3forms.com/submit',{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify(payload)})
+  .then(function(r){return r.json();}).then(function(res){
+    if(res.success){msg.className='form-msg ok';msg.innerHTML='Registered! 👑 Please arrive at the Gazebo by 9:30 AM on September 19th to check in. We can&rsquo;t wait to meet your little one!';btn.style.display='none';}
+    else{msg.className='form-msg err';msg.textContent='Something went wrong. Please call (580) 682-0887.';btn.disabled=false;btn.textContent='Register My Child →';}
+  }).catch(function(){msg.className='form-msg err';msg.textContent='Could not send. Please call (580) 682-0887.';btn.disabled=false;btn.textContent='Register My Child →';});
+}
+</script>
+</body>
+</html>
