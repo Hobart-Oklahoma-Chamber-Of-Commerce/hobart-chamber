@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8" />
+<meta name="color-scheme" content="light only"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Hobart Chamber of Commerce | Hobart, Oklahoma</title>
 <meta name="description" content="The Hobart Chamber of Commerce supports local business and strengthens community in Hobart and Kiowa County, Oklahoma." />
@@ -33,6 +34,7 @@
   *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
 
   :root{
+  color-scheme:light;
     /* Bearcat royal blue + athletic gold */
     --navy:#1a3ea8;
     --navy-dark:#142f7e;
@@ -479,6 +481,8 @@
   .member-contact .mc-line{font-size:11.5px;color:var(--gray);line-height:1.45;}
   .member-contact .mc-phone{font-size:11.5px;font-weight:600;color:var(--navy);text-decoration:none;width:fit-content;}
   .member-contact .mc-phone:hover{color:var(--gold);}
+  .mc-menu{display:inline-flex;align-items:center;gap:4px;margin-top:6px;padding:4px 10px;background:var(--gold-pale);border:1px solid var(--gold);border-radius:14px;font-size:11px;font-weight:700;color:var(--navy);text-decoration:none;width:fit-content;transition:background .15s;}
+  .mc-menu:hover{background:var(--gold);color:var(--navy-deep);}
 
   /* ---- BOARD ---- */
   .board{background:var(--navy);padding:84px 60px;}
