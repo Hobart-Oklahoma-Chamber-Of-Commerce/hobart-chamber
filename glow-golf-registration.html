@@ -1,444 +1,312 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Glow Golf Tournament Registration — Hobart Chamber of Commerce</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;800;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+<meta charset="UTF-8"/>
+<meta name="color-scheme" content="light only"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Glow Golf Tournament — October 3, 2026 | Hobart Chamber</title>
+<meta name="description" content="Register your team for the Hobart Chamber Glow Golf Tournament — Saturday, October 3, 2026 at dusk (approx. 8:30 PM). Hobart Municipal Golf Course. $240 per team of 4. Limited to 15 public spots."/>
+<meta property="og:title" content="Glow Golf Tournament · Oct 3, 2026 · Hobart, OK"/>
+<meta property="og:description" content="4-man scramble under the glow · $240 per team · Limited spots · Register now at hobartchamber.org"/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,800;0,900;1,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"/>
 <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
 <style>
-  *{margin:0;padding:0;box-sizing:border-box;}
-  :root{
-    --navy:#1a3ea8;--navy-dark:#142f7e;--navy-deep:#0e2056;--navy-hover:#2247bd;
-    --gold:#c49a3e;--gold-light:#dab65e;--gold-pale:#f6edd6;
-    --white:#ffffff;--slate:#f3f6fc;--gray:#6f7d99;--dark-gray:#2c3a58;--border:#dbe3f4;
-  }
-  body{font-family:'Inter',sans-serif;color:var(--navy-deep);background:var(--slate);line-height:1.5;-webkit-font-smoothing:antialiased;}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+:root{color-scheme:light;
+  --navy:#1a3ea8;--navy-dark:#142f7e;--navy-deep:#0e2056;
+  --gold:#c49a3e;--gold-light:#dab65e;--gold-pale:#f6edd6;
+  --green:#1a6e3a;--green-light:#22943e;
+  --white:#fff;--slate:#f3f6fc;--gray:#6f7d99;--dark-gray:#2c3a58;--border:#dbe3f4;
+}
+html{background:#fff !important;overflow-x:hidden;}
+body{font-family:'Inter',sans-serif;color:var(--navy-deep);background:#fff !important;overflow-x:hidden;}
 
-  /* header */
-  .gg-top{background:linear-gradient(135deg,#0e2056 0%,#16317f 45%,#1a3ea8 100%);color:#fff;padding:34px 24px 40px;position:relative;overflow:hidden;}
-  .gg-top .glow{position:absolute;border-radius:50%;filter:blur(46px);opacity:.5;}
-  .gg-top .glow.a{width:220px;height:220px;background:#7bd88f;top:-70px;right:-40px;}
-  .gg-top .glow.b{width:180px;height:180px;background:#dab65e;bottom:-80px;left:-30px;opacity:.4;}
-  .gg-inner{max-width:680px;margin:0 auto;position:relative;z-index:2;}
-  .gg-back{display:inline-block;color:var(--gold-light);text-decoration:none;font-size:13px;font-weight:600;margin-bottom:18px;letter-spacing:.3px;}
-  .gg-back:hover{color:#fff;}
-  .gg-eyebrow{display:flex;align-items:center;gap:10px;margin-bottom:14px;}
-  .gg-eyebrow-line{width:38px;height:2px;background:var(--gold);}
-  .gg-eyebrow span{font-size:10.5px;font-weight:600;letter-spacing:2.6px;text-transform:uppercase;color:var(--gold-light);}
-  .gg-top h1{font-family:'Playfair Display',serif;font-size:clamp(30px,6vw,46px);font-weight:900;line-height:1.02;margin-bottom:14px;}
-  .gg-top h1 .em{color:var(--gold-light);}
-  .gg-facts{display:flex;flex-wrap:wrap;gap:8px 20px;margin-top:20px;}
-  .gg-fact{display:flex;align-items:center;gap:7px;font-size:13.5px;color:#dfe7fb;}
-  .gg-fact b{color:#fff;font-weight:700;}
+nav{background:rgba(26,62,168,.97);display:flex;align-items:center;justify-content:space-between;padding:0 22px;height:62px;border-bottom:2px solid var(--gold);gap:12px;position:sticky;top:0;z-index:100;}
+.nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none;flex:1;min-width:0;overflow:hidden;}
+.nav-logo-mark{width:38px;height:38px;border-radius:50%;background:var(--gold-pale);overflow:hidden;flex-shrink:0;}
+.nav-logo-mark img{width:100%;height:100%;object-fit:cover;}
+.nav-logo-text{min-width:0;overflow:hidden;}
+.nav-logo-text span:first-child{font-family:'Playfair Display',serif;font-size:14px;font-weight:700;color:#fff;display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.nav-logo-text span:last-child{font-size:10px;color:rgba(255,255,255,.5);}
+.nav-back{font-size:12px;font-weight:600;color:rgba(255,255,255,.7);text-decoration:none;padding:7px 12px;border:1px solid rgba(255,255,255,.25);border-radius:5px;white-space:nowrap;flex-shrink:0;}
 
-  /* form card */
-  .gg-wrap{max-width:680px;margin:-20px auto 60px;padding:0 16px;position:relative;z-index:3;}
-  .gg-card{background:#fff;border:1px solid var(--border);border-radius:14px;box-shadow:0 10px 40px rgba(14,32,86,.10);padding:30px 26px;}
-  .cap-banner{display:none;border-radius:8px;padding:12px 15px;font-size:13.5px;line-height:1.55;margin-bottom:16px;background:#e8f1ff;border-left:3px solid var(--navy);color:var(--dark-gray);}
-  .cap-banner.low{background:#fff5e0;border-left-color:var(--gold);}
-  .cap-banner.full{background:#fbe9e9;border-left-color:#b3261e;color:#7a1f1a;}
-  .gg-note{background:var(--gold-pale);border-left:3px solid var(--gold);border-radius:6px;padding:12px 15px;font-size:13px;color:var(--dark-gray);margin-bottom:26px;line-height:1.55;}
+/* HERO */
+.hero{background:linear-gradient(150deg,#001a00 0%,#0a3a1a 45%,#1a6e3a 100%);padding:44px 20px 38px;text-align:center;position:relative;overflow:hidden;}
+.hero::before{content:'⛳';position:absolute;font-size:280px;opacity:.05;top:50%;left:50%;transform:translate(-50%,-55%);}
+.hero-inner{position:relative;z-index:2;max-width:640px;margin:0 auto;}
+.hero-eyebrow{font-size:10.5px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:rgba(255,255,255,.6);margin-bottom:8px;}
+.hero h1{font-family:'Playfair Display',serif;font-size:clamp(28px,5.5vw,46px);font-weight:900;color:#fff;line-height:1.1;margin-bottom:8px;}
+.hero h1 em{font-style:italic;color:var(--gold);}
+.hero-detail{font-size:14px;color:rgba(255,255,255,.78);line-height:1.8;margin-bottom:18px;}
+.hero-detail strong{color:#fff;}
+.hero-chips{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-bottom:22px;}
+.chip{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.22);border-radius:20px;padding:6px 14px;font-size:12px;font-weight:600;color:rgba(255,255,255,.9);}
 
-  .gg-section{margin-bottom:26px;}
-  .gg-section-head{display:flex;align-items:center;gap:10px;margin-bottom:15px;}
-  .gg-section-head .n{width:26px;height:26px;border-radius:50%;background:var(--navy);color:#fff;font-size:13px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-family:'Playfair Display',serif;}
-  .gg-section-head h2{font-family:'Playfair Display',serif;font-size:19px;font-weight:800;color:var(--navy-deep);}
-  .gg-section-head .sub{font-size:12px;color:var(--gray);margin-left:auto;}
+/* SLOTS METER */
+.slots-bar{background:var(--navy-deep);padding:20px 24px;text-align:center;}
+.slots-label{font-size:12px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,.55);margin-bottom:10px;}
+.slots-track{background:rgba(255,255,255,.12);border-radius:99px;height:22px;max-width:460px;margin:0 auto 10px;overflow:hidden;position:relative;}
+.slots-fill{height:100%;border-radius:99px;background:linear-gradient(90deg,var(--green-light),var(--gold));transition:width .6s ease;}
+.slots-fill.warn{background:linear-gradient(90deg,#e07b00,#e04000);}
+.slots-text{font-size:13px;font-weight:700;color:#fff;}
+.slots-text span{color:var(--gold);}
 
-  label.fl{display:block;font-size:12.5px;font-weight:600;color:var(--dark-gray);margin-bottom:6px;}
-  label.fl .req{color:#c0392b;}
-  .fg{margin-bottom:16px;}
-  input[type=text],input[type=tel],input[type=email]{width:100%;padding:11px 13px;border:1.5px solid var(--border);border-radius:8px;font-size:14.5px;font-family:'Inter',sans-serif;color:var(--navy-deep);background:#fff;transition:border-color .15s,box-shadow .15s;}
-  input:focus{outline:none;border-color:var(--navy);box-shadow:0 0 0 3px rgba(26,62,168,.12);}
-  input::placeholder{color:#a7b2c9;}
-  .fg-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+/* MAIN */
+main{max-width:660px;margin:0 auto;padding:36px 18px 80px;}
 
-  /* player block */
-  .player{border:1px solid var(--border);border-radius:10px;padding:16px 16px 4px;margin-bottom:14px;background:var(--slate);}
-  .player-tag{display:inline-flex;align-items:center;gap:7px;font-size:12px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:var(--navy);margin-bottom:13px;}
-  .player-tag .dot{width:8px;height:8px;border-radius:50%;background:var(--gold);}
-  .player.cap .player-tag{color:var(--gold);}
-  .player.cap .player-tag .dot{background:var(--navy);}
+.notice{border-radius:8px;padding:16px 20px;margin-bottom:24px;font-size:13.5px;line-height:1.7;}
+.notice.gold{background:var(--gold-pale);border-left:4px solid var(--gold);color:var(--dark-gray);}
+.notice.green{background:#e8f6ec;border-left:4px solid var(--green);color:#1a4a28;}
+.notice.red{background:#fbe9e9;border-left:4px solid #c0392b;color:#7a1c1c;}
+.notice strong{display:block;margin-bottom:3px;font-size:14.5px;}
 
-  /* payment */
-  .pay-opts{display:flex;flex-wrap:wrap;gap:10px;}
-  .pay-opt{flex:1;min-width:120px;}
-  .pay-opt input{position:absolute;opacity:0;pointer-events:none;}
-  .pay-opt label{display:block;text-align:center;padding:13px 10px;border:1.5px solid var(--border);border-radius:9px;font-size:14px;font-weight:600;color:var(--dark-gray);cursor:pointer;transition:all .15s;background:#fff;}
-  .pay-opt input:checked+label{border-color:var(--navy);background:var(--navy);color:#fff;box-shadow:0 4px 14px rgba(26,62,168,.22);}
+/* FULL / PRE-REG STATE */
+.full-state{display:none;text-align:center;padding:32px 20px;}
+.full-state h2{font-family:'Playfair Display',serif;font-size:26px;color:var(--navy);margin-bottom:10px;}
+.full-state p{font-size:14px;color:var(--gray);line-height:1.7;margin-bottom:20px;}
 
-  /* waiver */
-  .waiver-box{border:1px solid var(--border);border-radius:9px;padding:15px 16px;background:var(--slate);font-size:12.5px;color:var(--dark-gray);line-height:1.6;font-style:italic;margin-bottom:14px;}
-  .agree{display:flex;align-items:flex-start;gap:10px;font-size:13.5px;color:var(--dark-gray);cursor:pointer;}
-  .agree input{margin-top:3px;width:17px;height:17px;flex-shrink:0;accent-color:var(--navy);cursor:pointer;}
+/* FORM */
+.form-card{background:#fff;border:1px solid var(--border);border-radius:12px;padding:32px;box-shadow:0 4px 24px rgba(26,62,168,.07);}
+.form-sec{font-family:'Playfair Display',serif;font-size:17px;font-weight:700;color:var(--navy);margin:24px 0 14px;padding-bottom:8px;border-bottom:1px solid var(--border);}
+.form-sec:first-of-type{margin-top:0;}
+.fg{display:flex;flex-direction:column;gap:5px;margin-bottom:14px;}
+.fg label{font-size:13px;font-weight:600;color:var(--dark-gray);}
+.fg label .req{color:var(--gold);margin-left:2px;}
+.fg input,.fg select,.fg textarea{padding:11px 13px;border:1.5px solid var(--border);border-radius:7px;font-size:16px;font-family:'Inter',sans-serif;color:var(--navy-deep);width:100%;-webkit-appearance:none;}
+.fg input:focus,.fg select:focus{outline:none;border-color:var(--navy);box-shadow:0 0 0 3px rgba(26,62,168,.1);}
+.fg .hint{font-size:11.5px;color:var(--gray);line-height:1.5;}
+.fg-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+.player-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:4px;}
 
-  .gg-submit{width:100%;padding:15px;background:var(--navy);color:#fff;border:none;border-radius:10px;font-size:16px;font-weight:700;font-family:'Inter',sans-serif;cursor:pointer;letter-spacing:.3px;transition:background .18s,transform .1s;margin-top:6px;}
-  .gg-submit:hover{background:var(--navy-hover);}
-  .gg-submit:active{transform:translateY(1px);}
-  .gg-submit:disabled{background:var(--gray);cursor:not-allowed;}
+.fee-box{background:var(--navy-deep);border-radius:8px;padding:18px 20px;margin:18px 0;}
+.fee-box h4{font-family:'Playfair Display',serif;font-size:17px;color:var(--gold);margin-bottom:6px;}
+.fee-box p{font-size:13px;color:rgba(255,255,255,.75);line-height:1.7;}
+.fee-box strong{color:#fff;}
 
-  .gg-msg{display:none;padding:13px 15px;border-radius:9px;font-size:14px;margin-top:16px;line-height:1.5;}
+.btn-submit{width:100%;background:var(--green);color:#fff;border:none;border-radius:8px;padding:16px;font-size:16px;font-weight:700;font-family:'Inter',sans-serif;cursor:pointer;margin-top:6px;transition:background .2s;}
+.btn-submit:hover{background:var(--green-light);}
+.btn-submit:disabled{background:var(--gray);cursor:not-allowed;}
+.form-msg{display:none;border-radius:8px;padding:14px 18px;font-size:14px;font-weight:500;line-height:1.6;margin-top:14px;}
+.form-msg.ok{background:#e8f6ec;color:#1c7a3e;display:block;}
+.form-msg.err{background:#fbe9e9;color:#b3261e;display:block;}
 
-  /* success */
-  .gg-done{display:none;text-align:center;padding:20px 10px;}
-  .gg-done .check{width:66px;height:66px;border-radius:50%;background:#e8f6ec;color:#1c7a3e;font-size:34px;display:flex;align-items:center;justify-content:center;margin:0 auto 18px;}
-  .gg-done h2{font-family:'Playfair Display',serif;font-size:24px;color:var(--navy-deep);margin-bottom:10px;}
-  .gg-done p{font-size:14.5px;color:var(--dark-gray);max-width:440px;margin:0 auto 8px;line-height:1.6;}
-  .gg-done .team-name{color:var(--navy);font-weight:700;}
-  .gg-done a{display:inline-block;margin-top:20px;color:var(--navy);font-weight:700;text-decoration:none;font-size:14px;}
-  .gg-done a:hover{color:var(--gold);}
+.page-footer{background:var(--navy-dark);padding:24px;text-align:center;}
+.page-footer p{font-size:12.5px;color:rgba(255,255,255,.4);}
+.page-footer a{color:var(--gold-light);text-decoration:none;}
 
-  .gg-foot{text-align:center;font-size:12.5px;color:var(--gray);margin-top:22px;line-height:1.7;}
-  .gg-foot a{color:var(--navy);text-decoration:none;font-weight:600;}
-
-  @media(max-width:520px){
-    .gg-card{padding:24px 18px;}
-    .fg-row{grid-template-columns:1fr;}
-    .gg-section-head .sub{display:none;}
-  }
+@media(max-width:600px){
+  nav{padding:0 13px;}
+  .form-card{padding:20px 15px;}
+  .fg-row,.player-grid{grid-template-columns:1fr;}
+}
 </style>
 </head>
 <body>
 
-<div class="gg-top">
-  <div class="glow a"></div>
-  <div class="glow b"></div>
-  <div class="gg-inner">
-    <a href="index.html" class="gg-back">← Back to Chamber site</a>
-    <div class="gg-eyebrow"><span class="gg-eyebrow-line"></span><span>Hobart Chamber of Commerce</span></div>
-    <h1>Glow Golf Tournament <span class="em">2026</span></h1>
-    <div class="gg-facts">
-      <span class="gg-fact">🗓️ <b>August 1, 2026</b></span>
-      <span class="gg-fact">📍 <b>Hobart Municipal Golf Course</b></span>
-      <span class="gg-fact">⛳ <b>4-Man Scramble</b></span>
-      <span class="gg-fact">💵 <b>$240 / team</b></span>
-      <span class="gg-fact">🏌️ <b>Limited to 18 teams</b></span>
+<nav>
+  <a href="index.html" class="nav-logo">
+    <span class="nav-logo-mark"><img src="flyers/chamber-logo.PNG" alt="" onerror="this.onerror=null;this.style.display='none';"/></span>
+    <span class="nav-logo-text"><span>Hobart Chamber of Commerce</span><span>Events</span></span>
+  </a>
+  <a href="index.html" class="nav-back">← Back</a>
+</nav>
+
+<div class="hero">
+  <div class="hero-inner">
+    <div class="hero-eyebrow">Saturday, October 3, 2026 · At Dusk · Approx. 8:30 PM</div>
+    <h1>🌙 Glow Golf <em>Tournament</em></h1>
+    <div class="hero-detail">
+      <strong>Hobart Municipal Golf Course</strong><br>
+      4-Man Scramble · $240 per team · Limited to 15 public spots
+    </div>
+    <div class="hero-chips">
+      <span class="chip">⛳ 4-Man Scramble</span>
+      <span class="chip">💰 $240 Per Team</span>
+      <span class="chip">🌙 Starts at Dusk ~8:30 PM</span>
+      <span class="chip">📍 Hobart Municipal Golf Course</span>
     </div>
   </div>
 </div>
 
-<div class="gg-wrap">
-  <div class="gg-card" id="ggCard">
+<div class="slots-bar">
+  <div class="slots-label">Team Slots Available</div>
+  <div class="slots-track"><div class="slots-fill" id="slotsFill" style="width:0%"></div></div>
+  <div class="slots-text" id="slotsText">Loading availability…</div>
+</div>
 
-    <div class="cap-banner" id="capBanner"></div>
+<main>
+  <div class="notice gold">
+    <strong>🏌️ About the Tournament</strong>
+    Glowing golf balls, illuminated fairways, and a fun night under the stars. Teams of 4 compete in a scramble format — everyone tees off, the best shot is selected, and play continues from there. Great for all skill levels.
+  </div>
 
-    <div class="gg-note" id="ggNote">Register your 4-person team below. After you submit, the Chamber receives your registration automatically — no need to turn in the paper form. Payment ($240 per team) can be made by cash, check, or credit card; the Chamber will follow up to collect it.</div>
-
-    <!-- TEAM -->
-    <div class="gg-section">
-      <div class="gg-section-head"><span class="n">1</span><h2>Team</h2></div>
-      <div class="fg">
-        <label class="fl" for="teamName">Team Name <span class="req">*</span></label>
-        <input type="text" id="teamName" placeholder="e.g. Bearcat Birdies" />
-      </div>
-    </div>
-
-    <!-- CAPTAIN -->
-    <div class="gg-section">
-      <div class="gg-section-head"><span class="n">2</span><h2>Team Captain</h2></div>
-      <div class="fg">
-        <label class="fl" for="capName">Captain Name <span class="req">*</span></label>
-        <input type="text" id="capName" placeholder="Full name" />
-      </div>
+  <!-- FULL STATE (shown when 15 public slots are taken) -->
+  <div class="full-state" id="fullState">
+    <div style="font-size:56px;margin-bottom:16px;">⛳</div>
+    <h2>Registration is Full</h2>
+    <p>All 15 public team spots for the October 3rd Glow Golf Tournament have been filled. Pre-register below and you will be first in line for our next Glow Golf event.</p>
+    <div class="form-card">
+      <div class="form-sec">Pre-Register for the Next Event</div>
+      <div class="notice green" style="margin-bottom:18px;"><strong>You are on the list.</strong>We will contact you first when the next Glow Golf Tournament opens for registration.</div>
       <div class="fg-row">
-        <div class="fg">
-          <label class="fl" for="capPhone">Phone <span class="req">*</span></label>
-          <input type="tel" id="capPhone" placeholder="(580) 000-0000" />
-        </div>
-        <div class="fg">
-          <label class="fl" for="capEmail">Email <span class="req">*</span></label>
-          <input type="email" id="capEmail" placeholder="name@email.com" />
-        </div>
+        <div class="fg"><label>Captain Name <span class="req">*</span></label><input type="text" id="pr_name" placeholder="Full name"/></div>
+        <div class="fg"><label>Phone <span class="req">*</span></label><input type="tel" id="pr_phone" placeholder="(580) 000-0000"/></div>
       </div>
-    </div>
-
-    <!-- PLAYERS -->
-    <div class="gg-section">
-      <div class="gg-section-head"><span class="n">3</span><h2>Players</h2><span class="sub">4-man scramble</span></div>
-
-      <div class="player cap">
-        <div class="player-tag"><span class="dot"></span>Player 1 · Captain</div>
-        <div class="fg">
-          <label class="fl" for="p1name">Name</label>
-          <input type="text" id="p1name" placeholder="Same as captain above (auto-filled)" />
-        </div>
-      </div>
-
-      <div class="player">
-        <div class="player-tag"><span class="dot"></span>Player 2</div>
-        <div class="fg"><label class="fl" for="p2name">Name</label><input type="text" id="p2name" placeholder="Full name" /></div>
-        <div class="fg-row">
-          <div class="fg"><label class="fl" for="p2phone">Phone</label><input type="tel" id="p2phone" placeholder="(580) 000-0000" /></div>
-          <div class="fg"><label class="fl" for="p2email">Email</label><input type="email" id="p2email" placeholder="name@email.com" /></div>
-        </div>
-      </div>
-
-      <div class="player">
-        <div class="player-tag"><span class="dot"></span>Player 3</div>
-        <div class="fg"><label class="fl" for="p3name">Name</label><input type="text" id="p3name" placeholder="Full name" /></div>
-        <div class="fg-row">
-          <div class="fg"><label class="fl" for="p3phone">Phone</label><input type="tel" id="p3phone" placeholder="(580) 000-0000" /></div>
-          <div class="fg"><label class="fl" for="p3email">Email</label><input type="email" id="p3email" placeholder="name@email.com" /></div>
-        </div>
-      </div>
-
-      <div class="player">
-        <div class="player-tag"><span class="dot"></span>Player 4</div>
-        <div class="fg"><label class="fl" for="p4name">Name</label><input type="text" id="p4name" placeholder="Full name" /></div>
-        <div class="fg-row">
-          <div class="fg"><label class="fl" for="p4phone">Phone</label><input type="tel" id="p4phone" placeholder="(580) 000-0000" /></div>
-          <div class="fg"><label class="fl" for="p4email">Email</label><input type="email" id="p4email" placeholder="name@email.com" /></div>
-        </div>
-      </div>
-    </div>
-
-    <!-- PAYMENT -->
-    <div class="gg-section" id="paySection">
-      <div class="gg-section-head"><span class="n">4</span><h2>Payment</h2><span class="sub">$240 per team</span></div>
-      <label class="fl">How will your team pay? <span class="req">*</span></label>
-      <div class="pay-opts">
-        <div class="pay-opt"><input type="radio" name="pay" id="payCash" value="Cash"><label for="payCash">Cash</label></div>
-        <div class="pay-opt"><input type="radio" name="pay" id="payCheck" value="Check"><label for="payCheck">Check</label></div>
-        <div class="pay-opt"><input type="radio" name="pay" id="payCard" value="Credit Card"><label for="payCard">Credit Card</label></div>
-      </div>
-    </div>
-
-    <!-- WAIVER -->
-    <div class="gg-section">
-      <div class="gg-section-head"><span class="n">5</span><h2>Waiver</h2></div>
-      <div class="waiver-box">"I understand that participation in the Glow Golf Tournament involves certain risks. I voluntarily participate and release the Hobart Chamber of Commerce, Hobart Municipal Golf Course, sponsors, volunteers, and event organizers from liability for injuries or damages arising from participation."</div>
-      <label class="agree"><input type="checkbox" id="agree"> <span>As team captain, I have read and agree to the waiver above on behalf of my team. <span class="req">*</span></span></label>
-    </div>
-
-    <button class="gg-submit" id="ggSubmit" onclick="submitGolf()">Register Team</button>
-    <div class="gg-msg" id="ggMsg"></div>
-
-    <div class="gg-foot">
-      Questions? Hobart Chamber of Commerce · <a href="tel:5806820887">(580) 682-0887</a><br>
-      <a href="mailto:director@hobartokchamber.org">director@hobartokchamber.org</a>
+      <div class="fg"><label>Email</label><input type="email" id="pr_email" placeholder="you@email.com"/></div>
+      <div class="fg"><label>Team Name (if you have one)</label><input type="text" id="pr_team"/></div>
+      <div class="form-msg" id="pr_msg"></div>
+      <button class="btn-submit" style="background:var(--navy);" onclick="submitPreReg()">Pre-Register for Next Event →</button>
     </div>
   </div>
 
-  <!-- SUCCESS -->
-  <div class="gg-card gg-done" id="ggDone">
-    <div class="check">✓</div>
-    <h2>You're registered!</h2>
-    <p>Thanks, <span class="team-name" id="doneTeam">team</span> — your spot in the Glow Golf Tournament is in. The Chamber has your registration and will reach out about payment and final details.</p>
-    <p>See you August 1st at Hobart Municipal Golf Course.</p>
-    <a href="index.html">← Return to Chamber site</a>
+  <!-- REGISTRATION FORM (shown when spots remain) -->
+  <div id="regState">
+    <div class="form-card">
+      <h2 style="font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:var(--navy);margin-bottom:5px;">Team Registration</h2>
+      <p style="font-size:13px;color:var(--gray);margin-bottom:24px;">Fields marked <span style="color:var(--gold);font-weight:700;">*</span> are required. Payment is due at the course on event night.</p>
+
+      <div class="form-sec">Team Information</div>
+      <div class="fg"><label>Team Name <span class="req">*</span></label><input type="text" id="f_team" placeholder="Your team name"/></div>
+
+      <div class="form-sec">Team Captain</div>
+      <div class="fg-row">
+        <div class="fg"><label>Captain Name <span class="req">*</span></label><input type="text" id="f_cap" autocomplete="name"/></div>
+        <div class="fg"><label>Phone <span class="req">*</span></label><input type="tel" id="f_phone" placeholder="(580) 000-0000"/></div>
+      </div>
+      <div class="fg"><label>Email <span class="req">*</span></label><input type="email" id="f_email" placeholder="you@email.com"/></div>
+
+      <div class="form-sec">Team Members <span style="font-size:13px;font-weight:500;color:var(--gray);">(4 players total including captain)</span></div>
+      <div class="player-grid">
+        <div class="fg"><label>Player 2 Name <span class="req">*</span></label><input type="text" id="f_p2"/></div>
+        <div class="fg"><label>Player 3 Name <span class="req">*</span></label><input type="text" id="f_p3"/></div>
+        <div class="fg"><label>Player 4 Name <span class="req">*</span></label><input type="text" id="f_p4"/></div>
+        <div class="fg"><label>Alternate / Sub</label><input type="text" id="f_alt" placeholder="Optional"/></div>
+      </div>
+
+      <div class="fee-box">
+        <h4>💳 Entry Fee — $240 per team</h4>
+        <p>Payment is collected at the course on the night of the event. Registering online holds your spot. <strong>Spots are first-come, first-served</strong> — register early to guarantee your place.</p>
+      </div>
+
+      <div class="fg">
+        <label>Anything else we should know?</label>
+        <input type="text" id="f_notes" placeholder="Shirt sizes, accessibility needs, questions…"/>
+      </div>
+
+      <div class="form-msg" id="f_msg"></div>
+      <button class="btn-submit" id="f_btn" onclick="submitReg()">Register My Team →</button>
+      <p style="font-size:12px;color:var(--gray);margin-top:14px;text-align:center;line-height:1.6;">Questions? Call <a href="tel:5806820887" style="color:var(--navy);font-weight:600;">(580) 682-0887</a> or email <a href="mailto:director@hobartokchamber.org" style="color:var(--navy);font-weight:600;">director@hobartokchamber.org</a></p>
+    </div>
   </div>
+</main>
+
+<div class="page-footer">
+  <p>Hobart Chamber of Commerce · 106 W 4th St · Hobart, OK 73651 · <a href="tel:5806820887">(580) 682-0887</a></p>
+  <p style="margin-top:6px;"><a href="index.html">← Back to hobartchamber.org</a></p>
 </div>
 
 <script>
-/* ============================================================
-   GLOW GOLF TOURNAMENT — team registration
-   Writes to Firestore collection 'glowgolf'. Registrations show up
-   automatically in the Chamber admin panel under the Glow Golf tab.
-   String-concatenation only, no template literals (house style).
-   ============================================================ */
-var firebaseConfig = {
-  apiKey: "AIzaSyDdoomYnp5-ASz7domQQervL8RttEtOY0o",
-  authDomain: "hobart-chamber.firebaseapp.com",
-  projectId: "hobart-chamber",
-  storageBucket: "hobart-chamber.firebasestorage.app",
-  messagingSenderId: "1018730792333",
-  appId: "1:1018730792333:web:b26c20feef8d04ed07a9c4"
-};
+var firebaseConfig={apiKey:"AIzaSyDdoomYnp5-ASz7domQQervL8RttEtOY0o",authDomain:"hobart-chamber.firebaseapp.com",projectId:"hobart-chamber",storageBucket:"hobart-chamber.firebasestorage.app",messagingSenderId:"1018730792333",appId:"1:1018730792333:web:b26c20feef8d04ed07a9c4"};
+var db=null;
+try{if(!firebase.apps.length)firebase.initializeApp(firebaseConfig);db=firebase.firestore();}catch(e){}
+var WEB3FORMS_KEY="a35795f6-54b3-41a0-b5c8-043e93cb73a5";
 
-var db=null, FB=false;
-if(window.firebase){
-  firebase.initializeApp(firebaseConfig);
-  db=firebase.firestore();
-  FB=true;
-}
-document.addEventListener('DOMContentLoaded', function(){ checkCapacity(); });
+// 15 public slots (3 held back internally — never exposed)
+var PUBLIC_SLOTS = 15;
+var confirmed = 0;
 
-/* Web3Forms — emails a copy of each registration to the Chamber inbox.
-   Uses the same key as the membership form, so it lands in the same place
-   (director@hobartokchamber.org). This is a notification only; the official
-   record is the entry saved to Firestore / shown in the admin panel. */
-var WEB3FORMS_KEY = "a35795f6-54b3-41a0-b5c8-043e93cb73a5";
-function notifyChamber(data){
-  try{
-    var roster=data.roster||[];
-    var lines='';
-    for(var i=0;i<roster.length;i++){
-      var p=roster[i], who=(i===0?'Player 1 (Captain)':'Player '+(i+1));
-      var bits=[]; if(p.name)bits.push(p.name); if(p.phone)bits.push(p.phone); if(p.email)bits.push(p.email);
-      lines+=who+': '+(bits.length?bits.join(' · '):'—')+'\n';
-    }
-    var payload={
-      access_key: WEB3FORMS_KEY,
-      subject: "New Glow Golf Team Registration - "+data.teamName,
-      from_name: "Hobart Chamber Website",
-      "Team Name": data.teamName,
-      "Captain": data.contactName,
-      "Captain Phone": data.phone,
-      "Captain Email": data.email,
-      "Payment Method": data.paymentMethod,
-      "Roster": lines,
-      "Event": "Glow Golf Tournament 2026 — Aug 1, Hobart Municipal Golf Course"
-    };
-    fetch('https://api.web3forms.com/submit',{
-      method:'POST',
-      headers:{'Content-Type':'application/json','Accept':'application/json'},
-      body:JSON.stringify(payload)
-    }).catch(function(){});
-  }catch(e){}
-}
+function val(id){var el=document.getElementById(id);return el?(el.value||'').trim():'';}
 
-/* ============ CAPACITY / WAITLIST ============
-   The tournament is capped at 18 teams. On load we count confirmed teams; once
-   the field is full the form flips to pre-registration for the next Glow Golf,
-   so nobody who shows up late just bounces off a dead end. Waitlist entries are
-   saved to the same collection with waitlist:true so the Chamber can call them
-   first if a spot opens, and has a head start on next year's field. */
-var TEAM_CAP = 18;
-var IS_WAITLIST = false;
-
-function applyCapacityUI(count){
-  var left = TEAM_CAP - count;
-  var banner = document.getElementById('capBanner');
-  var btn = document.getElementById('ggSubmit');
-  if(!banner) return;
-  if(left > 0){
-    banner.className = 'cap-banner' + (left <= 3 ? ' low' : '');
-    banner.innerHTML = left <= 3
-      ? '🔥 <b>Only ' + left + ' spot' + (left===1?'':'s') + ' left</b> — ' + count + ' of ' + TEAM_CAP + ' teams registered.'
-      : '<b>' + left + ' of ' + TEAM_CAP + ' spots open</b> — ' + count + ' team' + (count===1?'':'s') + ' registered so far.';
-    banner.style.display = 'block';
-    IS_WAITLIST = false;
-  }else{
-    IS_WAITLIST = true;
-    banner.className = 'cap-banner full';
-    banner.innerHTML = '🚫 <b>EVENT FULL</b> — all ' + TEAM_CAP + ' teams for the 2026 Glow Golf Tournament are registered. '
-      + 'You can <b>pre-register for next year\'s Glow Golf Tournament</b> below so your team gets first call when registration opens. '
-      + 'If a spot opens up this year, the Chamber works down this list in order.';
-    banner.style.display = 'block';
-    if(btn) btn.textContent = 'Pre-Register for Next Year';
-    var note = document.getElementById('ggNote');
-    if(note) note.innerHTML = '<b>This year\'s tournament is full.</b> This form is now taking <b>pre-registrations for next year\'s Glow Golf Tournament</b>. You\'ll be first in line when registration opens — and if a team drops out this year, the Chamber calls this list in order.';
-    var payHead = document.getElementById('paySection');
-    if(payHead) payHead.style.display = 'none';
+function updateSlots(count){
+  confirmed = count;
+  var remaining = Math.max(0, PUBLIC_SLOTS - count);
+  var pct = Math.min(100, (count / PUBLIC_SLOTS)*100);
+  var fill = document.getElementById('slotsFill');
+  var txt  = document.getElementById('slotsText');
+  fill.style.width = pct + '%';
+  if(pct >= 60) fill.classList.add('warn');
+  if(remaining === 0){
+    txt.innerHTML = '<span style="color:#e05c1a;">Registration Full</span> — pre-register for our next event below';
+    document.getElementById('regState').style.display  = 'none';
+    document.getElementById('fullState').style.display = 'block';
+  } else {
+    txt.innerHTML = '<span>' + remaining + '</span> of ' + PUBLIC_SLOTS + ' spots remaining';
   }
 }
 
-/* The glowgolf roster is admin-only readable (protects registrants' contact
-   info), so the public page can't count it directly. Instead we keep a single
-   public counter doc at counters/glowgolf holding {confirmed:N}. It's bumped
-   on every save below. This exposes only a number, never anyone's details. */
-function checkCapacity(){
-  if(!FB) return;
-  db.collection('counters').doc('glowgolf').get().then(function(doc){
-    var n = (doc.exists && typeof doc.data().confirmed==='number') ? doc.data().confirmed : 0;
-    applyCapacityUI(n);
-  }).catch(function(){ /* if the counter can't be read, leave the default open state */ });
-}
+// Load confirmed count from Firestore
+if(db){
+  db.collection('glowgolf2').where('event','==','Glow Golf Oct 3 2026').where('waitlist','==',false).get()
+    .then(function(snap){ updateSlots(snap.size); })
+    .catch(function(){ updateSlots(0); });
+} else { updateSlots(0); }
 
-function val(id){ var el=document.getElementById(id); return el?el.value.trim():''; }
-function showMsg(txt,type){
-  var m=document.getElementById('ggMsg');
-  m.style.display='block';
-  m.textContent=txt;
-  if(type==='err'){ m.style.background='#fbe9e9'; m.style.color='#b3261e'; }
-  else if(type==='ok'){ m.style.background='#e8f6ec'; m.style.color='#1c7a3e'; }
-  else{ m.style.background='#eef2fb'; m.style.color='#1a3ea8'; }
-}
-
-/* keep Player 1 name mirrored to the captain name if left blank */
-document.getElementById('capName').addEventListener('blur',function(){
-  var p1=document.getElementById('p1name');
-  if(p1 && !p1.value.trim()){ p1.value=this.value.trim(); }
-});
-
-function payMethod(){
-  var r=document.querySelectorAll('input[name="pay"]'), i;
-  for(i=0;i<r.length;i++){ if(r[i].checked) return r[i].value; }
-  return '';
-}
-
-function submitGolf(){
-  var teamName=val('teamName');
-  var capName=val('capName'), capPhone=val('capPhone'), capEmail=val('capEmail');
-  var pay=payMethod();
-  var agreed=document.getElementById('agree').checked;
-
-  if(!teamName){ showMsg('Please enter a team name.','err'); return; }
-  if(!capName||!capPhone||!capEmail){ showMsg('Please fill in the captain name, phone, and email.','err'); return; }
-  if(!pay && !IS_WAITLIST){ showMsg('Please choose a payment method.','err'); return; }
-  if(!agreed){ showMsg('Please agree to the waiver to complete registration.','err'); return; }
-
-  /* build roster — player 1 defaults to captain */
-  var roster=[
-    { name: val('p1name')||capName, phone: capPhone, email: capEmail },
-    { name: val('p2name'), phone: val('p2phone'), email: val('p2email') },
-    { name: val('p3name'), phone: val('p3phone'), email: val('p3email') },
-    { name: val('p4name'), phone: val('p4phone'), email: val('p4email') }
-  ];
-
+function submitReg(){
+  var msg=document.getElementById('f_msg'), btn=document.getElementById('f_btn');
+  var team=val('f_team'),cap=val('f_cap'),phone=val('f_phone'),email=val('f_email');
+  var p2=val('f_p2'),p3=val('f_p3'),p4=val('f_p4');
+  if(!team||!cap||!phone||!email||!p2||!p3||!p4){
+    msg.className='form-msg err';msg.textContent='Please fill in all required fields.';return;
+  }
+  if(confirmed >= PUBLIC_SLOTS){
+    msg.className='form-msg err';msg.textContent='Sorry — all spots just filled. Please use the pre-registration form.';return;
+  }
+  btn.disabled=true;btn.textContent='Registering…';
   var data={
-    teamName: teamName,
-    contactName: capName,
-    phone: capPhone,
-    email: capEmail,
-    roster: roster,
-    paymentMethod: pay,
-    paymentReceived: false,
-    amountPaid: '',
-    event: IS_WAITLIST ? 'Glow Golf — Pre-Registration (next tournament)' : 'Glow Golf Tournament 2026',
-    waitlist: IS_WAITLIST,
-    waiverAgreed: true
+    event:'Glow Golf Oct 3 2026',teamName:team,captainName:cap,
+    phone:phone,email:email,
+    players:[cap,p2,p3,p4].concat(val('f_alt')?[val('f_alt')]:[]),
+    notes:val('f_notes'),waitlist:false,paymentReceived:false,
+    createdAt:firebase.firestore.FieldValue.serverTimestamp()
   };
-
-  var btn=document.getElementById('ggSubmit');
-  btn.disabled=true;
-  showMsg(IS_WAITLIST?'Adding you to the pre-registration list…':'Sending your registration…','info');
-
-  if(!FB){
-    showMsg('Preview mode: registration not sent (Firebase not connected). On the live site this saves to the Chamber.','info');
-    btn.disabled=false;
-    return;
-  }
-
-  data.createdAt=firebase.firestore.FieldValue.serverTimestamp();
-  /* Final capacity check the instant before saving, using the public counter
-     (the roster itself isn't publicly readable). If the field filled while this
-     form was open, convert to a next-year pre-registration instead of
-     overbooking. Confirmed saves atomically bump the counter so the next
-     visitor sees the true count. */
-  var counterRef = db.collection('counters').doc('glowgolf');
-  counterRef.get().then(function(doc){
-    var confirmed = (doc.exists && typeof doc.data().confirmed==='number') ? doc.data().confirmed : 0;
-    if(!IS_WAITLIST && confirmed >= TEAM_CAP){
-      IS_WAITLIST = true;
-      data.waitlist = true;
-      data.event = 'Glow Golf — Pre-Registration (next year)';
-      applyCapacityUI(confirmed);
-      showMsg('The last spot was just taken — adding you to next year\u2019s pre-registration list instead\u2026','info');
+  if(db) db.collection('glowgolf2').add(data).catch(function(){});
+  var payload={access_key:WEB3FORMS_KEY,
+    subject:'Glow Golf Oct 3 — Team Registration: '+team,
+    from_name:'Hobart Chamber Website',
+    'Team':team,'Captain':cap,'Phone':phone,'Email':email,
+    'Players':data.players.join(', '),'Notes':val('f_notes')||'—'};
+  fetch('https://api.web3forms.com/submit',{method:'POST',
+    headers:{'Content-Type':'application/json','Accept':'application/json'},
+    body:JSON.stringify(payload)})
+  .then(function(r){return r.json();}).then(function(res){
+    if(res.success){
+      msg.className='form-msg ok';
+      msg.innerHTML='Team <b>'+team+'</b> is registered! ⛳ See you October 3rd at dusk. Payment of $240 is due at the course on the night of the event.';
+      btn.style.display='none';
+      updateSlots(confirmed+1);
+    } else {
+      msg.className='form-msg err';msg.textContent='Something went wrong. Please call (580) 682-0887.';
+      btn.disabled=false;btn.textContent='Register My Team →';
     }
-    return db.collection('glowgolf').add(data);
-  }).then(function(){
-    /* only confirmed teams count against the 18 cap */
-    if(!data.waitlist){
-      counterRef.set({confirmed: firebase.firestore.FieldValue.increment(1)}, {merge:true}).catch(function(){});
-    }
-    notifyChamber(data);
-    document.getElementById('doneTeam').textContent=teamName;
-    if(IS_WAITLIST){
-      var done=document.getElementById('ggDone');
-      done.querySelector('h2').textContent="You're on the list!";
-      var ps=done.querySelectorAll('p');
-      ps[0].innerHTML='Thanks, <span class="team-name">'+teamName.replace(/</g,'&lt;')+'</span> — this year\'s tournament is full, so you\'re pre-registered for next year\'s Glow Golf Tournament. The Chamber will contact you first when registration opens.';
-      ps[1].textContent='If a team drops out this year, we work down this list in order — so you may still hear from us about this year\'s event.';
-    }
-    document.getElementById('ggCard').style.display='none';
-    document.getElementById('ggDone').style.display='block';
-    window.scrollTo({top:0,behavior:'smooth'});
-  }).catch(function(e){
-    btn.disabled=false;
-    showMsg('Something went wrong saving your registration. Please try again, or call the Chamber at (580) 682-0887.','err');
+  }).catch(function(){
+    msg.className='form-msg err';msg.textContent='Could not send. Please call (580) 682-0887.';
+    btn.disabled=false;btn.textContent='Register My Team →';
+  });
+}
+
+function submitPreReg(){
+  var msg=document.getElementById('pr_msg');
+  var name=val('pr_name'),phone=val('pr_phone');
+  if(!name||!phone){msg.className='form-msg err';msg.textContent='Please enter your name and phone number.';return;}
+  var data={event:'Glow Golf Pre-Reg (Next Event)',captainName:name,phone:phone,
+    email:val('pr_email'),teamName:val('pr_team'),waitlist:true,
+    createdAt:firebase.firestore.FieldValue.serverTimestamp()};
+  if(db) db.collection('glowgolf2').add(data).catch(function(){});
+  var payload={access_key:WEB3FORMS_KEY,
+    subject:'Glow Golf — Pre-Registration (Next Event): '+name,
+    from_name:'Hobart Chamber Website',
+    'Captain':name,'Phone':phone,'Email':val('pr_email')||'—','Team':val('pr_team')||'—'};
+  fetch('https://api.web3forms.com/submit',{method:'POST',
+    headers:{'Content-Type':'application/json','Accept':'application/json'},
+    body:JSON.stringify(payload)})
+  .then(function(r){return r.json();}).then(function(res){
+    msg.className='form-msg ok';
+    msg.innerHTML='Got it, <b>'+name+'</b>! You are pre-registered for our next Glow Golf event. We will reach out to you first when registration opens.';
+    document.querySelector('#fullState .btn-submit').style.display='none';
+  }).catch(function(){
+    msg.className='form-msg ok';
+    msg.innerHTML='Got it, <b>'+name+'</b>! We will be in touch. If you need immediate confirmation call (580) 682-0887.';
   });
 }
 </script>
