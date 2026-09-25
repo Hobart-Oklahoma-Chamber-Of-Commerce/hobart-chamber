@@ -933,8 +933,8 @@
     <a href="#membership" class="btn-primary">Become a Member</a>
   </div>
   <div class="botw-card">
-    <div class="botw-photo"><img src="flyers/botw-frazer.png" alt="Frazer Bank — Business of the Week" onclick="openFlyer('flyers/botw-frazer.png')" onerror="this.parentElement.classList.add('empty');this.outerHTML=flyerPHWhite;"><span class="zoom-hint">🔍 Click to enlarge</span></div>
-    <div class="botw-inner"><span class="botw-badge">This Week's Feature</span><h3>Frazer Bank</h3><p>Since 1902, Frazer Bank has been more than a financial institution in Hobart — it has been a trusted neighbor, a community partner, and a place where customers are greeted by name and treated like family. What sets Frazer Bank apart is the people behind the counter. VP and Office Manager Kelley Hilburn has devoted 23 years to the bank and 47 years to the profession. CFO Cheryl Barnes — a Hobart native — describes the institution simply: "a small bank with a large heart." Tellers Jaci Sims, Nariah Norris, and newest team member Jacquelyn Skinner round out a staff known for genuine relationships, community involvement, and showing up long after the lobby closes. From Relay for Life to Shortgrass Playhouse to the Kiowa County Free Fair — the Frazer Bank team is woven into the fabric of this community. Congratulations to the entire Frazer Bank family.</p></div>
+    <div class="botw-photo"><img src="flyers/botw-clinks.jpg" alt="Clink's — Business of the Week" onclick="openFlyer('flyers/botw-clinks.jpg')" onerror="this.parentElement.classList.add('empty');this.outerHTML=flyerPHWhite;"><span class="zoom-hint">🔍 Click to enlarge</span></div>
+    <div class="botw-inner"><span class="botw-badge">This Week's Feature</span><h3>Clink's</h3><p>Clink's story began when Joe Clinkenbeard purchased the IGA store on January 1, 1980. For more than 36 years, Clink's has been a familiar part of life in Hobart — built on friendly faces, dedicated employees, and a genuine commitment to the community. The store's success is rooted in its people, many of whom have given decades of service. Neal, who retires this month after 36 years, exemplifies everything Clink's stands for. Whether it's carrying groceries to your vehicle in bad weather, tracking down a product a customer needs, or stocking sugar-free sodas so a young diabetic could feel like every other kid — Clink's has always understood that hometown business is about neighbors serving neighbors. Congratulations to Joe, Neal, and the entire Clink's team — past and present.</p></div>
   </div>
 </section>
 
@@ -3078,6 +3078,110 @@ function regCSV(coll, cols, filename){
 }
 
 /* ---- Wristbands ---- */
+
+function paneGlowGolf2(){
+  var pane=document.getElementById('adminPane');
+  pane.innerHTML='<div class="admin-empty">Loading…</div>';
+  if(!db){ pane.innerHTML='<div class="admin-empty">Database not connected.</div>'; return; }
+  db.collection('glowgolf2').orderBy('createdAt','asc').get().then(function(snap){
+    var rows=[],wait=[];
+    snap.forEach(function(doc){
+      var x=doc.data(); x._id=doc.id;
+      if(x.waitlist) wait.push(x); else rows.push(x);
+    });
+    var cnt=document.getElementById('ggCount2');
+    if(cnt) cnt.innerHTML=rows.length?('<span class="badge-pending">'+rows.length+'/15</span>'):'';
+
+    var html='<div style="display:flex;align-items:center;gap:16px;margin-bottom:14px;flex-wrap:wrap;">'
+      +'<div style="font-size:13px;font-weight:700;color:var(--navy);">'+rows.length+' / 15 public slots filled</div>';
+
+    // slot meter
+    var pct=Math.min(100,Math.round((rows.length/15)*100));
+    var meterColor=rows.length>=15?'#c0392b':rows.length>=10?'#e07b00':'#22843c';
+    html+='<div style="flex:1;min-width:140px;background:#e8eef6;border-radius:99px;height:16px;overflow:hidden;">'
+      +'<div style="width:'+pct+'%;height:100%;background:'+meterColor+';border-radius:99px;transition:width .4s;"></div></div>'
+      +'<span style="font-size:12px;font-weight:700;color:'+meterColor+';">'+(15-Math.min(15,rows.length))+' remaining</span>'
+      +'</div>';
+
+    html+='<button class="btn-sm btn-gold" style="margin-bottom:16px;" onclick="exportGlowGolf2()">Export CSV</button>';
+
+    if(!rows.length){
+      html+='<div class="admin-empty" style="margin:0 0 16px;">No registrations yet.</div>';
+    } else {
+      html+='<div class="admin-list">';
+      rows.forEach(function(r,i){
+        var paid=r.paymentReceived===true;
+        html+='<div class="admin-row" style="'+(paid?'border-left:3px solid #22843c;':'')+'">'
+          +'<div class="info">'
+          +'<b style="font-size:14px;">⛳ #'+(i+1)+' — '+esc(r.teamName||'—')+'</b>'
+          +(paid?'<span style="font-size:11px;font-weight:700;color:#22843c;margin-left:8px;">✅ PAID</span>':'')
+          +'<small>Captain: '+esc(r.captainName||'')+' · '+esc(r.phone||'')+' · '+esc(r.email||'')+'</small>'
+          +'<small>Players: '+esc((r.players||[]).join(', '))+'</small>'
+          +(r.notes?'<small style="font-style:italic;color:var(--gray);">'+esc(r.notes)+'</small>':'')
+          +'</div>'
+          +'<div class="acts">'
+          +(paid
+            ? '<button class="btn-sm btn-line" data-id="'+r._id+'" onclick="ggUnpay(this.dataset.id)">Unmark Paid</button>'
+            : '<button class="btn-sm btn-gold" data-id="'+r._id+'" onclick="ggPay(this.dataset.id)">Mark Paid</button>')
+          +' <button class="btn-sm btn-red" data-id="'+r._id+'" onclick="ggDel(this.dataset.id)">Delete</button>'
+          +'</div></div>';
+      });
+      html+='</div>';
+    }
+
+    if(wait.length){
+      html+='<div style="font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;'
+        +'color:var(--gold);margin:20px 0 8px;padding-top:16px;border-top:1px solid var(--border);">'
+        +'Pre-Registrations — Next Event ('+wait.length+')</div>';
+      html+='<div class="admin-list">';
+      wait.forEach(function(r){
+        html+='<div class="admin-row"><div class="info">'
+          +'<b>'+esc(r.captainName||'—')+'</b>'
+          +'<small>'+esc(r.phone||'')+(r.email?' · '+esc(r.email):'')+'</small>'
+          +(r.teamName?'<small>Team: '+esc(r.teamName)+'</small>':'')
+          +'</div><div class="acts"><button class="btn-sm btn-red" data-id="'+r._id+'" onclick="ggDel(this.dataset.id)">Delete</button></div></div>';
+      });
+      html+='</div>';
+    }
+
+    pane.innerHTML=html;
+  }).catch(function(e){
+    pane.innerHTML='<div class="admin-empty">Error loading — check Firestore rules for <b>glowgolf2</b>.<br><small>'+esc(e&&e.message||e||'')+'</small></div>';
+  });
+}
+function ggPay(id){
+  db.collection('glowgolf2').doc(id).update({paymentReceived:true})
+    .then(function(){paneGlowGolf2();})
+    .catch(function(e){alert('Error: '+(e&&e.message||''));});
+}
+function ggUnpay(id){
+  db.collection('glowgolf2').doc(id).update({paymentReceived:false})
+    .then(function(){paneGlowGolf2();})
+    .catch(function(e){alert('Error: '+(e&&e.message||''));});
+}
+function ggDel(id){
+  if(!confirm('Delete this registration?'))return;
+  db.collection('glowgolf2').doc(id).delete()
+    .then(function(){paneGlowGolf2();})
+    .catch(function(e){alert('Error: '+(e&&e.message||''));});
+}
+function exportGlowGolf2(){
+  db.collection('glowgolf2').orderBy('createdAt','asc').get().then(function(snap){
+    var out=[['#','Team','Captain','Phone','Email','Players','Notes','Paid'].join(',')];
+    var n=0;
+    snap.forEach(function(doc){
+      var d=doc.data(); if(d.waitlist) return; n++;
+      out.push([n,d.teamName,d.captainName,d.phone,d.email,
+        (d.players||[]).join(' / '),d.notes||'',d.paymentReceived?'Yes':'No']
+        .map(function(v){return '"'+String(v||'').replace(/"/g,'""')+'"';}).join(','));
+    });
+    var a=document.createElement('a');
+    a.href=URL.createObjectURL(new Blob([out.join('\n')],{type:'text/csv'}));
+    a.download='glow-golf-oct3-'+new Date().toISOString().slice(0,10)+'.csv';
+    document.body.appendChild(a); a.click(); document.body.removeChild(a);
+  });
+}
+
 function paneWrist(){
   regPane('wristbands','wbCount','No wristband registrations yet. Share the link: <b>wristband-registration.html</b>',
     function(r){
