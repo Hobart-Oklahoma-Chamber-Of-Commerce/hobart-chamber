@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="color-scheme" content="light only"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Local Diner Menus | Hobart Chamber of Commerce</title>
+<meta name="description" content="Menus for Hobart, Oklahoma restaurants and diners in one place — Big-A-Burger, Hometown Pizza, Main Street Grill, and Restaurante Nuevo León."/>
+<meta property="og:title" content="Local Diner Menus · Hobart, OK"/>
+<meta property="og:description" content="Browse menus from Hobart's local restaurants and diners — all in one place."/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,800;0,900;1,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+:root{color-scheme:light;--navy:#1a3ea8;--navy-dark:#142f7e;--navy-deep:#0e2056;--gold:#c49a3e;--gold-light:#dab65e;--gold-pale:#f6edd6;--slate:#f3f6fc;--gray:#6f7d99;--dark-gray:#2c3a58;--border:#dbe3f4;}
+html{background:#fff !important;overflow-x:hidden;max-width:100%;}
+body{font-family:'Inter',sans-serif;color:var(--navy-deep);background:#fff !important;overflow-x:hidden;max-width:100vw;}
+nav{background:rgba(26,62,168,.97);display:flex;align-items:center;justify-content:space-between;padding:0 22px;height:62px;border-bottom:2px solid var(--gold);gap:12px;position:sticky;top:0;z-index:100;}
+.nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none;flex:1;min-width:0;overflow:hidden;}
+.nav-logo-mark{width:38px;height:38px;border-radius:50%;background:var(--gold-pale);overflow:hidden;flex-shrink:0;}
+.nav-logo-mark img{width:100%;height:100%;object-fit:cover;}
+.nav-logo-text{min-width:0;overflow:hidden;}
+.nav-logo-text span:first-child{font-family:'Playfair Display',serif;font-size:14px;font-weight:700;color:#fff;display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.nav-logo-text span:last-child{font-size:10px;color:rgba(255,255,255,.5);}
+.nav-back{font-size:12px;font-weight:600;color:rgba(255,255,255,.7);text-decoration:none;padding:7px 12px;border:1px solid rgba(255,255,255,.25);border-radius:5px;white-space:nowrap;flex-shrink:0;}
+
+.hero{background:linear-gradient(150deg,#0e2056 0%,#1a3ea8 60%,#142f7e 100%);padding:46px 22px 40px;text-align:center;border-bottom:4px solid var(--gold);}
+.hero-eyebrow{font-size:10.5px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:rgba(255,255,255,.6);margin-bottom:8px;}
+.hero h1{font-family:'Playfair Display',serif;font-size:clamp(28px,5.5vw,46px);font-weight:900;color:#fff;line-height:1.1;margin-bottom:10px;}
+.hero h1 em{font-style:italic;color:var(--gold-light);}
+.hero p{font-size:14.5px;color:rgba(255,255,255,.75);line-height:1.7;max-width:540px;margin:0 auto;}
+
+main{max-width:900px;margin:0 auto;padding:38px 18px 80px;}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;}
+.card{display:flex;flex-direction:column;background:#fff;border:1px solid var(--border);border-radius:14px;overflow:hidden;text-decoration:none;color:inherit;box-shadow:0 4px 20px rgba(26,62,168,.07);transition:transform .15s,box-shadow .15s;}
+.card:hover{transform:translateY(-3px);box-shadow:0 8px 28px rgba(26,62,168,.14);}
+.card-top{padding:22px 22px 14px;flex:1;}
+.card-icon{font-size:34px;margin-bottom:8px;}
+.card-name{font-family:'Playfair Display',serif;font-size:21px;font-weight:800;color:var(--navy-deep);margin-bottom:4px;line-height:1.2;}
+.card-tag{font-size:11px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;color:var(--gold);margin-bottom:10px;}
+.card-desc{font-size:13.5px;color:var(--dark-gray);line-height:1.65;}
+.card-info{font-size:12.5px;color:var(--gray);line-height:1.7;margin-top:10px;}
+.card-foot{padding:13px 22px;border-top:1px solid var(--border);background:var(--slate);font-size:13px;font-weight:700;color:var(--navy);}
+.note{margin-top:30px;background:var(--gold-pale);border-left:4px solid var(--gold);border-radius:8px;padding:16px 20px;font-size:13.5px;color:var(--dark-gray);line-height:1.7;}
+.note strong{color:var(--navy);}
+.page-footer{background:var(--navy-dark);padding:24px;text-align:center;}
+.page-footer p{font-size:12.5px;color:rgba(255,255,255,.4);}
+.page-footer a{color:var(--gold-light);text-decoration:none;}
+@media(max-width:620px){nav{padding:0 13px;}.grid{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+<nav>
+  <a href="index.html" class="nav-logo">
+    <span class="nav-logo-mark"><img src="flyers/chamber-logo.PNG" alt="" onerror="this.onerror=null;this.style.display='none';"/></span>
+    <span class="nav-logo-text"><span>Hobart Chamber of Commerce</span><span>Kiowa County · Oklahoma</span></span>
+  </a>
+  <a href="index.html" class="nav-back">← Back</a>
+</nav>
+
+<div class="hero">
+  <div class="hero-eyebrow">Eat Local · Hobart, Oklahoma</div>
+  <h1>Local <em>Diner</em> Menus</h1>
+  <p>Hungry? Browse menus from Hobart's local restaurants and diners, all in one place.</p>
+</div>
+
+<main>
+  <div class="grid">
+
+    <a class="card" href="menu-big-a-burger.html">
+      <div class="card-top">
+        <div class="card-icon">🍔</div>
+        <div class="card-name">Big-A-Burger Drive Inn</div>
+        <div class="card-tag">Since 1954</div>
+        <div class="card-desc">Burgers, breakfast, Mexican food, baskets, and combos.</div>
+        <div class="card-info">📍 417 S Jefferson<br>📞 Orders to go: (580) 726-5300</div>
+      </div>
+      <div class="card-foot">View Menu →</div>
+    </a>
+
+    <a class="card" href="menu-hometown-pizza.html">
+      <div class="card-top">
+        <div class="card-icon">🍕</div>
+        <div class="card-name">Hometown Pizza</div>
+        <div class="card-tag">Pizza · Buffet · Subs</div>
+        <div class="card-desc">Specialty pizzas, lunch buffet, subs, calzones, pasta, and a salad bar.</div>
+        <div class="card-info">📍 104 E 4th St<br>📞 (580) 726-2225</div>
+      </div>
+      <div class="card-foot">View Menu →</div>
+    </a>
+
+    <a class="card" href="menu-main-street-grill.html">
+      <div class="card-top">
+        <div class="card-icon">🍳</div>
+        <div class="card-name">Main Street Grill</div>
+        <div class="card-tag">Breakfast</div>
+        <div class="card-desc">Daily specials Monday through Saturday, omelettes, pancakes, breakfast combos, and a kids menu.</div>
+        <div class="card-info">🕖 Breakfast served 7:00–11:00 AM</div>
+      </div>
+      <div class="card-foot">View Menu →</div>
+    </a>
+
+    <a class="card" href="menu-nuevo-leon.html">
+      <div class="card-top">
+        <div class="card-icon">🌮</div>
+        <div class="card-name">Restaurante Nuevo León</div>
+        <div class="card-tag">Mexican &amp; American</div>
+        <div class="card-desc">Authentic Mexican dinners, tacos, burritos, enchiladas, fajitas, and American plates.</div>
+        <div class="card-info">📍 Hobart, OK</div>
+      </div>
+      <div class="card-foot">View Menu →</div>
+    </a>
+
+  </div>
+
+  <div class="note">
+    <strong>Own a restaurant in Hobart?</strong> To get your menu listed here, call the Chamber at <a href="tel:5806820887" style="color:var(--navy);font-weight:600;">(580) 682-0887</a> or email <a href="mailto:director@hobartokchamber.org" style="color:var(--navy);font-weight:600;">director@hobartokchamber.org</a>. Menus and prices are subject to change; call the restaurant to confirm.
+  </div>
+</main>
+
+<div class="page-footer">
+  <p>Hobart Chamber of Commerce · 106 W 4th St · Hobart, OK 73651 · <a href="tel:5806820887">(580) 682-0887</a></p>
+  <p style="margin-top:6px;"><a href="index.html">← Back to hobartchamber.org</a></p>
+</div>
+</body>
+</html>
