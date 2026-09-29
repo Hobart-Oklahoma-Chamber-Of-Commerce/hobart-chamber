@@ -130,7 +130,7 @@ main{max-width:660px;margin:0 auto;padding:36px 18px 80px;}
 </div>
 
 <div class="slots-bar">
-  <div class="slots-label">Team Slots Available</div>
+  <div class="slots-label">Teams Registered</div>
   <div class="slots-track"><div class="slots-fill" id="slotsFill" style="width:0%"></div></div>
   <div class="slots-text" id="slotsText">Loading availability…</div>
 </div>
@@ -219,28 +219,44 @@ var confirmed = 0;
 function val(id){var el=document.getElementById(id);return el?(el.value||'').trim():'';}
 
 function updateSlots(count){
+  var fill = document.getElementById('slotsFill');
+  var txt  = document.getElementById('slotsText');
+  /* count === null means the live count couldn't be loaded — don't fake a number */
+  if(count === null || count === undefined || isNaN(count)){
+    fill.style.width = '0%';
+    txt.innerHTML = 'Limited to <span>' + PUBLIC_SLOTS + '</span> teams — register now to hold your spot';
+    return;
+  }
   confirmed = count;
   var remaining = Math.max(0, PUBLIC_SLOTS - count);
   var pct = Math.min(100, (count / PUBLIC_SLOTS)*100);
-  var fill = document.getElementById('slotsFill');
-  var txt  = document.getElementById('slotsText');
   fill.style.width = pct + '%';
   if(pct >= 60) fill.classList.add('warn');
   if(remaining === 0){
-    txt.innerHTML = '<span style="color:#e05c1a;">Registration Full</span> — pre-register for our next event below';
+    txt.innerHTML = '<span style="color:#e05c1a;">' + PUBLIC_SLOTS + ' of ' + PUBLIC_SLOTS + ' teams registered — Registration Full</span> — pre-register for our next event below';
     document.getElementById('regState').style.display  = 'none';
     document.getElementById('fullState').style.display = 'block';
   } else {
-    txt.innerHTML = '<span>' + remaining + '</span> of ' + PUBLIC_SLOTS + ' spots remaining';
+    txt.innerHTML = '<span>' + count + '</span> of ' + PUBLIC_SLOTS + ' teams registered &nbsp;·&nbsp; <span>' + remaining + '</span> ' + (remaining === 1 ? 'spot' : 'spots') + ' remaining';
   }
 }
 
-// Load confirmed count from Firestore
-if(db){
+// Load the confirmed-team count. Primary source: counters/glowgolf2, which the
+// admin panel keeps in sync with its own "X / 15" count. Fallback: count the
+// confirmed registrations directly.
+function loadSlots(){
+  if(!db){ updateSlots(null); return; }
+  db.collection('counters').doc('glowgolf2').get().then(function(doc){
+    if(doc.exists && typeof doc.data().confirmed === 'number'){ updateSlots(doc.data().confirmed); }
+    else { loadSlotsDirect(); }
+  }).catch(function(){ loadSlotsDirect(); });
+}
+function loadSlotsDirect(){
   db.collection('glowgolf2').where('event','==','Glow Golf Oct 3 2026').where('waitlist','==',false).get()
     .then(function(snap){ updateSlots(snap.size); })
-    .catch(function(){ updateSlots(0); });
-} else { updateSlots(0); }
+    .catch(function(){ updateSlots(null); });
+}
+loadSlots();
 
 function submitReg(){
   var msg=document.getElementById('f_msg'), btn=document.getElementById('f_btn');
@@ -260,7 +276,10 @@ function submitReg(){
     notes:val('f_notes'),waitlist:false,paymentReceived:false,
     createdAt:firebase.firestore.FieldValue.serverTimestamp()
   };
-  if(db) db.collection('glowgolf2').add(data).catch(function(){});
+  if(db){
+    db.collection('glowgolf2').add(data).catch(function(){});
+    db.collection('counters').doc('glowgolf2').set({confirmed: firebase.firestore.FieldValue.increment(1)},{merge:true}).catch(function(){});
+  }
   var payload={access_key:WEB3FORMS_KEY,
     subject:'Glow Golf Oct 3 — Team Registration: '+team,
     from_name:'Hobart Chamber Website',
