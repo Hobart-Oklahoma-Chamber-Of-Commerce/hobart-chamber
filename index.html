@@ -657,7 +657,7 @@
     <li><a href="#deals">Deals</a></li>
     <li><a href="#directory">Members</a></li>
     <li><a href="#jobs">Jobs</a></li>
-    <li><a href="hometown-harvest.html" style="color:var(--gold-light);">🌽 Harvest</a></li>
+    <!-- ARCHIVED 2026 (restore for 2027): <li><a href="hometown-harvest.html" style="color:var(--gold-light);">🌽 Harvest</a></li> -->
     <li><a href="moving-to-hobart.html">Moving Here</a></li>
     <li><a href="local-menus.html">🍽️ Diner Menus</a></li>
     <li><a href="#about">About</a></li>
@@ -722,7 +722,7 @@
   <div class="stat-item"><span class="num">Mon&nbsp;&amp;&nbsp;Wed</span><span class="label">Office Hours · 1:30–4:30 PM</span></div>
 </div>
 
-<!-- ===== TRACTOR SHOW ANNOUNCEMENT ===== -->
+<!-- ARCHIVED 2026 (restore for 2027) — Hometown Harvest Tractor Show banner:
 <a href="tractor-show-registration.html" class="announce-banner">
   <div class="announce-in">
     <div class="announce-left">
@@ -736,6 +736,7 @@
     <span class="announce-btn">Register Your Tractor →</span>
   </div>
 </a>
+-->
 
 <!-- ===== PILLARS ===== -->
 <section class="pillars">
@@ -1211,7 +1212,7 @@
     <li><a href="#directory">Member Directory</a></li>
     <li><a href="#board">Board of Directors</a></li>
     <li><a href="#about">About</a></li>
-    <li><a href="hometown-harvest.html">Hometown Harvest</a></li>
+    <!-- ARCHIVED 2026 (restore for 2027): <li><a href="hometown-harvest.html">Hometown Harvest</a></li> -->
     <li><a href="moving-to-hobart.html">Moving to Hobart</a></li>
     <li><a href="local-menus.html">Local Diner Menus</a></li>
   </ul></div>
@@ -1414,7 +1415,9 @@ var SEED=[
   {id:'s8',title:'Glow Golf Tournament',date:'2026-08-01',time:'Night',location:'Hobart Municipal Golf Course',description:'Glowing golf balls, illuminated fairways, and a fun evening under the stars. 4-man scramble, $240 per team, limited to 18 teams. Register your team online.',status:'approved',registerUrl:'glow-golf-registration.html'},
   {id:'s9',title:"Hobart's 125th Birthday Celebration",date:'2026-08-07',time:'All day',location:'Downtown Hobart',description:'Celebrate 125 years of Hobart history and community in downtown Hobart. Free admission, with Dragging Main, live music, family-friendly fun and games, and a community picnic and gathering. The Chamber will be selling hot dogs, chips, and drinks. For more information, contact Jessica Williams, Executive Director, at (580) 682-0887.',status:'approved'},
   {id:'s15',title:"Hobart's 125th Birthday Gala: A Night to Remember",date:'2026-08-08',time:'Doors 6:00 PM',location:'The Stanley Building, Downtown Hobart',description:'The City of Hobart invites you to a formal evening celebrating 125 years — honoring our past, celebrating our present, and building our future. The night features a catered steak dinner, dueling pianos, guest speakers, and both live and silent auctions, plus a 25-year time capsule to be opened on Hobart\'s 150th birthday. Attire is cocktail or semi-formal. Tickets are $125 per couple or $65 single, available at City Hall — seating is limited.',status:'approved',cat:'community'},
+  /* ARCHIVED 2026 (restore for 2027)
   {id:'s11',title:"Hobart's Hometown Harvest",date:'2026-09-19',time:'8:00 AM – 6:30 PM+',location:'Kiowa County Courthouse Square · 316 S Main, Hobart',description:'A full day of family fun in downtown Hobart. 8–10 AM: Vendor, food truck & tractor show setup. 9 AM: Stanley Building opens for Silent Auction. 10 AM: The fun begins — vendors, food trucks, Kiowa County Historical Museum and Tommy Franks Museum open, Lil Mr. & Miss Hometown Pageant. 11 AM: Bingo, Sack Races, Chalk Contest. 11:30 AM: Firefighter & Fire Truck Fun. 12 PM: Scarecrow Contest. 12:30 PM: Pumpkin Rolling Race. 1 PM: Fun with Hobart Police Dept / Find the Officers and Deputies Scavenger Hunt. 1:30 PM: Pumpkin Painting / Trivia. 2 PM: Fun with Kiowa County Sheriff Dept. 2:30 PM: Roping the Horns. 3 PM: PSO Truck & Electricity Safety / Name That Tune. 3:30 PM: Scavenger Hunt ends, Egg Relay, Chalk Contest ends. 4 PM: Duck Duck Goose. 4:30 PM: Stick Horse Race / Parade Lineup. 5 PM: Freeze Dance, Petting Zoo & Silent Auction close. 5:30 PM: PARADE. 6 PM: Winners Announcement. 6:30 PM: Street Dance & Cornhole for Kids. Plus all-day Extra Events: Pick the Pumpkin Pounds, Count the Corn, and Harvest Drop and Win.',status:'approved',linkUrl:'hometown-harvest.html',linkLabel:'Event Info & Registration'},
+  */
   {id:'s12',title:'First Saturday Market',date:'2026-08-01',time:'8:00 AM – 2:00 PM',location:'207 W 4th St',description:'The monthly First Saturday Market returns to downtown Hobart, hosted by Rust Dirt Co. Shop local goods, enjoy live music, and bring the whole family. Artisans, makers, farmers, and vendors are welcome — come be part of something local.',status:'approved',cat:'community'},
   {id:'s13',title:'Walmart Grand Reopening',date:'2026-07-10',time:'All day',location:'Walmart, 923 W 11th St',description:'The Hobart Walmart (Store 607) celebrates its grand reopening after a 2026 remodel — part of Walmart\'s statewide investment in 25 Oklahoma stores. The updated store features refreshed layouts, wider aisles, expanded pickup and delivery, an updated pharmacy, and a modernized Vision Center. Stop in and see what\'s new.',status:'approved',cat:'community'},
   {id:'s14',title:'Elk Creek Kiowa Casino 1-Year Anniversary',date:'2026-07-25',time:'All day',location:'Elk Creek Kiowa Casino, 13765 US-183',description:'Elk Creek Kiowa Casino celebrates one year since opening in July 2025. Owned by the Kiowa Tribe of Oklahoma, the Kiowa County casino on Highway 183 features 250 slot machines, three table games, Bar 153, and the Boomarang Diner. Join the anniversary celebration. Must be 21+ to enter.',status:'approved',cat:'community'},
@@ -2354,14 +2357,14 @@ function renderAdmin(){
     +'<div class="admin-tab'+(adminTab==='botw'?' on':'')+'" onclick="switchTab(\'botw\')">BOTW Archive</div>'
     +'<div class="admin-tab'+(adminTab==='jobs'?' on':'')+'" onclick="switchTab(\'jobs\')">Jobs</div>'
     +'<div class="admin-tab'+(adminTab==='jobcreate'?' on':'')+'" onclick="switchTab(\'jobcreate\')">+ New Opening</div>'
-    +'<div class="admin-tab'+(adminTab==='parade'?' on':'')+'" onclick="switchTab(\'parade\')">Parade <span id="prCount"></span></div>'
-    +'<div class="admin-tab'+(adminTab==='tractor'?' on':'')+'" onclick="switchTab(\'tractor\')">Tractor Show <span id="tsCount"></span></div>'
-    +'<div class="admin-tab'+(adminTab==='vendor'?' on':'')+'" onclick="switchTab(\'vendor\')">Vendors <span id="vnCount"></span></div>'
+    /* ARCHIVED 2026 HARVEST TAB (restore for 2027): +'<div class="admin-tab'+(adminTab==='parade'?' on':'')+'" onclick="switchTab(\'parade\')">Parade <span id="prCount"></span></div>' */
+    /* ARCHIVED 2026 HARVEST TAB (restore for 2027): +'<div class="admin-tab'+(adminTab==='tractor'?' on':'')+'" onclick="switchTab(\'tractor\')">Tractor Show <span id="tsCount"></span></div>' */
+    /* ARCHIVED 2026 HARVEST TAB (restore for 2027): +'<div class="admin-tab'+(adminTab==='vendor'?' on':'')+'" onclick="switchTab(\'vendor\')">Vendors <span id="vnCount"></span></div>' */
     +'<div class="admin-tab'+(adminTab==='ribbon'?' on':'')+'" onclick="switchTab(\'ribbon\')">Ribbon Cuttings <span id="rcCount"></span></div>'
-    +'<div class="admin-tab'+(adminTab==='wrist'?' on':'')+'" onclick="switchTab(\'wrist\')">Wristbands <span id="wbCount"></span></div>'
+    /* ARCHIVED 2026 HARVEST TAB (restore for 2027): +'<div class="admin-tab'+(adminTab==='wrist'?' on':'')+'" onclick="switchTab(\'wrist\')">Wristbands <span id="wbCount"></span></div>' */
     +'<div class="admin-tab'+(adminTab==='glowgolf2'?' on':'')+' " onclick="switchTab(\'glowgolf2\')">⛳ Glow Golf Oct 3 <span id="ggCount2"></span></div>'
-    +'<div class="admin-tab'+(adminTab==='scarecrow'?' on':'')+'" onclick="switchTab(\'scarecrow\')">Scarecrow <span id="scCount"></span></div>'
-    +'<div class="admin-tab'+(adminTab==='pageant'?' on':'')+'" onclick="switchTab(\'pageant\')">Pageant <span id="pgCount"></span></div>'
+    /* ARCHIVED 2026 HARVEST TAB (restore for 2027): +'<div class="admin-tab'+(adminTab==='scarecrow'?' on':'')+'" onclick="switchTab(\'scarecrow\')">Scarecrow <span id="scCount"></span></div>' */
+    /* ARCHIVED 2026 HARVEST TAB (restore for 2027): +'<div class="admin-tab'+(adminTab==='pageant'?' on':'')+'" onclick="switchTab(\'pageant\')">Pageant <span id="pgCount"></span></div>' */
     +'<div class="admin-tab'+(adminTab==='scavenger'?' on':'')+'" onclick="switchTab(\'scavenger\')">Scavenger Hunt <span id="shCount"></span></div>'
     +'<div class="admin-tab'+(adminTab==='deals'?' on':'')+'" onclick="switchTab(\'deals\')">Local Sales <span id="dlCount"></span></div>'
     +'<div class="admin-tab'+(adminTab==='subs'?' on':'')+'" onclick="switchTab(\'subs\')">Subscribers <span id="sbCount"></span></div>'
@@ -2576,6 +2579,7 @@ function setKbPaid(id,val){ db.collection('kickball').doc(id).update({paymentRec
 function setKbAmount(id,val){ db.collection('kickball').doc(id).update({amountPaid:val}); }
 function delKickball(id){ if(!confirm('Delete this team registration?'))return; db.collection('kickball').doc(id).delete().then(function(){paneKickball();}); }
 
+/* [ARCHIVED 2026 — tab hidden, code kept for 2027] */
 /* ---- Hometown Harvest Parade registrations ---- */
 function paneParade(){
   var pane=document.getElementById('adminPane');
@@ -2782,6 +2786,7 @@ function setGgPaid(id,val){ db.collection('glowgolf').doc(id).update({paymentRec
 function setGgAmount(id,val){ db.collection('glowgolf').doc(id).update({amountPaid:val}); }
 function delGolf(id){ if(!confirm('Delete this team registration?'))return; db.collection('glowgolf').doc(id).delete().then(function(){paneGolf();}); }
 
+/* [ARCHIVED 2026 — tab hidden, code kept for 2027] */
 /* ---- Hometown Harvest Tractor Show registrations ---- */
 function paneTractor(){
   var pane=document.getElementById('adminPane');
@@ -2965,6 +2970,7 @@ function addBotwEntry(){
 }
 function delBotwEntry(id){if(!confirm('Remove this entry from the archive?'))return;db.collection('botw_archive').doc(id).delete().then(function(){paneBotw();});}
 
+/* [ARCHIVED 2026 — tab hidden, code kept for 2027] */
 /* ---- Hometown Harvest Vendor registrations ---- */
 function paneVendor(){
   var pane=document.getElementById('adminPane');
@@ -3079,6 +3085,7 @@ function regCSV(coll, cols, filename){
   });
 }
 
+/* [ARCHIVED 2026 — tab hidden, code kept for 2027] */
 /* ---- Wristbands ---- */
 
 function paneGlowGolf2(){
@@ -3196,6 +3203,7 @@ function paneWrist(){
 }
 function exportWrist(){regCSV('wristbands',[['Parent/Guardian','contactName'],['Phone','phone'],['Email','email'],['Quantity','quantity'],['Children','children'],['Notes','notes']],'wristband-registrations.csv');}
 
+/* [ARCHIVED 2026 — tab hidden, code kept for 2027] */
 /* ---- Scarecrow Contest ---- */
 function paneScarecrow(){
   regPane('scarecrow','scCount','No scarecrow entries yet. Share the link: <b>scarecrow-registration.html</b>',
@@ -3209,6 +3217,7 @@ function paneScarecrow(){
 }
 function exportScarecrow(){regCSV('scarecrow',[['Entry Name','entryName'],['Category','category'],['Entered By','enteredBy'],['Contact','contactName'],['Phone','phone'],['Email','email'],['Description','description'],['Needs Help','needsHelp'],['Needs Staking','needsStaking']],'scarecrow-entries.csv');}
 
+/* [ARCHIVED 2026 — tab hidden, code kept for 2027] */
 /* ---- Lil Mr & Miss Pageant ---- */
 function panePageant(){
   regPane('pageant','pgCount','No pageant registrations yet. Share the link: <b>pageant-registration.html</b>',
