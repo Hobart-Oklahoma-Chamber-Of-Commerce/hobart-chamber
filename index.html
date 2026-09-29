@@ -659,6 +659,7 @@
     <li><a href="#jobs">Jobs</a></li>
     <li><a href="hometown-harvest.html" style="color:var(--gold-light);">🌽 Harvest</a></li>
     <li><a href="moving-to-hobart.html">Moving Here</a></li>
+    <li><a href="local-menus.html">🍽️ Diner Menus</a></li>
     <li><a href="#about">About</a></li>
     <li><a href="#membership" class="nav-cta">Join Today</a></li>
   </ul>
@@ -1212,6 +1213,7 @@
     <li><a href="#about">About</a></li>
     <li><a href="hometown-harvest.html">Hometown Harvest</a></li>
     <li><a href="moving-to-hobart.html">Moving to Hobart</a></li>
+    <li><a href="local-menus.html">Local Diner Menus</a></li>
   </ul></div>
   <div><h6>Get Involved</h6><ul>
     <li><a href="#membership">Membership</a></li>
@@ -1713,27 +1715,7 @@ function renderAdminEventCards(){
   var old=track.querySelectorAll('.event-card[data-admin="1"]'), i;
   for(i=0;i<old.length;i++) old[i].remove();
   var adminEvents=EVENTS.filter(function(e){return e._admin;});
-  /* Skip an admin-created card that just duplicates a hand-curated card
-     (same date, same title) and has no flyer of its own. */
-  function normT(s){return String(s||'').toLowerCase().replace(/[^a-z0-9]/g,'');}
-  var staticCards=track.querySelectorAll('.event-card:not([data-admin="1"])'), sc=[], k, h4;
-  for(k=0;k<staticCards.length;k++){
-    h4=staticCards[k].querySelector('h4');
-    sc.push({d:staticCards[k].getAttribute('data-date'), t:normT(h4?h4.textContent:'')});
-  }
-  function isDupOfStatic(ev){
-    if(ev.flyerUrl) return false;
-    var t=normT(ev.title), j;
-    if(!t) return false;
-    for(j=0;j<sc.length;j++){
-      if(sc[j].d===ev.date && sc[j].t && (sc[j].t.indexOf(t)!==-1 || t.indexOf(sc[j].t)!==-1)) return true;
-    }
-    return false;
-  }
-  for(i=0;i<adminEvents.length;i++){
-    if(isDupOfStatic(adminEvents[i])) continue;
-    track.insertAdjacentHTML('beforeend', buildEventCardHTML(adminEvents[i]));
-  }
+  for(i=0;i<adminEvents.length;i++){ track.insertAdjacentHTML('beforeend', buildEventCardHTML(adminEvents[i])); }
   sortEventsCarousel();
   pruneCarousel();
   applyFlyerBackdrops();
@@ -3111,9 +3093,6 @@ function paneGlowGolf2(){
     });
     var cnt=document.getElementById('ggCount2');
     if(cnt) cnt.innerHTML=rows.length?('<span class="badge-pending">'+rows.length+'/15</span>'):'';
-    /* Publish the confirmed count so the public glow-golf-registration.html page
-       shows the exact number this panel shows (without exposing registrant data). */
-    db.collection('counters').doc('glowgolf2').set({confirmed: rows.length}, {merge:true}).catch(function(){});
 
     var html='<div style="display:flex;align-items:center;gap:16px;margin-bottom:14px;flex-wrap:wrap;">'
       +'<div style="font-size:13px;font-weight:700;color:var(--navy);">'+rows.length+' / 15 public slots filled</div>';
