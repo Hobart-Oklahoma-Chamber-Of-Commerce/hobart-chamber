@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="color-scheme" content="light only"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Big-A-Burger Drive Inn — Menu | Hobart Chamber of Commerce</title>
+<meta name="description" content="Full menu for Big-A-Burger Drive Inn in Hobart, Oklahoma. Serving Southwest Oklahoma since 1954. Burgers, breakfast, Mexican food, and more. Orders to go: (580) 726-5300."/>
+<meta property="og:title" content="Big-A-Burger Drive Inn — Menu | Hobart, OK"/>
+<meta property="og:description" content="Serving Southwest Oklahoma since 1954. Burgers, breakfast all day, Mexican food, baskets, and combos. Orders to go: (580) 726-5300"/>
+<meta property="og:type" content="restaurant.menu"/>
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"Restaurant",
+  "name":"Big-A-Burger Drive Inn",
+  "description":"Serving Southwest Oklahoma since 1954. Burgers, breakfast, Mexican food, and more.",
+  "address":{"@type":"PostalAddress","streetAddress":"417 S Jefferson","addressLocality":"Hobart","addressRegion":"OK","postalCode":"73651","addressCountry":"US"},
+  "telephone":"+15807265300",
+  "servesCuisine":["American","Burgers","Breakfast","Mexican"],
+  "priceRange":"$",
+  "hasMenu":"https://hobartchamber.org/menu-big-a-burger.html"
+}
+</script>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,800;0,900;1,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  color-scheme:light;
+  --navy:#1a3ea8;--navy-dark:#142f7e;--navy-deep:#0e2056;
+  --gold:#c49a3e;--gold-light:#dab65e;--gold-pale:#f6edd6;
+  --white:#fff;--slate:#f3f6fc;--gray:#6f7d99;--dark-gray:#2c3a58;--border:#dbe3f4;
+  --biz-navy:#1e3a6f;--biz-gold:#e8b93c;--biz-red:#c0392b;--biz-green:#4a9d5f;
+}
+html{background:#fff !important;scroll-behavior:smooth;}
+body{font-family:'Inter',sans-serif;color:var(--navy-deep);background:#fff !important;overflow-x:hidden;}
+
+/* NAV */
+nav{background:rgba(26,62,168,.97);display:flex;align-items:center;justify-content:space-between;padding:0 24px;height:64px;border-bottom:2px solid var(--gold);gap:12px;position:sticky;top:0;z-index:100;}
+.nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none;flex:1;min-width:0;}
+.nav-logo-mark{width:38px;height:38px;border-radius:50%;background:var(--gold-pale);overflow:hidden;flex-shrink:0;}
+.nav-logo-mark img{width:100%;height:100%;object-fit:cover;}
+.nav-logo-text span:first-child{font-family:'Playfair Display',serif;font-size:14.5px;font-weight:700;color:#fff;display:block;white-space:nowrap;}
+.nav-logo-text span:last-child{font-size:10px;color:rgba(255,255,255,.5);}
+.nav-back{font-size:12px;font-weight:600;color:rgba(255,255,255,.7);text-decoration:none;padding:7px 13px;border:1px solid rgba(255,255,255,.25);border-radius:5px;white-space:nowrap;flex-shrink:0;}
+.nav-back:hover{color:#fff;border-color:rgba(255,255,255,.6);}
+
+/* MEMBER BADGE BAR */
+.member-bar{background:var(--gold-pale);border-bottom:1px solid var(--gold);padding:8px 24px;text-align:center;}
+.member-bar span{font-size:11.5px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:var(--navy);}
+
+/* HERO */
+.hero{background:linear-gradient(150deg,var(--biz-navy) 0%,#2a4e8a 60%,#1e3a6f 100%);padding:44px 24px 38px;text-align:center;position:relative;overflow:hidden;}
+.hero::before{content:'🍔';position:absolute;font-size:220px;opacity:.05;top:50%;left:50%;transform:translate(-50%,-50%);}
+.hero-inner{position:relative;z-index:2;max-width:640px;margin:0 auto;}
+.hero-est{font-size:11px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--biz-gold);margin-bottom:10px;}
+.hero-name{font-family:'Playfair Display',serif;font-size:clamp(30px,6vw,50px);font-weight:900;color:#fff;line-height:1.05;margin-bottom:8px;}
+.hero-tag{font-size:14px;color:rgba(255,255,255,.7);font-style:italic;margin-bottom:20px;}
+.hero-meta{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-bottom:22px;}
+.hero-chip{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);border-radius:20px;padding:7px 15px;font-size:12.5px;font-weight:600;color:rgba(255,255,255,.9);}
+.hero-cta{display:inline-flex;align-items:center;gap:8px;background:var(--biz-gold);color:var(--biz-navy);font-size:16px;font-weight:800;padding:14px 30px;border-radius:8px;text-decoration:none;transition:transform .15s,background .2s;}
+.hero-cta:hover{background:#f0c754;transform:translateY(-1px);}
+
+/* HAPPY HOUR BANNER */
+.happy-hour{background:var(--biz-green);color:#fff;padding:14px 24px;text-align:center;}
+.happy-hour strong{font-size:15px;font-weight:800;letter-spacing:.5px;}
+.happy-hour span{font-size:13px;opacity:.9;display:block;margin-top:2px;}
+
+/* JUMP NAV */
+.jump-nav{background:var(--slate);border-bottom:1px solid var(--border);padding:12px 16px;display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;position:sticky;top:64px;z-index:90;}
+.jump-nav::-webkit-scrollbar{display:none;}
+.jump-link{padding:7px 14px;background:var(--white);border:1px solid var(--border);border-radius:20px;font-size:12.5px;font-weight:600;color:var(--navy);text-decoration:none;white-space:nowrap;flex-shrink:0;transition:all .15s;}
+.jump-link:hover{background:var(--navy);color:#fff;border-color:var(--navy);}
+
+/* MAIN */
+main{max-width:900px;margin:0 auto;padding:36px 20px 80px;}
+
+/* MENU SECTION */
+.menu-section{margin-bottom:38px;scroll-margin-top:130px;}
+.menu-head{display:flex;align-items:baseline;gap:12px;margin-bottom:16px;padding-bottom:10px;border-bottom:2.5px solid var(--biz-navy);}
+.menu-head h2{font-family:'Playfair Display',serif;font-size:24px;font-weight:800;color:var(--biz-navy);letter-spacing:.5px;}
+.menu-head .menu-note{font-size:12px;color:var(--gray);font-style:italic;margin-left:auto;}
+
+.menu-grid{display:grid;grid-template-columns:1fr;gap:0;}
+.menu-item{display:flex;align-items:baseline;gap:12px;padding:11px 4px;flex-wrap:wrap;border-bottom:1px dotted var(--border);}
+.menu-item:last-child{border-bottom:none;}
+.mi-name{font-size:15px;font-weight:600;color:var(--dark-gray);flex:1 1 auto;min-width:0;overflow-wrap:anywhere;}
+.mi-desc{font-size:12.5px;color:var(--gray);font-style:italic;}
+.mi-dots{flex:1 1 20px;border-bottom:1px dotted #c8d2e8;min-width:16px;transform:translateY(-4px);}
+.mi-price{font-size:15px;font-weight:700;color:var(--biz-navy);flex-shrink:0;font-variant-numeric:tabular-nums;}
+.mi-price-alt{font-size:12px;color:var(--gray);font-weight:500;margin-left:6px;}
+
+/* TIERED PRICE (1/2/3 style) */
+.mi-tiers{display:flex;gap:14px;flex-shrink:0;}
+.mi-tier{text-align:center;}
+.mi-tier .t-qty{font-size:10px;color:var(--gray);font-weight:600;display:block;text-transform:uppercase;letter-spacing:.5px;}
+.mi-tier .t-price{font-size:14.5px;font-weight:700;color:var(--biz-navy);font-variant-numeric:tabular-nums;}
+
+/* HIGHLIGHT BOXES */
+.menu-highlight{background:var(--biz-gold);border-radius:10px;padding:18px 22px;margin:16px 0;}
+.menu-highlight.red{background:var(--biz-red);}
+.menu-highlight.navy{background:var(--biz-navy);}
+.mh-title{font-family:'Playfair Display',serif;font-size:18px;font-weight:800;color:#1a1a1a;margin-bottom:4px;}
+.menu-highlight.red .mh-title,.menu-highlight.navy .mh-title{color:#fff;}
+.mh-sub{font-size:12.5px;color:rgba(0,0,0,.65);font-style:italic;margin-bottom:12px;line-height:1.5;}
+.menu-highlight.red .mh-sub,.menu-highlight.navy .mh-sub{color:rgba(255,255,255,.75);}
+.mh-items{display:flex;flex-direction:column;gap:7px;}
+.mh-item{display:flex;justify-content:space-between;align-items:baseline;font-size:14.5px;font-weight:600;color:#1a1a1a;}
+.menu-highlight.red .mh-item,.menu-highlight.navy .mh-item{color:#fff;}
+.mh-item span:last-child{font-weight:800;font-variant-numeric:tabular-nums;}
+
+/* COMBOS GRID */
+.combo-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:12px;}
+.combo-card{background:var(--white);border:1.5px solid var(--border);border-radius:10px;padding:16px;transition:border-color .2s,box-shadow .2s;}
+.combo-card:hover{border-color:var(--biz-navy);box-shadow:0 4px 16px rgba(30,58,111,.1);}
+.combo-card.gold{background:var(--gold-pale);border-color:var(--biz-gold);}
+.combo-card.navy{background:var(--biz-navy);border-color:var(--biz-navy);}
+.combo-name{font-size:14px;font-weight:800;color:var(--biz-navy);margin-bottom:5px;line-height:1.2;text-transform:uppercase;letter-spacing:.3px;}
+.combo-card.navy .combo-name{color:var(--biz-gold);}
+.combo-desc{font-size:11.5px;color:var(--gray);line-height:1.5;margin-bottom:10px;min-height:32px;}
+.combo-card.navy .combo-desc{color:rgba(255,255,255,.7);}
+.combo-price{font-size:20px;font-weight:800;color:var(--biz-navy);font-variant-numeric:tabular-nums;}
+.combo-card.navy .combo-price{color:#fff;}
+
+/* SIDE-BY-SIDE ADD-ONS */
+.addon-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px;padding-top:12px;border-top:1px dotted var(--border);}
+.addon-chip{background:var(--slate);border-radius:16px;padding:5px 12px;font-size:12px;color:var(--dark-gray);font-weight:500;}
+.addon-chip b{color:var(--biz-navy);font-weight:700;}
+
+/* CONTACT CARD */
+.contact-card{background:var(--biz-navy);border-radius:12px;padding:28px;text-align:center;margin-top:40px;}
+.contact-card h3{font-family:'Playfair Display',serif;font-size:22px;font-weight:800;color:var(--biz-gold);margin-bottom:6px;}
+.contact-card p{font-size:13.5px;color:rgba(255,255,255,.7);line-height:1.7;margin-bottom:18px;}
+.contact-btns{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;}
+.c-btn{display:inline-flex;align-items:center;gap:7px;padding:12px 22px;border-radius:7px;font-size:14px;font-weight:700;text-decoration:none;transition:all .2s;}
+.c-btn.primary{background:var(--biz-gold);color:var(--biz-navy);}
+.c-btn.primary:hover{background:#f0c754;}
+.c-btn.outline{border:1.5px solid rgba(255,255,255,.3);color:rgba(255,255,255,.85);}
+.c-btn.outline:hover{border-color:#fff;color:#fff;}
+
+/* DISCLAIMER */
+.disclaimer{margin-top:24px;padding:14px 18px;background:var(--slate);border-radius:8px;font-size:12px;color:var(--gray);line-height:1.6;text-align:center;}
+
+/* FOOTER */
+.page-footer{background:var(--navy-dark);padding:24px;text-align:center;}
+.page-footer p{font-size:13px;color:rgba(255,255,255,.4);}
+.page-footer a{color:var(--gold-light);text-decoration:none;}
+
+@media(max-width:640px){
+  nav{padding:0 14px;}
+  .jump-nav{top:64px;}
+  .hero{padding:32px 18px 30px;}
+  main{padding:26px 14px 60px;}
+  .menu-head h2{font-size:20px;}
+  .menu-head .menu-note{display:none;}
+  .mi-name{font-size:14px;}
+  .mi-tiers{gap:10px;}
+  .combo-grid{grid-template-columns:1fr 1fr;}
+  .contact-card{padding:22px 16px;}
+}
+@media(max-width:420px){
+  .combo-grid{grid-template-columns:1fr;}
+}
+
+  /* --- overflow containment --- */
+  .menu-section,.panel,.specials{max-width:100%;overflow-wrap:break-word;}
+  .mi-price,.p-price{margin-left:auto;}
+  @media(max-width:560px){
+    .mi-dots,.p-dots{display:none;}
+    .mi-name small,.p-name small{max-width:100%;}
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">
+    <span class="nav-logo-mark"><img src="flyers/chamber-logo.PNG" alt="" onerror="this.onerror=null;this.style.display='none';"/></span>
+    <span class="nav-logo-text"><span>Hobart Chamber of Commerce</span><span>Member Menus</span></span>
+  </a>
+  <a href="index.html#directory" class="nav-back">← Directory</a>
+</nav>
+
+<div class="member-bar">
+  <span>⭐ Hobart Chamber Member Since 1954</span>
+</div>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-inner">
+    <div class="hero-est">Serving Southwest Oklahoma Since 1954</div>
+    <h1 class="hero-name">Big-A-Burger<br>Drive Inn</h1>
+    <p class="hero-tag">417 S Jefferson · Hobart, OK</p>
+    <div class="hero-meta">
+      <span class="hero-chip">🍔 Burgers</span>
+      <span class="hero-chip">🍳 Breakfast</span>
+      <span class="hero-chip">🌮 Mexican Food</span>
+      <span class="hero-chip">🥤 Malts &amp; Shakes</span>
+    </div>
+    <a href="tel:5807265300" class="hero-cta">📞 Orders To-Go · (580) 726-5300</a>
+  </div>
+</div>
+
+<!-- HAPPY HOUR -->
+<div class="happy-hour">
+  <strong>🥤 HAPPY HOUR — ALL DRINKS $1.49</strong>
+  <span>9:00–11:00 AM &amp; 3:00–5:00 PM Daily</span>
+</div>
+
+<!-- JUMP NAV -->
+<div class="jump-nav">
+  <a href="#burgers" class="jump-link">Burgers</a>
+  <a href="#combos" class="jump-link">Combos</a>
+  <a href="#sandwiches" class="jump-link">Sandwiches</a>
+  <a href="#chicken" class="jump-link">Chicken</a>
+  <a href="#mexican" class="jump-link">Mexican</a>
+  <a href="#breakfast" class="jump-link">Breakfast</a>
+  <a href="#sides" class="jump-link">Sides</a>
+  <a href="#salads" class="jump-link">Salads</a>
+  <a href="#drinks" class="jump-link">Drinks</a>
+  <a href="#kids" class="jump-link">Kid's Meal</a>
+</div>
+
+<main>
+
+  <!-- BURGERS -->
+  <section class="menu-section" id="burgers">
+    <div class="menu-head"><h2>🍔 Burgers</h2><span class="menu-note">Add cheese available</span></div>
+    <div class="menu-grid">
+      <div class="menu-item"><span class="mi-name">Big-A-Burger</span><span class="mi-dots"></span><span class="mi-price">$5.99</span></div>
+      <div class="menu-item"><span class="mi-name">Double Burger</span><span class="mi-dots"></span><span class="mi-price">$8.49</span></div>
+      <div class="menu-item"><span class="mi-name">Bacon Burger</span><span class="mi-dots"></span><span class="mi-price">$7.49</span></div>
+      <div class="menu-item"><span class="mi-name">Small Burger</span><span class="mi-dots"></span><span class="mi-price">$4.99</span></div>
+      <div class="menu-item"><span class="mi-name">Small Double</span><span class="mi-dots"></span><span class="mi-price">$6.49</span></div>
+      <div class="menu-item"><span class="mi-name">Small Super Cheese</span><span class="mi-dots"></span><span class="mi-price">$8.49</span></div>
+      <div class="menu-item"><span class="mi-name">Large Super Cheese</span><span class="mi-dots"></span><span class="mi-price">$10.99</span></div>
+    </div>
+
+    <div class="menu-highlight">
+      <div class="mh-title">Homestyle Onion Burgers</div>
+      <div class="mh-sub">Certified Angus Beef</div>
+      <div class="mh-items">
+        <div class="mh-item"><span>Big Onion</span><span>$6.99</span></div>
+        <div class="mh-item"><span>Small Onion</span><span>$5.99</span></div>
+      </div>
+    </div>
+
+    <div class="addon-row">
+      <span class="addon-chip">Add Chili <b>$1.49</b></span>
+      <span class="addon-chip">Add Bacon <b>$0.99</b></span>
+      <span class="addon-chip">Fried Onions <b>$0.89</b></span>
+      <span class="addon-chip">Jalapeños <b>$0.69</b></span>
+    </div>
+  </section>
+
+  <!-- COMBOS -->
+  <section class="menu-section" id="combos">
+    <div class="menu-head"><h2>🍟 Combo Meals</h2><span class="menu-note">Super size for $0.99 more</span></div>
+    <div class="combo-grid">
+      <div class="combo-card gold">
+        <div class="combo-name">Little Meal</div>
+        <div class="combo-desc">Small cheeseburger, fries &amp; medium drink</div>
+        <div class="combo-price">$7.99</div>
+      </div>
+      <div class="combo-card">
+        <div class="combo-name">Big Double Meal</div>
+        <div class="combo-desc">Double cheeseburger, fries &amp; medium drink</div>
+        <div class="combo-price">$11.49</div>
+      </div>
+      <div class="combo-card gold">
+        <div class="combo-name">Super Meal</div>
+        <div class="combo-desc">Super cheeseburger, large fries &amp; large drink</div>
+        <div class="combo-price">$13.99</div>
+      </div>
+      <div class="combo-card">
+        <div class="combo-name">Bacon Cheese Meal</div>
+        <div class="combo-desc">Bacon cheeseburger, fries &amp; medium drink</div>
+        <div class="combo-price">$10.99</div>
+      </div>
+      <div class="combo-card gold">
+        <div class="combo-name">Chicken Strip Meal</div>
+        <div class="combo-desc">2 strips, cheese fries &amp; medium drink</div>
+        <div class="combo-price">$7.99</div>
+      </div>
+      <div class="combo-card">
+        <div class="combo-name">Big Onion Burger Meal</div>
+        <div class="combo-desc">Big onion burger, fries &amp; medium drink</div>
+        <div class="combo-price">$10.99</div>
+      </div>
+      <div class="combo-card gold">
+        <div class="combo-name">Taco Combo</div>
+        <div class="combo-desc">Two tacos, fries &amp; medium drink</div>
+        <div class="combo-price">$9.49</div>
+      </div>
+      <div class="combo-card navy">
+        <div class="combo-name">Little Double Meal</div>
+        <div class="combo-desc">Small cheese double, fries &amp; medium drink</div>
+        <div class="combo-price">$9.99</div>
+      </div>
+      <div class="combo-card navy">
+        <div class="combo-name">Big Meal</div>
+        <div class="combo-desc">Big cheeseburger, fries &amp; medium drink</div>
+        <div class="combo-price">$8.99</div>
+      </div>
+    </div>
+    <div class="addon-row">
+      <span class="addon-chip">⬆️ Super Size — large fries &amp; 32 oz drink <b>+$0.99</b></span>
+    </div>
+  </section>
+
+  <!-- SANDWICHES -->
+  <section class="menu-section" id="sandwiches">
+    <div class="menu-head"><h2>🥪 Sandwiches</h2></div>
+    <div class="menu-grid">
+      <div class="menu-item"><span class="mi-name">Chicken Strip Sandwich</span><span class="mi-dots"></span><span class="mi-price">$5.99</span></div>
+      <div class="menu-item"><span class="mi-name">Steak Sandwich</span><span class="mi-dots"></span><span class="mi-price">$6.99</span></div>
+      <div class="menu-item"><span class="mi-name">Club</span><span class="mi-dots"></span><span class="mi-price">$6.99</span></div>
+      <div class="menu-item"><span class="mi-name">Ham &amp; Cheese</span><span class="mi-dots"></span><span class="mi-price">$4.99</span></div>
+      <div class="menu-item"><span class="mi-name">Grilled Cheese</span><span class="mi-dots"></span><span class="mi-price">$3.49</span></div>
+      <div class="menu-item"><span class="mi-name">B.L.T.</span><span class="mi-dots"></span><span class="mi-price">$5.99</span></div>
+    </div>
+  </section>
+
+  <!-- CHICKEN & BASKETS -->
+  <section class="menu-section" id="chicken">
+    <div class="menu-head"><h2>🍗 Chicken &amp; Baskets</h2></div>
+    <div class="menu-grid">
+      <div class="menu-item">
+        <span class="mi-name">Chicken Strips</span><span class="mi-dots"></span>
+        <div class="mi-tiers">
+          <div class="mi-tier"><span class="t-qty">1</span><span class="t-price">$1.79</span></div>
+          <div class="mi-tier"><span class="t-qty">4</span><span class="t-price">$6.99</span></div>
+          <div class="mi-tier"><span class="t-qty">8</span><span class="t-price">$12.99</span></div>
+        </div>
+      </div>
+      <div class="menu-item">
+        <span class="mi-name">Chicken Nuggets</span><span class="mi-dots"></span>
+        <div class="mi-tiers">
+          <div class="mi-tier"><span class="t-qty">6</span><span class="t-price">$3.99</span></div>
+          <div class="mi-tier"><span class="t-qty">12</span><span class="t-price">$6.99</span></div>
+          <div class="mi-tier"><span class="t-qty">24</span><span class="t-price">$12.99</span></div>
+        </div>
+      </div>
+      <div class="menu-item"><span class="mi-name">Chicken Wrap</span><span class="mi-dots"></span><span class="mi-price">$5.99</span></div>
+      <div class="menu-item"><span class="mi-name">Steak Fingers Basket</span><span class="mi-dots"></span><span class="mi-price">$9.99</span></div>
+    </div>
+  </section>
+
+  <!-- MEXICAN -->
+  <section class="menu-section" id="mexican">
+    <div class="menu-head"><h2>🌮 Mexican Food</h2></div>
+    <div class="menu-grid">
+      <div class="menu-item"><span class="mi-name">Taco</span><span class="mi-dots"></span><span class="mi-price">$3.29</span></div>
+      <div class="menu-item"><span class="mi-name">Burrito</span><span class="mi-dots"></span><span class="mi-price">$2.59</span></div>
+      <div class="menu-item"><span class="mi-name">Cheese Burrito</span><span class="mi-dots"></span><span class="mi-price">$3.69</span></div>
+      <div class="menu-item"><span class="mi-name">Chili Burrito</span><span class="mi-dots"></span><span class="mi-price">$4.69</span></div>
+      <div class="menu-item"><span class="mi-name">Chili-Cheese Burrito</span><span class="mi-dots"></span><span class="mi-price">$6.49</span></div>
+      <div class="menu-item"><span class="mi-name">Deluxe Burrito</span><span class="mi-dots"></span><span class="mi-price">$7.69</span></div>
+    </div>
+  </section>
+
+  <!-- BREAKFAST -->
+  <section class="menu-section" id="breakfast">
+    <div class="menu-head"><h2>🍳 Breakfast</h2><span class="menu-note">Served all day</span></div>
+
+    <div class="menu-highlight navy">
+      <div class="mh-title">Eggs</div>
+      <div class="mh-sub">Any style — served with ham, bacon or sausage, hash browns &amp; choice of toast, biscuit &amp; gravy</div>
+      <div class="mh-items">
+        <div class="mh-item"><span>One Egg</span><span>$5.98</span></div>
+        <div class="mh-item"><span>Two Eggs</span><span>$6.98</span></div>
+        <div class="mh-item"><span>Three Eggs</span><span>$7.49</span></div>
+      </div>
+    </div>
+
+    <div class="menu-highlight navy">
+      <div class="mh-title">Omelets</div>
+      <div class="mh-sub">Served with hash browns &amp; choice of toast or biscuits &amp; gravy</div>
+      <div class="mh-items">
+        <div class="mh-item"><span>Cheese</span><span>$6.29</span></div>
+        <div class="mh-item"><span>Ham</span><span>$8.79</span></div>
+        <div class="mh-item"><span>Bacon</span><span>$8.79</span></div>
+        <div class="mh-item"><span>Sausage</span><span>$8.79</span></div>
+        <div class="mh-item"><span>Western</span><span>$9.49</span></div>
+      </div>
+    </div>
+
+    <h3 style="font-family:'Playfair Display',serif;font-size:17px;font-weight:700;color:var(--biz-navy);margin:22px 0 10px;">Biscuits</h3>
+    <div class="menu-grid">
+      <div class="menu-item"><span class="mi-name">One Biscuit</span><span class="mi-dots"></span><span class="mi-price">$1.29<span class="mi-price-alt">w/ gravy $2.99</span></span></div>
+      <div class="menu-item"><span class="mi-name">Two Biscuits</span><span class="mi-dots"></span><span class="mi-price">$2.39<span class="mi-price-alt">w/ gravy $4.89</span></span></div>
+      <div class="menu-item"><span class="mi-name">One w/ Gravy &amp; Sausage</span><span class="mi-dots"></span><span class="mi-price">$4.89</span></div>
+      <div class="menu-item"><span class="mi-name">Two w/ Gravy &amp; Sausage</span><span class="mi-dots"></span><span class="mi-price">$6.99</span></div>
+    </div>
+
+    <h3 style="font-family:'Playfair Display',serif;font-size:17px;font-weight:700;color:var(--biz-navy);margin:22px 0 10px;">Breakfast on a Biscuit</h3>
+    <div class="menu-grid">
+      <div class="menu-item"><span class="mi-name">Sausage</span><span class="mi-dots"></span><span class="mi-price">$2.79</span></div>
+      <div class="menu-item"><span class="mi-name">Sausage, Egg &amp; Cheese</span><span class="mi-dots"></span><span class="mi-price">$4.89</span></div>
+      <div class="menu-item"><span class="mi-name">Bacon, Egg &amp; Cheese</span><span class="mi-dots"></span><span class="mi-price">$4.89</span></div>
+      <div class="menu-item"><span class="mi-name">Ham, Egg &amp; Cheese</span><span class="mi-dots"></span><span class="mi-price">$4.89</span></div>
+    </div>
+
+    <div class="menu-highlight red" style="margin-top:20px;">
+      <div class="mh-title">South of the Border Breakfast</div>
+      <div class="mh-items">
+        <div class="mh-item"><span>Breakfast Taco</span><span>$4.49</span></div>
+        <div class="mh-item"><span>Breakfast Burrito</span><span>$4.99</span></div>
+        <div class="mh-item"><span>Quesadilla — Half</span><span>$5.19</span></div>
+        <div class="mh-item"><span>Quesadilla — Full</span><span>$7.99</span></div>
+      </div>
+      <div class="addon-row" style="border-top-color:rgba(255,255,255,.2);">
+        <span class="addon-chip" style="background:rgba(255,255,255,.15);color:#fff;">Add Jalapeños <b style="color:#fff;">$0.49</b></span>
+        <span class="addon-chip" style="background:rgba(255,255,255,.15);color:#fff;">Add Hash Browns <b style="color:#fff;">$0.99</b></span>
+      </div>
+    </div>
+
+    <h3 style="font-family:'Playfair Display',serif;font-size:17px;font-weight:700;color:var(--biz-navy);margin:22px 0 10px;">Specials &amp; More</h3>
+    <div class="menu-grid">
+      <div class="menu-item"><span class="mi-name">DY Special</span><span class="mi-desc">Breakfast on a bun — egg, cheese, choice of sausage/ham/bacon &amp; a hash brown</span><span class="mi-dots"></span><span class="mi-price">$5.29</span></div>
+      <div class="menu-item"><span class="mi-name">Breakfast Toaster</span><span class="mi-dots"></span><span class="mi-price">$4.99</span></div>
+    </div>
+
+    <h3 style="font-family:'Playfair Display',serif;font-size:17px;font-weight:700;color:var(--biz-navy);margin:22px 0 10px;">Breakfast Sides</h3>
+    <div class="menu-grid">
+      <div class="menu-item">
+        <span class="mi-name">Eggs (any way)</span><span class="mi-dots"></span>
+        <div class="mi-tiers">
+          <div class="mi-tier"><span class="t-qty">1</span><span class="t-price">$1.69</span></div>
+          <div class="mi-tier"><span class="t-qty">2</span><span class="t-price">$2.99</span></div>
+          <div class="mi-tier"><span class="t-qty">3</span><span class="t-price">$3.79</span></div>
+        </div>
+      </div>
+      <div class="menu-item">
+        <span class="mi-name">Sausage</span><span class="mi-dots"></span>
+        <div class="mi-tiers">
+          <div class="mi-tier"><span class="t-qty">1</span><span class="t-price">$1.59</span></div>
+          <div class="mi-tier"><span class="t-qty">2</span><span class="t-price">$2.99</span></div>
+        </div>
+      </div>
+      <div class="menu-item"><span class="mi-name">Ham</span><span class="mi-dots"></span><span class="mi-price">$2.99</span></div>
+      <div class="menu-item"><span class="mi-name">Bacon</span><span class="mi-dots"></span><span class="mi-price">$2.99</span></div>
+      <div class="menu-item">
+        <span class="mi-name">Gravy</span><span class="mi-dots"></span>
+        <div class="mi-tiers">
+          <div class="mi-tier"><span class="t-qty">Sm</span><span class="t-price">$1.39</span></div>
+          <div class="mi-tier"><span class="t-qty">Lg</span><span class="t-price">$1.99</span></div>
+        </div>
+      </div>
+      <div class="menu-item">
+        <span class="mi-name">Texas Toast</span><span class="mi-dots"></span>
+        <div class="mi-tiers">
+          <div class="mi-tier"><span class="t-qty">1</span><span class="t-price">$1.29</span></div>
+          <div class="mi-tier"><span class="t-qty">2</span><span class="t-price">$2.29</span></div>
+        </div>
+      </div>
+      <div class="menu-item"><span class="mi-name">Thin Toast (2)</span><span class="mi-dots"></span><span class="mi-price">$1.79</span></div>
+      <div class="menu-item"><span class="mi-name">Hash Browns</span><span class="mi-dots"></span><span class="mi-price">$1.49</span></div>
+    </div>
+
+    <h3 style="font-family:'Playfair Display',serif;font-size:17px;font-weight:700;color:var(--biz-navy);margin:22px 0 10px;">Pancakes</h3>
+    <div class="menu-grid">
+      <div class="menu-item">
+        <span class="mi-name">Pancakes</span><span class="mi-dots"></span>
+        <div class="mi-tiers">
+          <div class="mi-tier"><span class="t-qty">1</span><span class="t-price">$3.59</span></div>
+          <div class="mi-tier"><span class="t-qty">2</span><span class="t-price">$4.79</span></div>
+          <div class="mi-tier"><span class="t-qty">3</span><span class="t-price">$5.99</span></div>
+        </div>
+      </div>
+      <div class="menu-item"><span class="mi-name">Add Meat</span><span class="mi-dots"></span><span class="mi-price">$2.98</span></div>
+    </div>
+  </section>
+
+  <!-- SIDES -->
+  <section class="menu-section" id="sides">
+    <div class="menu-head"><h2>🍟 Side Orders</h2><span class="menu-note">Add cheese available</span></div>
+    <div class="menu-grid">
+      <div class="menu-item">
+        <span class="mi-name">Fries</span><span class="mi-dots"></span>
+        <div class="mi-tiers">
+          <div class="mi-tier"><span class="t-qty">Reg</span><span class="t-price">$2.59</span></div>
+          <div class="mi-tier"><span class="t-qty">+Cheese</span><span class="t-price">$3.79</span></div>
+        </div>
+      </div>
+      <div class="menu-item">
+        <span class="mi-name">Large Fries</span><span class="mi-dots"></span>
+        <div class="mi-tiers">
+          <div class="mi-tier"><span class="t-qty">Reg</span><span class="t-price">$3.39</span></div>
+          <div class="mi-tier"><span class="t-qty">+Cheese</span><span class="t-price">$5.49</span></div>
+        </div>
+      </div>
+      <div class="menu-item">
+        <span class="mi-name">Tater Tots</span><span class="mi-dots"></span>
+        <div class="mi-tiers">
+          <div class="mi-tier"><span class="t-qty">Reg</span><span class="t-price">$2.59</span></div>
+          <div class="mi-tier"><span class="t-qty">+Cheese</span><span class="t-price">$3.79</span></div>
+        </div>
+      </div>
+      <div class="menu-item">
+        <span class="mi-name">Large Tots</span><span class="mi-dots"></span>
+        <div class="mi-tiers">
+          <div class="mi-tier"><span class="t-qty">Reg</span><span class="t-price">$3.39</span></div>
+          <div class="mi-tier"><span class="t-qty">+Cheese</span><span class="t-price">$4.49</span></div>
+        </div>
+      </div>
+      <div class="menu-item">
+        <span class="mi-name">Onion Rings</span><span class="mi-dots"></span>
+        <div class="mi-tiers">
+          <div class="mi-tier"><span class="t-qty">Reg</span><span class="t-price">$3.89</span></div>
+          <div class="mi-tier"><span class="t-qty">+Cheese</span><span class="t-price">$5.19</span></div>
+        </div>
+      </div>
+      <div class="menu-item"><span class="mi-name">Fried Pickles</span><span class="mi-dots"></span><span class="mi-price">$6.49</span></div>
+    </div>
+
+    <div class="menu-highlight" style="margin-top:18px;">
+      <div class="mh-title">Xtreme Cheese Fries</div>
+      <div class="mh-sub">Fries smothered with American cheese, bacon bits and homemade ranch dressing!</div>
+      <div class="mh-items">
+        <div class="mh-item"><span>Small</span><span>$4.99</span></div>
+        <div class="mh-item"><span>Large</span><span>$6.99</span></div>
+      </div>
+    </div>
+
+    <div class="addon-row">
+      <span class="addon-chip">Chili — Small <b>$1.69</b></span>
+      <span class="addon-chip">Chili — Large <b>$2.69</b></span>
+      <span class="addon-chip">Ranch <b>$0.39</b></span>
+    </div>
+  </section>
+
+  <!-- SALADS -->
+  <section class="menu-section" id="salads">
+    <div class="menu-head"><h2>🥗 Salads</h2></div>
+    <div class="menu-grid">
+      <div class="menu-item"><span class="mi-name">Chef Salad</span><span class="mi-dots"></span><span class="mi-price">$6.99</span></div>
+      <div class="menu-item"><span class="mi-name">Chicken Strip Salad</span><span class="mi-dots"></span><span class="mi-price">$6.99</span></div>
+      <div class="menu-item"><span class="mi-name">Dinner Salad</span><span class="mi-dots"></span><span class="mi-price">$2.99</span></div>
+    </div>
+  </section>
+
+  <!-- DRINKS -->
+  <section class="menu-section" id="drinks">
+    <div class="menu-head"><h2>🥤 Drinks</h2><span class="menu-note">Happy Hour: all drinks $1.49</span></div>
+
+    <div class="menu-highlight">
+      <div class="mh-title">Fountain Drinks</div>
+      <div class="mh-sub">Pepsi, Diet Pepsi, Dr. Pepper, Diet Dr. Pepper, Mtn. Dew, Sierra Mist, Mug Root Beer, Cherry Lime, Gatorade, Fruit Punch &amp; Lemon Lime · Fresh brewed tea and sweet tea!</div>
+      <div class="mh-items">
+        <div class="mh-item"><span>Small</span><span>$1.49</span></div>
+        <div class="mh-item"><span>Medium</span><span>$2.39</span></div>
+        <div class="mh-item"><span>Large</span><span>$2.89</span></div>
+      </div>
+    </div>
+
+    <div class="menu-grid" style="margin-top:16px;">
+      <div class="menu-item">
+        <span class="mi-name">Coffee</span><span class="mi-dots"></span>
+        <div class="mi-tiers">
+          <div class="mi-tier"><span class="t-qty">Sm</span><span class="t-price">$1.69</span></div>
+          <div class="mi-tier"><span class="t-qty">Lg</span><span class="t-price">$2.49</span></div>
+        </div>
+      </div>
+      <div class="menu-item">
+        <span class="mi-name">Orange Juice</span><span class="mi-dots"></span>
+        <div class="mi-tiers">
+          <div class="mi-tier"><span class="t-qty">Sm</span><span class="t-price">$2.29</span></div>
+          <div class="mi-tier"><span class="t-qty">Lg</span><span class="t-price">$2.99</span></div>
+        </div>
+      </div>
+      <div class="menu-item">
+        <span class="mi-name">Hot Chocolate</span><span class="mi-dots"></span>
+        <div class="mi-tiers">
+          <div class="mi-tier"><span class="t-qty">Sm</span><span class="t-price">$1.69</span></div>
+          <div class="mi-tier"><span class="t-qty">Lg</span><span class="t-price">$2.49</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="menu-highlight navy" style="margin-top:18px;">
+      <div class="mh-title">🥤 Malts &amp; Shakes</div>
+      <div class="mh-sub">Chocolate · Vanilla · Strawberry</div>
+      <div class="mh-items">
+        <div class="mh-item"><span>Any flavor</span><span>$5.29</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- KID'S MEAL -->
+  <section class="menu-section" id="kids">
+    <div class="menu-head"><h2>😊 Kid's Meal</h2></div>
+    <div class="menu-highlight">
+      <div class="mh-title">Kid's Meal — $5.49</div>
+      <div class="mh-sub">Served with fries and small drink · Your choice of:</div>
+      <div class="mh-items">
+        <div class="mh-item"><span>🌭 Corn Dog</span><span></span></div>
+        <div class="mh-item"><span>🍗 Chicken Strip</span><span></span></div>
+        <div class="mh-item"><span>🧀 Grilled Cheese</span><span></span></div>
+        <div class="mh-item"><span>🍔 Cheeseburger</span><span></span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <div class="contact-card">
+    <h3>Orders To-Go</h3>
+    <p>Big-A-Burger Drive Inn<br>417 S Jefferson · Hobart, OK 73651</p>
+    <div class="contact-btns">
+      <a href="tel:5807265300" class="c-btn primary">📞 Call (580) 726-5300</a>
+      <a href="https://maps.google.com/?q=417+S+Jefferson,+Hobart,+OK+73651" target="_blank" rel="noopener" class="c-btn outline">📍 Get Directions</a>
+    </div>
+  </div>
+
+  <div class="disclaimer">
+    Menu and prices provided by Big-A-Burger Drive Inn and published as a service of the Hobart Chamber of Commerce. Prices subject to change — please call to confirm. Last updated September 2026.
+  </div>
+
+</main>
+
+<div class="page-footer">
+  <p>Hobart Chamber of Commerce · 106 W 4th St · Hobart, OK 73651 · <a href="tel:5806820887">(580) 682-0887</a></p>
+  <p style="margin-top:6px;"><a href="index.html#directory">← Back to Member Directory</a></p>
+</div>
+
+</body>
+</html>

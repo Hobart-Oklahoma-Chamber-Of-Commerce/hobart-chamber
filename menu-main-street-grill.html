@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="color-scheme" content="light only"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Main Street Grill — Breakfast Menu | Hobart Chamber of Commerce</title>
+<meta name="description" content="Breakfast menu for Main Street Grill in Hobart, Oklahoma. Daily specials, breakfast combos, omelettes, pancakes and a kids menu. Open 7:00–11:00 AM."/>
+<meta property="og:title" content="Main Street Grill — Breakfast Menu | Hobart, OK"/>
+<meta property="og:description" content="Daily specials Monday through Saturday, omelettes, pancakes, breakfast combos and a kids menu. Open 7:00–11:00 AM."/>
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"Restaurant",
+  "name":"Main Street Grill",
+  "description":"Breakfast spot in Hobart, Oklahoma serving daily specials, omelettes, pancakes and breakfast combos.",
+  "address":{"@type":"PostalAddress","addressLocality":"Hobart","addressRegion":"OK","postalCode":"73651","addressCountry":"US"},
+  "servesCuisine":["American","Breakfast"],
+  "priceRange":"$",
+  "openingHoursSpecification":{"@type":"OpeningHoursSpecification","opens":"07:00","closes":"11:00"},
+  "hasMenu":"https://hobartchamber.org/menu-main-street-grill.html"
+}
+</script>
+<link href="https://fonts.googleapis.com/css2?family=Bree+Serif&family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  color-scheme:light;
+  --navy:#1a3ea8;--navy-dark:#142f7e;--navy-deep:#0e2056;
+  --gold:#c49a3e;--gold-light:#dab65e;--gold-pale:#f6edd6;
+  --white:#fff;--slate:#f3f6fc;--gray:#6f7d99;--dark-gray:#2c3a58;--border:#dbe3f4;
+  /* Main Street Grill brand */
+  --msg-cream:#fdf6dc;--msg-navy:#2f4079;--msg-red:#d64430;
+  --msg-butter:#f5c65a;--msg-periwinkle:#9aabe8;
+}
+html{background:#fff !important;scroll-behavior:smooth;}
+body{font-family:'Inter',sans-serif;color:var(--navy-deep);background:#fff !important;overflow-x:hidden;}
+
+nav{background:rgba(26,62,168,.97);display:flex;align-items:center;justify-content:space-between;padding:0 22px;height:62px;border-bottom:2px solid var(--gold);gap:12px;position:sticky;top:0;z-index:100;}
+.nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none;flex:1;min-width:0;}
+.nav-logo-mark{width:38px;height:38px;border-radius:50%;background:var(--gold-pale);overflow:hidden;flex-shrink:0;}
+.nav-logo-mark img{width:100%;height:100%;object-fit:cover;}
+.nav-logo-text span:first-child{font-family:'Playfair Display',serif;font-size:14.5px;font-weight:700;color:#fff;display:block;white-space:nowrap;}
+.nav-logo-text span:last-child{font-size:10px;color:rgba(255,255,255,.5);}
+.nav-back{font-size:12px;font-weight:600;color:rgba(255,255,255,.7);text-decoration:none;padding:7px 13px;border:1px solid rgba(255,255,255,.25);border-radius:5px;white-space:nowrap;flex-shrink:0;}
+.nav-back:hover{color:#fff;border-color:rgba(255,255,255,.6);}
+
+.member-bar{background:var(--gold-pale);border-bottom:1px solid var(--gold);padding:8px 24px;text-align:center;}
+.member-bar span{font-size:11.5px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:var(--navy);}
+
+/* HERO — checkerboard nod to their menu */
+.hero{background:var(--msg-cream);padding:0;position:relative;overflow:hidden;border-bottom:4px solid var(--msg-navy);}
+.checker{height:26px;background:
+  repeating-linear-gradient(90deg,var(--msg-butter) 0 26px,transparent 26px 52px),
+  repeating-linear-gradient(180deg,var(--msg-butter) 0 26px,transparent 26px 52px);
+  background-color:var(--msg-cream);opacity:.75;}
+.hero-inner{padding:30px 22px 34px;text-align:center;max-width:660px;margin:0 auto;}
+.hero-name1{font-family:'Bree Serif',serif;font-size:clamp(28px,6vw,46px);color:#1a1a1a;line-height:1;letter-spacing:1px;}
+.hero-name2{font-family:'Bree Serif',serif;font-size:clamp(38px,9vw,66px);color:var(--msg-navy);line-height:1;letter-spacing:2px;margin-top:-2px;}
+.hero-hours{display:inline-block;background:var(--msg-navy);color:#fff;border-radius:30px;padding:9px 24px;margin-top:16px;}
+.hero-hours b{display:block;font-size:15px;font-weight:800;letter-spacing:.5px;}
+.hero-hours span{font-size:11.5px;opacity:.75;letter-spacing:1.5px;text-transform:uppercase;}
+.hero-chips{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-top:16px;}
+.chip{background:#fff;border:1.5px solid var(--msg-navy);border-radius:20px;padding:6px 14px;font-size:12px;font-weight:700;color:var(--msg-navy);}
+
+/* JUMP NAV */
+.jump-nav{background:var(--slate);border-bottom:1px solid var(--border);padding:11px 14px;display:flex;gap:7px;overflow-x:auto;scrollbar-width:none;position:sticky;top:62px;z-index:90;}
+.jump-nav::-webkit-scrollbar{display:none;}
+.jump-link{padding:7px 14px;background:#fff;border:1px solid var(--border);border-radius:20px;font-size:12.5px;font-weight:600;color:var(--msg-navy);text-decoration:none;white-space:nowrap;flex-shrink:0;}
+.jump-link:hover{background:var(--msg-navy);color:#fff;border-color:var(--msg-navy);}
+
+main{max-width:900px;margin:0 auto;padding:34px 18px 80px;background:#fff;}
+.menu-section{margin-bottom:40px;scroll-margin-top:128px;}
+.menu-head{display:flex;align-items:baseline;gap:12px;margin-bottom:14px;padding-bottom:9px;border-bottom:3px solid var(--msg-navy);}
+.menu-head h2{font-family:'Bree Serif',serif;font-size:25px;color:var(--msg-navy);letter-spacing:.5px;}
+.menu-note{font-size:12px;color:var(--gray);font-style:italic;margin-left:auto;}
+
+.menu-item{display:flex;align-items:baseline;gap:11px;padding:11px 4px;flex-wrap:wrap;border-bottom:1px dotted var(--border);}
+.menu-item:last-child{border-bottom:none;}
+.mi-name{font-size:15px;font-weight:600;color:var(--dark-gray);flex:1 1 auto;min-width:0;overflow-wrap:anywhere;}
+.mi-dots{flex:1 1 20px;border-bottom:1px dotted #c8d2e8;min-width:14px;transform:translateY(-4px);}
+.mi-price{font-size:15px;font-weight:800;color:var(--msg-navy);flex-shrink:0;font-variant-numeric:tabular-nums;}
+.mi-tiers{display:flex;gap:14px;flex-shrink:0;}
+.mi-tier{text-align:center;}
+.mi-tier .t-qty{font-size:10px;color:var(--gray);font-weight:700;display:block;text-transform:uppercase;letter-spacing:.5px;}
+.mi-tier .t-price{font-size:14.5px;font-weight:800;color:var(--msg-navy);font-variant-numeric:tabular-nums;}
+
+/* DAILY SPECIALS */
+.specials{background:var(--msg-red);border-radius:14px;padding:26px 24px;}
+.specials-title{font-family:'Bree Serif',serif;font-size:22px;color:var(--msg-butter);text-align:center;letter-spacing:1px;margin-bottom:4px;}
+.specials-sub{text-align:center;font-size:12px;color:rgba(255,255,255,.7);margin-bottom:18px;}
+.day{padding:14px 0;border-bottom:1px solid rgba(255,255,255,.18);}
+.day:last-child{border-bottom:none;}
+.day-name{font-family:'Bree Serif',serif;font-size:19px;color:var(--msg-butter);letter-spacing:1px;margin-bottom:3px;}
+.day-row{display:flex;align-items:baseline;gap:12px;}
+.day-desc{font-size:13px;color:#fff;line-height:1.5;flex:1;}
+.day-price{font-size:17px;font-weight:800;color:#fff;flex-shrink:0;font-variant-numeric:tabular-nums;}
+
+/* COMBO / KIDS PANELS */
+.panel{border-radius:14px;padding:24px;margin-top:16px;}
+.panel.navy{background:var(--msg-navy);}
+.panel.peri{background:var(--msg-periwinkle);}
+.panel-title{font-family:'Bree Serif',serif;font-size:21px;letter-spacing:1px;margin-bottom:3px;}
+.panel.navy .panel-title{color:var(--msg-butter);}
+.panel.peri .panel-title{color:var(--msg-navy);}
+.panel-sub{font-size:11.5px;line-height:1.55;margin-bottom:15px;text-transform:uppercase;letter-spacing:.6px;}
+.panel.navy .panel-sub{color:rgba(255,255,255,.65);}
+.panel.peri .panel-sub{color:rgba(47,64,121,.75);}
+.p-item{display:flex;align-items:baseline;gap:11px;padding:8px 0;flex-wrap:wrap;border-bottom:1px dotted rgba(255,255,255,.22);}
+.panel.peri .p-item{border-bottom-color:rgba(47,64,121,.22);}
+.p-item:last-child{border-bottom:none;}
+.p-name{font-size:14.5px;font-weight:700;flex:1 1 auto;min-width:0;overflow-wrap:anywhere;}
+.panel.navy .p-name{color:#fff;}
+.panel.peri .p-name{color:var(--msg-navy);}
+.p-name small{display:block;font-size:11px;font-weight:500;opacity:.7;margin-top:1px;}
+.p-dots{flex:1 1 20px;border-bottom:1px dotted rgba(255,255,255,.3);min-width:14px;transform:translateY(-4px);}
+.panel.peri .p-dots{border-bottom-color:rgba(47,64,121,.3);}
+.p-price{font-size:15.5px;font-weight:800;flex-shrink:0;font-variant-numeric:tabular-nums;}
+.panel.navy .p-price{color:var(--msg-butter);}
+.panel.peri .p-price{color:var(--msg-navy);}
+
+/* COMING SOON */
+.soon{background:var(--slate);border:2px dashed var(--border);border-radius:12px;padding:30px 24px;text-align:center;margin-top:14px;}
+.soon-icon{font-size:34px;margin-bottom:8px;}
+.soon h3{font-family:'Bree Serif',serif;font-size:19px;color:var(--msg-navy);margin-bottom:6px;}
+.soon p{font-size:13px;color:var(--gray);line-height:1.6;}
+
+.footnote{margin-top:18px;padding:13px 18px;background:var(--msg-cream);border-left:4px solid var(--msg-red);border-radius:8px;font-size:13px;font-weight:700;color:var(--msg-navy);text-align:center;}
+
+.contact-card{background:var(--msg-navy);border-radius:14px;padding:28px;text-align:center;margin-top:40px;}
+.contact-card h3{font-family:'Bree Serif',serif;font-size:22px;color:var(--msg-butter);margin-bottom:6px;letter-spacing:.5px;}
+.contact-card p{font-size:13.5px;color:rgba(255,255,255,.7);line-height:1.7;margin-bottom:18px;}
+.c-btn{display:inline-flex;align-items:center;gap:7px;padding:12px 22px;border-radius:7px;font-size:14px;font-weight:700;text-decoration:none;background:var(--msg-butter);color:var(--msg-navy);}
+
+.disclaimer{margin-top:22px;padding:14px 18px;background:var(--slate);border-radius:8px;font-size:12px;color:var(--gray);line-height:1.6;text-align:center;}
+.page-footer{background:var(--navy-dark);padding:24px;text-align:center;}
+.page-footer p{font-size:13px;color:rgba(255,255,255,.4);}
+.page-footer a{color:var(--gold-light);text-decoration:none;}
+
+@media(max-width:640px){
+  nav{padding:0 13px;}
+  .jump-nav{top:62px;}
+  main{padding:24px 13px 60px;}
+  .menu-head h2{font-size:21px;}
+  .menu-note{display:none;}
+  .specials{padding:20px 16px;}
+  .panel{padding:18px 16px;}
+  .day-row{flex-direction:column;gap:3px;}
+  .day-price{font-size:16px;}
+}
+
+  /* --- overflow containment --- */
+  .menu-section,.panel,.specials{max-width:100%;overflow-wrap:break-word;}
+  .mi-price,.p-price{margin-left:auto;}
+  @media(max-width:560px){
+    .mi-dots,.p-dots{display:none;}
+    .mi-name small,.p-name small{max-width:100%;}
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">
+    <span class="nav-logo-mark"><img src="flyers/chamber-logo.PNG" alt="" onerror="this.onerror=null;this.style.display='none';"/></span>
+    <span class="nav-logo-text"><span>Hobart Chamber of Commerce</span><span>Member Menus</span></span>
+  </a>
+  <a href="index.html#directory" class="nav-back">← Directory</a>
+</nav>
+
+<div class="member-bar"><span>⭐ Hobart Chamber Member</span></div>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="checker"></div>
+  <div class="hero-inner">
+    <div class="hero-name1">MAIN STREET</div>
+    <div class="hero-name2">GRILL</div>
+    <div class="hero-hours">
+      <b>7:00 AM – 11:00 AM</b>
+      <span>Breakfast Hours</span>
+    </div>
+    <div class="hero-chips">
+      <span class="chip">🍳 Daily Specials</span>
+      <span class="chip">🥞 Pancakes</span>
+      <span class="chip">🧀 Omelettes</span>
+      <span class="chip">👦 Kids Menu</span>
+    </div>
+  </div>
+  <div class="checker"></div>
+</div>
+
+<!-- JUMP NAV -->
+<div class="jump-nav">
+  <a href="#specials" class="jump-link">Daily Specials</a>
+  <a href="#combos" class="jump-link">Breakfast Combos</a>
+  <a href="#omelettes" class="jump-link">Omelettes</a>
+  <a href="#griddle" class="jump-link">Pancakes &amp; More</a>
+  <a href="#alacarte" class="jump-link">A La Carte</a>
+  <a href="#kids" class="jump-link">Kids Menu</a>
+  <a href="#drinks" class="jump-link">Drinks</a>
+  <a href="#later" class="jump-link">Lunch &amp; Dinner</a>
+</div>
+
+<main>
+
+  <!-- DAILY SPECIALS -->
+  <section class="menu-section" id="specials">
+    <div class="menu-head"><h2>Daily Specials</h2><span class="menu-note">Monday through Saturday</span></div>
+    <div class="specials">
+      <div class="specials-title">DAILY SPECIALS</div>
+      <div class="specials-sub">A different plate every day of the week</div>
+
+      <div class="day">
+        <div class="day-name">MONDAY</div>
+        <div class="day-row">
+          <span class="day-desc">1 egg, 2 bacon, 1 sausage, hashbrowns, and toast</span>
+          <span class="day-price">$6.99</span>
+        </div>
+      </div>
+      <div class="day">
+        <div class="day-name">TUESDAY</div>
+        <div class="day-row">
+          <span class="day-desc">1 pancake, 1 egg, and hashbrowns with bacon or sausage and toast</span>
+          <span class="day-price">$6.99</span>
+        </div>
+      </div>
+      <div class="day">
+        <div class="day-name">WEDNESDAY</div>
+        <div class="day-row">
+          <span class="day-desc">Biscuits and gravy with 2 eggs and bacon or sausage</span>
+          <span class="day-price">$7.99</span>
+        </div>
+      </div>
+      <div class="day">
+        <div class="day-name">THURSDAY</div>
+        <div class="day-row">
+          <span class="day-desc">½ order of french toast with 2 eggs, hashbrowns, and bacon or sausage</span>
+          <span class="day-price">$7.99</span>
+        </div>
+      </div>
+      <div class="day">
+        <div class="day-name">FRIDAY</div>
+        <div class="day-row">
+          <span class="day-desc">2 eggs with hashbrowns, bacon, sausage, and gravy over open faced biscuits</span>
+          <span class="day-price">$8.99</span>
+        </div>
+      </div>
+      <div class="day">
+        <div class="day-name">SATURDAY</div>
+        <div class="day-row">
+          <span class="day-desc">Oatmeal or grits with sausage or bacon or a fruit bowl and toast</span>
+          <span class="day-price">$7.99</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BREAKFAST COMBOS -->
+  <section class="menu-section" id="combos">
+    <div class="menu-head"><h2>Breakfast Combos</h2></div>
+    <div class="panel navy">
+      <div class="panel-title">BREAKFAST COMBOS</div>
+      <div class="panel-sub">Served with hashbrowns and toast or biscuits and gravy</div>
+      <div class="p-item"><span class="p-name">1 Egg</span><span class="p-dots"></span><span class="p-price">$5.99</span></div>
+      <div class="p-item"><span class="p-name">1 Egg <small>add bacon or sausage</small></span><span class="p-dots"></span><span class="p-price">$7.99</span></div>
+      <div class="p-item"><span class="p-name">2 Eggs</span><span class="p-dots"></span><span class="p-price">$6.99</span></div>
+      <div class="p-item"><span class="p-name">2 Eggs <small>add bacon or sausage</small></span><span class="p-dots"></span><span class="p-price">$8.99</span></div>
+    </div>
+  </section>
+
+  <!-- OMELETTES -->
+  <section class="menu-section" id="omelettes">
+    <div class="menu-head"><h2>Omelettes</h2><span class="menu-note">With hashbrowns &amp; toast or biscuits &amp; gravy</span></div>
+    <div class="menu-item"><span class="mi-name">Cheese Omelette</span><span class="mi-dots"></span><span class="mi-price">$7.99</span></div>
+    <div class="menu-item"><span class="mi-name">Veggie Omelette</span><span class="mi-dots"></span><span class="mi-price">$7.99</span></div>
+    <div class="menu-item"><span class="mi-name">Omelette with Meat</span><span class="mi-dots"></span><span class="mi-price">$9.99</span></div>
+    <div class="menu-item"><span class="mi-name">Western Omelette</span><span class="mi-dots"></span><span class="mi-price">$10.99</span></div>
+    <div class="menu-item"><span class="mi-name">Spanish Omelette</span><span class="mi-dots"></span><span class="mi-price">$10.99</span></div>
+    <div class="menu-item"><span class="mi-name">Meat Lovers Omelette</span><span class="mi-dots"></span><span class="mi-price">$11.99</span></div>
+    <div class="menu-item"><span class="mi-name">Ultimate Omelette</span><span class="mi-dots"></span><span class="mi-price">$11.99</span></div>
+  </section>
+
+  <!-- GRIDDLE -->
+  <section class="menu-section" id="griddle">
+    <div class="menu-head"><h2>Pancakes &amp; More</h2></div>
+    <div class="menu-item"><span class="mi-name">Pancake</span><span class="mi-dots"></span><span class="mi-price">$3.99</span></div>
+    <div class="menu-item"><span class="mi-name">Shortstack</span><span class="mi-dots"></span><span class="mi-price">$5.99</span></div>
+    <div class="menu-item"><span class="mi-name">Breakfast Burrito</span><span class="mi-dots"></span><span class="mi-price">$5.50</span></div>
+  </section>
+
+  <!-- A LA CARTE -->
+  <section class="menu-section" id="alacarte">
+    <div class="menu-head"><h2>A La Carte</h2></div>
+    <div class="menu-item"><span class="mi-name">Hashbrowns</span><span class="mi-dots"></span><span class="mi-price">$2.50</span></div>
+    <div class="menu-item"><span class="mi-name">Biscuit</span><span class="mi-dots"></span><span class="mi-price">$1.50</span></div>
+    <div class="menu-item"><span class="mi-name">Toast</span><span class="mi-dots"></span><span class="mi-price">$1.50</span></div>
+    <div class="menu-item"><span class="mi-name">Ham</span><span class="mi-dots"></span><span class="mi-price">$3.50</span></div>
+    <div class="menu-item"><span class="mi-name">Bacon</span><span class="mi-dots"></span><span class="mi-price">$2.99</span></div>
+    <div class="menu-item"><span class="mi-name">Sausage</span><span class="mi-dots"></span><span class="mi-price">$2.99</span></div>
+    <div class="menu-item"><span class="mi-name">Cinnamon Toast</span><span class="mi-dots"></span><span class="mi-price">$1.99</span></div>
+  </section>
+
+  <!-- KIDS -->
+  <section class="menu-section" id="kids">
+    <div class="menu-head"><h2>Kids Menu</h2></div>
+    <div class="panel peri">
+      <div class="panel-title">KIDS MENU</div>
+      <div class="panel-sub">For our younger guests</div>
+      <div class="p-item"><span class="p-name">Small Pancake or French Toast</span><span class="p-dots"></span><span class="p-price">$3.99</span></div>
+      <div class="p-item"><span class="p-name">Small Pancake or French Toast <small>add bacon or sausage</small></span><span class="p-dots"></span><span class="p-price">$5.99</span></div>
+      <div class="p-item"><span class="p-name">1 Egg <small>with hashbrowns, toast, and bacon or sausage</small></span><span class="p-dots"></span><span class="p-price">$5.99</span></div>
+    </div>
+  </section>
+
+  <!-- DRINKS -->
+  <section class="menu-section" id="drinks">
+    <div class="menu-head"><h2>Drinks</h2></div>
+    <div class="menu-item"><span class="mi-name">Milk</span><span class="mi-dots"></span><span class="mi-price">$2.29</span></div>
+    <div class="menu-item"><span class="mi-name">Orange Juice</span><span class="mi-dots"></span><span class="mi-price">$2.29</span></div>
+    <div class="menu-item"><span class="mi-name">Coffee</span><span class="mi-dots"></span><span class="mi-price">$1.89</span></div>
+    <div class="menu-item">
+      <span class="mi-name">Soft Drinks / Tea</span><span class="mi-dots"></span>
+      <div class="mi-tiers">
+        <div class="mi-tier"><span class="t-qty">Sm</span><span class="t-price">$1.89</span></div>
+        <div class="mi-tier"><span class="t-qty">Med</span><span class="t-price">$2.29</span></div>
+        <div class="mi-tier"><span class="t-qty">Lg</span><span class="t-price">$2.59</span></div>
+      </div>
+    </div>
+    <div class="footnote">No substitutions. We will serve current menu items only.</div>
+  </section>
+
+  <!-- LUNCH & DINNER -->
+  <section class="menu-section" id="later">
+    <div class="menu-head"><h2>Lunch &amp; Dinner</h2></div>
+    <div class="soon">
+      <div class="soon-icon">🍽️</div>
+      <h3>Coming Soon</h3>
+      <p>Lunch and dinner menus will be published here as soon as they're available.<br>Check back or follow the Chamber for updates.</p>
+    </div>
+  </section>
+
+  <div class="contact-card">
+    <h3>Main Street Grill</h3>
+    <p>Downtown Hobart, Oklahoma<br>Breakfast served 7:00 AM – 11:00 AM</p>
+    <a href="index.html#directory" class="c-btn">🏛️ Chamber Member Directory</a>
+  </div>
+
+  <div class="disclaimer">
+    Menu and prices provided by Main Street Grill and published as a service of the Hobart Chamber of Commerce. Prices subject to change — please call to confirm. Last updated September 2026.
+  </div>
+
+</main>
+
+<div class="page-footer">
+  <p>Hobart Chamber of Commerce · 106 W 4th St · Hobart, OK 73651 · <a href="tel:5806820887">(580) 682-0887</a></p>
+  <p style="margin-top:6px;"><a href="index.html#directory">← Back to Member Directory</a></p>
+</div>
+
+</body>
+</html>

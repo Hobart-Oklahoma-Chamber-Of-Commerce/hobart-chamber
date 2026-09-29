@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="color-scheme" content="light only"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Restaurante Nuevo León — Menu | Hobart, OK</title>
+<meta name="description" content="Full menu for Restaurante Nuevo León in Hobart, Oklahoma. Authentic Mexican food, American plates, burritos, tacos, enchiladas, and more."/>
+<meta property="og:title" content="Restaurante Nuevo León — Menu | Hobart, OK"/>
+<meta property="og:description" content="Authentic Mexican food and American plates in Hobart, Oklahoma. Dinners, tacos, burritos, enchiladas, fajitas, and more."/>
+<meta property="og:type" content="restaurant.menu"/>
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"Restaurant",
+  "name":"Restaurante Nuevo León",
+  "description":"Authentic Mexican and American food in Hobart, Oklahoma.",
+  "address":{"@type":"PostalAddress","addressLocality":"Hobart","addressRegion":"OK","postalCode":"73651","addressCountry":"US"},
+  "servesCuisine":["Mexican","American","Tex-Mex"],
+  "priceRange":"$",
+  "hasMenu":"https://hobartchamber.org/menu-nuevo-leon.html"
+}
+</script>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,800;0,900;1,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  color-scheme:light;
+  --navy:#1a3ea8;--gold:#c49a3e;--gold-pale:#f6edd6;--white:#fff;
+  --slate:#f3f6fc;--gray:#6f7d99;--dark-gray:#2c3a58;--border:#dbe3f4;
+  --mex-red:#9b1c1c;--mex-red2:#c0392b;--mex-green:#1a5c2a;--mex-green2:#22843c;
+  --mex-cream:#fdf8f0;--mex-gold:#d4a017;
+}
+html{background:#fff !important;scroll-behavior:smooth;}
+body{font-family:'Inter',sans-serif;color:var(--dark-gray);background:#fff !important;overflow-x:hidden;}
+
+nav{background:rgba(26,62,168,.97);display:flex;align-items:center;justify-content:space-between;padding:0 22px;height:62px;border-bottom:2px solid var(--gold);gap:12px;position:sticky;top:0;z-index:100;}
+.nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none;flex:1;min-width:0;overflow:hidden;}
+.nav-logo-mark{width:38px;height:38px;border-radius:50%;background:var(--gold-pale);overflow:hidden;flex-shrink:0;}
+.nav-logo-mark img{width:100%;height:100%;object-fit:cover;}
+.nav-logo-text{min-width:0;overflow:hidden;}
+.nav-logo-text span:first-child{font-family:'Playfair Display',serif;font-size:14px;font-weight:700;color:#fff;display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.nav-logo-text span:last-child{font-size:10px;color:rgba(255,255,255,.5);}
+.nav-back{font-size:12px;font-weight:600;color:rgba(255,255,255,.7);text-decoration:none;padding:7px 12px;border:1px solid rgba(255,255,255,.25);border-radius:5px;white-space:nowrap;flex-shrink:0;}
+
+.hero{background:linear-gradient(150deg,#3a0000 0%,#7a1010 50%,#1a5c2a 100%);padding:44px 24px 36px;text-align:center;position:relative;overflow:hidden;}
+.hero::before{content:'🌮';position:absolute;font-size:240px;opacity:.05;top:50%;left:50%;transform:translate(-50%,-52%);}
+.hero-inner{position:relative;z-index:2;max-width:640px;margin:0 auto;}
+.hero-eyebrow{font-size:11px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,.55);margin-bottom:8px;}
+.hero-name{font-family:'Playfair Display',serif;font-size:clamp(28px,6vw,52px);font-weight:900;color:#fff;line-height:1.05;margin-bottom:4px;}
+.hero-name em{font-style:italic;color:var(--mex-gold);}
+.hero-tag{font-size:14px;color:rgba(255,255,255,.7);margin-bottom:22px;font-style:italic;}
+.hero-chips{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-bottom:22px;}
+.chip{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);border-radius:20px;padding:6px 14px;font-size:12px;font-weight:600;color:rgba(255,255,255,.9);}
+
+.flag-bar{display:flex;height:8px;}
+.flag-bar span{flex:1;}
+.flag-green{background:#006847;}
+.flag-white{background:#fff;}
+.flag-red{background:#ce1126;}
+
+.jump-nav{background:var(--slate);border-bottom:1px solid var(--border);padding:11px 14px;display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;position:sticky;top:62px;z-index:90;}
+.jump-nav::-webkit-scrollbar{display:none;}
+.jump-link{padding:6px 13px;background:#fff;border:1px solid var(--border);border-radius:20px;font-size:12px;font-weight:600;color:var(--mex-red);text-decoration:none;white-space:nowrap;flex-shrink:0;transition:all .15s;}
+.jump-link:hover{background:var(--mex-red);color:#fff;border-color:var(--mex-red);}
+
+main{max-width:960px;margin:0 auto;padding:32px 18px 80px;}
+
+.menu-section{margin-bottom:36px;scroll-margin-top:120px;}
+.menu-head{display:flex;align-items:baseline;gap:12px;margin-bottom:14px;padding-bottom:8px;border-bottom:2.5px solid var(--mex-red);}
+.menu-head h2{font-family:'Playfair Display',serif;font-size:22px;font-weight:800;color:var(--mex-red);letter-spacing:.2px;}
+.menu-note{font-size:12px;color:var(--gray);font-style:italic;margin-bottom:12px;line-height:1.6;}
+
+.menu-grid{display:grid;grid-template-columns:1fr 1fr;gap:0;}
+.menu-item{display:flex;justify-content:space-between;align-items:flex-start;gap:10px;padding:10px 0;border-bottom:1px solid #f0f0f0;}
+.menu-item:last-child{border-bottom:none;}
+.menu-item-left{flex:1;min-width:0;}
+.item-num{font-size:11px;font-weight:700;color:var(--mex-red);margin-right:4px;}
+.item-name{font-size:13.5px;font-weight:700;color:var(--dark-gray);line-height:1.3;}
+.item-desc{font-size:11.5px;color:var(--gray);line-height:1.5;margin-top:2px;}
+.item-desc em{color:var(--mex-green2);font-style:normal;font-weight:600;}
+.item-price{font-size:13.5px;font-weight:800;color:var(--mex-green);white-space:nowrap;flex-shrink:0;}
+
+/* single column sections */
+.menu-list{display:flex;flex-direction:column;}
+.menu-list .menu-item{display:flex;justify-content:space-between;align-items:flex-start;padding:9px 0;border-bottom:1px solid #f0f0f0;}
+
+/* 3-col for small items */
+.menu-3col{display:grid;grid-template-columns:1fr 1fr 1fr;gap:0;}
+
+/* chico's plate numbered list */
+.chicos-grid{display:grid;grid-template-columns:1fr 1fr;gap:4px 16px;}
+.chicos-item{display:flex;align-items:baseline;gap:6px;padding:6px 0;border-bottom:1px solid #f5f5f5;font-size:13px;}
+.chicos-item .cn{font-weight:800;color:var(--mex-red);width:20px;flex-shrink:0;}
+.chicos-item .ct{flex:1;color:var(--dark-gray);}
+.chicos-item .cp{font-weight:700;color:var(--mex-green);}
+
+/* specials highlighted */
+.specials-list{display:flex;flex-direction:column;gap:2px;}
+.special-item{display:flex;justify-content:space-between;align-items:center;padding:10px 14px;border-radius:6px;background:#fef5f5;border-left:4px solid var(--mex-red);}
+.special-name{font-size:13.5px;font-weight:800;color:var(--mex-red);text-transform:uppercase;letter-spacing:.5px;}
+.special-desc{font-size:11.5px;color:var(--dark-gray);margin-top:1px;}
+.special-price{font-size:14px;font-weight:800;color:var(--mex-red);white-space:nowrap;}
+
+/* subsection headers within a section */
+.sub-head{font-size:12px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--mex-green);margin:16px 0 8px;padding-bottom:4px;border-bottom:1px solid var(--mex-green);}
+
+.notice{background:var(--mex-cream);border:1px solid #e0c89a;border-radius:8px;padding:12px 16px;font-size:12px;color:var(--gray);line-height:1.6;margin-top:14px;font-style:italic;}
+
+.page-footer{background:#1a0a00;padding:24px;text-align:center;}
+.page-footer p{font-size:12.5px;color:rgba(255,255,255,.4);}
+.page-footer a{color:var(--mex-gold);text-decoration:none;}
+
+@media(max-width:640px){
+  nav{padding:0 13px;}
+  .menu-grid,.menu-3col{grid-template-columns:1fr;}
+  .chicos-grid{grid-template-columns:1fr;}
+  main{padding:24px 14px 60px;}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">
+    <span class="nav-logo-mark"><img src="flyers/chamber-logo.PNG" alt="" onerror="this.onerror=null;this.style.display='none';"/></span>
+    <span class="nav-logo-text"><span>Hobart Chamber of Commerce</span><span>Member Restaurant</span></span>
+  </a>
+  <a href="index.html" class="nav-back">← Back</a>
+</nav>
+
+<div class="flag-bar"><span class="flag-green"></span><span class="flag-white"></span><span class="flag-red"></span></div>
+
+<div class="hero">
+  <div class="hero-inner">
+    <div class="hero-eyebrow">Restaurante · Hobart, Oklahoma</div>
+    <div class="hero-name">Nuevo <em>León</em></div>
+    <div class="hero-tag">Authentic Mexican Food &amp; American Plates</div>
+    <div class="hero-chips">
+      <span class="chip">🌮 Mexican Dinners</span>
+      <span class="chip">🍔 American Food</span>
+      <span class="chip">🌯 Burritos &amp; Tacos</span>
+      <span class="chip">🍽️ Family Combos</span>
+    </div>
+  </div>
+</div>
+
+<div class="flag-bar"><span class="flag-green"></span><span class="flag-white"></span><span class="flag-red"></span></div>
+
+<nav class="jump-nav" aria-label="Menu sections">
+  <a href="#specials" class="jump-link">Specials</a>
+  <a href="#alacarte" class="jump-link">À La Carte</a>
+  <a href="#sides" class="jump-link">Sides</a>
+  <a href="#beverages" class="jump-link">Beverages</a>
+  <a href="#dessert" class="jump-link">Dessert</a>
+  <a href="#dinners" class="jump-link">Dinners</a>
+  <a href="#burritos" class="jump-link">Burritos</a>
+  <a href="#tacos" class="jump-link">Tacos</a>
+  <a href="#enchiladas" class="jump-link">Enchiladas</a>
+  <a href="#tortas" class="jump-link">Tortas</a>
+  <a href="#tostadas" class="jump-link">Tostadas</a>
+  <a href="#salads" class="jump-link">Salads</a>
+  <a href="#chicos" class="jump-link">Chico's Plate</a>
+  <a href="#appetizers" class="jump-link">Appetizers</a>
+  <a href="#elpoco" class="jump-link">El Poco</a>
+  <a href="#plates" class="jump-link">NL Plates</a>
+  <a href="#deluxe" class="jump-link">Deluxe Plates</a>
+  <a href="#american" class="jump-link">American</a>
+</nav>
+
+<main>
+
+<!-- SPECIALS -->
+<div class="menu-section" id="specials">
+  <div class="menu-head"><h2>Specials</h2></div>
+  <div class="specials-list">
+    <div class="special-item"><div><div class="special-name">Monterrey</div><div class="special-desc">1 Tostada with Guacamole · 1 Enchilada · 1 Taco</div></div><div class="special-price">$7.99</div></div>
+    <div class="special-item"><div><div class="special-name">Villaldama</div><div class="special-desc">1 Guacamole Tostada · 1 Chili Relleno · 1 Bean Tostada</div></div><div class="special-price">$7.99</div></div>
+    <div class="special-item"><div><div class="special-name">Sabinas</div><div class="special-desc">1 Burrito · 1 Enchilada · 1 Taco</div></div><div class="special-price">$7.99</div></div>
+    <div class="special-item"><div><div class="special-name">Linares</div><div class="special-desc">1 Chile Relleno · 1 Tamale · 1 Enchilada · 1 Guacamole Tostada</div></div><div class="special-price">$8.99</div></div>
+  </div>
+</div>
+
+<!-- À LA CARTE -->
+<div class="menu-section" id="alacarte">
+  <div class="menu-head"><h2>À La Carte</h2></div>
+  <div class="menu-grid">
+    <div class="menu-item"><div class="menu-item-left"><div class="item-name">Enchilada</div></div><div class="item-price">$1.99</div></div>
+    <div class="menu-item"><div class="menu-item-left"><div class="item-name">Chile Relleno</div></div><div class="item-price">$2.99</div></div>
+    <div class="menu-item"><div class="menu-item-left"><div class="item-name">Tamale</div></div><div class="item-price">$1.99</div></div>
+    <div class="menu-item"><div class="menu-item-left"><div class="item-name">Baked Potato</div></div><div class="item-price">$3.99</div></div>
+    <div class="menu-item"><div class="menu-item-left"><div class="item-name">French Fries</div></div><div class="item-price">$2.99</div></div>
+    <div class="menu-item"><div class="menu-item-left"><div class="item-name">Rice or Beans</div></div><div class="item-price">$1.99</div></div>
+    <div class="menu-item"><div class="menu-item-left"><div class="item-name">Rice &amp; Beans</div></div><div class="item-price">$2.99</div></div>
+  </div>
+</div>
+
+<!-- SIDE ORDERS -->
+<div class="menu-section" id="sides">
+  <div class="menu-head"><h2>Side Orders</h2></div>
+  <div class="menu-grid">
+    <div class="menu-item"><div class="menu-item-left"><div class="item-name">Sour Cream Dip</div></div><div class="item-price">$0.99</div></div>
+    <div class="menu-item"><div class="menu-item-left"><div class="item-name">Grated Cheese</div></div><div class="item-price">$1.99</div></div>
+    <div class="menu-item"><div class="menu-item-left"><div class="item-name">Jalapeños</div></div><div class="item-price">$0.99</div></div>
+    <div class="menu-item"><div class="menu-item-left"><div class="item-name">Pico de Gallo</div></div><div class="item-price">$0.99</div></div>
+    <div class="menu-item"><div class="menu-item-left"><div class="item-name">Salsa Verde</div></div><div class="item-price">$0.99</div></div>
+    <div class="menu-item"><div class="menu-item-left"><div class="item-name">Small Guacamole</div></div><div class="item-price">$1.99</div></div>
+    <div class="menu-item"><div class="menu-item-left"><div class="item-name">Large Guacamole</div></div><div class="item-price">$2.99</div></div>
+    <div class="menu-item"><div class="menu-item-left"><div class="item-name">Tortillas</div></div><div class="item-price">$1.99</div></div>
+    <div class="menu-item"><div class="menu-item-left"><div class="item-name">Mexican Sliced Potatoes</div></div><div class="item-price">$2.99</div></div>
+    <div class="menu-item"><div class="menu-item-left"><div class="item-name">Mexican Guacamole</div></div><div class="item-price">$4.99</div></div>
+  </div>
+</div>
+
+<!-- BEVERAGES -->
+<div class="menu-section" id="beverages">
+  <div class="menu-head"><h2>Beverages <span style="font-size:13px;font-weight:500;color:var(--gray);">· No Refills</span></h2></div>
+  <div class="menu-grid">
+    <div class="menu-item"><div class="menu-item-left"><div class="item-name">Coffee</div></div><div class="item-price">$1.99</div></div>
+    <div class="menu-item"><div class="menu-item-left"><div class="item-name">Iced Tea</div></div><div class="item-price">$2.99</div></div>
+    <div class="menu-item"><div class="menu-item-left"><div class="item-name">Sweet Tea</div></div><div class="item-price">$2.99</div></div>
+    <div class="menu-item"><div class="menu-item-left"><div class="item-name">Juice</div></div><div class="item-price">$2.99</div></div>
+    <div class="menu-item"><div class="menu-item-left"><div class="item-name">Hot Chocolate</div></div><div class="item-price">$2.99</div></div>
+    <div class="menu-item"><div class="menu-item-left"><div class="item-name">Milk</div></div><div class="item-price">$2.99</div></div>
+    <div class="menu-item"><div class="menu-item-left"><div class="item-name">Soft Drinks<div class="item-desc">Pepsi · Diet Pepsi · Dr Pepper · Sierra Mist · Mountain Dew · Root Beer</div></div></div><div class="item-price">$2.99</div></div>
+    <div class="menu-item"><div class="menu-item-left"><div class="item-name">Horchata</div></div><div class="item-price">$2.99</div></div>
+    <div class="menu-item"><div class="menu-item-left"><div class="item-name">Lemonade</div></div><div class="item-price">$2.99</div></div>
+    <div class="menu-item"><div class="menu-item-left"><div class="item-name">Mango</div></div><div class="item-price">$2.99</div></div>
+    <div class="menu-item"><div class="menu-item-left"><div class="item-name">Melon</div></div><div class="item-price">$2.99</div></div>
+  </div>
+</div>
+
+<!-- DESSERT -->
+<div class="menu-section" id="dessert">
+  <div class="menu-head"><h2>Dessert</h2></div>
+  <div class="menu-grid">
+    <div class="menu-item"><div class="menu-item-left"><div class="item-name">Sopaipilla</div></div><div class="item-price">$1.99</div></div>
+    <div class="menu-item"><div class="menu-item-left"><div class="item-name">Sopaipilla Supreme</div></div><div class="item-price">$4.99</div></div>
+    <div class="menu-item"><div class="menu-item-left"><div class="item-name">Xangos</div></div><div class="item-price">$5.99</div></div>
+    <div class="menu-item"><div class="menu-item-left"><div class="item-name">Ice Cream — Small</div></div><div class="item-price">$4.99</div></div>
+    <div class="menu-item"><div class="menu-item-left"><div class="item-name">Ice Cream — Large</div></div><div class="item-price">$5.99</div></div>
+  </div>
+</div>
+
+<!-- NUEVO LEON DINNERS -->
+<div class="menu-section" id="dinners">
+  <div class="menu-head"><h2>Nuevo León Dinners</h2></div>
+  <div class="menu-grid">
+    <div class="menu-item"><div class="menu-item-left"><div class="item-name"><span class="item-num">#21</span>Fajitas for One</div><div class="item-desc">Beef, Chicken or Combination. Special marinated strips sautéed with bell peppers &amp; onions. Served with guacamole, sour cream, rice, beans &amp; tortillas. Shrimp add $5 · Hot Links add $3</div></div><div class="item-price">$12.99</div></div>
+    <div class="menu-item"><div class="menu-item-left"><div class="item-name"><span class="item-num">#22</span>Fajitas for Two</div><div class="item-desc">Beef, Chicken or Combination. Served with guacamole, sour cream, rice, beans &amp; tortillas. Shrimp add $5 · Hot Links add $3</div></div><div class="item-price">$22.99</div></div>
+    <div class="menu-item"><div class="menu-item-left"><div class="item-name"><span class="item-num">#23</span>Flautas (3)</div><div class="item-desc">3 Rolled tortillas filled with shredded beef or chicken, lettuce, tomato, cheese, guacamole &amp; sour cream. Served with rice &amp; beans</div></div><div class="item-price">$10.99</div></div>
+    <div class="menu-item"><div class="menu-item-left"><div class="item-name"><span class="item-num">#24</span>Tacos Teran</div><div class="item-desc">Flour tortilla filled with charbroiled beef strips &amp; seasoned onions. Served with rice, beans, sour cream &amp; guacamole</div></div><div class="item-price">$11.99</div></div>
+    <div class="menu-item"><div class="menu-item-left"><div class="item-name"><span class="item-num">#25</span>Carne a la Mecicana</div><div class="item-desc">Strips of sirloin steak served with Mexican sliced potatoes, beans, guacamole, grilled onion &amp; tortillas</div></div><div class="item-price">$11.99</div></div>
+    <div class="menu-item"><div class="menu-item-left"><div class="item-name"><span class="item-num">#26</span>Mexican Style Steak</div><div class="item-desc">10oz Rib Eye. Served with Mexican sliced potatoes, beans, guacamole &amp; tortillas</div></div><div class="item-price">$19.99</div></div>
+    <div class="menu-item"><div class="menu-item-left"><div class="item-name"><span class="item-num">#27</span>Mexican Picadilla <em style="color:var(--mex-red2)">(HOT)</em></div><div class="item-desc">Marinated beef cubes, onions, tomato &amp; bell pepper. Served with rice, beans &amp; tortillas</div></div><div class="item-price">$11.99</div></div>
+    <div class="menu-item"><div class="menu-item-left"><div class="item-name"><span class="item-num">#28</span>Mariachis</div><div class="item-desc">Large flour tortillas filled with chicken. Served with salad, guacamole, sour cream &amp; bits of charbroiled beef</div></div><div class="item-price">$11.99</div></div>
+    <div class="menu-item"><div class="menu-item-left"><div class="item-name"><span class="item-num">#29</span>Fajitas Quesadilla</div><div class="item-desc">Strips of sirloin steak, grilled chicken or combination. Served with salad, guacamole &amp; sour cream</div></div><div class="item-price">$9.99</div></div>
+    <div class="menu-item"><div class="menu-item-left"><div class="item-name"><span class="item-num">#30</span>Nachoes Grande Dinner</div><div class="item-desc">Served with beef, cheese, beans, rice, guacamole, sour cream, jalapeños, lettuce &amp; tomato. ½ Order $6.99</div></div><div class="item-price">$10.99</div></div>
+    <div class="menu-item"><div class="menu-item-left"><div class="item-name"><span class="item-num">#31</span>Steak Ranchero</div><div class="item-desc">12oz Rib Eye. Served with rice, beans, ranchero sauce &amp; 3 tortillas</div></div><div class="item-price">$19.99</div></div>
+    <div class="menu-item"><div class="menu-item-left"><div class="item-name"><span class="item-num">#32</span>Guiso en Salsa Verde <em style="color:var(--mex-red2)">(HOT)</em></div><div class="item-desc">Pork cubes with green salsa. Served with rice, beans &amp; tortillas</div></div><div class="item-price">$10.99</div></div>
+    <div class="menu-item"><div class="menu-item-left"><div class="item-name"><span class="item-num">#33</span>Burrito Supreme</div><div class="item-desc">Large burrito filled with shredded beef, onions &amp; bell peppers. Served with rice, beans, salad &amp; sour cream</div></div><div class="item-price">$10.99</div></div>
+    <div class="menu-item"><div class="menu-item-left"><div class="item-name"><span class="item-num">#34</span>Tampiqueno</div><div class="item-desc">Cubes of sirloin steak, chicken or combination with red ranchero sauce. Served with rice, beans &amp; 3 tortillas</div></div><div class="item-price">$10.99</div></div>
+    <div class="menu-item"><div class="menu-item-left"><div class="item-name"><span class="item-num">#35</span>Burrito Tampiqueno</div><div class="item-desc">Large burrito with cubes of sirloin steak, chicken or combination with bell peppers, onion &amp; tomato. Served with rice, beans, salad &amp; sour cream</div></div><div class="item-price">$10.99</div></div>
+    <div class="menu-item"><div class="menu-item-left"><div class="item-name"><span class="item-num">#36</span>Enchiladas Tapatias</div><div class="item-desc">2 Flour shredded chicken enchiladas topped with sour cream sauce. Served with rice &amp; beans</div></div><div class="item-price">$8.99</div></div>
+    <div class="menu-item"><div class="menu-item-left"><div class="item-name"><span class="item-num">#37</span>Fajitas Nachos</div><div class="item-desc">Cubes of sirloin steak, chicken or combination. Served with lettuce, tomato, jalapeño, sour cream &amp; guacamole. ½ Order $6.99</div></div><div class="item-price">$10.99</div></div>
+    <div class="menu-item"><div class="menu-item-left"><div class="item-name"><span class="item-num">#38</span>Chimichanga</div><div class="item-desc">Fried burrito with ground beef, shredded beef or shredded chicken. Served with rice, beans, salad &amp; sour cream</div></div><div class="item-price">$10.99</div></div>
+    <div class="menu-item"><div class="menu-item-left"><div class="item-name"><span class="item-num">#39</span>Tacos Sabina (Mexican Tacos)</div><div class="item-desc">3 Soft corn taco cubes with sirloin steak or chicken chopped with onion, cilantro, limes &amp; green sauce</div></div><div class="item-price">$11.99</div></div>
+    <div class="menu-item"><div class="menu-item-left"><div class="item-name"><span class="item-num">#40</span>Grilled Chicken Breast</div><div class="item-desc">Served with rice, beans, salad &amp; tortillas</div></div><div class="item-price">$11.99</div></div>
+    <div class="menu-item"><div class="menu-item-left"><div class="item-name"><span class="item-num">#41</span>Fajitas Shrimp Quesadillas</div><div class="item-desc">Served with sour cream &amp; guacamole</div></div><div class="item-price">$10.99</div></div>
+    <div class="menu-item"><div class="menu-item-left"><div class="item-name"><span class="item-num">#42</span>Carne Asada Steak</div><div class="item-desc">Served with charro beans, salad &amp; tortillas</div></div><div class="item-price">$19.99</div></div>
+    <div class="menu-item"><div class="menu-item-left"><div class="item-name"><span class="item-num">#43</span>Chuletas Rancheras Pork</div><div class="item-desc">Served with rice, beans, salad &amp; tortillas</div></div><div class="item-price">$11.99</div></div>
+    <div class="menu-item"><div class="menu-item-left"><div class="item-name"><span class="item-num">#44</span>Grilled Pork Chops</div><div class="item-desc">Served with rice, beans, salad &amp; tortillas</div></div><div class="item-price">$11.99</div></div>
+    <div class="menu-item"><div class="menu-item-left"><div class="item-name"><span class="item-num">#45</span>Fish Soup</div><div class="item-desc">Fish, potatoes, tomatoes &amp; chiles. Served with rice &amp; tortillas. Add shrimp for $5</div></div><div class="item-price">$12.99</div></div>
+    <div class="menu-item"><div class="menu-item-left"><div class="item-name"><span class="item-num">#46</span>Shrimp Nachos</div><div class="item-desc">Served with sour cream, guacamole, peppers &amp; salad</div></div><div class="item-price">$10.99</div></div>
+    <div class="menu-item"><div class="menu-item-left"><div class="item-name"><span class="item-num">#47</span>Shrimp Rancheras</div><div class="item-desc">Served with rice, beans &amp; tortillas</div></div><div class="item-price">$11.99</div></div>
+    <div class="menu-item"><div class="menu-item-left"><div class="item-name"><span class="item-num">#48</span>Tacos Nuevo Leon</div><div class="item-desc">2 Fried tacos with ground beef, chicken or shredded beef. Served with rice, beans, salad, guacamole &amp; sour cream</div></div><div class="item-price">$10.99</div></div>
+    <div class="menu-item"><div class="menu-item-left"><div class="item-name"><span class="item-num">#49</span>Guiso en Salsa Rojo</div><div class="item-desc">Pork cubes with red sauce. Served with rice, beans &amp; tortillas</div></div><div class="item-price">$11.99</div></div>
+    <div class="menu-item"><div class="menu-item-left"><div class="item-name"><span class="item-num">#50</span>Guiso Ranchero</div><div class="item-desc">Ground beef, onion &amp; jalapeño. Served with beans &amp; salad</div></div><div class="item-price">$9.99</div></div>
+    <div class="menu-item"><div class="menu-item-left"><div class="item-name"><span class="item-num">#51</span>Guiso Verde &amp; Nopalitos</div><div class="item-desc">Pork cubes with green sauce &amp; cactus. Served with rice, beans &amp; tortillas</div></div><div class="item-price">$11.99</div></div>
+    <div class="menu-item"><div class="menu-item-left"><div class="item-name"><span class="item-num">#52</span>Fritanga Guiso</div><div class="item-desc">Pork cubes, ground beef, chorizo, fajita beef, cilantro, onion &amp; jalapeño. Served with rice, beans &amp; tortillas</div></div><div class="item-price">$11.99</div></div>
+    <div class="menu-item"><div class="menu-item-left"><div class="item-name"><span class="item-num">#53</span>Camarones A La Diabla (Green or Red)</div><div class="item-desc">Served with rice, beans &amp; tortillas</div></div><div class="item-price">$11.99</div></div>
+    <div class="menu-item"><div class="menu-item-left"><div class="item-name"><span class="item-num">#54</span>Molcajete (Green or Red)</div><div class="item-desc">Fajita beef steak, fajita chicken &amp; shrimp. Served with rice, beans, salad, sour cream, guacamole &amp; tortillas</div></div><div class="item-price">① $19.99 &nbsp; ② $24.99</div></div>
+    <div class="menu-item"><div class="menu-item-left"><div class="item-name"><span class="item-num">#55</span>Caldo de Pollo</div></div><div class="item-price">$11.99</div></div>
+    <div class="menu-item"><div class="menu-item-left"><div class="item-name"><span class="item-num">#56</span>Camarones Al Mojo D'Ajo</div></div><div class="item-price">$11.99</div></div>
+    <div class="menu-item"><div class="menu-item-left"><div class="item-name"><span class="item-num">#57</span>Menudo</div></div><div class="item-price">$11.99</div></div>
+    <div class="menu-item"><div class="menu-item-left"><div class="item-name"><span class="item-num">#58</span>Cocktail</div></div><div class="item-price">$12.99</div></div>
+  </div>
+</div>
+
+<!-- BURRITOS -->
+<div class="menu-section" id="burritos">
+  <div class="menu-head"><h2>Burritos</h2></div>
+  <p class="menu-note">Your choice of ground beef, chicken or shredded beef with lettuce, tomato &amp; sour cream, topped with burrito sauce &amp; cheese.</p>
+  <div class="menu-grid">
+    <div class="menu-item"><div class="menu-item-left"><div class="item-name">Big Cheese</div></div><div class="item-price">$5.99</div></div>
+    <div class="menu-item"><div class="menu-item-left"><div class="item-name">Baby Cheese</div></div><div class="item-price">$4.99</div></div>
+    <div class="menu-item"><div class="menu-item-left"><div class="item-name">Big Chile O Queso</div></div><div class="item-price">$5.99</div></div>
+    <div class="menu-item"><div class="menu-item-left"><div class="item-name">Baby Chile O Queso</div></div><div class="item-price">$4.99</div></div>
+    <div class="menu-item"><div class="menu-item-left"><div class="item-name">Quitarlo Aut Loco</div></div><div class="item-price">$4.99</div></div>
+  </div>
+</div>
+
+<!-- TACOS -->
+<div class="menu-section" id="tacos">
+  <div class="menu-head"><h2>Tacos</h2></div>
+  <p class="menu-note">Served with lettuce, tomato, onion, cilantro, green sauce, lime &amp; cheese</p>
+  <div class="menu-grid">
+    <div class="menu-item"><div class="menu-item-left"><div class="item-name">Ground Beef</div></div><div class="item-price">$2.99</div></div>
+    <div class="menu-item"><div class="menu-item-left"><div class="item-name">Shredded Beef</div></div><div class="item-price">$2.99</div></div>
+    <div class="menu-item"><div class="menu-item-left"><div class="item-name">Barbacoa</div></div><div class="item-price">$2.99</div></div>
+    <div class="menu-item"><div class="menu-item-left"><div class="item-name">Carnitas</div></div><div class="item-price">$2.99</div></div>
+    <div class="menu-item"><div class="menu-item-left"><div class="item-name">Azada</div></div><div class="item-price">$2.99</div></div>
+    <div class="menu-item"><div class="menu-item-left"><div class="item-name">Pastor</div></div><div class="item-price">$2.99</div></div>
+    <div class="menu-item"><div class="menu-item-left"><div class="item-name">Picadillo</div></div><div class="item-price">$2.99</div></div>
+  </div>
+</div>
+
+<!-- ENCHILADAS -->
+<div class="menu-section" id="enchiladas">
+  <div class="menu-head"><h2>Enchiladas</h2></div>
+  <div class="menu-grid">
+    <div class="menu-item"><div class="menu-item-left"><div class="item-name">Three Cheese</div></div><div class="item-price">$4.99</div></div>
+    <div class="menu-item"><div class="menu-item-left"><div class="item-name">Three Beef</div></div><div class="item-price">$4.99</div></div>
+    <div class="menu-item"><div class="menu-item-left"><div class="item-name">Three Chicken</div></div><div class="item-price">$4.99</div></div>
+    <div class="menu-item"><div class="menu-item-left"><div class="item-name">Three Sour Cream</div></div><div class="item-price">$4.99</div></div>
+  </div>
+</div>
+
+<!-- TORTAS -->
+<div class="menu-section" id="tortas">
+  <div class="menu-head"><h2>Tortas</h2></div>
+  <p class="menu-note">Served with lettuce, onion, tomatoes, avocado &amp; beans</p>
+  <div class="menu-grid">
+    <div class="menu-item"><div class="menu-item-left"><div class="item-name">Azada-Fijita Beef</div></div><div class="item-price">$8.99</div></div>
+    <div class="menu-item"><div class="menu-item-left"><div class="item-name">Desebrada-Shredded Beef</div></div><div class="item-price">$8.99</div></div>
+    <div class="menu-item"><div class="menu-item-left"><div class="item-name">Fajita Pollo-Fajita Chicken</div></div><div class="item-price">$8.99</div></div>
+    <div class="menu-item"><div class="menu-item-left"><div class="item-name">Fajita de Res-Fajita Beef</div></div><div class="item-price">$8.99</div></div>
+    <div class="menu-item"><div class="menu-item-left"><div class="item-name">Barbacoa</div></div><div class="item-price">$8.99</div></div>
+    <div class="menu-item"><div class="menu-item-left"><div class="item-name">Carnitas</div></div><div class="item-price">$8.99</div></div>
+    <div class="menu-item"><div class="menu-item-left"><div class="item-name">Ham-Jamon</div></div><div class="item-price">$8.99</div></div>
+    <div class="menu-item"><div class="menu-item-left"><div class="item-name">Egg with Meat - Huevo</div></div><div class="item-price">$8.99</div></div>
+  </div>
+</div>
+
+<!-- TOSTADAS -->
+<div class="menu-section" id="tostadas">
+  <div class="menu-head"><h2>Tostadas</h2></div>
+  <p class="menu-note">Served with lettuce, tomato, cheese and sour cream</p>
+  <div class="menu-grid">
+    <div class="menu-item"><div class="menu-item-left"><div class="item-name">Bean</div></div><div class="item-price">$3.99</div></div>
+    <div class="menu-item"><div class="menu-item-left"><div class="item-name">Beef &amp; Rice</div></div><div class="item-price">$3.99</div></div>
+    <div class="menu-item"><div class="menu-item-left"><div class="item-name">Beef &amp; Bean</div></div><div class="item-price">$3.99</div></div>
+    <div class="menu-item"><div class="menu-item-left"><div class="item-name">Guacamole</div></div><div class="item-price">$5.99</div></div>
+    <div class="menu-item"><div class="menu-item-left"><div class="item-name">Shrimp</div></div><div class="item-price">$5.99</div></div>
+  </div>
+</div>
+
+<!-- SALADS -->
+<div class="menu-section" id="salads">
+  <div class="menu-head"><h2>Salads</h2></div>
+  <div class="menu-grid">
+    <div class="menu-item"><div class="menu-item-left"><div class="item-name">Grilled Fiesta Salad</div><div class="item-desc">Steak, chicken or breaded chicken &amp; guacamole</div></div><div class="item-price">$8.99</div></div>
+    <div class="menu-item"><div class="menu-item-left"><div class="item-name">Taco Salad</div><div class="item-desc">Ground beef or chicken with sour cream</div></div><div class="item-price">$8.99</div></div>
+    <div class="menu-item"><div class="menu-item-left"><div class="item-name">Taco Salad Supreme</div><div class="item-desc">Ground beef or chicken served with beans &amp; sour cream</div></div><div class="item-price">$8.99</div></div>
+    <div class="menu-item"><div class="menu-item-left"><div class="item-name">Guacamole Salad</div></div><div class="item-price">$5.99</div></div>
+    <div class="menu-item"><div class="menu-item-left"><div class="item-name">Green Salad</div></div><div class="item-price">$3.99</div></div>
+    <div class="menu-item"><div class="menu-item-left"><div class="item-name">Fiesta Salad with Shrimp</div></div><div class="item-price">$8.99</div></div>
+    <div class="menu-item"><div class="menu-item-left"><div class="item-name">Golden Salad</div><div class="item-desc">Served with croutons, beef, chicken or combo</div></div><div class="item-price">$8.99</div></div>
+  </div>
+</div>
+
+<!-- CHICO'S PLATE -->
+<div class="menu-section" id="chicos">
+  <div class="menu-head"><h2>Chico's Plate <span style="font-size:20px;color:var(--mex-red);">$4.99</span></h2></div>
+  <div class="chicos-grid">
+    <div class="chicos-item"><span class="cn">#1</span><span class="ct">Burrito <small style="color:var(--gray);">Served with rice &amp; beans</small></span></div>
+    <div class="chicos-item"><span class="cn">#2</span><span class="ct">Enchilada <small style="color:var(--gray);">Served with rice &amp; beans</small></span></div>
+    <div class="chicos-item"><span class="cn">#3</span><span class="ct">Taco <small style="color:var(--gray);">Served with rice &amp; beans</small></span></div>
+    <div class="chicos-item"><span class="cn">#4</span><span class="ct">Tamale <small style="color:var(--gray);">Served with rice &amp; beans</small></span></div>
+    <div class="chicos-item"><span class="cn">#5</span><span class="ct">Cheese Quesadilla <small style="color:var(--gray);">Add fajita meat $1</small></span></div>
+    <div class="chicos-item"><span class="cn">#6</span><span class="ct">Quesadilla <small style="color:var(--gray);">Beef or chicken &amp; cheese. Add fajita meat $1</small></span></div>
+    <div class="chicos-item"><span class="cn">#7</span><span class="ct">Chicken Strips <small style="color:var(--gray);">Served with French fries</small></span></div>
+    <div class="chicos-item"><span class="cn">#8</span><span class="ct">Chicken Nuggets <small style="color:var(--gray);">Served with French fries</small></span></div>
+    <div class="chicos-item"><span class="cn">#9</span><span class="ct">Corn Dog <small style="color:var(--gray);">Served with French fries</small></span></div>
+    <div class="chicos-item"><span class="cn">#10</span><span class="ct">Kid Pepperoni Pizza</span></div>
+  </div>
+</div>
+
+<!-- APPETIZERS -->
+<div class="menu-section" id="appetizers">
+  <div class="menu-head"><h2>Appetizers</h2></div>
+  <div class="menu-grid">
+    <div class="menu-item"><div class="menu-item-left"><div class="item-name">Cheese Nachos</div></div><div class="item-price">$7.99</div></div>
+    <div class="menu-item"><div class="menu-item-left"><div class="item-name">Bean Nachos</div></div><div class="item-price">$7.99</div></div>
+    <div class="menu-item"><div class="menu-item-left"><div class="item-name">Beef Nachos</div></div><div class="item-price">$7.99</div></div>
+    <div class="menu-item"><div class="menu-item-left"><div class="item-name">Chicken Nachos</div></div><div class="item-price">$7.99</div></div>
+    <div class="menu-item"><div class="menu-item-left"><div class="item-name">Nachos Half Order</div></div><div class="item-price">$6.99</div></div>
+    <div class="menu-item"><div class="menu-item-left"><div class="item-name">Cheese Quesadilla</div></div><div class="item-price">$7.99</div></div>
+    <div class="menu-item"><div class="menu-item-left"><div class="item-name">Ground Beef Quesadilla</div></div><div class="item-price">$7.99</div></div>
+    <div class="menu-item"><div class="menu-item-left"><div class="item-name">Shredded Chicken Quesadilla</div></div><div class="item-price">$7.99</div></div>
+    <div class="menu-item"><div class="menu-item-left"><div class="item-name">Shredded Beef Quesadilla</div></div><div class="item-price">$7.99</div></div>
+  </div>
+</div>
+
+<!-- EL POCO -->
+<div class="menu-section" id="elpoco">
+  <div class="menu-head"><h2>El Poco</h2></div>
+  <p class="menu-note">Served with rice &amp; beans · Add fajita meat $1.00</p>
+  <div class="menu-grid">
+    <div class="menu-item"><div class="menu-item-left"><div class="item-name"><span class="item-num">#1</span>Burrito</div></div><div class="item-price">$6.99</div></div>
+    <div class="menu-item"><div class="menu-item-left"><div class="item-name"><span class="item-num">#2</span>Enchilada</div></div><div class="item-price">$6.99</div></div>
+    <div class="menu-item"><div class="menu-item-left"><div class="item-name"><span class="item-num">#3</span>Taco</div></div><div class="item-price">$6.99</div></div>
+    <div class="menu-item"><div class="menu-item-left"><div class="item-name"><span class="item-num">#4</span>Tamale</div></div><div class="item-price">$6.99</div></div>
+    <div class="menu-item"><div class="menu-item-left"><div class="item-name"><span class="item-num">#5</span>Chile Relleno</div></div><div class="item-price">$6.99</div></div>
+  </div>
+</div>
+
+<!-- NUEVO LEON PLATES -->
+<div class="menu-section" id="plates">
+  <div class="menu-head"><h2>Nuevo León Plates</h2></div>
+  <p class="menu-note">Served with rice &amp; beans</p>
+  <div class="menu-grid">
+    <div class="menu-item"><div class="menu-item-left"><div class="item-name"><span class="item-num">#6</span>2 Enchiladas</div></div><div class="item-price">$7.99</div></div>
+    <div class="menu-item"><div class="menu-item-left"><div class="item-name"><span class="item-num">#7</span>Enchilada &amp; Tamale</div></div><div class="item-price">$7.99</div></div>
+    <div class="menu-item"><div class="menu-item-left"><div class="item-name"><span class="item-num">#8</span>Chile Relleno &amp; Tamale</div></div><div class="item-price">$7.99</div></div>
+    <div class="menu-item"><div class="menu-item-left"><div class="item-name"><span class="item-num">#9</span>Chile Relleno &amp; Taco</div></div><div class="item-price">$7.99</div></div>
+    <div class="menu-item"><div class="menu-item-left"><div class="item-name"><span class="item-num">#10</span>Tamale &amp; Taco</div></div><div class="item-price">$7.99</div></div>
+    <div class="menu-item"><div class="menu-item-left"><div class="item-name"><span class="item-num">#11</span>Enchilada &amp; Chile Relleno</div></div><div class="item-price">$7.99</div></div>
+    <div class="menu-item"><div class="menu-item-left"><div class="item-name"><span class="item-num">#12</span>Enchilada &amp; Taco</div></div><div class="item-price">$7.99</div></div>
+    <div class="menu-item"><div class="menu-item-left"><div class="item-name"><span class="item-num">#13</span>Burrito &amp; Taco</div></div><div class="item-price">$7.99</div></div>
+  </div>
+</div>
+
+<!-- MEXICAN DELUXE PLATES -->
+<div class="menu-section" id="deluxe">
+  <div class="menu-head"><h2>Mexican Deluxe Plates</h2></div>
+  <p class="menu-note">Served with rice &amp; beans</p>
+  <div class="menu-grid">
+    <div class="menu-item"><div class="menu-item-left"><div class="item-name"><span class="item-num">#14</span>Enchilada, Tostada, Taco</div></div><div class="item-price">$8.99</div></div>
+    <div class="menu-item"><div class="menu-item-left"><div class="item-name"><span class="item-num">#15</span>Burrito, Enchilada, Taco</div></div><div class="item-price">$8.99</div></div>
+    <div class="menu-item"><div class="menu-item-left"><div class="item-name"><span class="item-num">#16</span>Tamale, Enchilada, Taco</div></div><div class="item-price">$8.99</div></div>
+    <div class="menu-item"><div class="menu-item-left"><div class="item-name"><span class="item-num">#17</span>Chile Relleno, Tostada &amp; Taco</div></div><div class="item-price">$8.99</div></div>
+    <div class="menu-item"><div class="menu-item-left"><div class="item-name"><span class="item-num">#18</span>Tamale, Burrito &amp; Taco</div></div><div class="item-price">$8.99</div></div>
+    <div class="menu-item"><div class="menu-item-left"><div class="item-name"><span class="item-num">#19</span>Taco, Chile Relleno &amp; Enchilada</div></div><div class="item-price">$8.99</div></div>
+    <div class="menu-item"><div class="menu-item-left"><div class="item-name"><span class="item-num">#20</span>3 Enchiladas</div></div><div class="item-price">$8.99</div></div>
+  </div>
+</div>
+
+<!-- AMERICAN FOOD -->
+<div class="menu-section" id="american">
+  <div class="menu-head"><h2>American Food</h2></div>
+  <div class="sub-head">Burgers &amp; Sandwiches <span style="font-size:11px;font-weight:500;color:var(--gray);">· Indicates items served with French Fries</span></div>
+  <div class="menu-grid">
+    <div class="menu-item"><div class="menu-item-left"><div class="item-name">• Hamburger</div></div><div class="item-price">$8.99</div></div>
+    <div class="menu-item"><div class="menu-item-left"><div class="item-name">• Cheeseburger</div></div><div class="item-price">$8.99</div></div>
+    <div class="menu-item"><div class="menu-item-left"><div class="item-name">• Double Meat Cheeseburger</div></div><div class="item-price">$10.99</div></div>
+    <div class="menu-item"><div class="menu-item-left"><div class="item-name">• Mexican Burger</div></div><div class="item-price">$10.99</div></div>
+    <div class="menu-item"><div class="menu-item-left"><div class="item-name">• BLT</div></div><div class="item-price">$7.99</div></div>
+    <div class="menu-item"><div class="menu-item-left"><div class="item-name">• Bacon Cheeseburger</div></div><div class="item-price">$8.99</div></div>
+    <div class="menu-item"><div class="menu-item-left"><div class="item-name">• Steak Sandwich</div></div><div class="item-price">$8.99</div></div>
+    <div class="menu-item"><div class="menu-item-left"><div class="item-name">• Grilled Chicken Breast Sandwich</div></div><div class="item-price">$8.99</div></div>
+    <div class="menu-item"><div class="menu-item-left"><div class="item-name">• Grilled Cheese Sandwich</div></div><div class="item-price">$4.99</div></div>
+    <div class="menu-item"><div class="menu-item-left"><div class="item-name">• Chicken Fried Steak</div></div><div class="item-price">$10.99</div></div>
+    <div class="menu-item"><div class="menu-item-left"><div class="item-name">• Grilled Fish Fillet</div></div><div class="item-price">$11.99</div></div>
+    <div class="menu-item"><div class="menu-item-left"><div class="item-name">• Fried Fish Fillet</div></div><div class="item-price">$11.99</div></div>
+    <div class="menu-item"><div class="menu-item-left"><div class="item-name">• Papa Loca</div></div><div class="item-price">$11.99</div></div>
+  </div>
+  <div class="sub-head" style="margin-top:20px;">Plates &amp; Dinners <span style="font-size:11px;font-weight:500;color:var(--gray);">· Served with baked potato or French fries, salad &amp; Texas toast</span></div>
+  <div class="menu-grid">
+    <div class="menu-item"><div class="menu-item-left"><div class="item-name">• Qutarlo</div></div><div class="item-price">$10.99</div></div>
+    <div class="menu-item"><div class="menu-item-left"><div class="item-name">• Fried Shrimp (6)</div></div><div class="item-price">$10.99</div></div>
+    <div class="menu-item"><div class="menu-item-left"><div class="item-name">• Rib Eye Dinner</div></div><div class="item-price">$19.99</div></div>
+    <div class="menu-item"><div class="menu-item-left"><div class="item-name">• Rib Eye with 6 Shrimp</div></div><div class="item-price">$24.99</div></div>
+    <div class="menu-item"><div class="menu-item-left"><div class="item-name">• Majarra Frita</div></div><div class="item-price">$12.99</div></div>
+    <div class="menu-item"><div class="menu-item-left"><div class="item-name">• Hamburger Steak</div></div><div class="item-price">$10.99</div></div>
+    <div class="menu-item"><div class="menu-item-left"><div class="item-name">• Chicken Strip Dinner</div></div><div class="item-price">$9.99</div></div>
+    <div class="menu-item"><div class="menu-item-left"><div class="item-name">• Joe's Special (Fried Fish)</div></div><div class="item-price">$11.99</div></div>
+    <div class="menu-item"><div class="menu-item-left"><div class="item-name">• Grilled Fish Fillet</div></div><div class="item-price">$11.99</div></div>
+  </div>
+
+  <div class="notice">⚠️ The consuming of raw or undercooked eggs, meat, poultry, seafood or shellfish may increase your risk of food borne illness, especially if you have a medical condition.</div>
+</div>
+
+</main>
+
+<div class="flag-bar"><span class="flag-green"></span><span class="flag-white"></span><span class="flag-red"></span></div>
+<div class="page-footer">
+  <p>Restaurante Nuevo León · Hobart, Oklahoma</p>
+  <p style="margin-top:6px;"><a href="index.html">← Back to hobartchamber.org</a></p>
+</div>
+
+</body>
+</html>
