@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta name="robots" content="noindex, nofollow"/>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Full Schedule · Hobart's Hometown Harvest 2026</title>
+<meta name="description" content="Full day schedule for Hobart's Hometown Harvest — Saturday, September 19, 2026. Vendors, food trucks, parade, street dance, games, and more."/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,800;0,900;1,700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+<style>
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+  :root{--navy:#1a3ea8;--navy-dark:#142f7e;--navy-deep:#0e2056;--gold:#c49a3e;--gold-light:#dab65e;--gold-pale:#f6edd6;--white:#fff;--slate:#f3f6fc;--gray:#6f7d99;--dark-gray:#2c3a58;--border:#dbe3f4;--harvest:#c44b0a;}
+  body{font-family:'Inter',sans-serif;color:var(--navy-deep);background:var(--white);}
+  nav{background:rgba(26,62,168,.97);display:flex;align-items:center;justify-content:space-between;padding:0 24px;height:64px;border-bottom:1px solid rgba(196,154,62,.4);gap:12px;}
+  .nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none;min-width:0;flex:1;}
+  .nav-logo-mark{width:40px;height:40px;border-radius:50%;background:var(--gold-pale);display:flex;align-items:center;justify-content:center;overflow:hidden;flex-shrink:0;}
+  .nav-logo-mark img{width:100%;height:100%;object-fit:cover;}
+  .nav-logo-text{display:flex;flex-direction:column;min-width:0;}
+  .nav-logo-text span:first-child{font-family:'Playfair Display',serif;font-size:15px;font-weight:700;color:#fff;line-height:1.2;white-space:nowrap;}
+  .nav-logo-text span:last-child{font-size:10px;color:rgba(255,255,255,.5);}
+  .nav-back{font-size:12.5px;font-weight:600;color:rgba(255,255,255,.7);text-decoration:none;padding:8px 14px;border:1px solid rgba(255,255,255,.25);border-radius:5px;white-space:nowrap;flex-shrink:0;}
+
+  .hero{background:linear-gradient(135deg,#4a1a00 0%,#8b3a00 50%,#c44b0a 100%);padding:48px 24px 40px;text-align:center;position:relative;overflow:hidden;}
+  .hero::before{content:'🌽';position:absolute;font-size:200px;opacity:.06;top:50%;left:50%;transform:translate(-50%,-50%);}
+  .hero-inner{position:relative;z-index:2;max-width:680px;margin:0 auto;}
+  .hero-eyebrow{font-size:11px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:rgba(255,255,255,.65);margin-bottom:8px;}
+  .hero-title{font-family:'Playfair Display',serif;font-size:clamp(28px,6vw,52px);font-weight:900;color:#fff;line-height:1.1;margin-bottom:8px;}
+  .hero-title em{font-style:italic;color:#f6b84a;}
+  .hero-date{font-size:18px;font-weight:700;color:rgba(255,255,255,.85);margin-bottom:16px;}
+  .hero-loc{font-size:13.5px;color:rgba(255,255,255,.6);}
+  .hero-badges{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-top:16px;}
+  .badge{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);border-radius:20px;padding:6px 14px;font-size:12px;font-weight:600;color:rgba(255,255,255,.85);}
+
+  main{max-width:700px;margin:0 auto;padding:40px 20px 80px;}
+
+  /* SCHEDULE */
+  .schedule{display:flex;flex-direction:column;gap:0;}
+  .sched-group{margin-bottom:28px;}
+  .sched-group-title{font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:10px;padding-left:72px;}
+
+  .sched-item{display:flex;gap:0;position:relative;}
+  .sched-item::before{content:'';position:absolute;left:52px;top:32px;bottom:-8px;width:2px;background:var(--border);}
+  .sched-item:last-child::before{display:none;}
+  .sched-time{width:64px;flex-shrink:0;padding-top:14px;text-align:right;padding-right:12px;}
+  .sched-time .t-hour{font-size:13px;font-weight:700;color:var(--navy);line-height:1.1;}
+  .sched-time .t-ampm{font-size:10px;font-weight:600;color:var(--gray);}
+  .sched-dot{width:16px;height:16px;border-radius:50%;background:var(--white);border:2.5px solid var(--border);flex-shrink:0;margin-top:16px;position:relative;z-index:1;}
+  .sched-item.featured .sched-dot{border-color:var(--harvest);background:var(--harvest);}
+  .sched-item.gold .sched-dot{border-color:var(--gold);background:var(--gold);}
+  .sched-content{flex:1;padding:10px 0 10px 14px;}
+  .sched-title{font-size:14px;font-weight:700;color:var(--navy-deep);line-height:1.3;}
+  .sched-item.featured .sched-title{font-size:15.5px;color:var(--harvest);}
+  .sched-item.gold .sched-title{color:var(--gold);}
+  .sched-sub{font-size:12px;color:var(--gray);margin-top:2px;line-height:1.5;}
+  .sched-divider{height:1px;background:var(--border);margin:4px 0 12px 78px;}
+
+  /* LINKS */
+  .reg-links{display:flex;flex-wrap:wrap;gap:10px;margin-top:28px;padding-top:24px;border-top:2px solid var(--border);}
+  .reg-link{display:inline-flex;align-items:center;gap:6px;padding:10px 18px;border-radius:7px;font-size:13px;font-weight:700;text-decoration:none;transition:all .2s;}
+  .reg-link.primary{background:var(--navy);color:#fff;}
+  .reg-link.primary:hover{background:var(--navy-dark);}
+  .reg-link.gold{background:var(--gold);color:var(--navy-deep);}
+  .reg-link.gold:hover{background:var(--gold-light);}
+  .reg-link.outline{border:1.5px solid var(--border);color:var(--navy);background:var(--white);}
+  .reg-link.outline:hover{border-color:var(--navy);}
+
+  .page-footer{background:var(--navy-dark);padding:24px 24px;text-align:center;}
+  .page-footer p{font-size:13px;color:rgba(255,255,255,.4);}
+  .page-footer a{color:var(--gold-light);text-decoration:none;}
+
+  @media(max-width:500px){.sched-time{width:54px;}.sched-group-title{padding-left:60px;}.sched-divider{margin-left:62px;}}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">
+    <span class="nav-logo-mark"><img src="flyers/chamber-logo.PNG" alt="Hobart Chamber" onerror="this.onerror=null;this.style.display='none';"/></span>
+    <span class="nav-logo-text"><span>Hobart Chamber of Commerce</span><span>Kiowa County · Oklahoma</span></span>
+  </a>
+  <a href="index.html" class="nav-back">← Back</a>
+</nav>
+
+<div class="hero">
+  <div class="hero-inner">
+    <div class="hero-eyebrow">Hobart, Oklahoma · Kiowa County Courthouse Square</div>
+    <h1 class="hero-title">Hometown <em>Harvest</em></h1>
+    <div class="hero-date">Saturday, September 19, 2026</div>
+    <div class="hero-loc">📍 316 S Main St · Hobart, OK 73651</div>
+    <div class="hero-badges">
+      <span class="badge">🌽 Vendors & Food Trucks</span>
+      <span class="badge">🚜 Tractor Show</span>
+      <span class="badge">🎉 Parade at 5:30 PM</span>
+      <span class="badge">💃 Street Dance at 6:30 PM</span>
+    </div>
+  </div>
+</div>
+
+<main>
+  <div class="schedule">
+
+    <!-- MORNING -->
+    <div class="sched-group">
+      <div class="sched-group-title">Morning Setup & Opening</div>
+
+      <div class="sched-item featured">
+        <div class="sched-time"><div class="t-hour">8:00</div><div class="t-ampm">AM</div></div>
+        <div class="sched-dot"></div>
+        <div class="sched-content">
+          <div class="sched-title">Registration & Setup Begins</div>
+          <div class="sched-sub">Vendors · Food Trucks · Tractor Show · Opens through 10:00 AM</div>
+        </div>
+      </div>
+      <div class="sched-divider"></div>
+
+      <div class="sched-item featured">
+        <div class="sched-time"><div class="t-hour">9:00</div><div class="t-ampm">AM</div></div>
+        <div class="sched-dot"></div>
+        <div class="sched-content">
+          <div class="sched-title">Stanley Building Opens — Silent Auction</div>
+        </div>
+      </div>
+      <div class="sched-divider"></div>
+
+      <div class="sched-item gold">
+        <div class="sched-time"><div class="t-hour">10:00</div><div class="t-ampm">AM</div></div>
+        <div class="sched-dot"></div>
+        <div class="sched-content">
+          <div class="sched-title">🎪 The Fun Begins!</div>
+          <div class="sched-sub">Vendors & Food Trucks open · Kiowa County Historical Museum opens · General Tommy Franks Leadership Institute & Museum opens</div>
+        </div>
+      </div>
+      <div class="sched-divider"></div>
+
+      <div class="sched-item">
+        <div class="sched-time"><div class="t-hour">10:00</div><div class="t-ampm">AM</div></div>
+        <div class="sched-dot"></div>
+        <div class="sched-content">
+          <div class="sched-title">👑 Lil Mr. & Miss Hometown Pageant</div>
+        </div>
+      </div>
+      <div class="sched-divider"></div>
+
+      <div class="sched-item">
+        <div class="sched-time"><div class="t-hour">11:00</div><div class="t-ampm">AM</div></div>
+        <div class="sched-dot"></div>
+        <div class="sched-content">
+          <div class="sched-title">🎯 Bingo Begins · Sack Races · Chalk Contest Begins</div>
+        </div>
+      </div>
+      <div class="sched-divider"></div>
+
+      <div class="sched-item">
+        <div class="sched-time"><div class="t-hour">11:30</div><div class="t-ampm">AM</div></div>
+        <div class="sched-dot"></div>
+        <div class="sched-content">
+          <div class="sched-title">🚒 Firefighter & Fire Truck Fun</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- AFTERNOON -->
+    <div class="sched-group">
+      <div class="sched-group-title">Afternoon Activities</div>
+
+      <div class="sched-item">
+        <div class="sched-time"><div class="t-hour">12:00</div><div class="t-ampm">PM</div></div>
+        <div class="sched-dot"></div>
+        <div class="sched-content">
+          <div class="sched-title">🎃 Scarecrow Contest</div>
+        </div>
+      </div>
+      <div class="sched-divider"></div>
+
+      <div class="sched-item">
+        <div class="sched-time"><div class="t-hour">12:30</div><div class="t-ampm">PM</div></div>
+        <div class="sched-dot"></div>
+        <div class="sched-content">
+          <div class="sched-title">🎃 Pumpkin Rolling Race</div>
+        </div>
+      </div>
+      <div class="sched-divider"></div>
+
+      <div class="sched-item">
+        <div class="sched-time"><div class="t-hour">1:00</div><div class="t-ampm">PM</div></div>
+        <div class="sched-dot"></div>
+        <div class="sched-content">
+          <div class="sched-title">🚔 Police Fun / Find the Officer Scavenger Hunt Begins</div>
+        </div>
+      </div>
+      <div class="sched-divider"></div>
+
+      <div class="sched-item">
+        <div class="sched-time"><div class="t-hour">1:30</div><div class="t-ampm">PM</div></div>
+        <div class="sched-dot"></div>
+        <div class="sched-content">
+          <div class="sched-title">🎨 Pumpkin Painting / Trivia Game Begins</div>
+        </div>
+      </div>
+      <div class="sched-divider"></div>
+
+      <div class="sched-item">
+        <div class="sched-time"><div class="t-hour">2:00</div><div class="t-ampm">PM</div></div>
+        <div class="sched-dot"></div>
+        <div class="sched-content">
+          <div class="sched-title">🐕 Meet the Local K-9 Unit</div>
+        </div>
+      </div>
+      <div class="sched-divider"></div>
+
+      <div class="sched-item">
+        <div class="sched-time"><div class="t-hour">2:30</div><div class="t-ampm">PM</div></div>
+        <div class="sched-dot"></div>
+        <div class="sched-content">
+          <div class="sched-title">🤠 Roping the Horns Contest</div>
+        </div>
+      </div>
+      <div class="sched-divider"></div>
+
+      <div class="sched-item">
+        <div class="sched-time"><div class="t-hour">3:00</div><div class="t-ampm">PM</div></div>
+        <div class="sched-dot"></div>
+        <div class="sched-content">
+          <div class="sched-title">⚡ PSO Truck & Electricity Safety</div>
+        </div>
+      </div>
+      <div class="sched-divider"></div>
+
+      <div class="sched-item">
+        <div class="sched-time"><div class="t-hour">3:30</div><div class="t-ampm">PM</div></div>
+        <div class="sched-dot"></div>
+        <div class="sched-content">
+          <div class="sched-title">🥚 Egg Relay / Chalk Contest Ends</div>
+        </div>
+      </div>
+      <div class="sched-divider"></div>
+
+      <div class="sched-item">
+        <div class="sched-time"><div class="t-hour">4:00</div><div class="t-ampm">PM</div></div>
+        <div class="sched-dot"></div>
+        <div class="sched-content">
+          <div class="sched-title">🦆 Duck Duck Goose</div>
+        </div>
+      </div>
+      <div class="sched-divider"></div>
+
+      <div class="sched-item">
+        <div class="sched-time"><div class="t-hour">4:30</div><div class="t-ampm">PM</div></div>
+        <div class="sched-dot"></div>
+        <div class="sched-content">
+          <div class="sched-title">🐴 Stick Horse Race / Parade Lineup Begins</div>
+        </div>
+      </div>
+      <div class="sched-divider"></div>
+
+      <div class="sched-item">
+        <div class="sched-time"><div class="t-hour">5:00</div><div class="t-ampm">PM</div></div>
+        <div class="sched-dot"></div>
+        <div class="sched-content">
+          <div class="sched-title">❄️ Freeze Dance</div>
+          <div class="sched-sub">Petting Zoo closes · Silent Auction viewing closes · Museum closes</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- EVENING -->
+    <div class="sched-group">
+      <div class="sched-group-title">Evening Events</div>
+
+      <div class="sched-item gold">
+        <div class="sched-time"><div class="t-hour">5:30</div><div class="t-ampm">PM</div></div>
+        <div class="sched-dot"></div>
+        <div class="sched-content">
+          <div class="sched-title">🎉 PARADE</div>
+        </div>
+      </div>
+      <div class="sched-divider"></div>
+
+      <div class="sched-item">
+        <div class="sched-time"><div class="t-hour">6:00</div><div class="t-ampm">PM</div></div>
+        <div class="sched-dot"></div>
+        <div class="sched-content">
+          <div class="sched-title">🏆 Winners Announcement</div>
+          <div class="sched-sub">Immediately following parade</div>
+        </div>
+      </div>
+      <div class="sched-divider"></div>
+
+      <div class="sched-item gold">
+        <div class="sched-time"><div class="t-hour">6:30</div><div class="t-ampm">PM</div></div>
+        <div class="sched-dot"></div>
+        <div class="sched-content">
+          <div class="sched-title">🎵 Street Dance Begins / Cornhole for Kids</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- REGISTRATION LINKS -->
+  <div class="reg-links">
+    <a href="vendor-registration.html" class="reg-link gold">🛖 Vendor Registration</a>
+    <a href="tractor-show-registration.html" class="reg-link primary">🚜 Register a Tractor</a>
+    <a href="parade-registration.html" class="reg-link outline">🎉 Join the Parade</a>
+    <a href="index.html#calendar" class="reg-link outline">📅 View Full Calendar</a>
+  </div>
+</main>
+
+<div class="page-footer">
+  <p>Hobart Chamber of Commerce · 106 W 4th St · (580) 682-0887 · <a href="mailto:director@hobartokchamber.org">director@hobartokchamber.org</a></p>
+  <p style="margin-top:6px;"><a href="index.html">← Back to hobartchamber.org</a></p>
+</div>
+
+</body>
+</html>
