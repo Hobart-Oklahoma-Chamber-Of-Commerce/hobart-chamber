@@ -286,6 +286,40 @@
   .cal-chip[data-cat="community"]{background:rgba(194,106,30,.12);color:#9c5518;border-left-color:#c26a1e;}
   .cal-chip:hover{background:rgba(26,62,168,.2);}
   .cal-more{font-size:10px;font-weight:600;color:var(--gold);cursor:pointer;}
+  /* ---- calendar range + layout switchers ---- */
+  .cal-ctrls{display:flex;align-items:center;gap:10px;flex-wrap:wrap;}
+  .cal-seg{display:inline-flex;border:1.5px solid var(--border);border-radius:8px;overflow:hidden;background:var(--white);}
+  .cal-seg button{border:0;background:transparent;color:var(--dark-gray);font-size:12.5px;font-weight:600;padding:9px 14px;cursor:pointer;font-family:inherit;transition:background .15s,color .15s;}
+  .cal-seg button+button{border-left:1.5px solid var(--border);}
+  .cal-seg button:hover{color:var(--navy);}
+  .cal-seg button.on{background:var(--navy);color:var(--white);}
+  .cal-grid.cal-week .cal-cell{min-height:210px;gap:6px;}
+  .cal-wh{font-size:12px;font-weight:700;color:var(--navy);padding-bottom:6px;border-bottom:1px solid var(--border);margin-bottom:2px;}
+  .cal-wh small{font-weight:600;color:var(--gray);margin-left:4px;}
+  .cal-wchip{display:block;font-size:12px;font-weight:600;line-height:1.3;padding:6px 8px;border-radius:5px;background:rgba(26,62,168,.1);color:var(--navy);border-left:3px solid var(--navy);cursor:pointer;word-break:break-word;}
+  .cal-wchip .t{display:block;font-size:10.5px;font-weight:500;opacity:.75;margin-top:2px;}
+  .cal-wchip[data-cat="sports"]{background:rgba(47,122,62,.11);color:#256434;border-left-color:#2f7a3e;}
+  .cal-wchip[data-cat="school"]{background:rgba(107,63,160,.11);color:#59338a;border-left-color:#6b3fa0;}
+  .cal-wchip[data-cat="holiday"]{background:rgba(179,38,30,.10);color:#96201a;border-left-color:#b3261e;}
+  .cal-wchip[data-cat="community"]{background:rgba(194,106,30,.12);color:#9c5518;border-left-color:#c26a1e;}
+  .cal-wchip:hover{filter:brightness(.96);}
+  .cal-list{display:block;border:1px solid var(--border);border-radius:10px;background:var(--white);overflow:hidden;}
+  .cal-lday{background:var(--navy);color:var(--gold-light);font-size:12px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:10px 16px;display:flex;align-items:center;gap:10px;}
+  .cal-lday .tdy{background:var(--gold);color:var(--navy-deep);border-radius:20px;padding:2px 9px;font-size:10px;letter-spacing:.5px;}
+  .cal-lrow{display:block;padding:13px 16px 13px 14px;border-left:4px solid var(--navy);border-bottom:1px solid var(--border);cursor:pointer;background:var(--white);transition:background .15s;}
+  .cal-lrow:last-child{border-bottom:0;}
+  .cal-lrow:hover{background:#f6f8fd;}
+  .cal-lrow[data-cat="sports"]{border-left-color:#2f7a3e;}
+  .cal-lrow[data-cat="school"]{border-left-color:#6b3fa0;}
+  .cal-lrow[data-cat="holiday"]{border-left-color:#b3261e;}
+  .cal-lrow[data-cat="community"]{border-left-color:#c26a1e;}
+  .cal-lrow .lt{font-size:15px;font-weight:700;color:var(--navy);line-height:1.3;}
+  .cal-lrow .lm{font-size:13px;color:var(--gray);margin-top:3px;}
+  .cal-lrow .ld{font-size:13.5px;color:var(--dark-gray);margin-top:7px;line-height:1.55;}
+  .cal-lrow .lc{display:inline-block;margin-top:8px;font-size:10.5px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:var(--gray);}
+  .cal-list.cal-dayview .cal-lrow{padding:18px 20px 18px 18px;}
+  .cal-list.cal-dayview .lt{font-size:18px;}
+  .cal-empty{padding:34px 20px;text-align:center;color:var(--gray);font-size:14px;background:var(--white);}
   .cal-legend{margin-top:16px;font-size:12.5px;color:var(--gray);display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
   .cal-mode{font-size:11px;font-weight:600;color:#b08d57;background:#fdf6e9;border:1px solid #f0e0c0;padding:3px 9px;border-radius:20px;}
 
@@ -627,6 +661,11 @@
     .event-card{flex-basis:280px;}.stat-divider{display:none;}
     .form-card{padding:26px;}
     .cal-cell{min-height:60px;padding:6px 5px;gap:3px;}
+    .cal-grid.cal-week{grid-template-columns:minmax(0,1fr);}
+    .cal-grid.cal-week .cal-cell{min-height:0;padding:10px 12px;}
+    .cal-month{min-width:0;font-size:19px;}
+    .cal-ctrls{width:100%;}
+    .cal-seg button{padding:9px 11px;}
     .cal-cell .dnum{font-size:13px;}
     .cal-dow{font-size:10px;padding:10px 2px;}
     .cal-chip{font-size:0;height:5px;min-height:5px;padding:0;border:none;border-radius:3px;background:var(--navy);margin-top:1px;pointer-events:none;}
@@ -793,6 +832,8 @@
     <div class="event-card" data-date="2026-10-22"><div class="flyer-slot"><img src="flyers/flyer-womens-friendship-dinner.jpg" alt="Women's Friendship Dinner — Thursday, October 22 at the Stanley Building" onclick="openFlyer('flyers/flyer-womens-friendship-dinner.jpg')" onerror="this.parentElement.classList.add('empty');this.outerHTML=flyerPH;"></div><div class="event-top"><div class="event-date"><span class="m">Oct</span><span class="d">22</span></div><div class="event-meta"><h4>Women's Friendship Dinner</h4><span class="loc">📍 Stanley Building · Downtown Hobart</span></div></div><div class="event-body"><p>The annual Women's Friendship Dinner is back, now with a <b>fashion show</b>. Doors open at 5:30 PM, dinner begins at 6:00 PM. Tickets are $30 each — contact the Hobart Chamber of Commerce at 580-682-0887. Businesses and groups may sponsor a table.</p></div><div class="event-foot"><span class="event-tag">Dinner · Fashion Show</span></div></div>
     <div class="event-card" data-date="2026-10-31"><div class="flyer-slot"><img src="flyers/flyer-trunk-or-treat.jpg" alt="Trunk or Treat — Saturday, October 31 at 5:30 PM around the Kiowa County Courthouse Square" onclick="openFlyer('flyers/flyer-trunk-or-treat.jpg')" onerror="this.parentElement.classList.add('empty');this.outerHTML=flyerPH;"></div><div class="event-top"><div class="event-date"><span class="m">Oct</span><span class="d">31</span></div><div class="event-meta"><h4>Trunk or Treat</h4><span class="loc">📍 Kiowa County Courthouse Square</span></div></div><div class="event-body"><p>A safe place for children to trick or treat, beginning at 5:30 PM. Decorate your trunk and bring the Halloween spirit — the best decorated vehicle wins a prize. Hosted by the City of Hobart, Kiowa County and the Hobart Chamber of Commerce.</p></div><div class="event-foot"><span class="event-tag">Family · Halloween</span></div></div>
     <div class="event-card" data-date="2026-11-01"><div class="flyer-slot"><img src="flyers/flyer-ebike-raffle.jpg" alt="" onerror="this.parentElement.classList.add('empty');this.outerHTML=flyerPH;"></div><div class="event-top"><div class="event-date"><span class="m">Nov</span><span class="d">1</span></div><div class="event-meta"><h4>E-Bike Raffle Drawing</h4><span class="loc">📍 Kiowa County Museum</span></div></div><div class="event-body"><p>Win a 1500-Watt Vortex Mountain E-Bike — up to 32 mph, 60 miles on one charge. Tickets $5 each or 5 for $20. You do not have to be present to win.</p></div><div class="event-foot"><span class="event-tag">Raffle · Fundraiser</span></div></div>
+    <div class="event-card" data-date="2026-11-07"><div class="flyer-slot"><img src="flyers/flyer-first-saturday-market-nov7.jpg" alt="Hobart First Saturday Market — Saturday, November 7, 8 AM to 2 PM, 207 W. 4th St. Vendors wanted" onclick="openFlyer('flyers/flyer-first-saturday-market-nov7.jpg')" onerror="this.parentElement.classList.add('empty');this.outerHTML=flyerPH;"></div><div class="event-top"><div class="event-date"><span class="m">Nov</span><span class="d">7</span></div><div class="event-meta"><h4>First Saturday Market — Vendors Wanted</h4><span class="loc">📍 207 W. 4th St · Hobart, OK</span></div></div><div class="event-body"><p>Rust Dirt Co. presents the Hobart First Saturday Market, <b>8 AM–2 PM</b>. <b>Vendors wanted</b>, and they are also seeking a food truck. Message Rust Dirt Co. for details or visit rustdirtco.com.</p></div><div class="event-foot"><span class="event-tag">Market · Vendors Wanted</span></div></div>
+    <div class="event-card" data-date="2026-11-07"><div class="flyer-slot"><img src="flyers/flyer-par3-golf-tournament.jpg" alt="Par 3 Golf Tournament — November 7 at the Hobart Golf Course, 9 AM shotgun start" onclick="openFlyer('flyers/flyer-par3-golf-tournament.jpg')" onerror="this.parentElement.classList.add('empty');this.outerHTML=flyerPH;"></div><div class="event-top"><div class="event-date"><span class="m">Nov</span><span class="d">7</span></div><div class="event-meta"><h4>Par 3 Golf Tournament</h4><span class="loc">📍 Hobart Golf Course</span></div></div><div class="event-body"><p>18-hole, 2-man scramble with a <b>9 AM shotgun start</b>. $200 entry fee, A, B &amp; C flights, payouts in all flights (amounts based on entries), plus Closest to the Pin and Longest Putt. To enter, contact Tom at 580-819-2114.</p></div><div class="event-foot"><span class="event-tag">Golf · Tournament</span></div></div>
   </div>
 </section>
 
@@ -808,11 +849,22 @@
   <p class="cal-sub">See what's happening across Hobart and Kiowa County. Anyone can submit a community event — submissions are reviewed by the Chamber before they appear on the calendar.</p>
   <div class="cal-toolbar">
     <div class="cal-nav">
-      <button onclick="calMove(-1)" aria-label="Previous month">‹</button>
+      <button id="calPrev" onclick="calMove(-1)" aria-label="Previous month">‹</button>
       <div class="cal-month" id="calMonth">—</div>
-      <button onclick="calMove(1)" aria-label="Next month">›</button>
+      <button id="calNext" onclick="calMove(1)" aria-label="Next month">›</button>
     </div>
-    <button class="btn-sm btn-line" onclick="calToday()">Today</button>
+    <div class="cal-ctrls">
+      <div class="cal-seg" id="calViewSeg" role="group" aria-label="Calendar range">
+        <button type="button" data-v="month" onclick="calSetView('month')">Month</button>
+        <button type="button" data-v="week" onclick="calSetView('week')">Week</button>
+        <button type="button" data-v="day" onclick="calSetView('day')">Day</button>
+      </div>
+      <div class="cal-seg" id="calModeSeg" role="group" aria-label="Calendar layout">
+        <button type="button" data-m="grid" onclick="calSetMode('grid')">▦ Calendar</button>
+        <button type="button" data-m="list" onclick="calSetMode('list')">☰ List</button>
+      </div>
+      <button class="btn-sm btn-line" onclick="calToday()">Today</button>
+    </div>
   </div>
   <div class="cal-filter" id="calFilter"></div>
   <div class="cal-grid" id="calGrid"></div>
@@ -1673,6 +1725,8 @@ var SEED=[
   {id:'ev12',title:'Shortgrass Playhouse Auditions — "Have A Nice Doomsday"',date:'2026-08-24',time:'6:00 PM',location:'City Hall Theatre · 103½ E 3rd St, Hobart',description:'The Shortgrass Playhouse in Hobart is holding auditions for "Have A Nice Doomsday" on August 24th and 25th at 6:00 PM at City Hall Theatre, 103½ East 3rd Street. Must be 15 or older to audition. Enter through the east side door marked Shortgrass Playhouse. Be prepared to do a cold read from the provided script. Performance dates: October 3rd, 4th, 10th, and 11th.',status:'approved',cat:'community'},
   {id:'ev13',title:'Math Bootcamp — Great Plains Youth & Family Services',date:'2026-09-08',time:'Multiple sessions — 7:15 AM, 3:30 PM, 4:00 PM, 4:30 PM',location:'Western Technology Center · Hobart, OK',description:'Great Plains Youth & Family Services is offering the 2026-2027 Math Bootcamp with Misty George for students in 6th–12th grades. Free program running throughout Fall and Spring semesters. Sessions: 7:15–7:45 AM (All Math, Grades 6-12) · 3:30–4:00 PM (6th & 7th Grade Math) · 4:00–4:30 PM (Pre-Algebra & Algebra I) · 4:30–5:00 PM (Algebra II, Geometry & Trigonometry). Register at the link or contact Misty George at (580) 726-3383.',status:'approved',cat:'community',linkUrl:'https://form.jotform.com/262225855611153',linkLabel:'Register Online'},
   {id:'ev17',title:'🌙 Glow Golf Tournament',date:'2026-10-03',time:'At Dusk · Approx. 8:30 PM',location:'Hobart Municipal Golf Course · Hobart, OK',description:'The Hobart Chamber Glow Golf Tournament — a 4-man scramble under the glow! Teams of 4, scramble format. $240 per team. Limited to 15 public team spots.',status:'approved',cat:'community',linkUrl:'glow-golf-registration.html',linkLabel:'Register Your Team'},
+  {id:'ev22',title:'First Saturday Market — Vendors Wanted',date:'2026-11-07',time:'8:00 AM – 2:00 PM',location:'207 W. 4th St · Hobart, OK',description:'Rust Dirt Co. presents the Hobart First Saturday Market. Vendors wanted, and they are also seeking a food truck. Message Rust Dirt Co. for details or visit rustdirtco.com.',status:'approved',cat:'community'},
+  {id:'ev23',title:'Par 3 Golf Tournament',date:'2026-11-07',time:'9:00 AM Shotgun Start',location:'Hobart Golf Course · Hobart, OK',description:'18-hole, 2-man scramble. $200 entry fee. A, B & C flights with payouts in all flights (amounts based on entries), plus Closest to the Pin and Longest Putt. To enter, contact Tom at 580-819-2114.',status:'approved',cat:'community'},
   {id:'ev18',title:"Women's Friendship Dinner",date:'2026-10-22',time:'Doors 5:30 PM · Dinner 6:00 PM',location:'Stanley Building · Downtown Hobart',description:"The annual Women's Friendship Dinner is back with a fashion show for entertainment. Hobart Junior Ambassadors will help serve and model current clothing and styles from Hobart boutiques. Tickets are $30 per person — contact the Hobart Chamber of Commerce at 580-682-0887. Businesses and groups may sponsor a table.",status:'approved',cat:'community'},
   {id:'ev19',title:'🎃 Trunk or Treat — Courthouse Square',date:'2026-10-31',time:'5:30 PM',location:'Kiowa County Courthouse Square · Hobart, OK',description:'A safe place for children to trick or treat around the Kiowa County Courthouse Square. Decorate your trunk and bring the Halloween spirit — the best decorated vehicle wins a prize. Hosted by the City of Hobart, Kiowa County and the Hobart Chamber of Commerce.',status:'approved',cat:'community'},
   {id:'ev20',title:'FFA Labor Auction',date:'2026-10-27',time:'6:00 PM',location:"Women's Exhibit Building · Hobart, OK",description:'The Hobart FFA Labor Auction takes place Tuesday, October 27 at 6:00 PM at the Women\'s Exhibit Building.',status:'approved',cat:'community'},
@@ -1807,7 +1861,8 @@ function filterCal(key){
   renderCal();
 }
 
-function renderCal(){
+function renderCalMonth(){
+  var grid0=document.getElementById('calGrid'); grid0.className='cal-grid';
   document.getElementById('calMonth').textContent=MN[view.getMonth()]+' '+view.getFullYear();
   var grid=document.getElementById('calGrid'); grid.innerHTML='';
   var i; for(i=0;i<7;i++){var h=document.createElement('div');h.className='cal-dow';h.textContent=DOW[i];grid.appendChild(h);}
@@ -1865,8 +1920,138 @@ function renderCal(){
   }
 }
 
-function calMove(d){ view=new Date(view.getFullYear(),view.getMonth()+d,1); renderCal(); }
-function calToday(){ view=new Date(); view.setDate(1); renderCal(); }
+/* ---- Calendar range (month / week / day) and layout (calendar / list) ---- */
+var calView='month';
+var calMode=(window.innerWidth<=700)?'list':'grid';
+var calAnchor=new Date(today.getFullYear(),today.getMonth(),today.getDate());
+var MN3=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+function calWeekStart(d){ return new Date(d.getFullYear(),d.getMonth(),d.getDate()-d.getDay()); }
+function calSetView(v){ calView=v; renderCal(); }
+function calSetMode(m){ calMode=m; renderCal(); }
+function calMove(d){
+  if(calView==='week') calAnchor=new Date(calAnchor.getFullYear(),calAnchor.getMonth(),calAnchor.getDate()+7*d);
+  else if(calView==='day') calAnchor=new Date(calAnchor.getFullYear(),calAnchor.getMonth(),calAnchor.getDate()+d);
+  else{
+    var t=new Date(calAnchor.getFullYear(),calAnchor.getMonth()+d,1);
+    var now=new Date();
+    calAnchor=(t.getFullYear()===now.getFullYear()&&t.getMonth()===now.getMonth())?new Date(now.getFullYear(),now.getMonth(),now.getDate()):t;
+  }
+  renderCal();
+}
+function calToday(){ var n=new Date(); calAnchor=new Date(n.getFullYear(),n.getMonth(),n.getDate()); renderCal(); }
+function calLabel(){
+  var a=calAnchor;
+  if(calView==='week'){
+    var s0=calWeekStart(a), e0=new Date(s0.getFullYear(),s0.getMonth(),s0.getDate()+6);
+    if(s0.getFullYear()!==e0.getFullYear()) return MN3[s0.getMonth()]+' '+s0.getDate()+', '+s0.getFullYear()+' – '+MN3[e0.getMonth()]+' '+e0.getDate()+', '+e0.getFullYear();
+    if(s0.getMonth()!==e0.getMonth()) return MN3[s0.getMonth()]+' '+s0.getDate()+' – '+MN3[e0.getMonth()]+' '+e0.getDate()+', '+e0.getFullYear();
+    return MN3[s0.getMonth()]+' '+s0.getDate()+' – '+e0.getDate()+', '+e0.getFullYear();
+  }
+  if(calView==='day') return fmtNice(dstr(a));
+  return MN[a.getMonth()]+' '+a.getFullYear();
+}
+function calSyncCtrls(){
+  var lbl=document.getElementById('calMonth'); if(lbl) lbl.textContent=calLabel();
+  var unit=(calView==='week')?'week':(calView==='day')?'day':'month';
+  var pv=document.getElementById('calPrev'), nx=document.getElementById('calNext');
+  if(pv) pv.setAttribute('aria-label','Previous '+unit);
+  if(nx) nx.setAttribute('aria-label','Next '+unit);
+  var vb=document.querySelectorAll('#calViewSeg button'), i;
+  for(i=0;i<vb.length;i++){ var on=vb[i].getAttribute('data-v')===calView; vb[i].classList.toggle('on',on); vb[i].setAttribute('aria-pressed',on?'true':'false'); }
+  var mb=document.querySelectorAll('#calModeSeg button');
+  for(i=0;i<mb.length;i++){ var on2=mb[i].getAttribute('data-m')===calMode; mb[i].classList.toggle('on',on2); mb[i].setAttribute('aria-pressed',on2?'true':'false'); }
+}
+function calRange(){
+  var a=calAnchor, s0, e0;
+  if(calView==='week'){ s0=calWeekStart(a); e0=new Date(s0.getFullYear(),s0.getMonth(),s0.getDate()+6); }
+  else if(calView==='day'){ s0=new Date(a.getFullYear(),a.getMonth(),a.getDate()); e0=s0; }
+  else{ s0=new Date(a.getFullYear(),a.getMonth(),1); e0=new Date(a.getFullYear(),a.getMonth()+1,0); }
+  return {a:dstr(s0), b:dstr(e0), start:s0};
+}
+function calEventsBetween(a,b){
+  var out=[], i;
+  for(i=0;i<EVENTS.length;i++){ var e=EVENTS[i]; if(e.date && e.date>=a && e.date<=b && calMatches(e)) out.push({e:e,i:i}); }
+  out.sort(function(x,y){ return x.e.date<y.e.date?-1:x.e.date>y.e.date?1:x.i-y.i; });
+  return out.map(function(o){return o.e;});
+}
+function calEl(tag,cls,txt){ var n=document.createElement(tag); if(cls) n.className=cls; if(txt!=null) n.textContent=txt; return n; }
+function calCatLabel(ev){ var k=evCat(ev), l=k; CAL_TYPES.forEach(function(t){ if(t.key===k) l=t.label; }); return l; }
+function calEmptyMsg(what){
+  var m='Nothing on the calendar '+what+'.';
+  if(calFilter!=='All'){ var l=calFilter; CAL_TYPES.forEach(function(t){ if(t.key===calFilter) l=t.label; }); m='No '+l+' events '+what+'. Choose “All” to see everything.'; }
+  return m;
+}
+function calRow(ev,rich){
+  var r=calEl('div','cal-lrow'); r.setAttribute('data-cat',evCat(ev)); r.setAttribute('role','button'); r.tabIndex=0;
+  r.appendChild(calEl('div','lt',ev.title));
+  var meta=(ev.time?ev.time:'')+((ev.time&&ev.location)?' · ':'')+(ev.location||'');
+  if(meta) r.appendChild(calEl('div','lm',meta));
+  if(rich && ev.description){ var d=ev.description; if(d.length>260) d=d.slice(0,257).replace(/\s+\S*$/,'')+'…'; r.appendChild(calEl('div','ld',d)); }
+  if(rich) r.appendChild(calEl('span','lc',calCatLabel(ev)));
+  r.addEventListener('click',function(){ showDetail(ev); });
+  r.addEventListener('keydown',function(e){ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); showDetail(ev); } });
+  return r;
+}
+function renderCalList(){
+  var grid=document.getElementById('calGrid'); grid.innerHTML='';
+  grid.className='cal-list'+(calView==='day'?' cal-dayview':'');
+  var rg=calRange(), list=calEventsBetween(rg.a,rg.b), todayStr=dstr(new Date());
+  if(!list.length){
+    grid.appendChild(calEl('div','cal-empty',calEmptyMsg(calView==='day'?'for this day':calView==='week'?'this week':'this month')));
+    setStatus(''); return;
+  }
+  var last=null, i;
+  for(i=0;i<list.length;i++){
+    var ev=list[i];
+    if(ev.date!==last){
+      last=ev.date;
+      var h=calEl('div','cal-lday',fmtNice(ev.date));
+      if(ev.date===todayStr) h.appendChild(calEl('span','tdy','Today'));
+      grid.appendChild(h);
+    }
+    grid.appendChild(calRow(ev,calView!=='month'));
+  }
+  setStatus('');
+}
+function renderCalWeek(){
+  var grid=document.getElementById('calGrid'); grid.innerHTML=''; grid.className='cal-grid cal-week';
+  var s0=calWeekStart(calAnchor), todayStr=dstr(new Date()), total=0, i;
+  for(i=0;i<7;i++){
+    var d=new Date(s0.getFullYear(),s0.getMonth(),s0.getDate()+i), ds=dstr(d);
+    var cell=calEl('div','cal-cell'); if(ds===todayStr) cell.classList.add('today');
+    var h=calEl('div','cal-wh',DOW[d.getDay()]); h.appendChild(calEl('small',null,MN3[d.getMonth()]+' '+d.getDate())); cell.appendChild(h);
+    var evs=EVENTS.filter(function(e){ return e.date===ds && calMatches(e); }), k;
+    total+=evs.length;
+    for(k=0;k<evs.length;k++){
+      (function(ev){
+        var c=calEl('div','cal-wchip',ev.title); c.setAttribute('data-cat',evCat(ev)); c.setAttribute('role','button'); c.tabIndex=0;
+        if(ev.time) c.appendChild(calEl('span','t',ev.time));
+        c.addEventListener('click',function(){ showDetail(ev); });
+        c.addEventListener('keydown',function(e){ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); showDetail(ev); } });
+        cell.appendChild(c);
+      })(evs[k]);
+    }
+    grid.appendChild(cell);
+  }
+  setStatus(total?'':calEmptyMsg('this week'));
+}
+function renderCalDay(){
+  var grid=document.getElementById('calGrid'); grid.innerHTML=''; grid.className='cal-list cal-dayview';
+  var ds=dstr(calAnchor), list=EVENTS.filter(function(e){ return e.date===ds && calMatches(e); });
+  var h=calEl('div','cal-lday',fmtNice(ds)); if(ds===dstr(new Date())) h.appendChild(calEl('span','tdy','Today'));
+  grid.appendChild(h);
+  if(!list.length){ grid.appendChild(calEl('div','cal-empty',calEmptyMsg('for this day'))); setStatus(''); return; }
+  var i; for(i=0;i<list.length;i++) grid.appendChild(calRow(list[i],true));
+  setStatus('');
+}
+function renderCal(){
+  view=new Date(calAnchor.getFullYear(),calAnchor.getMonth(),1);
+  calSyncCtrls();
+  if(calMode==='list') return renderCalList();
+  if(calView==='week') return renderCalWeek();
+  if(calView==='day') return renderCalDay();
+  renderCalMonth();
+}
 
 function showDetail(ev){
   document.getElementById('d_title').textContent=ev.title;
