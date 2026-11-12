@@ -1,0 +1,16 @@
+{
+  "name": "hobart-chamber-social-worker",
+  "private": true,
+  "type": "module",
+  "version": "0.1.0",
+  "description": "Hobart Chamber of Commerce social worker: turns calendar events into on-brand Facebook posts",
+  "scripts": {
+    "samples": "node src/samples.js",
+    "plan": "node src/run.js --dry-run",
+    "run": "node src/run.js",
+    "check": "node src/run.js --check"
+  },
+  "dependencies": {
+    "playwright": "1.49.1"
+  }
+}
