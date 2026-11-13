@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="color-scheme" content="light only"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Frisco Creek BBQ — Menu | Hobart Chamber of Commerce</title>
+<meta name="description" content="Menu for Frisco Creek BBQ in Hobart, Oklahoma. Smoked brisket, ribs, pork, turkey, sausage, dinners, sandwiches, sides and desserts. Open Tuesday through Friday 11 AM to 7 PM."/>
+<meta property="og:title" content="Frisco Creek BBQ — Menu | Hobart, OK"/>
+<meta property="og:description" content="Smoked meats, dinners, sandwiches, sides and homemade desserts. Tuesday through Friday, 11 AM to 7 PM."/>
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"Restaurant",
+  "name":"Frisco Creek BBQ",
+  "description":"Smokehouse in Hobart, Oklahoma serving brisket, ribs, pork, turkey and sausage with home-style sides and desserts.",
+  "telephone":"+1-580-726-2025",
+  "address":{"@type":"PostalAddress","streetAddress":"1020 S Main St","addressLocality":"Hobart","addressRegion":"OK","postalCode":"73651","addressCountry":"US"},
+  "servesCuisine":["Barbecue"],
+  "priceRange":"$$",
+  "openingHoursSpecification":{"@type":"OpeningHoursSpecification","dayOfWeek":["Tuesday","Wednesday","Thursday","Friday"],"opens":"11:00","closes":"19:00"},
+  "hasMenu":"https://hobartchamber.org/menu-frisco-creek-bbq.html"
+}
+</script>
+<link href="https://fonts.googleapis.com/css2?family=Bree+Serif&family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@700;800&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  color-scheme:light;
+  --navy:#1a3ea8;--navy-dark:#142f7e;--navy-deep:#0e2056;
+  --gold:#c49a3e;--gold-light:#dab65e;--gold-pale:#f6edd6;
+  --white:#fff;--slate:#f3f6fc;--gray:#6f7d99;--dark-gray:#2c3a58;--border:#dbe3f4;
+  /* Frisco Creek BBQ brand: smoke, ember, butcher-paper cream */
+  --msg-cream:#f8f0e0;--msg-navy:#2e2622;--msg-red:#a8321f;
+  --msg-butter:#f0b040;--msg-periwinkle:#dcc9a6;
+}
+html{background:#fff !important;scroll-behavior:smooth;}
+body{font-family:'Inter',sans-serif;color:var(--navy-deep);background:#fff !important;overflow-x:hidden;}
+
+nav{background:rgba(26,62,168,.97);display:flex;align-items:center;justify-content:space-between;padding:0 22px;height:62px;border-bottom:2px solid var(--gold);gap:12px;position:sticky;top:0;z-index:100;}
+.nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none;flex:1;min-width:0;}
+.nav-logo-mark{width:38px;height:38px;border-radius:50%;background:var(--gold-pale);overflow:hidden;flex-shrink:0;}
+.nav-logo-mark img{width:100%;height:100%;object-fit:cover;}
+.nav-logo-text span:first-child{font-family:'Playfair Display',serif;font-size:14.5px;font-weight:700;color:#fff;display:block;white-space:nowrap;}
+.nav-logo-text span:last-child{font-size:10px;color:rgba(255,255,255,.5);}
+.nav-back{font-size:12px;font-weight:600;color:rgba(255,255,255,.7);text-decoration:none;padding:7px 13px;border:1px solid rgba(255,255,255,.25);border-radius:5px;white-space:nowrap;flex-shrink:0;}
+.nav-back:hover{color:#fff;border-color:rgba(255,255,255,.6);}
+
+.member-bar{background:var(--gold-pale);border-bottom:1px solid var(--gold);padding:8px 24px;text-align:center;}
+.member-bar span{font-size:11.5px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;color:var(--navy);}
+
+/* HERO */
+.hero{background:var(--msg-cream);padding:0;position:relative;overflow:hidden;border-bottom:4px solid var(--msg-navy);}
+.checker{height:26px;background:
+  repeating-linear-gradient(90deg,var(--msg-butter) 0 26px,transparent 26px 52px),
+  repeating-linear-gradient(180deg,var(--msg-butter) 0 26px,transparent 26px 52px);
+  background-color:var(--msg-cream);opacity:.75;}
+.hero-inner{padding:30px 22px 34px;text-align:center;max-width:660px;margin:0 auto;}
+.hero-name1{font-family:'Bree Serif',serif;font-size:clamp(28px,6vw,46px);color:#1a1a1a;line-height:1;letter-spacing:1px;}
+.hero-name2{font-family:'Bree Serif',serif;font-size:clamp(38px,9vw,66px);color:var(--msg-navy);line-height:1;letter-spacing:2px;margin-top:-2px;}
+.hero-hours{display:inline-block;background:var(--msg-navy);color:#fff;border-radius:30px;padding:9px 24px;margin-top:16px;}
+.hero-hours b{display:block;font-size:15px;font-weight:800;letter-spacing:.5px;}
+.hero-hours span{font-size:11.5px;opacity:.75;letter-spacing:1.5px;text-transform:uppercase;}
+.hero-chips{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-top:16px;}
+.chip{background:#fff;border:1.5px solid var(--msg-navy);border-radius:20px;padding:6px 14px;font-size:12px;font-weight:700;color:var(--msg-navy);}
+
+/* JUMP NAV */
+.jump-nav{background:var(--slate);border-bottom:1px solid var(--border);padding:11px 14px;display:flex;gap:7px;overflow-x:auto;scrollbar-width:none;position:sticky;top:62px;z-index:90;}
+.jump-nav::-webkit-scrollbar{display:none;}
+.jump-link{padding:7px 14px;background:#fff;border:1px solid var(--border);border-radius:20px;font-size:12.5px;font-weight:600;color:var(--msg-navy);text-decoration:none;white-space:nowrap;flex-shrink:0;}
+.jump-link:hover{background:var(--msg-navy);color:#fff;border-color:var(--msg-navy);}
+
+main{max-width:900px;margin:0 auto;padding:34px 18px 80px;background:#fff;}
+.menu-section{margin-bottom:40px;scroll-margin-top:128px;}
+.menu-head{display:flex;align-items:baseline;gap:12px;margin-bottom:14px;padding-bottom:9px;border-bottom:3px solid var(--msg-navy);}
+.menu-head h2{font-family:'Bree Serif',serif;font-size:25px;color:var(--msg-navy);letter-spacing:.5px;}
+.menu-note{font-size:12px;color:var(--gray);font-style:italic;margin-left:auto;}
+
+.menu-item{display:flex;align-items:baseline;gap:11px;padding:11px 4px;flex-wrap:wrap;border-bottom:1px dotted var(--border);}
+.menu-item:last-child{border-bottom:none;}
+.mi-name{font-size:15px;font-weight:600;color:var(--dark-gray);flex:1 1 auto;min-width:0;overflow-wrap:anywhere;}
+.mi-dots{flex:1 1 20px;border-bottom:1px dotted #c8d2e8;min-width:14px;transform:translateY(-4px);}
+.mi-price{font-size:15px;font-weight:800;color:var(--msg-navy);flex-shrink:0;font-variant-numeric:tabular-nums;}
+.mi-tiers{display:flex;gap:14px;flex-shrink:0;}
+.mi-tier{text-align:center;}
+.mi-tier .t-qty{font-size:10px;color:var(--gray);font-weight:700;display:block;text-transform:uppercase;letter-spacing:.5px;}
+.mi-tier .t-price{font-size:14.5px;font-weight:800;color:var(--msg-navy);font-variant-numeric:tabular-nums;}
+
+/* DAILY SPECIALS */
+.specials{background:var(--msg-red);border-radius:14px;padding:26px 24px;}
+.specials-title{font-family:'Bree Serif',serif;font-size:22px;color:var(--msg-butter);text-align:center;letter-spacing:1px;margin-bottom:4px;}
+.specials-sub{text-align:center;font-size:12px;color:rgba(255,255,255,.7);margin-bottom:18px;}
+.day{padding:14px 0;border-bottom:1px solid rgba(255,255,255,.18);}
+.day:last-child{border-bottom:none;}
+.day-name{font-family:'Bree Serif',serif;font-size:19px;color:var(--msg-butter);letter-spacing:1px;margin-bottom:3px;}
+.day-row{display:flex;align-items:baseline;gap:12px;}
+.day-desc{font-size:13px;color:#fff;line-height:1.5;flex:1;}
+.day-price{font-size:17px;font-weight:800;color:#fff;flex-shrink:0;font-variant-numeric:tabular-nums;}
+
+/* COMBO / KIDS PANELS */
+.panel{border-radius:14px;padding:24px;margin-top:16px;}
+.panel.navy{background:var(--msg-navy);}
+.panel.peri{background:var(--msg-periwinkle);}
+.panel-title{font-family:'Bree Serif',serif;font-size:21px;letter-spacing:1px;margin-bottom:3px;}
+.panel.navy .panel-title{color:var(--msg-butter);}
+.panel.peri .panel-title{color:var(--msg-navy);}
+.panel-sub{font-size:11.5px;line-height:1.55;margin-bottom:15px;text-transform:uppercase;letter-spacing:.6px;}
+.panel.navy .panel-sub{color:rgba(255,255,255,.65);}
+.panel.peri .panel-sub{color:rgba(47,64,121,.75);}
+.p-item{display:flex;align-items:baseline;gap:11px;padding:8px 0;flex-wrap:wrap;border-bottom:1px dotted rgba(255,255,255,.22);}
+.panel.peri .p-item{border-bottom-color:rgba(47,64,121,.22);}
+.p-item:last-child{border-bottom:none;}
+.p-name{font-size:14.5px;font-weight:700;flex:1 1 auto;min-width:0;overflow-wrap:anywhere;}
+.panel.navy .p-name{color:#fff;}
+.panel.peri .p-name{color:var(--msg-navy);}
+.p-name small{display:block;font-size:11px;font-weight:500;opacity:.7;margin-top:1px;}
+.p-dots{flex:1 1 20px;border-bottom:1px dotted rgba(255,255,255,.3);min-width:14px;transform:translateY(-4px);}
+.panel.peri .p-dots{border-bottom-color:rgba(47,64,121,.3);}
+.p-price{font-size:15.5px;font-weight:800;flex-shrink:0;font-variant-numeric:tabular-nums;}
+.panel.navy .p-price{color:var(--msg-butter);}
+.panel.peri .p-price{color:var(--msg-navy);}
+
+/* COMING SOON */
+.soon{background:var(--slate);border:2px dashed var(--border);border-radius:12px;padding:30px 24px;text-align:center;margin-top:14px;}
+.soon-icon{font-size:34px;margin-bottom:8px;}
+.soon h3{font-family:'Bree Serif',serif;font-size:19px;color:var(--msg-navy);margin-bottom:6px;}
+.soon p{font-size:13px;color:var(--gray);line-height:1.6;}
+
+.footnote{margin-top:18px;padding:13px 18px;background:var(--msg-cream);border-left:4px solid var(--msg-red);border-radius:8px;font-size:13px;font-weight:700;color:var(--msg-navy);text-align:center;}
+
+.contact-card{background:var(--msg-navy);border-radius:14px;padding:28px;text-align:center;margin-top:40px;}
+.contact-card h3{font-family:'Bree Serif',serif;font-size:22px;color:var(--msg-butter);margin-bottom:6px;letter-spacing:.5px;}
+.contact-card p{font-size:13.5px;color:rgba(255,255,255,.7);line-height:1.7;margin-bottom:18px;}
+.c-btn{display:inline-flex;align-items:center;gap:7px;padding:12px 22px;border-radius:7px;font-size:14px;font-weight:700;text-decoration:none;background:var(--msg-butter);color:var(--msg-navy);}
+
+.disclaimer{margin-top:22px;padding:14px 18px;background:var(--slate);border-radius:8px;font-size:12px;color:var(--gray);line-height:1.6;text-align:center;}
+.page-footer{background:var(--navy-dark);padding:24px;text-align:center;}
+.page-footer p{font-size:13px;color:rgba(255,255,255,.4);}
+.page-footer a{color:var(--gold-light);text-decoration:none;}
+
+@media(max-width:640px){
+  nav{padding:0 13px;}
+  .jump-nav{top:62px;}
+  main{padding:24px 13px 60px;}
+  .menu-head h2{font-size:21px;}
+  .menu-note{display:none;}
+  .specials{padding:20px 16px;}
+  .panel{padding:18px 16px;}
+  .day-row{flex-direction:column;gap:3px;}
+  .day-price{font-size:16px;}
+}
+
+  /* --- overflow containment --- */
+  .menu-section,.panel,.specials{max-width:100%;overflow-wrap:break-word;}
+  .mi-price,.p-price{margin-left:auto;}
+  @media(max-width:560px){
+    .mi-dots,.p-dots{display:none;}
+    .mi-name small,.p-name small{max-width:100%;}
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">
+    <span class="nav-logo-mark"><img src="flyers/chamber-logo.PNG" alt="" onerror="this.onerror=null;this.style.display='none';"/></span>
+    <span class="nav-logo-text"><span>Hobart Chamber of Commerce</span><span>Member Menus</span></span>
+  </a>
+  <a href="local-menus.html" class="nav-back">← All Menus</a>
+</nav>
+
+<div class="member-bar"><span>⭐ Hobart Chamber Member</span></div>
+
+<div class="hero">
+  <div class="hero-inner">
+    <div class="hero-name1">FRISCO CREEK</div>
+    <div class="hero-name2">BBQ</div>
+    <p style="font-family:'Bree Serif',serif;font-style:italic;color:var(--msg-red);font-size:18px;margin-top:6px;">"No Doubt about it…"</p>
+    <div class="hero-hours">
+      <b>Tuesday – Friday · 11 AM – 7 PM</b>
+      <span>1020 S. Main · (580) 726-2025</span>
+    </div>
+    <div class="hero-chips">
+      <span class="chip">🔥 Smoked On Site</span>
+      <span class="chip">🥩 Brisket &amp; Ribs</span>
+      <span class="chip">🍑 Peach Cobbler</span>
+      <span class="chip">👨‍👩‍👧 Family Pack</span>
+    </div>
+  </div>
+</div>
+
+<div class="jump-nav">
+  <a href="#specials" class="jump-link">Specials</a>
+  <a href="#sandwiches" class="jump-link">Sandwiches</a>
+  <a href="#dinners" class="jump-link">Dinners</a>
+  <a href="#meat" class="jump-link">Meat Only</a>
+  <a href="#sides" class="jump-link">Sides</a>
+  <a href="#premium" class="jump-link">Premium Sides</a>
+  <a href="#desserts" class="jump-link">Desserts</a>
+  <a href="#drinks" class="jump-link">Drinks</a>
+</div>
+
+<main>
+  <section class="menu-section" id="specials">
+    <div class="menu-head"><h2>Specials</h2></div>
+    <div class="specials">
+      <div class="specials-title">SMOKE STACK</div>
+      <div class="specials-sub">Brisket, pork, sausage or chicken</div>
+      <div class="day"><div class="day-row"><span class="day-desc">Smoke Stack: your choice of brisket, pork, sausage or chicken</span><span class="day-price">$9.49</span></div></div>
+      <div class="day"><div class="day-row"><span class="day-desc">Bearcat Special: large chopped BBQ sandwich, chips and a drink</span><span class="day-price">$9.49</span></div></div>
+    </div>
+  </section>
+
+  <section class="menu-section" id="sandwiches">
+    <div class="menu-head"><h2>Sandwiches</h2></div>
+      <div class="menu-item"><span class="mi-name">Brisket</span><span class="mi-dots"></span><span class="mi-tiers"><span class="mi-tier"><span class="t-qty">Small</span><span class="t-price">$6.39</span></span><span class="mi-tier"><span class="t-qty">Large</span><span class="t-price">$9.59</span></span></span></div>      <div class="menu-item"><span class="mi-name">Pork</span><span class="mi-dots"></span><span class="mi-tiers"><span class="mi-tier"><span class="t-qty">Small</span><span class="t-price">$6.39</span></span><span class="mi-tier"><span class="t-qty">Large</span><span class="t-price">$9.59</span></span></span></div>      <div class="menu-item"><span class="mi-name">Turkey</span><span class="mi-dots"></span><span class="mi-tiers"><span class="mi-tier"><span class="t-qty">Small</span><span class="t-price">$6.39</span></span><span class="mi-tier"><span class="t-qty">Large</span><span class="t-price">$9.59</span></span></span></div>      <div class="menu-item"><span class="mi-name">Chicken Breast</span><span class="mi-dots"></span><span class="mi-tiers"><span class="mi-tier"><span class="t-qty">Small</span><span class="t-price">$6.39</span></span><span class="mi-tier"><span class="t-qty">Large</span><span class="t-price">$9.59</span></span></span></div>      <div class="menu-item"><span class="mi-name">Chicken Leg Quarter</span><span class="mi-dots"></span><span class="mi-tiers"><span class="mi-tier"><span class="t-qty">Large</span><span class="t-price">$6.79</span></span></span></div>      <div class="menu-item"><span class="mi-name">Sausage</span><span class="mi-dots"></span><span class="mi-tiers"><span class="mi-tier"><span class="t-qty">Large</span><span class="t-price">$4.79</span></span></span></div>      <div class="menu-item"><span class="mi-name">Smoked Salad</span><span class="mi-dots"></span><span class="mi-tiers"><span class="mi-tier"><span class="t-qty">Small</span><span class="t-price">$6.39</span></span><span class="mi-tier"><span class="t-qty">Large</span><span class="t-price">$9.59</span></span></span></div>      <div class="menu-item"><span class="mi-name">Chopped BBQ</span><span class="mi-dots"></span><span class="mi-tiers"><span class="mi-tier"><span class="t-qty">Small</span><span class="t-price">$4.29</span></span><span class="mi-tier"><span class="t-qty">Large</span><span class="t-price">$6.39</span></span></span></div>
+  </section>
+
+  <section class="menu-section" id="dinners">
+    <div class="menu-head"><h2>Dinners</h2><span class="menu-note">Served with 2 sides</span></div>
+    <div class="panel navy">
+      <div class="panel-title">DINNERS</div>
+      <div class="panel-sub">Served with 2 sides</div>
+      <div class="p-item"><span class="p-name">Brisket</span><span class="p-dots"></span><span class="p-price">$16.99</span></div>      <div class="p-item"><span class="p-name">Rib</span><span class="p-dots"></span><span class="p-price">$16.99</span></div>      <div class="p-item"><span class="p-name">Pork</span><span class="p-dots"></span><span class="p-price">$16.99</span></div>      <div class="p-item"><span class="p-name">Turkey</span><span class="p-dots"></span><span class="p-price">$16.99</span></div>      <div class="p-item"><span class="p-name">Burnt Ends</span><span class="p-dots"></span><span class="p-price">$18.29</span></div>      <div class="p-item"><span class="p-name">Rib Tips</span><span class="p-dots"></span><span class="p-price">$18.29</span></div>      <div class="p-item"><span class="p-name">Sausage</span><span class="p-dots"></span><span class="p-price">$13.99</span></div>      <div class="p-item"><span class="p-name">Single Sausage</span><span class="p-dots"></span><span class="p-price">$10.99</span></div>      <div class="p-item"><span class="p-name">Chopped BBQ</span><span class="p-dots"></span><span class="p-price">$13.99</span></div>      <div class="p-item"><span class="p-name">Chicken Breast</span><span class="p-dots"></span><span class="p-price">$13.79</span></div>      <div class="p-item"><span class="p-name">Combo</span><span class="p-dots"></span><span class="p-price">$21.49</span></div>      <div class="p-item"><span class="p-name">Sampler</span><span class="p-dots"></span><span class="p-price">$28.59</span></div>      <div class="p-item"><span class="p-name">Kids Plate</span><span class="p-dots"></span><span class="p-price">$6.09</span></div>      <div class="p-item"><span class="p-name">Pound Plate<small>1 lb meat and 2 sides, save $1.00</small></span><span class="p-dots"></span><span class="p-price">$1 off</span></div>      <div class="p-item"><span class="p-name">Family Pack<small>1 lb meat, 2 16 oz sides and dessert</small></span><span class="p-dots"></span><span class="p-price">$34.99</span></div>
+    </div>
+  </section>
+
+  <section class="menu-section" id="meat">
+    <div class="menu-head"><h2>Meat Only</h2><span class="menu-note">By the weight</span></div>
+      <div class="menu-item"><span class="mi-name">Brisket</span><span class="mi-dots"></span><span class="mi-tiers"><span class="mi-tier"><span class="t-qty">½ lb</span><span class="t-price">$12.79</span></span><span class="mi-tier"><span class="t-qty">1 lb</span><span class="t-price">$21.99</span></span></span></div>      <div class="menu-item"><span class="mi-name">Rib</span><span class="mi-dots"></span><span class="mi-tiers"><span class="mi-tier"><span class="t-qty">½ lb</span><span class="t-price">$12.79</span></span><span class="mi-tier"><span class="t-qty">1 lb</span><span class="t-price">$21.99</span></span></span></div>      <div class="menu-item"><span class="mi-name">Pork</span><span class="mi-dots"></span><span class="mi-tiers"><span class="mi-tier"><span class="t-qty">½ lb</span><span class="t-price">$12.79</span></span><span class="mi-tier"><span class="t-qty">1 lb</span><span class="t-price">$21.99</span></span></span></div>      <div class="menu-item"><span class="mi-name">Turkey</span><span class="mi-dots"></span><span class="mi-tiers"><span class="mi-tier"><span class="t-qty">½ lb</span><span class="t-price">$12.79</span></span><span class="mi-tier"><span class="t-qty">1 lb</span><span class="t-price">$21.99</span></span></span></div>      <div class="menu-item"><span class="mi-name">Burnt Ends</span><span class="mi-dots"></span><span class="mi-tiers"><span class="mi-tier"><span class="t-qty">½ lb</span><span class="t-price">$13.29</span></span><span class="mi-tier"><span class="t-qty">1 lb</span><span class="t-price">$24.19</span></span></span></div>      <div class="menu-item"><span class="mi-name">Rib Tips</span><span class="mi-dots"></span><span class="mi-tiers"><span class="mi-tier"><span class="t-qty">½ lb</span><span class="t-price">$13.29</span></span><span class="mi-tier"><span class="t-qty">1 lb</span><span class="t-price">$24.19</span></span></span></div>      <div class="menu-item"><span class="mi-name">Chopped BBQ</span><span class="mi-dots"></span><span class="mi-tiers"><span class="mi-tier"><span class="t-qty">½ lb</span><span class="t-price">$9.19</span></span><span class="mi-tier"><span class="t-qty">1 lb</span><span class="t-price">$15.99</span></span></span></div>      <div class="menu-item"><span class="mi-name">Sausage</span><span class="mi-dots"></span><span class="mi-tiers"><span class="mi-tier"><span class="t-qty">½ lb</span><span class="t-price">$9.19</span></span><span class="mi-tier"><span class="t-qty">1 lb</span><span class="t-price">$15.99</span></span></span></div>      <div class="menu-item"><span class="mi-name">Bolo</span><span class="mi-dots"></span><span class="mi-tiers"><span class="mi-tier"><span class="t-qty">½ lb</span><span class="t-price">$5.19</span></span><span class="mi-tier"><span class="t-qty">1 lb</span><span class="t-price">$10.99</span></span></span></div>
+  </section>
+
+  <section class="menu-section" id="sides">
+    <div class="menu-head"><h2>Sides</h2></div>
+      <div class="menu-item"><span class="mi-name">Frisco Fries · Potato Salad · Cole Slaw · FC Baked Beans · Mac n Cheese · Green Beans · Red Beans · Mixed Greens</span></div>      <div class="menu-item"><span class="mi-name">Choose any side</span><span class="mi-dots"></span><span class="mi-tiers"><span class="mi-tier"><span class="t-qty">4 oz</span><span class="t-price">$2.59</span></span><span class="mi-tier"><span class="t-qty">8 oz</span><span class="t-price">$5.19</span></span><span class="mi-tier"><span class="t-qty">16 oz</span><span class="t-price">$7.99</span></span><span class="mi-tier"><span class="t-qty">32 oz</span><span class="t-price">$15.69</span></span></span></div>      <div class="menu-item"><span class="mi-name">Garlic Bread<small>4 for $4.29</small></span><span class="mi-dots"></span><span class="mi-price">$1.49</span></div>      <div class="menu-item"><span class="mi-name">Corn Bread<small>Pan $4.29</small></span><span class="mi-dots"></span><span class="mi-price">$1.49</span></div>      <div class="menu-item"><span class="mi-name">Garlic Bread or Corn Bread, pan</span><span class="mi-dots"></span><span class="mi-price">$4.29</span></div>      <div class="menu-item"><span class="mi-name">Baked Potato<small>Lunch time only, while they last</small></span><span class="mi-dots"></span><span class="mi-price">$5.99</span></div>      <div class="menu-item"><span class="mi-name">Loaded Baked Potato<small>Lunch time only, while they last</small></span><span class="mi-dots"></span><span class="mi-price">$9.49</span></div>
+  </section>
+
+  <section class="menu-section" id="premium">
+    <div class="menu-head"><h2>Premium Sides</h2></div>
+      <div class="menu-item"><span class="mi-name">Gumbo</span><span class="mi-dots"></span><span class="mi-tiers"><span class="mi-tier"><span class="t-qty">4 oz</span><span class="t-price">$6.09</span></span><span class="mi-tier"><span class="t-qty">8 oz</span><span class="t-price">$10.89</span></span><span class="mi-tier"><span class="t-qty">16 oz</span><span class="t-price">$18.39</span></span><span class="mi-tier"><span class="t-qty">32 oz</span><span class="t-price">$30.29</span></span></span></div>      <div class="menu-item"><span class="mi-name">Red Beans &amp; Rice</span><span class="mi-dots"></span><span class="mi-tiers"><span class="mi-tier"><span class="t-qty">Small</span><span class="t-price">$9.29</span></span><span class="mi-tier"><span class="t-qty">Large</span><span class="t-price">$17.69</span></span><span class="mi-tier"><span class="t-qty">Family</span><span class="t-price">$21.99</span></span></span></div>      <div class="menu-item"><span class="mi-name">Dirty Rice</span><span class="mi-dots"></span><span class="mi-tiers"><span class="mi-tier"><span class="t-qty">Small</span><span class="t-price">$9.29</span></span><span class="mi-tier"><span class="t-qty">Large</span><span class="t-price">$17.69</span></span><span class="mi-tier"><span class="t-qty">Family</span><span class="t-price">$21.99</span></span></span></div>      <div class="menu-item"><span class="mi-name">Pork &amp; Red Beans</span><span class="mi-dots"></span><span class="mi-tiers"><span class="mi-tier"><span class="t-qty">Small</span><span class="t-price">$9.29</span></span><span class="mi-tier"><span class="t-qty">Large</span><span class="t-price">$17.69</span></span><span class="mi-tier"><span class="t-qty">Family</span><span class="t-price">$21.99</span></span></span></div>      <div class="menu-item"><span class="mi-name">Pork &amp; Mixed Greens</span><span class="mi-dots"></span><span class="mi-tiers"><span class="mi-tier"><span class="t-qty">Small</span><span class="t-price">$9.29</span></span><span class="mi-tier"><span class="t-qty">Large</span><span class="t-price">$17.69</span></span><span class="mi-tier"><span class="t-qty">Family</span><span class="t-price">$21.99</span></span></span></div>
+  </section>
+
+  <section class="menu-section" id="desserts">
+    <div class="menu-head"><h2>Desserts</h2><span class="menu-note">$3.59 each</span></div>
+      <div class="menu-item"><span class="mi-name">Pecan Cake</span><span class="mi-dots"></span><span class="mi-price">$3.59</span></div>      <div class="menu-item"><span class="mi-name">Banana Pudding</span><span class="mi-dots"></span><span class="mi-price">$3.59</span></div>      <div class="menu-item"><span class="mi-name">Peach Cobbler</span><span class="mi-dots"></span><span class="mi-price">$3.59</span></div>
+  </section>
+
+  <section class="menu-section" id="drinks">
+    <div class="menu-head"><h2>Drinks</h2></div>
+      <div class="menu-item"><span class="mi-name">Can Soda</span><span class="mi-dots"></span><span class="mi-price">$1.50</span></div>      <div class="menu-item"><span class="mi-name">Bottle Water</span><span class="mi-dots"></span><span class="mi-price">$2.29</span></div>      <div class="menu-item"><span class="mi-name">Bottle Soda</span><span class="mi-dots"></span><span class="mi-price">$3.29</span></div>      <div class="menu-item"><span class="mi-name">Ice Tea</span><span class="mi-dots"></span><span class="mi-tiers"><span class="mi-tier"><span class="t-qty">20 oz</span><span class="t-price">$2.99</span></span><span class="mi-tier"><span class="t-qty">32 oz</span><span class="t-price">$3.49</span></span></span></div>      <div class="menu-item"><span class="mi-name">Coffee</span><span class="mi-dots"></span><span class="mi-price">$1.59</span></div>      <div class="menu-item"><span class="mi-name">Cold Brew Coffee<small>16 oz</small></span><span class="mi-dots"></span><span class="mi-price">$3.19</span></div>
+  </section>
+
+
+  <div class="footnote">Tuesday – Friday, 11:00 AM – 7:00 PM</div>
+
+  <div class="contact-card">
+    <h3>Frisco Creek BBQ</h3>
+    <p>1020 S. Main, Hobart, OK 73651<br>Patio seating available · Credit cards accepted</p>
+    <a class="c-btn" href="tel:5807262025">📞 (580) 726-2025</a>
+  </div>
+
+  <div class="disclaimer">Menu and prices as printed on the restaurant's current menu and subject to change. Please call to confirm.</div>
+</main>
+
+<div class="page-footer">
+  <p>Hobart Chamber of Commerce · 106 W 4th St · Hobart, OK 73651 · <a href="tel:5806820887">(580) 682-0887</a></p>
+  <p style="margin-top:6px;"><a href="index.html#directory">← Back to Member Directory</a></p>
+</div>
+
+</body>
+</html>
