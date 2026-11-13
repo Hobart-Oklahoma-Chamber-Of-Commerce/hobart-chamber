@@ -2,25 +2,40 @@
 
 Turns events on the community calendar into on-brand Facebook posts, on its own.
 
-**What it does every day (7:15 AM and 7:15 PM Central)**
+**What it does (five posts a day, 7 AM, 10 AM, 12 PM, 3 PM, 6 PM Central)**
 
-1. Reads the calendar (the built-in events in `index.html` plus anything added in the admin panel).
-2. Works out which posts are due:
-   - an **announcement** once an event is 7 days out or less,
-   - a **reminder** the day before.
-   - Multi-date runs (a play with four shows) get one announcement that lists every date.
-   - Sports, school and holiday entries stay on the calendar but don't get their own post.
-3. Draws a "Hobart Happenings" graphic for each one (the event's real flyer is taped on as a polaroid when there is one, otherwise a hand-drawn icon) and writes the caption.
-4. **Schedules** the post on the Facebook Page. It does not post instantly. Scheduled posts sit in **Meta Business Suite → Planner → Scheduled**, where Jessica can read, edit, reschedule or delete any of them before they go out.
-5. Records every post in `state/ledger.json`, so nothing is ever posted twice.
+Each evening (and again each morning as a safety net) it reads the calendar and schedules the next day's five posts on the Page:
 
-At most 3 posts a day, sent at 10:00, 12:30, 3:30 or 6:00 (Central).
+| Time | Post | Where it comes from |
+|---|---|---|
+| 7:00 AM | **Today in Hobart** lineup (or "Coming up" if today is quiet) | the calendar |
+| 10:00 AM | Event announcement (7 days out) or reminder (day before), else a "save the date" for the next event | the calendar |
+| 12:00 PM | **Lunch spot** spotlight, only restaurants open that day | `data/restaurants.json` + menu pages |
+| 3:00 PM | **Member spotlight**, rotating through every member | the member directory on the website |
+| 6:00 PM | Second event post, else **Tomorrow in Hobart**, else a Chamber how-to (submit an event, join, see menus) | the calendar |
+
+Nothing is invented: every name, address, phone and hour comes from the website or a verified listing. If the calendar is quiet, the slot falls back to a true "how to use the Chamber" post instead of filler.
+
+Posts are **scheduled**, not instant. They sit in **Meta Business Suite > Planner > Scheduled**, where Jessica can read, edit, move or delete any of them. `state/ledger.json` records every post so nothing is made twice.
 
 ## The look (so it stays consistent)
 
-Every post is a page from a Main Street scrapbook: paper grain and sunburst, the date as a tear-off ticket stub with a hand-lettered "This Saturday!", a colored sticker, and the Chamber logo and navy/gold from the water-tower mark. Fonts are open-licensed and live in `fonts/`. All art is drawn vector (`src/icons.js`), with no AI-generated imagery. Captions use the Chamber's own event description almost word for word, with no emoji bullets, hashtag piles or em dashes.
+Every graphic uses the website's own fonts (Playfair Display and Inter) and exact colors (royal blue `#1a3ea8`, gold `#c49a3e`, navy `#0e2056`). On top of that each post gets two theme layers:
 
-Look and feel lives in `src/template.js` and `src/icons.js`. Wording lives in `src/caption.js`. Timing rules live at the top of `src/plan.js`.
+- **Season** (by date): fall leaves on warm paper, winter snowflakes on cool paper, spring blossoms, summer sun.
+- **Event** (by words in the title): football, basketball, band/music, market, harvest, Halloween, golf, Christmas, stage, food, shopping, giving. This sets the sticker color, header strip pattern, hero icon and a few motifs.
+
+So a November football post and a January basketball post share the same bones but look clearly different. Themes live in `src/themes.js`, icons in `src/icons.js`, layout in `src/template.js`, wording in `src/caption.js` and `src/content.js`, timing in `src/plan.js` (`DAILY`).
+
+## Setup checklist (about 20 minutes)
+
+- [ ] Merge this pull request.
+- [ ] Meta developer app created under the **Chamber's** Facebook admin login (steps 1-3 below).
+- [ ] Repo secrets `FB_PAGE_ID` and `FB_PAGE_TOKEN` saved (step 4). Never paste them in chat.
+- [ ] Actions > "Hobart Happenings social worker" > Run workflow with **dry run checked**. Open the `drafts` download and look at the graphics.
+- [ ] Run it again with dry run **unchecked**. Open Meta Business Suite > Planner and confirm the posts are in Scheduled.
+- [ ] Jessica checks Scheduled for a week before anyone trusts it blind.
+- [ ] Optional: set repo variable `FB_MODE` = `publish` once everyone is happy.
 
 ## One-time setup (about 20 minutes, needs the Chamber's Facebook admin login)
 
@@ -50,5 +65,6 @@ node src/run.js --dry-run --now 2026-11-22T08:30   # pretend it's another day
 ## When something looks off
 
 - A post is wrong: delete it in Meta Business Suite → Scheduled. Fix the event on the calendar. The ledger remembers it was made, so to re-make it, remove its line from `state/ledger.json`.
+- A restaurant changed hours or phone: edit `data/restaurants.json`. Members come straight from the website directory.
 - Wrong sticker or icon for an event: adjust the word rules at the top of `src/icons.js`.
 - Facebook token stopped working: repeat step 3 and replace the `FB_PAGE_TOKEN` secret.

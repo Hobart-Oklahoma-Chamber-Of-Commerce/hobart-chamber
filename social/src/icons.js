@@ -108,6 +108,8 @@ export const ICONS = {
 // Pick an icon (and sticker label) from the event's words. First match wins.
 const RULES = [
   [/golf|scramble|tee\b/i,                     'golf',       'FORE!'],
+  [/band|concert|choir|music|orchestra|drumline|marching|recital|karaoke/i, 'music', 'LIVE MUSIC'],
+  [/harvest/i,                                 'pumpkin',    'HARVEST TIME'],
   [/poker run|ride|motorcycle|biker|crawl/i,   'biker',      'ROLL OUT'],
   [/market|sale|vendor|bazaar|craft|boutique/i,'market',     'SHOP LOCAL'],
   [/fashion|friendship/i,                      'dress',      'BRING A FRIEND'],
@@ -139,5 +141,25 @@ export function pickLook(ev) {
 export const UI = {
   clock: `<svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="20" cy="20" r="15"/><path d="M20 10 V20 L27 24"/></svg>`,
   pin:   `<svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 36 C10 24 7 19 7 14 a13 13 0 0 1 26 0 c0 5 -3 10 -13 22 Z"/><circle cx="20" cy="14" r="4.5"/></svg>`,
+  phone: `<svg viewBox="0 0 40 40" fill="none" stroke="currentColor" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round"><path d="M10 5 h7 l3 8 -4 3 a18 18 0 0 0 8 8 l3 -4 8 3 v7 a4 4 0 0 1 -4 4 C18 34 6 22 6 9 a4 4 0 0 1 4 -4 Z"/></svg>`,
   star:  `<svg viewBox="0 0 40 40" fill="currentColor"><path d="M20 3 l4.6 11.6 12.4 1 -9.5 8 3 12.2 L20 28.6 9.5 35.8 12.5 23.6 3 15.6 l12.4 -1 z"/></svg>`,
+};
+
+// ---- extra icons: seasons + band ----
+const _N = '#0e2056', _G = '#c49a3e', _R = '#d9573b', _O = '#ef8a2f', _GR = '#5b9a5e', _C = '#fff8e6';
+const _w = (inner) => `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" fill="none" stroke="${_N}" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">${inner}</svg>`;
+Object.assign(ICONS, {
+  music: _w(`<path d="M36 70 V24 L78 14 V60" fill="none"/><ellipse cx="28" cy="72" rx="11" ry="8" fill="${_G}"/><ellipse cx="70" cy="62" rx="11" ry="8" fill="${_G}"/><path d="M36 38 L78 28" />`),
+  store: _w(`<path d="M12 40 L20 14 H80 L88 40 Z" fill="${_R}"/><path d="M12 40 q7 9 13 0 q7 9 13 0 q7 9 12 0 q7 9 13 0 q7 9 13 0" fill="${_C}"/><rect x="16" y="48" width="68" height="40" fill="${_C}"/><rect x="40" y="62" width="20" height="26" fill="${_G}"/><rect x="22" y="56" width="14" height="14" fill="#8fc3e8"/><rect x="64" y="56" width="14" height="14" fill="#8fc3e8"/>`),
+  megaphone: _w(`<path d="M16 38 H34 L74 16 V84 L34 62 H16 Z" fill="${_G}"/><path d="M34 62 L40 86 H52 L46 66"/><path d="M84 36 q8 14 0 28" />`),
+});
+export const MOTIFS = {
+  leaf: `<svg viewBox="0 0 60 60"><path d="M30 6 C48 14 54 34 30 54 C6 34 12 14 30 6 Z" fill="currentColor"/><path d="M30 12 V56" stroke="rgba(0,0,0,.25)" stroke-width="2.5" fill="none"/></svg>`,
+  snow: `<svg viewBox="0 0 60 60" stroke="currentColor" stroke-width="4" stroke-linecap="round" fill="none"><path d="M30 6 V54 M9 18 L51 42 M9 42 L51 18"/><path d="M24 9 L30 15 L36 9 M24 51 L30 45 L36 51"/></svg>`,
+  blossom: `<svg viewBox="0 0 60 60"><g fill="currentColor"><circle cx="30" cy="14" r="10"/><circle cx="46" cy="26" r="10"/><circle cx="40" cy="45" r="10"/><circle cx="20" cy="45" r="10"/><circle cx="14" cy="26" r="10"/></g><circle cx="30" cy="31" r="6" fill="#f7d36a"/></svg>`,
+  sun: `<svg viewBox="0 0 60 60" stroke="currentColor" stroke-width="4" stroke-linecap="round" fill="none"><circle cx="30" cy="30" r="10" fill="currentColor"/><path d="M30 5 V13 M30 47 V55 M5 30 H13 M47 30 H55 M12 12 L18 18 M42 42 L48 48 M48 12 L42 18 M18 42 L12 48"/></svg>`,
+  star: UI.star,
+  stitch: `<svg viewBox="0 0 60 60" stroke="currentColor" stroke-width="5" stroke-linecap="round" fill="none"><path d="M10 30 H50 M18 20 V40 M30 20 V40 M42 20 V40"/></svg>`,
+  note: `<svg viewBox="0 0 60 60" fill="currentColor"><path d="M24 44 V12 L48 8 V38" stroke="currentColor" stroke-width="5" fill="none"/><ellipse cx="18" cy="44" rx="9" ry="7"/><ellipse cx="42" cy="38" rx="9" ry="7"/></svg>`,
+  pumpkin: `<svg viewBox="0 0 60 60"><path d="M30 14 C10 10 4 30 10 42 C16 52 26 52 30 48 C34 52 44 52 50 42 C56 30 50 10 30 14 Z" fill="currentColor"/><path d="M28 14 q0 -7 7 -9" stroke="#3d7a3f" stroke-width="4" fill="none"/></svg>`,
 };

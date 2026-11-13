@@ -10,7 +10,8 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { loadSeed, loadCarouselFlyers, matchFlyer, fetchAdminEvents, downloadFlyer } from './events.js';
-import { duePosts, assignSlots, centralNow, zonedEpoch, CONFIG } from './plan.js';
+import { planDays, centralNow, zonedEpoch, CONFIG } from './plan.js';
+import { loadRestaurants, loadMembers, lineupCaption, restaurantCaption, memberCaption } from './content.js';
 import { postHTML, cleanTitle } from './template.js';
 import { writeCaption, altText, runDatesText } from './caption.js';
 import { renderPNG, closeBrowser } from './render.js';
@@ -52,36 +53,44 @@ const admin = await fetchAdminEvents();
 if (admin.error) console.log(`Note: could not read admin-added events (${admin.error}). Using the built-in calendar only.`);
 const events = [...seed, ...admin.events];
 
-// 2) what's due
-let due = duePosts(events, today, ledger);
-if (opt('only')) due = due.filter((p) => p.ev.id === opt('only'));
-const { scheduled, skipped } = assignSlots(due, nowEpoch, ledger);
+// 2) the five-a-day plan
+const restaurants = loadRestaurants(socialDir);
+const members = loadMembers(indexHtml);
+let scheduled = planDays(events, { restaurants, members }, nowEpoch, ledger);
+if (opt('only')) scheduled = scheduled.filter((p) => p.ev.id === opt('only') || p.slot === opt('only'));
+const skipped = [];
+const due = scheduled;
 
-console.log(`Today (Central): ${today}. ${events.length} calendar events, ${due.length} post(s) due.`);
-for (const s of skipped) console.log(`  skipped: ${cleanTitle(s.ev.title)} (${s.type}) - ${s.reason}`);
+console.log(`Today (Central): ${today}. ${events.length} calendar events, ${members.length} members, ${restaurants.length} restaurants. ${scheduled.length} post(s) to make.`);
 
 // 3) make + send
 fs.mkdirSync(outDir, { recursive: true });
 let made = 0;
 for (const post of scheduled) {
   const ev = { ...post.ev };
-  if (ev.runDates && ev.runDates.length > 1) ev.taglineOverride = `Dates: ${runDatesText(ev.runDates)}.`;
+  if ((post.type === 'announce' || post.type === 'reminder') && ev.runDates && ev.runDates.length > 1) ev.taglineOverride = `Dates: ${runDatesText(ev.runDates)}.`;
 
-  let flyerPath = matchFlyer(ev, cards, repoDir);
+  let flyerPath = ['announce', 'reminder'].includes(post.type) ? matchFlyer(ev, cards, repoDir) : null;
   if (!flyerPath && ev.flyerUrl) flyerPath = await downloadFlyer(ev.flyerUrl, path.join(socialDir, 'out', 'flyers'), ev.id);
 
-  const slug = `${post.eventDate}-${String(ev.id).replace(/[^a-z0-9_-]/gi, '')}-${post.type}`;
+  const slug = `${post.scheduledDay}-${post.slot.replace(':', '')}-${String(ev.id).replace(/[^a-z0-9_-]/gi, '').slice(0, 40)}-${post.type}`;
   const png = path.join(outDir, `${slug}.png`);
   await renderPNG(postHTML(ev, { today: post.scheduledDay, socialDir, flyerFileUrl: flyerPath ? 'file://' + flyerPath : null }), png);
-  const caption = writeCaption({ type: post.type, ev }, post.scheduledDay);
+  const caption = post.type === 'lineup' ? lineupCaption(post.items, ev.date, ev.title)
+    : post.type === 'eat' ? restaurantCaption(post.restaurant, post.scheduledDay)
+    : post.type === 'member' ? memberCaption(post.member, post.scheduledDay)
+    : post.type === 'evergreen' ? post.caption
+    : writeCaption({ type: post.type, ev }, post.scheduledDay);
   fs.writeFileSync(path.join(outDir, `${slug}.txt`), caption);
+  console.log(`  ${post.slot} ${post.type}: ${cleanTitle(ev.title)}`);
 
   const when = new Date(post.scheduledFor * 1000).toLocaleString('en-US', { timeZone: CONFIG.TZ, dateStyle: 'medium', timeStyle: 'short' });
   if (dry) {
     console.log(`  DRAFT  ${cleanTitle(ev.title)} [${post.type}] for ${when} CT -> ${path.relative(socialDir, png)}`);
   } else {
     try {
-      const res = await postPhoto(fb, { imagePath: png, caption, altText: altText(ev), publishAtEpoch: post.scheduledFor });
+      const res = await postPhoto(fb, { imagePath: png, caption, altText: ['announce', 'reminder'].includes(post.type) ? altText(ev) : `Hobart Happenings graphic: ${cleanTitle(ev.title)}. ${ev.taglineOverride || ''}`.trim(), publishAtEpoch: post.scheduledFor });
+      ledger[post.slotKey] = { scheduledFor: post.scheduledFor, key: post.key };
       ledger[post.key] = { fbPostId: res.post_id || res.id, scheduledFor: post.scheduledFor, title: cleanTitle(ev.title), type: post.type, mode: fb.mode, madeAt: new Date().toISOString() };
       fs.mkdirSync(path.dirname(ledgerPath), { recursive: true });
       fs.writeFileSync(ledgerPath, JSON.stringify(ledger, null, 2) + '\n');
