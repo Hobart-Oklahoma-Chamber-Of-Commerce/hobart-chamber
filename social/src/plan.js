@@ -10,11 +10,15 @@
 //   - Never more than MAX_PER_DAY posts a day, spaced out at fixed, friendly times.
 //   - A post that is already in the ledger is never created again.
 
+// The five-a-day rhythm. Edit the times here and nowhere else.
+export const DAILY = { lineup: '07:00', event1: '10:00', eat: '12:00', member: '15:00', event2: '18:00' };
+export const PLAN_DAYS_AHEAD = 1;   // plan today (what's still open) and tomorrow
+
 export const CONFIG = {
   TZ: 'America/Chicago',
   ANNOUNCE_DAYS_BEFORE: 7,
-  MAX_PER_DAY: 3,
-  SLOTS: ['10:00', '12:30', '15:30', '18:00'],   // local times posts may go out
+  MAX_PER_DAY: 5,
+  SLOTS: ['10:00', '18:00'],                    // legacy event-only slots (the five-a-day plan below uses DAILY)
   MIN_LEAD_MINUTES: 30,                          // Facebook needs 10+; we leave room
   ELIGIBLE_CATS: ['chamber', 'community'],       // events with no category count as 'chamber'
 };
@@ -149,4 +153,78 @@ export function assignSlots(posts, nowEpoch, ledger = {}) {
     if (!placed) skipped.push({ ...p, reason: 'no open send time before the event' });
   }
   return { scheduled, skipped };
+}
+
+import { lineupItems, lineupPost, restaurantPost, pickRestaurant, memberPost, pickMember, evergreenPost } from './content.js';
+
+/**
+ * Five posts a day. Real content first, honest fallbacks second, never filler that invents facts.
+ *   07:00 lineup (today's events, or what's coming up)      10:00 event post (announce / reminder)
+ *   12:00 lunch spotlight (restaurants open today)          15:00 member spotlight
+ *   18:00 second event post, else "tomorrow in Hobart", else a Chamber how-to
+ */
+export function planDays(events, { restaurants, members }, nowEpoch, ledger = {}) {
+  const { today } = centralNow(nowEpoch * 1000);
+  const work = { ...ledger };            // so day 2 sees what day 1 just picked
+  const used = new Set();
+  const out = [];
+  const stamp = (post, D, slot) => {
+    const epoch = zonedEpoch(D, slot);
+    if (epoch < nowEpoch + CONFIG.MIN_LEAD_MINUTES * 60) return false;
+    const slotKey = `slot:${D}:${slot}`;
+    if (ledger[slotKey]) return false;
+    post.key = post.key || slotKey;
+    post.slotKey = slotKey; post.scheduledFor = epoch; post.scheduledDay = D; post.slot = slot;
+    out.push(post);
+    work[post.key] = { scheduledFor: epoch }; work[slotKey] = { scheduledFor: epoch };
+    return true;
+  };
+  for (let n = 0; n <= PLAN_DAYS_AHEAD; n++) {
+    const D = addDays(today, n);
+    const next = addDays(D, 1);
+    // 07:00
+    let items = lineupItems(events, D);
+    if (items.length) stamp({ ...lineupPost(items, D), key: `lineup:${D}` }, D, DAILY.lineup);
+    else {
+      const ahead = [];
+      for (let k = 1; k <= 7; k++) for (const e of lineupItems(events, addDays(D, k), { includeSports: false })) ahead.push(e);
+      if (ahead.length) stamp({ ...lineupPost(ahead, D, 'Coming up in Hobart'), key: `lineup:${D}` }, D, DAILY.lineup);
+      else stamp(evergreenPost(D, DAILY.lineup), D, DAILY.lineup);
+    }
+    // 10:00 and 18:00 event posts
+    const evs = duePosts(events, D, work).filter((p) => !used.has(p.key));
+    const [e1, e2] = evs;
+    if (e1) { if (stamp({ ...e1 }, D, DAILY.event1)) used.add(e1.key); }
+    else {
+      // nothing due today: give the next upcoming event a "save the date" post (once per event)
+      const t = teaser(events, D, work, used);
+      if (t) { used.add(t.key); stamp(t, D, DAILY.event1); } else stamp(evergreenPost(D, DAILY.event1), D, DAILY.event1);
+    }
+    // 12:00
+    const r = restaurants.length ? pickRestaurant(restaurants, D, work) : null;
+    if (r) stamp(restaurantPost(r, D), D, DAILY.eat); else stamp(evergreenPost(D, DAILY.eat), D, DAILY.eat);
+    // 15:00
+    const m = members.length ? pickMember(members, D, work) : null;
+    if (m) stamp(memberPost(m, D), D, DAILY.member); else stamp(evergreenPost(D, DAILY.member), D, DAILY.member);
+    // 18:00
+    if (e2) { if (stamp({ ...e2 }, D, DAILY.event2)) used.add(e2.key); }
+    else {
+      const tm = lineupItems(events, next, { includeSports: false });
+      if (tm.length) stamp({ ...lineupPost(tm, next, 'Tomorrow in Hobart'), key: `tomorrow:${D}`, stubDay: next }, D, DAILY.event2);
+      else stamp(evergreenPost(D, DAILY.event2), D, DAILY.event2);
+    }
+  }
+  return out;
+}
+
+function teaser(events, D, work, used) {
+  const runs = buildRuns(events).filter((r) => r.dates[0] >= addDays(D, 2) && r.dates[0] <= addDays(D, 45)).sort((a, b) => (a.dates[0] < b.dates[0] ? -1 : 1));
+  for (const r of runs) {
+    const key = `${r.key}:teaser`;
+    if (work[key] || used.has(key) || work[`${r.key}:announce`]) continue;
+    const first = r.dates[0];
+    const rep = r.events.find((e) => e.date === first) || r.events[0];
+    return { key, type: 'announce', ev: { ...rep, runDates: r.dates.length > 1 ? r.dates : undefined }, eventDate: first, runKey: r.key };
+  }
+  return null;
 }

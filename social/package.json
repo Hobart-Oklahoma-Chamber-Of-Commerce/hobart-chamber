@@ -11,6 +11,8 @@
     "check": "node src/run.js --check"
   },
   "dependencies": {
+    "@fontsource/inter": "^5.2.8",
+    "@fontsource/playfair-display": "^5.2.8",
     "playwright": "1.49.1"
   }
 }

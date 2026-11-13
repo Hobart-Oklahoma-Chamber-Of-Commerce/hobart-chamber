@@ -1,6 +1,6 @@
 name: Hobart Happenings social worker
 
-# Looks at the community calendar twice a day and schedules Facebook posts for
+# Looks at the community calendar twice a day and schedules the next day's five Facebook posts for
 # anything that is due. Posts go into the Page's "Scheduled" queue (Meta Business
 # Suite) so they can be reviewed or deleted before they go live.
 on:
