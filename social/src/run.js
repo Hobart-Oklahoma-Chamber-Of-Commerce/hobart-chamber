@@ -6,18 +6,19 @@
 //   node src/run.js --check              verify the Facebook token + Page, then stop
 //   node src/run.js --now 2026-11-12T08:30   pretend it's this Central-time moment (testing)
 //   node src/run.js --only <eventId>     only this event
+//   node src/run.js --reset-scheduled    delete the worker's own scheduled posts from the new week-plan start date on, forget them, then plan again
 //   node src/run.js --publish-now 12:00  publish today's 12:00 post to the Page RIGHT NOW (demo / showcase)
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { loadSeed, loadCarouselFlyers, matchFlyer, fetchAdminEvents, downloadFlyer } from './events.js';
-import { planWeek, centralNow, zonedEpoch, CONFIG } from './plan.js';
+import { planWeek, centralNow, zonedEpoch, CONFIG, WEEK_STARTS } from './plan.js';
 import { loadRestaurants, loadMembers, loadData, lineupCaption, restaurantCaption, memberCaption } from './content.js';
 import { postHTML, cleanTitle } from './template.js';
 import { writeCaption, altText, runDatesText } from './caption.js';
 import { renderPNG, closeBrowser } from './render.js';
 import { flyerPalette } from './palettes.js';
-import { fbConfig, postPhoto, checkPage } from './facebook.js';
+import { fbConfig, postPhoto, checkPage, deletePost } from './facebook.js';
 
 const socialDir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const repoDir = path.resolve(socialDir, '..');
@@ -46,6 +47,21 @@ if (opt('now')) {
 const { today, epoch: nowEpoch } = centralNow(nowEpochMs);
 
 const ledger = fs.existsSync(ledgerPath) ? JSON.parse(fs.readFileSync(ledgerPath, 'utf8')) : {};
+
+// 0) optional: throw away the worker's own FUTURE scheduled posts (only ones in the ledger, from the new plan's start date on) and re-plan them
+if (flag('reset-scheduled')) {
+  const gone = new Set();
+  for (const [k, v] of Object.entries(ledger)) {
+    if (!v || !v.fbPostId || !v.scheduledFor || v.mode !== 'schedule' || k.startsWith('slot:')) continue;
+    const day = new Intl.DateTimeFormat('en-CA', { timeZone: CONFIG.TZ }).format(new Date(v.scheduledFor * 1000));
+    if (v.scheduledFor <= nowEpoch + 600 || day < WEEK_STARTS) continue;       // never touch posts that are live, about to go, or from the old plan
+    if (dry) { console.log(`  WOULD DELETE ${v.title} [${v.type}] for ${day} (id ${v.fbPostId})`); continue; }
+    try { const res = await deletePost(fb, v.fbPostId); console.log(`  ${res.toUpperCase()}  ${v.title} [${v.type}] for ${day}`); gone.add(v.scheduledFor); }
+    catch (e) { console.log(`  COULD NOT DELETE ${v.title} for ${day}: ${e.message}`); process.exitCode = 1; }
+  }
+  for (const [k, v] of Object.entries(ledger)) if (v && gone.has(v.scheduledFor)) delete ledger[k];
+  if (!dry) { fs.writeFileSync(ledgerPath, JSON.stringify(ledger, null, 2) + '\n'); console.log(`Removed ${gone.size} scheduled post(s). Planning them again now.`); }
+}
 
 // 1) the calendar
 const indexHtml = path.join(repoDir, 'index.html');
