@@ -16,6 +16,7 @@ import { loadRestaurants, loadMembers, loadData, lineupCaption, restaurantCaptio
 import { postHTML, cleanTitle } from './template.js';
 import { writeCaption, altText, runDatesText } from './caption.js';
 import { renderPNG, closeBrowser } from './render.js';
+import { flyerPalette } from './palettes.js';
 import { fbConfig, postPhoto, checkPage } from './facebook.js';
 
 const socialDir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
@@ -76,6 +77,8 @@ for (const post of scheduled) {
 
   let flyerPath = ['announce', 'reminder'].includes(post.type) ? matchFlyer(ev, cards, repoDir) : null;
   if (!flyerPath && ev.flyerUrl) flyerPath = await downloadFlyer(ev.flyerUrl, path.join(socialDir, 'out', 'flyers'), ev.id);
+
+  if (flyerPath && !ev.palette) { const pal = await flyerPalette(flyerPath); if (pal) ev.palette = pal; }
 
   const slug = `${post.scheduledDay}-${post.slot.replace(':', '')}-${String(ev.id).replace(/[^a-z0-9_-]/gi, '').slice(0, 40)}-${post.type}`;
   const png = path.join(outDir, `${slug}.png`);

@@ -95,14 +95,14 @@ function tornEdge(seed, width, y, amp, down) {
   return d;
 }
 
-const CSS = (fontsBase, th) => `
+const CSS = (fontsBase, th, pal) => `
 @font-face{font-family:'Play';font-weight:800;src:url('${fontsBase}/playfair-display-latin-800-normal.woff2') format('woff2');}
 @font-face{font-family:'Play';font-weight:900;src:url('${fontsBase}/playfair-display-latin-900-normal.woff2') format('woff2');}
 @font-face{font-family:'PlayI';font-style:italic;font-weight:600;src:url('${fontsBase}/playfair-display-latin-600-italic.woff2') format('woff2');}
 @font-face{font-family:'Inter';font-weight:500;src:url('${fontsBase}/inter-latin-500-normal.woff2') format('woff2');}
 @font-face{font-family:'Inter';font-weight:700;src:url('${fontsBase}/inter-latin-700-normal.woff2') format('woff2');}
 @font-face{font-family:'Inter';font-weight:800;src:url('${fontsBase}/inter-latin-800-normal.woff2') format('woff2');}
-:root{--navy:#0e2056;--royal:#1a3ea8;--gold:#c49a3e;--goldlt:#dab65e;--cream:${th.season.paper};--paper:#ffffff;--ink:#0e2056;--accent:${th.accent};--rays:${th.season.rays};}
+:root{--navy:${pal?.navy || '#0e2056'};--royal:${pal?.royal || '#1a3ea8'};--gold:${pal?.gold || '#c49a3e'};--goldlt:${pal?.goldLt || '#dab65e'};--cream:${th.season.paper};--paper:#ffffff;--ink:${pal?.navy || '#0e2056'};--accent:${th.accent};--rays:${th.season.rays};--badgeink:${pal?.badgeInk || '#fff'};}
 *{box-sizing:border-box;margin:0;padding:0;}
 html,body{width:${W}px;height:${H}px;background:var(--cream);overflow:hidden;font-family:'Inter',sans-serif;color:var(--ink);-webkit-font-smoothing:antialiased;}
 .page{position:relative;width:${W}px;height:${H}px;overflow:hidden;background:var(--cream);}
@@ -119,7 +119,7 @@ html,body{width:${W}px;height:${H}px;background:var(--cream);overflow:hidden;fon
 /* left column */
 .badge{position:absolute;left:52px;top:236px;width:176px;height:176px;border-radius:50%;transform:rotate(-9deg);z-index:9;display:flex;align-items:center;justify-content:center;text-align:center;box-shadow:0 6px 0 rgba(0,0,0,.18);}
 .badge::after{content:'';position:absolute;inset:8px;border-radius:50%;border:3px dashed rgba(255,255,255,.75);}
-.badge span{position:relative;z-index:2;font-family:'Inter';font-weight:800;font-size:33px;line-height:.98;color:#fff;text-transform:uppercase;letter-spacing:1px;padding:0 20px;}
+.badge span{position:relative;z-index:2;font-family:'Inter';font-weight:800;font-size:33px;line-height:.98;color:var(--badgeink);text-transform:uppercase;letter-spacing:1px;padding:0 20px;}
 .stub{position:absolute;left:44px;top:436px;width:300px;height:318px;transform:rotate(-3deg);z-index:7;filter:drop-shadow(0 10px 0 rgba(14,32,86,.20)) drop-shadow(0 18px 18px rgba(14,32,86,.18));}
 .stub .in{position:absolute;inset:0;background:var(--paper);
   -webkit-mask:radial-gradient(circle 15px at 0 50%,transparent 97%,#000 100%) left/51% 100% no-repeat,radial-gradient(circle 15px at 100% 50%,transparent 97%,#000 100%) right/51% 100% no-repeat;
@@ -175,7 +175,10 @@ export function postHTML(ev, ctx) {
   const title = cleanTitle(ev.title);
   const d = parseDate(ev.date);
   const look = ev.look || pickLook(ev);
-  const th = themeFor(ctx.today || ev.date, look.icon, { season: ctx.season, accent: ev.accent });
+  let th = themeFor(ctx.today || ev.date, look.icon, { season: ctx.season, accent: ev.accent });
+  const pal = ev.palette || null;
+  if (pal) th = { ...th, accent: pal.accent, season: { ...th.season, paper: pal.cream, rays: pal.rays, colors: pal.colors }, ev: { ...th.ev, extra: pal.colors.slice(0, 3), strip: pal.strip || th.ev.strip } };
+  const band = pal ? pal.band : '#1a3ea8';
   const accent = th.accent;
   const time = cleanTime(ev.time);
   const place = cleanPlace(ev.location);
@@ -201,13 +204,13 @@ export function postHTML(ev, ctx) {
          ${sparkle(14, 44, 54, -12)}${sparkle(488, 22, 40, 14, '#dab65e')}${sparkle(500, 400, 56, 8)}${sparkle(40, 410, 34, -8, '#dab65e')}
        </div></div>`;
 
-  return `<!doctype html><html><head><meta charset="utf-8"><title>${esc(title)}</title><style>${CSS(fonts, th)}</style></head><body>
+  return `<!doctype html><html><head><meta charset="utf-8"><title>${esc(title)}</title><style>${CSS(fonts, th, pal)}</style></head><body>
 <div class="page">
   <div class="rays"></div>
   ${confetti(th, seed)}
 
   <div class="header">
-    <svg class="band" width="${W}" height="230" viewBox="0 0 ${W} 230"><path d="${tornEdge(seed + 'h', W, 188, 7, true)}" fill="#1a3ea8"/><path d="M0 0 H${W} V186 H0 Z" fill="#1a3ea8"/>
+    <svg class="band" width="${W}" height="230" viewBox="0 0 ${W} 230"><path d="${tornEdge(seed + 'h', W, 188, 7, true)}" fill="${band}"/><path d="M0 0 H${W} V186 H0 Z" fill="${band}"/>
       <path d="M0 176 H${W}" stroke="#c49a3e" stroke-width="3" stroke-dasharray="3 12" stroke-linecap="round" opacity=".8"/></svg>
     ${stripSVG(th.ev.strip, accent)}<div class="logo"><img src="${logo}" alt=""></div>
     <div class="brand"><div class="t">Hobart Happenings</div><div class="s">Your Hobart Chamber of Commerce</div></div>
@@ -235,7 +238,7 @@ export function postHTML(ev, ctx) {
   </div>
 
   <div class="footer">
-    <svg width="${W}" height="130" viewBox="0 0 ${W} 130"><path d="${tornEdge(seed + 'f', W, 22, 7, false)}" transform="translate(0,0)" fill="#1a3ea8"/><rect x="0" y="40" width="${W}" height="90" fill="#1a3ea8"/></svg>
+    <svg width="${W}" height="130" viewBox="0 0 ${W} 130"><path d="${tornEdge(seed + 'f', W, 22, 7, false)}" transform="translate(0,0)" fill="${band}"/><rect x="0" y="40" width="${W}" height="90" fill="${band}"/></svg>
     <div class="l">Everything happening<br>in Hobart</div>
     <div class="r">hobartchamber.org</div>
   </div>

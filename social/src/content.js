@@ -5,6 +5,7 @@ import path from 'node:path';
 import { cleanTitle, cleanTime, cleanPlace } from './template.js';
 import { pickLook } from './icons.js';
 import { longDate } from './caption.js';
+import { PALETTES } from './palettes.js';
 
 const DOW3 = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'];
 const pd = (ds) => { const [y, m, d] = ds.split('-').map(Number); return new Date(y, m - 1, d); };
@@ -75,7 +76,7 @@ export function lineupPost(items, today, label = 'Today in Hobart') {
   return {
     type: 'lineup',
     ev: {
-      id: `lineup-${today}`, title: label, date: today,
+      id: `lineup-${today}`, title: label, date: today, palette: PALETTES.lineup,
       look: { icon: items.length === 1 ? pickLook(first).icon : 'star', badge: week ? 'THIS WEEK' : ahead ? 'COMING UP' : label.startsWith('Tomorrow') ? 'SEE YOU THEN' : 'GOOD MORNING' },
       stub: week ? { dow: 'THIS WEEK', big: String(items.length), mon: items.length === 1 ? 'EVENT' : 'EVENTS', note: 'Plan your week' } : ahead ? { dow: 'THIS WEEK', big: '★', mon: 'AHEAD', note: 'On the calendar' } : { dow: ['SUNDAY','MONDAY','TUESDAY','WEDNESDAY','THURSDAY','FRIDAY','SATURDAY'][d.getDay()], big: String(d.getDate()), mon: ['JAN','FEB','MAR','APR','MAY','JUN','JUL','AUG','SEP','OCT','NOV','DEC'][d.getMonth()], note: label.startsWith('Tomorrow') ? 'Plan ahead!' : 'Here we go!' },
       taglineOverride: 'The full community calendar is always at hobartchamber.org.',
@@ -149,7 +150,7 @@ export function memberPost(m, today) {
     type: 'member',
     key: `member:${m.id}:${today}`,
     ev: {
-      id: `member-${m.id}`, title: m.name, date: today,
+      id: `member-${m.id}`, title: m.name, date: today, palette: PALETTES.member,
       look: { icon: CAT_ICON[m.cat] || 'store', badge: 'MEMBER SPOTLIGHT' },
       stub: { dow: 'SHOP', big: '★', mon: 'LOCAL', note: 'Chamber member' },
       taglineOverride: m.kind, rows,
@@ -220,7 +221,6 @@ export function weekAheadPost(events, D) {
 // Weekday 10:30: member spotlight with a morning look
 export function memberPostAM(m, D) {
   const p = memberPost(m, D);
-  p.ev.accent = '#e8832a';
   p.ev.look = { ...p.ev.look, badge: 'GOOD MORNING' };
   p.ev.stub = { dow: 'MORNING', big: '★', mon: 'MEMBER', note: 'Say hello!' };
   return p;
@@ -258,7 +258,7 @@ export function engagementPost(D, { history, prompts }, events, ledger = {}) {
     if (past.length) {
       const e = past[0];
       return { type: 'engage', key: `engage:yearago:${D}`,
-        ev: { id: `engage-yearago-${D}`, title: cleanTitle(e.title), date: D, look: { icon: 'star', badge: 'A YEAR AGO' }, stub: { dow: 'A YEAR', big: '1', mon: 'YEAR AGO', note: 'Remember this?' },
+        ev: { palette: PALETTES.engage, id: `engage-yearago-${D}`, title: cleanTitle(e.title), date: D, look: { icon: 'star', badge: 'A YEAR AGO' }, stub: { dow: 'A YEAR', big: '1', mon: 'YEAR AGO', note: 'Remember this?' },
           taglineOverride: `This time last year in Hobart. What do you remember?`, rows: [{ i: 'pin', t: 'Tell us in the comments' }] },
         caption: `A year ago this week in Hobart: ${cleanTitle(e.title)}.\n\nDo you remember it? Share your memory or a photo in the comments.\n\n${CHAMBER}` };
     }
@@ -269,21 +269,21 @@ export function engagementPost(D, { history, prompts }, events, ledger = {}) {
     const wk = rangeItems(events, sat, sun, { includeSports: false });
     const head = wk.length ? `This weekend: ${wk.slice(0, 3).map((e) => cleanTitle(e.title)).join(', ')}.` : 'Weekend is almost here.';
     return { type: 'engage', key: `engage:weekend:${D}`,
-      ev: { id: `engage-weekend-${D}`, title: 'Weekend plans?', date: D, look: { icon: 'star', badge: 'HAPPY FRIDAY' }, stub: { dow: 'FRIDAY', big: '?', mon: 'WEEKEND', note: 'Tell us!' },
+      ev: { palette: PALETTES.engage, id: `engage-weekend-${D}`, title: 'Weekend plans?', date: D, look: { icon: 'star', badge: 'HAPPY FRIDAY' }, stub: { dow: 'FRIDAY', big: '?', mon: 'WEEKEND', note: 'Tell us!' },
         taglineOverride: 'What are you doing in Hobart this weekend?', rows: [{ i: 'pin', t: 'Tell us in the comments' }] },
       caption: `Happy Friday, Hobart. ${head}\n\nWhat are you doing this weekend? Tell us in the comments.\n\nFull calendar: hobartchamber.org\n\n${CHAMBER}` };
   }
   if (kind === 'history' && history.length) {
     const h = pickNew(history, 'history');
     return { type: 'engage', key: `engage:history:${h.id}`,
-      ev: { id: `engage-history-${h.id}`, title: h.head, date: D, look: { icon: 'book', badge: 'HOBART HISTORY' }, stub: { dow: 'HOBART', big: h.year, mon: 'HISTORY', note: 'Did you know?' },
+      ev: { palette: PALETTES.engage, id: `engage-history-${h.id}`, title: h.head, date: D, look: { icon: 'book', badge: 'HOBART HISTORY' }, stub: { dow: 'HOBART', big: h.year, mon: 'HISTORY', note: 'Did you know?' },
         taglineOverride: h.fact, rows: [{ i: 'pin', t: 'Tell us in the comments' }] },
       caption: `Hobart history: ${h.fact}\n\n${h.ask}\n\nSource: Oklahoma Historical Society, Encyclopedia of Oklahoma History and Culture.\n\n${CHAMBER}` };
   }
   const f = pickNew(prompts, 'fun');
   if (!f) return null;
   return { type: 'engage', key: `engage:fun:${f.id}`,
-    ev: { id: `engage-fun-${f.id}`, title: f.head, date: D, look: { icon: 'megaphone', badge: 'YOUR TURN' }, stub: { dow: 'HOBART', big: '?', mon: 'QUESTION', note: 'Join in!' },
+    ev: { palette: PALETTES.engage, id: `engage-fun-${f.id}`, title: f.head, date: D, look: { icon: 'megaphone', badge: 'YOUR TURN' }, stub: { dow: 'HOBART', big: '?', mon: 'QUESTION', note: 'Join in!' },
       taglineOverride: f.q, rows: [{ i: 'pin', t: 'Tell us in the comments' }] },
     caption: `${f.q}\n\n${f.ask}\n\n${CHAMBER}` };
 }
@@ -300,7 +300,7 @@ export function recapPost(events, D, results) {
   ];
   const lines = [...scores.map((r) => `- ${r.text}`), ...items.map((e) => `- ${longDate(e.date)}: ${cleanTitle(e.title)}`)];
   return { type: 'recap', key: `recap:${D}`,
-    ev: { id: `recap-${D}`, title: 'The week in Hobart', date: D, look: { icon: 'trophy', badge: 'WEEK IN REVIEW' }, stub: { dow: 'THIS WEEK', big: '★', mon: 'RECAP', note: 'Nice work, Hobart' },
+    ev: { palette: PALETTES.lineup, id: `recap-${D}`, title: 'The week in Hobart', date: D, look: { icon: 'trophy', badge: 'WEEK IN REVIEW' }, stub: { dow: 'THIS WEEK', big: '★', mon: 'RECAP', note: 'Nice work, Hobart' },
       taglineOverride: scores.length ? 'Scores and highlights from around town.' : 'A look back at what was on the Hobart calendar.', rows },
     caption: `The week in Hobart, in review:\n\n${lines.join('\n')}\n\nWere you there? Share your photos and highlights in the comments.\n\n${CHAMBER}` };
 }
