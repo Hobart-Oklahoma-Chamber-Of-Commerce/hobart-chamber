@@ -1,1 +1,86 @@
-{}
+{
+  "slot:2026-11-14:15:00": {
+    "scheduledFor": 1794690000,
+    "key": "member:ark-veterinary-clinic:2026-11-14"
+  },
+  "member:ark-veterinary-clinic:2026-11-14": {
+    "fbPostId": "122180971484990004",
+    "scheduledFor": 1794690000,
+    "title": "Ark Veterinary Clinic",
+    "type": "member",
+    "mode": "schedule",
+    "madeAt": "2026-11-14T19:09:44.759Z"
+  },
+  "slot:2026-11-14:18:00": {
+    "scheduledFor": 1794700800,
+    "key": "evergreen:2026-11-14:18:00"
+  },
+  "evergreen:2026-11-14:18:00": {
+    "fbPostId": "122180971526990004",
+    "scheduledFor": 1794700800,
+    "title": "Meet our members",
+    "type": "evergreen",
+    "mode": "schedule",
+    "madeAt": "2026-11-14T19:09:46.768Z"
+  },
+  "slot:2026-11-15:07:00": {
+    "scheduledFor": 1794747600,
+    "key": "lineup:2026-11-15"
+  },
+  "lineup:2026-11-15": {
+    "fbPostId": "122180971568990004",
+    "scheduledFor": 1794747600,
+    "title": "Coming up in Hobart",
+    "type": "lineup",
+    "mode": "schedule",
+    "madeAt": "2026-11-14T19:09:48.880Z"
+  },
+  "slot:2026-11-15:10:00": {
+    "scheduledFor": 1794758400,
+    "key": "hobart food pantry|2026-11-18:announce"
+  },
+  "hobart food pantry|2026-11-18:announce": {
+    "fbPostId": "122180971610990004",
+    "scheduledFor": 1794758400,
+    "title": "Hobart Food Pantry",
+    "type": "announce",
+    "mode": "schedule",
+    "madeAt": "2026-11-14T19:09:50.806Z"
+  },
+  "slot:2026-11-15:12:00": {
+    "scheduledFor": 1794765600,
+    "key": "eat:big-a-burger:2026-11-15"
+  },
+  "eat:big-a-burger:2026-11-15": {
+    "fbPostId": "122180971658990004",
+    "scheduledFor": 1794765600,
+    "title": "Big-A-Burger Drive Inn",
+    "type": "eat",
+    "mode": "schedule",
+    "madeAt": "2026-11-14T19:09:52.683Z"
+  },
+  "slot:2026-11-15:15:00": {
+    "scheduledFor": 1794776400,
+    "key": "member:bancfirst:2026-11-15"
+  },
+  "member:bancfirst:2026-11-15": {
+    "fbPostId": "122180971718990004",
+    "scheduledFor": 1794776400,
+    "title": "BancFirst",
+    "type": "member",
+    "mode": "schedule",
+    "madeAt": "2026-11-14T19:09:54.797Z"
+  },
+  "slot:2026-11-15:18:00": {
+    "scheduledFor": 1794787200,
+    "key": "evergreen:2026-11-15:18:00"
+  },
+  "evergreen:2026-11-15:18:00": {
+    "fbPostId": "122180971760990004",
+    "scheduledFor": 1794787200,
+    "title": "Where should we eat?",
+    "type": "evergreen",
+    "mode": "schedule",
+    "madeAt": "2026-11-14T19:09:57.060Z"
+  }
+}
