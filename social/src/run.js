@@ -6,6 +6,7 @@
 //   node src/run.js --check              verify the Facebook token + Page, then stop
 //   node src/run.js --now 2026-11-12T08:30   pretend it's this Central-time moment (testing)
 //   node src/run.js --only <eventId>     only this event
+//   node src/run.js --publish-now 12:00  publish today's 12:00 post to the Page RIGHT NOW (demo / showcase)
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -56,7 +57,9 @@ const events = [...seed, ...admin.events];
 // 2) the five-a-day plan
 const restaurants = loadRestaurants(socialDir);
 const members = loadMembers(indexHtml);
-let scheduled = planDays(events, { restaurants, members }, nowEpoch, ledger);
+const pubNow = opt('publish-now');
+let scheduled = planDays(events, { restaurants, members }, pubNow ? zonedEpoch(today, '00:00') : nowEpoch, ledger);
+if (pubNow) scheduled = scheduled.filter((p) => p.scheduledDay === today && p.slot === pubNow);
 if (opt('only')) scheduled = scheduled.filter((p) => p.ev.id === opt('only') || p.slot === opt('only'));
 const skipped = [];
 const due = scheduled;
@@ -89,12 +92,12 @@ for (const post of scheduled) {
     console.log(`  DRAFT  ${cleanTitle(ev.title)} [${post.type}] for ${when} CT -> ${path.relative(socialDir, png)}`);
   } else {
     try {
-      const res = await postPhoto(fb, { imagePath: png, caption, altText: ['announce', 'reminder'].includes(post.type) ? altText(ev) : `Hobart Happenings graphic: ${cleanTitle(ev.title)}. ${ev.taglineOverride || ''}`.trim(), publishAtEpoch: post.scheduledFor });
+      const res = await postPhoto(pubNow ? { ...fb, mode: 'publish' } : fb, { imagePath: png, caption, altText: ['announce', 'reminder'].includes(post.type) ? altText(ev) : `Hobart Happenings graphic: ${cleanTitle(ev.title)}. ${ev.taglineOverride || ''}`.trim(), publishAtEpoch: post.scheduledFor });
       ledger[post.slotKey] = { scheduledFor: post.scheduledFor, key: post.key };
       ledger[post.key] = { fbPostId: res.post_id || res.id, scheduledFor: post.scheduledFor, title: cleanTitle(ev.title), type: post.type, mode: fb.mode, madeAt: new Date().toISOString() };
       fs.mkdirSync(path.dirname(ledgerPath), { recursive: true });
       fs.writeFileSync(ledgerPath, JSON.stringify(ledger, null, 2) + '\n');
-      console.log(`  SENT   ${cleanTitle(ev.title)} [${post.type}] ${fb.mode === 'schedule' ? 'scheduled for ' + when + ' CT' : 'published'} (id ${ledger[post.key].fbPostId})`);
+      console.log(`  SENT   ${cleanTitle(ev.title)} [${post.type}] ${fb.mode === 'schedule' && !pubNow ? 'scheduled for ' + when + ' CT' : 'published now'} (id ${ledger[post.key].fbPostId})`);
     } catch (e) {
       console.log(`  FAILED ${cleanTitle(ev.title)} [${post.type}]: ${e.message}`);
       process.exitCode = 1;

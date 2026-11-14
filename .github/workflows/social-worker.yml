@@ -13,6 +13,10 @@ on:
         description: 'Make drafts only (do not touch Facebook)'
         type: boolean
         default: true
+      publish_now:
+        description: 'Demo: publish the post for this slot today (07:00, 10:00, 12:00, 15:00 or 18:00) to the Page immediately. Uncheck dry run too.'
+        type: string
+        default: ''
       now:
         description: 'Pretend it is this Central time, e.g. 2026-11-12T08:30 (testing)'
         type: string
@@ -50,10 +54,12 @@ jobs:
           IS_MANUAL: ${{ github.event_name == 'workflow_dispatch' }}
           DRY_RUN: ${{ inputs.dry_run }}
           PRETEND_NOW: ${{ inputs.now }}
+          PUBLISH_NOW: ${{ inputs.publish_now }}
         run: |
           ARGS=""
           if [ "$IS_MANUAL" = "true" ] && [ "$DRY_RUN" = "true" ]; then ARGS="$ARGS --dry-run"; fi
           if [ -n "$PRETEND_NOW" ]; then ARGS="$ARGS --now $PRETEND_NOW"; fi
+          if [ -n "$PUBLISH_NOW" ]; then ARGS="$ARGS --publish-now $PUBLISH_NOW"; fi
           node src/run.js $ARGS | tee "$GITHUB_STEP_SUMMARY"
 
       - name: Keep the drafts so they can be looked at
