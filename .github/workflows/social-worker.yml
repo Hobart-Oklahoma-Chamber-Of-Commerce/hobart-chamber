@@ -17,6 +17,10 @@ on:
         description: 'Demo: publish the post for this slot today (07:00, 10:00, 12:00, 15:00 or 18:00) to the Page immediately. Uncheck dry run too.'
         type: string
         default: ''
+      reset_scheduled:
+        description: 'Delete the worker scheduled posts from Nov 16 on and make them again (uncheck dry run to do it for real)'
+        type: boolean
+        default: false
       now:
         description: 'Pretend it is this Central time, e.g. 2026-11-12T08:30 (testing)'
         type: string
@@ -55,10 +59,12 @@ jobs:
           DRY_RUN: ${{ inputs.dry_run }}
           PRETEND_NOW: ${{ inputs.now }}
           PUBLISH_NOW: ${{ inputs.publish_now }}
+          RESET_SCHEDULED: ${{ inputs.reset_scheduled }}
         run: |
           ARGS=""
           if [ "$IS_MANUAL" = "true" ] && [ "$DRY_RUN" = "true" ]; then ARGS="$ARGS --dry-run"; fi
           if [ -n "$PRETEND_NOW" ]; then ARGS="$ARGS --now $PRETEND_NOW"; fi
+          if [ "$RESET_SCHEDULED" = "true" ]; then ARGS="$ARGS --reset-scheduled"; fi
           if [ -n "$PUBLISH_NOW" ]; then ARGS="$ARGS --publish-now $PUBLISH_NOW"; fi
           node src/run.js $ARGS | tee "$GITHUB_STEP_SUMMARY"
 

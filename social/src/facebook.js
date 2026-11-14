@@ -44,3 +44,14 @@ export async function postPhoto({ pageId, token, mode }, { imagePath, caption, a
   }
   return call(`${API}/${pageId}/photos`, { method: 'POST', body: form });
 }
+
+// Delete one of the worker's own scheduled posts. A post that is already gone counts as deleted.
+export async function deletePost({ token }, postId) {
+  try {
+    await call(`${API}/${postId}?access_token=${encodeURIComponent(token)}`, { method: 'DELETE' });
+    return 'deleted';
+  } catch (e) {
+    if (e.code === 100 || /does not exist|cannot be loaded|Unsupported delete/i.test(e.message)) return 'already gone';
+    throw e;
+  }
+}
