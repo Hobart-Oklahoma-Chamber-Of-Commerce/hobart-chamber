@@ -72,9 +72,9 @@ function titleSize(t) {
   const n = Math.max(1, t.length);
   const single = Math.floor(950 / (0.6 * n));   // largest size that fits on one line
   if (single >= 84) return Math.min(single, 120);
-  const two = Math.floor(1880 / (0.6 * n));     // largest size that fits on two lines
-  if (two >= 56) return Math.min(two, 78);
-  return 54;
+  const two = Math.floor(1880 / (0.72 * n));     // largest size that fits on two lines
+  if (two >= 50) return Math.min(two, 78);
+  return 46;
 }
 
 // deterministic pseudo-random so the same event always renders the same page
