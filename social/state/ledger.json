@@ -82,5 +82,17 @@
     "type": "evergreen",
     "mode": "schedule",
     "madeAt": "2026-11-14T19:09:57.060Z"
+  },
+  "slot:2026-11-14:12:00": {
+    "scheduledFor": 1794679200,
+    "key": "eat:hometown-pizza:2026-11-14"
+  },
+  "eat:hometown-pizza:2026-11-14": {
+    "fbPostId": "740948365774653_122180972396990004",
+    "scheduledFor": 1794679200,
+    "title": "Hometown Pizza",
+    "type": "eat",
+    "mode": "schedule",
+    "madeAt": "2026-11-14T19:14:54.104Z"
   }
 }
