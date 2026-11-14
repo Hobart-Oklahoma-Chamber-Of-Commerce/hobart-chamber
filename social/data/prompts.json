@@ -1,0 +1,12 @@
+{
+  "fun": [
+    { "id": "diner", "head": "Hobart this or that", "q": "Breakfast on Main Street or lunch at the drive-in?", "ask": "Pick one and tell us why in the comments." },
+    { "id": "friday-night", "head": "Hobart evenings", "q": "What is the best part of a Hobart evening?", "ask": "Tell us yours in the comments." },
+    { "id": "small-town", "head": "Small town, big heart", "q": "What is one thing you love about living in Hobart?", "ask": "Share it in the comments." },
+    { "id": "shop-local", "head": "Shop local", "q": "Which Hobart business should everyone know about?", "ask": "Give them a shout-out in the comments." },
+    { "id": "neighbor", "head": "Neighbor appreciation", "q": "Who is someone in Hobart who made your week better?", "ask": "Tag them in the comments." },
+    { "id": "weekend", "head": "Weekend plans", "q": "What are you doing in Hobart this weekend?", "ask": "Tell us in the comments." },
+    { "id": "tradition", "head": "Hobart traditions", "q": "What Hobart tradition do you hope never goes away?", "ask": "Tell us in the comments." },
+    { "id": "season", "head": "Season check", "q": "What is the best thing about this time of year in Hobart?", "ask": "Tell us in the comments." }
+  ]
+}

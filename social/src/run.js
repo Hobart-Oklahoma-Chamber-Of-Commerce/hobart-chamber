@@ -11,8 +11,8 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { loadSeed, loadCarouselFlyers, matchFlyer, fetchAdminEvents, downloadFlyer } from './events.js';
-import { planDays, centralNow, zonedEpoch, CONFIG } from './plan.js';
-import { loadRestaurants, loadMembers, lineupCaption, restaurantCaption, memberCaption } from './content.js';
+import { planWeek, centralNow, zonedEpoch, CONFIG } from './plan.js';
+import { loadRestaurants, loadMembers, loadData, lineupCaption, restaurantCaption, memberCaption } from './content.js';
 import { postHTML, cleanTitle } from './template.js';
 import { writeCaption, altText, runDatesText } from './caption.js';
 import { renderPNG, closeBrowser } from './render.js';
@@ -58,7 +58,8 @@ const events = [...seed, ...admin.events];
 const restaurants = loadRestaurants(socialDir);
 const members = loadMembers(indexHtml);
 const pubNow = opt('publish-now');
-let scheduled = planDays(events, { restaurants, members }, pubNow ? zonedEpoch(today, '00:00') : nowEpoch, ledger);
+const data = loadData(socialDir);
+let scheduled = planWeek(events, { members, data }, pubNow ? zonedEpoch(today, '00:00') : nowEpoch, ledger);
 if (pubNow) scheduled = scheduled.filter((p) => p.scheduledDay === today && p.slot === pubNow);
 if (opt('only')) scheduled = scheduled.filter((p) => p.ev.id === opt('only') || p.slot === opt('only'));
 const skipped = [];
@@ -79,7 +80,7 @@ for (const post of scheduled) {
   const slug = `${post.scheduledDay}-${post.slot.replace(':', '')}-${String(ev.id).replace(/[^a-z0-9_-]/gi, '').slice(0, 40)}-${post.type}`;
   const png = path.join(outDir, `${slug}.png`);
   await renderPNG(postHTML(ev, { today: post.scheduledDay, socialDir, flyerFileUrl: flyerPath ? 'file://' + flyerPath : null }), png);
-  const caption = post.type === 'lineup' ? lineupCaption(post.items, ev.date, ev.title)
+  const caption = post.caption ? post.caption : post.type === 'lineup' ? lineupCaption(post.items, ev.date, ev.title)
     : post.type === 'eat' ? restaurantCaption(post.restaurant, post.scheduledDay)
     : post.type === 'member' ? memberCaption(post.member, post.scheduledDay)
     : post.type === 'evergreen' ? post.caption

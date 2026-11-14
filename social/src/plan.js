@@ -155,7 +155,7 @@ export function assignSlots(posts, nowEpoch, ledger = {}) {
   return { scheduled, skipped };
 }
 
-import { lineupItems, lineupPost, restaurantPost, pickRestaurant, memberPost, pickMember, evergreenPost } from './content.js';
+import { lineupItems, lineupPost, restaurantPost, pickRestaurant, memberPost, pickMember, evergreenPost, weekAheadPost, memberPostAM, pickMemberCommunity, memberPostCommunity, engagementPost, recapPost } from './content.js';
 
 /**
  * Five posts a day. Real content first, honest fallbacks second, never filler that invents facts.
@@ -227,4 +227,70 @@ function teaser(events, D, work, used) {
     return { key, type: 'announce', ev: { ...rep, runDates: r.dates.length > 1 ? r.dates : undefined }, eventDate: first, runKey: r.key };
   }
   return null;
+}
+
+
+// ============ The Chamber's weekly schedule (Jessica's plan) ============
+// Edit times here and nowhere else. 24-hour clock, Central time.
+//   Sunday      9:30 week ahead | 3:30 PM member spotlight (what they do for the community)
+//   Mon - Fri   7:30 today in Hobart | 10:30 member spotlight (morning look) | 2:45 PM event post | 7:30 PM engagement post
+//   Saturday    7:30 today in Hobart | 2:00 PM week in review | 6:00 PM event post
+export const WEEK = {
+  0: [['09:30', 'weekAhead'], ['15:30', 'memberCommunity']],
+  1: [['07:30', 'today'], ['10:30', 'memberAM'], ['14:45', 'event'], ['19:30', 'engage']],
+  2: [['07:30', 'today'], ['10:30', 'memberAM'], ['14:45', 'event'], ['19:30', 'engage']],
+  3: [['07:30', 'today'], ['10:30', 'memberAM'], ['14:45', 'event'], ['19:30', 'engage']],
+  4: [['07:30', 'today'], ['10:30', 'memberAM'], ['14:45', 'event'], ['19:30', 'engage']],
+  5: [['07:30', 'today'], ['10:30', 'memberAM'], ['14:45', 'event'], ['19:30', 'engage']],
+  6: [['07:30', 'today'], ['14:00', 'recap'], ['18:00', 'event']],
+};
+export const WEEK_DAYS_AHEAD = 7;               // plan today plus the next 7 days, so the Chamber can review a week ahead
+export const WEEK_STARTS = '2026-11-16';        // days before this were already scheduled under the old five-a-day plan
+export const RECAP_MAX_DAYS_AHEAD = 1;          // the recap is made at most a day early so it can use real results
+
+export function planWeek(events, { members, data }, nowEpoch, ledger = {}) {
+  const { today } = centralNow(nowEpoch * 1000);
+  const work = { ...ledger };
+  const used = new Set();
+  const out = [];
+  const stamp = (post, D, slot) => {
+    const epoch = zonedEpoch(D, slot);
+    if (epoch < nowEpoch + CONFIG.MIN_LEAD_MINUTES * 60) return false;
+    const slotKey = `slot:${D}:${slot}`;
+    if (ledger[slotKey]) return false;
+    post.key = post.key || slotKey;
+    if (work[post.key] && !String(post.key).startsWith('slot:')) return false;     // never post the same thing twice
+    post.slotKey = slotKey; post.scheduledFor = epoch; post.scheduledDay = D; post.slot = slot;
+    out.push(post);
+    work[post.key] = { scheduledFor: epoch }; work[slotKey] = { scheduledFor: epoch };
+    return true;
+  };
+  for (let n = 0; n <= WEEK_DAYS_AHEAD; n++) {
+    const D = addDays(today, n);
+    if (D < WEEK_STARTS) continue;
+    const dow = pd(D).getDay();
+    for (const [slot, kind] of WEEK[dow]) {
+      let post = null;
+      if (kind === 'weekAhead') post = weekAheadPost(events, D);
+      else if (kind === 'today') {
+        const items = lineupItems(events, D);
+        if (items.length) post = { ...lineupPost(items, D), key: `lineup:${D}` };
+        else {
+          const ahead = [];
+          for (let k = 1; k <= 7; k++) for (const e of lineupItems(events, addDays(D, k), { includeSports: false })) ahead.push(e);
+          post = ahead.length ? { ...lineupPost(ahead, D, 'Coming up in Hobart'), key: `lineup:${D}` } : null;
+        }
+      } else if (kind === 'memberAM') { const m = members.length ? pickMember(members, D, work) : null; post = m ? memberPostAM(m, D) : null; }
+      else if (kind === 'memberCommunity') { const m = members.length ? pickMemberCommunity(members, D, work, data.notes) : null; post = m ? memberPostCommunity(m, D, data.notes) : null; }
+      else if (kind === 'event') {
+        const e = duePosts(events, D, work).find((p) => !used.has(p.key));
+        if (e) { post = { ...e }; used.add(e.key); }
+        else { const t = teaser(events, D, work, used); if (t) { used.add(t.key); post = t; } }
+      } else if (kind === 'engage') post = engagementPost(D, data, events, work);
+      else if (kind === 'recap') post = n <= RECAP_MAX_DAYS_AHEAD ? recapPost(events, D, data.results) : null;
+      if (!post) post = kind === 'recap' && n > RECAP_MAX_DAYS_AHEAD ? null : evergreenPost(D, slot);
+      if (post) stamp(post, D, slot);
+    }
+  }
+  return out;
 }

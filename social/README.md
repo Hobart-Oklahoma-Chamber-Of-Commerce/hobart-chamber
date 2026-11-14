@@ -2,17 +2,27 @@
 
 Turns events on the community calendar into on-brand Facebook posts, on its own.
 
-**What it does (five posts a day, 7 AM, 10 AM, 12 PM, 3 PM, 6 PM Central)**
+**What it does: a full week of posts, planned a week ahead (Central time)**
 
-Each evening (and again each morning as a safety net) it reads the calendar and schedules the next day's five posts on the Page:
+Twice a day it reads the calendar and schedules the next 8 days of posts on the Page. Jessica reviews them each Sunday in **Meta Business Suite > Planner > Scheduled** and edits, moves or deletes anything.
 
-| Time | Post | Where it comes from |
-|---|---|---|
-| 7:00 AM | **Today in Hobart** lineup (or "Coming up" if today is quiet) | the calendar |
-| 10:00 AM | Event announcement (7 days out) or reminder (day before), else a "save the date" for the next event | the calendar |
-| 12:00 PM | **Lunch spot** spotlight, only restaurants open that day | `data/restaurants.json` + menu pages |
-| 3:00 PM | **Member spotlight**, rotating through every member | the member directory on the website |
-| 6:00 PM | Second event post, else **Tomorrow in Hobart**, else a Chamber how-to (submit an event, join, see menus) | the calendar |
+| Day | Time | Post | Where it comes from |
+|---|---|---|---|
+| Sunday | 9:30 AM | **This week in Hobart** | the calendar |
+| Sunday | 3:30 PM | **Member spotlight** on what the business does for the community | member directory + `data/member-notes.json` |
+| Mon to Fri | 7:30 AM | **Today in Hobart** | the calendar |
+| Mon to Fri | 10:30 AM | **Member spotlight** (morning look) | member directory |
+| Mon to Fri | 2:45 PM | **Event post** (announcement 7 days out, reminder the day before, or a save-the-date) | the calendar |
+| Mon to Fri | 7:30 PM | **Engagement post** that asks for comments: Mon/Wed Hobart history, Tue fun question, Thu "a year ago" (only if the calendar has something from last year), Fri weekend plans | `data/history.json`, `data/prompts.json` |
+| Saturday | 7:30 AM | **Today in Hobart** | the calendar |
+| Saturday | 2:00 PM | **The week in Hobart** recap (made the day before so it can use real results) | the calendar + `data/results.json` |
+| Saturday | 6:00 PM | **Event post** | the calendar |
+
+Edit the times in `src/plan.js` (`WEEK`) and nowhere else.
+
+**Game scores:** there is no automatic source for local game scores. To include them, add real results to `data/results.json`, for example `{ "date": "2026-11-17", "text": "5/6th Basketball: Hobart 24, Hollis 18" }`. The recap uses only what is in that file.
+
+**History posts** use facts from the Oklahoma Historical Society's Encyclopedia of Oklahoma History and Culture (Hobart entry) and cite it in the caption. Add more to `data/history.json` only with a real source.
 
 Nothing is invented: every name, address, phone and hour comes from the website or a verified listing. If the calendar is quiet, the slot falls back to a true "how to use the Chamber" post instead of filler.
 
@@ -25,7 +35,7 @@ Every graphic uses the website's own fonts (Playfair Display and Inter) and exac
 - **Season** (by date): fall leaves on warm paper, winter snowflakes on cool paper, spring blossoms, summer sun.
 - **Event** (by words in the title): football, basketball, band/music, market, harvest, Halloween, golf, Christmas, stage, food, shopping, giving. This sets the sticker color, header strip pattern, hero icon and a few motifs.
 
-So a November football post and a January basketball post share the same bones but look clearly different. Themes live in `src/themes.js`, icons in `src/icons.js`, layout in `src/template.js`, wording in `src/caption.js` and `src/content.js`, timing in `src/plan.js` (`DAILY`).
+So a November football post and a January basketball post share the same bones but look clearly different. Themes live in `src/themes.js`, icons in `src/icons.js`, layout in `src/template.js`, wording in `src/caption.js` and `src/content.js`, timing in `src/plan.js` (`WEEK`).
 
 ## Setup checklist (about 20 minutes)
 
