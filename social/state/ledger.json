@@ -358,5 +358,29 @@
     "type": "announce",
     "mode": "schedule",
     "madeAt": "2026-11-14T21:55:41.412Z"
+  },
+  "slot:2026-11-22:09:30": {
+    "scheduledFor": 1795361400,
+    "key": "week:2026-11-22"
+  },
+  "week:2026-11-22": {
+    "fbPostId": "122181039692990004",
+    "scheduledFor": 1795361400,
+    "title": "This week in Hobart",
+    "type": "lineup",
+    "mode": "schedule",
+    "madeAt": "2026-11-15T06:39:50.451Z"
+  },
+  "slot:2026-11-22:15:30": {
+    "scheduledFor": 1795383000,
+    "key": "member:frisco-creek-bbq:2026-11-22"
+  },
+  "member:frisco-creek-bbq:2026-11-22": {
+    "fbPostId": "122181039734990004",
+    "scheduledFor": 1795383000,
+    "title": "Frisco Creek BBQ",
+    "type": "member",
+    "mode": "schedule",
+    "madeAt": "2026-11-15T06:39:53.495Z"
   }
 }
