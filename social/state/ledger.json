@@ -382,5 +382,53 @@
     "type": "member",
     "mode": "schedule",
     "madeAt": "2026-11-15T06:39:53.495Z"
+  },
+  "slot:2026-11-23:07:30": {
+    "scheduledFor": 1795440600,
+    "key": "lineup:2026-11-23"
+  },
+  "lineup:2026-11-23": {
+    "fbPostId": "122181168776990004",
+    "scheduledFor": 1795440600,
+    "title": "Coming up in Hobart",
+    "type": "lineup",
+    "mode": "schedule",
+    "madeAt": "2026-11-16T06:36:06.600Z"
+  },
+  "slot:2026-11-23:10:30": {
+    "scheduledFor": 1795451400,
+    "key": "member:general-tommy-franks-museum:2026-11-23"
+  },
+  "member:general-tommy-franks-museum:2026-11-23": {
+    "fbPostId": "122181168830990004",
+    "scheduledFor": 1795451400,
+    "title": "General Tommy Franks Museum",
+    "type": "member",
+    "mode": "schedule",
+    "madeAt": "2026-11-16T06:36:10.517Z"
+  },
+  "slot:2026-11-23:14:45": {
+    "scheduledFor": 1795466700,
+    "key": "evergreen:2026-11-23:14:45"
+  },
+  "evergreen:2026-11-23:14:45": {
+    "fbPostId": "122181168878990004",
+    "scheduledFor": 1795466700,
+    "title": "Where should we eat?",
+    "type": "evergreen",
+    "mode": "schedule",
+    "madeAt": "2026-11-16T06:36:13.632Z"
+  },
+  "slot:2026-11-23:19:30": {
+    "scheduledFor": 1795483800,
+    "key": "engage:history:first-sale"
+  },
+  "engage:history:first-sale": {
+    "fbPostId": "122181168920990004",
+    "scheduledFor": 1795483800,
+    "title": "A town in five days",
+    "type": "engage",
+    "mode": "schedule",
+    "madeAt": "2026-11-16T06:36:16.683Z"
   }
 }
