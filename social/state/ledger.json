@@ -430,5 +430,53 @@
     "type": "engage",
     "mode": "schedule",
     "madeAt": "2026-11-16T06:36:16.683Z"
+  },
+  "slot:2026-11-24:07:30": {
+    "scheduledFor": 1795527000,
+    "key": "lineup:2026-11-24"
+  },
+  "lineup:2026-11-24": {
+    "fbPostId": "122181306464990004",
+    "scheduledFor": 1795527000,
+    "title": "Coming up in Hobart",
+    "type": "lineup",
+    "mode": "schedule",
+    "madeAt": "2026-11-17T07:59:27.094Z"
+  },
+  "slot:2026-11-24:10:30": {
+    "scheduledFor": 1795537800,
+    "key": "member:great-plains-bank:2026-11-24"
+  },
+  "member:great-plains-bank:2026-11-24": {
+    "fbPostId": "122181306506990004",
+    "scheduledFor": 1795537800,
+    "title": "Great Plains Bank",
+    "type": "member",
+    "mode": "schedule",
+    "madeAt": "2026-11-17T07:59:29.373Z"
+  },
+  "slot:2026-11-24:14:45": {
+    "scheduledFor": 1795553100,
+    "key": "evergreen:2026-11-24:14:45"
+  },
+  "evergreen:2026-11-24:14:45": {
+    "fbPostId": "122181306548990004",
+    "scheduledFor": 1795553100,
+    "title": "Join the Chamber",
+    "type": "evergreen",
+    "mode": "schedule",
+    "madeAt": "2026-11-17T07:59:31.485Z"
+  },
+  "slot:2026-11-24:19:30": {
+    "scheduledFor": 1795570200,
+    "key": "engage:fun:neighbor"
+  },
+  "engage:fun:neighbor": {
+    "fbPostId": "122181306590990004",
+    "scheduledFor": 1795570200,
+    "title": "Neighbor appreciation",
+    "type": "engage",
+    "mode": "schedule",
+    "madeAt": "2026-11-17T07:59:33.667Z"
   }
 }
