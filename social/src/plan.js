@@ -270,6 +270,8 @@ export function planWeek(events, { members, data }, nowEpoch, ledger = {}) {
     if (D < WEEK_STARTS) continue;
     const dow = pd(D).getDay();
     for (const [slot, kind] of WEEK[dow]) {
+      // already scheduled, or too late to schedule: skip it before picking content, so an event is never used up on a slot that won't post
+      if (zonedEpoch(D, slot) < nowEpoch + CONFIG.MIN_LEAD_MINUTES * 60 || ledger[`slot:${D}:${slot}`]) continue;
       let post = null;
       if (kind === 'weekAhead') post = weekAheadPost(events, D);
       else if (kind === 'today') {
@@ -284,12 +286,12 @@ export function planWeek(events, { members, data }, nowEpoch, ledger = {}) {
       else if (kind === 'memberCommunity') { const m = members.length ? pickMemberCommunity(members, D, work, data.notes) : null; post = m ? memberPostCommunity(m, D, data.notes) : null; }
       else if (kind === 'event') {
         const e = duePosts(events, D, work).find((p) => !used.has(p.key));
-        if (e) { post = { ...e }; used.add(e.key); }
-        else { const t = teaser(events, D, work, used); if (t) { used.add(t.key); post = t; } }
+        if (e) post = { ...e };
+        else { const t = teaser(events, D, work, used); if (t) post = t; }
       } else if (kind === 'engage') post = engagementPost(D, data, events, work);
       else if (kind === 'recap') post = n <= RECAP_MAX_DAYS_AHEAD ? recapPost(events, D, data.results) : null;
       if (!post) post = kind === 'recap' && n > RECAP_MAX_DAYS_AHEAD ? null : evergreenPost(D, slot);
-      if (post) stamp(post, D, slot);
+      if (post && stamp(post, D, slot)) used.add(post.key);   // only count an event as used once it really has a slot
     }
   }
   return out;
