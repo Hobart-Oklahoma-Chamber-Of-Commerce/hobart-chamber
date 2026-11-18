@@ -478,5 +478,53 @@
     "type": "engage",
     "mode": "schedule",
     "madeAt": "2026-11-17T07:59:33.667Z"
+  },
+  "slot:2026-11-25:07:30": {
+    "scheduledFor": 1795613400,
+    "key": "lineup:2026-11-25"
+  },
+  "lineup:2026-11-25": {
+    "fbPostId": "122181424580990004",
+    "scheduledFor": 1795613400,
+    "title": "Coming up in Hobart",
+    "type": "lineup",
+    "mode": "schedule",
+    "madeAt": "2026-11-18T07:34:37.885Z"
+  },
+  "slot:2026-11-25:10:30": {
+    "scheduledFor": 1795624200,
+    "key": "member:hiway-inn-motel:2026-11-25"
+  },
+  "member:hiway-inn-motel:2026-11-25": {
+    "fbPostId": "122181424622990004",
+    "scheduledFor": 1795624200,
+    "title": "Hiway Inn Motel",
+    "type": "member",
+    "mode": "schedule",
+    "madeAt": "2026-11-18T07:34:40.557Z"
+  },
+  "slot:2026-11-25:14:45": {
+    "scheduledFor": 1795639500,
+    "key": "evergreen:2026-11-25:14:45"
+  },
+  "evergreen:2026-11-25:14:45": {
+    "fbPostId": "122181424664990004",
+    "scheduledFor": 1795639500,
+    "title": "Got an event?",
+    "type": "evergreen",
+    "mode": "schedule",
+    "madeAt": "2026-11-18T07:34:43.053Z"
+  },
+  "slot:2026-11-25:19:30": {
+    "scheduledFor": 1795656600,
+    "key": "engage:history:frisco"
+  },
+  "engage:history:frisco": {
+    "fbPostId": "122181424706990004",
+    "scheduledFor": 1795656600,
+    "title": "The Frisco line",
+    "type": "engage",
+    "mode": "schedule",
+    "madeAt": "2026-11-18T07:34:45.795Z"
   }
 }
