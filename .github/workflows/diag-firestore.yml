@@ -1,0 +1,17 @@
+name: Temporary privacy check (can the public read sign-up lists?)
+on:
+  push:
+    branches: [diag-firestore-read]
+permissions:
+  contents: read
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: HTTP status only (200 = anyone can read it, 403 = protected). No data is printed.
+        run: |
+          B="https://firestore.googleapis.com/v1/projects/hobart-chamber/databases/(default)/documents"
+          for c in subscribers kickball glowgolf glowgolf2 scavengerhunt tractorshow vendors parade ribbon_cuttings counters analytics_daily; do
+            code=$(curl -s -o /dev/null -w "%{http_code}" "$B/$c?pageSize=1")
+            echo "LIST $c -> $code"
+          done
