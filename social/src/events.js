@@ -23,7 +23,7 @@ export function loadSeed(indexHtmlPath) {
 export function loadCarouselFlyers(indexHtmlPath) {
   const s = fs.readFileSync(indexHtmlPath, 'utf8');
   const out = [];
-  const re = /<div class="event-card" data-date="([^"]+)"[^>]*><div class="flyer-slot"><img src="([^"]+)"[\s\S]*?<h4>([\s\S]*?)<\/h4>/g;
+  const re = /<div class="event-card" data-date="([^"]+)"[^>]*><div class="flyer-slot"><img [^>]*?\bsrc="([^"]+)"[\s\S]*?<h4>([\s\S]*?)<\/h4>/g;   // other attributes (loading, decoding) may come before src
   let m;
   while ((m = re.exec(s))) out.push({ date: m[1], src: m[2], title: m[3].replace(/<[^>]+>/g, '').trim() });
   return out;
