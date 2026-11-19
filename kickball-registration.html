@@ -310,5 +310,21 @@ function submitKickball(){
   });
 }
 </script>
+<script>
+/* After the event date: show a closed notice and switch the form off (registrations stop). */
+(function(){
+  var END='2026-07-18', t=new Date();
+  var today=t.getFullYear()+'-'+('0'+(t.getMonth()+1)).slice(-2)+'-'+('0'+t.getDate()).slice(-2);
+  if(today<=END) return;
+  var b=document.createElement('div');
+  b.setAttribute('role','status');
+  b.style.cssText='background:#0e2056;color:#fff;text-align:center;padding:14px 18px;font:600 15px/1.5 Inter,system-ui,sans-serif;border-bottom:3px solid #c49a3e;';
+  b.innerHTML='This event has wrapped up and registration is closed. Thank you to everyone who took part! <a href="index.html#calendar" style="color:#e3bd62;">See what\u2019s coming up \u2192</a>';
+  var nav=document.querySelector('nav');
+  if(nav&&nav.parentNode) nav.parentNode.insertBefore(b,nav.nextSibling); else document.body.insertBefore(b,document.body.firstChild);
+  var els=document.querySelectorAll('input,select,textarea,button'), i;
+  for(i=0;i<els.length;i++){ if(!els[i].closest('nav')) els[i].disabled=true; }
+})();
+</script>
 </body>
 </html>
