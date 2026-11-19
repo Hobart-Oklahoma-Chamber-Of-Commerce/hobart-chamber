@@ -2292,26 +2292,65 @@ function sortEventsCarousel(){
   cards.forEach(function(c){track.appendChild(c);});
 }
 
-/* ---- BOTW Archive (public — loads from botw_archive collection) ---- */
+/* ---- Business of the Week (managed in the admin panel) ----
+   Every entry in botw_archive is a week's featured business. The newest one
+   (if it is newer than the built-in Clink's feature) becomes the featured card;
+   all the others, plus Clink's once replaced, fill Previous Businesses of the
+   Week, newest first. With no entries, the built-in cards stay as they are. */
+var BOTW_STATIC={name:'Clink\'s', date:'2026-09-25', photo:'flyers/botw-clinks.JPG'};
+function botwDate(x){
+  if(x.weekDate) return String(x.weekDate);
+  var t=Date.parse(String(x.weekOf||'').replace(/^\s*week of\s*/i,''));
+  if(!isNaN(t)) return dstr(new Date(t));
+  if(x.createdAt&&x.createdAt.toDate) return dstr(x.createdAt.toDate());
+  return '';
+}
+function botwWeekLabel(ds){ if(!ds) return ''; var d=ymdDate(ds); return 'Week of '+MN[d.getMonth()].slice(0,3)+' '+d.getDate()+', '+d.getFullYear(); }
+function botwThumbFail(img){ var d=document.createElement('div'); d.className='botw-archive-thumb empty-thumb'; d.textContent='🏪'; if(img.parentNode) img.parentNode.replaceChild(d,img); }
+function botwArchiveCard(x){
+  var img=x.photo?'<img class="botw-archive-thumb" loading="lazy" decoding="async" src="'+esc(x.photo)+'" alt="'+esc(x.name)+'" onerror="botwThumbFail(this)">':'<div class="botw-archive-thumb empty-thumb">🏪</div>';
+  return '<div class="botw-archive-card"'+(x.photo?' onclick="openFlyer(\''+esc(x.photo)+'\')"':'')+'>'+img
+    +'<div class="botw-archive-info"><div class="botw-archive-name">'+esc(x.name)+'</div><div class="botw-archive-week">'+esc(x.weekOf||botwWeekLabel(x._date))+'</div></div></div>';
+}
+function showBotwFeature(x){
+  var card=document.querySelector('.botw-card');
+  if(!card) return;
+  var photo=x.photo
+    ?'<img loading="lazy" decoding="async" src="'+esc(x.photo)+'" alt="'+esc(x.name)+' — Business of the Week" onclick="openFlyer(\''+esc(x.photo)+'\')" onerror="this.parentElement.classList.add(\'empty\');this.outerHTML=flyerPHWhite;"><span class="zoom-hint">🔍 Click to enlarge</span>'
+    :flyerPHWhite;
+  var paras=String(x.blurb||'').split(/\n\s*\n/).filter(function(t){return t.trim();}).map(function(t){ return '<p>'+esc(t.trim()).replace(/\n/g,'<br>')+'</p>'; }).join('');
+  card.innerHTML='<div class="botw-photo">'+photo+'</div><div class="botw-inner"><span class="botw-badge">'+esc(x.weekOf||botwWeekLabel(x._date))+'</span><h3>'+esc(x.name)+'</h3>'+paras+'</div>';
+}
 function loadBotwArchive(){
   var grid=document.getElementById('botwArchiveGrid');
-  if(!grid||typeof db==='undefined')return;
-  db.collection('botw_archive').orderBy('weekOf','desc').get().then(function(snap){
-    if(snap.empty) return; // nothing in Firestore — hardcoded cards stay
-    // Firestore has entries — render them AFTER the hardcoded cards
-    var html=grid.innerHTML; // preserve hardcoded cards
-    snap.forEach(function(doc){
-      var x=doc.data();
-      var img=x.photo?'<img class="botw-archive-thumb" loading="lazy" decoding="async" src="'+esc(x.photo)+'" alt="'+esc(x.name)+'" onerror="this.classList.add(\'empty-thumb\');this.outerHTML=\'<div class=\\\"botw-archive-thumb empty-thumb\\\">🏪</div>\';">'
-        :'<div class="botw-archive-thumb empty-thumb">🏪</div>';
-      html+='<div class="botw-archive-card" onclick="openFlyer(\''+(x.photo||'')+'\')">'+img
-        +'<div class="botw-archive-info">'
-        +'<div class="botw-archive-name">'+esc(x.name||'')+'</div>'
-        +'<div class="botw-archive-week">'+(x.weekOf||'')+'</div>'
-        +'</div></div>';
-    });
+  if(!grid||!FB||!db) return;
+  db.collection('botw_archive').get().then(function(snap){
+    var rows=[];
+    snap.forEach(function(doc){ var x=doc.data(); x.id=doc.id; x._date=botwDate(x); if(x.name) rows.push(x); });
+    if(!rows.length) return;   /* nothing added yet: the built-in cards stay */
+    rows.sort(function(a,b){ return a._date<b._date?1:a._date>b._date?-1:0; });
+    var featured=(rows[0]._date && rows[0]._date>BOTW_STATIC.date) ? rows[0] : null;
+    if(featured) showBotwFeature(featured);
+    /* everything for the archive: built-in cards + admin entries (+ Clink's once replaced) */
+    var all=[], i, cards=grid.querySelectorAll('.botw-archive-card');
+    for(i=0;i<cards.length;i++){
+      var nm=cards[i].querySelector('.botw-archive-name'), wk=cards[i].querySelector('.botw-archive-week'), im=cards[i].querySelector('img');
+      var w=wk?wk.textContent.trim():'';
+      all.push({name:nm?nm.textContent.trim():'', weekOf:w, photo:im?im.getAttribute('src'):'', _date:botwDate({weekOf:w})});
+    }
+    if(featured) all.push({name:BOTW_STATIC.name, weekOf:botwWeekLabel(BOTW_STATIC.date), photo:BOTW_STATIC.photo, _date:BOTW_STATIC.date});
+    for(i=0;i<rows.length;i++){ if(rows[i]!==featured) all.push(rows[i]); }
+    var seen={}, html='';
+    all.sort(function(a,b){ return a._date<b._date?1:a._date>b._date?-1:0; });
+    for(i=0;i<all.length;i++){
+      var nm=String(all[i].name||'').toLowerCase(), key=nm+'|'+all[i]._date;
+      if(!nm||seen[key]) continue;
+      if(!featured && nm===BOTW_STATIC.name.toLowerCase()) continue;   /* Clink's is still the featured card */
+      seen[key]=1;
+      html+=botwArchiveCard(all[i]);
+    }
     grid.innerHTML=html;
-  }).catch(function(){}); // silently fail — hardcoded cards stay visible
+  }).catch(function(){});   /* keep the built-in cards if anything goes wrong */
 }
 
 /* ---- Oct 3 Power-Packed Saturday countdown (target: Oct 3, 2026, 8:30 PM) ---- */
@@ -2673,7 +2712,7 @@ function renderAdmin(){
     +'<div class="admin-tab'+(adminTab==='manage'?' on':'')+'" onclick="switchTab(\'manage\')">Manage Events</div>'
     +'<div class="admin-tab'+(adminTab==='create'?' on':'')+'" onclick="switchTab(\'create\')">+ New Event</div>'
     +'<div class="admin-tab'+(adminTab==='banner'?' on':'')+'" onclick="switchTab(\'banner\')">Banner</div>'
-    +'<div class="admin-tab'+(adminTab==='botw'?' on':'')+'" onclick="switchTab(\'botw\')">BOTW Archive</div>'
+    +'<div class="admin-tab'+(adminTab==='botw'?' on':'')+'" onclick="switchTab(\'botw\')">Business of the Week</div>'
     +'<div class="admin-tab'+(adminTab==='jobs'?' on':'')+'" onclick="switchTab(\'jobs\')">Jobs</div>'
     +'<div class="admin-tab'+(adminTab==='jobcreate'?' on':'')+'" onclick="switchTab(\'jobcreate\')">+ New Opening</div>'
     /* ARCHIVED 2026 HARVEST TAB (restore for 2027): +'<div class="admin-tab'+(adminTab==='parade'?' on':'')+'" onclick="switchTab(\'parade\')">Parade <span id="prCount"></span></div>' */
@@ -3256,39 +3295,55 @@ function exportScavenger(){
 }
 
 /* ---- BOTW Archive admin ---- */
+var curBotwPhoto=null;
+function thisMonday(){ var d=new Date(); d.setHours(0,0,0,0); var k=(d.getDay()+6)%7; d.setDate(d.getDate()-k); return dstr(d); }
 function paneBotw(){
   var pane=document.getElementById('adminPane');
   pane.innerHTML='<div class="admin-empty">Loading…</div>';
-  db.collection('botw_archive').orderBy('weekOf','desc').get().then(function(snap){
-    var rows=[]; snap.forEach(function(doc){var x=doc.data();x.id=doc.id;rows.push(x);});
-    var addForm='<div style="background:var(--slate);border-radius:8px;padding:18px;margin-bottom:20px;">'
-      +'<div style="font-weight:700;font-size:13px;color:var(--navy);margin-bottom:12px;">+ Add to Archive</div>'
-      +'<div class="fg-row" style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:10px;">'
-      +'<div class="fg"><label style="font-size:12px;font-weight:600;">Business Name</label><input id="botw_name" type="text" placeholder="e.g. BancFirst" style="width:100%;padding:8px 10px;border:1px solid var(--border);border-radius:5px;font-size:13px;"></div>'
-      +'<div class="fg"><label style="font-size:12px;font-weight:600;">Week Of (e.g. "Week of Aug 4, 2026")</label><input id="botw_week" type="text" placeholder="Week of Aug 4, 2026" style="width:100%;padding:8px 10px;border:1px solid var(--border);border-radius:5px;font-size:13px;"></div>'
-      +'</div>'
-      +'<div class="fg" style="margin-bottom:10px;"><label style="font-size:12px;font-weight:600;">Photo URL (flyers/ path)</label><input id="botw_photo" type="text" placeholder="flyers/botw-bancfirst-team.jpg" style="width:100%;padding:8px 10px;border:1px solid var(--border);border-radius:5px;font-size:13px;"></div>'
-      +'<div class="fg" style="margin-bottom:10px;"><label style="font-size:12px;font-weight:600;">Short blurb (optional)</label><textarea id="botw_blurb" style="width:100%;padding:8px 10px;border:1px solid var(--border);border-radius:5px;font-size:13px;min-height:60px;"></textarea></div>'
-      +'<button class="btn-sm btn-gold" onclick="addBotwEntry()">Add to Archive</button>'
-      +'<span id="botw_msg" style="font-size:12px;margin-left:10px;color:var(--navy);"></span>'
+  curBotwPhoto=null;
+  db.collection('botw_archive').get().then(function(snap){
+    var rows=[]; snap.forEach(function(doc){ var x=doc.data(); x.id=doc.id; x._date=botwDate(x); rows.push(x); });
+    rows.sort(function(a,b){ return a._date<b._date?1:a._date>b._date?-1:0; });
+    var featuredId=(rows.length && rows[0]._date>BOTW_STATIC.date) ? rows[0].id : null;
+    var inp='width:100%;padding:9px 10px;border:1px solid var(--border);border-radius:5px;font-size:14px;font-family:inherit;';
+    var form='<div style="background:var(--slate);border-radius:8px;padding:18px;margin-bottom:20px;">'
+      +'<div style="font-weight:700;font-size:14px;color:var(--navy);margin-bottom:4px;">Feature this week\'s business</div>'
+      +'<div style="font-size:12.5px;color:var(--gray);margin-bottom:14px;line-height:1.5;">The newest week shows on the home page as Business of the Week. Earlier weeks move to Previous Businesses of the Week automatically.</div>'
+      +'<div class="fg"><label for="botw_name">Business name *</label><input id="botw_name" type="text" placeholder="e.g. BancFirst" style="'+inp+'"></div>'
+      +'<div class="fg"><label for="botw_date">Week of *</label><input id="botw_date" type="date" value="'+thisMonday()+'" style="'+inp+'"></div>'
+      +'<div class="fg"><label>Photo</label>'
+      +'<div class="upl-box"><img class="upl-thumb" id="botw_thumb" src="">'
+      +'<div class="upl-body"><label class="upl-label">Choose Photo<input type="file" accept="image/*" onchange="handleBotwPhoto(this)"></label>'
+      +'<div class="upl-status" id="botw_status"></div></div></div></div>'
+      +'<div class="fg"><label for="botw_blurb">Their story</label><textarea id="botw_blurb" rows="7" placeholder="Who they are, how long they have served Hobart, what makes them special. Leave a blank line between paragraphs." style="'+inp+'"></textarea></div>'
+      +'<button class="btn-sm btn-gold" onclick="addBotwEntry()">Publish to the Home Page</button>'
+      +'<span id="botw_msg" style="font-size:12.5px;margin-left:10px;color:var(--navy);"></span>'
       +'</div>';
-    var listHtml=rows.length?'<div class="admin-list">'+rows.map(function(r){
-      return '<div class="admin-row"><div class="info"><b>'+esc(r.name||'')+'</b><small>'+esc(r.weekOf||'')+'</small>'+(r.photo?'<small>'+esc(r.photo)+'</small>':'')+'</div>'
+    var list=rows.length?'<div class="admin-list">'+rows.map(function(r){
+      return '<div class="admin-row"><div class="info"><b>'+esc(r.name||'')+(r.id===featuredId?' <span style="background:#e8f6ec;color:#1c5e33;border-radius:10px;padding:1px 8px;font-size:11px;">On the home page</span>':'')+'</b><small>'+esc(r.weekOf||botwWeekLabel(r._date))+'</small></div>'
         +'<div class="acts"><button class="btn-sm btn-red" onclick="delBotwEntry(\''+r.id+'\')">Remove</button></div></div>';
-    }).join('')+'</div>':'<div class="admin-empty" style="margin-top:0;">No entries yet — add the first one above.</div>';
-    pane.innerHTML=addForm+listHtml;
-  }).catch(function(){pane.innerHTML='<div class="admin-empty">Error — make sure <b>botw_archive</b> collection exists in Firestore and has a read rule for auth users.</div>';});
+    }).join('')+'</div>':'<div class="admin-empty" style="margin-top:0;">No weeks added yet. The home page shows Clink\'s until you publish the first one.</div>';
+    pane.innerHTML=form+list;
+  }).catch(function(){ pane.innerHTML='<div class="admin-empty">Could not load Business of the Week entries. Check your connection and try again.</div>'; });
+}
+function handleBotwPhoto(inputEl){
+  var file=inputEl.files&&inputEl.files[0];
+  if(!file) return;
+  var thumb=document.getElementById('botw_thumb'), status=document.getElementById('botw_status');
+  thumb.src=URL.createObjectURL(file); thumb.style.display='block';
+  function setStatus(msg,isErr){ status.textContent=msg; status.className='upl-status'+(isErr?' err':''); }
+  uploadFlyerImage(file, 'botw', setStatus, function(url){ curBotwPhoto=url; setStatus('Photo attached ✓', false); status.classList.add('ok'); });
 }
 function addBotwEntry(){
-  var name=val('botw_name'),week=val('botw_week'),photo=val('botw_photo'),blurb=val('botw_blurb'),msg=document.getElementById('botw_msg');
-  if(!name||!week){msg.textContent='Name and week are required.';return;}
-  msg.textContent='Saving…';
-  db.collection('botw_archive').add({name:name,weekOf:week,photo:photo||'',blurb:blurb||'',createdAt:firebase.firestore.FieldValue.serverTimestamp()}).then(function(){
-    msg.textContent='Added!';
-    setTimeout(function(){paneBotw();},600);
-  }).catch(function(){msg.textContent='Error saving.';});
+  var name=val('botw_name'), wd=val('botw_date'), blurb=val('botw_blurb'), msg=document.getElementById('botw_msg');
+  if(!name||!wd){ msg.textContent='Business name and week are required.'; return; }
+  msg.textContent='Publishing…';
+  db.collection('botw_archive').add({name:name, weekDate:wd, weekOf:botwWeekLabel(wd), photo:curBotwPhoto||'', blurb:blurb||'', createdAt:firebase.firestore.FieldValue.serverTimestamp()}).then(function(){
+    msg.textContent='Published! It is on the home page now.';
+    setTimeout(function(){ paneBotw(); },900);
+  }).catch(function(){ msg.textContent='Could not publish. Please try again.'; });
 }
-function delBotwEntry(id){if(!confirm('Remove this entry from the archive?'))return;db.collection('botw_archive').doc(id).delete().then(function(){paneBotw();});}
+function delBotwEntry(id){ if(!confirm('Remove this week from Business of the Week?')) return; db.collection('botw_archive').doc(id).delete().then(function(){ paneBotw(); }); }
 
 /* [ARCHIVED 2026 — tab hidden, code kept for 2027] */
 /* ---- Hometown Harvest Vendor registrations ---- */
@@ -4008,6 +4063,7 @@ expireNotices();
 document.addEventListener('click',function(e){ var d=document.querySelector('details.sub-cal[open]'); if(d&&!d.contains(e.target)) d.removeAttribute('open'); });
 applyFlyerBackdrops();
 loadDeals();
+loadBotwArchive();
 trackView();
 </script>
 </body>
