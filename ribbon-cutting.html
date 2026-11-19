@@ -25,7 +25,7 @@
 <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
 <style>
   *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
-  :root{--navy:#1a3ea8;--navy-dark:#142f7e;--navy-deep:#0e2056;--navy-hover:#2247bd;--gold:#c49a3e;--gold-light:#dab65e;--gold-pale:#f6edd6;--white:#fff;--slate:#f3f6fc;--gray:#6f7d99;--dark-gray:#2c3a58;--border:#dbe3f4;}
+  :root{--navy:#1a3ea8;--navy-dark:#142f7e;--navy-deep:#0e2056;--navy-hover:#2247bd;--gold:#c49a3e;--gold-light:#dab65e;--gold-pale:#f6edd6;--white:#fff;--slate:#f3f6fc;--gray:#5f6c88;--dark-gray:#2c3a58;--border:#dbe3f4;}
   body{font-family:'Inter',sans-serif;color:var(--navy-deep);background:var(--white);}
   nav{background:rgba(26,62,168,.97);display:flex;align-items:center;justify-content:space-between;padding:0 24px;height:74px;border-bottom:1px solid rgba(196,154,62,.4);gap:12px;}
   .nav-logo{display:flex;align-items:center;gap:10px;text-decoration:none;min-width:0;flex:1;}
@@ -33,7 +33,7 @@
   .nav-logo-mark img{width:100%;height:100%;object-fit:cover;}
   .nav-logo-text{display:flex;flex-direction:column;min-width:0;}
   .nav-logo-text span:first-child{font-family:'Playfair Display',serif;font-size:15px;font-weight:700;color:#fff;line-height:1.2;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
-  .nav-logo-text span:last-child{font-size:10px;color:rgba(255,255,255,.55);white-space:nowrap;}
+  .nav-logo-text span:last-child{font-size:10px;color:rgba(255,255,255,.82);white-space:nowrap;}
   .nav-back{font-size:12.5px;font-weight:600;color:rgba(255,255,255,.7);text-decoration:none;padding:8px 14px;border:1px solid rgba(255,255,255,.25);border-radius:5px;white-space:nowrap;flex-shrink:0;}
   .nav-back:hover{color:#fff;border-color:rgba(255,255,255,.6);}
   .hero{background:linear-gradient(135deg,var(--navy-deep) 0%,var(--navy) 60%,#1f4fbf 100%);padding:56px 48px 48px;text-align:center;position:relative;overflow:hidden;}
@@ -57,6 +57,7 @@
   .fg input,.fg textarea,.fg select{padding:10px 13px;border:1px solid var(--border);border-radius:6px;font-size:14px;font-family:'Inter',sans-serif;color:var(--navy-deep);width:100%;transition:border-color .2s,box-shadow .2s;}
   .fg input:focus,.fg textarea:focus,.fg select:focus{outline:none;border-color:var(--navy);box-shadow:0 0 0 3px rgba(26,62,168,.1);}
   .fg textarea{resize:vertical;min-height:80px;}
+  .form-card p a{text-decoration:underline;}
   .fg .hint{font-size:11px;color:var(--gray);line-height:1.5;}
   .fg-row{display:grid;grid-template-columns:1fr 1fr;gap:13px;}
   .btn-submit{width:100%;background:var(--navy);color:#fff;border:none;border-radius:7px;padding:14px;font-size:15px;font-weight:700;font-family:'Inter',sans-serif;cursor:pointer;margin-top:6px;transition:background .2s;}
@@ -66,7 +67,7 @@
   .form-msg.ok{background:#e8f6ec;color:#1c7a3e;display:block;}
   .form-msg.err{background:#fbe9e9;color:#b3261e;display:block;}
   .page-footer{background:var(--navy-dark);padding:26px 48px;text-align:center;}
-  .page-footer p{font-size:13px;color:rgba(255,255,255,.45);}
+  .page-footer p{font-size:13px;color:rgba(255,255,255,.72);}
   .page-footer a{color:var(--gold-light);text-decoration:none;}
   @media(max-width:640px){nav{padding:0 18px;}.hero{padding:36px 18px 30px;}.form-card{padding:22px 16px;}.fg-row{grid-template-columns:1fr;}}
 </style>
@@ -105,11 +106,11 @@
 
     <div class="form-section-title">Business Information</div>
     <div class="fg">
-      <label>Business Name <span class="req">*</span></label>
+      <label for="rc_biz">Business Name <span class="req">*</span></label>
       <input type="text" id="rc_biz" placeholder="Your business name"/>
     </div>
     <div class="fg">
-      <label>Type of Occasion <span class="req">*</span></label>
+      <label for="rc_type">Type of Occasion <span class="req">*</span></label>
       <select id="rc_type">
         <option value="">— Select —</option>
         <option>New Business Opening</option>
@@ -121,44 +122,44 @@
       </select>
     </div>
     <div class="fg">
-      <label>Business Address <span class="req">*</span></label>
+      <label for="rc_address">Business Address <span class="req">*</span></label>
       <input type="text" id="rc_address" placeholder="Street address in Hobart, OK"/>
     </div>
 
     <div class="form-section-title">Contact & Timing</div>
     <div class="fg-row">
       <div class="fg">
-        <label>Contact Name <span class="req">*</span></label>
+        <label for="rc_name">Contact Name <span class="req">*</span></label>
         <input type="text" id="rc_name" placeholder="First and last name"/>
       </div>
       <div class="fg">
-        <label>Phone Number <span class="req">*</span></label>
+        <label for="rc_phone">Phone Number <span class="req">*</span></label>
         <input type="tel" id="rc_phone" placeholder="(580) 000-0000"/>
       </div>
     </div>
     <div class="fg">
-      <label>Email Address <span class="req">*</span></label>
+      <label for="rc_email">Email Address <span class="req">*</span></label>
       <input type="email" id="rc_email" placeholder="you@email.com"/>
     </div>
     <div class="fg-row">
       <div class="fg">
-        <label>Preferred Date</label>
+        <label for="rc_date">Preferred Date</label>
         <input type="date" id="rc_date"/>
         <span class="hint">We'll confirm availability.</span>
       </div>
       <div class="fg">
-        <label>Preferred Time</label>
+        <label for="rc_time">Preferred Time</label>
         <input type="text" id="rc_time" placeholder="e.g. 10:00 AM"/>
       </div>
     </div>
 
     <div class="form-section-title">Tell Us More (Optional)</div>
     <div class="fg">
-      <label>Brief description of your business or milestone</label>
+      <label for="rc_desc">Brief description of your business or milestone</label>
       <textarea id="rc_desc" placeholder="What do you do? What are you celebrating? This helps us announce you to the community…"></textarea>
     </div>
     <div class="fg">
-      <label>Estimated number of guests</label>
+      <label for="rc_guests">Estimated number of guests</label>
       <select id="rc_guests">
         <option value="">— Select —</option>
         <option>Just us — small and intimate</option>
