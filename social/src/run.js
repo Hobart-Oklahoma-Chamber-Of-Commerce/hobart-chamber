@@ -8,8 +8,12 @@
 //   node src/run.js --only <eventId>     only this event
 //   node src/run.js --reset-scheduled    delete the worker's own scheduled posts from the new week-plan start date on, forget them, then plan again
 //   node src/run.js --publish-now 12:00  publish today's 12:00 post to the Page RIGHT NOW (demo / showcase)
+//
+// Chamber graphics: a picture in social/overrides named for its time (2026-11-19-0730.jpg) plus its caption
+// (2026-11-19-0730.txt) replaces the worker's own post for that time. See social/overrides/README.md.
 import fs from 'node:fs';
 import path from 'node:path';
+import crypto from 'node:crypto';
 import { fileURLToPath } from 'node:url';
 import { loadSeed, loadCarouselFlyers, matchFlyer, fetchAdminEvents, downloadFlyer } from './events.js';
 import { planWeek, centralNow, zonedEpoch, CONFIG, WEEK_STARTS } from './plan.js';
@@ -19,7 +23,7 @@ import { writeCaption, altText, runDatesText } from './caption.js';
 import { renderPNG, closeBrowser } from './render.js';
 import { flyerPalette } from './palettes.js';
 import { writeICS } from './ics.js';
-import { fbConfig, postPhoto, checkPage, deletePost } from './facebook.js';
+import { fbConfig, postPhoto, checkPage, deletePost, getNode, scheduledPosts } from './facebook.js';
 
 const socialDir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const repoDir = path.resolve(socialDir, '..');
@@ -48,12 +52,14 @@ if (opt('now')) {
 const { today, epoch: nowEpoch } = centralNow(nowEpochMs);
 
 const ledger = fs.existsSync(ledgerPath) ? JSON.parse(fs.readFileSync(ledgerPath, 'utf8')) : {};
+const saveLedger = () => { fs.mkdirSync(path.dirname(ledgerPath), { recursive: true }); fs.writeFileSync(ledgerPath, JSON.stringify(ledger, null, 2) + '\n'); };
 
 // 0) optional: throw away the worker's own FUTURE scheduled posts (only ones in the ledger, from the new plan's start date on) and re-plan them
 if (flag('reset-scheduled')) {
   const gone = new Set();
+  const chamberTimes = new Set(Object.entries(ledger).filter(([k, v]) => k.startsWith('override:') && v).map(([, v]) => v.scheduledFor));
   for (const [k, v] of Object.entries(ledger)) {
-    if (!v || !v.fbPostId || !v.scheduledFor || v.mode !== 'schedule' || k.startsWith('slot:')) continue;
+    if (!v || !v.fbPostId || !v.scheduledFor || v.mode !== 'schedule' || k.startsWith('slot:') || k.startsWith('override:') || chamberTimes.has(v.scheduledFor)) continue;
     const day = new Intl.DateTimeFormat('en-CA', { timeZone: CONFIG.TZ }).format(new Date(v.scheduledFor * 1000));
     if (v.scheduledFor <= nowEpoch + 600 || day < WEEK_STARTS) continue;       // never touch posts that are live, about to go, or from the old plan
     if (dry) { console.log(`  WOULD DELETE ${v.title} [${v.type}] for ${day} (id ${v.fbPostId})`); continue; }
@@ -62,6 +68,66 @@ if (flag('reset-scheduled')) {
   }
   for (const [k, v] of Object.entries(ledger)) if (v && gone.has(v.scheduledFor)) delete ledger[k];
   if (!dry) { fs.writeFileSync(ledgerPath, JSON.stringify(ledger, null, 2) + '\n'); console.log(`Removed ${gone.size} scheduled post(s). Planning them again now.`); }
+}
+
+// 0b) Chamber graphics (social/overrides). A picture named for its time, 2026-11-19-0730.jpg, with its caption
+//     in 2026-11-19-0730.txt (and alt text in 2026-11-19-0730.alt.txt if wanted). The worker deletes its own
+//     scheduled post for that time, if it made one, and schedules the Chamber's picture in its place, once.
+//     Change the picture or caption later and the next run swaps it again. Dry runs only look, never change.
+const overridesDir = path.join(socialDir, 'overrides');
+const flat = (s) => String(s || '').replace(/\s+/g, ' ').trim();
+const toEpoch = (v) => (typeof v === 'number' ? v : /^\d+$/.test(String(v)) ? Number(v) : Math.floor(Date.parse(String(v).replace(/([+-]\d\d)(\d\d)$/, '$1:$2')) / 1000));
+let pageQueue = null;
+for (const f of fs.existsSync(overridesDir) ? fs.readdirSync(overridesDir).sort() : []) {
+  const m = f.match(/^(\d{4}-\d{2}-\d{2})-(\d{2})(\d{2})\.(png|jpe?g)$/i);
+  if (!m) continue;
+  const D = m[1], T = `${m[2]}:${m[3]}`, base = f.replace(/\.[^.]+$/, ''), label = `${D} ${T}`;
+  const at = zonedEpoch(D, T);
+  if (at <= nowEpoch) continue;                                          // its time has come and gone
+  const read = (ext) => { const p = path.join(overridesDir, base + ext); return fs.existsSync(p) ? fs.readFileSync(p, 'utf8').trim() : ''; };
+  const caption = read('.txt'), alt = read('.alt.txt');
+  if (!caption) { console.log(`  SKIPPED Chamber graphic ${f}: it needs a caption file named ${base}.txt`); continue; }
+  const imagePath = path.join(overridesDir, f);
+  const sig = crypto.createHash('sha1').update(fs.readFileSync(imagePath)).update(caption).update(alt).digest('hex').slice(0, 12);
+  const doneKey = `override:${D}:${T}`, slotKey = `slot:${D}:${T}`;
+  const done = ledger[doneKey];
+  if (done && done.sig === sig) continue;                                // already swapped in
+  if (at < nowEpoch + 15 * 60) { console.log(`  SKIPPED Chamber graphic for ${label}: too close to post time to swap safely`); continue; }
+  const wk = ledger[slotKey] && ledger[slotKey].key !== doneKey ? ledger[slotKey].key : null;
+  const replacing = done && done.fbPostId ? { key: doneKey, title: done.title, type: 'override', fbPostId: done.fbPostId }
+    : wk && ledger[wk] && ledger[wk].fbPostId ? { key: wk, title: ledger[wk].title, type: ledger[wk].type, fbPostId: ledger[wk].fbPostId } : null;
+  if (fb.ready) {                                                        // look first: what is queued on the Page for that time?
+    if (!pageQueue) { try { pageQueue = await scheduledPosts(fb); } catch (e) { pageQueue = []; console.log(`  (could not list the Page's scheduled posts: ${e.message})`); } }
+    const same = pageQueue.filter((p) => toEpoch(p.scheduled_publish_time) === at);
+    for (const p of same) console.log(`    queued on the Page for ${label}: ${p.id} "${flat(p.message).slice(0, 80)}"`);
+    const already = !done && same.find((p) => flat(p.message) === flat(caption));
+    if (already) {                                                       // a run before this one already did it
+      if (!dry) { ledger[doneKey] = { fbPostId: already.id, scheduledFor: at, title: `Chamber graphic ${f}`, type: 'override', mode: 'schedule', sig, madeAt: new Date().toISOString() }; if (!ledger[slotKey]) ledger[slotKey] = { scheduledFor: at, key: doneKey }; saveLedger(); }
+      console.log(`  ALREADY ON THE PAGE  Chamber graphic ${f} for ${label}`);
+      continue;
+    }
+    if (replacing) {
+      try { const o = await getNode(fb, replacing.fbPostId, 'id,name,created_time,updated_time'); console.log(`    now in that slot: ${replacing.title} [${replacing.type}] ${o.id}, made ${o.created_time}, last changed ${o.updated_time}: "${flat(o.name).slice(0, 80)}"`); }
+      catch (e) { console.log(`    now in that slot: ${replacing.title} [${replacing.type}] ${replacing.fbPostId} (${e.message})`); }
+    }
+  }
+  if (dry) { console.log(`  WOULD SWAP  ${replacing ? `${replacing.title} [${replacing.type}]` : '(no worker post at that time)'} -> Chamber graphic ${f} for ${label} CT`); continue; }
+  try {
+    if (replacing) {
+      const r = await deletePost(fb, replacing.fbPostId);
+      console.log(`  ${r.toUpperCase()}  ${replacing.title} [${replacing.type}] for ${label}`);
+      ledger[replacing.key] = { ...ledger[replacing.key], fbPostId: null, replacedBy: doneKey };
+      saveLedger();
+    }
+    const res = await postPhoto({ ...fb, mode: 'schedule' }, { imagePath, caption, altText: alt, publishAtEpoch: at });
+    ledger[doneKey] = { fbPostId: res.post_id || res.id, scheduledFor: at, title: `Chamber graphic ${f}`, type: 'override', mode: 'schedule', sig, replaced: replacing ? replacing.fbPostId : null, madeAt: new Date().toISOString() };
+    if (!ledger[slotKey]) ledger[slotKey] = { scheduledFor: at, key: doneKey };
+    saveLedger();
+    console.log(`  SENT   Chamber graphic ${f} scheduled for ${label} CT (id ${ledger[doneKey].fbPostId})`);
+  } catch (e) {
+    console.log(`  FAILED Chamber graphic ${f}: ${e.message}`);
+    process.exitCode = 1;
+  }
 }
 
 // 1) the calendar
