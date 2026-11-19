@@ -36,7 +36,8 @@ export async function postPhoto({ pageId, token, mode }, { imagePath, caption, a
   form.append('access_token', token);
   form.append('message', caption);
   if (altText) form.append('alt_text_custom', altText);
-  form.append('source', new Blob([fs.readFileSync(imagePath)], { type: 'image/png' }), 'post.png');
+  const jpg = /\.jpe?g$/i.test(imagePath);
+  form.append('source', new Blob([fs.readFileSync(imagePath)], { type: jpg ? 'image/jpeg' : 'image/png' }), jpg ? 'post.jpg' : 'post.png');
   if (mode === 'schedule') {
     form.append('published', 'false');
     form.append('scheduled_publish_time', String(publishAtEpoch));
@@ -54,4 +55,21 @@ export async function deletePost({ token }, postId) {
     if (e.code === 100 || /does not exist|cannot be loaded|Unsupported delete/i.test(e.message)) return 'already gone';
     throw e;
   }
+}
+
+// Read one post or photo (used to look before changing anything).
+export async function getNode({ token }, id, fields) {
+  return call(`${API}/${id}?fields=${encodeURIComponent(fields)}&access_token=${encodeURIComponent(token)}`);
+}
+
+// Everything waiting in the Page's Scheduled queue, the worker's posts and anything added by hand.
+export async function scheduledPosts({ pageId, token }) {
+  const out = [];
+  let url = `${API}/${pageId}/scheduled_posts?fields=id,message,scheduled_publish_time&limit=100&access_token=${encodeURIComponent(token)}`;
+  for (let i = 0; url && i < 10; i++) {
+    const res = await call(url);
+    out.push(...(res.data || []));
+    url = res.paging && res.paging.next;
+  }
+  return out;
 }
