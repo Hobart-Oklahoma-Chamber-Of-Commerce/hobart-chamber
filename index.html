@@ -522,6 +522,13 @@
   .directory-head{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:12px;}
   .directory-head .section-title{color:var(--navy);}
   .directory-sub{font-size:15px;color:var(--gray);margin-bottom:26px;max-width:620px;}
+  .dir-search{position:relative;max-width:440px;margin-bottom:16px;}
+  .dir-search input{width:100%;padding:12px 16px 12px 42px;border:1.5px solid var(--border);border-radius:30px;font-family:inherit;font-size:14px;color:var(--dark-gray);background:var(--white);}
+  .dir-search input:focus{outline:none;border-color:var(--navy);box-shadow:0 0 0 3px rgba(26,62,168,.12);}
+  .dir-search svg{position:absolute;left:15px;top:50%;transform:translateY(-50%);width:17px;height:17px;color:var(--gray);pointer-events:none;}
+  .dir-empty{margin:6px 0 10px;font-size:14px;color:var(--gray);}
+  .member-contact a.mc-addr{color:var(--gray);text-decoration:none;border-bottom:1px dotted rgba(95,108,136,.55);width:fit-content;}
+  .member-contact a.mc-addr:hover{color:var(--navy);border-bottom-color:var(--navy);}
   .dir-filter{display:flex;gap:10px;overflow-x:auto;padding-bottom:14px;margin-bottom:28px;scroll-behavior:smooth;scrollbar-width:none;}
   .dir-filter::-webkit-scrollbar{display:none;}
   .dir-chip{flex:0 0 auto;padding:9px 18px;border-radius:30px;border:1.5px solid var(--border);background:var(--white);color:var(--dark-gray);font-size:13px;font-weight:600;cursor:pointer;white-space:nowrap;transition:all .2s;}
@@ -1076,6 +1083,8 @@
     </div>
   </div>
   <p class="directory-sub">Current members since our December 2025 membership drive. These are the businesses and organizations investing in Hobart's future.</p>
+  <div class="dir-search"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg><input type="search" id="dirSearch" placeholder="Search by name or what they do" aria-label="Search the member directory" autocomplete="off" /></div>
+  <p class="dir-empty" id="dirEmpty" hidden>No members match that search. Try another word, or tap All.</p>
   <div class="dir-filter" id="dirFilter"></div>
   <div class="directory-grid" id="directoryGrid">
     <div class="member t-gold" data-cat="Civic &amp; Nonprofit">
@@ -3844,16 +3853,44 @@ function mkChip(label,on){
   b.addEventListener('click',function(){ filterDir(label,b); });
   return b;
 }
+/* Category chip + search box work together. */
+var dirCat='All', dirQuery='';
 function filterDir(cat,btn){
   var chips=document.querySelectorAll('#dirFilter .dir-chip'),i;
   for(i=0;i<chips.length;i++) chips[i].classList.remove('on');
   btn.classList.add('on');
-  var members=document.querySelectorAll('#directoryGrid .member');
+  dirCat=cat;
+  applyDirFilter();
+}
+function applyDirFilter(){
+  var members=document.querySelectorAll('#directoryGrid .member'), shown=0, i;
   for(i=0;i<members.length;i++){
     var c=members[i].getAttribute('data-cat');
-    members[i].style.display=(cat==='All'||c===cat)?'':'none';
+    var ok=(dirCat==='All'||c===dirCat) && (!dirQuery||members[i].textContent.toLowerCase().indexOf(dirQuery)>-1);
+    members[i].style.display=ok?'':'none';
+    if(ok) shown++;
+  }
+  var em=document.getElementById('dirEmpty'); if(em) em.hidden=shown>0;
+}
+/* Street addresses in the directory open directions (Google Maps works on every phone). */
+function linkMemberAddresses(){
+  var lines=document.querySelectorAll('#directoryGrid .mc-line'), i;
+  for(i=0;i<lines.length;i++){
+    var el=lines[i], t=(el.textContent||'').trim();
+    if(!/^\d/.test(t)) continue;   /* P.O. boxes and town-only lines stay plain */
+    var q=t.indexOf(',')>-1 ? (/\bOK\b|Oklahoma/i.test(t)?t:t+', OK') : t+', Hobart, OK 73651';
+    var a=document.createElement('a');
+    a.className='mc-line mc-addr'; a.textContent=t;
+    a.href='https://www.google.com/maps/search/?api=1&query='+encodeURIComponent(q);
+    a.target='_blank'; a.rel='noopener';
+    a.setAttribute('aria-label','Directions to '+t);
+    el.parentNode.replaceChild(a,el);
   }
 }
+(function(){
+  var box=document.getElementById('dirSearch');
+  if(box) box.addEventListener('input',function(){ dirQuery=box.value.trim().toLowerCase(); applyDirFilter(); });
+})();
 
 /* ---- Board of Directors (click a member for their bio) ---- */
 var BOARD=[
@@ -3928,6 +3965,7 @@ loadEvents();
 loadJobs();
 loadBanner();
 initDirFilter();
+linkMemberAddresses();
 renderBoard();
 renderPillarPhotos();
 sortEventsCarousel();
