@@ -58,6 +58,7 @@
   .fg input:focus,.fg textarea:focus,.fg select:focus{outline:none;border-color:var(--navy);box-shadow:0 0 0 3px rgba(26,62,168,.1);}
   .fg textarea{resize:vertical;min-height:80px;}
   .form-card p a{text-decoration:underline;}
+  .hp-field{position:absolute !important;left:-10000px !important;width:1px !important;height:1px !important;opacity:0 !important;pointer-events:none;}
   .fg .hint{font-size:11px;color:var(--gray);line-height:1.5;}
   .fg-row{display:grid;grid-template-columns:1fr 1fr;gap:13px;}
   .btn-submit{width:100%;background:var(--navy);color:#fff;border:none;border-radius:7px;padding:14px;font-size:15px;font-weight:700;font-family:'Inter',sans-serif;cursor:pointer;margin-top:6px;transition:background .2s;}
@@ -156,7 +157,7 @@
     <div class="form-section-title">Tell Us More (Optional)</div>
     <div class="fg">
       <label for="rc_desc">Brief description of your business or milestone</label>
-      <textarea id="rc_desc" placeholder="What do you do? What are you celebrating? This helps us announce you to the community…"></textarea>
+      <textarea id="rc_desc" placeholder="What do you do? What are you celebrating? This helps us announce you to the community…"></textarea><input type="text" id="rc_hp" name="website" class="hp-field" tabindex="-1" autocomplete="off" aria-hidden="true" />
     </div>
     <div class="fg">
       <label for="rc_guests">Estimated number of guests</label>
@@ -186,10 +187,14 @@ var db=null;
 try{if(!firebase.apps.length)firebase.initializeApp(firebaseConfig);db=firebase.firestore();}catch(e){}
 var WEB3FORMS_KEY="a35795f6-54b3-41a0-b5c8-043e93cb73a5";
 function val(id){var el=document.getElementById(id);return el?(el.value||'').trim():'';}
+/* spam guard: bots fill the hidden "website" field or send instantly; treat those as done without sending */
+var PAGE_OPENED=Date.now();
 function submitRC(){
   var biz=val('rc_biz'),type=val('rc_type'),address=val('rc_address'),name=val('rc_name'),phone=val('rc_phone'),email=val('rc_email');
   var msg=document.getElementById('rc_msg'),btn=document.getElementById('rc_btn');
   if(!biz||!type||!address||!name||!phone||!email){msg.className='form-msg err';msg.textContent='Please fill in all required fields.';return;}
+  var hp=document.getElementById('rc_hp');
+  if((hp&&hp.value)||Date.now()-PAGE_OPENED<3000){msg.className='form-msg ok';msg.textContent='Request received! \u2702\ufe0f The Chamber will reach out within 2 business days to confirm your ceremony.';return;}
   btn.disabled=true;btn.textContent='Sending…';msg.className='form-msg';msg.style.display='none';
   var fsData={businessName:biz,occasionType:type,address:address,contactName:name,phone:phone,email:email,preferredDate:val('rc_date'),preferredTime:val('rc_time'),description:val('rc_desc'),expectedGuests:val('rc_guests'),createdAt:firebase.firestore.FieldValue.serverTimestamp()};
   if(db)db.collection('ribbon_cuttings').add(fsData).catch(function(){});

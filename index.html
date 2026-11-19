@@ -522,6 +522,7 @@
   .directory-head{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:12px;}
   .directory-head .section-title{color:var(--navy);}
   .directory-sub{font-size:15px;color:var(--gray);margin-bottom:26px;max-width:620px;}
+  .hp-field{position:absolute !important;left:-10000px !important;top:auto !important;width:1px !important;height:1px !important;opacity:0 !important;pointer-events:none;}
   .dir-search{position:relative;max-width:440px;margin-bottom:16px;}
   .dir-search input{width:100%;padding:12px 16px 12px 42px;border:1.5px solid var(--border);border-radius:30px;font-family:inherit;font-size:14px;color:var(--dark-gray);background:var(--white);}
   .dir-search input:focus{outline:none;border-color:var(--navy);box-shadow:0 0 0 3px rgba(26,62,168,.12);}
@@ -987,7 +988,7 @@
       <label for="subEmail">Email</label>
       <input type="email" id="subEmail" placeholder="name@email.com" />
       <label for="subPhone">Mobile (optional — for text alerts)</label>
-      <input type="tel" id="subPhone" placeholder="(580) 000-0000" />
+      <input type="tel" id="subPhone" placeholder="(580) 000-0000" /><input type="text" id="sub_hp" name="website" class="hp-field" tabindex="-1" autocomplete="off" aria-hidden="true" />
       <label for="m_biz">What do you want?</label>
       <div class="notify-opts">
         <div class="notify-opt"><input type="checkbox" id="optEvents" checked><label for="optEvents">Event alerts</label></div>
@@ -1029,7 +1030,7 @@
         <label class="check-item"><input type="checkbox" class="m_int" value="Sponsorship Opportunities" />Sponsorship</label>
       </div>
     </div>
-    <div class="fg"><label>Anything else you'd like us to know?</label><textarea id="m_notes" rows="3" placeholder="Optional"></textarea></div>
+    <div class="fg"><label>Anything else you'd like us to know?</label><textarea id="m_notes" rows="3" placeholder="Optional"></textarea><input type="text" id="m_hp" name="website" class="hp-field" tabindex="-1" autocomplete="off" aria-hidden="true" /></div>
     <button class="btn-primary" style="width:100%;text-align:center;padding:14px;" onclick="submitMembership()">Submit Application</button>
     <p class="form-note">By submitting, your application is sent to the Chamber at director@hobartokchamber.org. A team member will follow up with membership level options. We accept cash, card, or check.</p>
     <div class="form-msg" id="m_msg"></div>
@@ -1373,7 +1374,7 @@
       <div class="fg-row"><div class="fg"><label for="s_date">Date *</label><input id="s_date" type="date" /></div><div class="fg"><label for="s_time">Time</label><input id="s_time" type="text" placeholder="e.g. 6:00 PM" /></div></div>
       <div class="fg"><label for="s_loc">Location</label><input id="s_loc" type="text" placeholder="Where is it?" /></div>
       <div class="fg"><label for="s_desc">Description</label><textarea id="s_desc" rows="3"></textarea></div>
-      <div class="fg-row"><div class="fg"><label for="s_by">Your Name *</label><input id="s_by" type="text" /></div><div class="fg"><label for="s_byemail">Your Email *</label><input id="s_byemail" type="email" /></div></div>
+      <div class="fg-row"><div class="fg"><label for="s_by">Your Name *</label><input id="s_by" type="text" /></div><div class="fg"><label for="s_byemail">Your Email *</label><input id="s_byemail" type="email" /><input type="text" id="s_hp" name="website" class="hp-field" tabindex="-1" autocomplete="off" aria-hidden="true" /></div></div>
       <div class="form-msg" id="s_msg"></div>
     </div>
     <div class="modal-foot"><button class="btn-sm btn-line" onclick="closeOverlay('submitOverlay')">Cancel</button><button class="btn-sm btn-gold" onclick="submitEvent()">Submit for Review</button></div>
@@ -2179,10 +2180,18 @@ function esc(s){ s=(s==null?'':''+s); return s.replace(/&/g,'&amp;').replace(/</
 
 /* ---- submit event (public → pending) ---- */
 function openSubmit(){ openOverlay('submitOverlay'); }
+/* ---- spam guard ----
+   Each public form has a hidden "website" field people never see. Bots fill in
+   every field, so a filled one (or a send within 3 seconds of the page opening)
+   is quietly treated as done, without saving or emailing anything. */
+var PAGE_OPENED=Date.now();
+function looksLikeBot(trapId){ var t=document.getElementById(trapId); return !!(t&&t.value) || (Date.now()-PAGE_OPENED<3000); }
+
 function submitEvent(){
   var t=val('s_title'), d=val('s_date'), by=val('s_by'), em=val('s_byemail');
   var msg=document.getElementById('s_msg');
   if(!t||!d||!by||!em){ msg.className='form-msg'; msg.style.display='block'; msg.style.background='#fbe9e9'; msg.style.color='#b3261e'; msg.textContent='Please fill in title, date, your name, and email.'; return; }
+  if(looksLikeBot('s_hp')){ submitOK(msg); return; }
   var ev={title:t,date:d,time:val('s_time'),location:val('s_loc'),description:val('s_desc'),submittedBy:by,submitterEmail:em,status:'pending'};
   if(FB){
     ev.createdAt=firebase.firestore.FieldValue.serverTimestamp();
@@ -2205,6 +2214,7 @@ function submitMembership(){
   var biz=val('m_biz'),name=val('m_name'),phone=val('m_phone'),email=val('m_email');
   var msg=document.getElementById('m_msg');
   if(!biz||!name||!phone||!email){ msg.className='form-msg'; msg.style.display='block'; msg.style.background='#fbe9e9'; msg.style.color='#b3261e'; msg.textContent='Please fill in business name, contact, phone, and email.'; return; }
+  if(looksLikeBot('m_hp')){ msg.className='form-msg ok'; msg.style.display='block'; msg.style.background='#e8f6ec'; msg.style.color='#1c7a3e'; msg.textContent='Thank you! Your application was sent to the Chamber. A team member will follow up with membership options.'; return; }
   var ints=[]; var boxes=document.querySelectorAll('.m_int'); var i;
   for(i=0;i<boxes.length;i++){ if(boxes[i].checked) ints.push(boxes[i].value); }
 
@@ -2402,6 +2412,7 @@ function submitSubscribe(){
   if(email && email.indexOf('@')<1){ subMsgShow('That email address doesn\'t look right.','err'); return; }
   if(!wEvents && !wNews && !wDeals){ subMsgShow('Pick at least one thing you\'d like to hear about.','err'); return; }
 
+  if(looksLikeBot('sub_hp')){ subMsgShow('You\'re on the list, '+name.split(' ')[0]+'! We\'ll be in touch.','ok'); return; }
   var btn=document.getElementById('subBtn');
   btn.disabled=true;
   subMsgShow('Adding you to the list…','info');
