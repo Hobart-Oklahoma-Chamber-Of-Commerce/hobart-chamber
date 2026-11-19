@@ -4,15 +4,32 @@
 <meta charset="UTF-8" />
 <meta name="color-scheme" content="light only"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="icon" type="image/png" sizes="48x48" href="favicon.png" />
+<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png" />
+<link rel="apple-touch-icon" href="apple-touch-icon.png" />
+<meta name="theme-color" content="#1a3ea8" />
 <title>Hobart Chamber of Commerce | Hobart, Oklahoma</title>
 <meta name="description" content="The Hobart Chamber of Commerce supports local business and strengthens community in Hobart and Kiowa County, Oklahoma." />
+<link rel="canonical" href="https://hobartchamber.org/" />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="Hobart Chamber of Commerce" />
+<meta property="og:title" content="Hobart Chamber of Commerce | Hobart, Oklahoma" />
+<meta property="og:description" content="The Hobart Chamber of Commerce supports local business and strengthens community in Hobart and Kiowa County, Oklahoma." />
+<meta property="og:url" content="https://hobartchamber.org/" />
+<meta property="og:image" content="https://hobartchamber.org/flyers/share-card.jpg" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:image:alt" content="Hobart Chamber of Commerce, Hobart, Oklahoma" />
+<meta name="twitter:card" content="summary_large_image" />
 <script type="application/ld+json">
 {
   "@context":"https://schema.org",
   "@type":"LocalBusiness",
   "name":"Hobart Chamber of Commerce",
   "description":"The Hobart Chamber of Commerce supports local businesses and strengthens community in Hobart and Kiowa County, Oklahoma.",
-  "url":"https://www.hobartchamber.org",
+  "url":"https://hobartchamber.org/",
+  "logo":"https://hobartchamber.org/flyers/chamber-logo.PNG",
+  "image":"https://hobartchamber.org/flyers/share-card.jpg",
   "telephone":"+15806820887",
   "email":"director@hobartokchamber.org",
   "address":{"@type":"PostalAddress","streetAddress":"106 W 4th St","addressLocality":"Hobart","addressRegion":"OK","postalCode":"73651","addressCountry":"US"},
@@ -1310,12 +1327,12 @@
     106 W. 4th St.<br>Hobart, OK 73651<br><br>
     <a href="tel:5806820887">(580) 682-0887</a><br>
     <a href="mailto:director@hobartokchamber.org">director@hobartokchamber.org</a><br>
-    <a href="https://www.hobartchamber.org" target="_blank" rel="noopener">www.hobartchamber.org</a><br><br>
+    <a href="https://hobartchamber.org/">hobartchamber.org</a><br><br>
     <strong style="color:rgba(255,255,255,.7)">Open Hours</strong><br>Mon &amp; Wed: 1:30–4:30 PM<br>Other times by appointment
   </p></div>
 </footer>
 <div class="footer-bottom">
-  <p>© 2026 Hobart Chamber of Commerce · All Rights Reserved</p>
+  <p>© <span id="copyYear">2026</span> Hobart Chamber of Commerce · All Rights Reserved · <a href="privacy.html" style="color:inherit;text-decoration:underline;">Privacy Policy</a></p>
   <p>Supporting Business. Strengthening Community. <span class="gear" id="gear" title="Chamber settings">·</span></p>
 </div>
 
@@ -3898,6 +3915,7 @@ sortEventsCarousel();
 pruneCarousel();
 syncEventCount();
 expireNotices();
+(function(){ var y=document.getElementById('copyYear'); if(y) y.textContent=new Date().getFullYear(); })();
 applyFlyerBackdrops();
 loadDeals();
 trackView();
