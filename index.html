@@ -326,6 +326,14 @@
   .cal-wchip[data-cat="community"]{background:rgba(194,106,30,.12);color:#9c5518;border-left-color:#c26a1e;}
   .cal-wchip:hover{filter:brightness(.96);}
   .cal-list{display:block;border:1px solid var(--border);border-radius:10px;background:var(--white);overflow:hidden;}
+  .sub-cal{position:relative;}
+  .sub-cal summary{list-style:none;cursor:pointer;display:inline-flex;align-items:center;gap:5px;}
+  .sub-cal summary::-webkit-details-marker{display:none;}
+  .sub-cal-menu{position:absolute;left:0;top:calc(100% + 8px);z-index:30;width:272px;background:#fff;border-radius:8px;box-shadow:0 14px 40px rgba(14,32,86,.22);padding:8px;display:flex;flex-direction:column;}
+  @media(min-width:701px){.sub-cal-menu{left:auto;right:0;}}
+  .sub-cal-menu a{padding:11px 12px;border-radius:6px;color:var(--navy);font-size:14px;font-weight:600;text-decoration:none;}
+  .sub-cal-menu a:hover{background:#f1f4fb;}
+  .sub-cal-menu small{padding:8px 12px 4px;font-size:12px;color:var(--gray);line-height:1.45;}
   .cal-earlier{display:block;width:100%;padding:12px 16px;background:#f6f8fd;border:0;border-bottom:1px solid var(--border);color:var(--navy);font-family:inherit;font-size:13px;font-weight:600;text-align:left;cursor:pointer;}
   .cal-earlier:hover{background:#eef2fb;}
   .cal-lday{background:var(--navy);color:var(--gold-light);font-size:12px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:10px 16px;display:flex;align-items:center;gap:10px;}
@@ -868,7 +876,15 @@
   <div class="cal-head">
     <div><span class="section-eyebrow">Hobart Happenings</span><h2 class="section-title">Community Calendar</h2></div>
     <div style="display:flex;gap:10px;align-items:center;flex-wrap:wrap;">
-      <a href="hobart-chamber.ics" download="hobart-chamber-events.ics" class="btn-sm btn-line" style="text-decoration:none;display:inline-flex;align-items:center;gap:5px;">📅 Subscribe</a>
+      <details class="sub-cal">
+        <summary class="btn-sm btn-line">📅 Subscribe</summary>
+        <div class="sub-cal-menu">
+          <a href="webcal://hobartchamber.org/hobart-chamber.ics">iPhone / Apple Calendar</a>
+          <a href="https://calendar.google.com/calendar/r?cid=webcal%3A%2F%2Fhobartchamber.org%2Fhobart-chamber.ics" target="_blank" rel="noopener">Google Calendar</a>
+          <a href="hobart-chamber.ics" download="hobart-community-calendar.ics">Download file (Outlook &amp; others)</a>
+          <small>Subscribed calendars pick up new events and changes on their own, including every Bearcat game.</small>
+        </div>
+      </details>
       <button class="btn-primary" onclick="openSubmit()">+ Submit an Event</button>
     </div>
   </div>
@@ -3916,6 +3932,8 @@ pruneCarousel();
 syncEventCount();
 expireNotices();
 (function(){ var y=document.getElementById('copyYear'); if(y) y.textContent=new Date().getFullYear(); })();
+/* close the Subscribe menu when tapping anywhere else */
+document.addEventListener('click',function(e){ var d=document.querySelector('details.sub-cal[open]'); if(d&&!d.contains(e.target)) d.removeAttribute('open'); });
 applyFlyerBackdrops();
 loadDeals();
 trackView();

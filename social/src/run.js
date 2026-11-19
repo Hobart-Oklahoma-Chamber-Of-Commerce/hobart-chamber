@@ -18,6 +18,7 @@ import { postHTML, cleanTitle } from './template.js';
 import { writeCaption, altText, runDatesText } from './caption.js';
 import { renderPNG, closeBrowser } from './render.js';
 import { flyerPalette } from './palettes.js';
+import { writeICS } from './ics.js';
 import { fbConfig, postPhoto, checkPage, deletePost } from './facebook.js';
 
 const socialDir = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
@@ -70,6 +71,10 @@ const cards = loadCarouselFlyers(indexHtml);
 const admin = await fetchAdminEvents();
 if (admin.error) console.log(`Note: could not read admin-added events (${admin.error}). Using the built-in calendar only.`);
 const events = [...seed, ...admin.events];
+
+// 1b) keep the calendar subscription file (hobart-chamber.ics) in step with the calendar
+const ics = writeICS(events, path.join(repoDir, 'hobart-chamber.ics'), today);
+console.log(`Calendar subscription: ${ics.count} events${ics.changed ? ' (updated)' : ' (no changes)'}`);
 
 // 2) the five-a-day plan
 const restaurants = loadRestaurants(socialDir);
