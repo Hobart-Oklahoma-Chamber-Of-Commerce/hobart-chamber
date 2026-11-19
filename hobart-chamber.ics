@@ -3,790 +3,2168 @@ VERSION:2.0
 PRODID:-//Hobart Chamber of Commerce//Community Calendar//EN
 CALSCALE:GREGORIAN
 METHOD:PUBLISH
-X-WR-CALNAME:Hobart Chamber of Commerce
+X-WR-CALNAME:Hobart Community Calendar
 X-WR-TIMEZONE:America/Chicago
-X-WR-CALDESC:Community events\, sports\, and activities for Hobart and Kiowa County\, Oklahoma. Powered by hobartchamber.org.
+X-WR-CALDESC:Community events\, Bearcat games\, school dates and holidays f
+ or Hobart and Kiowa County\, Oklahoma. From hobartchamber.org.
+REFRESH-INTERVAL;VALUE=DURATION:PT12H
+X-PUBLISHED-TTL:PT12H
+BEGIN:VTIMEZONE
+TZID:America/Chicago
+BEGIN:DAYLIGHT
+TZOFFSETFROM:-0600
+TZOFFSETTO:-0500
+TZNAME:CDT
+DTSTART:19700308T020000
+RRULE:FREQ=YEARLY;BYMONTH=3;BYDAY=2SU
+END:DAYLIGHT
+BEGIN:STANDARD
+TZOFFSETFROM:-0500
+TZOFFSETTO:-0600
+TZNAME:CST
+DTSTART:19701101T020000
+RRULE:FREQ=YEARLY;BYMONTH=11;BYDAY=1SU
+END:STANDARD
+END:VTIMEZONE
 BEGIN:VEVENT
-UID:s0@hobartchamber.org
-DTSTAMP:20260824T144151Z
-DTSTART;TZID=America/Chicago:20260704T080000
-DTEND;TZID=America/Chicago:20260704T100000
-SUMMARY:Hobart First Saturday Market: Red\, White & Local
-DESCRIPTION:A patriotic Fourth of July edition of the First Saturday Market hosted by Rust Dirt Co.
-LOCATION:207 W 4th St\, Hobart
-END:VEVENT
-BEGIN:VEVENT
-UID:s1@hobartchamber.org
-DTSTAMP:20260824T144151Z
-DTSTART;TZID=America/Chicago:20260730T100000
-DTEND;TZID=America/Chicago:20260730T120000
-SUMMARY:Back2School Bash
-DESCRIPTION:Great Plains Youth & Family Services hosts the Back2School Bash. Pre-registered families shop 10-11:30 AM\, public 11:30 AM-Noon. Questions? Call/text 580-682-9761.
-LOCATION:Western Technology Center\, 1000 S Bailey St
-END:VEVENT
-BEGIN:VEVENT
-UID:s2@hobartchamber.org
-DTSTAMP:20260824T144151Z
-DTSTART;TZID=America/Chicago:20260710T180000
-DTEND;TZID=America/Chicago:20260710T200000
-SUMMARY:Relay for Life
-DESCRIPTION:Celebrate survivors\, remember loved ones\, and support the fight against cancer.
-LOCATION:Hancock Event Center\, Hobart
-END:VEVENT
-BEGIN:VEVENT
-UID:s3@hobartchamber.org
-DTSTAMP:20260824T144151Z
-DTSTART;TZID=America/Chicago:20260713T080000
-DTEND;TZID=America/Chicago:20260713T100000
-SUMMARY:Hilltop National Junior Golf Clinic
-DESCRIPTION:Under Armour Junior Tour clinic coached by Bobby Taylor. Ages 6-10 ($150) and 11-18 ($150). Call Brian Baker at the golf shop: (580) 530-9177.
-LOCATION:Hobart Municipal Golf Course
-END:VEVENT
-BEGIN:VEVENT
-UID:s4@hobartchamber.org
-DTSTAMP:20260824T144151Z
-DTSTART;TZID=America/Chicago:20260717T180000
-DTEND;TZID=America/Chicago:20260717T200000
-SUMMARY:Family Health & Fitness Day
-DESCRIPTION:An evening of health\, wellness\, and fun for the whole family. Proceeds benefit victims of child abuse throughout Southwest Oklahoma.
-LOCATION:Elkview General Hospital\, Hobart
-END:VEVENT
-BEGIN:VEVENT
-UID:s5@hobartchamber.org
-DTSTAMP:20260824T144151Z
-DTSTART;TZID=America/Chicago:20260718T080000
-DTEND;TZID=America/Chicago:20260718T100000
-SUMMARY:Farmers Market
-DESCRIPTION:Support local growers\, makers\, and vendors\, plus special kids activities all morning.
-LOCATION:Hunter Park\, Hobart
-END:VEVENT
-BEGIN:VEVENT
-UID:s8@hobartchamber.org
-DTSTAMP:20260824T144151Z
-DTSTART;TZID=America/Chicago:20260801T200000
-DTEND;TZID=America/Chicago:20260801T220000
-SUMMARY:Glow Golf Tournament
-DESCRIPTION:4-man scramble\, $240 per team\, limited to 18 teams. Glowing golf balls\, illuminated fairways. Register online at hobartchamber.org.
-LOCATION:Hobart Municipal Golf Course
-END:VEVENT
-BEGIN:VEVENT
-UID:s12@hobartchamber.org
-DTSTAMP:20260824T144151Z
-DTSTART;TZID=America/Chicago:20260801T080000
-DTEND;TZID=America/Chicago:20260801T100000
-SUMMARY:First Saturday Market
-DESCRIPTION:The monthly First Saturday Market hosted by Rust Dirt Co. Shop local goods\, enjoy live music.
-LOCATION:207 W 4th St\, Hobart
-END:VEVENT
-BEGIN:VEVENT
-UID:s13@hobartchamber.org
-DTSTAMP:20260824T144151Z
-DTSTART;VALUE=DATE:20260710
-DTEND;VALUE=DATE:20260711
-SUMMARY:Walmart Grand Reopening
-DESCRIPTION:Hobart Walmart (Store 607) grand reopening after 2026 remodel. Updated layouts\, wider aisles\, pharmacy\, and Vision Center.
-LOCATION:Walmart\, 923 W 11th St\, Hobart
-END:VEVENT
-BEGIN:VEVENT
-UID:s14@hobartchamber.org
-DTSTAMP:20260824T144151Z
-DTSTART;VALUE=DATE:20260725
-DTEND;VALUE=DATE:20260726
-SUMMARY:Elk Creek Kiowa Casino 1-Year Anniversary
-DESCRIPTION:Elk Creek Kiowa Casino celebrates one year since opening. 250 slots\, three table games\, Bar 153\, Boomarang Diner. Must be 21+.
-LOCATION:Elk Creek Kiowa Casino\, 13765 US-183
-END:VEVENT
-BEGIN:VEVENT
-UID:f1@hobartchamber.org
-DTSTAMP:20260824T144151Z
-DTSTART;TZID=America/Chicago:20260827T120000
-DTEND;TZID=America/Chicago:20260827T140000
-SUMMARY:Kiowa County Free Fair Opens
-DESCRIPTION:Opening day of 2026 Kiowa County Free Fair. Indoor Exhibits accepted Noon-6 PM. Judging of Indoor Exhibits begins 7 PM. No admission or entry fee.
-LOCATION:Kiowa County Fairgrounds\, Hobart
-END:VEVENT
-BEGIN:VEVENT
-UID:f2@hobartchamber.org
-DTSTAMP:20260824T144151Z
-DTSTART;TZID=America/Chicago:20260828T190000
-DTEND;TZID=America/Chicago:20260828T210000
-SUMMARY:Free Fair: Cattle Show
-DESCRIPTION:Day two of the Kiowa County Free Fair. Indoor Exhibits open 3-7 PM. Cattle cards due 6 PM\, Cattle Show at 7 PM. Food trucks on site.
-LOCATION:Kiowa County Fairgrounds\, Hobart
-END:VEVENT
-BEGIN:VEVENT
-UID:f3@hobartchamber.org
-DTSTAMP:20260824T144151Z
-DTSTART;TZID=America/Chicago:20260829T080000
-DTEND;TZID=America/Chicago:20260829T100000
-SUMMARY:Free Fair: Rabbit\, Poultry\, Goat & Sheep Shows
-DESCRIPTION:Indoor Exhibits open 8 AM. Rabbit/Poultry cards due 9 AM. Goat/Sheep cards due 6 PM\, show at 7 PM. Kiwanis Turtle Races for kids.
-LOCATION:Kiowa County Fairgrounds\, Hobart
-END:VEVENT
-BEGIN:VEVENT
-UID:f4@hobartchamber.org
-DTSTAMP:20260824T144151Z
-DTSTART;TZID=America/Chicago:20260830T140000
-DTEND;TZID=America/Chicago:20260830T160000
-SUMMARY:Free Fair: Exhibit & Premium Pickup
-DESCRIPTION:Indoor Exhibit and premium pickup 2-6 PM.
-LOCATION:Kiowa County Fairgrounds\, Hobart
-END:VEVENT
-BEGIN:VEVENT
-UID:sp1@hobartchamber.org
-DTSTAMP:20260824T144151Z
-DTSTART;TZID=America/Chicago:20260821T180000
-DTEND;TZID=America/Chicago:20260821T200000
-SUMMARY:HS Football Scrimmage vs Merritt
-DESCRIPTION:Hobart Bearcat football preseason scrimmage against Merritt.
-LOCATION:Hobart Bearcat Stadium
-END:VEVENT
-BEGIN:VEVENT
-UID:sp2@hobartchamber.org
-DTSTAMP:20260824T144151Z
-DTSTART;TZID=America/Chicago:20260828T190000
-DTEND;TZID=America/Chicago:20260828T210000
-SUMMARY:HS Football @ Minco
-DESCRIPTION:Hobart Bearcat football. Regular season game at Minco.
-LOCATION:Minco (Away)
-END:VEVENT
-BEGIN:VEVENT
-UID:sp3@hobartchamber.org
-DTSTAMP:20260824T144151Z
-DTSTART;TZID=America/Chicago:20260904T190000
-DTEND;TZID=America/Chicago:20260904T210000
-SUMMARY:HS Football vs Sayre
-DESCRIPTION:Hobart Bearcat football. Regular season home game vs Sayre.
-LOCATION:Hobart Bearcat Stadium
-END:VEVENT
-BEGIN:VEVENT
-UID:sp4@hobartchamber.org
-DTSTAMP:20260824T144151Z
-DTSTART;TZID=America/Chicago:20260911T190000
-DTEND;TZID=America/Chicago:20260911T210000
-SUMMARY:HS Football @ Mangum
-DESCRIPTION:Hobart Bearcat football. Regular season game at Mangum.
-LOCATION:Mangum (Away)
-END:VEVENT
-BEGIN:VEVENT
-UID:sp5@hobartchamber.org
-DTSTAMP:20260824T144151Z
-DTSTART;TZID=America/Chicago:20260918T193000
-DTEND;TZID=America/Chicago:20260918T213000
-SUMMARY:HS Football vs Tishomingo — HOMECOMING
-DESCRIPTION:Hobart Bearcat football. HOMECOMING. Regular season home game vs Tishomingo.
-LOCATION:Hobart Bearcat Stadium
-END:VEVENT
-BEGIN:VEVENT
-UID:sp6@hobartchamber.org
-DTSTAMP:20260824T144151Z
-DTSTART;TZID=America/Chicago:20260925T190000
-DTEND;TZID=America/Chicago:20260925T210000
-SUMMARY:HS Football @ Southwest Covenant
-DESCRIPTION:Hobart Bearcat football. District game at Southwest Covenant.
-LOCATION:Southwest Covenant (Away)
-END:VEVENT
-BEGIN:VEVENT
-UID:sp7@hobartchamber.org
-DTSTAMP:20260824T144151Z
-DTSTART;TZID=America/Chicago:20261009T190000
-DTEND;TZID=America/Chicago:20261009T210000
-SUMMARY:HS Football @ Apache
-DESCRIPTION:Hobart Bearcat football. District game at Apache.
-LOCATION:Apache (Away)
-END:VEVENT
-BEGIN:VEVENT
-UID:sp8@hobartchamber.org
-DTSTAMP:20260824T144151Z
-DTSTART;TZID=America/Chicago:20261015T190000
-DTEND;TZID=America/Chicago:20261015T210000
-SUMMARY:HS Football vs Empire
-DESCRIPTION:Hobart Bearcat football. District home game vs Empire. Thursday night.
-LOCATION:Hobart Bearcat Stadium
-END:VEVENT
-BEGIN:VEVENT
-UID:sp9@hobartchamber.org
-DTSTAMP:20260824T144151Z
-DTSTART;TZID=America/Chicago:20261023T190000
-DTEND;TZID=America/Chicago:20261023T210000
-SUMMARY:HS Football vs Thomas-Fay-Custer
-DESCRIPTION:Hobart Bearcat football. District home game vs Thomas-Fay-Custer.
-LOCATION:Hobart Bearcat Stadium
-END:VEVENT
-BEGIN:VEVENT
-UID:sp10@hobartchamber.org
-DTSTAMP:20260824T144151Z
-DTSTART;TZID=America/Chicago:20261030T190000
-DTEND;TZID=America/Chicago:20261030T210000
-SUMMARY:HS Football @ Mooreland
-DESCRIPTION:Hobart Bearcat football. District game at Mooreland.
-LOCATION:Mooreland (Away)
-END:VEVENT
-BEGIN:VEVENT
-UID:sp11@hobartchamber.org
-DTSTAMP:20260824T144151Z
-DTSTART;TZID=America/Chicago:20261106T190000
-DTEND;TZID=America/Chicago:20261106T210000
-SUMMARY:HS Football vs Carnegie — SENIOR NIGHT
-DESCRIPTION:Hobart Bearcat football. SENIOR NIGHT. District home game vs Carnegie.
-LOCATION:Hobart Bearcat Stadium
-END:VEVENT
-BEGIN:VEVENT
-UID:sp12@hobartchamber.org
-DTSTAMP:20260824T144151Z
-DTSTART;TZID=America/Chicago:20260831T173000
-DTEND;TZID=America/Chicago:20260831T193000
-SUMMARY:JH Football vs Mangum
-DESCRIPTION:Hobart Bearcat junior high football. Games at 5:30 and 7:00 PM.
-LOCATION:Hobart Bearcat Stadium
-END:VEVENT
-BEGIN:VEVENT
-UID:sp13@hobartchamber.org
-DTSTAMP:20260824T144151Z
-DTSTART;TZID=America/Chicago:20260908T173000
-DTEND;TZID=America/Chicago:20260908T193000
-SUMMARY:JH Football @ Apache
-DESCRIPTION:Hobart Bearcat junior high football. Games at 5:30 and 7:00 PM.
-LOCATION:Apache (Away)
-END:VEVENT
-BEGIN:VEVENT
-UID:sp14@hobartchamber.org
-DTSTAMP:20260824T144151Z
-DTSTART;TZID=America/Chicago:20260914T173000
-DTEND;TZID=America/Chicago:20260914T193000
-SUMMARY:JH Football vs Merritt
-DESCRIPTION:Hobart Bearcat junior high football. Games at 5:30 and 7:00 PM.
-LOCATION:Hobart Bearcat Stadium
-END:VEVENT
-BEGIN:VEVENT
-UID:sp15@hobartchamber.org
-DTSTAMP:20260824T144151Z
-DTSTART;TZID=America/Chicago:20260921T173000
-DTEND;TZID=America/Chicago:20260921T193000
-SUMMARY:JH Football vs Carnegie
-DESCRIPTION:Hobart Bearcat junior high football. Games at 5:30 and 7:00 PM.
-LOCATION:Hobart Bearcat Stadium
-END:VEVENT
-BEGIN:VEVENT
-UID:sp16@hobartchamber.org
-DTSTAMP:20260824T144151Z
-DTSTART;TZID=America/Chicago:20260928T173000
-DTEND;TZID=America/Chicago:20260928T193000
-SUMMARY:JH Football @ Thomas
-DESCRIPTION:Hobart Bearcat junior high football. Games at 5:30 and 7:00 PM.
-LOCATION:Thomas (Away)
-END:VEVENT
-BEGIN:VEVENT
-UID:sp17@hobartchamber.org
-DTSTAMP:20260824T144151Z
-DTSTART;TZID=America/Chicago:20261005T173000
-DTEND;TZID=America/Chicago:20261005T193000
-SUMMARY:JH Football vs Frederick
-DESCRIPTION:Hobart Bearcat junior high football. Games at 5:30 and 7:00 PM.
-LOCATION:Hobart Bearcat Stadium
-END:VEVENT
-BEGIN:VEVENT
-UID:sp18@hobartchamber.org
-DTSTAMP:20260824T144151Z
-DTSTART;TZID=America/Chicago:20261012T173000
-DTEND;TZID=America/Chicago:20261012T193000
-SUMMARY:JH Football @ Sayre
-DESCRIPTION:Hobart Bearcat junior high football. Games at 5:30 and 7:00 PM.
-LOCATION:Sayre (Away)
-END:VEVENT
-BEGIN:VEVENT
-UID:sp19@hobartchamber.org
-DTSTAMP:20260824T144151Z
-DTSTART;TZID=America/Chicago:20261019T173000
-DTEND;TZID=America/Chicago:20261019T193000
-SUMMARY:JH Football @ Hinton
-DESCRIPTION:Hobart Bearcat junior high football. Games at 5:30 and 7:00 PM.
-LOCATION:Hinton (Away)
-END:VEVENT
-BEGIN:VEVENT
-UID:sp20@hobartchamber.org
-DTSTAMP:20260824T144151Z
-DTSTART;VALUE=DATE:20260822
-DTEND;VALUE=DATE:20260823
-SUMMARY:Cross Country: Weatherford HS
-DESCRIPTION:Hobart Bearcat cross country meet.
-LOCATION:Weatherford
-END:VEVENT
-BEGIN:VEVENT
-UID:sp21@hobartchamber.org
-DTSTAMP:20260824T144151Z
-DTSTART;VALUE=DATE:20260903
-DTEND;VALUE=DATE:20260904
-SUMMARY:Cross Country: Merritt JH/HS
-DESCRIPTION:Hobart Bearcat cross country meet.
-LOCATION:Merritt
-END:VEVENT
-BEGIN:VEVENT
-UID:sp22@hobartchamber.org
-DTSTAMP:20260824T144151Z
-DTSTART;VALUE=DATE:20260912
-DTEND;VALUE=DATE:20260913
-SUMMARY:Cross Country: Sweetwater JH/HS
-DESCRIPTION:Hobart Bearcat cross country meet.
-LOCATION:Sweetwater
-END:VEVENT
-BEGIN:VEVENT
-UID:sp23@hobartchamber.org
-DTSTAMP:20260824T144151Z
-DTSTART;VALUE=DATE:20260916
-DTEND;VALUE=DATE:20260917
-SUMMARY:Cross Country: Sayre JH/HS
-DESCRIPTION:Hobart Bearcat cross country meet.
-LOCATION:Sayre
+UID:ev8@hobartchamber.org
+DTSTAMP:20261119T024346Z
+DTSTART;TZID=America/Chicago:20260919T090000
+DTEND;TZID=America/Chicago:20260919T110000
+SUMMARY:Full Throttle Fall Crawl — Poker Run
+DESCRIPTION:Time: Registration 9 AM · Last Bike Out 11 AM · Last Bike In 
+ 4 PM\n\nHosted by Temple Guardians Widows Sons\, Oklahoma Masonic Riders A
+ ssociation. Registration starts at 9:00 AM. Last bike out 11:00 AM. Last b
+ ike in 4:00 PM. High Hand Prize $1\,000 · Low Hand Prize $500. Raffle pro
+ ceeds benefit Temple Guardians Toys for Tots.
+LOCATION:Elk Creek Kiowa Casino\, Hobart\, OK — Start & Finish
+CATEGORIES:Community
+URL:https://hobartchamber.org/#calendar
 END:VEVENT
 BEGIN:VEVENT
 UID:sp24@hobartchamber.org
-DTSTAMP:20260824T144151Z
+DTSTAMP:20261119T024346Z
 DTSTART;VALUE=DATE:20260919
 DTEND;VALUE=DATE:20260920
-SUMMARY:Cross Country: Hollis JH/HS
-DESCRIPTION:Hobart Bearcat cross country meet.
+SUMMARY:🏃 Cross Country: Hollis JH/HS
+DESCRIPTION:Hobart Bearcat cross country meet — Hollis JH/HS.
 LOCATION:Hollis
+CATEGORIES:Sports
+URL:https://hobartchamber.org/#calendar
 END:VEVENT
 BEGIN:VEVENT
-UID:sp25@hobartchamber.org
-DTSTAMP:20260824T144151Z
-DTSTART;VALUE=DATE:20260925
-DTEND;VALUE=DATE:20260926
-SUMMARY:Cross Country: Cameron HS
-DESCRIPTION:Hobart Bearcat cross country meet.
-LOCATION:Cameron University\, Lawton
+UID:sp58@hobartchamber.org
+DTSTAMP:20261119T024346Z
+DTSTART;VALUE=DATE:20260919
+DTEND;VALUE=DATE:20260920
+SUMMARY:🥎 HS Softball Latta Festival
+DESCRIPTION:Hobart Lady Cat high school softball. Latta Festival.
+LOCATION:Latta
+CATEGORIES:Sports
+URL:https://hobartchamber.org/#calendar
 END:VEVENT
 BEGIN:VEVENT
-UID:sp26@hobartchamber.org
-DTSTAMP:20260824T144151Z
-DTSTART;VALUE=DATE:20260930
-DTEND;VALUE=DATE:20261001
-SUMMARY:Cross Country: Hobart Elem\, JH/HS
-DESCRIPTION:Hobart Bearcat cross country meet — hosted in Hobart.
-LOCATION:Hobart
-END:VEVENT
-BEGIN:VEVENT
-UID:sp27@hobartchamber.org
-DTSTAMP:20260824T144151Z
-DTSTART;VALUE=DATE:20261007
-DTEND;VALUE=DATE:20261008
-SUMMARY:Cross Country: Frederick Elem\, JH/HS
-DESCRIPTION:Hobart Bearcat cross country meet.
-LOCATION:Frederick
-END:VEVENT
-BEGIN:VEVENT
-UID:sp28@hobartchamber.org
-DTSTAMP:20260824T144151Z
-DTSTART;VALUE=DATE:20261017
-DTEND;VALUE=DATE:20261018
-SUMMARY:Cross Country: Regionals
-DESCRIPTION:Hobart Bearcat cross country — Regionals.
-LOCATION:TBD
-END:VEVENT
-BEGIN:VEVENT
-UID:sp29@hobartchamber.org
-DTSTAMP:20260824T144151Z
-DTSTART;VALUE=DATE:20261024
-DTEND;VALUE=DATE:20261025
-SUMMARY:Cross Country: State
-DESCRIPTION:Hobart Bearcat cross country — State.
-LOCATION:TBD
-END:VEVENT
-BEGIN:VEVENT
-UID:sp30@hobartchamber.org
-DTSTAMP:20260824T144151Z
-DTSTART;TZID=America/Chicago:20260810T163000
-DTEND;TZID=America/Chicago:20260810T183000
-SUMMARY:JH Softball @ BFDC
-DESCRIPTION:Hobart Lady Cat JH softball.
-LOCATION:Away
-END:VEVENT
-BEGIN:VEVENT
-UID:sp31@hobartchamber.org
-DTSTAMP:20260824T144151Z
-DTSTART;TZID=America/Chicago:20260811T163000
-DTEND;TZID=America/Chicago:20260811T183000
-SUMMARY:JH Softball vs Sentinel
-DESCRIPTION:Hobart Lady Cat JH softball.
-LOCATION:Hobart
-END:VEVENT
-BEGIN:VEVENT
-UID:sp32@hobartchamber.org
-DTSTAMP:20260824T144151Z
-DTSTART;TZID=America/Chicago:20260818T163000
-DTEND;TZID=America/Chicago:20260818T183000
-SUMMARY:JH Softball @ Frederick
-DESCRIPTION:Hobart Lady Cat JH softball.
-LOCATION:Frederick (Away)
-END:VEVENT
-BEGIN:VEVENT
-UID:sp33@hobartchamber.org
-DTSTAMP:20260824T144151Z
-DTSTART;TZID=America/Chicago:20260820T163000
-DTEND;TZID=America/Chicago:20260820T183000
-SUMMARY:JH Softball vs Cordell
-DESCRIPTION:Hobart Lady Cat JH softball.
-LOCATION:Hobart
-END:VEVENT
-BEGIN:VEVENT
-UID:sp34@hobartchamber.org
-DTSTAMP:20260824T144151Z
-DTSTART;TZID=America/Chicago:20260821T163000
-DTEND;TZID=America/Chicago:20260821T183000
-SUMMARY:JH Softball vs Snyder
-DESCRIPTION:Hobart Lady Cat JH softball.
-LOCATION:Hobart
-END:VEVENT
-BEGIN:VEVENT
-UID:sp35@hobartchamber.org
-DTSTAMP:20260824T144151Z
-DTSTART;VALUE=DATE:20260822
-DTEND;VALUE=DATE:20260823
-SUMMARY:JH Softball Hinton Tournament
-DESCRIPTION:Hobart Lady Cat JH softball tournament at Hinton.
-LOCATION:Hinton
-END:VEVENT
-BEGIN:VEVENT
-UID:sp36@hobartchamber.org
-DTSTAMP:20260824T144151Z
-DTSTART;VALUE=DATE:20260824
-DTEND;VALUE=DATE:20260825
-SUMMARY:JH Softball Hobart Tournament
-DESCRIPTION:Hobart Lady Cat JH softball tournament at home.
-LOCATION:Hobart
-END:VEVENT
-BEGIN:VEVENT
-UID:sp37@hobartchamber.org
-DTSTAMP:20260824T144151Z
-DTSTART;TZID=America/Chicago:20260825T163000
-DTEND;TZID=America/Chicago:20260825T183000
-SUMMARY:JH Softball vs Sayre
-DESCRIPTION:Hobart Lady Cat JH softball.
-LOCATION:Hobart
-END:VEVENT
-BEGIN:VEVENT
-UID:sp38@hobartchamber.org
-DTSTAMP:20260824T144151Z
-DTSTART;TZID=America/Chicago:20260831T163000
-DTEND;TZID=America/Chicago:20260831T183000
-SUMMARY:JH Softball @ MVG
-DESCRIPTION:Hobart Lady Cat JH softball.
-LOCATION:Away
-END:VEVENT
-BEGIN:VEVENT
-UID:sp39@hobartchamber.org
-DTSTAMP:20260824T144151Z
-DTSTART;TZID=America/Chicago:20260901T163000
-DTEND;TZID=America/Chicago:20260901T183000
-SUMMARY:JH Softball vs Navajo
-DESCRIPTION:Hobart Lady Cat JH softball.
-LOCATION:Hobart
-END:VEVENT
-BEGIN:VEVENT
-UID:sp40@hobartchamber.org
-DTSTAMP:20260824T144151Z
-DTSTART;TZID=America/Chicago:20260903T170000
-DTEND;TZID=America/Chicago:20260903T190000
-SUMMARY:JH Softball @ Frederick
-DESCRIPTION:Hobart Lady Cat JH softball.
-LOCATION:Frederick (Away)
-END:VEVENT
-BEGIN:VEVENT
-UID:sp41@hobartchamber.org
-DTSTAMP:20260824T144151Z
-DTSTART;VALUE=DATE:20260914
-DTEND;VALUE=DATE:20260915
-SUMMARY:JH Softball Conference Tournament
-DESCRIPTION:Hobart Lady Cat JH softball conference tournament hosted in Hobart.
-LOCATION:Hobart
-END:VEVENT
-BEGIN:VEVENT
-UID:sp42@hobartchamber.org
-DTSTAMP:20260824T144151Z
-DTSTART;TZID=America/Chicago:20260915T163000
-DTEND;TZID=America/Chicago:20260915T183000
-SUMMARY:JH Softball @ Sayre
-DESCRIPTION:Hobart Lady Cat JH softball.
-LOCATION:Sayre (Away)
+UID:sp15@hobartchamber.org
+DTSTAMP:20261119T024346Z
+DTSTART;TZID=America/Chicago:20260921T173000
+DTEND;TZID=America/Chicago:20260921T193000
+SUMMARY:🏈 JH Football vs Carnegie
+DESCRIPTION:Time: 5:30 / 7:00 PM\n\nHobart Bearcat junior high football. Ga
+ mes begin at 5:30 and 7:00 PM.
+LOCATION:Hobart Bearcat Stadium
+CATEGORIES:Sports
+URL:https://hobartchamber.org/#calendar
 END:VEVENT
 BEGIN:VEVENT
 UID:sp43@hobartchamber.org
-DTSTAMP:20260824T144151Z
+DTSTAMP:20261119T024346Z
 DTSTART;TZID=America/Chicago:20260921T163000
 DTEND;TZID=America/Chicago:20260921T183000
-SUMMARY:JH Softball @ Merritt
-DESCRIPTION:Hobart Lady Cat JH softball.
-LOCATION:Merritt (Away)
-END:VEVENT
-BEGIN:VEVENT
-UID:sp44@hobartchamber.org
-DTSTAMP:20260824T144151Z
-DTSTART;TZID=America/Chicago:20260810T173000
-DTEND;TZID=America/Chicago:20260810T193000
-SUMMARY:HS Softball @ BFDC
-DESCRIPTION:Hobart Lady Cat HS softball.
+SUMMARY:🥎 JH Softball @ Merritt
+DESCRIPTION:Hobart Lady Cat junior high fast pitch softball.
 LOCATION:Away
+CATEGORIES:Sports
+URL:https://hobartchamber.org/#calendar
 END:VEVENT
 BEGIN:VEVENT
-UID:sp45@hobartchamber.org
-DTSTAMP:20260824T144151Z
-DTSTART;TZID=America/Chicago:20260811T173000
-DTEND;TZID=America/Chicago:20260811T193000
-SUMMARY:HS Softball vs Sentinel
-DESCRIPTION:Hobart Lady Cat HS softball.
-LOCATION:Hobart
-END:VEVENT
-BEGIN:VEVENT
-UID:bf1@hobartchamber.org
-DTSTAMP:20260824T144151Z
-DTSTART;VALUE=DATE:20260803
-DTEND;VALUE=DATE:20260804
-SUMMARY:First Day of Bearcat Pride Week
-DESCRIPTION:First day of Bearcat Pride Week for Hobart Bearcat football.
-LOCATION:Hobart High School
-END:VEVENT
-BEGIN:VEVENT
-UID:bf3@hobartchamber.org
-DTSTAMP:20260824T144151Z
-DTSTART;TZID=America/Chicago:20260806T090000
-DTEND;TZID=America/Chicago:20260806T110000
-SUMMARY:Senior Banner Pictures
-DESCRIPTION:Senior banner pictures for Hobart Bearcat football seniors.
-LOCATION:The HEC\, Hobart
-END:VEVENT
-BEGIN:VEVENT
-UID:bf4@hobartchamber.org
-DTSTAMP:20260824T144151Z
-DTSTART;TZID=America/Chicago:20260807T100000
-DTEND;TZID=America/Chicago:20260807T120000
-SUMMARY:Bearcat Football Car Wash Fundraiser
-DESCRIPTION:Car wash fundraiser supporting Hobart Bearcat football\, 10 AM to 2 PM. All donations go to the football program.
-LOCATION:Waterworks Car Wash\, Hobart
-END:VEVENT
-BEGIN:VEVENT
-UID:bf5@hobartchamber.org
-DTSTAMP:20260824T144151Z
-DTSTART;TZID=America/Chicago:20260810T193000
-DTEND;TZID=America/Chicago:20260810T213000
-SUMMARY:Player / Parent Meeting
-DESCRIPTION:Hobart Bearcat football player and parent meeting.
-LOCATION:The HEC\, Hobart
-END:VEVENT
-BEGIN:VEVENT
-UID:bf6@hobartchamber.org
-DTSTAMP:20260824T144151Z
-DTSTART;VALUE=DATE:20260819
-DTEND;VALUE=DATE:20260820
-SUMMARY:Fan Pledge Fundraiser
-DESCRIPTION:Fan pledge fundraiser supporting Hobart Bearcat football.
-LOCATION:Hobart
-END:VEVENT
-BEGIN:VEVENT
-UID:bf7@hobartchamber.org
-DTSTAMP:20260824T144151Z
-DTSTART;VALUE=DATE:20260821
-DTEND;VALUE=DATE:20260822
-SUMMARY:Bearcat Blast
-DESCRIPTION:The Bearcat Blast\, held the same evening as the Merritt scrimmage.
-LOCATION:Hobart Bearcat Stadium
-END:VEVENT
-BEGIN:VEVENT
-UID:bf8@hobartchamber.org
-DTSTAMP:20260824T144151Z
-DTSTART;VALUE=DATE:20260822
-DTEND;VALUE=DATE:20260823
-SUMMARY:Hobart Bearcats 4-Person Golf Scramble
-DESCRIPTION:4-Person Scramble benefiting all of Bearcat Athletics. Corporate Sponsor $500\, Team Sponsor $325\, Hole Sponsor $100. Contact Coach Joe Jones: (580) 916-5387.
-LOCATION:Hobart Municipal Golf Course
-END:VEVENT
-BEGIN:VEVENT
-UID:sg1@hobartchamber.org
-DTSTAMP:20260824T144151Z
-DTSTART;VALUE=DATE:20261003
-DTEND;VALUE=DATE:20261004
-SUMMARY:Shortgrass Playhouse: Have a Nice Doomsday
-DESCRIPTION:Adult Comedy. Seniors $12\, Adults $15\, Students $10\, Ages 2-5 $5\, under 2 free.
-LOCATION:Shortgrass Playhouse\, 103 1/2 E. 3rd St\, Hobart
-END:VEVENT
-BEGIN:VEVENT
-UID:sg2@hobartchamber.org
-DTSTAMP:20260824T144151Z
-DTSTART;VALUE=DATE:20261004
-DTEND;VALUE=DATE:20261005
-SUMMARY:Shortgrass Playhouse: Have a Nice Doomsday
-DESCRIPTION:Adult Comedy. Seniors $12\, Adults $15\, Students $10\, Ages 2-5 $5\, under 2 free.
-LOCATION:Shortgrass Playhouse\, 103 1/2 E. 3rd St\, Hobart
-END:VEVENT
-BEGIN:VEVENT
-UID:sg3@hobartchamber.org
-DTSTAMP:20260824T144151Z
-DTSTART;VALUE=DATE:20261010
-DTEND;VALUE=DATE:20261011
-SUMMARY:Shortgrass Playhouse: Have a Nice Doomsday
-DESCRIPTION:Adult Comedy. Seniors $12\, Adults $15\, Students $10\, Ages 2-5 $5\, under 2 free.
-LOCATION:Shortgrass Playhouse\, 103 1/2 E. 3rd St\, Hobart
-END:VEVENT
-BEGIN:VEVENT
-UID:sg4@hobartchamber.org
-DTSTAMP:20260824T144151Z
-DTSTART;VALUE=DATE:20261011
-DTEND;VALUE=DATE:20261012
-SUMMARY:Shortgrass Playhouse: Have a Nice Doomsday
-DESCRIPTION:Adult Comedy. Seniors $12\, Adults $15\, Students $10\, Ages 2-5 $5\, under 2 free.
-LOCATION:Shortgrass Playhouse\, 103 1/2 E. 3rd St\, Hobart
-END:VEVENT
-BEGIN:VEVENT
-UID:sg5@hobartchamber.org
-DTSTAMP:20260824T144151Z
-DTSTART;VALUE=DATE:20261128
-DTEND;VALUE=DATE:20261129
-SUMMARY:Shortgrass Playhouse: A Dickens Christmas Carol
-DESCRIPTION:Childrens Show. Seniors $12\, Adults $15\, Students $10\, Ages 2-5 $5\, under 2 free.
-LOCATION:Shortgrass Playhouse\, 103 1/2 E. 3rd St\, Hobart
-END:VEVENT
-BEGIN:VEVENT
-UID:sg6@hobartchamber.org
-DTSTAMP:20260824T144151Z
-DTSTART;VALUE=DATE:20261129
-DTEND;VALUE=DATE:20261130
-SUMMARY:Shortgrass Playhouse: A Dickens Christmas Carol
-DESCRIPTION:Childrens Show. Seniors $12\, Adults $15\, Students $10\, Ages 2-5 $5\, under 2 free.
-LOCATION:Shortgrass Playhouse\, 103 1/2 E. 3rd St\, Hobart
-END:VEVENT
-BEGIN:VEVENT
-UID:sg7@hobartchamber.org
-DTSTAMP:20260824T144151Z
-DTSTART;VALUE=DATE:20261205
-DTEND;VALUE=DATE:20261206
-SUMMARY:Shortgrass Playhouse: A Dickens Christmas Carol
-DESCRIPTION:Childrens Show. Seniors $12\, Adults $15\, Students $10\, Ages 2-5 $5\, under 2 free.
-LOCATION:Shortgrass Playhouse\, 103 1/2 E. 3rd St\, Hobart
-END:VEVENT
-BEGIN:VEVENT
-UID:sg8@hobartchamber.org
-DTSTAMP:20260824T144151Z
-DTSTART;VALUE=DATE:20261206
-DTEND;VALUE=DATE:20261207
-SUMMARY:Shortgrass Playhouse: A Dickens Christmas Carol
-DESCRIPTION:Childrens Show. Seniors $12\, Adults $15\, Students $10\, Ages 2-5 $5\, under 2 free.
-LOCATION:Shortgrass Playhouse\, 103 1/2 E. 3rd St\, Hobart
-END:VEVENT
-BEGIN:VEVENT
-UID:sg9@hobartchamber.org
-DTSTAMP:20260824T144151Z
-DTSTART;VALUE=DATE:20270227
-DTEND;VALUE=DATE:20270228
-SUMMARY:Shortgrass Playhouse: This Murder Was Staged
-DESCRIPTION:Teen Show. Seniors $12\, Adults $15\, Students $10\, Ages 2-5 $5\, under 2 free.
-LOCATION:Shortgrass Playhouse\, 103 1/2 E. 3rd St\, Hobart
-END:VEVENT
-BEGIN:VEVENT
-UID:sg10@hobartchamber.org
-DTSTAMP:20260824T144151Z
-DTSTART;VALUE=DATE:20270228
-DTEND;VALUE=DATE:20270301
-SUMMARY:Shortgrass Playhouse: This Murder Was Staged
-DESCRIPTION:Teen Show. Seniors $12\, Adults $15\, Students $10\, Ages 2-5 $5\, under 2 free.
-LOCATION:Shortgrass Playhouse\, 103 1/2 E. 3rd St\, Hobart
-END:VEVENT
-BEGIN:VEVENT
-UID:sg11@hobartchamber.org
-DTSTAMP:20260824T144151Z
-DTSTART;VALUE=DATE:20270306
-DTEND;VALUE=DATE:20270307
-SUMMARY:Shortgrass Playhouse: This Murder Was Staged
-DESCRIPTION:Teen Show. Seniors $12\, Adults $15\, Students $10\, Ages 2-5 $5\, under 2 free.
-LOCATION:Shortgrass Playhouse\, 103 1/2 E. 3rd St\, Hobart
-END:VEVENT
-BEGIN:VEVENT
-UID:sg12@hobartchamber.org
-DTSTAMP:20260824T144151Z
-DTSTART;VALUE=DATE:20270307
-DTEND;VALUE=DATE:20270308
-SUMMARY:Shortgrass Playhouse: This Murder Was Staged
-DESCRIPTION:Teen Show. Seniors $12\, Adults $15\, Students $10\, Ages 2-5 $5\, under 2 free.
-LOCATION:Shortgrass Playhouse\, 103 1/2 E. 3rd St\, Hobart
-END:VEVENT
-BEGIN:VEVENT
-UID:sg13@hobartchamber.org
-DTSTAMP:20260824T144151Z
-DTSTART;VALUE=DATE:20270417
-DTEND;VALUE=DATE:20270418
-SUMMARY:Shortgrass Playhouse: Antlia Pneumatica
-DESCRIPTION:Adult Dramatic Comedy. Seniors $12\, Adults $15\, Students $10\, Ages 2-5 $5\, under 2 free.
-LOCATION:Shortgrass Playhouse\, 103 1/2 E. 3rd St\, Hobart
-END:VEVENT
-BEGIN:VEVENT
-UID:sg14@hobartchamber.org
-DTSTAMP:20260824T144151Z
-DTSTART;VALUE=DATE:20270418
-DTEND;VALUE=DATE:20270419
-SUMMARY:Shortgrass Playhouse: Antlia Pneumatica
-DESCRIPTION:Adult Dramatic Comedy. Seniors $12\, Adults $15\, Students $10\, Ages 2-5 $5\, under 2 free.
-LOCATION:Shortgrass Playhouse\, 103 1/2 E. 3rd St\, Hobart
-END:VEVENT
-BEGIN:VEVENT
-UID:sg15@hobartchamber.org
-DTSTAMP:20260824T144151Z
-DTSTART;VALUE=DATE:20270424
-DTEND;VALUE=DATE:20270425
-SUMMARY:Shortgrass Playhouse: Antlia Pneumatica
-DESCRIPTION:Adult Dramatic Comedy. Seniors $12\, Adults $15\, Students $10\, Ages 2-5 $5\, under 2 free.
-LOCATION:Shortgrass Playhouse\, 103 1/2 E. 3rd St\, Hobart
-END:VEVENT
-BEGIN:VEVENT
-UID:sg16@hobartchamber.org
-DTSTAMP:20260824T144151Z
-DTSTART;VALUE=DATE:20270425
-DTEND;VALUE=DATE:20270426
-SUMMARY:Shortgrass Playhouse: Antlia Pneumatica
-DESCRIPTION:Adult Dramatic Comedy. Seniors $12\, Adults $15\, Students $10\, Ages 2-5 $5\, under 2 free.
-LOCATION:Shortgrass Playhouse\, 103 1/2 E. 3rd St\, Hobart
-END:VEVENT
-BEGIN:VEVENT
-UID:fp8@hobartchamber.org
-DTSTAMP:20260824T144151Z
-DTSTART;TZID=America/Chicago:20260819T090000
-DTEND;TZID=America/Chicago:20260819T110000
-SUMMARY:Hobart Food Pantry Distribution
-DESCRIPTION:Monthly food distribution. Begins at 9:00 AM.
-LOCATION:Hobart Food Pantry
+UID:sp59@hobartchamber.org
+DTSTAMP:20261119T024346Z
+DTSTART;TZID=America/Chicago:20260921T173000
+DTEND;TZID=America/Chicago:20260921T193000
+SUMMARY:🥎 HS Softball @ Merritt
+DESCRIPTION:Hobart Lady Cat high school softball.
+LOCATION:Away
+CATEGORIES:Sports
+URL:https://hobartchamber.org/#calendar
 END:VEVENT
 BEGIN:VEVENT
 UID:fp9@hobartchamber.org
-DTSTAMP:20260824T144151Z
+DTSTAMP:20261119T024346Z
 DTSTART;TZID=America/Chicago:20260923T090000
 DTEND;TZID=America/Chicago:20260923T110000
-SUMMARY:Hobart Food Pantry Distribution
-DESCRIPTION:Monthly food distribution. Begins at 9:00 AM.
+SUMMARY:🥫 Hobart Food Pantry
+DESCRIPTION:Monthly food distribution at the Hobart Food Pantry. Distributi
+ on begins at 9:00 AM.
 LOCATION:Hobart Food Pantry
+CATEGORIES:Community
+URL:https://hobartchamber.org/#calendar
+END:VEVENT
+BEGIN:VEVENT
+UID:sp60@hobartchamber.org
+DTSTAMP:20261119T024346Z
+DTSTART;VALUE=DATE:20260924
+DTEND;VALUE=DATE:20260925
+SUMMARY:🥎 HS Softball Regional Tournament
+DESCRIPTION:Hobart Lady Cat high school softball. Regional Tournament\, Sep
+ tember 24-25.
+LOCATION:TBD
+CATEGORIES:Sports
+URL:https://hobartchamber.org/#calendar
+END:VEVENT
+BEGIN:VEVENT
+UID:sp25@hobartchamber.org
+DTSTAMP:20261119T024346Z
+DTSTART;VALUE=DATE:20260925
+DTEND;VALUE=DATE:20260926
+SUMMARY:🏃 Cross Country: Cameron HS
+DESCRIPTION:Hobart Bearcat cross country meet — Cameron HS.
+LOCATION:Cameron University\, Lawton
+CATEGORIES:Sports
+URL:https://hobartchamber.org/#calendar
+END:VEVENT
+BEGIN:VEVENT
+UID:sp6@hobartchamber.org
+DTSTAMP:20261119T024346Z
+DTSTART;TZID=America/Chicago:20260925T190000
+DTEND;TZID=America/Chicago:20260925T210000
+SUMMARY:🏈 HS Football @ Southwest Covenant
+DESCRIPTION:Hobart Bearcat high school football. District game at Southwest
+  Covenant.
+LOCATION:Away
+CATEGORIES:Sports
+URL:https://hobartchamber.org/#calendar
+END:VEVENT
+BEGIN:VEVENT
+UID:sp16@hobartchamber.org
+DTSTAMP:20261119T024346Z
+DTSTART;TZID=America/Chicago:20260928T173000
+DTEND;TZID=America/Chicago:20260928T193000
+SUMMARY:🏈 JH Football @ Thomas
+DESCRIPTION:Time: 5:30 / 7:00 PM\n\nHobart Bearcat junior high football. Ga
+ mes begin at 5:30 and 7:00 PM.
+LOCATION:Away
+CATEGORIES:Sports
+URL:https://hobartchamber.org/#calendar
+END:VEVENT
+BEGIN:VEVENT
+UID:sp61@hobartchamber.org
+DTSTAMP:20261119T024346Z
+DTSTART;TZID=America/Chicago:20260928T163000
+DTEND;TZID=America/Chicago:20260928T183000
+SUMMARY:🥎 HS Softball @ Granite
+DESCRIPTION:Hobart Lady Cat high school softball.
+LOCATION:Away
+CATEGORIES:Sports
+URL:https://hobartchamber.org/#calendar
+END:VEVENT
+BEGIN:VEVENT
+UID:sp26@hobartchamber.org
+DTSTAMP:20261119T024346Z
+DTSTART;VALUE=DATE:20260930
+DTEND;VALUE=DATE:20261001
+SUMMARY:🏃 Cross Country: Hobart Elem\, JH/HS
+DESCRIPTION:Hobart Bearcat cross country meet — Hobart Elem\, JH/HS.
+LOCATION:Hobart
+CATEGORIES:Sports
+URL:https://hobartchamber.org/#calendar
+END:VEVENT
+BEGIN:VEVENT
+UID:sp62@hobartchamber.org
+DTSTAMP:20261119T024346Z
+DTSTART;VALUE=DATE:20261001
+DTEND;VALUE=DATE:20261002
+SUMMARY:🥎 HS Softball Super Regionals
+DESCRIPTION:Hobart Lady Cat high school softball. Super Regionals\, October
+  1-2.
+LOCATION:TBD
+CATEGORIES:Sports
+URL:https://hobartchamber.org/#calendar
+END:VEVENT
+BEGIN:VEVENT
+UID:ev1@hobartchamber.org
+DTSTAMP:20261119T024346Z
+DTSTART;VALUE=DATE:20261003
+DTEND;VALUE=DATE:20261004
+SUMMARY:Hobart\, OK Town Wide Garage Sale
+DESCRIPTION:One town\, one day\, great finds everywhere! Clear out\, cash i
+ n\, have fun — Hobart is open for deals. Have a sale? Come by the Hobart
+  Chamber of Commerce (106 W 4th Street) to get your address listed so shop
+ pers know where to find you\, and to pick up the required paperwork for th
+ e City of Hobart. Let's make this the best garage sale day ever!
+LOCATION:Hobart\, OK
+URL:https://hobartchamber.org/#calendar
+END:VEVENT
+BEGIN:VEVENT
+UID:ev17@hobartchamber.org
+DTSTAMP:20261119T024346Z
+DTSTART;TZID=America/Chicago:20261003T203000
+DTEND;TZID=America/Chicago:20261003T223000
+SUMMARY:🌙 Glow Golf Tournament
+DESCRIPTION:Time: At Dusk · Approx. 8:30 PM\n\nThe Hobart Chamber Glow Gol
+ f Tournament — a 4-man scramble under the glow! Teams of 4\, scramble fo
+ rmat. $240 per team. Limited to 15 public team spots.
+LOCATION:Hobart Municipal Golf Course · Hobart\, OK
+CATEGORIES:Community
+URL:https://hobartchamber.org/#calendar
+END:VEVENT
+BEGIN:VEVENT
+UID:sg1@hobartchamber.org
+DTSTAMP:20261119T024346Z
+DTSTART;VALUE=DATE:20261003
+DTEND;VALUE=DATE:20261004
+SUMMARY:🎭 Have a Nice Doomsday
+DESCRIPTION:Time: See listing for showtime\n\nShortgrass Playhouse presents
+  "Have a Nice Doomsday" (Adult Comedy). 103 1/2 E. 3rd St\, Hobart. Regula
+ r ticket prices: Seniors (60+) $12\, Adults $15\, Students $10\, Ages 2-5 
+ $5\, under 2 free. Season patron memberships are also available and suppor
+ t the playhouse fundraising for the season.
+LOCATION:Shortgrass Playhouse\, 103 1/2 E. 3rd St
+CATEGORIES:Community
+URL:https://hobartchamber.org/#calendar
+END:VEVENT
+BEGIN:VEVENT
+UID:sg2@hobartchamber.org
+DTSTAMP:20261119T024346Z
+DTSTART;VALUE=DATE:20261004
+DTEND;VALUE=DATE:20261005
+SUMMARY:🎭 Have a Nice Doomsday
+DESCRIPTION:Time: See listing for showtime\n\nShortgrass Playhouse presents
+  "Have a Nice Doomsday" (Adult Comedy). 103 1/2 E. 3rd St\, Hobart. Regula
+ r ticket prices: Seniors (60+) $12\, Adults $15\, Students $10\, Ages 2-5 
+ $5\, under 2 free. Season patron memberships are also available and suppor
+ t the playhouse fundraising for the season.
+LOCATION:Shortgrass Playhouse\, 103 1/2 E. 3rd St
+CATEGORIES:Community
+URL:https://hobartchamber.org/#calendar
+END:VEVENT
+BEGIN:VEVENT
+UID:sp17@hobartchamber.org
+DTSTAMP:20261119T024346Z
+DTSTART;TZID=America/Chicago:20261005T173000
+DTEND;TZID=America/Chicago:20261005T193000
+SUMMARY:🏈 JH Football vs Frederick
+DESCRIPTION:Time: 5:30 / 7:00 PM\n\nHobart Bearcat junior high football. Ga
+ mes begin at 5:30 and 7:00 PM.
+LOCATION:Hobart Bearcat Stadium
+CATEGORIES:Sports
+URL:https://hobartchamber.org/#calendar
+END:VEVENT
+BEGIN:VEVENT
+UID:ev9@hobartchamber.org
+DTSTAMP:20261119T024346Z
+DTSTART;TZID=America/Chicago:20261006T180000
+DTEND;TZID=America/Chicago:20261006T200000
+SUMMARY:Defensive Driving Class — Kiowa County Farm Bureau
+DESCRIPTION:Need a discount on your auto insurance? The Kiowa County Farm B
+ ureau is hosting a Defensive Driving Class on Tuesday\, October 6th at 6:0
+ 0 PM at 801 S Broadway\, Hobart. Farm Bureau members attend FREE — non-m
+ embers $10. Class requires a minimum of 15 participants to run\, so please
+  let the Farm Bureau know if you plan to attend. Call (580) 726-3444 to si
+ gn up.
+LOCATION:Kiowa County Farm Bureau · 801 S Broadway\, Hobart
+CATEGORIES:Community
+URL:https://hobartchamber.org/#calendar
+END:VEVENT
+BEGIN:VEVENT
+UID:sc10@hobartchamber.org
+DTSTAMP:20261119T024346Z
+DTSTART;VALUE=DATE:20261007
+DTEND;VALUE=DATE:20261008
+SUMMARY:📚 Progress Reports
+DESCRIPTION:Progress reports issued.
+LOCATION:Hobart Public Schools
+CATEGORIES:School
+URL:https://hobartchamber.org/#calendar
+END:VEVENT
+BEGIN:VEVENT
+UID:sp27@hobartchamber.org
+DTSTAMP:20261119T024346Z
+DTSTART;VALUE=DATE:20261007
+DTEND;VALUE=DATE:20261008
+SUMMARY:🏃 Cross Country: Frederick Elem\, JH/HS
+DESCRIPTION:Hobart Bearcat cross country meet — Frederick Elem\, JH/HS.
+LOCATION:Frederick
+CATEGORIES:Sports
+URL:https://hobartchamber.org/#calendar
+END:VEVENT
+BEGIN:VEVENT
+UID:sc11@hobartchamber.org
+DTSTAMP:20261119T024346Z
+DTSTART;VALUE=DATE:20261008
+DTEND;VALUE=DATE:20261009
+SUMMARY:📚 Nine Weeks Tests
+DESCRIPTION:First nine weeks tests. Part of Oct 8-9.
+LOCATION:Hobart Public Schools
+CATEGORIES:School
+URL:https://hobartchamber.org/#calendar
+END:VEVENT
+BEGIN:VEVENT
+UID:sp63@hobartchamber.org
+DTSTAMP:20261119T024346Z
+DTSTART;VALUE=DATE:20261008
+DTEND;VALUE=DATE:20261009
+SUMMARY:🥎 HS Softball State Tournament
+DESCRIPTION:Hobart Lady Cat high school softball. State Tournament\, Octobe
+ r 8-10.
+LOCATION:TBD
+CATEGORIES:Sports
+URL:https://hobartchamber.org/#calendar
+END:VEVENT
+BEGIN:VEVENT
+UID:sc12@hobartchamber.org
+DTSTAMP:20261119T024346Z
+DTSTART;VALUE=DATE:20261009
+DTEND;VALUE=DATE:20261010
+SUMMARY:📚 Nine Weeks Tests
+DESCRIPTION:First nine weeks tests. Part of Oct 8-9.
+LOCATION:Hobart Public Schools
+CATEGORIES:School
+URL:https://hobartchamber.org/#calendar
+END:VEVENT
+BEGIN:VEVENT
+UID:sc13@hobartchamber.org
+DTSTAMP:20261119T024346Z
+DTSTART;VALUE=DATE:20261009
+DTEND;VALUE=DATE:20261010
+SUMMARY:📚 End of 1st Nine Weeks
+DESCRIPTION:End of the first nine weeks. 41 days taught\, 3 professional da
+ ys.
+LOCATION:Hobart Public Schools
+CATEGORIES:School
+URL:https://hobartchamber.org/#calendar
+END:VEVENT
+BEGIN:VEVENT
+UID:sp7@hobartchamber.org
+DTSTAMP:20261119T024346Z
+DTSTART;TZID=America/Chicago:20261009T190000
+DTEND;TZID=America/Chicago:20261009T210000
+SUMMARY:🏈 HS Football @ Apache
+DESCRIPTION:Hobart Bearcat high school football. District game at Apache.
+LOCATION:Away
+CATEGORIES:Sports
+URL:https://hobartchamber.org/#calendar
+END:VEVENT
+BEGIN:VEVENT
+UID:sg3@hobartchamber.org
+DTSTAMP:20261119T024346Z
+DTSTART;VALUE=DATE:20261010
+DTEND;VALUE=DATE:20261011
+SUMMARY:🎭 Have a Nice Doomsday
+DESCRIPTION:Time: See listing for showtime\n\nShortgrass Playhouse presents
+  "Have a Nice Doomsday" (Adult Comedy). 103 1/2 E. 3rd St\, Hobart. Regula
+ r ticket prices: Seniors (60+) $12\, Adults $15\, Students $10\, Ages 2-5 
+ $5\, under 2 free. Season patron memberships are also available and suppor
+ t the playhouse fundraising for the season.
+LOCATION:Shortgrass Playhouse\, 103 1/2 E. 3rd St
+CATEGORIES:Community
+URL:https://hobartchamber.org/#calendar
+END:VEVENT
+BEGIN:VEVENT
+UID:sg4@hobartchamber.org
+DTSTAMP:20261119T024346Z
+DTSTART;VALUE=DATE:20261011
+DTEND;VALUE=DATE:20261012
+SUMMARY:🎭 Have a Nice Doomsday
+DESCRIPTION:Time: See listing for showtime\n\nShortgrass Playhouse presents
+  "Have a Nice Doomsday" (Adult Comedy). 103 1/2 E. 3rd St\, Hobart. Regula
+ r ticket prices: Seniors (60+) $12\, Adults $15\, Students $10\, Ages 2-5 
+ $5\, under 2 free. Season patron memberships are also available and suppor
+ t the playhouse fundraising for the season.
+LOCATION:Shortgrass Playhouse\, 103 1/2 E. 3rd St
+CATEGORIES:Community
+URL:https://hobartchamber.org/#calendar
+END:VEVENT
+BEGIN:VEVENT
+UID:h9@hobartchamber.org
+DTSTAMP:20261119T024346Z
+DTSTART;VALUE=DATE:20261012
+DTEND;VALUE=DATE:20261013
+SUMMARY:🇺🇸 Columbus Day
+DESCRIPTION:Federal holiday\, observed in some states as Indigenous Peoples
+ ' Day. Most banks\, government offices\, and the post office are closed.
+LOCATION:Federal Holiday
+CATEGORIES:Holiday
+URL:https://hobartchamber.org/#calendar
+END:VEVENT
+BEGIN:VEVENT
+UID:sp18@hobartchamber.org
+DTSTAMP:20261119T024346Z
+DTSTART;TZID=America/Chicago:20261012T173000
+DTEND;TZID=America/Chicago:20261012T193000
+SUMMARY:🏈 JH Football @ Sayre
+DESCRIPTION:Time: 5:30 / 7:00 PM\n\nHobart Bearcat junior high football. Ga
+ mes begin at 5:30 and 7:00 PM.
+LOCATION:Away
+CATEGORIES:Sports
+URL:https://hobartchamber.org/#calendar
+END:VEVENT
+BEGIN:VEVENT
+UID:sc14@hobartchamber.org
+DTSTAMP:20261119T024346Z
+DTSTART;TZID=America/Chicago:20261013T151500
+DTEND;TZID=America/Chicago:20261013T211500
+SUMMARY:📚 Parent-Teacher Conferences
+DESCRIPTION:Time: 3:15 - 9:15 PM\n\nParent-teacher conferences\, 3:15 PM - 
+ 9:15 PM.
+LOCATION:Hobart Public Schools
+CATEGORIES:School
+URL:https://hobartchamber.org/#calendar
+END:VEVENT
+BEGIN:VEVENT
+UID:sc15@hobartchamber.org
+DTSTAMP:20261119T024346Z
+DTSTART;VALUE=DATE:20261014
+DTEND;VALUE=DATE:20261015
+SUMMARY:📚 Parent-Teacher Conferences
+DESCRIPTION:Parent-teacher conferences.
+LOCATION:Hobart Public Schools
+CATEGORIES:School
+URL:https://hobartchamber.org/#calendar
+END:VEVENT
+BEGIN:VEVENT
+UID:sc16@hobartchamber.org
+DTSTAMP:20261119T024346Z
+DTSTART;VALUE=DATE:20261015
+DTEND;VALUE=DATE:20261016
+SUMMARY:📚 Fall Break — No School
+DESCRIPTION:Fall break. No school. Part of Oct 15-16.
+LOCATION:Hobart Public Schools
+CATEGORIES:School
+URL:https://hobartchamber.org/#calendar
+END:VEVENT
+BEGIN:VEVENT
+UID:sp8@hobartchamber.org
+DTSTAMP:20261119T024346Z
+DTSTART;TZID=America/Chicago:20261015T190000
+DTEND;TZID=America/Chicago:20261015T210000
+SUMMARY:🏈 HS Football vs Empire
+DESCRIPTION:Hobart Bearcat high school football. District game at home. Thu
+ rsday night game.
+LOCATION:Hobart Bearcat Stadium
+CATEGORIES:Sports
+URL:https://hobartchamber.org/#calendar
+END:VEVENT
+BEGIN:VEVENT
+UID:sc17@hobartchamber.org
+DTSTAMP:20261119T024346Z
+DTSTART;VALUE=DATE:20261016
+DTEND;VALUE=DATE:20261017
+SUMMARY:📚 Fall Break — No School
+DESCRIPTION:Fall break. No school. Part of Oct 15-16.
+LOCATION:Hobart Public Schools
+CATEGORIES:School
+URL:https://hobartchamber.org/#calendar
+END:VEVENT
+BEGIN:VEVENT
+UID:sp28@hobartchamber.org
+DTSTAMP:20261119T024346Z
+DTSTART;VALUE=DATE:20261017
+DTEND;VALUE=DATE:20261018
+SUMMARY:🏃 Cross Country: Regionals
+DESCRIPTION:Hobart Bearcat cross country meet — Regionals.
+LOCATION:TBD
+CATEGORIES:Sports
+URL:https://hobartchamber.org/#calendar
+END:VEVENT
+BEGIN:VEVENT
+UID:sp19@hobartchamber.org
+DTSTAMP:20261119T024346Z
+DTSTART;TZID=America/Chicago:20261019T173000
+DTEND;TZID=America/Chicago:20261019T193000
+SUMMARY:🏈 JH Football @ Hinton
+DESCRIPTION:Time: 5:30 / 7:00 PM\n\nHobart Bearcat junior high football. Ga
+ mes begin at 5:30 and 7:00 PM.
+LOCATION:Away
+CATEGORIES:Sports
+URL:https://hobartchamber.org/#calendar
 END:VEVENT
 BEGIN:VEVENT
 UID:fp10@hobartchamber.org
-DTSTAMP:20260824T144151Z
+DTSTAMP:20261119T024346Z
 DTSTART;TZID=America/Chicago:20261021T090000
 DTEND;TZID=America/Chicago:20261021T110000
-SUMMARY:Hobart Food Pantry Distribution
-DESCRIPTION:Monthly food distribution. Begins at 9:00 AM.
+SUMMARY:🥫 Hobart Food Pantry
+DESCRIPTION:Monthly food distribution at the Hobart Food Pantry. Distributi
+ on begins at 9:00 AM.
 LOCATION:Hobart Food Pantry
+CATEGORIES:Community
+URL:https://hobartchamber.org/#calendar
+END:VEVENT
+BEGIN:VEVENT
+UID:ev18@hobartchamber.org
+DTSTAMP:20261119T024346Z
+DTSTART;TZID=America/Chicago:20261022T173000
+DTEND;TZID=America/Chicago:20261022T193000
+SUMMARY:Women's Friendship Dinner
+DESCRIPTION:Time: Doors 5:30 PM · Dinner 6:00 PM\n\nThe annual Women's Fri
+ endship Dinner is back with a fashion show for entertainment. Hobart Junio
+ r Ambassadors will help serve and model current clothing and styles from H
+ obart boutiques. Tickets are $30 per person — contact the Hobart Chamber
+  of Commerce at 580-682-0887. Businesses and groups may sponsor a table.
+LOCATION:Stanley Building · Downtown Hobart
+CATEGORIES:Community
+URL:https://hobartchamber.org/#calendar
+END:VEVENT
+BEGIN:VEVENT
+UID:sp9@hobartchamber.org
+DTSTAMP:20261119T024346Z
+DTSTART;TZID=America/Chicago:20261023T190000
+DTEND;TZID=America/Chicago:20261023T210000
+SUMMARY:🏈 HS Football vs Thomas-Fay-Custer
+DESCRIPTION:Hobart Bearcat high school football. District game at home.
+LOCATION:Hobart Bearcat Stadium
+CATEGORIES:Sports
+URL:https://hobartchamber.org/#calendar
+END:VEVENT
+BEGIN:VEVENT
+UID:sp29@hobartchamber.org
+DTSTAMP:20261119T024346Z
+DTSTART;VALUE=DATE:20261024
+DTEND;VALUE=DATE:20261025
+SUMMARY:🏃 Cross Country: Cross Country State
+DESCRIPTION:Hobart Bearcat cross country meet — Cross Country State.
+LOCATION:TBD
+CATEGORIES:Sports
+URL:https://hobartchamber.org/#calendar
+END:VEVENT
+BEGIN:VEVENT
+UID:ev11@hobartchamber.org
+DTSTAMP:20261119T024346Z
+DTSTART;TZID=America/Chicago:20261027T100000
+DTEND;TZID=America/Chicago:20261027T140000
+SUMMARY:Kiowa County Baby Shower
+DESCRIPTION:The Kiowa County Baby Shower will be held Tuesday\, October 27t
+ h at the Western Technology Center in Hobart from 10:00 AM to 2:00 PM. For
+  more information contact Rebecca Villa-Winsett\, Local Emergency Response
+  Coordinator\, at (580) 726-3316.
+LOCATION:Western Technology Center · Hobart\, OK
+CATEGORIES:Community
+URL:https://hobartchamber.org/#calendar
+END:VEVENT
+BEGIN:VEVENT
+UID:ev20@hobartchamber.org
+DTSTAMP:20261119T024346Z
+DTSTART;TZID=America/Chicago:20261027T180000
+DTEND;TZID=America/Chicago:20261027T200000
+SUMMARY:FFA Labor Auction
+DESCRIPTION:The Hobart FFA Labor Auction takes place Tuesday\, October 27 a
+ t 6:00 PM at the Women's Exhibit Building.
+LOCATION:Women's Exhibit Building · Hobart\, OK
+CATEGORIES:Community
+URL:https://hobartchamber.org/#calendar
+END:VEVENT
+BEGIN:VEVENT
+UID:sp10@hobartchamber.org
+DTSTAMP:20261119T024346Z
+DTSTART;TZID=America/Chicago:20261030T190000
+DTEND;TZID=America/Chicago:20261030T210000
+SUMMARY:🏈 HS Football @ Mooreland
+DESCRIPTION:Hobart Bearcat high school football. District game at Mooreland
+ .
+LOCATION:Away
+CATEGORIES:Sports
+URL:https://hobartchamber.org/#calendar
+END:VEVENT
+BEGIN:VEVENT
+UID:ev19@hobartchamber.org
+DTSTAMP:20261119T024346Z
+DTSTART;TZID=America/Chicago:20261031T173000
+DTEND;TZID=America/Chicago:20261031T193000
+SUMMARY:🎃 Trunk or Treat — Courthouse Square
+DESCRIPTION:A safe place for children to trick or treat around the Kiowa Co
+ unty Courthouse Square. Decorate your trunk and bring the Halloween spirit
+  — the best decorated vehicle wins a prize. Hosted by the City of Hobart
+ \, Kiowa County and the Hobart Chamber of Commerce.
+LOCATION:Kiowa County Courthouse Square · Hobart\, OK
+CATEGORIES:Community
+URL:https://hobartchamber.org/#calendar
+END:VEVENT
+BEGIN:VEVENT
+UID:ev14@hobartchamber.org
+DTSTAMP:20261119T024346Z
+DTSTART;VALUE=DATE:20261101
+DTEND;VALUE=DATE:20261102
+SUMMARY:E-Bike Raffle Drawing — Kiowa County Museum
+DESCRIPTION:Time: Drawing: November 1\, 2026\n\nThe Kiowa County Museum is 
+ raffling off a 1500-Watt\, 48-Volt Vortex Mountain E-Bike Rider (C200 HIQI
+ S) — up to 32 mph\, 7-speed pedal assist\, 60 miles on one charge. Ticke
+ ts: $5 each or 5 for $20. You do NOT have to be present to win. Contact th
+ e Kiowa County Museum for tickets.
+LOCATION:Kiowa County Museum · Hobart\, OK
+CATEGORIES:Community
+URL:https://hobartchamber.org/#calendar
+END:VEVENT
+BEGIN:VEVENT
+UID:sp64@hobartchamber.org
+DTSTAMP:20261119T024346Z
+DTSTART;TZID=America/Chicago:20261102T183000
+DTEND;TZID=America/Chicago:20261102T203000
+SUMMARY:🏀 JH Basketball @ Hinton
+DESCRIPTION:Hobart Bearcat junior high basketball. All regular season games
+  have JV games starting at 4:30.
+LOCATION:Hinton
+CATEGORIES:Sports
+URL:https://hobartchamber.org/#calendar
+END:VEVENT
+BEGIN:VEVENT
+UID:sc18@hobartchamber.org
+DTSTAMP:20261119T024346Z
+DTSTART;VALUE=DATE:20261104
+DTEND;VALUE=DATE:20261105
+SUMMARY:📚 Progress Reports
+DESCRIPTION:Progress reports issued.
+LOCATION:Hobart Public Schools
+CATEGORIES:School
+URL:https://hobartchamber.org/#calendar
+END:VEVENT
+BEGIN:VEVENT
+UID:sp65@hobartchamber.org
+DTSTAMP:20261119T024346Z
+DTSTART;TZID=America/Chicago:20261105T183000
+DTEND;TZID=America/Chicago:20261105T203000
+SUMMARY:🏀 JH Basketball @ BFDC
+DESCRIPTION:Hobart Bearcat junior high basketball. All regular season games
+  have JV games starting at 4:30.
+LOCATION:BFDC
+CATEGORIES:Sports
+URL:https://hobartchamber.org/#calendar
+END:VEVENT
+BEGIN:VEVENT
+UID:sp11@hobartchamber.org
+DTSTAMP:20261119T024346Z
+DTSTART;TZID=America/Chicago:20261106T190000
+DTEND;TZID=America/Chicago:20261106T210000
+SUMMARY:🏈 HS Football vs Carnegie
+DESCRIPTION:Hobart Bearcat high school football. SENIOR NIGHT. District gam
+ e at home.
+LOCATION:Hobart Bearcat Stadium
+CATEGORIES:Sports
+URL:https://hobartchamber.org/#calendar
+END:VEVENT
+BEGIN:VEVENT
+UID:ev22@hobartchamber.org
+DTSTAMP:20261119T024346Z
+DTSTART;TZID=America/Chicago:20261107T080000
+DTEND;TZID=America/Chicago:20261107T140000
+SUMMARY:First Saturday Market — Vendors Wanted
+DESCRIPTION:Rust Dirt Co. presents the Hobart First Saturday Market. Vendor
+ s wanted\, and they are also seeking a food truck. Message Rust Dirt Co. f
+ or details or visit rustdirtco.com.
+LOCATION:207 W. 4th St · Hobart\, OK
+CATEGORIES:Community
+URL:https://hobartchamber.org/#calendar
+END:VEVENT
+BEGIN:VEVENT
+UID:ev23@hobartchamber.org
+DTSTAMP:20261119T024346Z
+DTSTART;TZID=America/Chicago:20261107T090000
+DTEND;TZID=America/Chicago:20261107T110000
+SUMMARY:Par 3 Golf Tournament
+DESCRIPTION:Time: 9:00 AM Shotgun Start\n\n18-hole\, 2-man scramble. $200 e
+ ntry fee. A\, B & C flights with payouts in all flights (amounts based on 
+ entries)\, plus Closest to the Pin and Longest Putt. To enter\, contact To
+ m at 580-819-2114.
+LOCATION:Hobart Golf Course · Hobart\, OK
+CATEGORIES:Community
+URL:https://hobartchamber.org/#calendar
+END:VEVENT
+BEGIN:VEVENT
+UID:sp66@hobartchamber.org
+DTSTAMP:20261119T024346Z
+DTSTART;TZID=America/Chicago:20261109T183000
+DTEND;TZID=America/Chicago:20261109T203000
+SUMMARY:🏀 JH Basketball vs Sayre
+DESCRIPTION:Hobart Bearcat junior high basketball. All regular season games
+  have JV games starting at 4:30.
+LOCATION:Hobart
+CATEGORIES:Sports
+URL:https://hobartchamber.org/#calendar
+END:VEVENT
+BEGIN:VEVENT
+UID:h10@hobartchamber.org
+DTSTAMP:20261119T024346Z
+DTSTART;VALUE=DATE:20261111
+DTEND;VALUE=DATE:20261112
+SUMMARY:🇺🇸 Veterans Day
+DESCRIPTION:Federal holiday honoring all who have served in the U.S. Armed 
+ Forces. Most banks\, government offices\, and the post office are closed.
+LOCATION:Federal Holiday
+CATEGORIES:Holiday
+URL:https://hobartchamber.org/#calendar
+END:VEVENT
+BEGIN:VEVENT
+UID:sp67@hobartchamber.org
+DTSTAMP:20261119T024346Z
+DTSTART;TZID=America/Chicago:20261112T183000
+DTEND;TZID=America/Chicago:20261112T203000
+SUMMARY:🏀 JH Basketball vs Hollis
+DESCRIPTION:Hobart Bearcat junior high basketball. All regular season games
+  have JV games starting at 4:30.
+LOCATION:Hobart
+CATEGORIES:Sports
+URL:https://hobartchamber.org/#calendar
+END:VEVENT
+BEGIN:VEVENT
+UID:bb1@hobartchamber.org
+DTSTAMP:20261119T024346Z
+DTSTART;TZID=America/Chicago:20261116T160000
+DTEND;TZID=America/Chicago:20261116T180000
+SUMMARY:🏀 5/6th Basketball @ Mountain View
+DESCRIPTION:Hobart Bearcat 5th/6th grade basketball. 6th grade only.
+LOCATION:Mountain View
+CATEGORIES:Sports
+URL:https://hobartchamber.org/#calendar
+END:VEVENT
+BEGIN:VEVENT
+UID:sp68@hobartchamber.org
+DTSTAMP:20261119T024346Z
+DTSTART;TZID=America/Chicago:20261116T180000
+DTEND;TZID=America/Chicago:20261116T200000
+SUMMARY:🏀 JH Basketball @ Mountain View
+DESCRIPTION:Hobart Bearcat junior high basketball. All regular season games
+  have JV games starting at 4:30. 6th grade plays at 4:00 PM.
+LOCATION:Mt. View
+CATEGORIES:Sports
+URL:https://hobartchamber.org/#calendar
+END:VEVENT
+BEGIN:VEVENT
+UID:bb2@hobartchamber.org
+DTSTAMP:20261119T024346Z
+DTSTART;TZID=America/Chicago:20261117T163000
+DTEND;TZID=America/Chicago:20261117T183000
+SUMMARY:🏀 5/6th Basketball @ Hollis
+DESCRIPTION:Hobart Bearcat 5th/6th grade basketball. Four games.
+LOCATION:Hollis
+CATEGORIES:Sports
+URL:https://hobartchamber.org/#calendar
+END:VEVENT
+BEGIN:VEVENT
+UID:sp74@hobartchamber.org
+DTSTAMP:20261119T024346Z
+DTSTART;TZID=America/Chicago:20261117T183000
+DTEND;TZID=America/Chicago:20261117T203000
+SUMMARY:🏀 JH Basketball @ Boone-Apache
+DESCRIPTION:Hobart Bearcat junior high basketball. All regular season games
+  have JV games starting at 4:30.
+LOCATION:Apache
+CATEGORIES:Sports
+URL:https://hobartchamber.org/#calendar
 END:VEVENT
 BEGIN:VEVENT
 UID:fp11@hobartchamber.org
-DTSTAMP:20260824T144151Z
+DTSTAMP:20261119T024346Z
 DTSTART;TZID=America/Chicago:20261118T090000
 DTEND;TZID=America/Chicago:20261118T110000
-SUMMARY:Hobart Food Pantry Distribution
-DESCRIPTION:Monthly food distribution. Begins at 9:00 AM.
+SUMMARY:🥫 Hobart Food Pantry
+DESCRIPTION:Monthly food distribution at the Hobart Food Pantry. Distributi
+ on begins at 9:00 AM.
 LOCATION:Hobart Food Pantry
+CATEGORIES:Community
+URL:https://hobartchamber.org/#calendar
+END:VEVENT
+BEGIN:VEVENT
+UID:bb3@hobartchamber.org
+DTSTAMP:20261119T024346Z
+DTSTART;TZID=America/Chicago:20261119T163000
+DTEND;TZID=America/Chicago:20261119T183000
+SUMMARY:🏀 5/6th Basketball @ Merritt
+DESCRIPTION:Hobart Bearcat 5th/6th grade basketball. Four games.
+LOCATION:Merritt (old gym)
+CATEGORIES:Sports
+URL:https://hobartchamber.org/#calendar
+END:VEVENT
+BEGIN:VEVENT
+UID:sp69@hobartchamber.org
+DTSTAMP:20261119T024346Z
+DTSTART;TZID=America/Chicago:20261119T180000
+DTEND;TZID=America/Chicago:20261119T200000
+SUMMARY:🏀 JH Basketball vs Canute
+DESCRIPTION:Hobart Bearcat junior high basketball. All regular season games
+  have JV games starting at 4:30.
+LOCATION:Hobart
+CATEGORIES:Sports
+URL:https://hobartchamber.org/#calendar
+END:VEVENT
+BEGIN:VEVENT
+UID:sc19@hobartchamber.org
+DTSTAMP:20261119T024346Z
+DTSTART;VALUE=DATE:20261123
+DTEND;VALUE=DATE:20261124
+SUMMARY:📚 Thanksgiving Break — No School
+DESCRIPTION:Thanksgiving break. No school. Nov 23-27.
+LOCATION:Hobart Public Schools
+CATEGORIES:School
+URL:https://hobartchamber.org/#calendar
+END:VEVENT
+BEGIN:VEVENT
+UID:sc20@hobartchamber.org
+DTSTAMP:20261119T024346Z
+DTSTART;VALUE=DATE:20261124
+DTEND;VALUE=DATE:20261125
+SUMMARY:📚 Thanksgiving Break — No School
+DESCRIPTION:Thanksgiving break. No school. Nov 23-27.
+LOCATION:Hobart Public Schools
+CATEGORIES:School
+URL:https://hobartchamber.org/#calendar
+END:VEVENT
+BEGIN:VEVENT
+UID:sc21@hobartchamber.org
+DTSTAMP:20261119T024346Z
+DTSTART;VALUE=DATE:20261125
+DTEND;VALUE=DATE:20261126
+SUMMARY:📚 Thanksgiving Break — No School
+DESCRIPTION:Thanksgiving break. No school. Nov 23-27.
+LOCATION:Hobart Public Schools
+CATEGORIES:School
+URL:https://hobartchamber.org/#calendar
+END:VEVENT
+BEGIN:VEVENT
+UID:h11@hobartchamber.org
+DTSTAMP:20261119T024346Z
+DTSTART;VALUE=DATE:20261126
+DTEND;VALUE=DATE:20261127
+SUMMARY:🇺🇸 Thanksgiving Day
+DESCRIPTION:Federal holiday. Most banks\, government offices\, and the post
+  office are closed.
+LOCATION:Federal Holiday
+CATEGORIES:Holiday
+URL:https://hobartchamber.org/#calendar
+END:VEVENT
+BEGIN:VEVENT
+UID:sc22@hobartchamber.org
+DTSTAMP:20261119T024346Z
+DTSTART;VALUE=DATE:20261126
+DTEND;VALUE=DATE:20261127
+SUMMARY:📚 Thanksgiving Break — No School
+DESCRIPTION:Thanksgiving break. No school. Nov 23-27.
+LOCATION:Hobart Public Schools
+CATEGORIES:School
+URL:https://hobartchamber.org/#calendar
+END:VEVENT
+BEGIN:VEVENT
+UID:sc23@hobartchamber.org
+DTSTAMP:20261119T024346Z
+DTSTART;VALUE=DATE:20261127
+DTEND;VALUE=DATE:20261128
+SUMMARY:📚 Thanksgiving Break — No School
+DESCRIPTION:Thanksgiving break. No school. Nov 23-27.
+LOCATION:Hobart Public Schools
+CATEGORIES:School
+URL:https://hobartchamber.org/#calendar
+END:VEVENT
+BEGIN:VEVENT
+UID:sg5@hobartchamber.org
+DTSTAMP:20261119T024346Z
+DTSTART;VALUE=DATE:20261128
+DTEND;VALUE=DATE:20261129
+SUMMARY:🎭 A Dickens Christmas Carol
+DESCRIPTION:Time: See listing for showtime\n\nShortgrass Playhouse presents
+  "A Dickens Christmas Carol" (Children's Show). 103 1/2 E. 3rd St\, Hobart
+ . Regular ticket prices: Seniors (60+) $12\, Adults $15\, Students $10\, A
+ ges 2-5 $5\, under 2 free. Season patron memberships are also available an
+ d support the playhouse fundraising for the season.
+LOCATION:Shortgrass Playhouse\, 103 1/2 E. 3rd St
+CATEGORIES:Community
+URL:https://hobartchamber.org/#calendar
+END:VEVENT
+BEGIN:VEVENT
+UID:sg6@hobartchamber.org
+DTSTAMP:20261119T024346Z
+DTSTART;VALUE=DATE:20261129
+DTEND;VALUE=DATE:20261130
+SUMMARY:🎭 A Dickens Christmas Carol
+DESCRIPTION:Time: See listing for showtime\n\nShortgrass Playhouse presents
+  "A Dickens Christmas Carol" (Children's Show). 103 1/2 E. 3rd St\, Hobart
+ . Regular ticket prices: Seniors (60+) $12\, Adults $15\, Students $10\, A
+ ges 2-5 $5\, under 2 free. Season patron memberships are also available an
+ d support the playhouse fundraising for the season.
+LOCATION:Shortgrass Playhouse\, 103 1/2 E. 3rd St
+CATEGORIES:Community
+URL:https://hobartchamber.org/#calendar
+END:VEVENT
+BEGIN:VEVENT
+UID:sp70@hobartchamber.org
+DTSTAMP:20261119T024346Z
+DTSTART;VALUE=DATE:20261130
+DTEND;VALUE=DATE:20261201
+SUMMARY:🏀 JH Basketball JH BFDC Tournament
+DESCRIPTION:Hobart Bearcat junior high basketball. All regular season games
+  have JV games starting at 4:30. Tournament dates listed in the schedule a
+ s Nov 30\, Dec 3 & 5 - please confirm with the school.
+LOCATION:BFDC
+CATEGORIES:Sports
+URL:https://hobartchamber.org/#calendar
+END:VEVENT
+BEGIN:VEVENT
+UID:ev-memory-tree-1201@hobartchamber.org
+DTSTAMP:20261119T024346Z
+DTSTART;VALUE=DATE:20261201
+DTEND;VALUE=DATE:20261202
+SUMMARY:Memory Tree Deadline
+DESCRIPTION:Light up a tree at Hunter Park in memory of a loved one. For $7
+ 5\, Hobart Parks & Recreation will wrap a tree in lights and place a plaqu
+ e with your loved one’s name on it. The trees light up at Christmas in t
+ he Park on Dec 12 and stay lit all December. Cash or checks only\, paid at
+  Hobart City Hall\; make checks to City of Hobart Parks and Rec with “Me
+ mory Tree” on the memo line. The Dec 1 deadline gives time to order and 
+ install the lights.
+LOCATION:Hobart City Hall
+CATEGORIES:Community
+URL:https://hobartchamber.org/#calendar
+END:VEVENT
+BEGIN:VEVENT
+UID:sp81@hobartchamber.org
+DTSTAMP:20261119T024346Z
+DTSTART;TZID=America/Chicago:20261201T180000
+DTEND;TZID=America/Chicago:20261201T200000
+SUMMARY:🏀 HS Basketball @ Sayre
+DESCRIPTION:Hobart Bearcat high school basketball.
+LOCATION:Sayre
+CATEGORIES:Sports
+URL:https://hobartchamber.org/#calendar
+END:VEVENT
+BEGIN:VEVENT
+UID:sp82@hobartchamber.org
+DTSTAMP:20261119T024346Z
+DTSTART;TZID=America/Chicago:20261204T180000
+DTEND;TZID=America/Chicago:20261204T200000
+SUMMARY:🏀 HS Basketball vs Granite
+DESCRIPTION:Hobart Bearcat high school basketball.
+LOCATION:Hobart
+CATEGORIES:Sports
+URL:https://hobartchamber.org/#calendar
+END:VEVENT
+BEGIN:VEVENT
+UID:sg7@hobartchamber.org
+DTSTAMP:20261119T024346Z
+DTSTART;VALUE=DATE:20261205
+DTEND;VALUE=DATE:20261206
+SUMMARY:🎭 A Dickens Christmas Carol
+DESCRIPTION:Time: See listing for showtime\n\nShortgrass Playhouse presents
+  "A Dickens Christmas Carol" (Children's Show). 103 1/2 E. 3rd St\, Hobart
+ . Regular ticket prices: Seniors (60+) $12\, Adults $15\, Students $10\, A
+ ges 2-5 $5\, under 2 free. Season patron memberships are also available an
+ d support the playhouse fundraising for the season.
+LOCATION:Shortgrass Playhouse\, 103 1/2 E. 3rd St
+CATEGORIES:Community
+URL:https://hobartchamber.org/#calendar
+END:VEVENT
+BEGIN:VEVENT
+UID:sg8@hobartchamber.org
+DTSTAMP:20261119T024346Z
+DTSTART;VALUE=DATE:20261206
+DTEND;VALUE=DATE:20261207
+SUMMARY:🎭 A Dickens Christmas Carol
+DESCRIPTION:Time: See listing for showtime\n\nShortgrass Playhouse presents
+  "A Dickens Christmas Carol" (Children's Show). 103 1/2 E. 3rd St\, Hobart
+ . Regular ticket prices: Seniors (60+) $12\, Adults $15\, Students $10\, A
+ ges 2-5 $5\, under 2 free. Season patron memberships are also available an
+ d support the playhouse fundraising for the season.
+LOCATION:Shortgrass Playhouse\, 103 1/2 E. 3rd St
+CATEGORIES:Community
+URL:https://hobartchamber.org/#calendar
+END:VEVENT
+BEGIN:VEVENT
+UID:bb4@hobartchamber.org
+DTSTAMP:20261119T024346Z
+DTSTART;TZID=America/Chicago:20261207T163000
+DTEND;TZID=America/Chicago:20261207T183000
+SUMMARY:🏀 5/6th Basketball @ Cordell
+DESCRIPTION:Hobart Bearcat 5th/6th grade basketball. Four games.
+LOCATION:Cordell
+CATEGORIES:Sports
+URL:https://hobartchamber.org/#calendar
+END:VEVENT
+BEGIN:VEVENT
+UID:sp72@hobartchamber.org
+DTSTAMP:20261119T024346Z
+DTSTART;TZID=America/Chicago:20261207T183000
+DTEND;TZID=America/Chicago:20261207T203000
+SUMMARY:🏀 JH Basketball @ Mangum
+DESCRIPTION:Hobart Bearcat junior high basketball. All regular season games
+  have JV games starting at 4:30.
+LOCATION:Mangum
+CATEGORIES:Sports
+URL:https://hobartchamber.org/#calendar
+END:VEVENT
+BEGIN:VEVENT
+UID:sp83@hobartchamber.org
+DTSTAMP:20261119T024346Z
+DTSTART;TZID=America/Chicago:20261208T180000
+DTEND;TZID=America/Chicago:20261208T200000
+SUMMARY:🏀 HS Basketball vs Boone-Apache
+DESCRIPTION:Hobart Bearcat high school basketball.
+LOCATION:Hobart
+CATEGORIES:Sports
+URL:https://hobartchamber.org/#calendar
+END:VEVENT
+BEGIN:VEVENT
+UID:sc24@hobartchamber.org
+DTSTAMP:20261119T024346Z
+DTSTART;VALUE=DATE:20261209
+DTEND;VALUE=DATE:20261210
+SUMMARY:📚 Progress Reports
+DESCRIPTION:Progress reports issued.
+LOCATION:Hobart Public Schools
+CATEGORIES:School
+URL:https://hobartchamber.org/#calendar
+END:VEVENT
+BEGIN:VEVENT
+UID:sp84@hobartchamber.org
+DTSTAMP:20261119T024346Z
+DTSTART;VALUE=DATE:20261210
+DTEND;VALUE=DATE:20261211
+SUMMARY:🏀 HS Basketball Minco Tournament
+DESCRIPTION:Hobart Bearcat high school basketball. Minco Tournament\, Decem
+ ber 10-12.
+LOCATION:Minco
+CATEGORIES:Sports
+URL:https://hobartchamber.org/#calendar
+END:VEVENT
+BEGIN:VEVENT
+UID:ev-xmas-park-1212@hobartchamber.org
+DTSTAMP:20261119T024346Z
+DTSTART;TZID=America/Chicago:20261212T160000
+DTEND;TZID=America/Chicago:20261212T190000
+SUMMARY:Christmas in the Park
+DESCRIPTION:Time: 4:00 – 7:00 PM\n\nFree Christmas fun from Hobart Parks 
+ & Recreation: pictures with Santa\, bounce houses for kids\, face painting
+ \, a Christmas rock hunt and food trucks. Christmas Dinner Raffle at 5:30 
+ and 6:30 PM\, with two complete meals donated by Clink’s Supermarket ($1
+  tickets\, or buy 5 get 1 free). Light-Up Your Ride ATV Parade at 6:45 PM\
+ ; line up at 6:30 on the south side of the park. Decorate your ATV\, golf 
+ cart or four-wheeler to ride along. Raffle proceeds support Hobart Parks.
+LOCATION:Hunter Park
+CATEGORIES:Community
+URL:https://hobartchamber.org/#calendar
+END:VEVENT
+BEGIN:VEVENT
+UID:sp73@hobartchamber.org
+DTSTAMP:20261119T024346Z
+DTSTART;TZID=America/Chicago:20261214T183000
+DTEND;TZID=America/Chicago:20261214T203000
+SUMMARY:🏀 JH Basketball @ Snyder
+DESCRIPTION:Hobart Bearcat junior high basketball. All regular season games
+  have JV games starting at 4:30.
+LOCATION:Snyder
+CATEGORIES:Sports
+URL:https://hobartchamber.org/#calendar
+END:VEVENT
+BEGIN:VEVENT
+UID:sp105@hobartchamber.org
+DTSTAMP:20261119T024346Z
+DTSTART;TZID=America/Chicago:20261215T160000
+DTEND;TZID=America/Chicago:20261215T180000
+SUMMARY:🏀 JH Basketball vs Hollis
+DESCRIPTION:Hobart Bearcat junior high basketball. Added on the updated sch
+ edule (11-11-26).
+LOCATION:Hobart
+CATEGORIES:Sports
+URL:https://hobartchamber.org/#calendar
+END:VEVENT
+BEGIN:VEVENT
+UID:sp85@hobartchamber.org
+DTSTAMP:20261119T024346Z
+DTSTART;TZID=America/Chicago:20261215T180000
+DTEND;TZID=America/Chicago:20261215T200000
+SUMMARY:🏀 HS Basketball vs Hollis
+DESCRIPTION:Hobart Bearcat high school basketball.
+LOCATION:Hobart
+CATEGORIES:Sports
+URL:https://hobartchamber.org/#calendar
+END:VEVENT
+BEGIN:VEVENT
+UID:sc25@hobartchamber.org
+DTSTAMP:20261119T024346Z
+DTSTART;VALUE=DATE:20261217
+DTEND;VALUE=DATE:20261218
+SUMMARY:📚 Semester Tests
+DESCRIPTION:Semester tests. Part of Dec 17-18.
+LOCATION:Hobart Public Schools
+CATEGORIES:School
+URL:https://hobartchamber.org/#calendar
+END:VEVENT
+BEGIN:VEVENT
+UID:sc26@hobartchamber.org
+DTSTAMP:20261119T024346Z
+DTSTART;VALUE=DATE:20261218
+DTEND;VALUE=DATE:20261219
+SUMMARY:📚 Semester Tests
+DESCRIPTION:Semester tests. Part of Dec 17-18.
+LOCATION:Hobart Public Schools
+CATEGORIES:School
+URL:https://hobartchamber.org/#calendar
+END:VEVENT
+BEGIN:VEVENT
+UID:sc27@hobartchamber.org
+DTSTAMP:20261119T024346Z
+DTSTART;VALUE=DATE:20261218
+DTEND;VALUE=DATE:20261219
+SUMMARY:📚 End of 2nd Nine Weeks
+DESCRIPTION:End of the second nine weeks. 45 days taught\, 0 professional d
+ ays.
+LOCATION:Hobart Public Schools
+CATEGORIES:School
+URL:https://hobartchamber.org/#calendar
+END:VEVENT
+BEGIN:VEVENT
+UID:sp86@hobartchamber.org
+DTSTAMP:20261119T024346Z
+DTSTART;TZID=America/Chicago:20261218T180000
+DTEND;TZID=America/Chicago:20261218T200000
+SUMMARY:🏀 HS Basketball @ Snyder
+DESCRIPTION:Hobart Bearcat high school basketball.
+LOCATION:Snyder
+CATEGORIES:Sports
+URL:https://hobartchamber.org/#calendar
+END:VEVENT
+BEGIN:VEVENT
+UID:ev-bakesale-1219@hobartchamber.org
+DTSTAMP:20261119T024346Z
+DTSTART;VALUE=DATE:20261219
+DTEND;VALUE=DATE:20261220
+SUMMARY:Kiowa County Museum Bake Sale
+DESCRIPTION:Bake sale by the Kiowa County Museum\, held at the Hobart Chamb
+ er of Commerce. Time to be announced. Flyer coming soon.
+LOCATION:Hobart Chamber of Commerce
+CATEGORIES:Community
+URL:https://hobartchamber.org/#calendar
+END:VEVENT
+BEGIN:VEVENT
+UID:sc28@hobartchamber.org
+DTSTAMP:20261119T024346Z
+DTSTART;VALUE=DATE:20261221
+DTEND;VALUE=DATE:20261222
+SUMMARY:📚 Christmas Break — No School
+DESCRIPTION:Christmas break. No school. Dec 21 - Jan 1.
+LOCATION:Hobart Public Schools
+CATEGORIES:School
+URL:https://hobartchamber.org/#calendar
 END:VEVENT
 BEGIN:VEVENT
 UID:fp12@hobartchamber.org
-DTSTAMP:20260824T144151Z
+DTSTAMP:20261119T024346Z
 DTSTART;TZID=America/Chicago:20261222T090000
 DTEND;TZID=America/Chicago:20261222T110000
-SUMMARY:Hobart Food Pantry Distribution
-DESCRIPTION:Monthly food distribution. Note: TUESDAY this month\, not the usual Wednesday.
+SUMMARY:🥫 Hobart Food Pantry
+DESCRIPTION:Monthly food distribution at the Hobart Food Pantry. Note: this
+  month's distribution is on a TUESDAY\, not the usual Wednesday. Distribut
+ ion begins at 9:00 AM.
 LOCATION:Hobart Food Pantry
+CATEGORIES:Community
+URL:https://hobartchamber.org/#calendar
+END:VEVENT
+BEGIN:VEVENT
+UID:sc29@hobartchamber.org
+DTSTAMP:20261119T024346Z
+DTSTART;VALUE=DATE:20261222
+DTEND;VALUE=DATE:20261223
+SUMMARY:📚 Christmas Break — No School
+DESCRIPTION:Christmas break. No school. Dec 21 - Jan 1.
+LOCATION:Hobart Public Schools
+CATEGORIES:School
+URL:https://hobartchamber.org/#calendar
+END:VEVENT
+BEGIN:VEVENT
+UID:sc30@hobartchamber.org
+DTSTAMP:20261119T024346Z
+DTSTART;VALUE=DATE:20261223
+DTEND;VALUE=DATE:20261224
+SUMMARY:📚 Christmas Break — No School
+DESCRIPTION:Christmas break. No school. Dec 21 - Jan 1.
+LOCATION:Hobart Public Schools
+CATEGORIES:School
+URL:https://hobartchamber.org/#calendar
+END:VEVENT
+BEGIN:VEVENT
+UID:sc31@hobartchamber.org
+DTSTAMP:20261119T024346Z
+DTSTART;VALUE=DATE:20261224
+DTEND;VALUE=DATE:20261225
+SUMMARY:📚 Christmas Break — No School
+DESCRIPTION:Christmas break. No school. Dec 21 - Jan 1.
+LOCATION:Hobart Public Schools
+CATEGORIES:School
+URL:https://hobartchamber.org/#calendar
+END:VEVENT
+BEGIN:VEVENT
+UID:h12@hobartchamber.org
+DTSTAMP:20261119T024346Z
+DTSTART;VALUE=DATE:20261225
+DTEND;VALUE=DATE:20261226
+SUMMARY:🇺🇸 Christmas Day
+DESCRIPTION:Federal holiday. Most banks\, government offices\, and the post
+  office are closed.
+LOCATION:Federal Holiday
+CATEGORIES:Holiday
+URL:https://hobartchamber.org/#calendar
+END:VEVENT
+BEGIN:VEVENT
+UID:sc32@hobartchamber.org
+DTSTAMP:20261119T024346Z
+DTSTART;VALUE=DATE:20261225
+DTEND;VALUE=DATE:20261226
+SUMMARY:📚 Christmas Break — No School
+DESCRIPTION:Christmas break. No school. Dec 21 - Jan 1.
+LOCATION:Hobart Public Schools
+CATEGORIES:School
+URL:https://hobartchamber.org/#calendar
+END:VEVENT
+BEGIN:VEVENT
+UID:sc33@hobartchamber.org
+DTSTAMP:20261119T024346Z
+DTSTART;VALUE=DATE:20261226
+DTEND;VALUE=DATE:20261227
+SUMMARY:📚 Christmas Break — No School
+DESCRIPTION:Christmas break. No school. Dec 21 - Jan 1.
+LOCATION:Hobart Public Schools
+CATEGORIES:School
+URL:https://hobartchamber.org/#calendar
+END:VEVENT
+BEGIN:VEVENT
+UID:sc34@hobartchamber.org
+DTSTAMP:20261119T024346Z
+DTSTART;VALUE=DATE:20261227
+DTEND;VALUE=DATE:20261228
+SUMMARY:📚 Christmas Break — No School
+DESCRIPTION:Christmas break. No school. Dec 21 - Jan 1.
+LOCATION:Hobart Public Schools
+CATEGORIES:School
+URL:https://hobartchamber.org/#calendar
+END:VEVENT
+BEGIN:VEVENT
+UID:sc35@hobartchamber.org
+DTSTAMP:20261119T024346Z
+DTSTART;VALUE=DATE:20261228
+DTEND;VALUE=DATE:20261229
+SUMMARY:📚 Christmas Break — No School
+DESCRIPTION:Christmas break. No school. Dec 21 - Jan 1.
+LOCATION:Hobart Public Schools
+CATEGORIES:School
+URL:https://hobartchamber.org/#calendar
+END:VEVENT
+BEGIN:VEVENT
+UID:sp87@hobartchamber.org
+DTSTAMP:20261119T024346Z
+DTSTART;VALUE=DATE:20261228
+DTEND;VALUE=DATE:20261229
+SUMMARY:🏀 HS Basketball Mustang Holiday Tournament
+DESCRIPTION:Hobart Bearcat high school basketball. Girls only. Mustang Holi
+ day Tournament\, December 28-30.
+LOCATION:Mustang
+CATEGORIES:Sports
+URL:https://hobartchamber.org/#calendar
+END:VEVENT
+BEGIN:VEVENT
+UID:sc36@hobartchamber.org
+DTSTAMP:20261119T024346Z
+DTSTART;VALUE=DATE:20261229
+DTEND;VALUE=DATE:20261230
+SUMMARY:📚 Christmas Break — No School
+DESCRIPTION:Christmas break. No school. Dec 21 - Jan 1.
+LOCATION:Hobart Public Schools
+CATEGORIES:School
+URL:https://hobartchamber.org/#calendar
+END:VEVENT
+BEGIN:VEVENT
+UID:sc37@hobartchamber.org
+DTSTAMP:20261119T024346Z
+DTSTART;VALUE=DATE:20261230
+DTEND;VALUE=DATE:20261231
+SUMMARY:📚 Christmas Break — No School
+DESCRIPTION:Christmas break. No school. Dec 21 - Jan 1.
+LOCATION:Hobart Public Schools
+CATEGORIES:School
+URL:https://hobartchamber.org/#calendar
+END:VEVENT
+BEGIN:VEVENT
+UID:sc38@hobartchamber.org
+DTSTAMP:20261119T024346Z
+DTSTART;VALUE=DATE:20261231
+DTEND;VALUE=DATE:20270101
+SUMMARY:📚 Christmas Break — No School
+DESCRIPTION:Christmas break. No school. Dec 21 - Jan 1.
+LOCATION:Hobart Public Schools
+CATEGORIES:School
+URL:https://hobartchamber.org/#calendar
+END:VEVENT
+BEGIN:VEVENT
+UID:h13@hobartchamber.org
+DTSTAMP:20261119T024346Z
+DTSTART;VALUE=DATE:20270101
+DTEND;VALUE=DATE:20270102
+SUMMARY:🇺🇸 New Year's Day
+DESCRIPTION:Federal holiday. Most banks\, government offices\, and the post
+  office are closed.
+LOCATION:Federal Holiday
+CATEGORIES:Holiday
+URL:https://hobartchamber.org/#calendar
+END:VEVENT
+BEGIN:VEVENT
+UID:sc39@hobartchamber.org
+DTSTAMP:20261119T024346Z
+DTSTART;VALUE=DATE:20270101
+DTEND;VALUE=DATE:20270102
+SUMMARY:📚 Christmas Break — No School
+DESCRIPTION:Christmas break. No school. Dec 21 - Jan 1.
+LOCATION:Hobart Public Schools
+CATEGORIES:School
+URL:https://hobartchamber.org/#calendar
+END:VEVENT
+BEGIN:VEVENT
+UID:sc40@hobartchamber.org
+DTSTAMP:20261119T024346Z
+DTSTART;VALUE=DATE:20270104
+DTEND;VALUE=DATE:20270105
+SUMMARY:📚 Second Semester Begins
+DESCRIPTION:Second semester begins.
+LOCATION:Hobart Public Schools
+CATEGORIES:School
+URL:https://hobartchamber.org/#calendar
+END:VEVENT
+BEGIN:VEVENT
+UID:sp88@hobartchamber.org
+DTSTAMP:20261119T024346Z
+DTSTART;TZID=America/Chicago:20270105T180000
+DTEND;TZID=America/Chicago:20270105T200000
+SUMMARY:🏀 HS Basketball vs BFDC
+DESCRIPTION:Hobart Bearcat high school basketball.
+LOCATION:Hobart
+CATEGORIES:Sports
+URL:https://hobartchamber.org/#calendar
+END:VEVENT
+BEGIN:VEVENT
+UID:sp89@hobartchamber.org
+DTSTAMP:20261119T024346Z
+DTSTART;VALUE=DATE:20270107
+DTEND;VALUE=DATE:20270108
+SUMMARY:🏀 HS Basketball Apache Tournament
+DESCRIPTION:Hobart Bearcat high school basketball. Boys only. Apache Tourna
+ ment\, January 7-9.
+LOCATION:Apache
+CATEGORIES:Sports
+URL:https://hobartchamber.org/#calendar
+END:VEVENT
+BEGIN:VEVENT
+UID:sp75@hobartchamber.org
+DTSTAMP:20261119T024346Z
+DTSTART;VALUE=DATE:20270111
+DTEND;VALUE=DATE:20270112
+SUMMARY:🏀 JH Basketball Tri-County Tournament
+DESCRIPTION:Hobart Bearcat junior high basketball. Tri-County Tournament (H
+ obart sub.) at Hollis\, January 11\, 14 & 16.
+LOCATION:Hollis
+CATEGORIES:Sports
+URL:https://hobartchamber.org/#calendar
+END:VEVENT
+BEGIN:VEVENT
+UID:bb5@hobartchamber.org
+DTSTAMP:20261119T024346Z
+DTSTART;TZID=America/Chicago:20270112T160000
+DTEND;TZID=America/Chicago:20270112T180000
+SUMMARY:🏀 5/6th Basketball vs Ft. Cobb
+DESCRIPTION:Hobart Bearcat 5th/6th grade basketball. 5th boys\, 6th girls a
+ nd 6th boys.
+LOCATION:Hobart
+CATEGORIES:Sports
+URL:https://hobartchamber.org/#calendar
+END:VEVENT
+BEGIN:VEVENT
+UID:sp90@hobartchamber.org
+DTSTAMP:20261119T024346Z
+DTSTART;TZID=America/Chicago:20270112T180000
+DTEND;TZID=America/Chicago:20270112T200000
+SUMMARY:🏀 HS Basketball @ Mangum
+DESCRIPTION:Hobart Bearcat high school basketball.
+LOCATION:Mangum
+CATEGORIES:Sports
+URL:https://hobartchamber.org/#calendar
+END:VEVENT
+BEGIN:VEVENT
+UID:sp76@hobartchamber.org
+DTSTAMP:20261119T024346Z
+DTSTART;TZID=America/Chicago:20270115T160000
+DTEND;TZID=America/Chicago:20270115T180000
+SUMMARY:🏀 JH Basketball vs Navajo
+DESCRIPTION:Hobart Bearcat junior high basketball. All regular season games
+  have JV games starting at 4:30.
+LOCATION:Hobart
+CATEGORIES:Sports
+URL:https://hobartchamber.org/#calendar
+END:VEVENT
+BEGIN:VEVENT
+UID:sp91@hobartchamber.org
+DTSTAMP:20261119T024346Z
+DTSTART;TZID=America/Chicago:20270115T180000
+DTEND;TZID=America/Chicago:20270115T200000
+SUMMARY:🏀 HS Basketball vs Navajo
+DESCRIPTION:Hobart Bearcat high school basketball.
+LOCATION:Hobart
+CATEGORIES:Sports
+URL:https://hobartchamber.org/#calendar
+END:VEVENT
+BEGIN:VEVENT
+UID:bb6@hobartchamber.org
+DTSTAMP:20261119T024346Z
+DTSTART;TZID=America/Chicago:20270118T163000
+DTEND;TZID=America/Chicago:20270118T183000
+SUMMARY:🏀 5/6th Basketball vs Merritt
+DESCRIPTION:Hobart Bearcat 5th/6th grade basketball. Four games.
+LOCATION:Hobart (old gym)
+CATEGORIES:Sports
+URL:https://hobartchamber.org/#calendar
+END:VEVENT
+BEGIN:VEVENT
+UID:h14@hobartchamber.org
+DTSTAMP:20261119T024346Z
+DTSTART;VALUE=DATE:20270118
+DTEND;VALUE=DATE:20270119
+SUMMARY:🇺🇸 Martin Luther King Jr. Day
+DESCRIPTION:Federal holiday honoring Dr. Martin Luther King Jr. Most banks\
+ , government offices\, and the post office are closed.
+LOCATION:Federal Holiday
+CATEGORIES:Holiday
+URL:https://hobartchamber.org/#calendar
+END:VEVENT
+BEGIN:VEVENT
+UID:sc41@hobartchamber.org
+DTSTAMP:20261119T024346Z
+DTSTART;VALUE=DATE:20270118
+DTEND;VALUE=DATE:20270119
+SUMMARY:📚 Professional Day
+DESCRIPTION:Teacher professional day — no classes.
+LOCATION:Hobart Public Schools
+CATEGORIES:School
+URL:https://hobartchamber.org/#calendar
+END:VEVENT
+BEGIN:VEVENT
+UID:sp77@hobartchamber.org
+DTSTAMP:20261119T024346Z
+DTSTART;TZID=America/Chicago:20270118T183000
+DTEND;TZID=America/Chicago:20270118T203000
+SUMMARY:🏀 JH Basketball vs Frederick
+DESCRIPTION:Hobart Bearcat junior high basketball. All regular season games
+  have JV games starting at 4:30.
+LOCATION:Hobart
+CATEGORIES:Sports
+URL:https://hobartchamber.org/#calendar
+END:VEVENT
+BEGIN:VEVENT
+UID:sp92@hobartchamber.org
+DTSTAMP:20261119T024346Z
+DTSTART;TZID=America/Chicago:20270119T180000
+DTEND;TZID=America/Chicago:20270119T200000
+SUMMARY:🏀 HS Basketball vs Hammon
+DESCRIPTION:Hobart Bearcat high school basketball.
+LOCATION:Hobart
+CATEGORIES:Sports
+URL:https://hobartchamber.org/#calendar
+END:VEVENT
+BEGIN:VEVENT
+UID:sc42@hobartchamber.org
+DTSTAMP:20261119T024346Z
+DTSTART;VALUE=DATE:20270120
+DTEND;VALUE=DATE:20270121
+SUMMARY:📚 Progress Reports
+DESCRIPTION:Progress reports issued.
+LOCATION:Hobart Public Schools
+CATEGORIES:School
+URL:https://hobartchamber.org/#calendar
+END:VEVENT
+BEGIN:VEVENT
+UID:sp93@hobartchamber.org
+DTSTAMP:20261119T024346Z
+DTSTART;VALUE=DATE:20270121
+DTEND;VALUE=DATE:20270122
+SUMMARY:🏀 HS Basketball Tri-County Tournament
+DESCRIPTION:Hobart Bearcat high school basketball. Tri-County Tournament\, 
+ January 21-23.
+LOCATION:WOSC
+CATEGORIES:Sports
+URL:https://hobartchamber.org/#calendar
+END:VEVENT
+BEGIN:VEVENT
+UID:sp78@hobartchamber.org
+DTSTAMP:20261119T024346Z
+DTSTART;TZID=America/Chicago:20270125T183000
+DTEND;TZID=America/Chicago:20270125T203000
+SUMMARY:🏀 JH Basketball @ Frederick
+DESCRIPTION:Hobart Bearcat junior high basketball. All regular season games
+  have JV games starting at 4:30.
+LOCATION:Frederick
+CATEGORIES:Sports
+URL:https://hobartchamber.org/#calendar
+END:VEVENT
+BEGIN:VEVENT
+UID:sp94@hobartchamber.org
+DTSTAMP:20261119T024346Z
+DTSTART;TZID=America/Chicago:20270126T180000
+DTEND;TZID=America/Chicago:20270126T200000
+SUMMARY:🏀 HS Basketball vs Lookeba-Sickles
+DESCRIPTION:Hobart Bearcat high school basketball.
+LOCATION:Hobart
+CATEGORIES:Sports
+URL:https://hobartchamber.org/#calendar
+END:VEVENT
+BEGIN:VEVENT
+UID:sp79@hobartchamber.org
+DTSTAMP:20261119T024346Z
+DTSTART;TZID=America/Chicago:20270128T183000
+DTEND;TZID=America/Chicago:20270128T203000
+SUMMARY:🏀 JH Basketball vs Ft. Cobb-Broxton
+DESCRIPTION:Hobart Bearcat junior high basketball. All regular season games
+  have JV games starting at 4:30.
+LOCATION:Hobart
+CATEGORIES:Sports
+URL:https://hobartchamber.org/#calendar
+END:VEVENT
+BEGIN:VEVENT
+UID:sp95@hobartchamber.org
+DTSTAMP:20261119T024346Z
+DTSTART;TZID=America/Chicago:20270129T180000
+DTEND;TZID=America/Chicago:20270129T200000
+SUMMARY:🏀 HS Basketball @ Ft. Cobb-Broxton
+DESCRIPTION:Hobart Bearcat high school basketball.
+LOCATION:Ft. Cobb
+CATEGORIES:Sports
+URL:https://hobartchamber.org/#calendar
+END:VEVENT
+BEGIN:VEVENT
+UID:sp80@hobartchamber.org
+DTSTAMP:20261119T024346Z
+DTSTART;TZID=America/Chicago:20270201T183000
+DTEND;TZID=America/Chicago:20270201T203000
+SUMMARY:🏀 JH Basketball @ Merritt
+DESCRIPTION:Hobart Bearcat junior high basketball. All regular season games
+  have JV games starting at 4:30.
+LOCATION:Merritt
+CATEGORIES:Sports
+URL:https://hobartchamber.org/#calendar
+END:VEVENT
+BEGIN:VEVENT
+UID:sp96@hobartchamber.org
+DTSTAMP:20261119T024346Z
+DTSTART;TZID=America/Chicago:20270202T180000
+DTEND;TZID=America/Chicago:20270202T200000
+SUMMARY:🏀 HS Basketball vs Watonga
+DESCRIPTION:Hobart Bearcat high school basketball.
+LOCATION:Hobart
+CATEGORIES:Sports
+URL:https://hobartchamber.org/#calendar
+END:VEVENT
+BEGIN:VEVENT
+UID:sp97@hobartchamber.org
+DTSTAMP:20261119T024346Z
+DTSTART;TZID=America/Chicago:20270204T180000
+DTEND;TZID=America/Chicago:20270204T200000
+SUMMARY:🏀 HS Basketball @ Frederick
+DESCRIPTION:Hobart Bearcat high school basketball.
+LOCATION:Frederick
+CATEGORIES:Sports
+URL:https://hobartchamber.org/#calendar
+END:VEVENT
+BEGIN:VEVENT
+UID:sp98@hobartchamber.org
+DTSTAMP:20261119T024346Z
+DTSTART;TZID=America/Chicago:20270209T180000
+DTEND;TZID=America/Chicago:20270209T200000
+SUMMARY:🏀 HS Basketball vs Merritt
+DESCRIPTION:Hobart Bearcat high school basketball.
+LOCATION:Hobart
+CATEGORIES:Sports
+URL:https://hobartchamber.org/#calendar
+END:VEVENT
+BEGIN:VEVENT
+UID:sc43@hobartchamber.org
+DTSTAMP:20261119T024346Z
+DTSTART;VALUE=DATE:20270210
+DTEND;VALUE=DATE:20270211
+SUMMARY:📚 Progress Reports
+DESCRIPTION:Progress reports issued.
+LOCATION:Hobart Public Schools
+CATEGORIES:School
+URL:https://hobartchamber.org/#calendar
+END:VEVENT
+BEGIN:VEVENT
+UID:sp99@hobartchamber.org
+DTSTAMP:20261119T024346Z
+DTSTART;TZID=America/Chicago:20270212T180000
+DTEND;TZID=America/Chicago:20270212T200000
+SUMMARY:🏀 HS Basketball @ Hinton
+DESCRIPTION:Hobart Bearcat high school basketball.
+LOCATION:Hinton
+CATEGORIES:Sports
+URL:https://hobartchamber.org/#calendar
+END:VEVENT
+BEGIN:VEVENT
+UID:h15@hobartchamber.org
+DTSTAMP:20261119T024346Z
+DTSTART;VALUE=DATE:20270215
+DTEND;VALUE=DATE:20270216
+SUMMARY:🇺🇸 Presidents' Day
+DESCRIPTION:Federal holiday. Most banks\, government offices\, and the post
+  office are closed.
+LOCATION:Federal Holiday
+CATEGORIES:Holiday
+URL:https://hobartchamber.org/#calendar
+END:VEVENT
+BEGIN:VEVENT
+UID:sc44@hobartchamber.org
+DTSTAMP:20261119T024346Z
+DTSTART;VALUE=DATE:20270215
+DTEND;VALUE=DATE:20270216
+SUMMARY:📚 No School
+DESCRIPTION:No school.
+LOCATION:Hobart Public Schools
+CATEGORIES:School
+URL:https://hobartchamber.org/#calendar
+END:VEVENT
+BEGIN:VEVENT
+UID:sp100@hobartchamber.org
+DTSTAMP:20261119T024346Z
+DTSTART;TZID=America/Chicago:20270215T180000
+DTEND;TZID=America/Chicago:20270215T200000
+SUMMARY:🏀 HS Basketball @ Walters
+DESCRIPTION:Hobart Bearcat high school basketball.
+LOCATION:Walters
+CATEGORIES:Sports
+URL:https://hobartchamber.org/#calendar
+END:VEVENT
+BEGIN:VEVENT
+UID:sp101@hobartchamber.org
+DTSTAMP:20261119T024346Z
+DTSTART;VALUE=DATE:20270218
+DTEND;VALUE=DATE:20270219
+SUMMARY:🏀 HS Basketball District
+DESCRIPTION:Hobart Bearcat high school basketball. District play.
+LOCATION:TBA
+CATEGORIES:Sports
+URL:https://hobartchamber.org/#calendar
+END:VEVENT
+BEGIN:VEVENT
+UID:sp102@hobartchamber.org
+DTSTAMP:20261119T024346Z
+DTSTART;VALUE=DATE:20270223
+DTEND;VALUE=DATE:20270224
+SUMMARY:🏀 HS Basketball Regional
+DESCRIPTION:Hobart Bearcat high school basketball. Regional play\, February
+  23\, 25-27.
+LOCATION:TBA
+CATEGORIES:Sports
+URL:https://hobartchamber.org/#calendar
+END:VEVENT
+BEGIN:VEVENT
+UID:sg9@hobartchamber.org
+DTSTAMP:20261119T024346Z
+DTSTART;VALUE=DATE:20270227
+DTEND;VALUE=DATE:20270228
+SUMMARY:🎭 This Murder Was Staged
+DESCRIPTION:Time: See listing for showtime\n\nShortgrass Playhouse presents
+  "This Murder Was Staged" (Teen Show). 103 1/2 E. 3rd St\, Hobart. Regular
+  ticket prices: Seniors (60+) $12\, Adults $15\, Students $10\, Ages 2-5 $
+ 5\, under 2 free. Season patron memberships are also available and support
+  the playhouse fundraising for the season.
+LOCATION:Shortgrass Playhouse\, 103 1/2 E. 3rd St
+CATEGORIES:Community
+URL:https://hobartchamber.org/#calendar
+END:VEVENT
+BEGIN:VEVENT
+UID:sg10@hobartchamber.org
+DTSTAMP:20261119T024346Z
+DTSTART;VALUE=DATE:20270228
+DTEND;VALUE=DATE:20270301
+SUMMARY:🎭 This Murder Was Staged
+DESCRIPTION:Time: See listing for showtime\n\nShortgrass Playhouse presents
+  "This Murder Was Staged" (Teen Show). 103 1/2 E. 3rd St\, Hobart. Regular
+  ticket prices: Seniors (60+) $12\, Adults $15\, Students $10\, Ages 2-5 $
+ 5\, under 2 free. Season patron memberships are also available and support
+  the playhouse fundraising for the season.
+LOCATION:Shortgrass Playhouse\, 103 1/2 E. 3rd St
+CATEGORIES:Community
+URL:https://hobartchamber.org/#calendar
+END:VEVENT
+BEGIN:VEVENT
+UID:sc45@hobartchamber.org
+DTSTAMP:20261119T024346Z
+DTSTART;VALUE=DATE:20270304
+DTEND;VALUE=DATE:20270305
+SUMMARY:📚 Nine Weeks Tests
+DESCRIPTION:Third nine weeks tests. Part of Mar 4-5.
+LOCATION:Hobart Public Schools
+CATEGORIES:School
+URL:https://hobartchamber.org/#calendar
+END:VEVENT
+BEGIN:VEVENT
+UID:sp103@hobartchamber.org
+DTSTAMP:20261119T024346Z
+DTSTART;VALUE=DATE:20270304
+DTEND;VALUE=DATE:20270305
+SUMMARY:🏀 HS Basketball Area
+DESCRIPTION:Hobart Bearcat high school basketball. Area play\, March 4-6.
+LOCATION:TBA
+CATEGORIES:Sports
+URL:https://hobartchamber.org/#calendar
+END:VEVENT
+BEGIN:VEVENT
+UID:sc46@hobartchamber.org
+DTSTAMP:20261119T024346Z
+DTSTART;VALUE=DATE:20270305
+DTEND;VALUE=DATE:20270306
+SUMMARY:📚 Nine Weeks Tests
+DESCRIPTION:Third nine weeks tests. Part of Mar 4-5.
+LOCATION:Hobart Public Schools
+CATEGORIES:School
+URL:https://hobartchamber.org/#calendar
+END:VEVENT
+BEGIN:VEVENT
+UID:sc47@hobartchamber.org
+DTSTAMP:20261119T024346Z
+DTSTART;VALUE=DATE:20270305
+DTEND;VALUE=DATE:20270306
+SUMMARY:📚 End of 3rd Nine Weeks
+DESCRIPTION:End of the third nine weeks. 43 days taught\, 1 professional da
+ y.
+LOCATION:Hobart Public Schools
+CATEGORIES:School
+URL:https://hobartchamber.org/#calendar
+END:VEVENT
+BEGIN:VEVENT
+UID:sg11@hobartchamber.org
+DTSTAMP:20261119T024346Z
+DTSTART;VALUE=DATE:20270306
+DTEND;VALUE=DATE:20270307
+SUMMARY:🎭 This Murder Was Staged
+DESCRIPTION:Time: See listing for showtime\n\nShortgrass Playhouse presents
+  "This Murder Was Staged" (Teen Show). 103 1/2 E. 3rd St\, Hobart. Regular
+  ticket prices: Seniors (60+) $12\, Adults $15\, Students $10\, Ages 2-5 $
+ 5\, under 2 free. Season patron memberships are also available and support
+  the playhouse fundraising for the season.
+LOCATION:Shortgrass Playhouse\, 103 1/2 E. 3rd St
+CATEGORIES:Community
+URL:https://hobartchamber.org/#calendar
+END:VEVENT
+BEGIN:VEVENT
+UID:sg12@hobartchamber.org
+DTSTAMP:20261119T024346Z
+DTSTART;VALUE=DATE:20270307
+DTEND;VALUE=DATE:20270308
+SUMMARY:🎭 This Murder Was Staged
+DESCRIPTION:Time: See listing for showtime\n\nShortgrass Playhouse presents
+  "This Murder Was Staged" (Teen Show). 103 1/2 E. 3rd St\, Hobart. Regular
+  ticket prices: Seniors (60+) $12\, Adults $15\, Students $10\, Ages 2-5 $
+ 5\, under 2 free. Season patron memberships are also available and support
+  the playhouse fundraising for the season.
+LOCATION:Shortgrass Playhouse\, 103 1/2 E. 3rd St
+CATEGORIES:Community
+URL:https://hobartchamber.org/#calendar
+END:VEVENT
+BEGIN:VEVENT
+UID:sc48@hobartchamber.org
+DTSTAMP:20261119T024346Z
+DTSTART;TZID=America/Chicago:20270311T151500
+DTEND;TZID=America/Chicago:20270311T211500
+SUMMARY:📚 Parent-Teacher Conferences
+DESCRIPTION:Time: 3:15 - 9:15 PM\n\nParent-teacher conferences\, 3:15 PM - 
+ 9:15 PM.
+LOCATION:Hobart Public Schools
+CATEGORIES:School
+URL:https://hobartchamber.org/#calendar
+END:VEVENT
+BEGIN:VEVENT
+UID:sp104@hobartchamber.org
+DTSTAMP:20261119T024346Z
+DTSTART;VALUE=DATE:20270311
+DTEND;VALUE=DATE:20270312
+SUMMARY:🏀 HS Basketball State
+DESCRIPTION:Hobart Bearcat high school basketball. State tournament\, March
+  11-13.
+LOCATION:TBA
+CATEGORIES:Sports
+URL:https://hobartchamber.org/#calendar
+END:VEVENT
+BEGIN:VEVENT
+UID:sc49@hobartchamber.org
+DTSTAMP:20261119T024346Z
+DTSTART;VALUE=DATE:20270312
+DTEND;VALUE=DATE:20270313
+SUMMARY:📚 Parent-Teacher Conferences
+DESCRIPTION:Parent-teacher conferences.
+LOCATION:Hobart Public Schools
+CATEGORIES:School
+URL:https://hobartchamber.org/#calendar
+END:VEVENT
+BEGIN:VEVENT
+UID:sc50@hobartchamber.org
+DTSTAMP:20261119T024346Z
+DTSTART;VALUE=DATE:20270315
+DTEND;VALUE=DATE:20270316
+SUMMARY:📚 Spring Break — No School
+DESCRIPTION:Spring break. No school. Mar 15-19.
+LOCATION:Hobart Public Schools
+CATEGORIES:School
+URL:https://hobartchamber.org/#calendar
+END:VEVENT
+BEGIN:VEVENT
+UID:sc51@hobartchamber.org
+DTSTAMP:20261119T024346Z
+DTSTART;VALUE=DATE:20270316
+DTEND;VALUE=DATE:20270317
+SUMMARY:📚 Spring Break — No School
+DESCRIPTION:Spring break. No school. Mar 15-19.
+LOCATION:Hobart Public Schools
+CATEGORIES:School
+URL:https://hobartchamber.org/#calendar
+END:VEVENT
+BEGIN:VEVENT
+UID:sc52@hobartchamber.org
+DTSTAMP:20261119T024346Z
+DTSTART;VALUE=DATE:20270317
+DTEND;VALUE=DATE:20270318
+SUMMARY:📚 Spring Break — No School
+DESCRIPTION:Spring break. No school. Mar 15-19.
+LOCATION:Hobart Public Schools
+CATEGORIES:School
+URL:https://hobartchamber.org/#calendar
+END:VEVENT
+BEGIN:VEVENT
+UID:sc53@hobartchamber.org
+DTSTAMP:20261119T024346Z
+DTSTART;VALUE=DATE:20270318
+DTEND;VALUE=DATE:20270319
+SUMMARY:📚 Spring Break — No School
+DESCRIPTION:Spring break. No school. Mar 15-19.
+LOCATION:Hobart Public Schools
+CATEGORIES:School
+URL:https://hobartchamber.org/#calendar
+END:VEVENT
+BEGIN:VEVENT
+UID:sc54@hobartchamber.org
+DTSTAMP:20261119T024346Z
+DTSTART;VALUE=DATE:20270319
+DTEND;VALUE=DATE:20270320
+SUMMARY:📚 Spring Break — No School
+DESCRIPTION:Spring break. No school. Mar 15-19.
+LOCATION:Hobart Public Schools
+CATEGORIES:School
+URL:https://hobartchamber.org/#calendar
+END:VEVENT
+BEGIN:VEVENT
+UID:sc55@hobartchamber.org
+DTSTAMP:20261119T024346Z
+DTSTART;VALUE=DATE:20270326
+DTEND;VALUE=DATE:20270327
+SUMMARY:📚 No School
+DESCRIPTION:No school.
+LOCATION:Hobart Public Schools
+CATEGORIES:School
+URL:https://hobartchamber.org/#calendar
+END:VEVENT
+BEGIN:VEVENT
+UID:sc56@hobartchamber.org
+DTSTAMP:20261119T024346Z
+DTSTART;VALUE=DATE:20270329
+DTEND;VALUE=DATE:20270330
+SUMMARY:📚 No School
+DESCRIPTION:No school.
+LOCATION:Hobart Public Schools
+CATEGORIES:School
+URL:https://hobartchamber.org/#calendar
+END:VEVENT
+BEGIN:VEVENT
+UID:sc57@hobartchamber.org
+DTSTAMP:20261119T024346Z
+DTSTART;VALUE=DATE:20270416
+DTEND;VALUE=DATE:20270417
+SUMMARY:📚 No School
+DESCRIPTION:No school.
+LOCATION:Hobart Public Schools
+CATEGORIES:School
+URL:https://hobartchamber.org/#calendar
+END:VEVENT
+BEGIN:VEVENT
+UID:sg13@hobartchamber.org
+DTSTAMP:20261119T024346Z
+DTSTART;VALUE=DATE:20270417
+DTEND;VALUE=DATE:20270418
+SUMMARY:🎭 Antlia Pneumatica
+DESCRIPTION:Time: See listing for showtime\n\nShortgrass Playhouse presents
+  "Antlia Pneumatica" (Adult Dramatic Comedy). 103 1/2 E. 3rd St\, Hobart. 
+ Regular ticket prices: Seniors (60+) $12\, Adults $15\, Students $10\, Age
+ s 2-5 $5\, under 2 free. Season patron memberships are also available and 
+ support the playhouse fundraising for the season.
+LOCATION:Shortgrass Playhouse\, 103 1/2 E. 3rd St
+CATEGORIES:Community
+URL:https://hobartchamber.org/#calendar
+END:VEVENT
+BEGIN:VEVENT
+UID:sg14@hobartchamber.org
+DTSTAMP:20261119T024346Z
+DTSTART;VALUE=DATE:20270418
+DTEND;VALUE=DATE:20270419
+SUMMARY:🎭 Antlia Pneumatica
+DESCRIPTION:Time: See listing for showtime\n\nShortgrass Playhouse presents
+  "Antlia Pneumatica" (Adult Dramatic Comedy). 103 1/2 E. 3rd St\, Hobart. 
+ Regular ticket prices: Seniors (60+) $12\, Adults $15\, Students $10\, Age
+ s 2-5 $5\, under 2 free. Season patron memberships are also available and 
+ support the playhouse fundraising for the season.
+LOCATION:Shortgrass Playhouse\, 103 1/2 E. 3rd St
+CATEGORIES:Community
+URL:https://hobartchamber.org/#calendar
+END:VEVENT
+BEGIN:VEVENT
+UID:sc59@hobartchamber.org
+DTSTAMP:20261119T024346Z
+DTSTART;VALUE=DATE:20270421
+DTEND;VALUE=DATE:20270422
+SUMMARY:📚 Progress Reports
+DESCRIPTION:Progress reports issued.
+LOCATION:Hobart Public Schools
+CATEGORIES:School
+URL:https://hobartchamber.org/#calendar
+END:VEVENT
+BEGIN:VEVENT
+UID:sc58@hobartchamber.org
+DTSTAMP:20261119T024346Z
+DTSTART;VALUE=DATE:20270423
+DTEND;VALUE=DATE:20270424
+SUMMARY:📚 No School
+DESCRIPTION:No school.
+LOCATION:Hobart Public Schools
+CATEGORIES:School
+URL:https://hobartchamber.org/#calendar
+END:VEVENT
+BEGIN:VEVENT
+UID:sg15@hobartchamber.org
+DTSTAMP:20261119T024346Z
+DTSTART;VALUE=DATE:20270424
+DTEND;VALUE=DATE:20270425
+SUMMARY:🎭 Antlia Pneumatica
+DESCRIPTION:Time: See listing for showtime\n\nShortgrass Playhouse presents
+  "Antlia Pneumatica" (Adult Dramatic Comedy). 103 1/2 E. 3rd St\, Hobart. 
+ Regular ticket prices: Seniors (60+) $12\, Adults $15\, Students $10\, Age
+ s 2-5 $5\, under 2 free. Season patron memberships are also available and 
+ support the playhouse fundraising for the season.
+LOCATION:Shortgrass Playhouse\, 103 1/2 E. 3rd St
+CATEGORIES:Community
+URL:https://hobartchamber.org/#calendar
+END:VEVENT
+BEGIN:VEVENT
+UID:sg16@hobartchamber.org
+DTSTAMP:20261119T024346Z
+DTSTART;VALUE=DATE:20270425
+DTEND;VALUE=DATE:20270426
+SUMMARY:🎭 Antlia Pneumatica
+DESCRIPTION:Time: See listing for showtime\n\nShortgrass Playhouse presents
+  "Antlia Pneumatica" (Adult Dramatic Comedy). 103 1/2 E. 3rd St\, Hobart. 
+ Regular ticket prices: Seniors (60+) $12\, Adults $15\, Students $10\, Age
+ s 2-5 $5\, under 2 free. Season patron memberships are also available and 
+ support the playhouse fundraising for the season.
+LOCATION:Shortgrass Playhouse\, 103 1/2 E. 3rd St
+CATEGORIES:Community
+URL:https://hobartchamber.org/#calendar
+END:VEVENT
+BEGIN:VEVENT
+UID:sc60@hobartchamber.org
+DTSTAMP:20261119T024346Z
+DTSTART;VALUE=DATE:20270512
+DTEND;VALUE=DATE:20270513
+SUMMARY:📚 Semester Tests
+DESCRIPTION:Semester tests. Part of May 12-13.
+LOCATION:Hobart Public Schools
+CATEGORIES:School
+URL:https://hobartchamber.org/#calendar
+END:VEVENT
+BEGIN:VEVENT
+UID:sc61@hobartchamber.org
+DTSTAMP:20261119T024346Z
+DTSTART;VALUE=DATE:20270513
+DTEND;VALUE=DATE:20270514
+SUMMARY:📚 Semester Tests
+DESCRIPTION:Semester tests. Part of May 12-13.
+LOCATION:Hobart Public Schools
+CATEGORIES:School
+URL:https://hobartchamber.org/#calendar
+END:VEVENT
+BEGIN:VEVENT
+UID:sc62@hobartchamber.org
+DTSTAMP:20261119T024346Z
+DTSTART;VALUE=DATE:20270513
+DTEND;VALUE=DATE:20270514
+SUMMARY:📚 Student's Final Day
+DESCRIPTION:Last day of school for students.
+LOCATION:Hobart Public Schools
+CATEGORIES:School
+URL:https://hobartchamber.org/#calendar
+END:VEVENT
+BEGIN:VEVENT
+UID:sc63@hobartchamber.org
+DTSTAMP:20261119T024346Z
+DTSTART;VALUE=DATE:20270514
+DTEND;VALUE=DATE:20270515
+SUMMARY:📚 Professional Day
+DESCRIPTION:Teacher professional day.
+LOCATION:Hobart Public Schools
+CATEGORIES:School
+URL:https://hobartchamber.org/#calendar
+END:VEVENT
+BEGIN:VEVENT
+UID:sc64@hobartchamber.org
+DTSTAMP:20261119T024346Z
+DTSTART;VALUE=DATE:20270514
+DTEND;VALUE=DATE:20270515
+SUMMARY:📚 Commencement
+DESCRIPTION:Hobart High School commencement / graduation.
+LOCATION:Hobart Public Schools
+CATEGORIES:School
+URL:https://hobartchamber.org/#calendar
+END:VEVENT
+BEGIN:VEVENT
+UID:h16@hobartchamber.org
+DTSTAMP:20261119T024346Z
+DTSTART;VALUE=DATE:20270531
+DTEND;VALUE=DATE:20270601
+SUMMARY:🇺🇸 Memorial Day
+DESCRIPTION:Federal holiday honoring those who died in military service. Mo
+ st banks\, government offices\, and the post office are closed.
+LOCATION:Federal Holiday
+CATEGORIES:Holiday
+URL:https://hobartchamber.org/#calendar
+END:VEVENT
+BEGIN:VEVENT
+UID:h18@hobartchamber.org
+DTSTAMP:20261119T024346Z
+DTSTART;VALUE=DATE:20270618
+DTEND;VALUE=DATE:20270619
+SUMMARY:🇺🇸 Juneteenth (Observed)
+DESCRIPTION:Federal observance of Juneteenth\, which falls on Saturday\, Ju
+ ne 19. Most banks\, government offices\, and the post office are closed to
+ day.
+LOCATION:Federal Holiday
+CATEGORIES:Holiday
+URL:https://hobartchamber.org/#calendar
+END:VEVENT
+BEGIN:VEVENT
+UID:h17@hobartchamber.org
+DTSTAMP:20261119T024346Z
+DTSTART;VALUE=DATE:20270619
+DTEND;VALUE=DATE:20270620
+SUMMARY:🇺🇸 Juneteenth
+DESCRIPTION:Federal holiday commemorating the end of slavery in the United 
+ States. Most banks\, government offices\, and the post office are closed. 
+ Falls on a Saturday in 2027\, so the federal holiday is observed Friday\, 
+ June 18.
+LOCATION:Federal Holiday
+CATEGORIES:Holiday
+URL:https://hobartchamber.org/#calendar
+END:VEVENT
+BEGIN:VEVENT
+UID:h19@hobartchamber.org
+DTSTAMP:20261119T024346Z
+DTSTART;VALUE=DATE:20270704
+DTEND;VALUE=DATE:20270705
+SUMMARY:🇺🇸 Independence Day
+DESCRIPTION:Federal holiday celebrating the Declaration of Independence. Mo
+ st banks\, government offices\, and the post office are closed. Falls on a
+  Sunday in 2027\, so the federal holiday is observed Monday\, July 5.
+LOCATION:Federal Holiday
+CATEGORIES:Holiday
+URL:https://hobartchamber.org/#calendar
+END:VEVENT
+BEGIN:VEVENT
+UID:h20@hobartchamber.org
+DTSTAMP:20261119T024346Z
+DTSTART;VALUE=DATE:20270705
+DTEND;VALUE=DATE:20270706
+SUMMARY:🇺🇸 Independence Day (Observed)
+DESCRIPTION:Federal observance of Independence Day\, which falls on Sunday\
+ , July 4. Most banks\, government offices\, and the post office are closed
+  today.
+LOCATION:Federal Holiday
+CATEGORIES:Holiday
+URL:https://hobartchamber.org/#calendar
+END:VEVENT
+BEGIN:VEVENT
+UID:h21@hobartchamber.org
+DTSTAMP:20261119T024346Z
+DTSTART;VALUE=DATE:20270906
+DTEND;VALUE=DATE:20270907
+SUMMARY:🇺🇸 Labor Day
+DESCRIPTION:Federal holiday honoring the American labor movement. Most bank
+ s\, government offices\, and the post office are closed.
+LOCATION:Federal Holiday
+CATEGORIES:Holiday
+URL:https://hobartchamber.org/#calendar
+END:VEVENT
+BEGIN:VEVENT
+UID:h22@hobartchamber.org
+DTSTAMP:20261119T024346Z
+DTSTART;VALUE=DATE:20271011
+DTEND;VALUE=DATE:20271012
+SUMMARY:🇺🇸 Columbus Day
+DESCRIPTION:Federal holiday\, observed in some states as Indigenous Peoples
+ ' Day. Most banks\, government offices\, and the post office are closed.
+LOCATION:Federal Holiday
+CATEGORIES:Holiday
+URL:https://hobartchamber.org/#calendar
+END:VEVENT
+BEGIN:VEVENT
+UID:h23@hobartchamber.org
+DTSTAMP:20261119T024346Z
+DTSTART;VALUE=DATE:20271111
+DTEND;VALUE=DATE:20271112
+SUMMARY:🇺🇸 Veterans Day
+DESCRIPTION:Federal holiday honoring all who have served in the U.S. Armed 
+ Forces. Most banks\, government offices\, and the post office are closed.
+LOCATION:Federal Holiday
+CATEGORIES:Holiday
+URL:https://hobartchamber.org/#calendar
+END:VEVENT
+BEGIN:VEVENT
+UID:h24@hobartchamber.org
+DTSTAMP:20261119T024346Z
+DTSTART;VALUE=DATE:20271125
+DTEND;VALUE=DATE:20271126
+SUMMARY:🇺🇸 Thanksgiving Day
+DESCRIPTION:Federal holiday. Most banks\, government offices\, and the post
+  office are closed.
+LOCATION:Federal Holiday
+CATEGORIES:Holiday
+URL:https://hobartchamber.org/#calendar
+END:VEVENT
+BEGIN:VEVENT
+UID:h26@hobartchamber.org
+DTSTAMP:20261119T024346Z
+DTSTART;VALUE=DATE:20271224
+DTEND;VALUE=DATE:20271225
+SUMMARY:🇺🇸 Christmas Day (Observed)
+DESCRIPTION:Federal observance of Christmas Day\, which falls on Saturday\,
+  December 25. Most banks\, government offices\, and the post office are cl
+ osed today.
+LOCATION:Federal Holiday
+CATEGORIES:Holiday
+URL:https://hobartchamber.org/#calendar
+END:VEVENT
+BEGIN:VEVENT
+UID:h25@hobartchamber.org
+DTSTAMP:20261119T024346Z
+DTSTART;VALUE=DATE:20271225
+DTEND;VALUE=DATE:20271226
+SUMMARY:🇺🇸 Christmas Day
+DESCRIPTION:Federal holiday. Most banks\, government offices\, and the post
+  office are closed. Falls on a Saturday in 2027\, so the federal holiday i
+ s observed Friday\, December 24.
+LOCATION:Federal Holiday
+CATEGORIES:Holiday
+URL:https://hobartchamber.org/#calendar
 END:VEVENT
 END:VCALENDAR
