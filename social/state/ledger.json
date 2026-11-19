@@ -548,5 +548,53 @@
     "sig": "1700b12fd17b",
     "replaced": "122180995172990004",
     "madeAt": "2026-11-19T03:41:58.861Z"
+  },
+  "slot:2026-11-26:07:30": {
+    "scheduledFor": 1795699800,
+    "key": "lineup:2026-11-26"
+  },
+  "lineup:2026-11-26": {
+    "fbPostId": "122181559076990004",
+    "scheduledFor": 1795699800,
+    "title": "Today in Hobart",
+    "type": "lineup",
+    "mode": "schedule",
+    "madeAt": "2026-11-19T07:30:39.068Z"
+  },
+  "slot:2026-11-26:10:30": {
+    "scheduledFor": 1795710600,
+    "key": "member:hobart-lions-club:2026-11-26"
+  },
+  "member:hobart-lions-club:2026-11-26": {
+    "fbPostId": "122181559118990004",
+    "scheduledFor": 1795710600,
+    "title": "Hobart Lions Club",
+    "type": "member",
+    "mode": "schedule",
+    "madeAt": "2026-11-19T07:30:41.560Z"
+  },
+  "slot:2026-11-26:14:45": {
+    "scheduledFor": 1795725900,
+    "key": "turkey trot 5k|2026-11-26:reminder:2026-11-26"
+  },
+  "turkey trot 5k|2026-11-26:reminder:2026-11-26": {
+    "fbPostId": "122181559160990004",
+    "scheduledFor": 1795725900,
+    "title": "Turkey Trot 5K",
+    "type": "reminder",
+    "mode": "schedule",
+    "madeAt": "2026-11-19T07:30:44.514Z"
+  },
+  "slot:2026-11-26:19:30": {
+    "scheduledFor": 1795743000,
+    "key": "engage:fun:season:2026-11-26"
+  },
+  "engage:fun:season:2026-11-26": {
+    "fbPostId": "122181559226990004",
+    "scheduledFor": 1795743000,
+    "title": "Season check",
+    "type": "engage",
+    "mode": "schedule",
+    "madeAt": "2026-11-19T07:30:46.700Z"
   }
 }
