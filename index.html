@@ -522,6 +522,10 @@
   .directory-head{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:12px;}
   .directory-head .section-title{color:var(--navy);}
   .directory-sub{font-size:15px;color:var(--gray);margin-bottom:26px;max-width:620px;}
+  .worker-status{margin:0 0 14px;font-size:13px;line-height:1.5;border-radius:8px;padding:10px 14px;}
+  .ws-ok{background:#e8f6ec;color:#1c5e33;}
+  .ws-warn{background:#fff4e5;color:#7a4b00;border:1px solid #f3d29a;}
+  .ws-warn a{color:#7a4b00;font-weight:700;}
   .hp-field{position:absolute !important;left:-10000px !important;top:auto !important;width:1px !important;height:1px !important;opacity:0 !important;pointer-events:none;}
   .dir-search{position:relative;max-width:440px;margin-bottom:16px;}
   .dir-search input{width:100%;padding:12px 16px 12px 42px;border:1.5px solid var(--border);border-radius:30px;font-family:inherit;font-size:14px;color:var(--dark-gray);background:var(--white);}
@@ -2646,9 +2650,24 @@ function adminLogin(){
   });
 }
 var adminTab='pending';
+/* Facebook worker health. The worker writes social/state/status.json after every
+   run; the admin panel shows a short note so a stopped worker gets noticed. */
+function loadWorkerStatus(){
+  var box=document.getElementById('workerStatus');
+  if(!box||!window.fetch) return;
+  fetch('social/state/status.json?ts='+Date.now()).then(function(r){ if(!r.ok) throw new Error('none'); return r.json(); }).then(function(st){
+    var t=new Date(st.lastRun), hrs=Math.round((Date.now()-t.getTime())/36e5);
+    var when=t.toLocaleString('en-US',{weekday:'short',month:'short',day:'numeric',hour:'numeric',minute:'2-digit'});
+    box.style.display='block';
+    if(st.ok && hrs<=30){ box.className='worker-status ws-ok'; box.textContent='\u2705 Facebook posts: the worker last ran '+(hrs<1?'less than an hour':hrs+(hrs===1?' hour':' hours'))+' ago and everything went through.'; }
+    else if(!st.ok){ box.className='worker-status ws-warn'; box.innerHTML='\u26a0\ufe0f The Facebook worker hit a problem on '+esc(when)+'. Scheduled posts may stop until it is fixed. Ask whoever manages the website to check it (the Facebook connection may need to be renewed). <a href="'+esc(st.run||'#')+'" target="_blank" rel="noopener">Details</a>'; }
+    else { box.className='worker-status ws-warn'; box.textContent='\u26a0\ufe0f The Facebook worker has not run since '+when+'. New posts are not being scheduled.'; }
+  }).catch(function(){});
+}
 function renderAdmin(){
   document.getElementById('adminTitle').textContent='Chamber Settings';
   var h=''
+    +'<div id="workerStatus" class="worker-status" style="display:none;"></div>'
     +'<div class="admin-tabs">'
     +'<div class="admin-tab'+(adminTab==='pending'?' on':'')+'" onclick="switchTab(\'pending\')">Pending <span id="pendCount"></span></div>'
     +'<div class="admin-tab'+(adminTab==='manage'?' on':'')+'" onclick="switchTab(\'manage\')">Manage Events</div>'
@@ -2672,6 +2691,7 @@ function renderAdmin(){
     +'<div class="admin-tab" onclick="adminLogout()" style="margin-left:auto;color:#b3261e;">Sign Out</div>'
     +'</div><div id="adminPane"></div>';
   document.getElementById('adminBody').innerHTML=h;
+  loadWorkerStatus();
   if(adminTab==='pending') paneList('pending');
   else if(adminTab==='manage') paneList('approved');
   else if(adminTab==='create') paneCreate(null);

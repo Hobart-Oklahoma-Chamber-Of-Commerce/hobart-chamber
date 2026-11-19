@@ -155,7 +155,7 @@ export function assignSlots(posts, nowEpoch, ledger = {}) {
   return { scheduled, skipped };
 }
 
-import { lineupItems, lineupPost, restaurantPost, pickRestaurant, memberPost, pickMember, evergreenPost, weekAheadPost, memberPostAM, pickMemberCommunity, memberPostCommunity, engagementPost, recapPost } from './content.js';
+import { lineupItems, lineupPost, restaurantPost, pickRestaurant, memberPost, pickMember, evergreenPost, weekAheadPost, memberPostAM, pickMemberCommunity, memberPostCommunity, engagementPost, recapPost, gameDayPost } from './content.js';
 
 /**
  * Five posts a day. Real content first, honest fallbacks second, never filler that invents facts.
@@ -287,7 +287,8 @@ export function planWeek(events, { members, data }, nowEpoch, ledger = {}) {
       else if (kind === 'event') {
         const e = duePosts(events, D, work).find((p) => !used.has(p.key));
         if (e) post = { ...e };
-        else { const t = teaser(events, D, work, used); if (t) post = t; }
+        if (!post) { const g = gameDayPost(events, D, slot); if (g && !work[g.key]) post = g; }   // Bearcat games later today
+        if (!post) { const t = teaser(events, D, work, used); if (t) post = t; }
       } else if (kind === 'engage') post = engagementPost(D, data, events, work);
       else if (kind === 'recap') post = n <= RECAP_MAX_DAYS_AHEAD ? recapPost(events, D, data.results) : null;
       if (!post) post = kind === 'recap' && n > RECAP_MAX_DAYS_AHEAD ? null : evergreenPost(D, slot);

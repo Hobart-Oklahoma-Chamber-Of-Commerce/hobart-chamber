@@ -6,6 +6,7 @@ import { cleanTitle, cleanTime, cleanPlace } from './template.js';
 import { pickLook } from './icons.js';
 import { longDate } from './caption.js';
 import { PALETTES } from './palettes.js';
+import { parseTimes } from './ics.js';
 
 const DOW3 = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'];
 const pd = (ds) => { const [y, m, d] = ds.split('-').map(Number); return new Date(y, m - 1, d); };
@@ -128,7 +129,7 @@ export function restaurantPost(r, today) {
 
 export function restaurantCaption(r, today) {
   const intros = ['Lunch idea, Hobart.', 'Hungry? Here is a local favorite.', 'Eat local today.'];
-  const lines = [intros[dayIndex(today) % 3] + ` ${r.name} is a Chamber member.`, r.blurb];
+  const lines = [intros[dayIndex(today) % 3] + ` ${r.name} is one of Hobart's local spots.`, r.blurb];
   const when = [`Where: ${r.address}`, `Call: ${r.phone}`];
   if (r.hoursText) when.unshift(`Hours: ${r.hoursText}`);
   return `${lines.join(' ')}\n\n${when.join('\n')}\n\nSee the full menu: hobartchamber.org/${r.menu}\n\nHobart Chamber of Commerce | (580) 682-0887`;
@@ -246,10 +247,13 @@ export function memberPostCommunity(m, D, notes) {
 const WEEK_KIND = { 1: 'history', 2: 'fun', 3: 'history', 4: 'yearago', 5: 'weekend' };
 export function engagementPost(D, { history, prompts }, events, ledger = {}) {
   const dow = pd(D).getDay();
-  const pickNew = (arr, kind) => {
-    const used = (x) => Object.keys(ledger).filter((k) => k === `engage:${kind}:${x.id}`).length;
-    return [...arr].sort((a, b) => used(a) - used(b) || (a.id < b.id ? -1 : 1))[0];
+  // least recently used first (never used = first); repeats once everything has had a turn
+  const lastUsed = (x, kind) => {
+    let t = 0;
+    for (const [k, v] of Object.entries(ledger)) if (k === `engage:${kind}:${x.id}` || k.startsWith(`engage:${kind}:${x.id}:`)) t = Math.max(t, (v && v.scheduledFor) || 1);
+    return t;
   };
+  const pickNew = (arr, kind) => [...arr].sort((a, b) => lastUsed(a, kind) - lastUsed(b, kind) || (a.id < b.id ? -1 : 1))[0];
   let kind = WEEK_KIND[dow] || 'fun';
   // a year ago: only if the calendar really has something from about this time last year
   if (kind === 'yearago') {
@@ -275,14 +279,14 @@ export function engagementPost(D, { history, prompts }, events, ledger = {}) {
   }
   if (kind === 'history' && history.length) {
     const h = pickNew(history, 'history');
-    return { type: 'engage', key: `engage:history:${h.id}`,
+    return { type: 'engage', key: `engage:history:${h.id}:${D}`,
       ev: { palette: PALETTES.engage, id: `engage-history-${h.id}`, title: h.head, date: D, look: { icon: 'book', badge: 'HOBART HISTORY' }, stub: { dow: 'HOBART', big: h.year, mon: 'HISTORY', note: 'Did you know?' },
         taglineOverride: h.fact, rows: [{ i: 'pin', t: 'Tell us in the comments' }] },
       caption: `Hobart history: ${h.fact}\n\n${h.ask}\n\nSource: Oklahoma Historical Society, Encyclopedia of Oklahoma History and Culture.\n\n${CHAMBER}` };
   }
   const f = pickNew(prompts, 'fun');
   if (!f) return null;
-  return { type: 'engage', key: `engage:fun:${f.id}`,
+  return { type: 'engage', key: `engage:fun:${f.id}:${D}`,
     ev: { palette: PALETTES.engage, id: `engage-fun-${f.id}`, title: f.head, date: D, look: { icon: 'megaphone', badge: 'YOUR TURN' }, stub: { dow: 'HOBART', big: '?', mon: 'QUESTION', note: 'Join in!' },
       taglineOverride: f.q, rows: [{ i: 'pin', t: 'Tell us in the comments' }] },
     caption: `${f.q}\n\n${f.ask}\n\n${CHAMBER}` };
@@ -303,4 +307,31 @@ export function recapPost(events, D, results) {
     ev: { palette: PALETTES.lineup, id: `recap-${D}`, title: 'The week in Hobart', date: D, look: { icon: 'trophy', badge: 'WEEK IN REVIEW' }, stub: { dow: 'THIS WEEK', big: '★', mon: 'RECAP', note: 'Nice work, Hobart' },
       taglineOverride: scores.length ? 'Scores and highlights from around town.' : 'A look back at what was on the Hobart calendar.', rows },
     caption: `The week in Hobart, in review:\n\n${lines.join('\n')}\n\nWere you there? Share your photos and highlights in the comments.\n\n${CHAMBER}` };
+}
+
+// Event-slot fallback before any filler: Bearcat games later today.
+// Only games that start at or after the post time (or with no set time) are listed.
+export function gameDayPost(events, D, slot) {
+  const slotMin = (() => { const [h, m] = String(slot || '00:00').split(':').map(Number); return h * 60 + (m || 0); })();
+  const startOf = (e) => { const t = parseTimes(e.time); return t ? t.start : null; };
+  const games = events
+    .filter((e) => e && e.date === D && e.cat === 'sports' && (!e.status || e.status === 'approved'))
+    .filter((e) => { const st = startOf(e); return st === null || st >= slotMin; })
+    .sort((a, b) => (startOf(a) ?? 9999) - (startOf(b) ?? 9999));
+  if (!games.length) return null;
+  const shown = games.slice(0, 4);
+  const rows = shown.map((e) => {
+    const t = cleanTime(e.time); const short = t && !/showtimes|announced|tba|tbd/i.test(t) ? t.split(/[–-]/)[0].trim() : '';
+    return { i: 'star', t: `${short ? short + '  ' : ''}${cleanTitle(e.title)}`.slice(0, 54) };
+  });
+  if (games.length > shown.length) rows.push({ i: 'star', t: `+ ${games.length - shown.length} more on the calendar` });
+  const lines = games.map((e) => { const t = cleanTime(e.time); return `- ${cleanTitle(e.title)}${t ? ', ' + (/announced|tba|tbd/i.test(t) ? 'time TBA' : t) : ''}${e.location ? ' (' + e.location + ')' : ''}`; });
+  return {
+    type: 'gameday', key: `gameday:${D}`,
+    ev: { id: `gameday-${D}`, title: 'Bearcat game day', date: D, palette: PALETTES.lineup,
+      look: { icon: pickLook(games[0]).icon || 'star', badge: 'GAME DAY' },
+      stub: { dow: 'TODAY', big: String(games.length), mon: games.length === 1 ? 'GAME' : 'GAMES', note: 'Go Bearcats!' },
+      taglineOverride: 'Come out and cheer on the Bearcats.', rows },
+    caption: `Game day! On the Bearcat schedule today:\n\n${lines.join('\n')}\n\nCome out and cheer them on. The full schedule is on the community calendar: hobartchamber.org\n\n${CHAMBER}`,
+  };
 }
