@@ -244,12 +244,13 @@
     "key": "lineup:2026-11-19"
   },
   "lineup:2026-11-19": {
-    "fbPostId": "122180994908990004",
+    "fbPostId": null,
     "scheduledFor": 1795095000,
     "title": "Today in Hobart",
     "type": "lineup",
     "mode": "schedule",
-    "madeAt": "2026-11-14T21:55:20.927Z"
+    "madeAt": "2026-11-14T21:55:20.927Z",
+    "replacedBy": "override:2026-11-19:07:30"
   },
   "slot:2026-11-19:10:30": {
     "scheduledFor": 1795105800,
@@ -292,12 +293,13 @@
     "key": "evergreen:2026-11-20:07:30"
   },
   "evergreen:2026-11-20:07:30": {
-    "fbPostId": "122180995172990004",
+    "fbPostId": null,
     "scheduledFor": 1795181400,
     "title": "Got an event?",
     "type": "evergreen",
     "mode": "schedule",
-    "madeAt": "2026-11-14T21:55:29.838Z"
+    "madeAt": "2026-11-14T21:55:29.838Z",
+    "replacedBy": "override:2026-11-20:07:30"
   },
   "slot:2026-11-20:10:30": {
     "scheduledFor": 1795192200,
@@ -526,5 +528,25 @@
     "type": "engage",
     "mode": "schedule",
     "madeAt": "2026-11-18T07:34:45.795Z"
+  },
+  "override:2026-11-19:07:30": {
+    "fbPostId": "122181538832990004",
+    "scheduledFor": 1795095000,
+    "title": "Chamber graphic 2026-11-19-0730.jpg",
+    "type": "override",
+    "mode": "schedule",
+    "sig": "e760dec401a7",
+    "replaced": "122180994908990004",
+    "madeAt": "2026-11-19T03:41:52.229Z"
+  },
+  "override:2026-11-20:07:30": {
+    "fbPostId": "122181538880990004",
+    "scheduledFor": 1795181400,
+    "title": "Chamber graphic 2026-11-20-0730.jpg",
+    "type": "override",
+    "mode": "schedule",
+    "sig": "1700b12fd17b",
+    "replaced": "122180995172990004",
+    "madeAt": "2026-11-19T03:41:58.861Z"
   }
 }
