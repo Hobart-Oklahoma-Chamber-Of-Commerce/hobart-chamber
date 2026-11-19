@@ -235,6 +235,11 @@
   .flyer-modal img{max-width:94vw;max-height:90vh;width:auto;height:auto;display:block;border-radius:8px;box-shadow:0 24px 70px rgba(0,0,0,.5);}
   .flyer-x{position:absolute;top:10px;right:10px;width:42px;height:42px;border-radius:50%;background:var(--gold);color:var(--navy-deep);border:none;font-size:24px;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 16px rgba(0,0,0,.45);z-index:2;}
   .flyer-x:hover{background:var(--gold-light);}
+  .auto-flyer{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:9px;padding:26px;text-align:center;background:radial-gradient(circle at 50% 28%,#2a52c9 0%,#1a3ea8 46%,#0e2056 100%);color:#fff;cursor:pointer;}
+  .auto-flyer .af-emoji{font-size:54px;line-height:1;}
+  .auto-flyer .af-date{font-size:12px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--gold-light);}
+  .auto-flyer .af-title{font-family:'Playfair Display',serif;font-size:26px;font-weight:800;line-height:1.15;}
+  .auto-flyer .af-cap{font-size:10.5px;font-weight:600;letter-spacing:1.6px;text-transform:uppercase;color:rgba(255,255,255,.72);}
   .flyer-empty{display:flex;flex-direction:column;align-items:center;gap:6px;color:#9fb0cc;}
   .flyer-empty svg{width:34px;height:34px;}
   .flyer-empty span{font-size:11px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;}
@@ -754,7 +759,7 @@
 <div class="stat-bar">
   <div class="stat-item"><span class="num" id="memberCount">22</span><span class="label">Current Members</span></div>
   <div class="stat-divider"></div>
-  <div class="stat-item"><span class="num" id="eventCount">TBA</span><span class="label">Fall Events</span></div>
+  <div class="stat-item"><span class="num" id="eventCount">TBA</span><span class="label" id="eventCountLabel">Featured Events</span></div>
   <div class="stat-divider"></div>
   <div class="stat-item"><span class="num" id="eventsLeft">13</span><span class="label">Still to Come</span></div>
   <div class="stat-divider"></div>
@@ -815,13 +820,13 @@
 <!-- ===== EVENTS CAROUSEL ===== -->
 <section class="events-section" id="events">
   <div class="events-head">
-    <div><span class="section-eyebrow">What's Happening · Fall 2026</span><h2 class="section-title">Featured Events</h2></div>
+    <div><span class="section-eyebrow" id="eventsEyebrow">What's Happening in Hobart</span><h2 class="section-title">Featured Events</h2></div>
     <div class="events-controls">
       <button class="ev-arrow" onclick="scrollEvents(-1)" aria-label="Previous">‹</button>
       <button class="ev-arrow" onclick="scrollEvents(1)" aria-label="Next">›</button>
     </div>
   </div>
-  <p class="events-sub">Our marquee fall events. Mark your calendar and watch this space — event flyers and details are added as each one is announced.</p>
+  <p class="events-sub" id="eventsSub">Our marquee events. Mark your calendar and watch this space — event flyers and details are added as each one is announced.</p>
   <div class="events-track" id="eventsTrack">
     <div class="event-card" data-date="2026-09-08"><div class="flyer-slot"><img loading="lazy" decoding="async" src="flyers/flyer-mathbootcamp.PNG" alt="" onerror="this.parentElement.classList.add('empty');this.outerHTML=flyerPH;"></div><div class="event-top"><div class="event-date"><span class="m">Sep</span><span class="d">8</span></div><div class="event-meta"><h4>Free Math Bootcamp — Grades 6–12</h4><span class="loc">📍 Western Technology Center · Hobart</span></div></div><div class="event-body"><p>Great Plains Youth &amp; Family Services is offering a FREE Math Bootcamp with Misty George throughout the 2026–27 school year. Multiple sessions daily covering all math levels from 6th grade through Trigonometry.</p></div><div class="event-foot"><span class="event-tag">Youth · Education · Free</span><a href="https://form.jotform.com/262225855611153" target="_blank" rel="noopener" style="font-size:12.5px;font-weight:700;color:var(--navy);text-decoration:none;">Register Online →</a></div></div>
     <div class="event-card" data-date="2026-10-03"><div class="flyer-slot"><img loading="lazy" decoding="async" src="flyers/flyer-glowgolf-oct3.PNG" alt="Glow Golf Tournament" onerror="this.parentElement.classList.add('empty');this.outerHTML=flyerPH;"></div><div class="event-top"><div class="event-date"><span class="m">Oct</span><span class="d">3</span></div><div class="event-meta"><h4>🌙 Glow Golf Tournament</h4><span class="loc">📍 Hobart Municipal Golf Course · At Dusk ~8:30 PM</span></div></div><div class="event-body"><p>4-man scramble under the glow. $240 per team. Each player gets 2 glow golf balls. Carts are limited — call to reserve. Limited team spots, register early.</p></div><div class="event-foot"><span class="event-tag">Golf · Night Event</span><a href="glow-golf-registration.html" style="font-size:12.5px;font-weight:700;color:var(--navy);text-decoration:none;">Register Your Team →</a></div></div>
@@ -904,7 +909,7 @@
 </div>
 
 <!-- ===== COMMUNITY NOTICE (Defensive Driving Class) ===== -->
-<div style="max-width:1180px;margin:34px auto;padding:0 60px;">
+<div data-expires="2026-10-06" style="max-width:1180px;margin:34px auto;padding:0 60px;">
   <a href="tel:5807263444" class="cadc-notice">
     <div class="cadc-in">
       <div class="cadc-qr" style="background:var(--navy);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:48px;min-width:90px;height:90px;">🚗</div>
@@ -996,7 +1001,7 @@
   </div>
   <div class="botw-card">
     <div class="botw-photo"><img loading="lazy" decoding="async" src="flyers/botw-clinks.JPG" alt="Clink's — Business of the Week" onclick="openFlyer('flyers/botw-clinks.JPG')" onerror="this.parentElement.classList.add('empty');this.outerHTML=flyerPHWhite;"><span class="zoom-hint">🔍 Click to enlarge</span></div>
-    <div class="botw-inner"><span class="botw-badge">This Week's Feature</span><h3>Clink's</h3><p>Clink's story began when Joe Clinkenbeard purchased the IGA store on January 1, 1980. For more than 36 years, Clink's has been a familiar part of life in Hobart — built on friendly faces, dedicated employees, and a genuine commitment to the community. The store's success is rooted in its people, many of whom have given decades of service. Neal, who retires this month after 36 years, exemplifies everything Clink's stands for. Whether it's carrying groceries to your vehicle in bad weather, tracking down a product a customer needs, or stocking sugar-free sodas so a young diabetic could feel like every other kid — Clink's has always understood that hometown business is about neighbors serving neighbors. Congratulations to Joe, Neal, and the entire Clink's team — past and present.</p></div>
+    <div class="botw-inner"><span class="botw-badge">Latest Feature</span><h3>Clink's</h3><p>Clink's story began when Joe Clinkenbeard purchased the IGA store on January 1, 1980. For more than 36 years, Clink's has been a familiar part of life in Hobart — built on friendly faces, dedicated employees, and a genuine commitment to the community. The store's success is rooted in its people, many of whom have given decades of service. Neal, a 36-year Clink's veteran, exemplifies everything Clink's stands for. Whether it's carrying groceries to your vehicle in bad weather, tracking down a product a customer needs, or stocking sugar-free sodas so a young diabetic could feel like every other kid — Clink's has always understood that hometown business is about neighbors serving neighbors. Congratulations to Joe, Neal, and the entire Clink's team — past and present.</p></div>
   </div>
 </section>
 
@@ -1777,12 +1782,13 @@ function loadEvents(){
       snap.forEach(function(doc){var x=doc.data();x.id=doc.id;x._admin=true;EVENTS.push(x);});
       initCalFilter(); renderCal(); setStatus('');
       renderAdminEventCards();
-    }).catch(function(e){ console.warn(e); EVENTS=SEED.slice(); initCalFilter(); renderCal(); setStatus(''); });
+    }).catch(function(e){ console.warn(e); EVENTS=SEED.slice(); initCalFilter(); renderCal(); setStatus(''); renderAdminEventCards(); });
   }else{
     EVENTS=SEED.slice();
     initCalFilter();
     renderCal();
     setStatus('Showing the Chamber\'s featured events. Community submissions appear here once approved.');
+    renderAdminEventCards();
   }
 }
 
@@ -1809,6 +1815,7 @@ function renderAdminEventCards(){
   for(i=0;i<old.length;i++) old[i].remove();
   var adminEvents=EVENTS.filter(function(e){return e._admin;});
   for(i=0;i<adminEvents.length;i++){ track.insertAdjacentHTML('beforeend', buildEventCardHTML(adminEvents[i])); }
+  topUpFeatured();
   sortEventsCarousel();
   pruneCarousel();
   applyFlyerBackdrops();
@@ -3665,26 +3672,106 @@ function pruneCarousel(){
   }
 }
 
-/* Fall Events = the Chamber's FEATURED events (carousel cards) in Sep/Oct/Nov.
-   Reads the cards themselves, so admin-added featured events count automatically
-   and the Bearcat games + federal holidays on the calendar never inflate it.
-   Shows "TBA" if no fall events are on the board yet. */
+/* ---- Featured Events top-up ----
+   When fewer than FEATURED_MIN featured cards are still ahead, the carousel
+   fills in with the next Chamber and community events from the calendar
+   (never games, holidays or school dates), so it is never an empty strip.
+   Events that already have a featured card are skipped. */
+var FEATURED_MIN=4, AUTO_MAX=6, AUTO_DAYS=90;
+function ymdDate(ds){ var p=String(ds||'').split('-'); return new Date(+p[0],(+p[1])-1,+p[2]); }
+function evWords(t){ return String(t||'').toLowerCase().replace(/[^a-z0-9 ]+/g,' ').split(/\s+/).filter(function(w){return w.length>2;}); }
+function sameEvent(a,b){ var A=evWords(a), B=evWords(b), hit=0, i; if(!A.length||!B.length) return false; for(i=0;i<A.length;i++){ if(B.indexOf(A[i])>-1) hit++; } return hit/Math.min(A.length,B.length)>=0.5; }
+function leadEmoji(t){ var ch=Array.from(String(t||''))[0]||''; return (ch && ch.charCodeAt(0)>255) ? ch : ''; }
+function shortText(s,n){ s=String(s||''); if(s.length<=n) return s; var cut=s.slice(0,n), sp=cut.lastIndexOf(' '); return cut.slice(0, sp>60?sp:n).replace(/[\s,;:.]+$/,'')+'…'; }
+function buildAutoCardHTML(ev){
+  var dt=ymdDate(ev.date), mAbbr=MN[dt.getMonth()].slice(0,3), dayNum=dt.getDate();
+  var em=leadEmoji(ev.title)||'📅', plain=String(ev.title||'').replace(/^[^A-Za-z0-9"'(]+/,'');
+  var open=' onclick="showDetailById(\''+ev.id+'\')"';
+  return '<div class="event-card" data-auto="1" data-date="'+esc(ev.date)+'">'
+    +'<div class="flyer-slot"><div class="auto-flyer"'+open+'><span class="af-emoji">'+em+'</span><span class="af-date">'+DOW[dt.getDay()]+' · '+mAbbr+' '+dayNum+'</span><span class="af-title">'+esc(plain)+'</span><span class="af-cap">On the community calendar</span></div></div>'
+    +'<div class="event-top" style="cursor:pointer;"'+open+'><div class="event-date"><span class="m">'+mAbbr+'</span><span class="d">'+dayNum+'</span></div>'
+    +'<div class="event-meta"><h4>'+esc(ev.title)+'</h4>'+(ev.location?'<span class="loc">📍 '+esc(ev.location)+(ev.time?' · '+esc(ev.time):'')+'</span>':'')+'</div></div>'
+    +'<div class="event-body" style="cursor:pointer;"'+open+'><p>'+esc(shortText(ev.description,170))+'</p></div>'
+    +'<div class="event-foot"><span class="event-tag">'+(ev.cat==='chamber'?'Chamber Event':'Community Calendar')+'</span></div></div>';
+}
+function topUpFeatured(){
+  var track=document.getElementById('eventsTrack');
+  if(!track||!EVENTS) return;
+  var old=track.querySelectorAll('.event-card[data-auto="1"]'), i;
+  for(i=0;i<old.length;i++) old[i].remove();
+  var today=new Date(); today.setHours(0,0,0,0);
+  var horizon=today.getTime()+AUTO_DAYS*86400000;
+  var cards=track.querySelectorAll('.event-card'), featured=[], ahead=0, ds, h4;
+  for(i=0;i<cards.length;i++){
+    ds=cards[i].getAttribute('data-date'); h4=cards[i].querySelector('h4');
+    if(!ds) continue;
+    featured.push({t:ymdDate(ds).getTime(), title:h4?h4.textContent:''});
+    if(ymdDate(cards[i].getAttribute('data-end')||ds).getTime()>=today.getTime()) ahead++;
+  }
+  if(ahead>=FEATURED_MIN) return;
+  var list=EVENTS.filter(function(e){
+    if(!e||!e.date||e._admin) return false;
+    if(e.status&&e.status!=='approved') return false;
+    if(e.cat&&e.cat!=='chamber'&&e.cat!=='community') return false;
+    var t=ymdDate(e.date).getTime();
+    return t>=today.getTime() && t<=horizon;
+  }).sort(function(a,b){ return a.date<b.date?-1:a.date>b.date?1:(a.cat==='chamber'?-1:1); });
+  var seen={}, added=0;
+  for(i=0;i<list.length;i++){
+    var e=list[i], key=evWords(e.title).join(' '), t=ymdDate(e.date).getTime();
+    if(seen[key]) continue;
+    seen[key]=1;
+    var dup=featured.some(function(f){ return Math.abs(f.t-t)<=7*86400000 && sameEvent(f.title,e.title); });
+    if(dup) continue;
+    track.insertAdjacentHTML('beforeend', buildAutoCardHTML(e));
+    added++;
+    if(ahead+added>=FEATURED_MIN||added>=AUTO_MAX) break;
+  }
+}
+/* Notices with a date hide themselves the day after it (data-expires="YYYY-MM-DD"). */
+function expireNotices(){
+  var els=document.querySelectorAll('[data-expires]'), today=new Date(), i;
+  today.setHours(0,0,0,0);
+  for(i=0;i<els.length;i++){ if(ymdDate(els[i].getAttribute('data-expires')).getTime()<today.getTime()) els[i].style.display='none'; }
+}
+/* Seasons for the Featured Events heading and the stat bar.
+   Holiday season runs Nov 15 to Dec 31. */
+function seasonOf(d){
+  var y=d.getFullYear(), m=d.getMonth(), day=d.getDate();
+  if((m===10&&day>=15)||m===11) return {name:'Holiday', label:'Holiday Season '+y, start:new Date(y,10,15), end:new Date(y,11,31)};
+  if(m<=1) return {name:'Winter', label:'Winter '+y, start:new Date(y,0,1), end:new Date(y,2,0)};
+  if(m<=4) return {name:'Spring', label:'Spring '+y, start:new Date(y,2,1), end:new Date(y,5,0)};
+  if(m<=7) return {name:'Summer', label:'Summer '+y, start:new Date(y,5,1), end:new Date(y,8,0)};
+  return {name:'Fall', label:'Fall '+y, start:new Date(y,8,1), end:new Date(y,10,14)};
+}
+/* Season Events = the featured cards (hand-curated, admin-added and calendar
+   top-ups) dated in the current season; Still to Come = the ones not over yet.
+   Bearcat games and federal holidays never count. If this season is wrapped
+   up, the bar and heading look ahead to the season of the next featured event,
+   so they never sit at "0 Still to Come". */
 function syncEventCount(){
   var track=document.getElementById('eventsTrack');
   if(!track) return;
-  var cards=track.querySelectorAll('.event-card'), i, ds, mo, total=0, left=0;
+  var cards=track.querySelectorAll('.event-card'), today=new Date(), dates=[], i, ds;
+  today.setHours(0,0,0,0);
   for(i=0;i<cards.length;i++){
     ds=cards[i].getAttribute('data-date');
-    if(!ds) continue;
-    mo=ds.slice(5,7);
-    if(mo!=='09'&&mo!=='10'&&mo!=='11') continue;
-    total++;
-    if(!cards[i].getAttribute('data-past')) left++;
+    if(ds) dates.push({d:ymdDate(ds).getTime(), end:ymdDate(cards[i].getAttribute('data-end')||ds).getTime()});
   }
-  var elT=document.getElementById('eventCount');
-  var elL=document.getElementById('eventsLeft');
-  if(elT) elT.textContent = total>0 ? total : 'TBA';
-  if(elL) elL.textContent = total>0 ? left : 'TBA';
+  function tally(se){ var t=0, l=0; dates.forEach(function(x){ if(x.d>=se.start.getTime()&&x.d<=se.end.getTime()){ t++; if(x.end>=today.getTime()) l++; } }); return {total:t, left:l}; }
+  var se=seasonOf(today), c=tally(se);
+  if(c.left===0){
+    var next=null;
+    dates.forEach(function(x){ if(x.end>=today.getTime()&&(next===null||x.d<next)) next=x.d; });
+    if(next!==null){ var se2=seasonOf(new Date(Math.max(next,today.getTime()))), c2=tally(se2); if(c2.total){ se=se2; c=c2; } }
+  }
+  var elT=document.getElementById('eventCount'), elL=document.getElementById('eventsLeft'), elLab=document.getElementById('eventCountLabel');
+  if(elLab) elLab.textContent=se.name+(c.total===1?' Event':' Events');
+  if(elT) elT.textContent=c.total>0?c.total:'TBA';
+  if(elL) elL.textContent=c.total>0?c.left:'TBA';
+  var eb=document.getElementById('eventsEyebrow'), sub=document.getElementById('eventsSub');
+  if(eb) eb.textContent='What\'s Happening · '+se.label;
+  if(sub) sub.textContent='Our marquee '+se.name.toLowerCase()+' events. Mark your calendar and watch this space — event flyers and details are added as each one is announced.';
 }
 function initDirFilter(){
   syncMemberCount();
@@ -3794,6 +3881,7 @@ renderPillarPhotos();
 sortEventsCarousel();
 pruneCarousel();
 syncEventCount();
+expireNotices();
 applyFlyerBackdrops();
 loadDeals();
 trackView();
