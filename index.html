@@ -309,6 +309,8 @@
   .cal-wchip[data-cat="community"]{background:rgba(194,106,30,.12);color:#9c5518;border-left-color:#c26a1e;}
   .cal-wchip:hover{filter:brightness(.96);}
   .cal-list{display:block;border:1px solid var(--border);border-radius:10px;background:var(--white);overflow:hidden;}
+  .cal-earlier{display:block;width:100%;padding:12px 16px;background:#f6f8fd;border:0;border-bottom:1px solid var(--border);color:var(--navy);font-family:inherit;font-size:13px;font-weight:600;text-align:left;cursor:pointer;}
+  .cal-earlier:hover{background:#eef2fb;}
   .cal-lday{background:var(--navy);color:var(--gold-light);font-size:12px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:10px 16px;display:flex;align-items:center;gap:10px;}
   .cal-lday .tdy{background:var(--gold);color:var(--navy-deep);border-radius:20px;padding:2px 9px;font-size:10px;letter-spacing:.5px;}
   .cal-lrow{display:block;padding:13px 16px 13px 14px;border-left:4px solid var(--navy);border-bottom:1px solid var(--border);cursor:pointer;background:var(--white);transition:background .15s;}
@@ -2026,10 +2028,24 @@ function calRow(ev,rich){
   r.addEventListener('keydown',function(e){ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); showDetail(ev); } });
   return r;
 }
+/* The month list (what phones see first) starts at today; earlier days this
+   month sit behind a "Show earlier" button. calPastFor remembers the month
+   whose earlier days were opened. */
+var calPastFor='';
 function renderCalList(){
   var grid=document.getElementById('calGrid'); grid.innerHTML='';
   grid.className='cal-list'+(calView==='day'?' cal-dayview':'');
-  var rg=calRange(), list=calEventsBetween(rg.a,rg.b), todayStr=dstr(new Date());
+  var rg=calRange(), list=calEventsBetween(rg.a,rg.b), todayStr=dstr(new Date()), hidden=0;
+  if(calView==='month' && calPastFor!==rg.a && todayStr>=rg.a && todayStr<=rg.b){
+    var ahead=list.filter(function(e){ return e.date>=todayStr; });
+    if(ahead.length){ hidden=list.length-ahead.length; list=ahead; }   /* nothing left this month: show it all */
+  }
+  if(hidden){
+    var more=calEl('button','cal-earlier','\u2191 Show earlier this month ('+hidden+(hidden===1?' event':' events')+')');
+    more.type='button';
+    more.addEventListener('click',function(){ calPastFor=rg.a; renderCalList(); });
+    grid.appendChild(more);
+  }
   if(!list.length){
     grid.appendChild(calEl('div','cal-empty',calEmptyMsg(calView==='day'?'for this day':calView==='week'?'this week':'this month')));
     setStatus(''); return;
