@@ -1,5 +1,7 @@
 name: Temporary Firestore read check
-on: workflow_dispatch
+on:
+  push:
+    branches: [diag-firestore-read]
 permissions:
   contents: read
 jobs:
