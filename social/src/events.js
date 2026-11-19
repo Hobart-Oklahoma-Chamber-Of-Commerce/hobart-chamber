@@ -59,23 +59,25 @@ function fromFs(v) {
   if ('timestampValue' in v) return v.timestampValue;
   return null;
 }
+// Events added or approved in the admin panel. The Firestore rules only let the public
+// read APPROVED events, so this asks for exactly those (a plain list of every event,
+// including pending ones, is refused with a 403).
 export async function fetchAdminEvents() {
   const out = [];
-  let pageToken = '';
   try {
-    do {
-      const url = `https://firestore.googleapis.com/v1/projects/${PROJECT}/databases/(default)/documents/events?pageSize=300${pageToken ? '&pageToken=' + pageToken : ''}`;
-      const res = await fetch(url);
-      if (!res.ok) throw new Error(`Firestore ${res.status}`);
-      const json = await res.json();
-      for (const doc of json.documents || []) {
-        const f = {}; for (const [k, v] of Object.entries(doc.fields || {})) f[k] = fromFs(v);
-        f.id = doc.name.split('/').pop();
-        f._admin = true;
-        out.push(f);
-      }
-      pageToken = json.nextPageToken || '';
-    } while (pageToken);
+    const url = `https://firestore.googleapis.com/v1/projects/${PROJECT}/databases/(default)/documents:runQuery`;
+    const body = { structuredQuery: { from: [{ collectionId: 'events' }], where: { fieldFilter: { field: { fieldPath: 'status' }, op: 'EQUAL', value: { stringValue: 'approved' } } } } };
+    const res = await fetch(url, { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify(body) });
+    if (!res.ok) throw new Error(`Firestore ${res.status}`);
+    const rows = await res.json();
+    for (const row of Array.isArray(rows) ? rows : []) {
+      const doc = row.document;
+      if (!doc) continue;
+      const f = {}; for (const [k, v] of Object.entries(doc.fields || {})) f[k] = fromFs(v);
+      f.id = doc.name.split('/').pop();
+      f._admin = true;
+      out.push(f);
+    }
   } catch (e) {
     return { events: out, error: String(e.message || e) };
   }
