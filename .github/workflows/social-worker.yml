@@ -51,6 +51,7 @@ jobs:
       - run: npx playwright install --with-deps chromium
 
       - name: Run the worker
+        id: worker
         env:
           FB_PAGE_ID: ${{ secrets.FB_PAGE_ID }}
           FB_PAGE_TOKEN: ${{ secrets.FB_PAGE_TOKEN }}
@@ -76,12 +77,21 @@ jobs:
           if-no-files-found: ignore
           retention-days: 14
 
-      - name: Save the ledger and the calendar file (so nothing ever posts twice)
+      - name: Record how the run went (the admin panel shows this to the Chamber)
+        if: always()
+        env:
+          OUTCOME: ${{ steps.worker.outcome }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
         run: |
-          if ! git diff --quiet -- state/ledger.json ../hobart-chamber.ics; then
+          node -e "const fs=require('fs');fs.writeFileSync('state/status.json',JSON.stringify({lastRun:new Date().toISOString(),ok:process.env.OUTCOME==='success',outcome:process.env.OUTCOME,run:process.env.RUN_URL},null,2)+'\n')"
+
+      - name: Save the ledger, calendar file and status (so nothing ever posts twice)
+        if: always()
+        run: |
+          if ! git diff --quiet -- state/ledger.json ../hobart-chamber.ics || [ -n "$(git status --porcelain -- state/status.json)" ]; then
             git config user.name "Hobart Happenings worker"
             git config user.email "actions@users.noreply.github.com"
-            git add state/ledger.json ../hobart-chamber.ics
+            git add state/ledger.json ../hobart-chamber.ics state/status.json
             git commit -m "social worker: update ledger [skip ci]"
             git pull --rebase origin "${GITHUB_REF_NAME}"
             git push
