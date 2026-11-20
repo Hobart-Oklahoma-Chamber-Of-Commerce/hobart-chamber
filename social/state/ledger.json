@@ -596,5 +596,65 @@
     "type": "engage",
     "mode": "schedule",
     "madeAt": "2026-11-19T07:30:46.700Z"
+  },
+  "slot:2026-11-21:14:00": {
+    "scheduledFor": 1795291200,
+    "key": "recap:2026-11-21"
+  },
+  "recap:2026-11-21": {
+    "fbPostId": "122181696332990004",
+    "scheduledFor": 1795291200,
+    "title": "The week in Hobart",
+    "type": "recap",
+    "mode": "schedule",
+    "madeAt": "2026-11-20T07:23:02.798Z"
+  },
+  "slot:2026-11-27:07:30": {
+    "scheduledFor": 1795786200,
+    "key": "lineup:2026-11-27"
+  },
+  "lineup:2026-11-27": {
+    "fbPostId": "122181696374990004",
+    "scheduledFor": 1795786200,
+    "title": "Coming up in Hobart",
+    "type": "lineup",
+    "mode": "schedule",
+    "madeAt": "2026-11-20T07:23:05.149Z"
+  },
+  "slot:2026-11-27:10:30": {
+    "scheduledFor": 1795797000,
+    "key": "member:interbank:2026-11-27"
+  },
+  "member:interbank:2026-11-27": {
+    "fbPostId": "122181696416990004",
+    "scheduledFor": 1795797000,
+    "title": "InterBank",
+    "type": "member",
+    "mode": "schedule",
+    "madeAt": "2026-11-20T07:23:07.322Z"
+  },
+  "slot:2026-11-27:14:45": {
+    "scheduledFor": 1795812300,
+    "key": "a dickens christmas carol|2026-11-28:reminder:2026-11-28"
+  },
+  "a dickens christmas carol|2026-11-28:reminder:2026-11-28": {
+    "fbPostId": "122181696464990004",
+    "scheduledFor": 1795812300,
+    "title": "A Dickens Christmas Carol",
+    "type": "reminder",
+    "mode": "schedule",
+    "madeAt": "2026-11-20T07:23:09.428Z"
+  },
+  "slot:2026-11-27:19:30": {
+    "scheduledFor": 1795829400,
+    "key": "engage:weekend:2026-11-27"
+  },
+  "engage:weekend:2026-11-27": {
+    "fbPostId": "122181696506990004",
+    "scheduledFor": 1795829400,
+    "title": "Weekend plans?",
+    "type": "engage",
+    "mode": "schedule",
+    "madeAt": "2026-11-20T07:23:11.464Z"
   }
 }
