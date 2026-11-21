@@ -656,5 +656,29 @@
     "type": "engage",
     "mode": "schedule",
     "madeAt": "2026-11-20T07:23:11.464Z"
+  },
+  "slot:2026-11-28:07:30": {
+    "scheduledFor": 1795872600,
+    "key": "lineup:2026-11-28"
+  },
+  "lineup:2026-11-28": {
+    "fbPostId": "122181828272990004",
+    "scheduledFor": 1795872600,
+    "title": "Today in Hobart",
+    "type": "lineup",
+    "mode": "schedule",
+    "madeAt": "2026-11-21T07:14:46.155Z"
+  },
+  "slot:2026-11-28:18:00": {
+    "scheduledFor": 1795910400,
+    "key": "memory tree deadline|2026-12-01:announce"
+  },
+  "memory tree deadline|2026-12-01:announce": {
+    "fbPostId": "122181828320990004",
+    "scheduledFor": 1795910400,
+    "title": "Memory Tree Deadline",
+    "type": "announce",
+    "mode": "schedule",
+    "madeAt": "2026-11-21T07:14:48.606Z"
   }
 }
