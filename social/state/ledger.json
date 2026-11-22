@@ -680,5 +680,29 @@
     "type": "announce",
     "mode": "schedule",
     "madeAt": "2026-11-21T07:14:48.606Z"
+  },
+  "slot:2026-11-29:09:30": {
+    "scheduledFor": 1795966200,
+    "key": "week:2026-11-29"
+  },
+  "week:2026-11-29": {
+    "fbPostId": "122181961400990004",
+    "scheduledFor": 1795966200,
+    "title": "This week in Hobart",
+    "type": "lineup",
+    "mode": "schedule",
+    "madeAt": "2026-11-22T06:55:15.440Z"
+  },
+  "slot:2026-11-29:15:30": {
+    "scheduledFor": 1795987800,
+    "key": "member:josh-wald-insurance:2026-11-29"
+  },
+  "member:josh-wald-insurance:2026-11-29": {
+    "fbPostId": "122181961442990004",
+    "scheduledFor": 1795987800,
+    "title": "Josh Wald Insurance",
+    "type": "member",
+    "mode": "schedule",
+    "madeAt": "2026-11-22T06:55:17.888Z"
   }
 }
