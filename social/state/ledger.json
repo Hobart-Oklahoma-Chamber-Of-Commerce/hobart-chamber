@@ -409,18 +409,6 @@
     "mode": "schedule",
     "madeAt": "2026-11-16T06:36:10.517Z"
   },
-  "slot:2026-11-23:14:45": {
-    "scheduledFor": 1795466700,
-    "key": "evergreen:2026-11-23:14:45"
-  },
-  "evergreen:2026-11-23:14:45": {
-    "fbPostId": "122181168878990004",
-    "scheduledFor": 1795466700,
-    "title": "Where should we eat?",
-    "type": "evergreen",
-    "mode": "schedule",
-    "madeAt": "2026-11-16T06:36:13.632Z"
-  },
   "slot:2026-11-23:19:30": {
     "scheduledFor": 1795483800,
     "key": "engage:history:first-sale"
@@ -504,18 +492,6 @@
     "type": "member",
     "mode": "schedule",
     "madeAt": "2026-11-18T07:34:40.557Z"
-  },
-  "slot:2026-11-25:14:45": {
-    "scheduledFor": 1795639500,
-    "key": "evergreen:2026-11-25:14:45"
-  },
-  "evergreen:2026-11-25:14:45": {
-    "fbPostId": "122181424664990004",
-    "scheduledFor": 1795639500,
-    "title": "Got an event?",
-    "type": "evergreen",
-    "mode": "schedule",
-    "madeAt": "2026-11-18T07:34:43.053Z"
   },
   "slot:2026-11-25:19:30": {
     "scheduledFor": 1795656600,
@@ -657,18 +633,6 @@
     "mode": "schedule",
     "madeAt": "2026-11-20T07:23:11.464Z"
   },
-  "slot:2026-11-28:07:30": {
-    "scheduledFor": 1795872600,
-    "key": "lineup:2026-11-28"
-  },
-  "lineup:2026-11-28": {
-    "fbPostId": "122181828272990004",
-    "scheduledFor": 1795872600,
-    "title": "Today in Hobart",
-    "type": "lineup",
-    "mode": "schedule",
-    "madeAt": "2026-11-21T07:14:46.155Z"
-  },
   "slot:2026-11-28:18:00": {
     "scheduledFor": 1795910400,
     "key": "memory tree deadline|2026-12-01:announce"
@@ -704,5 +668,74 @@
     "type": "member",
     "mode": "schedule",
     "madeAt": "2026-11-22T06:55:17.888Z"
+  },
+  "slot:2026-11-23:14:45": {
+    "scheduledFor": 1795466700,
+    "key": "clink s holiday helping hands|2026-11-23:reminder:2026-11-23"
+  },
+  "clink s holiday helping hands|2026-11-23:reminder:2026-11-23": {
+    "fbPostId": "122182059812990004",
+    "scheduledFor": 1795466700,
+    "title": "Clink's Holiday Helping Hands",
+    "type": "reminder",
+    "mode": "schedule",
+    "madeAt": "2026-11-23T01:28:53.100Z"
+  },
+  "redo:2026-11-23:14:45": {
+    "sig": "bb9b630c9d7f",
+    "slot": "slot:2026-11-23:14:45",
+    "key": "clink s holiday helping hands|2026-11-23:reminder:2026-11-23",
+    "replaced": {
+      "title": "Where should we eat?",
+      "type": "evergreen",
+      "fbPostId": "122181168878990004"
+    },
+    "madeAt": "2026-11-23T01:28:53.100Z"
+  },
+  "slot:2026-11-25:14:45": {
+    "scheduledFor": 1795639500,
+    "key": "hobart s hometown christmas|2026-11-28:announce"
+  },
+  "hobart s hometown christmas|2026-11-28:announce": {
+    "fbPostId": "122182059866990004",
+    "scheduledFor": 1795639500,
+    "title": "Hobart's Hometown Christmas",
+    "type": "announce",
+    "mode": "schedule",
+    "madeAt": "2026-11-23T01:28:55.909Z"
+  },
+  "redo:2026-11-25:14:45": {
+    "sig": "6b4bde49b904",
+    "slot": "slot:2026-11-25:14:45",
+    "key": "hobart s hometown christmas|2026-11-28:announce",
+    "replaced": {
+      "title": "Got an event?",
+      "type": "evergreen",
+      "fbPostId": "122181424664990004"
+    },
+    "madeAt": "2026-11-23T01:28:55.909Z"
+  },
+  "slot:2026-11-28:07:30": {
+    "scheduledFor": 1795872600,
+    "key": "lineup:2026-11-28"
+  },
+  "lineup:2026-11-28": {
+    "fbPostId": "122182059914990004",
+    "scheduledFor": 1795872600,
+    "title": "Today in Hobart",
+    "type": "lineup",
+    "mode": "schedule",
+    "madeAt": "2026-11-23T01:28:58.450Z"
+  },
+  "redo:2026-11-28:07:30": {
+    "sig": "0360bf516eb5",
+    "slot": "slot:2026-11-28:07:30",
+    "key": "lineup:2026-11-28",
+    "replaced": {
+      "title": "Today in Hobart",
+      "type": "lineup",
+      "fbPostId": "122181828272990004"
+    },
+    "madeAt": "2026-11-23T01:28:58.450Z"
   }
 }
