@@ -23,9 +23,12 @@ export function loadSeed(indexHtmlPath) {
 export function loadCarouselFlyers(indexHtmlPath) {
   const s = fs.readFileSync(indexHtmlPath, 'utf8');
   const out = [];
-  const re = /<div class="event-card" data-date="([^"]+)"[^>]*><div class="flyer-slot"><img [^>]*?\bsrc="([^"]+)"[\s\S]*?<h4>([\s\S]*?)<\/h4>/g;   // other attributes (loading, decoding) may come before src
+  const re = /<div class="event-card" data-date="([^"]+)"([^>]*)><div class="flyer-slot"><img [^>]*?\bsrc="([^"]+)"[\s\S]*?<h4>([\s\S]*?)<\/h4>/g;   // other attributes (loading, decoding) may come before src
   let m;
-  while ((m = re.exec(s))) out.push({ date: m[1], src: m[2], title: m[3].replace(/<[^>]+>/g, '').trim() });
+  while ((m = re.exec(s))) {
+    const end = (m[2].match(/data-end="([^"]+)"/) || [])[1] || m[1];     // multi-day cards (a play's run) carry data-end
+    out.push({ date: m[1], end, src: m[3], title: m[4].replace(/<[^>]+>/g, '').trim() });
+  }
   return out;
 }
 
@@ -36,13 +39,15 @@ export function matchFlyer(ev, cards, repoDir) {
   const ew = words(ev.title);
   let best = null, bestScore = 0;
   for (const c of cards) {
-    if (c.date !== ev.date) continue;
+    const exact = c.date === ev.date;
+    if (!exact && !(c.end && ev.date > c.date && ev.date <= c.end)) continue;   // or a later day of a multi-day card's run
     const cw = words(c.title);
     let hit = 0; for (const w of ew) if (cw.has(w)) hit++;
     const score = hit / Math.max(1, Math.min(ew.size, cw.size));
+    if (score < (exact ? 0.5 : 0.67)) continue;                                // a long-running card needs a closer title match
     if (score > bestScore) { bestScore = score; best = c; }
   }
-  if (best && bestScore >= 0.5) {
+  if (best) {
     const p = path.join(repoDir, best.src);
     if (fs.existsSync(p)) return p;
   }
