@@ -167,6 +167,11 @@ if (fs.existsSync(redoPath)) {
     const cur = ledger[slotKey];
     if ((cur && String(cur.key).startsWith('override:')) || ledger[`override:${D}:${T}`]) { console.log(`  SKIPPED redo for ${label}: that slot has a Chamber graphic`); continue; }
     const old = cur && cur.key && ledger[cur.key] ? { key: cur.key, ...ledger[cur.key] } : null;
+    if (fb.ready) {                       // a different post already queued for that time = re-made by an earlier run (or added by hand): leave it
+      if (!pageQueue) { try { pageQueue = await scheduledPosts(fb); } catch (e) { pageQueue = []; console.log(`  (could not list the Page's scheduled posts: ${e.message})`); } }
+      const others = pageQueue.filter((p) => toEpoch(p.scheduled_publish_time) === at && !(old && old.fbPostId && String(p.id).endsWith('_' + old.fbPostId)));
+      if (others.length) { console.log(`  SKIPPED redo for ${label}: the Page already has a different post queued then (${others.map((p) => p.id).join(', ')})`); continue; }
+    }
     if (fb.ready && old && old.fbPostId) {                                                           // look first
       try { const o = await getNode(fb, old.fbPostId, 'id,name,created_time,updated_time'); console.log(`    now in ${label}: ${old.title} [${old.type}] ${o.id}, made ${o.created_time}, last changed ${o.updated_time}: "${String(o.name || '').replace(/\s+/g, ' ').slice(0, 70)}"`); }
       catch (e) { console.log(`    now in ${label}: ${old.title} [${old.type}] ${old.fbPostId} (${e.message})`); }
