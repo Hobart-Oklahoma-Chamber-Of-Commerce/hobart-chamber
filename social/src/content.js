@@ -54,8 +54,11 @@ export function lineupItems(events, today, { includeSports = true } = {}) {
     if (seen.has(k)) continue; seen.add(k); list.push(e);
   }
   const rank = (e) => ({ chamber: 0, community: 1, sports: 2 }[cats(e)] ?? 3);
-  return list.sort((a, b) => rank(a) - rank(b));
+  const start = (e) => { const t = parseTimes(e.time); return t ? t.start : -1; };   // all-day first, then by start time
+  return list.map((e, i) => ({ e, i })).sort((a, b) => rank(a.e) - rank(b.e) || start(a.e) - start(b.e) || a.i - b.i).map((x) => x.e);
 }
+
+const clock = (m) => `${((Math.floor(m / 60) + 11) % 12) + 1}:${String(m % 60).padStart(2, '0')} ${m >= 720 ? 'PM' : 'AM'}`;
 
 export function lineupPost(items, today, label = 'Today in Hobart') {
   const week = label === 'This week in Hobart';
@@ -66,7 +69,8 @@ export function lineupPost(items, today, label = 'Today in Hobart') {
   const MON = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
   const rows = shown.map((e) => {
     const t = cleanTime(e.time);
-    const short = t && !/showtimes|announced/i.test(t) ? t.split(/[–-]/)[0].trim() : '';
+    const tm = parseTimes(e.time);
+    const short = tm ? clock(tm.start) : t && !/showtimes|announced/i.test(t) ? t.split(/[–-]/)[0].trim() : '';   // "12:00 – 7:00 PM" -> "12:00 PM"
     const lead = ahead ? `${MON[pd(e.date).getMonth()]} ${pd(e.date).getDate()}` : short;
     return { i: 'star', t: `${lead ? lead + '  ' : ''}${cleanTitle(e.title)}`.slice(0, 54) };
   });
