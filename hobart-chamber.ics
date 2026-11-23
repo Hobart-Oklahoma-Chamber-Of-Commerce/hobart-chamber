@@ -28,7 +28,7 @@ END:STANDARD
 END:VTIMEZONE
 BEGIN:VEVENT
 UID:fp9@hobartchamber.org
-DTSTAMP:20261121T071443Z
+DTSTAMP:20261123T012658Z
 DTSTART;TZID=America/Chicago:20260923T090000
 DTEND;TZID=America/Chicago:20260923T110000
 SUMMARY:🥫 Hobart Food Pantry
@@ -40,7 +40,7 @@ URL:https://hobartchamber.org/#calendar
 END:VEVENT
 BEGIN:VEVENT
 UID:sp60@hobartchamber.org
-DTSTAMP:20261121T071443Z
+DTSTAMP:20261123T012658Z
 DTSTART;VALUE=DATE:20260924
 DTEND;VALUE=DATE:20260925
 SUMMARY:🥎 HS Softball Regional Tournament
@@ -52,7 +52,7 @@ URL:https://hobartchamber.org/#calendar
 END:VEVENT
 BEGIN:VEVENT
 UID:sp25@hobartchamber.org
-DTSTAMP:20261121T071443Z
+DTSTAMP:20261123T012658Z
 DTSTART;VALUE=DATE:20260925
 DTEND;VALUE=DATE:20260926
 SUMMARY:🏃 Cross Country: Cameron HS
@@ -63,7 +63,7 @@ URL:https://hobartchamber.org/#calendar
 END:VEVENT
 BEGIN:VEVENT
 UID:sp6@hobartchamber.org
-DTSTAMP:20261121T071443Z
+DTSTAMP:20261123T012658Z
 DTSTART;TZID=America/Chicago:20260925T190000
 DTEND;TZID=America/Chicago:20260925T210000
 SUMMARY:🏈 HS Football @ Southwest Covenant
@@ -75,7 +75,7 @@ URL:https://hobartchamber.org/#calendar
 END:VEVENT
 BEGIN:VEVENT
 UID:sp16@hobartchamber.org
-DTSTAMP:20261121T071443Z
+DTSTAMP:20261123T012658Z
 DTSTART;TZID=America/Chicago:20260928T173000
 DTEND;TZID=America/Chicago:20260928T193000
 SUMMARY:🏈 JH Football @ Thomas
@@ -87,7 +87,7 @@ URL:https://hobartchamber.org/#calendar
 END:VEVENT
 BEGIN:VEVENT
 UID:sp61@hobartchamber.org
-DTSTAMP:20261121T071443Z
+DTSTAMP:20261123T012658Z
 DTSTART;TZID=America/Chicago:20260928T163000
 DTEND;TZID=America/Chicago:20260928T183000
 SUMMARY:🥎 HS Softball @ Granite
@@ -98,7 +98,7 @@ URL:https://hobartchamber.org/#calendar
 END:VEVENT
 BEGIN:VEVENT
 UID:sp26@hobartchamber.org
-DTSTAMP:20261121T071443Z
+DTSTAMP:20261123T012658Z
 DTSTART;VALUE=DATE:20260930
 DTEND;VALUE=DATE:20261001
 SUMMARY:🏃 Cross Country: Hobart Elem\, JH/HS
@@ -109,7 +109,7 @@ URL:https://hobartchamber.org/#calendar
 END:VEVENT
 BEGIN:VEVENT
 UID:sp62@hobartchamber.org
-DTSTAMP:20261121T071443Z
+DTSTAMP:20261123T012658Z
 DTSTART;VALUE=DATE:20261001
 DTEND;VALUE=DATE:20261002
 SUMMARY:🥎 HS Softball Super Regionals
@@ -121,7 +121,7 @@ URL:https://hobartchamber.org/#calendar
 END:VEVENT
 BEGIN:VEVENT
 UID:ev1@hobartchamber.org
-DTSTAMP:20261121T071443Z
+DTSTAMP:20261123T012658Z
 DTSTART;VALUE=DATE:20261003
 DTEND;VALUE=DATE:20261004
 SUMMARY:Hobart\, OK Town Wide Garage Sale
@@ -135,7 +135,7 @@ URL:https://hobartchamber.org/#calendar
 END:VEVENT
 BEGIN:VEVENT
 UID:ev17@hobartchamber.org
-DTSTAMP:20261121T071443Z
+DTSTAMP:20261123T012658Z
 DTSTART;TZID=America/Chicago:20261003T203000
 DTEND;TZID=America/Chicago:20261003T223000
 SUMMARY:🌙 Glow Golf Tournament
@@ -148,7 +148,7 @@ URL:https://hobartchamber.org/#calendar
 END:VEVENT
 BEGIN:VEVENT
 UID:sg1@hobartchamber.org
-DTSTAMP:20261121T071443Z
+DTSTAMP:20261123T012658Z
 DTSTART;VALUE=DATE:20261003
 DTEND;VALUE=DATE:20261004
 SUMMARY:🎭 Have a Nice Doomsday
@@ -163,7 +163,7 @@ URL:https://hobartchamber.org/#calendar
 END:VEVENT
 BEGIN:VEVENT
 UID:sg2@hobartchamber.org
-DTSTAMP:20261121T071443Z
+DTSTAMP:20261123T012658Z
 DTSTART;VALUE=DATE:20261004
 DTEND;VALUE=DATE:20261005
 SUMMARY:🎭 Have a Nice Doomsday
@@ -178,7 +178,7 @@ URL:https://hobartchamber.org/#calendar
 END:VEVENT
 BEGIN:VEVENT
 UID:sp17@hobartchamber.org
-DTSTAMP:20261121T071443Z
+DTSTAMP:20261123T012658Z
 DTSTART;TZID=America/Chicago:20261005T173000
 DTEND;TZID=America/Chicago:20261005T193000
 SUMMARY:🏈 JH Football vs Frederick
@@ -190,7 +190,7 @@ URL:https://hobartchamber.org/#calendar
 END:VEVENT
 BEGIN:VEVENT
 UID:ev9@hobartchamber.org
-DTSTAMP:20261121T071443Z
+DTSTAMP:20261123T012658Z
 DTSTART;TZID=America/Chicago:20261006T180000
 DTEND;TZID=America/Chicago:20261006T200000
 SUMMARY:Defensive Driving Class — Kiowa County Farm Bureau
@@ -206,7 +206,7 @@ URL:https://hobartchamber.org/#calendar
 END:VEVENT
 BEGIN:VEVENT
 UID:sc10@hobartchamber.org
-DTSTAMP:20261121T071443Z
+DTSTAMP:20261123T012658Z
 DTSTART;VALUE=DATE:20261007
 DTEND;VALUE=DATE:20261008
 SUMMARY:📚 Progress Reports
@@ -217,7 +217,7 @@ URL:https://hobartchamber.org/#calendar
 END:VEVENT
 BEGIN:VEVENT
 UID:sp27@hobartchamber.org
-DTSTAMP:20261121T071443Z
+DTSTAMP:20261123T012658Z
 DTSTART;VALUE=DATE:20261007
 DTEND;VALUE=DATE:20261008
 SUMMARY:🏃 Cross Country: Frederick Elem\, JH/HS
@@ -228,7 +228,7 @@ URL:https://hobartchamber.org/#calendar
 END:VEVENT
 BEGIN:VEVENT
 UID:sc11@hobartchamber.org
-DTSTAMP:20261121T071443Z
+DTSTAMP:20261123T012658Z
 DTSTART;VALUE=DATE:20261008
 DTEND;VALUE=DATE:20261009
 SUMMARY:📚 Nine Weeks Tests
@@ -239,7 +239,7 @@ URL:https://hobartchamber.org/#calendar
 END:VEVENT
 BEGIN:VEVENT
 UID:sp63@hobartchamber.org
-DTSTAMP:20261121T071443Z
+DTSTAMP:20261123T012658Z
 DTSTART;VALUE=DATE:20261008
 DTEND;VALUE=DATE:20261009
 SUMMARY:🥎 HS Softball State Tournament
@@ -251,7 +251,7 @@ URL:https://hobartchamber.org/#calendar
 END:VEVENT
 BEGIN:VEVENT
 UID:sc12@hobartchamber.org
-DTSTAMP:20261121T071443Z
+DTSTAMP:20261123T012658Z
 DTSTART;VALUE=DATE:20261009
 DTEND;VALUE=DATE:20261010
 SUMMARY:📚 Nine Weeks Tests
@@ -262,7 +262,7 @@ URL:https://hobartchamber.org/#calendar
 END:VEVENT
 BEGIN:VEVENT
 UID:sc13@hobartchamber.org
-DTSTAMP:20261121T071443Z
+DTSTAMP:20261123T012658Z
 DTSTART;VALUE=DATE:20261009
 DTEND;VALUE=DATE:20261010
 SUMMARY:📚 End of 1st Nine Weeks
@@ -274,7 +274,7 @@ URL:https://hobartchamber.org/#calendar
 END:VEVENT
 BEGIN:VEVENT
 UID:sp7@hobartchamber.org
-DTSTAMP:20261121T071443Z
+DTSTAMP:20261123T012658Z
 DTSTART;TZID=America/Chicago:20261009T190000
 DTEND;TZID=America/Chicago:20261009T210000
 SUMMARY:🏈 HS Football @ Apache
@@ -285,7 +285,7 @@ URL:https://hobartchamber.org/#calendar
 END:VEVENT
 BEGIN:VEVENT
 UID:sg3@hobartchamber.org
-DTSTAMP:20261121T071443Z
+DTSTAMP:20261123T012658Z
 DTSTART;VALUE=DATE:20261010
 DTEND;VALUE=DATE:20261011
 SUMMARY:🎭 Have a Nice Doomsday
@@ -300,7 +300,7 @@ URL:https://hobartchamber.org/#calendar
 END:VEVENT
 BEGIN:VEVENT
 UID:sg4@hobartchamber.org
-DTSTAMP:20261121T071443Z
+DTSTAMP:20261123T012658Z
 DTSTART;VALUE=DATE:20261011
 DTEND;VALUE=DATE:20261012
 SUMMARY:🎭 Have a Nice Doomsday
@@ -315,7 +315,7 @@ URL:https://hobartchamber.org/#calendar
 END:VEVENT
 BEGIN:VEVENT
 UID:h9@hobartchamber.org
-DTSTAMP:20261121T071443Z
+DTSTAMP:20261123T012658Z
 DTSTART;VALUE=DATE:20261012
 DTEND;VALUE=DATE:20261013
 SUMMARY:🇺🇸 Columbus Day
@@ -327,7 +327,7 @@ URL:https://hobartchamber.org/#calendar
 END:VEVENT
 BEGIN:VEVENT
 UID:sp18@hobartchamber.org
-DTSTAMP:20261121T071443Z
+DTSTAMP:20261123T012658Z
 DTSTART;TZID=America/Chicago:20261012T173000
 DTEND;TZID=America/Chicago:20261012T193000
 SUMMARY:🏈 JH Football @ Sayre
@@ -339,7 +339,7 @@ URL:https://hobartchamber.org/#calendar
 END:VEVENT
 BEGIN:VEVENT
 UID:sc14@hobartchamber.org
-DTSTAMP:20261121T071443Z
+DTSTAMP:20261123T012658Z
 DTSTART;TZID=America/Chicago:20261013T151500
 DTEND;TZID=America/Chicago:20261013T211500
 SUMMARY:📚 Parent-Teacher Conferences
@@ -351,7 +351,7 @@ URL:https://hobartchamber.org/#calendar
 END:VEVENT
 BEGIN:VEVENT
 UID:sc15@hobartchamber.org
-DTSTAMP:20261121T071443Z
+DTSTAMP:20261123T012658Z
 DTSTART;VALUE=DATE:20261014
 DTEND;VALUE=DATE:20261015
 SUMMARY:📚 Parent-Teacher Conferences
@@ -362,7 +362,7 @@ URL:https://hobartchamber.org/#calendar
 END:VEVENT
 BEGIN:VEVENT
 UID:sc16@hobartchamber.org
-DTSTAMP:20261121T071443Z
+DTSTAMP:20261123T012658Z
 DTSTART;VALUE=DATE:20261015
 DTEND;VALUE=DATE:20261016
 SUMMARY:📚 Fall Break — No School
@@ -373,7 +373,7 @@ URL:https://hobartchamber.org/#calendar
 END:VEVENT
 BEGIN:VEVENT
 UID:sp8@hobartchamber.org
-DTSTAMP:20261121T071443Z
+DTSTAMP:20261123T012658Z
 DTSTART;TZID=America/Chicago:20261015T190000
 DTEND;TZID=America/Chicago:20261015T210000
 SUMMARY:🏈 HS Football vs Empire
@@ -385,7 +385,7 @@ URL:https://hobartchamber.org/#calendar
 END:VEVENT
 BEGIN:VEVENT
 UID:sc17@hobartchamber.org
-DTSTAMP:20261121T071443Z
+DTSTAMP:20261123T012658Z
 DTSTART;VALUE=DATE:20261016
 DTEND;VALUE=DATE:20261017
 SUMMARY:📚 Fall Break — No School
@@ -396,7 +396,7 @@ URL:https://hobartchamber.org/#calendar
 END:VEVENT
 BEGIN:VEVENT
 UID:sp28@hobartchamber.org
-DTSTAMP:20261121T071443Z
+DTSTAMP:20261123T012658Z
 DTSTART;VALUE=DATE:20261017
 DTEND;VALUE=DATE:20261018
 SUMMARY:🏃 Cross Country: Regionals
@@ -407,7 +407,7 @@ URL:https://hobartchamber.org/#calendar
 END:VEVENT
 BEGIN:VEVENT
 UID:sp19@hobartchamber.org
-DTSTAMP:20261121T071443Z
+DTSTAMP:20261123T012658Z
 DTSTART;TZID=America/Chicago:20261019T173000
 DTEND;TZID=America/Chicago:20261019T193000
 SUMMARY:🏈 JH Football @ Hinton
@@ -419,7 +419,7 @@ URL:https://hobartchamber.org/#calendar
 END:VEVENT
 BEGIN:VEVENT
 UID:fp10@hobartchamber.org
-DTSTAMP:20261121T071443Z
+DTSTAMP:20261123T012658Z
 DTSTART;TZID=America/Chicago:20261021T090000
 DTEND;TZID=America/Chicago:20261021T110000
 SUMMARY:🥫 Hobart Food Pantry
@@ -431,7 +431,7 @@ URL:https://hobartchamber.org/#calendar
 END:VEVENT
 BEGIN:VEVENT
 UID:ev18@hobartchamber.org
-DTSTAMP:20261121T071443Z
+DTSTAMP:20261123T012658Z
 DTSTART;TZID=America/Chicago:20261022T173000
 DTEND;TZID=America/Chicago:20261022T193000
 SUMMARY:Women's Friendship Dinner
@@ -446,7 +446,7 @@ URL:https://hobartchamber.org/#calendar
 END:VEVENT
 BEGIN:VEVENT
 UID:sp9@hobartchamber.org
-DTSTAMP:20261121T071443Z
+DTSTAMP:20261123T012658Z
 DTSTART;TZID=America/Chicago:20261023T190000
 DTEND;TZID=America/Chicago:20261023T210000
 SUMMARY:🏈 HS Football vs Thomas-Fay-Custer
@@ -457,7 +457,7 @@ URL:https://hobartchamber.org/#calendar
 END:VEVENT
 BEGIN:VEVENT
 UID:sp29@hobartchamber.org
-DTSTAMP:20261121T071443Z
+DTSTAMP:20261123T012658Z
 DTSTART;VALUE=DATE:20261024
 DTEND;VALUE=DATE:20261025
 SUMMARY:🏃 Cross Country: Cross Country State
@@ -468,7 +468,7 @@ URL:https://hobartchamber.org/#calendar
 END:VEVENT
 BEGIN:VEVENT
 UID:ev11@hobartchamber.org
-DTSTAMP:20261121T071443Z
+DTSTAMP:20261123T012658Z
 DTSTART;TZID=America/Chicago:20261027T100000
 DTEND;TZID=America/Chicago:20261027T140000
 SUMMARY:Kiowa County Baby Shower
@@ -482,7 +482,7 @@ URL:https://hobartchamber.org/#calendar
 END:VEVENT
 BEGIN:VEVENT
 UID:ev20@hobartchamber.org
-DTSTAMP:20261121T071443Z
+DTSTAMP:20261123T012658Z
 DTSTART;TZID=America/Chicago:20261027T180000
 DTEND;TZID=America/Chicago:20261027T200000
 SUMMARY:FFA Labor Auction
@@ -494,7 +494,7 @@ URL:https://hobartchamber.org/#calendar
 END:VEVENT
 BEGIN:VEVENT
 UID:sp10@hobartchamber.org
-DTSTAMP:20261121T071443Z
+DTSTAMP:20261123T012658Z
 DTSTART;TZID=America/Chicago:20261030T190000
 DTEND;TZID=America/Chicago:20261030T210000
 SUMMARY:🏈 HS Football @ Mooreland
@@ -506,7 +506,7 @@ URL:https://hobartchamber.org/#calendar
 END:VEVENT
 BEGIN:VEVENT
 UID:ev19@hobartchamber.org
-DTSTAMP:20261121T071443Z
+DTSTAMP:20261123T012658Z
 DTSTART;TZID=America/Chicago:20261031T173000
 DTEND;TZID=America/Chicago:20261031T193000
 SUMMARY:🎃 Trunk or Treat — Courthouse Square
@@ -520,7 +520,7 @@ URL:https://hobartchamber.org/#calendar
 END:VEVENT
 BEGIN:VEVENT
 UID:ev14@hobartchamber.org
-DTSTAMP:20261121T071443Z
+DTSTAMP:20261123T012658Z
 DTSTART;VALUE=DATE:20261101
 DTEND;VALUE=DATE:20261102
 SUMMARY:E-Bike Raffle Drawing — Kiowa County Museum
@@ -535,7 +535,7 @@ URL:https://hobartchamber.org/#calendar
 END:VEVENT
 BEGIN:VEVENT
 UID:sp64@hobartchamber.org
-DTSTAMP:20261121T071443Z
+DTSTAMP:20261123T012658Z
 DTSTART;TZID=America/Chicago:20261102T183000
 DTEND;TZID=America/Chicago:20261102T203000
 SUMMARY:🏀 JH Basketball @ Hinton
@@ -547,7 +547,7 @@ URL:https://hobartchamber.org/#calendar
 END:VEVENT
 BEGIN:VEVENT
 UID:sc18@hobartchamber.org
-DTSTAMP:20261121T071443Z
+DTSTAMP:20261123T012658Z
 DTSTART;VALUE=DATE:20261104
 DTEND;VALUE=DATE:20261105
 SUMMARY:📚 Progress Reports
@@ -558,7 +558,7 @@ URL:https://hobartchamber.org/#calendar
 END:VEVENT
 BEGIN:VEVENT
 UID:sp65@hobartchamber.org
-DTSTAMP:20261121T071443Z
+DTSTAMP:20261123T012658Z
 DTSTART;TZID=America/Chicago:20261105T183000
 DTEND;TZID=America/Chicago:20261105T203000
 SUMMARY:🏀 JH Basketball @ BFDC
@@ -570,7 +570,7 @@ URL:https://hobartchamber.org/#calendar
 END:VEVENT
 BEGIN:VEVENT
 UID:sp11@hobartchamber.org
-DTSTAMP:20261121T071443Z
+DTSTAMP:20261123T012658Z
 DTSTART;TZID=America/Chicago:20261106T190000
 DTEND;TZID=America/Chicago:20261106T210000
 SUMMARY:🏈 HS Football vs Carnegie
@@ -582,7 +582,7 @@ URL:https://hobartchamber.org/#calendar
 END:VEVENT
 BEGIN:VEVENT
 UID:ev22@hobartchamber.org
-DTSTAMP:20261121T071443Z
+DTSTAMP:20261123T012658Z
 DTSTART;TZID=America/Chicago:20261107T080000
 DTEND;TZID=America/Chicago:20261107T140000
 SUMMARY:First Saturday Market — Vendors Wanted
@@ -595,7 +595,7 @@ URL:https://hobartchamber.org/#calendar
 END:VEVENT
 BEGIN:VEVENT
 UID:ev23@hobartchamber.org
-DTSTAMP:20261121T071443Z
+DTSTAMP:20261123T012658Z
 DTSTART;TZID=America/Chicago:20261107T090000
 DTEND;TZID=America/Chicago:20261107T110000
 SUMMARY:Par 3 Golf Tournament
@@ -609,7 +609,7 @@ URL:https://hobartchamber.org/#calendar
 END:VEVENT
 BEGIN:VEVENT
 UID:sp66@hobartchamber.org
-DTSTAMP:20261121T071443Z
+DTSTAMP:20261123T012658Z
 DTSTART;TZID=America/Chicago:20261109T183000
 DTEND;TZID=America/Chicago:20261109T203000
 SUMMARY:🏀 JH Basketball vs Sayre
@@ -621,7 +621,7 @@ URL:https://hobartchamber.org/#calendar
 END:VEVENT
 BEGIN:VEVENT
 UID:h10@hobartchamber.org
-DTSTAMP:20261121T071443Z
+DTSTAMP:20261123T012658Z
 DTSTART;VALUE=DATE:20261111
 DTEND;VALUE=DATE:20261112
 SUMMARY:🇺🇸 Veterans Day
@@ -633,7 +633,7 @@ URL:https://hobartchamber.org/#calendar
 END:VEVENT
 BEGIN:VEVENT
 UID:sp67@hobartchamber.org
-DTSTAMP:20261121T071443Z
+DTSTAMP:20261123T012658Z
 DTSTART;TZID=America/Chicago:20261112T183000
 DTEND;TZID=America/Chicago:20261112T203000
 SUMMARY:🏀 JH Basketball vs Hollis
@@ -645,7 +645,7 @@ URL:https://hobartchamber.org/#calendar
 END:VEVENT
 BEGIN:VEVENT
 UID:bb1@hobartchamber.org
-DTSTAMP:20261121T071443Z
+DTSTAMP:20261123T012658Z
 DTSTART;TZID=America/Chicago:20261116T160000
 DTEND;TZID=America/Chicago:20261116T180000
 SUMMARY:🏀 5/6th Basketball @ Mountain View
@@ -656,7 +656,7 @@ URL:https://hobartchamber.org/#calendar
 END:VEVENT
 BEGIN:VEVENT
 UID:sp68@hobartchamber.org
-DTSTAMP:20261121T071443Z
+DTSTAMP:20261123T012658Z
 DTSTART;TZID=America/Chicago:20261116T180000
 DTEND;TZID=America/Chicago:20261116T200000
 SUMMARY:🏀 JH Basketball @ Mountain View
@@ -668,7 +668,7 @@ URL:https://hobartchamber.org/#calendar
 END:VEVENT
 BEGIN:VEVENT
 UID:bb2@hobartchamber.org
-DTSTAMP:20261121T071443Z
+DTSTAMP:20261123T012658Z
 DTSTART;TZID=America/Chicago:20261117T163000
 DTEND;TZID=America/Chicago:20261117T183000
 SUMMARY:🏀 5/6th Basketball @ Hollis
@@ -679,7 +679,7 @@ URL:https://hobartchamber.org/#calendar
 END:VEVENT
 BEGIN:VEVENT
 UID:sp74@hobartchamber.org
-DTSTAMP:20261121T071443Z
+DTSTAMP:20261123T012658Z
 DTSTART;TZID=America/Chicago:20261117T183000
 DTEND;TZID=America/Chicago:20261117T203000
 SUMMARY:🏀 JH Basketball @ Boone-Apache
@@ -691,7 +691,7 @@ URL:https://hobartchamber.org/#calendar
 END:VEVENT
 BEGIN:VEVENT
 UID:fp11@hobartchamber.org
-DTSTAMP:20261121T071443Z
+DTSTAMP:20261123T012658Z
 DTSTART;TZID=America/Chicago:20261118T090000
 DTEND;TZID=America/Chicago:20261118T110000
 SUMMARY:🥫 Hobart Food Pantry
@@ -703,7 +703,7 @@ URL:https://hobartchamber.org/#calendar
 END:VEVENT
 BEGIN:VEVENT
 UID:bb3@hobartchamber.org
-DTSTAMP:20261121T071443Z
+DTSTAMP:20261123T012658Z
 DTSTART;TZID=America/Chicago:20261119T163000
 DTEND;TZID=America/Chicago:20261119T183000
 SUMMARY:🏀 5/6th Basketball @ Merritt
@@ -714,7 +714,7 @@ URL:https://hobartchamber.org/#calendar
 END:VEVENT
 BEGIN:VEVENT
 UID:sp69@hobartchamber.org
-DTSTAMP:20261121T071443Z
+DTSTAMP:20261123T012658Z
 DTSTART;TZID=America/Chicago:20261119T180000
 DTEND;TZID=America/Chicago:20261119T200000
 SUMMARY:🏀 JH Basketball vs Canute
@@ -725,8 +725,22 @@ CATEGORIES:Sports
 URL:https://hobartchamber.org/#calendar
 END:VEVENT
 BEGIN:VEVENT
+UID:ev-clinks-helping-hands-1123@hobartchamber.org
+DTSTAMP:20261123T012658Z
+DTSTART;VALUE=DATE:20261123
+DTEND;VALUE=DATE:20261124
+SUMMARY:Clink's Holiday Helping Hands
+DESCRIPTION:Time: During store hours\n\nThanksgiving shopping can be a lot.
+  Carts get heavy and finding everything can be tough\, so the Clink's crew
+  will be there to help you find everything on your list and get it to your
+  car. Let them lend a helping hand this Thanksgiving!
+LOCATION:Clink's Supermarket\, 410 S Broadway
+CATEGORIES:Community
+URL:https://hobartchamber.org/#calendar
+END:VEVENT
+BEGIN:VEVENT
 UID:sc19@hobartchamber.org
-DTSTAMP:20261121T071443Z
+DTSTAMP:20261123T012658Z
 DTSTART;VALUE=DATE:20261123
 DTEND;VALUE=DATE:20261124
 SUMMARY:📚 Thanksgiving Break — No School
@@ -737,7 +751,7 @@ URL:https://hobartchamber.org/#calendar
 END:VEVENT
 BEGIN:VEVENT
 UID:sc20@hobartchamber.org
-DTSTAMP:20261121T071443Z
+DTSTAMP:20261123T012658Z
 DTSTART;VALUE=DATE:20261124
 DTEND;VALUE=DATE:20261125
 SUMMARY:📚 Thanksgiving Break — No School
@@ -748,7 +762,7 @@ URL:https://hobartchamber.org/#calendar
 END:VEVENT
 BEGIN:VEVENT
 UID:sc21@hobartchamber.org
-DTSTAMP:20261121T071443Z
+DTSTAMP:20261123T012658Z
 DTSTART;VALUE=DATE:20261125
 DTEND;VALUE=DATE:20261126
 SUMMARY:📚 Thanksgiving Break — No School
@@ -759,7 +773,7 @@ URL:https://hobartchamber.org/#calendar
 END:VEVENT
 BEGIN:VEVENT
 UID:ev-turkey-trot-1126@hobartchamber.org
-DTSTAMP:20261121T071443Z
+DTSTAMP:20261123T012658Z
 DTSTART;TZID=America/Chicago:20261126T090000
 DTEND;TZID=America/Chicago:20261126T110000
 SUMMARY:Turkey Trot 5K
@@ -775,7 +789,7 @@ URL:https://hobartchamber.org/#calendar
 END:VEVENT
 BEGIN:VEVENT
 UID:h11@hobartchamber.org
-DTSTAMP:20261121T071443Z
+DTSTAMP:20261123T012658Z
 DTSTART;VALUE=DATE:20261126
 DTEND;VALUE=DATE:20261127
 SUMMARY:🇺🇸 Thanksgiving Day
@@ -787,7 +801,7 @@ URL:https://hobartchamber.org/#calendar
 END:VEVENT
 BEGIN:VEVENT
 UID:sc22@hobartchamber.org
-DTSTAMP:20261121T071443Z
+DTSTAMP:20261123T012658Z
 DTSTART;VALUE=DATE:20261126
 DTEND;VALUE=DATE:20261127
 SUMMARY:📚 Thanksgiving Break — No School
@@ -798,7 +812,7 @@ URL:https://hobartchamber.org/#calendar
 END:VEVENT
 BEGIN:VEVENT
 UID:sc23@hobartchamber.org
-DTSTAMP:20261121T071443Z
+DTSTAMP:20261123T012658Z
 DTSTART;VALUE=DATE:20261127
 DTEND;VALUE=DATE:20261128
 SUMMARY:📚 Thanksgiving Break — No School
@@ -808,38 +822,55 @@ CATEGORIES:School
 URL:https://hobartchamber.org/#calendar
 END:VEVENT
 BEGIN:VEVENT
+UID:ev-hometown-christmas-1128@hobartchamber.org
+DTSTAMP:20261123T012658Z
+DTSTART;TZID=America/Chicago:20261128T120000
+DTEND;TZID=America/Chicago:20261128T190000
+SUMMARY:Hobart's Hometown Christmas
+DESCRIPTION:Time: 12:00 – 7:00 PM\n\nChristmas fun on the Kiowa County Co
+ urthouse Square\, noon to 7. Vendors and food trucks\, a chalk drawing\, t
+ he Santa letter station\, Run Rudolph Run\, candy cane fishing\, a snowbal
+ l fight and more. Santa arrives at 4:00\, with pictures with Santa and Mrs
+ . Claus at 5:15\, caroling by Shortgrass Playhouse at 5:30 and the tree li
+ ghting at 6:00. A Dickens Christmas Carol follows at Shortgrass Playhouse 
+ at 7:00.
+LOCATION:Kiowa County Courthouse Square
+CATEGORIES:Community
+URL:https://hobartchamber.org/#calendar
+END:VEVENT
+BEGIN:VEVENT
 UID:sg5@hobartchamber.org
-DTSTAMP:20261121T071443Z
-DTSTART;VALUE=DATE:20261128
-DTEND;VALUE=DATE:20261129
+DTSTAMP:20261123T012658Z
+DTSTART;TZID=America/Chicago:20261128T190000
+DTEND;TZID=America/Chicago:20261128T210000
 SUMMARY:🎭 A Dickens Christmas Carol
-DESCRIPTION:Time: See listing for showtime\n\nShortgrass Playhouse presents
-  "A Dickens Christmas Carol" (Children's Show). 103 1/2 E. 3rd St\, Hobart
- . Regular ticket prices: Seniors (60+) $12\, Adults $15\, Students $10\, A
- ges 2-5 $5\, under 2 free. Season patron memberships are also available an
- d support the playhouse fundraising for the season.
+DESCRIPTION:Shortgrass Playhouse presents "A Dickens Christmas Carol" (Chil
+ dren's Show). 103 1/2 E. 3rd St\, Hobart. Regular ticket prices: Seniors (
+ 60+) $12\, Adults $15\, Students $10\, Ages 2-5 $5\, under 2 free. Season 
+ patron memberships are also available and support the playhouse fundraisin
+ g for the season.
 LOCATION:Shortgrass Playhouse\, 103 1/2 E. 3rd St
 CATEGORIES:Community
 URL:https://hobartchamber.org/#calendar
 END:VEVENT
 BEGIN:VEVENT
 UID:sg6@hobartchamber.org
-DTSTAMP:20261121T071443Z
-DTSTART;VALUE=DATE:20261129
-DTEND;VALUE=DATE:20261130
+DTSTAMP:20261123T012658Z
+DTSTART;TZID=America/Chicago:20261129T140000
+DTEND;TZID=America/Chicago:20261129T160000
 SUMMARY:🎭 A Dickens Christmas Carol
-DESCRIPTION:Time: See listing for showtime\n\nShortgrass Playhouse presents
-  "A Dickens Christmas Carol" (Children's Show). 103 1/2 E. 3rd St\, Hobart
- . Regular ticket prices: Seniors (60+) $12\, Adults $15\, Students $10\, A
- ges 2-5 $5\, under 2 free. Season patron memberships are also available an
- d support the playhouse fundraising for the season.
+DESCRIPTION:Shortgrass Playhouse presents "A Dickens Christmas Carol" (Chil
+ dren's Show). 103 1/2 E. 3rd St\, Hobart. Regular ticket prices: Seniors (
+ 60+) $12\, Adults $15\, Students $10\, Ages 2-5 $5\, under 2 free. Season 
+ patron memberships are also available and support the playhouse fundraisin
+ g for the season.
 LOCATION:Shortgrass Playhouse\, 103 1/2 E. 3rd St
 CATEGORIES:Community
 URL:https://hobartchamber.org/#calendar
 END:VEVENT
 BEGIN:VEVENT
 UID:sp70@hobartchamber.org
-DTSTAMP:20261121T071443Z
+DTSTAMP:20261123T012658Z
 DTSTART;VALUE=DATE:20261130
 DTEND;VALUE=DATE:20261201
 SUMMARY:🏀 JH Basketball JH BFDC Tournament
@@ -852,7 +883,7 @@ URL:https://hobartchamber.org/#calendar
 END:VEVENT
 BEGIN:VEVENT
 UID:ev-memory-tree-1201@hobartchamber.org
-DTSTAMP:20261121T071443Z
+DTSTAMP:20261123T012658Z
 DTSTART;VALUE=DATE:20261201
 DTEND;VALUE=DATE:20261202
 SUMMARY:Memory Tree Deadline
@@ -869,7 +900,7 @@ URL:https://hobartchamber.org/#calendar
 END:VEVENT
 BEGIN:VEVENT
 UID:sp81@hobartchamber.org
-DTSTAMP:20261121T071443Z
+DTSTAMP:20261123T012658Z
 DTSTART;TZID=America/Chicago:20261201T180000
 DTEND;TZID=America/Chicago:20261201T200000
 SUMMARY:🏀 HS Basketball @ Sayre
@@ -880,7 +911,7 @@ URL:https://hobartchamber.org/#calendar
 END:VEVENT
 BEGIN:VEVENT
 UID:sp82@hobartchamber.org
-DTSTAMP:20261121T071443Z
+DTSTAMP:20261123T012658Z
 DTSTART;TZID=America/Chicago:20261204T180000
 DTEND;TZID=America/Chicago:20261204T200000
 SUMMARY:🏀 HS Basketball vs Granite
@@ -891,37 +922,37 @@ URL:https://hobartchamber.org/#calendar
 END:VEVENT
 BEGIN:VEVENT
 UID:sg7@hobartchamber.org
-DTSTAMP:20261121T071443Z
-DTSTART;VALUE=DATE:20261205
-DTEND;VALUE=DATE:20261206
+DTSTAMP:20261123T012658Z
+DTSTART;TZID=America/Chicago:20261205T190000
+DTEND;TZID=America/Chicago:20261205T210000
 SUMMARY:🎭 A Dickens Christmas Carol
-DESCRIPTION:Time: See listing for showtime\n\nShortgrass Playhouse presents
-  "A Dickens Christmas Carol" (Children's Show). 103 1/2 E. 3rd St\, Hobart
- . Regular ticket prices: Seniors (60+) $12\, Adults $15\, Students $10\, A
- ges 2-5 $5\, under 2 free. Season patron memberships are also available an
- d support the playhouse fundraising for the season.
+DESCRIPTION:Shortgrass Playhouse presents "A Dickens Christmas Carol" (Chil
+ dren's Show). 103 1/2 E. 3rd St\, Hobart. Regular ticket prices: Seniors (
+ 60+) $12\, Adults $15\, Students $10\, Ages 2-5 $5\, under 2 free. Season 
+ patron memberships are also available and support the playhouse fundraisin
+ g for the season.
 LOCATION:Shortgrass Playhouse\, 103 1/2 E. 3rd St
 CATEGORIES:Community
 URL:https://hobartchamber.org/#calendar
 END:VEVENT
 BEGIN:VEVENT
 UID:sg8@hobartchamber.org
-DTSTAMP:20261121T071443Z
-DTSTART;VALUE=DATE:20261206
-DTEND;VALUE=DATE:20261207
+DTSTAMP:20261123T012658Z
+DTSTART;TZID=America/Chicago:20261206T140000
+DTEND;TZID=America/Chicago:20261206T160000
 SUMMARY:🎭 A Dickens Christmas Carol
-DESCRIPTION:Time: See listing for showtime\n\nShortgrass Playhouse presents
-  "A Dickens Christmas Carol" (Children's Show). 103 1/2 E. 3rd St\, Hobart
- . Regular ticket prices: Seniors (60+) $12\, Adults $15\, Students $10\, A
- ges 2-5 $5\, under 2 free. Season patron memberships are also available an
- d support the playhouse fundraising for the season.
+DESCRIPTION:Shortgrass Playhouse presents "A Dickens Christmas Carol" (Chil
+ dren's Show). 103 1/2 E. 3rd St\, Hobart. Regular ticket prices: Seniors (
+ 60+) $12\, Adults $15\, Students $10\, Ages 2-5 $5\, under 2 free. Season 
+ patron memberships are also available and support the playhouse fundraisin
+ g for the season.
 LOCATION:Shortgrass Playhouse\, 103 1/2 E. 3rd St
 CATEGORIES:Community
 URL:https://hobartchamber.org/#calendar
 END:VEVENT
 BEGIN:VEVENT
 UID:bb4@hobartchamber.org
-DTSTAMP:20261121T071443Z
+DTSTAMP:20261123T012658Z
 DTSTART;TZID=America/Chicago:20261207T163000
 DTEND;TZID=America/Chicago:20261207T183000
 SUMMARY:🏀 5/6th Basketball @ Cordell
@@ -932,7 +963,7 @@ URL:https://hobartchamber.org/#calendar
 END:VEVENT
 BEGIN:VEVENT
 UID:sp72@hobartchamber.org
-DTSTAMP:20261121T071443Z
+DTSTAMP:20261123T012658Z
 DTSTART;TZID=America/Chicago:20261207T183000
 DTEND;TZID=America/Chicago:20261207T203000
 SUMMARY:🏀 JH Basketball @ Mangum
@@ -944,7 +975,7 @@ URL:https://hobartchamber.org/#calendar
 END:VEVENT
 BEGIN:VEVENT
 UID:sp83@hobartchamber.org
-DTSTAMP:20261121T071443Z
+DTSTAMP:20261123T012658Z
 DTSTART;TZID=America/Chicago:20261208T180000
 DTEND;TZID=America/Chicago:20261208T200000
 SUMMARY:🏀 HS Basketball vs Boone-Apache
@@ -955,7 +986,7 @@ URL:https://hobartchamber.org/#calendar
 END:VEVENT
 BEGIN:VEVENT
 UID:sc24@hobartchamber.org
-DTSTAMP:20261121T071443Z
+DTSTAMP:20261123T012658Z
 DTSTART;VALUE=DATE:20261209
 DTEND;VALUE=DATE:20261210
 SUMMARY:📚 Progress Reports
@@ -966,7 +997,7 @@ URL:https://hobartchamber.org/#calendar
 END:VEVENT
 BEGIN:VEVENT
 UID:sp84@hobartchamber.org
-DTSTAMP:20261121T071443Z
+DTSTAMP:20261123T012658Z
 DTSTART;VALUE=DATE:20261210
 DTEND;VALUE=DATE:20261211
 SUMMARY:🏀 HS Basketball Minco Tournament
@@ -978,7 +1009,7 @@ URL:https://hobartchamber.org/#calendar
 END:VEVENT
 BEGIN:VEVENT
 UID:ev-xmas-park-1212@hobartchamber.org
-DTSTAMP:20261121T071443Z
+DTSTAMP:20261123T012658Z
 DTSTART;TZID=America/Chicago:20261212T160000
 DTEND;TZID=America/Chicago:20261212T190000
 SUMMARY:Christmas in the Park
@@ -995,7 +1026,7 @@ URL:https://hobartchamber.org/#calendar
 END:VEVENT
 BEGIN:VEVENT
 UID:sp73@hobartchamber.org
-DTSTAMP:20261121T071443Z
+DTSTAMP:20261123T012658Z
 DTSTART;TZID=America/Chicago:20261214T183000
 DTEND;TZID=America/Chicago:20261214T203000
 SUMMARY:🏀 JH Basketball @ Snyder
@@ -1007,7 +1038,7 @@ URL:https://hobartchamber.org/#calendar
 END:VEVENT
 BEGIN:VEVENT
 UID:sp105@hobartchamber.org
-DTSTAMP:20261121T071443Z
+DTSTAMP:20261123T012658Z
 DTSTART;TZID=America/Chicago:20261215T160000
 DTEND;TZID=America/Chicago:20261215T180000
 SUMMARY:🏀 JH Basketball vs Hollis
@@ -1019,7 +1050,7 @@ URL:https://hobartchamber.org/#calendar
 END:VEVENT
 BEGIN:VEVENT
 UID:sp85@hobartchamber.org
-DTSTAMP:20261121T071443Z
+DTSTAMP:20261123T012658Z
 DTSTART;TZID=America/Chicago:20261215T180000
 DTEND;TZID=America/Chicago:20261215T200000
 SUMMARY:🏀 HS Basketball vs Hollis
@@ -1030,7 +1061,7 @@ URL:https://hobartchamber.org/#calendar
 END:VEVENT
 BEGIN:VEVENT
 UID:sc25@hobartchamber.org
-DTSTAMP:20261121T071443Z
+DTSTAMP:20261123T012658Z
 DTSTART;VALUE=DATE:20261217
 DTEND;VALUE=DATE:20261218
 SUMMARY:📚 Semester Tests
@@ -1040,8 +1071,20 @@ CATEGORIES:School
 URL:https://hobartchamber.org/#calendar
 END:VEVENT
 BEGIN:VEVENT
+UID:ev-bakesale-1219@hobartchamber.org
+DTSTAMP:20261123T012658Z
+DTSTART;VALUE=DATE:20261218
+DTEND;VALUE=DATE:20261219
+SUMMARY:Kiowa County Museum Bake Sale
+DESCRIPTION:Bake sale hosted by the Kiowa County Museum\, held at the Hobar
+ t Chamber of Commerce. Time to be announced.
+LOCATION:Hobart Chamber of Commerce
+CATEGORIES:Community
+URL:https://hobartchamber.org/#calendar
+END:VEVENT
+BEGIN:VEVENT
 UID:sc26@hobartchamber.org
-DTSTAMP:20261121T071443Z
+DTSTAMP:20261123T012658Z
 DTSTART;VALUE=DATE:20261218
 DTEND;VALUE=DATE:20261219
 SUMMARY:📚 Semester Tests
@@ -1052,7 +1095,7 @@ URL:https://hobartchamber.org/#calendar
 END:VEVENT
 BEGIN:VEVENT
 UID:sc27@hobartchamber.org
-DTSTAMP:20261121T071443Z
+DTSTAMP:20261123T012658Z
 DTSTART;VALUE=DATE:20261218
 DTEND;VALUE=DATE:20261219
 SUMMARY:📚 End of 2nd Nine Weeks
@@ -1064,7 +1107,7 @@ URL:https://hobartchamber.org/#calendar
 END:VEVENT
 BEGIN:VEVENT
 UID:sp86@hobartchamber.org
-DTSTAMP:20261121T071443Z
+DTSTAMP:20261123T012658Z
 DTSTART;TZID=America/Chicago:20261218T180000
 DTEND;TZID=America/Chicago:20261218T200000
 SUMMARY:🏀 HS Basketball @ Snyder
@@ -1074,20 +1117,33 @@ CATEGORIES:Sports
 URL:https://hobartchamber.org/#calendar
 END:VEVENT
 BEGIN:VEVENT
-UID:ev-bakesale-1219@hobartchamber.org
-DTSTAMP:20261121T071443Z
-DTSTART;VALUE=DATE:20261219
-DTEND;VALUE=DATE:20261220
-SUMMARY:Kiowa County Museum Bake Sale
-DESCRIPTION:Bake sale by the Kiowa County Museum\, held at the Hobart Chamb
- er of Commerce. Time to be announced. Flyer coming soon.
-LOCATION:Hobart Chamber of Commerce
+UID:ev-breakfast-clauses-1219@hobartchamber.org
+DTSTAMP:20261123T012658Z
+DTSTART;TZID=America/Chicago:20261219T093000
+DTEND;TZID=America/Chicago:20261219T113000
+SUMMARY:Breakfast with the Clauses
+DESCRIPTION:Breakfast with Santa and Mrs. Claus\, hosted by the Hobart Cham
+ ber of Commerce at the Women's Exhibit Building by the fairgrounds. Questi
+ ons? Call the Chamber at (580) 682-0887.
+LOCATION:Women's Exhibit Building (by the fairgrounds)\, 302 N Lincoln
+CATEGORIES:Community
+URL:https://hobartchamber.org/#calendar
+END:VEVENT
+BEGIN:VEVENT
+UID:ev-mdt-christmas-1219@hobartchamber.org
+DTSTAMP:20261123T012658Z
+DTSTART;TZID=America/Chicago:20261219T180000
+DTEND;TZID=America/Chicago:20261219T200000
+SUMMARY:Kiowa County MDT Community Christmas
+DESCRIPTION:All free: toys\, hot chocolate and cookies\, plus door prizes. 
+ Come out and have some family fun!
+LOCATION:Women's Exhibit Building (by the fairgrounds)\, 302 N Lincoln
 CATEGORIES:Community
 URL:https://hobartchamber.org/#calendar
 END:VEVENT
 BEGIN:VEVENT
 UID:sc28@hobartchamber.org
-DTSTAMP:20261121T071443Z
+DTSTAMP:20261123T012658Z
 DTSTART;VALUE=DATE:20261221
 DTEND;VALUE=DATE:20261222
 SUMMARY:📚 Christmas Break — No School
@@ -1098,7 +1154,7 @@ URL:https://hobartchamber.org/#calendar
 END:VEVENT
 BEGIN:VEVENT
 UID:fp12@hobartchamber.org
-DTSTAMP:20261121T071443Z
+DTSTAMP:20261123T012658Z
 DTSTART;TZID=America/Chicago:20261222T090000
 DTEND;TZID=America/Chicago:20261222T110000
 SUMMARY:🥫 Hobart Food Pantry
@@ -1111,7 +1167,7 @@ URL:https://hobartchamber.org/#calendar
 END:VEVENT
 BEGIN:VEVENT
 UID:sc29@hobartchamber.org
-DTSTAMP:20261121T071443Z
+DTSTAMP:20261123T012658Z
 DTSTART;VALUE=DATE:20261222
 DTEND;VALUE=DATE:20261223
 SUMMARY:📚 Christmas Break — No School
@@ -1122,7 +1178,7 @@ URL:https://hobartchamber.org/#calendar
 END:VEVENT
 BEGIN:VEVENT
 UID:sc30@hobartchamber.org
-DTSTAMP:20261121T071443Z
+DTSTAMP:20261123T012658Z
 DTSTART;VALUE=DATE:20261223
 DTEND;VALUE=DATE:20261224
 SUMMARY:📚 Christmas Break — No School
@@ -1133,7 +1189,7 @@ URL:https://hobartchamber.org/#calendar
 END:VEVENT
 BEGIN:VEVENT
 UID:sc31@hobartchamber.org
-DTSTAMP:20261121T071443Z
+DTSTAMP:20261123T012658Z
 DTSTART;VALUE=DATE:20261224
 DTEND;VALUE=DATE:20261225
 SUMMARY:📚 Christmas Break — No School
@@ -1144,7 +1200,7 @@ URL:https://hobartchamber.org/#calendar
 END:VEVENT
 BEGIN:VEVENT
 UID:h12@hobartchamber.org
-DTSTAMP:20261121T071443Z
+DTSTAMP:20261123T012658Z
 DTSTART;VALUE=DATE:20261225
 DTEND;VALUE=DATE:20261226
 SUMMARY:🇺🇸 Christmas Day
@@ -1156,7 +1212,7 @@ URL:https://hobartchamber.org/#calendar
 END:VEVENT
 BEGIN:VEVENT
 UID:sc32@hobartchamber.org
-DTSTAMP:20261121T071443Z
+DTSTAMP:20261123T012658Z
 DTSTART;VALUE=DATE:20261225
 DTEND;VALUE=DATE:20261226
 SUMMARY:📚 Christmas Break — No School
@@ -1167,7 +1223,7 @@ URL:https://hobartchamber.org/#calendar
 END:VEVENT
 BEGIN:VEVENT
 UID:sc33@hobartchamber.org
-DTSTAMP:20261121T071443Z
+DTSTAMP:20261123T012658Z
 DTSTART;VALUE=DATE:20261226
 DTEND;VALUE=DATE:20261227
 SUMMARY:📚 Christmas Break — No School
@@ -1178,7 +1234,7 @@ URL:https://hobartchamber.org/#calendar
 END:VEVENT
 BEGIN:VEVENT
 UID:sc34@hobartchamber.org
-DTSTAMP:20261121T071443Z
+DTSTAMP:20261123T012658Z
 DTSTART;VALUE=DATE:20261227
 DTEND;VALUE=DATE:20261228
 SUMMARY:📚 Christmas Break — No School
@@ -1189,7 +1245,7 @@ URL:https://hobartchamber.org/#calendar
 END:VEVENT
 BEGIN:VEVENT
 UID:sc35@hobartchamber.org
-DTSTAMP:20261121T071443Z
+DTSTAMP:20261123T012658Z
 DTSTART;VALUE=DATE:20261228
 DTEND;VALUE=DATE:20261229
 SUMMARY:📚 Christmas Break — No School
@@ -1200,7 +1256,7 @@ URL:https://hobartchamber.org/#calendar
 END:VEVENT
 BEGIN:VEVENT
 UID:sp87@hobartchamber.org
-DTSTAMP:20261121T071443Z
+DTSTAMP:20261123T012658Z
 DTSTART;VALUE=DATE:20261228
 DTEND;VALUE=DATE:20261229
 SUMMARY:🏀 HS Basketball Mustang Holiday Tournament
@@ -1212,7 +1268,7 @@ URL:https://hobartchamber.org/#calendar
 END:VEVENT
 BEGIN:VEVENT
 UID:sc36@hobartchamber.org
-DTSTAMP:20261121T071443Z
+DTSTAMP:20261123T012658Z
 DTSTART;VALUE=DATE:20261229
 DTEND;VALUE=DATE:20261230
 SUMMARY:📚 Christmas Break — No School
@@ -1223,7 +1279,7 @@ URL:https://hobartchamber.org/#calendar
 END:VEVENT
 BEGIN:VEVENT
 UID:sc37@hobartchamber.org
-DTSTAMP:20261121T071443Z
+DTSTAMP:20261123T012658Z
 DTSTART;VALUE=DATE:20261230
 DTEND;VALUE=DATE:20261231
 SUMMARY:📚 Christmas Break — No School
@@ -1234,7 +1290,7 @@ URL:https://hobartchamber.org/#calendar
 END:VEVENT
 BEGIN:VEVENT
 UID:sc38@hobartchamber.org
-DTSTAMP:20261121T071443Z
+DTSTAMP:20261123T012658Z
 DTSTART;VALUE=DATE:20261231
 DTEND;VALUE=DATE:20270101
 SUMMARY:📚 Christmas Break — No School
@@ -1245,7 +1301,7 @@ URL:https://hobartchamber.org/#calendar
 END:VEVENT
 BEGIN:VEVENT
 UID:h13@hobartchamber.org
-DTSTAMP:20261121T071443Z
+DTSTAMP:20261123T012658Z
 DTSTART;VALUE=DATE:20270101
 DTEND;VALUE=DATE:20270102
 SUMMARY:🇺🇸 New Year's Day
@@ -1257,7 +1313,7 @@ URL:https://hobartchamber.org/#calendar
 END:VEVENT
 BEGIN:VEVENT
 UID:sc39@hobartchamber.org
-DTSTAMP:20261121T071443Z
+DTSTAMP:20261123T012658Z
 DTSTART;VALUE=DATE:20270101
 DTEND;VALUE=DATE:20270102
 SUMMARY:📚 Christmas Break — No School
@@ -1268,7 +1324,7 @@ URL:https://hobartchamber.org/#calendar
 END:VEVENT
 BEGIN:VEVENT
 UID:sc40@hobartchamber.org
-DTSTAMP:20261121T071443Z
+DTSTAMP:20261123T012658Z
 DTSTART;VALUE=DATE:20270104
 DTEND;VALUE=DATE:20270105
 SUMMARY:📚 Second Semester Begins
@@ -1279,7 +1335,7 @@ URL:https://hobartchamber.org/#calendar
 END:VEVENT
 BEGIN:VEVENT
 UID:sp88@hobartchamber.org
-DTSTAMP:20261121T071443Z
+DTSTAMP:20261123T012658Z
 DTSTART;TZID=America/Chicago:20270105T180000
 DTEND;TZID=America/Chicago:20270105T200000
 SUMMARY:🏀 HS Basketball vs BFDC
@@ -1290,7 +1346,7 @@ URL:https://hobartchamber.org/#calendar
 END:VEVENT
 BEGIN:VEVENT
 UID:sp89@hobartchamber.org
-DTSTAMP:20261121T071443Z
+DTSTAMP:20261123T012658Z
 DTSTART;VALUE=DATE:20270107
 DTEND;VALUE=DATE:20270108
 SUMMARY:🏀 HS Basketball Apache Tournament
@@ -1302,7 +1358,7 @@ URL:https://hobartchamber.org/#calendar
 END:VEVENT
 BEGIN:VEVENT
 UID:sp75@hobartchamber.org
-DTSTAMP:20261121T071443Z
+DTSTAMP:20261123T012658Z
 DTSTART;VALUE=DATE:20270111
 DTEND;VALUE=DATE:20270112
 SUMMARY:🏀 JH Basketball Tri-County Tournament
@@ -1314,7 +1370,7 @@ URL:https://hobartchamber.org/#calendar
 END:VEVENT
 BEGIN:VEVENT
 UID:bb5@hobartchamber.org
-DTSTAMP:20261121T071443Z
+DTSTAMP:20261123T012658Z
 DTSTART;TZID=America/Chicago:20270112T160000
 DTEND;TZID=America/Chicago:20270112T180000
 SUMMARY:🏀 5/6th Basketball vs Ft. Cobb
@@ -1326,7 +1382,7 @@ URL:https://hobartchamber.org/#calendar
 END:VEVENT
 BEGIN:VEVENT
 UID:sp90@hobartchamber.org
-DTSTAMP:20261121T071443Z
+DTSTAMP:20261123T012658Z
 DTSTART;TZID=America/Chicago:20270112T180000
 DTEND;TZID=America/Chicago:20270112T200000
 SUMMARY:🏀 HS Basketball @ Mangum
@@ -1337,7 +1393,7 @@ URL:https://hobartchamber.org/#calendar
 END:VEVENT
 BEGIN:VEVENT
 UID:sp76@hobartchamber.org
-DTSTAMP:20261121T071443Z
+DTSTAMP:20261123T012658Z
 DTSTART;TZID=America/Chicago:20270115T160000
 DTEND;TZID=America/Chicago:20270115T180000
 SUMMARY:🏀 JH Basketball vs Navajo
@@ -1349,7 +1405,7 @@ URL:https://hobartchamber.org/#calendar
 END:VEVENT
 BEGIN:VEVENT
 UID:sp91@hobartchamber.org
-DTSTAMP:20261121T071443Z
+DTSTAMP:20261123T012658Z
 DTSTART;TZID=America/Chicago:20270115T180000
 DTEND;TZID=America/Chicago:20270115T200000
 SUMMARY:🏀 HS Basketball vs Navajo
@@ -1360,7 +1416,7 @@ URL:https://hobartchamber.org/#calendar
 END:VEVENT
 BEGIN:VEVENT
 UID:bb6@hobartchamber.org
-DTSTAMP:20261121T071443Z
+DTSTAMP:20261123T012658Z
 DTSTART;TZID=America/Chicago:20270118T163000
 DTEND;TZID=America/Chicago:20270118T183000
 SUMMARY:🏀 5/6th Basketball vs Merritt
@@ -1371,7 +1427,7 @@ URL:https://hobartchamber.org/#calendar
 END:VEVENT
 BEGIN:VEVENT
 UID:h14@hobartchamber.org
-DTSTAMP:20261121T071443Z
+DTSTAMP:20261123T012658Z
 DTSTART;VALUE=DATE:20270118
 DTEND;VALUE=DATE:20270119
 SUMMARY:🇺🇸 Martin Luther King Jr. Day
@@ -1383,7 +1439,7 @@ URL:https://hobartchamber.org/#calendar
 END:VEVENT
 BEGIN:VEVENT
 UID:sc41@hobartchamber.org
-DTSTAMP:20261121T071443Z
+DTSTAMP:20261123T012658Z
 DTSTART;VALUE=DATE:20270118
 DTEND;VALUE=DATE:20270119
 SUMMARY:📚 Professional Day
@@ -1394,7 +1450,7 @@ URL:https://hobartchamber.org/#calendar
 END:VEVENT
 BEGIN:VEVENT
 UID:sp77@hobartchamber.org
-DTSTAMP:20261121T071443Z
+DTSTAMP:20261123T012658Z
 DTSTART;TZID=America/Chicago:20270118T183000
 DTEND;TZID=America/Chicago:20270118T203000
 SUMMARY:🏀 JH Basketball vs Frederick
@@ -1406,7 +1462,7 @@ URL:https://hobartchamber.org/#calendar
 END:VEVENT
 BEGIN:VEVENT
 UID:sp92@hobartchamber.org
-DTSTAMP:20261121T071443Z
+DTSTAMP:20261123T012658Z
 DTSTART;TZID=America/Chicago:20270119T180000
 DTEND;TZID=America/Chicago:20270119T200000
 SUMMARY:🏀 HS Basketball vs Hammon
@@ -1417,7 +1473,7 @@ URL:https://hobartchamber.org/#calendar
 END:VEVENT
 BEGIN:VEVENT
 UID:sc42@hobartchamber.org
-DTSTAMP:20261121T071443Z
+DTSTAMP:20261123T012658Z
 DTSTART;VALUE=DATE:20270120
 DTEND;VALUE=DATE:20270121
 SUMMARY:📚 Progress Reports
@@ -1428,7 +1484,7 @@ URL:https://hobartchamber.org/#calendar
 END:VEVENT
 BEGIN:VEVENT
 UID:sp93@hobartchamber.org
-DTSTAMP:20261121T071443Z
+DTSTAMP:20261123T012658Z
 DTSTART;VALUE=DATE:20270121
 DTEND;VALUE=DATE:20270122
 SUMMARY:🏀 HS Basketball Tri-County Tournament
@@ -1440,7 +1496,7 @@ URL:https://hobartchamber.org/#calendar
 END:VEVENT
 BEGIN:VEVENT
 UID:sp78@hobartchamber.org
-DTSTAMP:20261121T071443Z
+DTSTAMP:20261123T012658Z
 DTSTART;TZID=America/Chicago:20270125T183000
 DTEND;TZID=America/Chicago:20270125T203000
 SUMMARY:🏀 JH Basketball @ Frederick
@@ -1452,7 +1508,7 @@ URL:https://hobartchamber.org/#calendar
 END:VEVENT
 BEGIN:VEVENT
 UID:sp94@hobartchamber.org
-DTSTAMP:20261121T071443Z
+DTSTAMP:20261123T012658Z
 DTSTART;TZID=America/Chicago:20270126T180000
 DTEND;TZID=America/Chicago:20270126T200000
 SUMMARY:🏀 HS Basketball vs Lookeba-Sickles
@@ -1463,7 +1519,7 @@ URL:https://hobartchamber.org/#calendar
 END:VEVENT
 BEGIN:VEVENT
 UID:sp79@hobartchamber.org
-DTSTAMP:20261121T071443Z
+DTSTAMP:20261123T012658Z
 DTSTART;TZID=America/Chicago:20270128T183000
 DTEND;TZID=America/Chicago:20270128T203000
 SUMMARY:🏀 JH Basketball vs Ft. Cobb-Broxton
@@ -1475,7 +1531,7 @@ URL:https://hobartchamber.org/#calendar
 END:VEVENT
 BEGIN:VEVENT
 UID:sp95@hobartchamber.org
-DTSTAMP:20261121T071443Z
+DTSTAMP:20261123T012658Z
 DTSTART;TZID=America/Chicago:20270129T180000
 DTEND;TZID=America/Chicago:20270129T200000
 SUMMARY:🏀 HS Basketball @ Ft. Cobb-Broxton
@@ -1486,7 +1542,7 @@ URL:https://hobartchamber.org/#calendar
 END:VEVENT
 BEGIN:VEVENT
 UID:sp80@hobartchamber.org
-DTSTAMP:20261121T071443Z
+DTSTAMP:20261123T012658Z
 DTSTART;TZID=America/Chicago:20270201T183000
 DTEND;TZID=America/Chicago:20270201T203000
 SUMMARY:🏀 JH Basketball @ Merritt
@@ -1498,7 +1554,7 @@ URL:https://hobartchamber.org/#calendar
 END:VEVENT
 BEGIN:VEVENT
 UID:sp96@hobartchamber.org
-DTSTAMP:20261121T071443Z
+DTSTAMP:20261123T012658Z
 DTSTART;TZID=America/Chicago:20270202T180000
 DTEND;TZID=America/Chicago:20270202T200000
 SUMMARY:🏀 HS Basketball vs Watonga
@@ -1509,7 +1565,7 @@ URL:https://hobartchamber.org/#calendar
 END:VEVENT
 BEGIN:VEVENT
 UID:sp97@hobartchamber.org
-DTSTAMP:20261121T071443Z
+DTSTAMP:20261123T012658Z
 DTSTART;TZID=America/Chicago:20270204T180000
 DTEND;TZID=America/Chicago:20270204T200000
 SUMMARY:🏀 HS Basketball @ Frederick
@@ -1520,7 +1576,7 @@ URL:https://hobartchamber.org/#calendar
 END:VEVENT
 BEGIN:VEVENT
 UID:sp98@hobartchamber.org
-DTSTAMP:20261121T071443Z
+DTSTAMP:20261123T012658Z
 DTSTART;TZID=America/Chicago:20270209T180000
 DTEND;TZID=America/Chicago:20270209T200000
 SUMMARY:🏀 HS Basketball vs Merritt
@@ -1531,7 +1587,7 @@ URL:https://hobartchamber.org/#calendar
 END:VEVENT
 BEGIN:VEVENT
 UID:sc43@hobartchamber.org
-DTSTAMP:20261121T071443Z
+DTSTAMP:20261123T012658Z
 DTSTART;VALUE=DATE:20270210
 DTEND;VALUE=DATE:20270211
 SUMMARY:📚 Progress Reports
@@ -1542,7 +1598,7 @@ URL:https://hobartchamber.org/#calendar
 END:VEVENT
 BEGIN:VEVENT
 UID:sp99@hobartchamber.org
-DTSTAMP:20261121T071443Z
+DTSTAMP:20261123T012658Z
 DTSTART;TZID=America/Chicago:20270212T180000
 DTEND;TZID=America/Chicago:20270212T200000
 SUMMARY:🏀 HS Basketball @ Hinton
@@ -1553,7 +1609,7 @@ URL:https://hobartchamber.org/#calendar
 END:VEVENT
 BEGIN:VEVENT
 UID:h15@hobartchamber.org
-DTSTAMP:20261121T071443Z
+DTSTAMP:20261123T012658Z
 DTSTART;VALUE=DATE:20270215
 DTEND;VALUE=DATE:20270216
 SUMMARY:🇺🇸 Presidents' Day
@@ -1565,7 +1621,7 @@ URL:https://hobartchamber.org/#calendar
 END:VEVENT
 BEGIN:VEVENT
 UID:sc44@hobartchamber.org
-DTSTAMP:20261121T071443Z
+DTSTAMP:20261123T012658Z
 DTSTART;VALUE=DATE:20270215
 DTEND;VALUE=DATE:20270216
 SUMMARY:📚 No School
@@ -1576,7 +1632,7 @@ URL:https://hobartchamber.org/#calendar
 END:VEVENT
 BEGIN:VEVENT
 UID:sp100@hobartchamber.org
-DTSTAMP:20261121T071443Z
+DTSTAMP:20261123T012658Z
 DTSTART;TZID=America/Chicago:20270215T180000
 DTEND;TZID=America/Chicago:20270215T200000
 SUMMARY:🏀 HS Basketball @ Walters
@@ -1587,7 +1643,7 @@ URL:https://hobartchamber.org/#calendar
 END:VEVENT
 BEGIN:VEVENT
 UID:sp101@hobartchamber.org
-DTSTAMP:20261121T071443Z
+DTSTAMP:20261123T012658Z
 DTSTART;VALUE=DATE:20270218
 DTEND;VALUE=DATE:20270219
 SUMMARY:🏀 HS Basketball District
@@ -1598,7 +1654,7 @@ URL:https://hobartchamber.org/#calendar
 END:VEVENT
 BEGIN:VEVENT
 UID:sp102@hobartchamber.org
-DTSTAMP:20261121T071443Z
+DTSTAMP:20261123T012658Z
 DTSTART;VALUE=DATE:20270223
 DTEND;VALUE=DATE:20270224
 SUMMARY:🏀 HS Basketball Regional
@@ -1610,7 +1666,7 @@ URL:https://hobartchamber.org/#calendar
 END:VEVENT
 BEGIN:VEVENT
 UID:sg9@hobartchamber.org
-DTSTAMP:20261121T071443Z
+DTSTAMP:20261123T012658Z
 DTSTART;VALUE=DATE:20270227
 DTEND;VALUE=DATE:20270228
 SUMMARY:🎭 This Murder Was Staged
@@ -1625,7 +1681,7 @@ URL:https://hobartchamber.org/#calendar
 END:VEVENT
 BEGIN:VEVENT
 UID:sg10@hobartchamber.org
-DTSTAMP:20261121T071443Z
+DTSTAMP:20261123T012658Z
 DTSTART;VALUE=DATE:20270228
 DTEND;VALUE=DATE:20270301
 SUMMARY:🎭 This Murder Was Staged
@@ -1640,7 +1696,7 @@ URL:https://hobartchamber.org/#calendar
 END:VEVENT
 BEGIN:VEVENT
 UID:sc45@hobartchamber.org
-DTSTAMP:20261121T071443Z
+DTSTAMP:20261123T012658Z
 DTSTART;VALUE=DATE:20270304
 DTEND;VALUE=DATE:20270305
 SUMMARY:📚 Nine Weeks Tests
@@ -1651,7 +1707,7 @@ URL:https://hobartchamber.org/#calendar
 END:VEVENT
 BEGIN:VEVENT
 UID:sp103@hobartchamber.org
-DTSTAMP:20261121T071443Z
+DTSTAMP:20261123T012658Z
 DTSTART;VALUE=DATE:20270304
 DTEND;VALUE=DATE:20270305
 SUMMARY:🏀 HS Basketball Area
@@ -1662,7 +1718,7 @@ URL:https://hobartchamber.org/#calendar
 END:VEVENT
 BEGIN:VEVENT
 UID:sc46@hobartchamber.org
-DTSTAMP:20261121T071443Z
+DTSTAMP:20261123T012658Z
 DTSTART;VALUE=DATE:20270305
 DTEND;VALUE=DATE:20270306
 SUMMARY:📚 Nine Weeks Tests
@@ -1673,7 +1729,7 @@ URL:https://hobartchamber.org/#calendar
 END:VEVENT
 BEGIN:VEVENT
 UID:sc47@hobartchamber.org
-DTSTAMP:20261121T071443Z
+DTSTAMP:20261123T012658Z
 DTSTART;VALUE=DATE:20270305
 DTEND;VALUE=DATE:20270306
 SUMMARY:📚 End of 3rd Nine Weeks
@@ -1685,7 +1741,7 @@ URL:https://hobartchamber.org/#calendar
 END:VEVENT
 BEGIN:VEVENT
 UID:sg11@hobartchamber.org
-DTSTAMP:20261121T071443Z
+DTSTAMP:20261123T012658Z
 DTSTART;VALUE=DATE:20270306
 DTEND;VALUE=DATE:20270307
 SUMMARY:🎭 This Murder Was Staged
@@ -1700,7 +1756,7 @@ URL:https://hobartchamber.org/#calendar
 END:VEVENT
 BEGIN:VEVENT
 UID:sg12@hobartchamber.org
-DTSTAMP:20261121T071443Z
+DTSTAMP:20261123T012658Z
 DTSTART;VALUE=DATE:20270307
 DTEND;VALUE=DATE:20270308
 SUMMARY:🎭 This Murder Was Staged
@@ -1715,7 +1771,7 @@ URL:https://hobartchamber.org/#calendar
 END:VEVENT
 BEGIN:VEVENT
 UID:sc48@hobartchamber.org
-DTSTAMP:20261121T071443Z
+DTSTAMP:20261123T012658Z
 DTSTART;TZID=America/Chicago:20270311T151500
 DTEND;TZID=America/Chicago:20270311T211500
 SUMMARY:📚 Parent-Teacher Conferences
@@ -1727,7 +1783,7 @@ URL:https://hobartchamber.org/#calendar
 END:VEVENT
 BEGIN:VEVENT
 UID:sp104@hobartchamber.org
-DTSTAMP:20261121T071443Z
+DTSTAMP:20261123T012658Z
 DTSTART;VALUE=DATE:20270311
 DTEND;VALUE=DATE:20270312
 SUMMARY:🏀 HS Basketball State
@@ -1739,7 +1795,7 @@ URL:https://hobartchamber.org/#calendar
 END:VEVENT
 BEGIN:VEVENT
 UID:sc49@hobartchamber.org
-DTSTAMP:20261121T071443Z
+DTSTAMP:20261123T012658Z
 DTSTART;VALUE=DATE:20270312
 DTEND;VALUE=DATE:20270313
 SUMMARY:📚 Parent-Teacher Conferences
@@ -1750,7 +1806,7 @@ URL:https://hobartchamber.org/#calendar
 END:VEVENT
 BEGIN:VEVENT
 UID:sc50@hobartchamber.org
-DTSTAMP:20261121T071443Z
+DTSTAMP:20261123T012658Z
 DTSTART;VALUE=DATE:20270315
 DTEND;VALUE=DATE:20270316
 SUMMARY:📚 Spring Break — No School
@@ -1761,7 +1817,7 @@ URL:https://hobartchamber.org/#calendar
 END:VEVENT
 BEGIN:VEVENT
 UID:sc51@hobartchamber.org
-DTSTAMP:20261121T071443Z
+DTSTAMP:20261123T012658Z
 DTSTART;VALUE=DATE:20270316
 DTEND;VALUE=DATE:20270317
 SUMMARY:📚 Spring Break — No School
@@ -1772,7 +1828,7 @@ URL:https://hobartchamber.org/#calendar
 END:VEVENT
 BEGIN:VEVENT
 UID:sc52@hobartchamber.org
-DTSTAMP:20261121T071443Z
+DTSTAMP:20261123T012658Z
 DTSTART;VALUE=DATE:20270317
 DTEND;VALUE=DATE:20270318
 SUMMARY:📚 Spring Break — No School
@@ -1783,7 +1839,7 @@ URL:https://hobartchamber.org/#calendar
 END:VEVENT
 BEGIN:VEVENT
 UID:sc53@hobartchamber.org
-DTSTAMP:20261121T071443Z
+DTSTAMP:20261123T012658Z
 DTSTART;VALUE=DATE:20270318
 DTEND;VALUE=DATE:20270319
 SUMMARY:📚 Spring Break — No School
@@ -1794,7 +1850,7 @@ URL:https://hobartchamber.org/#calendar
 END:VEVENT
 BEGIN:VEVENT
 UID:sc54@hobartchamber.org
-DTSTAMP:20261121T071443Z
+DTSTAMP:20261123T012658Z
 DTSTART;VALUE=DATE:20270319
 DTEND;VALUE=DATE:20270320
 SUMMARY:📚 Spring Break — No School
@@ -1805,7 +1861,7 @@ URL:https://hobartchamber.org/#calendar
 END:VEVENT
 BEGIN:VEVENT
 UID:sc55@hobartchamber.org
-DTSTAMP:20261121T071443Z
+DTSTAMP:20261123T012658Z
 DTSTART;VALUE=DATE:20270326
 DTEND;VALUE=DATE:20270327
 SUMMARY:📚 No School
@@ -1816,7 +1872,7 @@ URL:https://hobartchamber.org/#calendar
 END:VEVENT
 BEGIN:VEVENT
 UID:sc56@hobartchamber.org
-DTSTAMP:20261121T071443Z
+DTSTAMP:20261123T012658Z
 DTSTART;VALUE=DATE:20270329
 DTEND;VALUE=DATE:20270330
 SUMMARY:📚 No School
@@ -1827,7 +1883,7 @@ URL:https://hobartchamber.org/#calendar
 END:VEVENT
 BEGIN:VEVENT
 UID:sc57@hobartchamber.org
-DTSTAMP:20261121T071443Z
+DTSTAMP:20261123T012658Z
 DTSTART;VALUE=DATE:20270416
 DTEND;VALUE=DATE:20270417
 SUMMARY:📚 No School
@@ -1838,7 +1894,7 @@ URL:https://hobartchamber.org/#calendar
 END:VEVENT
 BEGIN:VEVENT
 UID:sg13@hobartchamber.org
-DTSTAMP:20261121T071443Z
+DTSTAMP:20261123T012658Z
 DTSTART;VALUE=DATE:20270417
 DTEND;VALUE=DATE:20270418
 SUMMARY:🎭 Antlia Pneumatica
@@ -1853,7 +1909,7 @@ URL:https://hobartchamber.org/#calendar
 END:VEVENT
 BEGIN:VEVENT
 UID:sg14@hobartchamber.org
-DTSTAMP:20261121T071443Z
+DTSTAMP:20261123T012658Z
 DTSTART;VALUE=DATE:20270418
 DTEND;VALUE=DATE:20270419
 SUMMARY:🎭 Antlia Pneumatica
@@ -1868,7 +1924,7 @@ URL:https://hobartchamber.org/#calendar
 END:VEVENT
 BEGIN:VEVENT
 UID:sc59@hobartchamber.org
-DTSTAMP:20261121T071443Z
+DTSTAMP:20261123T012658Z
 DTSTART;VALUE=DATE:20270421
 DTEND;VALUE=DATE:20270422
 SUMMARY:📚 Progress Reports
@@ -1879,7 +1935,7 @@ URL:https://hobartchamber.org/#calendar
 END:VEVENT
 BEGIN:VEVENT
 UID:sc58@hobartchamber.org
-DTSTAMP:20261121T071443Z
+DTSTAMP:20261123T012658Z
 DTSTART;VALUE=DATE:20270423
 DTEND;VALUE=DATE:20270424
 SUMMARY:📚 No School
@@ -1890,7 +1946,7 @@ URL:https://hobartchamber.org/#calendar
 END:VEVENT
 BEGIN:VEVENT
 UID:sg15@hobartchamber.org
-DTSTAMP:20261121T071443Z
+DTSTAMP:20261123T012658Z
 DTSTART;VALUE=DATE:20270424
 DTEND;VALUE=DATE:20270425
 SUMMARY:🎭 Antlia Pneumatica
@@ -1905,7 +1961,7 @@ URL:https://hobartchamber.org/#calendar
 END:VEVENT
 BEGIN:VEVENT
 UID:sg16@hobartchamber.org
-DTSTAMP:20261121T071443Z
+DTSTAMP:20261123T012658Z
 DTSTART;VALUE=DATE:20270425
 DTEND;VALUE=DATE:20270426
 SUMMARY:🎭 Antlia Pneumatica
@@ -1920,7 +1976,7 @@ URL:https://hobartchamber.org/#calendar
 END:VEVENT
 BEGIN:VEVENT
 UID:sc60@hobartchamber.org
-DTSTAMP:20261121T071443Z
+DTSTAMP:20261123T012658Z
 DTSTART;VALUE=DATE:20270512
 DTEND;VALUE=DATE:20270513
 SUMMARY:📚 Semester Tests
@@ -1931,7 +1987,7 @@ URL:https://hobartchamber.org/#calendar
 END:VEVENT
 BEGIN:VEVENT
 UID:sc61@hobartchamber.org
-DTSTAMP:20261121T071443Z
+DTSTAMP:20261123T012658Z
 DTSTART;VALUE=DATE:20270513
 DTEND;VALUE=DATE:20270514
 SUMMARY:📚 Semester Tests
@@ -1942,7 +1998,7 @@ URL:https://hobartchamber.org/#calendar
 END:VEVENT
 BEGIN:VEVENT
 UID:sc62@hobartchamber.org
-DTSTAMP:20261121T071443Z
+DTSTAMP:20261123T012658Z
 DTSTART;VALUE=DATE:20270513
 DTEND;VALUE=DATE:20270514
 SUMMARY:📚 Student's Final Day
@@ -1953,7 +2009,7 @@ URL:https://hobartchamber.org/#calendar
 END:VEVENT
 BEGIN:VEVENT
 UID:sc63@hobartchamber.org
-DTSTAMP:20261121T071443Z
+DTSTAMP:20261123T012658Z
 DTSTART;VALUE=DATE:20270514
 DTEND;VALUE=DATE:20270515
 SUMMARY:📚 Professional Day
@@ -1964,7 +2020,7 @@ URL:https://hobartchamber.org/#calendar
 END:VEVENT
 BEGIN:VEVENT
 UID:sc64@hobartchamber.org
-DTSTAMP:20261121T071443Z
+DTSTAMP:20261123T012658Z
 DTSTART;VALUE=DATE:20270514
 DTEND;VALUE=DATE:20270515
 SUMMARY:📚 Commencement
@@ -1975,7 +2031,7 @@ URL:https://hobartchamber.org/#calendar
 END:VEVENT
 BEGIN:VEVENT
 UID:h16@hobartchamber.org
-DTSTAMP:20261121T071443Z
+DTSTAMP:20261123T012658Z
 DTSTART;VALUE=DATE:20270531
 DTEND;VALUE=DATE:20270601
 SUMMARY:🇺🇸 Memorial Day
@@ -1987,7 +2043,7 @@ URL:https://hobartchamber.org/#calendar
 END:VEVENT
 BEGIN:VEVENT
 UID:h18@hobartchamber.org
-DTSTAMP:20261121T071443Z
+DTSTAMP:20261123T012658Z
 DTSTART;VALUE=DATE:20270618
 DTEND;VALUE=DATE:20270619
 SUMMARY:🇺🇸 Juneteenth (Observed)
@@ -2000,7 +2056,7 @@ URL:https://hobartchamber.org/#calendar
 END:VEVENT
 BEGIN:VEVENT
 UID:h17@hobartchamber.org
-DTSTAMP:20261121T071443Z
+DTSTAMP:20261123T012658Z
 DTSTART;VALUE=DATE:20270619
 DTEND;VALUE=DATE:20270620
 SUMMARY:🇺🇸 Juneteenth
@@ -2014,7 +2070,7 @@ URL:https://hobartchamber.org/#calendar
 END:VEVENT
 BEGIN:VEVENT
 UID:h19@hobartchamber.org
-DTSTAMP:20261121T071443Z
+DTSTAMP:20261123T012658Z
 DTSTART;VALUE=DATE:20270704
 DTEND;VALUE=DATE:20270705
 SUMMARY:🇺🇸 Independence Day
@@ -2027,7 +2083,7 @@ URL:https://hobartchamber.org/#calendar
 END:VEVENT
 BEGIN:VEVENT
 UID:h20@hobartchamber.org
-DTSTAMP:20261121T071443Z
+DTSTAMP:20261123T012658Z
 DTSTART;VALUE=DATE:20270705
 DTEND;VALUE=DATE:20270706
 SUMMARY:🇺🇸 Independence Day (Observed)
@@ -2040,7 +2096,7 @@ URL:https://hobartchamber.org/#calendar
 END:VEVENT
 BEGIN:VEVENT
 UID:h21@hobartchamber.org
-DTSTAMP:20261121T071443Z
+DTSTAMP:20261123T012658Z
 DTSTART;VALUE=DATE:20270906
 DTEND;VALUE=DATE:20270907
 SUMMARY:🇺🇸 Labor Day
@@ -2052,7 +2108,7 @@ URL:https://hobartchamber.org/#calendar
 END:VEVENT
 BEGIN:VEVENT
 UID:h22@hobartchamber.org
-DTSTAMP:20261121T071443Z
+DTSTAMP:20261123T012658Z
 DTSTART;VALUE=DATE:20271011
 DTEND;VALUE=DATE:20271012
 SUMMARY:🇺🇸 Columbus Day
@@ -2064,7 +2120,7 @@ URL:https://hobartchamber.org/#calendar
 END:VEVENT
 BEGIN:VEVENT
 UID:h23@hobartchamber.org
-DTSTAMP:20261121T071443Z
+DTSTAMP:20261123T012658Z
 DTSTART;VALUE=DATE:20271111
 DTEND;VALUE=DATE:20271112
 SUMMARY:🇺🇸 Veterans Day
@@ -2076,7 +2132,7 @@ URL:https://hobartchamber.org/#calendar
 END:VEVENT
 BEGIN:VEVENT
 UID:h24@hobartchamber.org
-DTSTAMP:20261121T071443Z
+DTSTAMP:20261123T012658Z
 DTSTART;VALUE=DATE:20271125
 DTEND;VALUE=DATE:20271126
 SUMMARY:🇺🇸 Thanksgiving Day
@@ -2088,7 +2144,7 @@ URL:https://hobartchamber.org/#calendar
 END:VEVENT
 BEGIN:VEVENT
 UID:h26@hobartchamber.org
-DTSTAMP:20261121T071443Z
+DTSTAMP:20261123T012658Z
 DTSTART;VALUE=DATE:20271224
 DTEND;VALUE=DATE:20271225
 SUMMARY:🇺🇸 Christmas Day (Observed)
@@ -2101,7 +2157,7 @@ URL:https://hobartchamber.org/#calendar
 END:VEVENT
 BEGIN:VEVENT
 UID:h25@hobartchamber.org
-DTSTAMP:20261121T071443Z
+DTSTAMP:20261123T012658Z
 DTSTART;VALUE=DATE:20271225
 DTEND;VALUE=DATE:20271226
 SUMMARY:🇺🇸 Christmas Day
