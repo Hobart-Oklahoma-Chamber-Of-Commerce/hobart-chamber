@@ -80,6 +80,9 @@ const INTROS = {
  * @param post {type:'announce'|'reminder', ev:{id,title,date,time,location,description,runDates?}}
  * @param today 'YYYY-MM-DD' (Central time)
  */
+// a worded time reads mid-sentence: "During store hours" -> "during store hours" (TBA, 7:00 PM, Showtimes... untouched)
+const timeWords = (t) => (/^(During|All|Before|After|Until|Starting|Noon)\b/.test(t) && /^[A-Z][a-z]/.test(t) ? t[0].toLowerCase() + t.slice(1) : t);
+
 export function writeCaption(post, today) {
   const { ev, type } = post;
   const title = cleanTitle(ev.title);
@@ -88,7 +91,7 @@ export function writeCaption(post, today) {
 
   const lines = [];
   const multi = ev.runDates && ev.runDates.length > 1;
-  const t = cleanTime(ev.time);
+  const t = timeWords(cleanTime(ev.time));
   const timePart = t ? (/^showtimes/i.test(t) ? ` (${t[0].toLowerCase() + t.slice(1)})` : `, ${t}`) : '';
   lines.push(`When: ${multi ? runDatesText(ev.runDates) : longDate(ev.date)}${timePart}`);
   const place = cleanPlace(ev.location);
@@ -105,7 +108,7 @@ export function writeCaption(post, today) {
 export function altText(ev) {
   const t = cleanTitle(ev.title);
   const bits = [longDate(ev.date)];
-  if (cleanTime(ev.time)) bits.push(cleanTime(ev.time));
+  if (cleanTime(ev.time)) bits.push(timeWords(cleanTime(ev.time)));
   const place = cleanPlace(ev.location);
   if (place) bits.push(place);
   return `Hobart Happenings graphic for ${t}. ${bits.join(', ')}.`;

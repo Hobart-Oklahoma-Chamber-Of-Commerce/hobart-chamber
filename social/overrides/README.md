@@ -13,3 +13,16 @@ A time with no worker post just gets the Chamber's post added.
 
 The worker will not swap anything less than 15 minutes before post time, and old files can be
 left here; their time has passed, so the worker ignores them.
+
+## Re-making one of the worker's own posts
+
+When the calendar changes after a week is planned (a new event, a new location), list the slot in
+`social/redo.json`, optionally with the calendar event to post about:
+
+```json
+[{ "slot": "2026-11-25 14:45", "event": "ev-hometown-christmas-1128", "why": "added after the week was planned" }]
+```
+
+The next run deletes the worker's post in that slot and plans the slot again from today's calendar.
+Each entry runs once (it is recorded in `state/ledger.json`). Slots holding a Chamber graphic are never
+touched, and nothing is changed less than 30 minutes before post time.

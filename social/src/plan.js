@@ -248,7 +248,7 @@ export const WEEK_DAYS_AHEAD = 7;               // plan today plus the next 7 da
 export const WEEK_STARTS = '2026-11-16';        // days before this were already scheduled under the old five-a-day plan
 export const RECAP_MAX_DAYS_AHEAD = 1;          // the recap is made at most a day early so it can use real results
 
-export function planWeek(events, { members, data }, nowEpoch, ledger = {}) {
+export function planWeek(events, { members, data, force = {} }, nowEpoch, ledger = {}) {
   const { today } = centralNow(nowEpoch * 1000);
   const work = { ...ledger };
   const used = new Set();
@@ -285,7 +285,9 @@ export function planWeek(events, { members, data }, nowEpoch, ledger = {}) {
       } else if (kind === 'memberAM') { const m = members.length ? pickMember(members, D, work) : null; post = m ? memberPostAM(m, D) : null; }
       else if (kind === 'memberCommunity') { const m = members.length ? pickMemberCommunity(members, D, work, data.notes) : null; post = m ? memberPostCommunity(m, D, data.notes) : null; }
       else if (kind === 'event') {
-        const e = duePosts(events, D, work).find((p) => !used.has(p.key));
+        const want = force[`slot:${D}:${slot}`];                 // social/redo.json can name the event for this slot
+        if (want) post = forcedEventPost(events, D, work, want);
+        const e = post ? null : duePosts(events, D, work).find((p) => !used.has(p.key));
         if (e) post = { ...e };
         if (!post) { const g = gameDayPost(events, D, slot); if (g && !work[g.key]) post = g; }   // Bearcat games later today
         if (!post) { const t = teaser(events, D, work, used); if (t) post = t; }
@@ -296,4 +298,18 @@ export function planWeek(events, { members, data }, nowEpoch, ledger = {}) {
     }
   }
   return out;
+}
+
+// The post for one named event on day D (social/redo.json asked for it in a slot):
+// its due announcement or reminder if it has one, otherwise a one-off post for it.
+function forcedEventPost(events, D, work, id) {
+  const due = duePosts(events, D, work).find((p) => p.ev && p.ev.id === id);
+  if (due) return { ...due };
+  const run = buildRuns(events).find((r) => r.events.some((e) => e.id === id) && r.dates[r.dates.length - 1] >= D);
+  if (!run) return null;
+  const upcoming = run.dates.filter((d) => d >= D);
+  const rep = run.events.find((e) => e.date === upcoming[0]) || run.events[0];
+  const key = `${run.key}:redo:${D}`;
+  if (work[key]) return null;
+  return { key, type: upcoming[0] === D ? 'reminder' : 'announce', ev: { ...rep, runDates: upcoming.length > 1 ? upcoming : undefined }, eventDate: upcoming[0], runKey: run.key };
 }

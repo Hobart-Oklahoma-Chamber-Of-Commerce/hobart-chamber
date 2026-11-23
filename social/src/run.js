@@ -11,6 +11,9 @@
 //
 // Chamber graphics: a picture in social/overrides named for its time (2026-11-19-0730.jpg) plus its caption
 // (2026-11-19-0730.txt) replaces the worker's own post for that time. See social/overrides/README.md.
+//
+// Re-making the worker's own posts: list the slot in social/redo.json (optionally with the calendar event
+// to post about) and the next run deletes that post and plans the slot again from today's calendar.
 import fs from 'node:fs';
 import path from 'node:path';
 import crypto from 'node:crypto';
@@ -142,12 +145,50 @@ const events = [...seed, ...admin.events];
 const ics = writeICS(events, path.join(repoDir, 'hobart-chamber.ics'), today);
 console.log(`Calendar subscription: ${ics.count} events${ics.changed ? ' (updated)' : ' (no changes)'}`);
 
+// 1c) Re-make some of the worker's own posts (social/redo.json), e.g. when events were added after a week was
+//     planned. Each entry names a slot, {"slot": "2026-11-25 14:45"}, and for an event slot can name the
+//     calendar event to post about ("event": its id). The worker deletes its post in that slot and plans the
+//     slot again from today's calendar, once per entry. Chamber graphics are never touched. Dry runs only look.
+const redoPath = path.join(socialDir, 'redo.json');
+const force = {}, redoBySlot = {};
+let planLedger = ledger;
+if (fs.existsSync(redoPath)) {
+  let list = [];
+  try { list = JSON.parse(fs.readFileSync(redoPath, 'utf8')); } catch (e) { console.log(`  SKIPPED redo.json: ${e.message}`); }
+  for (const r of Array.isArray(list) ? list : []) {
+    const m = String((r && r.slot) || '').match(/^(\d{4}-\d{2}-\d{2})[ T](\d{2}:\d{2})$/);
+    if (!m) { console.log(`  SKIPPED redo entry with a bad slot: ${JSON.stringify(r && r.slot)}`); continue; }
+    const [, D, T] = m, label = `${D} ${T}`, slotKey = `slot:${D}:${T}`, redoKey = `redo:${D}:${T}`;
+    const sig = crypto.createHash('sha1').update(JSON.stringify({ slot: label, event: r.event || '' })).digest('hex').slice(0, 12);
+    if (ledger[redoKey] && ledger[redoKey].sig === sig) continue;                                    // already re-made
+    const at = zonedEpoch(D, T);
+    if (at < nowEpoch + CONFIG.MIN_LEAD_MINUTES * 60) { if (at > nowEpoch - 86400) console.log(`  SKIPPED redo for ${label}: too close to post time`); continue; }
+    if (r.event && !events.some((e) => e.id === r.event)) { console.log(`  SKIPPED redo for ${label}: no calendar event with id ${r.event}`); continue; }
+    const cur = ledger[slotKey];
+    if ((cur && String(cur.key).startsWith('override:')) || ledger[`override:${D}:${T}`]) { console.log(`  SKIPPED redo for ${label}: that slot has a Chamber graphic`); continue; }
+    const old = cur && cur.key && ledger[cur.key] ? { key: cur.key, ...ledger[cur.key] } : null;
+    if (fb.ready && old && old.fbPostId) {                                                           // look first
+      try { const o = await getNode(fb, old.fbPostId, 'id,name,created_time,updated_time'); console.log(`    now in ${label}: ${old.title} [${old.type}] ${o.id}, made ${o.created_time}, last changed ${o.updated_time}: "${String(o.name || '').replace(/\s+/g, ' ').slice(0, 70)}"`); }
+      catch (e) { console.log(`    now in ${label}: ${old.title} [${old.type}] ${old.fbPostId} (${e.message})`); }
+    }
+    if (!dry && old && old.fbPostId) {
+      try { const res = await deletePost(fb, old.fbPostId); console.log(`  ${res.toUpperCase()}  ${old.title} [${old.type}] for ${label}, to be re-made`); }
+      catch (e) { console.log(`  FAILED to delete ${old.title} for ${label}: ${e.message}`); process.exitCode = 1; continue; }
+    }
+    if (!dry) { delete ledger[slotKey]; if (old) delete ledger[old.key]; saveLedger(); }
+    else { if (planLedger === ledger) planLedger = { ...ledger }; delete planLedger[slotKey]; if (old) delete planLedger[old.key]; }
+    if (r.event) force[slotKey] = r.event;
+    redoBySlot[slotKey] = { redoKey, sig, replaced: old ? { title: old.title, type: old.type, fbPostId: old.fbPostId || null } : null };
+    console.log(`  ${dry ? 'WOULD REDO' : 'REDO'}  ${label}${old ? ` (was: ${old.title} [${old.type}])` : ''}${r.event ? ` -> ${r.event}` : ''}`);
+  }
+}
+
 // 2) the five-a-day plan
 const restaurants = loadRestaurants(socialDir);
 const members = loadMembers(indexHtml);
 const pubNow = opt('publish-now');
 const data = loadData(socialDir);
-let scheduled = planWeek(events, { members, data }, pubNow ? zonedEpoch(today, '00:00') : nowEpoch, ledger);
+let scheduled = planWeek(events, { members, data, force }, pubNow ? zonedEpoch(today, '00:00') : nowEpoch, planLedger);
 if (pubNow) scheduled = scheduled.filter((p) => p.scheduledDay === today && p.slot === pubNow);
 if (opt('only')) scheduled = scheduled.filter((p) => p.ev.id === opt('only') || p.slot === opt('only'));
 const skipped = [];
@@ -186,6 +227,8 @@ for (const post of scheduled) {
       const res = await postPhoto(pubNow ? { ...fb, mode: 'publish' } : fb, { imagePath: png, caption, altText: ['announce', 'reminder'].includes(post.type) ? altText(ev) : `Hobart Happenings graphic: ${cleanTitle(ev.title)}. ${ev.taglineOverride || ''}`.trim(), publishAtEpoch: post.scheduledFor });
       ledger[post.slotKey] = { scheduledFor: post.scheduledFor, key: post.key };
       ledger[post.key] = { fbPostId: res.post_id || res.id, scheduledFor: post.scheduledFor, title: cleanTitle(ev.title), type: post.type, mode: fb.mode, madeAt: new Date().toISOString() };
+      const rd = redoBySlot[post.slotKey];
+      if (rd) ledger[rd.redoKey] = { sig: rd.sig, slot: post.slotKey, key: post.key, replaced: rd.replaced, madeAt: new Date().toISOString() };   // done: never re-made twice
       fs.mkdirSync(path.dirname(ledgerPath), { recursive: true });
       fs.writeFileSync(ledgerPath, JSON.stringify(ledger, null, 2) + '\n');
       console.log(`  SENT   ${cleanTitle(ev.title)} [${post.type}] ${fb.mode === 'schedule' && !pubNow ? 'scheduled for ' + when + ' CT' : 'published now'} (id ${ledger[post.key].fbPostId})`);
