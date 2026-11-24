@@ -785,5 +785,53 @@
     "type": "engage",
     "mode": "schedule",
     "madeAt": "2026-11-23T07:44:39.913Z"
+  },
+  "slot:2026-12-01:07:30": {
+    "scheduledFor": 1796131800,
+    "key": "lineup:2026-12-01"
+  },
+  "lineup:2026-12-01": {
+    "fbPostId": "122182231088990004",
+    "scheduledFor": 1796131800,
+    "title": "Today in Hobart",
+    "type": "lineup",
+    "mode": "schedule",
+    "madeAt": "2026-11-24T09:58:24.694Z"
+  },
+  "slot:2026-12-01:10:30": {
+    "scheduledFor": 1796142600,
+    "key": "member:kiowa-county-farm-bureau:2026-12-01"
+  },
+  "member:kiowa-county-farm-bureau:2026-12-01": {
+    "fbPostId": "122182231142990004",
+    "scheduledFor": 1796142600,
+    "title": "Kiowa County Farm Bureau",
+    "type": "member",
+    "mode": "schedule",
+    "madeAt": "2026-11-24T09:58:27.074Z"
+  },
+  "slot:2026-12-01:14:45": {
+    "scheduledFor": 1796157900,
+    "key": "gameday:2026-12-01"
+  },
+  "gameday:2026-12-01": {
+    "fbPostId": "122182231184990004",
+    "scheduledFor": 1796157900,
+    "title": "Bearcat game day",
+    "type": "gameday",
+    "mode": "schedule",
+    "madeAt": "2026-11-24T09:58:29.017Z"
+  },
+  "slot:2026-12-01:19:30": {
+    "scheduledFor": 1796175000,
+    "key": "engage:fun:shop-local:2026-12-01"
+  },
+  "engage:fun:shop-local:2026-12-01": {
+    "fbPostId": "122182231226990004",
+    "scheduledFor": 1796175000,
+    "title": "Shop local",
+    "type": "engage",
+    "mode": "schedule",
+    "madeAt": "2026-11-24T09:58:31.249Z"
   }
 }
