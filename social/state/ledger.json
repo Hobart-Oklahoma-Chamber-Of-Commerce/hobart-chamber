@@ -833,5 +833,53 @@
     "type": "engage",
     "mode": "schedule",
     "madeAt": "2026-11-24T09:58:31.249Z"
+  },
+  "slot:2026-12-02:07:30": {
+    "scheduledFor": 1796218200,
+    "key": "lineup:2026-12-02"
+  },
+  "lineup:2026-12-02": {
+    "fbPostId": "122182356374990004",
+    "scheduledFor": 1796218200,
+    "title": "Coming up in Hobart",
+    "type": "lineup",
+    "mode": "schedule",
+    "madeAt": "2026-11-25T08:41:51.683Z"
+  },
+  "slot:2026-12-02:10:30": {
+    "scheduledFor": 1796229000,
+    "key": "member:kiowa-county-osu-extension:2026-12-02"
+  },
+  "member:kiowa-county-osu-extension:2026-12-02": {
+    "fbPostId": "122182356416990004",
+    "scheduledFor": 1796229000,
+    "title": "Kiowa County OSU Extension",
+    "type": "member",
+    "mode": "schedule",
+    "madeAt": "2026-11-25T08:41:53.685Z"
+  },
+  "slot:2026-12-02:14:45": {
+    "scheduledFor": 1796244300,
+    "key": "christmas in the park|2026-12-12:teaser"
+  },
+  "christmas in the park|2026-12-12:teaser": {
+    "fbPostId": "122182356470990004",
+    "scheduledFor": 1796244300,
+    "title": "Christmas in the Park",
+    "type": "announce",
+    "mode": "schedule",
+    "madeAt": "2026-11-25T08:41:55.782Z"
+  },
+  "slot:2026-12-02:19:30": {
+    "scheduledFor": 1796261400,
+    "key": "engage:history:namesake:2026-12-02"
+  },
+  "engage:history:namesake:2026-12-02": {
+    "fbPostId": "122182356512990004",
+    "scheduledFor": 1796261400,
+    "title": "Who is Hobart named for?",
+    "type": "engage",
+    "mode": "schedule",
+    "madeAt": "2026-11-25T08:41:57.812Z"
   }
 }
