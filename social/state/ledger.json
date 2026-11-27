@@ -929,5 +929,65 @@
     "type": "engage",
     "mode": "schedule",
     "madeAt": "2026-11-26T08:27:25.124Z"
+  },
+  "slot:2026-11-28:14:00": {
+    "scheduledFor": 1795896000,
+    "key": "recap:2026-11-28"
+  },
+  "recap:2026-11-28": {
+    "fbPostId": "122182611452990004",
+    "scheduledFor": 1795896000,
+    "title": "The week in Hobart",
+    "type": "recap",
+    "mode": "schedule",
+    "madeAt": "2026-11-27T08:40:41.644Z"
+  },
+  "slot:2026-12-04:07:30": {
+    "scheduledFor": 1796391000,
+    "key": "lineup:2026-12-04"
+  },
+  "lineup:2026-12-04": {
+    "fbPostId": "122182611518990004",
+    "scheduledFor": 1796391000,
+    "title": "Today in Hobart",
+    "type": "lineup",
+    "mode": "schedule",
+    "madeAt": "2026-11-27T08:40:45.220Z"
+  },
+  "slot:2026-12-04:10:30": {
+    "scheduledFor": 1796401800,
+    "key": "member:kris-hometown-legendz-inc-:2026-12-04"
+  },
+  "member:kris-hometown-legendz-inc-:2026-12-04": {
+    "fbPostId": "122182611650990004",
+    "scheduledFor": 1796401800,
+    "title": "Kris' Hometown Legendz, Inc.",
+    "type": "member",
+    "mode": "schedule",
+    "madeAt": "2026-11-27T08:40:47.726Z"
+  },
+  "slot:2026-12-04:14:45": {
+    "scheduledFor": 1796417100,
+    "key": "a dickens christmas carol|2026-11-28:reminder:2026-12-05"
+  },
+  "a dickens christmas carol|2026-11-28:reminder:2026-12-05": {
+    "fbPostId": "122182611698990004",
+    "scheduledFor": 1796417100,
+    "title": "A Dickens Christmas Carol",
+    "type": "reminder",
+    "mode": "schedule",
+    "madeAt": "2026-11-27T08:40:50.990Z"
+  },
+  "slot:2026-12-04:19:30": {
+    "scheduledFor": 1796434200,
+    "key": "engage:weekend:2026-12-04"
+  },
+  "engage:weekend:2026-12-04": {
+    "fbPostId": "122182611740990004",
+    "scheduledFor": 1796434200,
+    "title": "Weekend plans?",
+    "type": "engage",
+    "mode": "schedule",
+    "madeAt": "2026-11-27T08:40:53.860Z"
   }
 }
