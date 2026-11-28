@@ -989,5 +989,29 @@
     "type": "engage",
     "mode": "schedule",
     "madeAt": "2026-11-27T08:40:53.860Z"
+  },
+  "slot:2026-12-05:07:30": {
+    "scheduledFor": 1796477400,
+    "key": "lineup:2026-12-05"
+  },
+  "lineup:2026-12-05": {
+    "fbPostId": "122182731512990004",
+    "scheduledFor": 1796477400,
+    "title": "Today in Hobart",
+    "type": "lineup",
+    "mode": "schedule",
+    "madeAt": "2026-11-28T07:55:14.943Z"
+  },
+  "slot:2026-12-05:18:00": {
+    "scheduledFor": 1796515200,
+    "key": "christmas in the park|2026-12-12:announce"
+  },
+  "christmas in the park|2026-12-12:announce": {
+    "fbPostId": "122182731554990004",
+    "scheduledFor": 1796515200,
+    "title": "Christmas in the Park",
+    "type": "announce",
+    "mode": "schedule",
+    "madeAt": "2026-11-28T07:55:17.626Z"
   }
 }
