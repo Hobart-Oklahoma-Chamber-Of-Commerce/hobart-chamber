@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/png" sizes="48x48" href="favicon.png" />
+<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png" />
+<link rel="apple-touch-icon" href="apple-touch-icon.png" />
+<meta name="theme-color" content="#1a3ea8" />
+<title>A Special Call From Santa | Hobart Chamber of Commerce</title>
+<meta name="description" content="Sign up for a personal phone call from Santa Claus. $5 per child, $15 maximum per family. Hosted by the Hobart Chamber of Commerce.">
+<meta property="og:title" content="A Special Call From Santa! | Hobart Chamber of Commerce">
+<meta property="og:description" content="Sign your kids up for a personal phone call from Santa. $5 per child, $15 max per family.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
+<style>
+  :root{
+    --navy:#1a3ea8;
+    --navy-deep:#0e2056;
+    --gold:#c49a3e;
+    --gold-light:#dab65e;
+    --red:#b3261e;
+    --red-soft:#fbe9e9;
+    --green:#1c7a3e;
+    --white:#ffffff;
+    --slate:#f3f6fc;
+    --gray:#6f7d99;
+    --dark-gray:#2c3a58;
+    --border:#dbe3f4;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:'Inter',sans-serif;color:var(--navy-deep);background:var(--slate);line-height:1.5;padding:0 0 60px;}
+  .top-bar{background:var(--navy);padding:16px 20px;text-align:center;}
+  .top-bar a{color:var(--gold-light);font-size:13px;font-weight:600;text-decoration:none;letter-spacing:.3px;}
+  .top-bar a:hover{text-decoration:underline;}
+  .wrap{max-width:640px;margin:0 auto;padding:0 20px;}
+
+  .hero{position:relative;overflow:hidden;background:radial-gradient(circle at 20% 0%,#2a55cf 0%,var(--navy) 38%,var(--navy-deep) 100%);padding:48px 24px 52px;text-align:center;color:var(--white);border-bottom:4px solid var(--gold);}
+  .hero .snow{position:absolute;inset:0;pointer-events:none;background-image:radial-gradient(2px 2px at 10% 20%,rgba(255,255,255,.8) 50%,transparent 51%),radial-gradient(2px 2px at 30% 70%,rgba(255,255,255,.6) 50%,transparent 51%),radial-gradient(3px 3px at 55% 30%,rgba(255,255,255,.7) 50%,transparent 51%),radial-gradient(2px 2px at 75% 60%,rgba(255,255,255,.6) 50%,transparent 51%),radial-gradient(3px 3px at 90% 15%,rgba(255,255,255,.8) 50%,transparent 51%),radial-gradient(2px 2px at 65% 85%,rgba(255,255,255,.5) 50%,transparent 51%),radial-gradient(2px 2px at 18% 88%,rgba(255,255,255,.6) 50%,transparent 51%);}
+  .hero .inner{position:relative;}
+  .hero .santa{font-size:54px;line-height:1;margin-bottom:10px;filter:drop-shadow(0 4px 10px rgba(0,0,0,.25));}
+  .hero .eyebrow{font-size:12.5px;font-weight:700;letter-spacing:1.6px;text-transform:uppercase;color:var(--gold-light);margin-bottom:10px;}
+  .hero h1{font-family:'Playfair Display',serif;font-size:clamp(28px,6vw,40px);font-weight:900;line-height:1.15;margin-bottom:12px;}
+  .hero p{font-size:15px;color:#d6e0f7;max-width:460px;margin:0 auto;}
+  .price-pill{display:inline-flex;gap:10px;align-items:center;margin-top:18px;background:rgba(255,255,255,.1);border:1px solid rgba(218,182,94,.55);border-radius:99px;padding:9px 18px;font-size:14px;font-weight:700;color:var(--white);}
+  .price-pill span{color:var(--gold-light);}
+
+  .card{background:var(--white);border-radius:12px;box-shadow:0 10px 34px rgba(26,62,168,.12);margin-top:-28px;padding:30px 24px 34px;position:relative;border-top:5px solid var(--red);}
+  .pay-first{display:flex;gap:12px;align-items:flex-start;background:var(--red-soft);border:1px solid #f1c7c4;border-radius:8px;padding:14px 16px;margin-bottom:8px;}
+  .pay-first .ic{font-size:22px;line-height:1.2;}
+  .pay-first b{display:block;color:var(--red);font-size:14.5px;margin-bottom:3px;}
+  .pay-first p{font-size:13.5px;color:var(--dark-gray);}
+  .info-strip{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:14px 0 4px;}
+  .info-strip div{background:var(--slate);border:1px solid var(--border);border-radius:8px;padding:10px 12px;font-size:12.5px;color:var(--gray);}
+  .info-strip b{display:block;color:var(--navy);font-size:13.5px;}
+  .tbd{background:#fff6dd;color:#8a5a00;border:1px dashed #e0b44a;border-radius:4px;padding:0 5px;font-weight:700;}
+
+  .sec-title{font-family:'Playfair Display',serif;font-size:19px;font-weight:700;color:var(--navy);margin:28px 0 4px;padding-bottom:8px;border-bottom:2px solid var(--border);}
+  .sec-sub{font-size:12.5px;color:var(--gray);margin-bottom:16px;}
+  .fg{margin-bottom:16px;}
+  .fg label{display:block;font-size:12.5px;font-weight:600;color:var(--navy);margin-bottom:6px;letter-spacing:.2px;}
+  .fg input[type=text],.fg input[type=email],.fg input[type=tel],.fg input[type=number],.fg textarea{
+    width:100%;padding:12px 13px;border:1px solid var(--border);border-radius:6px;font-family:inherit;font-size:16px;color:var(--dark-gray);background:var(--white);transition:border-color .2s,box-shadow .2s;
+  }
+  .fg textarea{min-height:76px;resize:vertical;}
+  .fg input:focus,.fg textarea:focus{outline:none;border-color:var(--navy);box-shadow:0 0 0 3px rgba(26,62,168,.12);}
+  .row2{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+  .row3{display:grid;grid-template-columns:1fr 90px 110px;gap:10px;}
+  .radio-grid{display:flex;flex-wrap:wrap;gap:9px;}
+  .radio-opt{display:flex;align-items:center;gap:8px;font-size:14.5px;color:var(--dark-gray);cursor:pointer;padding:10px 14px;border:1px solid var(--border);border-radius:6px;transition:border-color .2s,background .2s;}
+  .radio-opt:has(input:checked){border-color:var(--navy);background:rgba(26,62,168,.05);}
+  .radio-opt input{width:17px;height:17px;accent-color:var(--navy);}
+
+  .child{border:1px solid var(--border);border-left:4px solid var(--green);border-radius:8px;padding:16px 16px 4px;margin-bottom:14px;background:#fcfdff;}
+  .child-hd{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;}
+  .child-hd b{font-size:14.5px;color:var(--green);}
+  .child-hd button{border:none;background:none;color:var(--red);font-size:13px;font-weight:600;cursor:pointer;}
+  .add-child{background:var(--white);border:1.5px dashed var(--border);color:var(--navy);font-size:14px;font-weight:600;padding:12px;border-radius:6px;width:100%;cursor:pointer;}
+  .add-child:hover{border-color:var(--navy);}
+  .add-child:disabled{opacity:.5;cursor:default;}
+
+  .total-box{display:flex;justify-content:space-between;align-items:center;background:var(--navy-deep);color:var(--white);border-radius:8px;padding:16px 18px;margin:18px 0 6px;}
+  .total-box small{display:block;color:#b9c7ea;font-size:12px;}
+  .total-box .amt{font-family:'Playfair Display',serif;font-size:30px;font-weight:900;color:var(--gold-light);}
+  .ack-row{display:flex;gap:10px;align-items:flex-start;font-size:13.5px;color:var(--dark-gray);padding:12px 14px;border:1px solid var(--border);border-radius:6px;cursor:pointer;margin-top:14px;}
+  .ack-row:has(input:checked){border-color:var(--navy);background:rgba(26,62,168,.05);}
+  .ack-row input{width:18px;height:18px;margin-top:2px;accent-color:var(--navy);flex-shrink:0;}
+
+  .submit-btn{background:var(--gold);color:var(--navy-deep);padding:17px;border:none;border-radius:6px;font-size:16px;font-weight:700;letter-spacing:.3px;cursor:pointer;width:100%;margin-top:18px;transition:background .2s;}
+  .submit-btn:hover{background:var(--gold-light);}
+  .submit-btn:disabled{opacity:.6;cursor:default;}
+  .form-msg{display:none;margin-top:16px;padding:14px 16px;border-radius:6px;font-size:14px;font-weight:500;text-align:center;}
+  .done{display:none;text-align:center;padding:10px 0 6px;}
+  .done .big{font-size:52px;}
+  .done h2{font-family:'Playfair Display',serif;color:var(--navy);font-size:26px;margin:8px 0 10px;}
+  .done p{font-size:14.5px;color:var(--dark-gray);margin-bottom:10px;}
+  .foot-note{text-align:center;font-size:12.5px;color:var(--gray);margin-top:22px;}
+  .req{color:var(--red);}
+  @media(max-width:480px){ .card{padding:24px 18px 28px;} .row2,.info-strip{grid-template-columns:1fr;} .row3{grid-template-columns:1fr 1fr;} .row3 .fg:first-child{grid-column:1 / -1;} }
+</style>
+</head>
+<body>
+
+<div class="top-bar"><a href="index.html">← Back to Hobart Chamber of Commerce</a></div>
+
+<div class="hero">
+  <div class="snow"></div>
+  <div class="wrap inner">
+    <div class="santa">🎅</div>
+    <div class="eyebrow">Hobart Chamber of Commerce</div>
+    <h1>A Special Call From Santa!</h1>
+    <p>Give your kids a phone call straight from the North Pole. Tell Santa a little about them and he'll make it personal.</p>
+    <div class="price-pill">$5 per child <span>★</span> $15 max per family</div>
+  </div>
+</div>
+
+<div class="wrap">
+  <div class="card">
+
+    <div class="pay-first">
+      <div class="ic">💳</div>
+      <div>
+        <b>Payment comes first</b>
+        <p>Santa's call is made only after payment is received. After you sign up, the Chamber will text or email you an invoice.</p>
+      </div>
+    </div>
+
+    <div class="info-strip">
+      <div><b>Call dates</b><span id="callDatesTxt"></span></div>
+      <div><b>Sign up by</b><span id="deadlineTxt"></span></div>
+    </div>
+
+    <form id="santaForm" onsubmit="return false;">
+
+      <div class="sec-title">Parent / Guardian</div>
+      <div class="fg"><label for="s_parent">Parent/Guardian Name <span class="req">*</span></label><input type="text" id="s_parent" autocomplete="name"></div>
+      <div class="row2">
+        <div class="fg"><label for="s_phone">Phone Number Santa Should Call <span class="req">*</span></label><input type="tel" id="s_phone" autocomplete="tel"></div>
+        <div class="fg"><label for="s_email">Email</label><input type="email" id="s_email" autocomplete="email"></div>
+      </div>
+      <div class="row2">
+        <div class="fg"><label for="s_pref">Preferred Call Date/Time <span class="req">*</span></label><input type="text" id="s_pref" placeholder="e.g. Dec 15, after 6 PM"></div>
+        <div class="fg"><label for="s_alt">Best Alternative Date/Time</label><input type="text" id="s_alt"></div>
+      </div>
+      <div class="fg">
+        <label>Send my invoice by <span class="req">*</span></label>
+        <div class="radio-grid">
+          <label class="radio-opt"><input type="radio" name="invoiceby" value="Text"> Text</label>
+          <label class="radio-opt"><input type="radio" name="invoiceby" value="Email"> Email</label>
+        </div>
+      </div>
+
+      <div class="sec-title">Your Child (or Children)</div>
+      <div class="sec-sub">One call per child. Add each child below. Santa reads this before he calls.</div>
+      <div id="childList"></div>
+      <button type="button" class="add-child" id="addChildBtn" onclick="addChild()">+ Add Another Child</button>
+
+      <div class="total-box">
+        <div><b id="callCountTxt">1 call</b><small>$5 per child, $15 maximum per family</small></div>
+        <div class="amt" id="totalTxt">$5</div>
+      </div>
+
+      <label class="ack-row">
+        <input type="checkbox" id="s_permission">
+        <span>I give permission for Santa / Chamber volunteers to call the number above. <span class="req">*</span></span>
+      </label>
+      <label class="ack-row">
+        <input type="checkbox" id="s_payack">
+        <span>I understand the call is made only after payment, and the Chamber will text or email me an invoice. <span class="req">*</span></span>
+      </label>
+
+      <div class="form-msg" id="s_msg"></div>
+      <button type="button" class="submit-btn" id="submitBtn" onclick="submitSanta()">Sign Up for Santa's Call</button>
+      <p class="foot-note">Information collected is used only to arrange and personalize the Santa phone calls.<br>Questions? Call the Chamber at (580) 682-0887.</p>
+    </form>
+
+    <div class="done" id="doneBox">
+      <div class="big">🎄</div>
+      <h2>You're on Santa's list!</h2>
+      <p>The Chamber will text or email you an invoice for <b id="doneTotal"></b>.</p>
+      <p><b>Santa's call is made once payment is received.</b></p>
+      <p style="margin-top:16px;"><a href="santa-calls.html" style="color:var(--navy);font-weight:600;">Sign up another family</a> · <a href="index.html" style="color:var(--navy);font-weight:600;">Back to the Chamber site</a></p>
+    </div>
+
+  </div>
+</div>
+
+<script>
+/* ---- EDIT THESE when Jessica confirms them ----
+   CALL_DATES: text shown to parents, e.g. 'December 14-18, evenings'
+   DEADLINE:   last day to sign up, as 'YYYY-MM-DD'. After this day the form closes.
+               Leave '' to keep the form open. */
+var CALL_DATES = '';
+var DEADLINE = '';
+var DEADLINE_LABEL = '';  /* e.g. 'Friday, December 11' */
+
+var PRICE_PER_CALL = 5, FAMILY_MAX = 15, MAX_CHILDREN = 8;
+
+/* ---- Firebase (writes the sign-up for the admin tracker) ---- */
+var firebaseConfig = {
+  apiKey: "AIzaSyDdoomYnp5-ASz7domQQervL8RttEtOY0o",
+  authDomain: "hobart-chamber.firebaseapp.com",
+  projectId: "hobart-chamber",
+  storageBucket: "hobart-chamber.firebasestorage.app",
+  messagingSenderId: "1018730792333",
+  appId: "1:1018730792333:web:b26c20feef8d04ed07a9c4"
+};
+var db=null, FB=false;
+try{ firebase.initializeApp(firebaseConfig); db=firebase.firestore(); FB=true; }catch(e){ console.warn('Firebase not initialized:',e); }
+
+/* ---- Web3Forms (instant email to the Chamber) ---- */
+var WEB3FORMS_KEY = "a35795f6-54b3-41a0-b5c8-043e93cb73a5";
+
+function tbd(t){ return '<span class="tbd">'+t+'</span>'; }
+document.getElementById('callDatesTxt').innerHTML = CALL_DATES ? CALL_DATES : tbd('Coming soon');
+document.getElementById('deadlineTxt').innerHTML = DEADLINE_LABEL ? DEADLINE_LABEL : tbd('Coming soon');
+
+function calcTotal(n){ return Math.min(n*PRICE_PER_CALL, FAMILY_MAX); }
+
+/* ---- child cards ---- */
+var childSeq=0;
+function addChild(){
+  var list=document.getElementById('childList');
+  if(list.children.length>=MAX_CHILDREN) return;
+  childSeq++;
+  var c=document.createElement('div');
+  c.className='child';
+  c.innerHTML='<div class="child-hd"><b class="c_title">Child</b><button type="button" class="c_rm" onclick="removeChild(this)">Remove</button></div>'
+    +'<div class="row3">'
+    +'<div class="fg"><label>Child\'s Name <span class="req">*</span></label><input type="text" class="c_name"></div>'
+    +'<div class="fg"><label>Age</label><input type="number" min="0" max="18" class="c_age" inputmode="numeric"></div>'
+    +'<div class="fg"><label>Grade</label><input type="text" class="c_grade" placeholder="e.g. 2nd"></div>'
+    +'</div>'
+    +'<div class="fg"><label>Teacher</label><input type="text" class="c_teacher"></div>'
+    +'<div class="fg"><label>What does this child want for Christmas?</label><textarea class="c_wish"></textarea></div>'
+    +'<div class="fg"><label>Something special Santa should know about this child</label><textarea class="c_special" placeholder="A pet\'s name, a big accomplishment this year, a little sibling…"></textarea></div>';
+  list.appendChild(c);
+  refreshChildren();
+}
+function removeChild(btn){ btn.closest('.child').remove(); refreshChildren(); }
+function refreshChildren(){
+  var cards=document.querySelectorAll('#childList .child'), n=cards.length, i;
+  for(i=0;i<n;i++){
+    cards[i].querySelector('.c_title').textContent='Child '+(i+1);
+    cards[i].querySelector('.c_rm').style.display = n>1 ? '' : 'none';
+  }
+  document.getElementById('addChildBtn').disabled = n>=MAX_CHILDREN;
+  document.getElementById('callCountTxt').textContent = n+(n===1?' call':' calls');
+  document.getElementById('totalTxt').textContent = '$'+calcTotal(n);
+}
+addChild();
+
+function showMsg(text,type){
+  var m=document.getElementById('s_msg');
+  m.style.display='block';
+  if(type==='ok'){ m.style.background='#e8f6ec'; m.style.color='#1c7a3e'; }
+  else if(type==='err'){ m.style.background='#fbe9e9'; m.style.color='#b3261e'; }
+  else{ m.style.background='#eef2fb'; m.style.color='#1a3ea8'; }
+  m.textContent=text;
+}
+function v(id){ return document.getElementById(id).value.trim(); }
+
+function submitSanta(){
+  var parent=v('s_parent'), phone=v('s_phone'), email=v('s_email'), pref=v('s_pref'), alt=v('s_alt');
+  var invEl=document.querySelector('input[name=invoiceby]:checked');
+  var invoiceBy=invEl?invEl.value:'';
+  var children=[];
+  var cards=document.querySelectorAll('#childList .child'), i, missingName=false;
+  for(i=0;i<cards.length;i++){
+    var c=cards[i];
+    var nm=c.querySelector('.c_name').value.trim();
+    var rec={ name:nm, age:c.querySelector('.c_age').value.trim(), grade:c.querySelector('.c_grade').value.trim(),
+      teacher:c.querySelector('.c_teacher').value.trim(), wish:c.querySelector('.c_wish').value.trim(), special:c.querySelector('.c_special').value.trim() };
+    if(!nm){ if(rec.age||rec.grade||rec.teacher||rec.wish||rec.special) missingName=true; continue; }
+    children.push(rec);
+  }
+
+  if(!parent){ showMsg('Please enter the parent or guardian name.','err'); return; }
+  if(!phone){ showMsg('Please enter the phone number Santa should call.','err'); return; }
+  if(!pref){ showMsg('Please give a preferred call date and time.','err'); return; }
+  if(!invoiceBy){ showMsg('Please choose text or email for your invoice.','err'); return; }
+  if(invoiceBy==='Email' && !email){ showMsg('Please enter your email so the Chamber can send your invoice.','err'); return; }
+  if(missingName){ showMsg('Please enter a name for each child card (or remove the empty card).','err'); return; }
+  if(!children.length){ showMsg('Please add at least one child.','err'); return; }
+  if(!document.getElementById('s_permission').checked){ showMsg('Please give permission for Santa to call the number above.','err'); return; }
+  if(!document.getElementById('s_payack').checked){ showMsg('Please check the box showing you understand payment comes before the call.','err'); return; }
+
+  var total=calcTotal(children.length);
+  var btn=document.getElementById('submitBtn');
+  btn.disabled=true;
+  showMsg('Sending your sign-up to the North Pole…','info');
+
+  var record={
+    parentName:parent, phone:phone, email:email, preferredTime:pref, alternateTime:alt,
+    invoiceBy:invoiceBy, children:children, numCalls:children.length, totalDue:total,
+    permissionGiven:true, status:'New',
+    invoiceSent:false, paymentReceived:false, amountPaid:'', callMade:false, adminNotes:'',
+    createdAt: FB ? firebase.firestore.FieldValue.serverTimestamp() : null
+  };
+
+  var savePromise = FB ? db.collection('santacalls').add(record) : Promise.reject(new Error('Database not connected'));
+
+  savePromise.then(function(){
+    var kidsText=children.map(function(k,idx){
+      return (idx+1)+'. '+k.name+(k.age?' (age '+k.age+')':'')+(k.grade?', grade '+k.grade:'')+(k.teacher?', teacher '+k.teacher:'')
+        +(k.wish?'\n   Wants: '+k.wish:'')+(k.special?'\n   Santa should know: '+k.special:'');
+    }).join('\n');
+    return fetch('https://api.web3forms.com/submit',{
+      method:'POST',
+      headers:{'Content-Type':'application/json','Accept':'application/json'},
+      body:JSON.stringify({
+        access_key: WEB3FORMS_KEY,
+        subject: "Santa Call Sign-Up — "+parent+" ("+children.length+(children.length===1?' call':' calls')+", $"+total+")",
+        from_name: "Hobart Chamber Website",
+        "Parent/Guardian": parent,
+        "Phone Santa Should Call": phone,
+        "Email": email || '—',
+        "Send Invoice By": invoiceBy,
+        "Preferred Call Date/Time": pref,
+        "Alternative Date/Time": alt || '—',
+        "Number of Calls": children.length,
+        "Total Due": "$"+total,
+        "Children": kidsText,
+        "Next Step": "Send invoice by "+invoiceBy.toLowerCase()+". Call is made only after payment."
+      })
+    }).catch(function(){ /* email is a backup; the sign-up is already saved */ });
+  }).then(function(){
+    document.getElementById('santaForm').style.display='none';
+    document.querySelector('.pay-first').style.display='none';
+    document.querySelector('.info-strip').style.display='none';
+    document.getElementById('doneTotal').textContent='$'+total;
+    document.getElementById('doneBox').style.display='block';
+    window.scrollTo({top:0,behavior:'smooth'});
+  }).catch(function(err){
+    console.warn(err);
+    showMsg('Something went wrong sending your sign-up. Please call the Chamber at (580) 682-0887.','err');
+    btn.disabled=false;
+  });
+}
+
+/* After the sign-up deadline: show a closed notice and switch the form off. */
+(function(){
+  if(!DEADLINE) return;
+  var t=new Date();
+  var today=t.getFullYear()+'-'+('0'+(t.getMonth()+1)).slice(-2)+'-'+('0'+t.getDate()).slice(-2);
+  if(today<=DEADLINE) return;
+  var b=document.createElement('div');
+  b.setAttribute('role','status');
+  b.style.cssText='background:#0e2056;color:#fff;text-align:center;padding:14px 18px;font:600 15px/1.5 Inter,system-ui,sans-serif;border-bottom:3px solid #c49a3e;';
+  b.innerHTML='Santa call sign-ups are closed for this year. Merry Christmas from the Hobart Chamber! <a href="index.html#calendar" style="color:#e3bd62;">See what’s coming up →</a>';
+  document.body.insertBefore(b,document.body.firstChild);
+  var els=document.querySelectorAll('#santaForm input,#santaForm textarea,#santaForm button'), i;
+  for(i=0;i<els.length;i++){ els[i].disabled=true; }
+})();
+</script>
+</body>
+</html>

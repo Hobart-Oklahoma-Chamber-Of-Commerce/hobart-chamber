@@ -2766,6 +2766,8 @@ function renderAdmin(){
     +'<div class="admin-tab'+(adminTab==='botw'?' on':'')+'" onclick="switchTab(\'botw\')">Business of the Week</div>'
     +'<div class="admin-tab'+(adminTab==='jobs'?' on':'')+'" onclick="switchTab(\'jobs\')">Jobs</div>'
     +'<div class="admin-tab'+(adminTab==='jobcreate'?' on':'')+'" onclick="switchTab(\'jobcreate\')">+ New Opening</div>'
+    +'<div class="admin-tab'+(adminTab==='allregs'?' on':'')+'" onclick="switchTab(\'allregs\')">📋 All Registrations <span id="arCount"></span></div>'
+    +'<div class="admin-tab'+(adminTab==='santa'?' on':'')+'" onclick="switchTab(\'santa\')">🎅 Santa Calls <span id="stCount"></span></div>'
     /* ARCHIVED 2026 HARVEST TAB (restore for 2027): +'<div class="admin-tab'+(adminTab==='parade'?' on':'')+'" onclick="switchTab(\'parade\')">Parade <span id="prCount"></span></div>' */
     /* ARCHIVED 2026 HARVEST TAB (restore for 2027): +'<div class="admin-tab'+(adminTab==='tractor'?' on':'')+'" onclick="switchTab(\'tractor\')">Tractor Show <span id="tsCount"></span></div>' */
     /* ARCHIVED 2026 HARVEST TAB (restore for 2027): +'<div class="admin-tab'+(adminTab==='vendor'?' on':'')+'" onclick="switchTab(\'vendor\')">Vendors <span id="vnCount"></span></div>' */
@@ -2801,6 +2803,8 @@ function renderAdmin(){
   else if(adminTab==='deals') paneDeals();
   else if(adminTab==='subs') paneSubs();
   else if(adminTab==='analytics') paneAnalytics();
+  else if(adminTab==='allregs') paneAllRegs();
+  else if(adminTab==='santa') paneSanta();
 }
 function switchTab(t){adminTab=t;renderAdmin();}
 function adminLogout(){try{localStorage.removeItem('hcc_admin');}catch(e){}auth.signOut().then(function(){renderLogin();});}
@@ -3659,6 +3663,225 @@ function panePageant(){
     },'exportPageant');
 }
 function exportPageant(){regCSV('pageant',[['Child','childName'],['Division','division'],['Age Group','ageGroup'],['Hometown/School','hometown'],['Parent','contactName'],['Phone','phone'],['Email','email'],['Notes','notes'],['Photo Consent','photoConsent']],'pageant-registrations.csv');}
+
+/* attribute-safe escape (also escapes quotes) */
+function escA(s){ return esc(s).replace(/"/g,'&quot;').replace(/'/g,'&#39;'); }
+/* ============ SANTA CALL SIGN-UPS (admin) ============
+   Parents sign up on the public santa-calls.html page. Each sign-up lands
+   here. Workflow: send the invoice (text or email, whichever they picked) →
+   check "Invoice sent" → when payment comes in, check "Paid" → after Santa
+   calls, check "Call made". Calls are made only after payment. */
+var santaFilter='all';
+function santaStage(r){
+  if(r.callMade) return 'called';
+  if(r.paymentReceived) return 'ready';
+  if(r.invoiceSent) return 'waiting';
+  return 'invoice';
+}
+var SANTA_STAGES={
+  invoice:{label:'Needs invoice',color:'#b3261e',bg:'#fbe9e9'},
+  waiting:{label:'Waiting on payment',color:'#9a6a00',bg:'#fdf2db'},
+  ready:{label:'Paid · ready to call',color:'#1a3ea8',bg:'#eef2fb'},
+  called:{label:'Call made',color:'#1c7a3e',bg:'#e8f6ec'}
+};
+function paneSanta(){
+  var pane=document.getElementById('adminPane');
+  pane.innerHTML='<div class="admin-empty">Loading…</div>';
+  if(!db){ pane.innerHTML='<div class="admin-empty">Database not connected.</div>'; return; }
+  db.collection('santacalls').get().then(function(snap){
+    var rows=[]; snap.forEach(function(doc){var x=doc.data();x.id=doc.id;rows.push(x);});
+    rows.sort(function(a,b){ return (a.createdAt&&a.createdAt.seconds||0)-(b.createdAt&&b.createdAt.seconds||0); });
+    var cnt=document.getElementById('stCount'); if(cnt) cnt.innerHTML=rows.length?('<span class="badge-pending">'+rows.length+'</span>'):'';
+    var calls=0, due=0, paidAmt=0, counts={invoice:0,waiting:0,ready:0,called:0}, i;
+    for(i=0;i<rows.length;i++){
+      var r=rows[i]; calls+=(r.numCalls||0); due+=(r.totalDue||0);
+      if(r.paymentReceived) paidAmt+=(parseFloat(r.amountPaid)||r.totalDue||0);
+      counts[santaStage(r)]++;
+    }
+    var html='<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:8px;margin-bottom:12px;">'
+      +santaStat(rows.length,'families')+santaStat(calls,'calls')+santaStat('$'+paidAmt,'collected')+santaStat('$'+Math.max(0,due-paidAmt),'still owed')
+      +'</div>';
+    html+='<div style="font-size:12.5px;color:var(--gray);margin-bottom:10px;">Public link: <a href="santa-calls.html" target="_blank" rel="noopener" style="color:var(--navy);font-weight:600;">hobartchamber.org/santa-calls.html</a> · Calls are made only after payment.</div>';
+    html+='<div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px;">'+santaChip('all','All ('+rows.length+')');
+    ['invoice','waiting','ready','called'].forEach(function(k){ html+=santaChip(k,SANTA_STAGES[k].label+' ('+counts[k]+')'); });
+    html+='</div>';
+    html+='<button class="btn-sm btn-gold" style="margin-bottom:14px;" onclick="exportSanta()">Export CSV</button>';
+    var shown=rows.filter(function(r){ return santaFilter==='all' || santaStage(r)===santaFilter; });
+    if(!rows.length){ pane.innerHTML=html+'<div class="admin-empty">No Santa call sign-ups yet. Share the link: <b>santa-calls.html</b></div>'; return; }
+    if(!shown.length){ pane.innerHTML=html+'<div class="admin-empty">Nothing in this group right now.</div>'; return; }
+    html+='<div class="admin-list" style="max-height:60vh;">';
+    shown.forEach(function(r){
+      var st=SANTA_STAGES[santaStage(r)], kids=r.children||[];
+      var when=r.createdAt&&r.createdAt.seconds?new Date(r.createdAt.seconds*1000).toLocaleDateString('en-US',{month:'short',day:'numeric'}):'';
+      html+='<div class="admin-row" style="flex-direction:column;align-items:stretch;border-left:4px solid '+st.color+';">'
+        +'<div style="display:flex;justify-content:space-between;align-items:flex-start;gap:10px;flex-wrap:wrap;">'
+        +'<div class="info"><b>🎅 '+esc(r.parentName||'—')+'</b>'
+        +'<span style="display:inline-block;font-size:11px;font-weight:700;color:'+st.color+';background:'+st.bg+';padding:2px 8px;border-radius:10px;margin:3px 0 4px;">'+st.label+'</span>'
+        +'<small style="display:block;"><a href="tel:'+escA((r.phone||'').replace(/[^0-9+]/g,''))+'" style="color:var(--navy);font-weight:600;">'+esc(r.phone||'')+'</a>'+(r.email?' · '+esc(r.email):'')+' · invoice by <b>'+esc(r.invoiceBy||'—')+'</b></small>'
+        +'<small style="display:block;">Call: '+esc(r.preferredTime||'—')+(r.alternateTime?' (alt: '+esc(r.alternateTime)+')':'')+'</small>'
+        +'<small style="display:block;"><b>'+(r.numCalls||kids.length)+'</b> call'+((r.numCalls||kids.length)===1?'':'s')+' · <b>$'+(r.totalDue||0)+'</b> due'+(when?' · signed up '+when:'')+'</small>'
+        +'</div>'
+        +'<div class="acts"><button class="btn-sm btn-line" onclick="toggleSantaKids(\''+r.id+'\')">Kids</button>'
+        +'<button class="btn-sm btn-red" onclick="delSanta(\''+r.id+'\')">Delete</button></div>'
+        +'</div>'
+        +'<div id="santakids_'+r.id+'" style="display:none;margin-top:10px;padding-top:10px;border-top:1px solid var(--border);font-size:13px;color:var(--dark-gray);">'
+        +(kids.length?kids.map(function(k,idx){
+            return '<div style="margin-bottom:8px;"><b>'+(idx+1)+'. '+esc(k.name||'')+'</b>'+(k.age?' · age '+esc(k.age):'')+(k.grade?' · grade '+esc(k.grade):'')+(k.teacher?' · '+esc(k.teacher):'')
+              +(k.wish?'<br>🎁 '+esc(k.wish):'')+(k.special?'<br>⭐ '+esc(k.special):'')+'</div>';
+          }).join(''):'No children listed.')
+        +'</div>'
+        +'<div style="display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-top:10px;padding-top:10px;border-top:1px solid var(--border);">'
+        +santaCheck(r.id,'invoiceSent',r.invoiceSent,'Invoice sent')
+        +santaCheck(r.id,'paymentReceived',r.paymentReceived,'Paid')
+        +'<label style="display:flex;align-items:center;gap:6px;font-size:13px;color:var(--dark-gray);">$<input type="text" inputmode="decimal" value="'+(r.amountPaid?escA(r.amountPaid):'')+'" placeholder="'+(r.totalDue||'')+'" style="width:60px;padding:6px 7px;border:1px solid var(--border);border-radius:4px;font-size:14px;" onchange="setSanta(\''+r.id+'\',\'amountPaid\',this.value,false)"></label>'
+        +santaCheck(r.id,'callMade',r.callMade,'Call made')
+        +'</div>'
+        +'<input type="text" value="'+escA(r.adminNotes||'')+'" placeholder="Notes (who is calling, when, anything else)" style="margin-top:8px;width:100%;padding:8px 10px;border:1px solid var(--border);border-radius:4px;font-size:14px;" onchange="setSanta(\''+r.id+'\',\'adminNotes\',this.value,false)">'
+        +'</div>';
+    });
+    html+='</div>';
+    pane.innerHTML=html;
+  }).catch(function(e){ pane.innerHTML='<div class="admin-empty">Error loading. If this is the first time using Santa Calls, add the <b>santacalls</b> rule in Firestore.<br><small style="color:#b3261e;">'+esc(e&&e.message||'')+'</small></div>'; });
+}
+function santaStat(n,label){ return '<div style="background:var(--slate,#f3f6fc);border:1px solid var(--border);border-radius:8px;padding:10px;text-align:center;"><div style="font-size:20px;font-weight:800;color:var(--navy);">'+n+'</div><div style="font-size:11.5px;color:var(--gray);">'+label+'</div></div>'; }
+function santaChip(key,label){ var on=santaFilter===key; return '<button class="btn-sm" style="padding:7px 12px;font-size:12.5px;'+(on?'background:var(--navy);color:#fff;':'background:#fff;border:1px solid var(--border);color:var(--dark-gray);')+'" onclick="santaFilter=\''+key+'\';paneSanta();">'+label+'</button>'; }
+function santaCheck(id,field,val,label){ return '<label style="display:flex;align-items:center;gap:6px;font-size:13.5px;color:var(--dark-gray);cursor:pointer;"><input type="checkbox" style="width:18px;height:18px;" '+(val?'checked':'')+' onchange="setSanta(\''+id+'\',\''+field+'\',this.checked,true)"> '+label+'</label>'; }
+function setSanta(id,field,val,refresh){
+  if(field==='callMade' && val===true){
+    var row=document.getElementById('santakids_'+id);
+    var paidBox=row&&row.parentNode?row.parentNode.querySelector('input[onchange*="paymentReceived"]'):null;
+    if(paidBox && !paidBox.checked && !confirm('This family is not marked paid yet. Mark the call as made anyway?')){ paneSanta(); return; }
+  }
+  var u={}; u[field]=val;
+  db.collection('santacalls').doc(id).update(u).then(function(){ if(refresh) paneSanta(); }).catch(function(){ alert('Could not save that change. Check your connection and try again.'); });
+}
+function toggleSantaKids(id){ var el=document.getElementById('santakids_'+id); if(el) el.style.display=(el.style.display==='none'?'block':'none'); }
+function delSanta(id){ if(!confirm('Delete this Santa call sign-up?'))return; db.collection('santacalls').doc(id).delete().then(function(){paneSanta();}); }
+function exportSanta(){
+  db.collection('santacalls').get().then(function(snap){
+    var q=function(s){return '"'+String(s==null?'':s).replace(/"/g,'""')+'"';};
+    var csv='Parent,Phone,Email,Invoice By,Preferred Time,Alternate Time,Calls,Total Due,Invoice Sent,Paid,Amount Paid,Call Made,Child,Age,Grade,Teacher,Wish,Santa Should Know,Notes\n';
+    snap.forEach(function(doc){
+      var r=doc.data(), kids=(r.children&&r.children.length)?r.children:[{}];
+      kids.forEach(function(k){
+        csv+=[q(r.parentName),q(r.phone),q(r.email),q(r.invoiceBy),q(r.preferredTime),q(r.alternateTime),q(r.numCalls),q(r.totalDue),q(r.invoiceSent?'Yes':'No'),q(r.paymentReceived?'Yes':'No'),q(r.amountPaid),q(r.callMade?'Yes':'No'),q(k.name),q(k.age),q(k.grade),q(k.teacher),q(k.wish),q(k.special),q(r.adminNotes)].join(',')+'\n';
+      });
+    });
+    var blob=new Blob([csv],{type:'text/csv'}), a=document.createElement('a');
+    a.href=URL.createObjectURL(blob); a.download='santa-call-signups.csv'; a.click();
+  });
+}
+
+/* ============ ALL REGISTRATIONS TRACKER (admin) ============
+   One list of every sign-up across the site's registration pages, newest
+   first. Filter by event or by paid/unpaid, search by name or phone, and
+   tick "Paid" right from the list where that event takes a fee. To add a
+   future registration page, add one line to REG_SOURCES. */
+var REG_SOURCES=[
+  {coll:'santacalls',     label:'🎅 Santa Calls',          name:['parentName'],               sub:function(r){return (r.numCalls||0)+' call(s) · $'+(r.totalDue||0)+' due';}, paid:'paymentReceived', tab:'santa'},
+  {coll:'glowgolf2',      label:'⛳ Glow Golf (Oct 3)',     name:['teamName'],                 sub:function(r){return 'Captain '+(r.captainName||'')+(r.waitlist?' · WAITLIST':'');}, paid:'paymentReceived', tab:'glowgolf2'},
+  {coll:'kickball',       label:'⚽ Kickball',              name:['teamName'],                 sub:function(r){return (r.contactName||'')+' · '+((r.roster||[]).length)+' players';}, paid:'paymentReceived'},
+  {coll:'glowgolf',       label:'⛳ Glow Golf (summer)',    name:['teamName'],                 sub:function(r){return 'Captain '+(r.contactName||r.captainName||'');}, paid:'paymentReceived'},
+  {coll:'ribbon_cuttings',label:'✂️ Ribbon Cuttings',       name:['businessName'],             sub:function(r){return (r.contactName||'')+(r.preferredDate?' · wants '+r.preferredDate:'');}, paid:null, tab:'ribbon'},
+  {coll:'parade',         label:'🚜 Parade',                name:['org','firstName'],          sub:function(r){return ((r.firstName||'')+' '+(r.lastName||'')).trim();}, paid:null},
+  {coll:'tractorshow',    label:'🚜 Tractor Show',          name:['ownerName'],                sub:function(r){return [r.year,r.make,r.model].filter(Boolean).join(' ');}, paid:'feePaid'},
+  {coll:'vendors',        label:'🛍️ Vendors',               name:['businessName','contactName'],sub:function(r){return (r.contactName||'')+(r.vendorType?' · '+r.vendorType:'');}, paid:'paymentReceived'},
+  {coll:'wristbands',     label:'🎟️ Wristbands',            name:['contactName'],              sub:function(r){return (r.quantity||'?')+' wristband(s)';}, paid:null},
+  {coll:'scarecrow',      label:'🎃 Scarecrow',             name:['entryName','contactName'],  sub:function(r){return (r.contactName||'')+(r.category?' · '+r.category:'');}, paid:null},
+  {coll:'pageant',        label:'👑 Pageant',               name:['childName'],                sub:function(r){return 'Parent '+(r.contactName||'')+(r.division?' · '+r.division:'');}, paid:null},
+  {coll:'shirt_orders',   label:'👕 Shirt Orders',          name:['contactName'],              sub:function(r){return r.totalDue?('$'+r.totalDue+' due'):'';}, paid:'paymentReceived'}
+];
+var regAll=[], regErr=[], regEvent='all', regPay='all', regSearch='';
+function paneAllRegs(){
+  var pane=document.getElementById('adminPane');
+  pane.innerHTML='<div class="admin-empty">Loading every registration…</div>';
+  if(!db){ pane.innerHTML='<div class="admin-empty">Database not connected.</div>'; return; }
+  regAll=[]; regErr=[];
+  Promise.all(REG_SOURCES.map(function(src){
+    return db.collection(src.coll).get().then(function(snap){
+      snap.forEach(function(doc){ var x=doc.data(); regAll.push({src:src,id:doc.id,d:x}); });
+    }).catch(function(){ regErr.push(src.label); });
+  })).then(function(){
+    regAll.sort(function(a,b){ return (b.d.createdAt&&b.d.createdAt.seconds||0)-(a.d.createdAt&&a.d.createdAt.seconds||0); });
+    var cnt=document.getElementById('arCount'); if(cnt) cnt.innerHTML=regAll.length?('<span class="badge-pending">'+regAll.length+'</span>'):'';
+    drawAllRegs();
+  });
+}
+function regName(it){ var i,f=it.src.name; for(i=0;i<f.length;i++){ if(it.d[f[i]]) return String(it.d[f[i]]); } return '—'; }
+function regPaidState(it){ if(!it.src.paid) return 'nofee'; return it.d[it.src.paid]?'paid':'unpaid'; }
+function drawAllRegs(){
+  var pane=document.getElementById('adminPane'); if(!pane) return;
+  var byEvent={}, unpaid=0, paid=0, i;
+  for(i=0;i<regAll.length;i++){ var c=regAll[i].src.coll; byEvent[c]=(byEvent[c]||0)+1; var ps=regPaidState(regAll[i]); if(ps==='unpaid') unpaid++; else if(ps==='paid') paid++; }
+  var html='<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:12px;">'
+    +santaStat(regAll.length,'registrations')+santaStat(unpaid,'unpaid')+santaStat(paid,'paid')+'</div>';
+  html+='<select onchange="regEvent=this.value;drawAllRegs();" style="width:100%;padding:10px;border:1px solid var(--border);border-radius:6px;font-size:15px;margin-bottom:8px;background:#fff;">'
+    +'<option value="all"'+(regEvent==='all'?' selected':'')+'>All events ('+regAll.length+')</option>';
+  REG_SOURCES.forEach(function(src){ if(!byEvent[src.coll]) return; html+='<option value="'+src.coll+'"'+(regEvent===src.coll?' selected':'')+'>'+src.label+' ('+byEvent[src.coll]+')</option>'; });
+  html+='</select>';
+  html+='<div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:8px;">'+regChip('all','Everyone')+regChip('unpaid','Unpaid')+regChip('paid','Paid')+regChip('nofee','No fee')+'</div>';
+  html+='<input type="search" id="regSearchBox" value="'+escA(regSearch)+'" placeholder="Search name, phone or email" oninput="regSearch=this.value;drawRegList();" style="width:100%;padding:10px;border:1px solid var(--border);border-radius:6px;font-size:15px;margin-bottom:10px;">';
+  html+='<div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-bottom:12px;"><button class="btn-sm btn-gold" onclick="exportAllRegs()">Export CSV</button><span id="regShowing" style="font-size:12.5px;color:var(--gray);"></span></div>';
+  if(regErr.length) html+='<div style="font-size:12px;color:#9a6a00;background:#fdf2db;border-radius:6px;padding:8px 10px;margin-bottom:10px;">Could not load: '+esc(regErr.join(', '))+'. Its Firestore rule may not allow reading yet.</div>';
+  html+='<div id="regListBox"></div>';
+  pane.innerHTML=html;
+  drawRegList();
+}
+function drawRegList(){
+  var box=document.getElementById('regListBox'); if(!box) return;
+  var s=regSearch.toLowerCase();
+  var shown=regAll.filter(function(it){
+    if(regEvent!=='all' && it.src.coll!==regEvent) return false;
+    if(regPay!=='all' && regPaidState(it)!==regPay) return false;
+    if(s){ var hay=(regName(it)+' '+(it.d.phone||'')+' '+(it.d.email||'')+' '+(it.d.contactName||'')+' '+(it.d.captainName||'')).toLowerCase(); if(hay.indexOf(s)<0) return false; }
+    return true;
+  });
+  var sh=document.getElementById('regShowing'); if(sh) sh.textContent='Showing '+shown.length+' of '+regAll.length;
+  if(!shown.length){ box.innerHTML='<div class="admin-empty">No registrations match.</div>'; return; }
+  var html='<div class="admin-list" style="max-height:60vh;">';
+  shown.forEach(function(it){
+    var d=it.d, ps=regPaidState(it);
+    var when=d.createdAt&&d.createdAt.seconds?new Date(d.createdAt.seconds*1000).toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'}):'';
+    var tag=ps==='paid'?'<span style="font-size:11px;font-weight:700;color:#1c7a3e;background:#e8f6ec;padding:2px 8px;border-radius:10px;">PAID</span>'
+      :ps==='unpaid'?'<span style="font-size:11px;font-weight:700;color:#b3261e;background:#fbe9e9;padding:2px 8px;border-radius:10px;">UNPAID</span>'
+      :'<span style="font-size:11px;font-weight:600;color:var(--gray);background:#f0f2f7;padding:2px 8px;border-radius:10px;">No fee</span>';
+    html+='<div class="admin-row" style="flex-direction:column;align-items:stretch;">'
+      +'<div style="display:flex;justify-content:space-between;align-items:flex-start;gap:8px;">'
+      +'<div class="info"><small style="display:block;font-weight:700;color:var(--gold);letter-spacing:.3px;">'+it.src.label+'</small>'
+      +'<b>'+esc(regName(it))+'</b>'
+      +'<small style="display:block;">'+esc(it.src.sub(d)||'')+'</small>'
+      +'<small style="display:block;">'+(d.phone?'<a href="tel:'+escA(String(d.phone).replace(/[^0-9+]/g,''))+'" style="color:var(--navy);font-weight:600;">'+esc(d.phone)+'</a>':'')+(d.email?(d.phone?' · ':'')+esc(d.email):'')+(when?' · '+when:'')+'</small>'
+      +'</div><div>'+tag+'</div></div>'
+      +(it.src.paid?'<label style="display:flex;align-items:center;gap:8px;font-size:13.5px;color:var(--dark-gray);cursor:pointer;margin-top:8px;padding-top:8px;border-top:1px solid var(--border);"><input type="checkbox" style="width:18px;height:18px;" '+(ps==='paid'?'checked':'')+' onchange="setRegPaid(\''+it.src.coll+'\',\''+it.id+'\',this.checked)"> Payment received'+(it.src.tab?'<a href="#" onclick="switchTab(\''+it.src.tab+'\');return false;" style="margin-left:auto;font-size:12.5px;color:var(--navy);font-weight:600;">Open details →</a>':'')+'</label>'
+        :(it.src.tab?'<div style="margin-top:8px;padding-top:8px;border-top:1px solid var(--border);text-align:right;"><a href="#" onclick="switchTab(\''+it.src.tab+'\');return false;" style="font-size:12.5px;color:var(--navy);font-weight:600;">Open details →</a></div>':''))
+      +'</div>';
+  });
+  html+='</div>';
+  box.innerHTML=html;
+}
+function regChip(key,label){ var on=regPay===key; return '<button class="btn-sm" style="padding:7px 12px;font-size:12.5px;'+(on?'background:var(--navy);color:#fff;':'background:#fff;border:1px solid var(--border);color:var(--dark-gray);')+'" onclick="regPay=\''+key+'\';drawAllRegs();">'+label+'</button>'; }
+function setRegPaid(coll,id,val){
+  var src=null,i; for(i=0;i<REG_SOURCES.length;i++){ if(REG_SOURCES[i].coll===coll) src=REG_SOURCES[i]; }
+  if(!src||!src.paid) return;
+  var u={}; u[src.paid]=val;
+  db.collection(coll).doc(id).update(u).then(function(){
+    for(i=0;i<regAll.length;i++){ if(regAll[i].id===id && regAll[i].src.coll===coll) regAll[i].d[src.paid]=val; }
+    drawAllRegs();
+  }).catch(function(){ alert('Could not save that change. Check your connection and try again.'); drawAllRegs(); });
+}
+function exportAllRegs(){
+  var q=function(s){return '"'+String(s==null?'':s).replace(/"/g,'""')+'"';};
+  var csv='Event,Name,Details,Phone,Email,Payment,Registered\n';
+  regAll.forEach(function(it){
+    if(regEvent!=='all' && it.src.coll!==regEvent) return;
+    if(regPay!=='all' && regPaidState(it)!==regPay) return;
+    var d=it.d, when=d.createdAt&&d.createdAt.seconds?new Date(d.createdAt.seconds*1000).toLocaleDateString('en-US'):'';
+    var ps=regPaidState(it);
+    csv+=[q(it.src.label.replace(/^[^A-Za-z]+/,'')),q(regName(it)),q(it.src.sub(d)),q(d.phone),q(d.email),q(ps==='paid'?'Paid':ps==='unpaid'?'Unpaid':'No fee'),q(when)].join(',')+'\n';
+  });
+  var blob=new Blob([csv],{type:'text/csv'}), a=document.createElement('a');
+  a.href=URL.createObjectURL(blob); a.download='all-registrations.csv'; a.click();
+}
 
 /* ---- Local Sales / deals admin ---- */
 function paneDeals(){
